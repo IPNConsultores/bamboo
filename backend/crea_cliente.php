@@ -6,7 +6,7 @@
  $apellidom=estandariza_info($_GET["apellidom"]);
  $rut=estandariza_info($_GET["rut"]);
  $dv=estandariza_info($_GET["dv"]);
- $email=$estandariza_info(_GET["email"]);
+ $email=estandariza_info(_GET["email"]);
  $direccion=estandariza_info($_GET["direccion"]);
  //$telefono=estandariza_info($_GET["telefono"]);
 $dbhost = 'localhost';
@@ -32,3 +32,6 @@ function estandariza_info($data) {
     return $data;
   }
 ?>
+
+
+http://ipnconsultores.cl/bamboo/backend/crea_cliente.php?nombre=felipe&apellidop=abarca&apellidom=soto&rut=17029236&dv=7&email=fabarca212%40gmail.com&direccion=santa+isabel+1610
