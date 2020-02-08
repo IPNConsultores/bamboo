@@ -4,18 +4,37 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Creación Cliente</title>
+<title>Modificación Cliente</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
 </head>
 <body>
 <!-- body code goes here -->
 
-	
 <div class=  "container">
-  <p> Clientes / Creación <br>
+  <p> Clientes / Modificación <br>
   </p>
-<form class="needs-validation" novalidate>
+  <br>
+  Buscador de Cliente
+  
+	<form class="form-inline my-2 my-lg-0">
+    <div class="btn-group">
+  <button type="button" class="btn dropdown-toggle" style="background-color: #41804A;color:white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Criterio
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
+    <input class="form-control mr-sm-2" type="search" placeholder="Cliente" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+  <br>
+  <form class="needs-validation" novalidate>
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
     <div class="form-row">
@@ -48,22 +67,20 @@
           </div>
         </div>
       </div>
-		<div class="col-md-4 mb-3">
-      <label for="validationCustomUsername">Mail</label>
-      <div class="input-group">
-        <div class="input-group-prepend"> <span class="input-group-text" id="EMail">@</span> </div>
-        <input type="email" class="form-control" id="Mail"  required>
-        <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Mail</label>
+        <div class="input-group">
+          <div class="input-group-prepend"> <span class="input-group-text" id="EMail">@</span> </div>
+          <input type="email" class="form-control" id="Mail"  required>
+          <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
+        </div>
       </div>
-    </div>
-		<div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3">
         <label for="Dirección">Dirección</label>
         <input type="text" class="form-control" id="Dirección" required>
         <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
       </div>
     </div>
-    
-
     <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
   </form>
 </div>
@@ -88,7 +105,7 @@
   }, false);
 })();
 
-	</script>
+	</script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.3.1.js"></script>
