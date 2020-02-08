@@ -15,7 +15,7 @@
 <div class=  "container">
   <p> Clientes / Creación <br>
   </p>
-<form action="backend/crea_cliente.php" class="needs-validation" method="POST" novalidate>
+<form action="backend/crea_cliente.php" class="needs-validation" method="POST" onsubmit="go_home()"  novalidate>
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
     <div class="form-row">
@@ -68,6 +68,11 @@
   </form>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js">
+<script type="text/javascript">	
+function go_home()) {
+       $( "#load" ).load( "Creación_ClienteV3.html" );}
+</script> 
 <script src="js/jquery-3.3.1.min.js"></script> 
 <script>
 	(function() {
