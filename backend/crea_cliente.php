@@ -10,9 +10,17 @@ $st=mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if ($st){
 mysqli_set_charset( $st, 'utf8');
 mysqli_select_db($st, $dbname);
-$limpia = mysqli_query($st, 'select * from clientes;');
+//$limpia = mysqli_query($st, 'select * from clientes;');
+echo "conectado al servidor;\n";
 }
 else{
-echo "no conectado;\n";
+echo "no conectado al servidor;\n";
 }
+echo $_GET["nombre"]."\n";
+echo $_GET["apellidop"]."\n";
+echo $_GET["apellidom"]."\n";
+echo $_GET["rut"]."\n";
+echo $_GET["dv"]."\n";
+echo $_GET["email"]."\n";
+echo $_GET["direccion"]."\n";
 ?>
