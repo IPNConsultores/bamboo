@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Untitled Document</title>
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+</head>
+<body>
+<!-- body code goes here -->
+
+	
+<div class=  "container">
+  <p> Clientes / Creación <br>
+  </p>
+<form class="needs-validation" novalidate>
+    <h5 class="form-row">&nbsp;Datos personales</h5>
+    <br>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="Nombre">Nombre</label>
+        <input type="text" class="form-control" id="Nombre"  required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ApellidoP">Apellido Paterno</label>
+        <input type="text" class="form-control" id="ApellidoP" required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ApellidoM">Apellido Materno</label>
+        <input type="text" class="form-control" id="ApellidoM" required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="form-row">
+          <div class ="col-md-8 mb-3">
+            <label for="RUT">RUT</label>
+            <input type="text" class="form-control" id="RUT" placeholder= "11111111" required>
+            <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+          </div>
+          <div class ="col-md-8 mb-3 col-xl-3">
+            <label for="RUT">&nbsp;</label>
+            <input type="text" class="form-control" id="DV" placeholder= "K" required>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </div>
+		<div class="col-md-4 mb-3">
+      <label for="validationCustomUsername">Mail</label>
+      <div class="input-group">
+        <div class="input-group-prepend"> <span class="input-group-text" id="EMail">@</span> </div>
+        <input type="email" class="form-control" id="Mail"  required>
+        <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
+      </div>
+    </div>
+		<div class="col-md-4 mb-3">
+        <label for="Dirección">Dirección</label>
+        <input type="text" class="form-control" id="Dirección" required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      </div>
+    </div>
+    
+
+    <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+  </form>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-3.3.1.min.js"></script> 
+<script>
+	(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+	</script>
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.3.1.js"></script>
+</body>
+</html>
