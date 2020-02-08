@@ -1,16 +1,18 @@
 <?php
 //update listado_licitaciones as a left join (SELECT codigo_externo, max(fecha_creacion) as MAXFECHA FROM listado_licitaciones group by codigo_externo) as b on a.codigo_externo=b.codigo_externo set antigua=1 where a.fecha_creacion<>b.MAXFECHA
  //$dias=$argv[1];
- $nombre=estandariza_info($_GET["nombre"]);
- $apellidop=estandariza_info($_GET["apellidop"]);
- $apellidom=estandariza_info($_GET["apellidom"]);
- $rut=estandariza_info($_GET["rut"]);
- $dv=estandariza_info($_GET["dv"]);
- $correo_electronico=estandariza_info($_GET["correo_electronico"]);
- $direccion=estandariza_info($_GET["direccion"]);
+ $nombre=estandariza_info($_POST["nombre"]);
+ $apellidop=estandariza_info($_POST["apellidop"]);
+ $apellidom=estandariza_info($_POST["apellidom"]);
+ $rut=estandariza_info($_POST["rut"]);
+ $dv=estandariza_info($_POST["dv"]);
+ $correo_electronico=estandariza_info($_POST["correo_electronico"]);
+ $direccion=estandariza_info($_POST["direccion"]);
  //$telefono=estandariza_info($_GET["telefono"]);
 // echo "nombre= ".$nombre;
  //echo "email= ".$correo_electronico." -> (".$_GET["correo_electronico"].")";
+ echo "direccion= ".$direccion." -> (".$_POST["direccion"].")";
+ 
 $dbhost = 'localhost';
 $dbname = 'asesori1_bamboo';
 $dbuser = 'asesori1_cesnar';
