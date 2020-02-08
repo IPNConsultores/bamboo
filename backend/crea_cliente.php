@@ -9,8 +9,8 @@
  $correo_electronico=estandariza_info($_GET["correo_electronico"]);
  $direccion=estandariza_info($_GET["direccion"]);
  //$telefono=estandariza_info($_GET["telefono"]);
- echo "nombre= ".$nombre;
- echo "email= ".$correo_electronico." -> (".$_GET["correo_electronico"].")";
+// echo "nombre= ".$nombre;
+ //echo "email= ".$correo_electronico." -> (".$_GET["correo_electronico"].")";
 $dbhost = 'localhost';
 $dbname = 'asesori1_bamboo';
 $dbuser = 'asesori1_cesnar';
@@ -20,9 +20,9 @@ $st=mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if ($st){
 mysqli_set_charset( $st, 'utf8');
 mysqli_select_db($st, $dbname);
-//mysqli_query($st, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccion.'\', \''.$correo_electronico.'\');');
+mysqli_query($st, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccion.'\', \''.$correo_electronico.'\');');
 
-echo 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccion.'\', \''.$correo_electronico.'\');';
+//echo 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccion.'\', \''.$correo_electronico.'\');';
 }
 else{
 echo "no conectado al servidor;\n";
