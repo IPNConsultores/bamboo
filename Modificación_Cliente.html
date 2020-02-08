@@ -14,24 +14,18 @@
 <div class=  "container">
   <p> Clientes / Modificación <br>
   </p>
-  <br>
-  Buscador de Cliente
-  
-	<form class="form-inline my-2 my-lg-0">
-    <div class="btn-group">
-  <button type="button" class="btn dropdown-toggle" style="background-color: #41804A;color:white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Criterio
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
-    <input class="form-control mr-sm-2" type="search" placeholder="Cliente" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  <form class="needs-validation" novalidate>
+<h5 class="form-row">&nbsp;Buscador Cliente</h5>
+<br>
+	  <label for="Buscador">Rut sin DV o Nombre</label>
+    <div class= "form-row">
+      <div class= "col-md-4; form-inline">
+             
+        <input class="form-control" type="text" id="buscacliente" required>
+		 <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;" type="submit">Buscar</button>
+<div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+        </div>
+    </div>
   </form>
   <br>
   <form class="needs-validation" novalidate>
@@ -81,7 +75,7 @@
         <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
       </div>
     </div>
-    <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+    <button class="btn" type="submit" style="background-color: #536656; color: white">Modificar</button>
   </form>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
