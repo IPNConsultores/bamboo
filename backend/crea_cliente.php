@@ -6,7 +6,7 @@
  $apellidom=estandariza_info($_GET["apellidom"]);
  $rut=estandariza_info($_GET["rut"]);
  $dv=estandariza_info($_GET["dv"]);
- $email=estandariza_info(_GET["email"]);
+ $email=estandariza_info(GET["email"]);
  $direccion=estandariza_info($_GET["direccion"]);
  //$telefono=estandariza_info($_GET["telefono"]);
  echo "nombre= ".$nombre;
