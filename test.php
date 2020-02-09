@@ -40,8 +40,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         While($row=mysqli_fetch_object($resultado))
     {
     //Mostramos los titulos de los articulos o lo que deseemos...
-        $rut=$row['rut'];
-        $nombre=$row['nombre'];
+        $rut=$row->rut;
+        $nombre=$row->nombre;
         echo $rut." - ".$nombre."<br>";
     }
 
