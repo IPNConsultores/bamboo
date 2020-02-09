@@ -50,8 +50,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		</li>
 		</ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style= "background-color:#536656;color:#A5CCAB">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar clientes" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style= "background-color:#536656;color:#A5CCAB">Buscar</button>
     </form>
   </div>
 </nav>
