@@ -6,6 +6,7 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+
  $busqueda=$busqueda_err='';
  $rut=$nombre='';
 // Processing form data when form is submitted
@@ -47,6 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Close connection
     mysqli_close($link);
+    echo 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  where nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';';
 }
 ?>
  <!DOCTYPE html>
