@@ -1,6 +1,7 @@
 <?php
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
  $busqueda=$busqueda_err='';
+ $rut=$nombre='';
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
