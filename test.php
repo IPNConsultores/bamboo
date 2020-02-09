@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista='<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr>';
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr>';
     }
 
     //fin feabarcas
