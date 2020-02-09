@@ -12,6 +12,7 @@ require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'asesori1_bamboo');
 mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\',, \''.$telefono.'\');');
+echo 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\',, \''.$telefono.'\');';
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
