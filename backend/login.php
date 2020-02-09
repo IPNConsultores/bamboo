@@ -228,7 +228,7 @@ body {
                                             <span class="input-group-addon"><!--?php echo $username_err; ?-->
                                                 <i class="fa fa-user"></i>
                                             </span>
-                                            <input type="text" class="form-control" id="username" placeholder="Usuario" value="<?php echo $username; ?>" required="required">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Usuario" value="<?php echo $username; ?>" required="required">
                                         </div>
                                     </div>
 
