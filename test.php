@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class=  "container">
     <p> Clientes / Modificación <br>
     </p>
-    <form class="needs-validation" novalidate method="POST" action="backend/busca_cliente.php">
+    <form class="needs-validation" novalidate method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
       <h5 class="form-row">&nbsp;Buscador Cliente</h5>
       <br>
       <label for="Buscador">Rut sin DV o Nombre</label>
