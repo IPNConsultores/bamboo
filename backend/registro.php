@@ -220,32 +220,46 @@ body {
   <p class="h6" style=" color:white; text-align: center"><img src="http://bambooseguros.cl/bamboo/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
   <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
 </div>
-<body>
-    <div class="wrapper">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                <span class="help-block"><?php echo $password_err; ?></span>
+
+<div class="modal-dialog modal-login">
+        <div class="modal-content col-lg-10">
+            <div class="modal-header">
+                <h4 class="modal-title">Inicio de Sesión</h4>
             </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                <span class="help-block"><?php echo $confirm_password_err; ?></span>
-            </div>
-            <div class="form-group">
+            <div class="modal-body">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <!--<div class="form-group ?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">-->
+                    <div class="form-group">
+                        <div class="input-group"> 
+                        <span class="input-group-addon"><!--?php echo $username_err; ?-->
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <input type="text" class="form-control" id="username" placeholder="Usuario" value="<?php echo $username; ?>" required="required">
+                        </div>
+                    </div>
+
+                    <!--div class="form-group ?php echo (!empty($password_err)) ? 'has-error' : ''; ?>"-->
+                    <div class="form-group">
+                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required" value="<?php echo $password; ?>">
+                        <span class="help-block"><!--?php echo $password_err; ?--></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Contraseña" required="required" value="<?php echo $confirm_password; ?>">
+                        <span class="help-block"><!--?php echo $password_err; ?--></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
-        </form>
-    </div>    
+            <p>Ya tienes una cuenta? <a href="/bamboo/backend/login.php">Ingresa aquí</a>.</p>
+                </form>
+            </div>
+        </div>   
+    </div> 
 </body>
 </html>
