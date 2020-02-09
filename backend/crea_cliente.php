@@ -16,5 +16,5 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-  header("Location:http://ipnconsultores.cl/bamboo/Banner.html");
+  header("Location:http://ipnconsultores.cl/bamboo/index.php");
 ?>
