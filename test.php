@@ -1,4 +1,10 @@
 <?php
+function estandariza_info($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
  $busqueda=$busqueda_err='';
  $rut=$nombre='';
