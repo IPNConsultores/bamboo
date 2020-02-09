@@ -14,19 +14,20 @@
 <div class=  "container">
   <p> Clientes / Modificación <br>
   </p>
-  <form class="needs-validation" novalidate>
-<h5 class="form-row">&nbsp;Buscador Cliente</h5>
-<br>
-	  <label for="Buscador">Rut sin DV o Nombre</label>
-    <div class= "form-row; needs-validation">
-      <div class= "col-md-4; form-inline">
-         <input class="form-control" type="text" id="buscacliente" required>
-		 <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;" type="submit">Buscar</button>
-<div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-        </div>
-    </div>
-  </form>
-  <br>
+    <form class="needs-validation" novalidate method="POST" >
+      <h5 class="form-row">&nbsp;Buscador Cliente</h5>
+      <br>
+          <label for="Buscador">Rut sin DV o Nombre</label>
+          <div class= "form-row; needs-validation">
+            <div class= "col-md-4; form-inline">
+              <input class="form-control" type="text" name="buscacliente" id="buscacliente" required>
+              <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;" type="submit">Buscar</button>
+              <div class="invalid-feedback"> No puedes dejar este campo en blanco 
+              </div>
+            </div>
+          </div>
+        </form>
+      <br>
   <form class="needs-validation" novalidate>
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
