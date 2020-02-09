@@ -212,11 +212,9 @@ body {
 </head>
 <body>
 <div class= "container" style= "overflow:auto;  background-color: #536656; " >
-  <p class="h6" style=" color:white; text-align: center"><img src="/bamboo/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
+  <p class="h6" style=" color:white; text-align: center"><img src="http://bambooseguros.cl/bamboo/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
   <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
 </div>
-
-<body>
     <div class="wrapper">
         <h2>Login</h2>
         <p>Favor completa tus datos.</p>
@@ -226,14 +224,17 @@ body {
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
+
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
+            
             <p>No tienes cuenta? <a href="registro.php">Regístrate</a>.</p>
         </form>
     </div>    
