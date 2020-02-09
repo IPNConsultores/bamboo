@@ -49,7 +49,7 @@
         </div>
       </div>
 		<div class="col-md-4 mb-3">
-      <label for="validationCustomUsername">e-mail</label>
+      <label for="validationCustomUsername">E-mail</label>
       <div class="input-group">
         <div class="input-group-prepend"> <span class="input-group-text" id="mail">@</span> </div>
         <input type="email" class="form-control" name="correo_electronico"  required>
@@ -57,13 +57,26 @@
       </div>
     </div>
 		<div class="col-md-4 mb-3">
-        <label for="Dirección">Dirección</label>
-        <input type="text" class="form-control" name="direccion" required>
-        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      <label for="validationCustomUsername">Telefono</label>
+      <div class="input-group">
+        <input type="text" class="form-control" name="telefono" placeholder="569XXXXXX"  required>
+        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
     </div>
+		<div class="col-md-4 mb-3">
+        <label for="Dirección">Dirección Particular</label>
+        <input type="text" class="form-control" name="direccionp" required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+      </div>
+		<div class="col-md-4 mb-3">
+      <label for="validationCustomUsername">Dirección Laboral</label>
+      <div class="input-group">
+        <input type="text" class="form-control" name="direccionl"  required>
+        <div class="invalid-feedback"> No puedes dejar este campo en blanco</div>
+      </div>
+    </div>
+    </div>
     
-
     <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
   </form>
 </div>
