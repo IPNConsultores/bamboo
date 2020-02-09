@@ -92,8 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($link);
 }
 ?>
- 
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -216,10 +215,10 @@ body {
 </style>
 </head>
 <body>
-<div class= "container" style= "overflow:auto;  background-color: #536656; " >
-  <p class="h6" style=" color:white; text-align: center"><img src="http://bambooseguros.cl/bamboo/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
-  <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
-</div>
+    <div class= "container" style= "overflow:auto;  background-color: #536656; " >
+        <p class="h6" style=" color:white; text-align: center"><img src="http://www.bambooseguros.cl/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
+        <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
+    </div>
 
 <div class="modal-dialog modal-login">
         <div class="modal-content col-lg-10">
@@ -248,13 +247,12 @@ body {
 
                     <div class="form-group">
                         <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Contraseña" required="required" value="<?php echo $confirm_password; ?>">
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Repetir Contraseña" required="required" value="<?php echo $confirm_password; ?>">
                         <span class="help-block"><!--?php echo $password_err; ?--></span>
                         </div>
                     </div>
                     <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
             </div>
             <p>Ya tienes una cuenta? <a href="/bamboo/backend/login.php">Ingresa aquí</a>.</p>
                 </form>
