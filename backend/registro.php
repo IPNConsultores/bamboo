@@ -1,7 +1,7 @@
 <?php
 // Include config file
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
- 
+ echo "submit funcionado";
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
@@ -214,50 +214,51 @@ body {
 }
 </style>
 </head>
-<body>
-    <div class= "container" style= "overflow:auto;  background-color: #536656; " >
-        <p class="h6" style=" color:white; text-align: center"><img src="http://www.bambooseguros.cl/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
-        <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
-    </div>
+    <body>
+        <div class= "container" style= "overflow:auto;  background-color: #536656; " >
+            <p class="h6" style=" color:white; text-align: center"><img src="http://www.bambooseguros.cl/img/logo-2.png" width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
+            <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
+        </div>
 
-<div class="modal-dialog modal-login">
-        <div class="modal-content col-lg-10">
-            <div class="modal-header">
-                <h4 class="modal-title">Inicio de Sesión</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <!--<div class="form-group ?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">-->
-                    <div class="form-group">
-                        <div class="input-group"> 
-                        <span class="input-group-addon"><!--?php echo $username_err; ?-->
-                            <i class="fa fa-user"></i>
-                        </span>
-                        <input type="text" class="form-control" id="username" placeholder="Usuario" value="<?php echo $username; ?>" required="required">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content col-lg-10">
+                <div class="modal-header">
+                    <h4 class="modal-title">Inicio de Sesión</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    
+                        <!--<div class="form-group ?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">-->
+                        <div class="form-group">
+                            <div class="input-group"> 
+                            <span class="input-group-addon"><!--?php echo $username_err; ?-->
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control" id="username" placeholder="Usuario" value="<?php echo $username; ?>" required="required">
+                            </div>
                         </div>
-                    </div>
 
-                    <!--div class="form-group ?php echo (!empty($password_err)) ? 'has-error' : ''; ?>"-->
-                    <div class="form-group">
-                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required" value="<?php echo $password; ?>">
-                        <span class="help-block"><!--?php echo $password_err; ?--></span>
+                        <!--div class="form-group ?php echo (!empty($password_err)) ? 'has-error' : ''; ?>"-->
+                        <div class="form-group">
+                            <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" required="required" value="<?php echo $password; ?>">
+                            <span class="help-block"><!--?php echo $password_err; ?--></span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Repetir Contraseña" required="required" value="<?php echo $confirm_password; ?>">
-                        <span class="help-block"><!--?php echo $password_err; ?--></span>
+                        <div class="form-group">
+                            <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Repetir Contraseña" required="required" value="<?php echo $confirm_password; ?>">
+                            <span class="help-block"><!--?php echo $password_err; ?--></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-            <p>Ya tienes una cuenta? <a href="/bamboo/backend/login.php">Ingresa aquí</a>.</p>
-                </form>
-            </div>
-        </div>   
-    </div> 
-</body>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Crear usuario">
+                        </div>
+                        <p>Ya tienes una cuenta? <a href="/bamboo/backend/login.php">Ingresa aquí</a>.</p>
+                    </form>
+                </div>
+            </div>   
+        </div> 
+    </body>
 </html>
