@@ -1,68 +1,43 @@
 <?php
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
- 
+ $busqueda=$busqueda_err='';
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
     if(empty(trim($_POST["buscacliente"]))){
-        $username_err = "Favor ingresa tu usuario.";
+        $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
     } else{
-        $username = trim($_POST["buscacliente"]);
+    //inicio feabarcas
+    $busqueda=estandariza_info($_POST["buscacliente"]);
+    $numero=$trozos=0;
+    mysqli_set_charset( $link, 'utf8');
+    mysqli_select_db($link, 'asesori1_bamboo');
+
+    if ($busqueda<>''){
+    //CUENTA EL NUMERO DE PALABRAS
+        $trozos=explode(" ",$busqueda);
+        $numero=count($trozos);
+        if ($numero==1) {
+        //SI SOLO HAY UNA PALABRA DE BUSQUEDA SE ESTABLECE UNA INSTRUCION CON LIKE
+            $resultado=mysqli_query($link, 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  where nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';');
+        } elseif ($numero>1) {
+        //SI HAY UNA FRASE SE UTILIZA EL ALGORTIMO DE BUSQUEDA AVANZADO DE MATCH AGAINST
+        //busqueda de frases con mas de una palabra y un algoritmo especializado
+            $resultado=mysqli_query($link, 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) AS Score FROM clientes WHERE MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) ORDER BY Score DESC LIMIT 50;');
+        }
+    }
+        While($row=mysqli_fetch_object($resultado))
+    {
+    //Mostramos los titulos de los articulos o lo que deseemos...
+        $rut=$row["rut"];
+        $nombre=$row["nombre"];
+        echo $rut." - ".$nombre."<br>";
     }
 
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT id, username, password FROM usuarios_aplicacion WHERE username = ?";
-        
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Store result
-                mysqli_stmt_store_result($stmt);
-                
-                // Check if username exists, if yes then verify password
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
-                    if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: /bamboo/index.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "La contraseña ingresada no es válida.";
-                        }
-                    }
-                } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "El usuario y contraseña no coinciden.";
-                }
-            } else{
-                echo "Oops! Algo salió mal. Favor intentar más tarde.";
-            }
-        }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
+    //fin feabarcas
     }
-    
+
     // Close connection
     mysqli_close($link);
 }
@@ -103,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="Nombre">Nombre</label>
-          <input type="text" class="form-control" id="Nombre"  required>
+          <input type="text" class="form-control" id="Nombre"  required value="<?php echo $nombre; ?>"  >
           <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
         </div>
         <div class="col-md-4 mb-3">
