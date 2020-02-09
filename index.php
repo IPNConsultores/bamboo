@@ -42,6 +42,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a class="dropdown-item" type="button" onclick="abrir_creacion_cliente()">Creación</a> 
 		<a class="dropdown-item" type="button" onclick="abrir_modif_cliente()">Modificación</a>
 		  </div>
+    </li>
+    <li class="nav-item active">
+		 <a class="nav-link" type ="button" href="/bamboo/backend/logout.php">
+			 Logout<span class="sr-only"></span>
+		</a>
 		</li>
 		</ul>
     <form class="form-inline my-2 my-lg-0">
