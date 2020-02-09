@@ -69,7 +69,7 @@ function abrir_home() {
 function abrir_creacion_cliente() {
        $( "#load" ).load( "Creación_ClienteV3.html" );}
 function abrir_modif_cliente() {
-       $( "#load" ).load( "Modificación_Cliente.html" );}
+       $( "#load" ).load( "listado_clientes.php" );}
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 
 </script> 
