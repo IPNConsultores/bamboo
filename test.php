@@ -6,9 +6,9 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-
+$num=0;
  $busqueda=$busqueda_err='';
- $rut=$nombre='';
+ $rut=$nombre=$telefono=$correo=$lista='';
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -28,12 +28,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $numero=count($trozos);
         if ($numero==1) {
         //SI SOLO HAY UNA PALABRA DE BUSQUEDA SE ESTABLECE UNA INSTRUCION CON LIKE
-            $resultado=mysqli_query($link, 'SELECT CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';');
+            $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes WHERE  nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';');
         echo '1 palabra';
         } elseif ($numero>1) {
         //SI HAY UNA FRASE SE UTILIZA EL ALGORTIMO DE BUSQUEDA AVANZADO DE MATCH AGAINST
         //busqueda de frases con mas de una palabra y un algoritmo especializado
-            $resultado=mysqli_query($link, 'SELECT CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) AS Score FROM clientes WHERE MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) ORDER BY Score DESC LIMIT 50;');
+            $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo , MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) AS Score FROM clientes WHERE MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) ORDER BY Score DESC LIMIT 50;');
             echo $numero.' palabras';
         }
     }
@@ -42,7 +42,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //Mostramos los titulos de los articulos o lo que deseemos...
         $rut=$row->rut;
         $nombre=$row->nombre;
-        echo $rut." - ".$nombre."<br>";
+        $telefono=$row->telefono;
+        $correo=$row->correo;
+        $num=$num+1;
+        $lista='<tr><td>'.$rut.'</td><td>'.$num.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr>';
     }
 
     //fin feabarcas
@@ -50,9 +53,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Close connection
     mysqli_close($link);
-    echo 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  where nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';';
-    echo 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) AS Score FROM clientes WHERE MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) ORDER BY Score DESC LIMIT 50;';
 }
+
 ?>
  <!DOCTYPE html>
 <html lang="en">
@@ -88,48 +90,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <h5 class="form-row">&nbsp;Datos personales</h5>
       <br>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="Nombre">Nombre</label>
-          <input type="text" class="form-control" id="Nombre"  required value="<?php echo $nombre; ?>"  >
-          <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="ApellidoP">Apellido Paterno</label>
-          <input type="text" class="form-control" id="ApellidoP" required>
-          <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="ApellidoM">Apellido Materno</label>
-          <input type="text" class="form-control" id="ApellidoM" required>
-          <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="form-row">
-            <div class ="col-md-8 mb-3">
-              <label for="RUT">RUT</label>
-              <input type="text" class="form-control" id="RUT" placeholder= "11111111" required>
-              <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-            </div>
-            <div class ="col-md-8 mb-3 col-xl-3">
-              <label for="RUT">&nbsp;</label>
-              <input type="text" class="form-control" id="DV" placeholder= "K" required>
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustomUsername">Mail</label>
-          <div class="input-group">
-            <div class="input-group-prepend"> <span class="input-group-text" id="EMail">@</span> </div>
-            <input type="email" class="form-control" id="Mail"  required>
-            <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="Dirección">Dirección</label>
-          <input type="text" class="form-control" id="Dirección" required>
-          <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-        </div>
+      <table id="listado"> 
+        <tr>
+        <th>#</th>
+        <th>Rut</th>
+        <th>Nombre</th> 
+        <th>Telefono</th>
+        <th>Correo</th>
+        <th>Acción</th>
+    </tr>
+      <?php echo $lista; ?>
+</table>
       </div>
       <button class="btn" type="submit" style="background-color: #536656; color: white">Modificar</button>
     </form>
