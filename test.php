@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr><br>';
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr>'. "\n";
     }
 
     //fin feabarcas
@@ -111,8 +111,8 @@ tr:nth-child(even) {
         <th>#</th>
         <th>Rut</th>
         <th>Nombre</th> 
-        <th>Telefono</th>
-        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Correo Electrónico</th>
         <th>Acción</th>
     </tr>
       <?php echo $lista; ?>
