@@ -242,7 +242,7 @@ body {
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block btn-lg" value="Login" style= "box-shadow: 5; overflow:auto;  background-color: #A5CCAB; color: #536656">Ingresar</button>
           </div>
-          <p>No tienes cuenta? <a href="registro.php">Regístrate</a>.</p>
+          <p>No tienes cuenta? <a href="/bamboo/backend/registro.php">Regístrate</a>.</p>
           <p class="hint-text"><a href="#" style="color:#536656">¿Olvidaste contraseña?</a></p>
         </form>
       </div>
