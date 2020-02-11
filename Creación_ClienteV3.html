@@ -4,64 +4,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  /* Popup container - can be anything you want */
-  .popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* The actual popup */
-  .popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-  }
-  
-  /* Popup arrow */
-  .popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
-  </style>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Creación Cliente</title>
 <!-- Bootstrap -->
@@ -74,15 +16,14 @@
   <div class=  "container">
     <p> Clientes / Creación <br>
     </p>
-  <form action="backend/crea_cliente.php" class="needs-validation" method="POST" onsubmit="return validarform()" novalidate>
+  <form action="backend/crea_cliente.php" class="needs-validation" method="POST"  novalidate>
       <h5 class="form-row">&nbsp;Datos personales</h5>
       <br>
       <div class="form-row">
         <div class="col-md-4 mb-3">
-          <label for="Nombre" onclick="validarnombre()" >Nombre</label>
+          <label for="Nombre">Nombre</label>
           <input type="text" class="form-control" name="nombre"  required>
           <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-          <span class="popuptext" id="myPopup">testeo de nombre</span>
         </div>
         <div class="col-md-4 mb-3">
           <label for="ApellidoP">Apellido Paterno</label>
@@ -141,16 +82,4 @@
     </form>
   </div>
 </body>
-<script>
-function validarForm(){
-    if(document.getElementById('mail').value.length < 2())
-      return true;
-    else
-      return false;
-}
-function validarnombre() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
 </html>
