@@ -61,6 +61,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   <form id="load" class="needs-validation" novalidate></form>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap-4.3.1.js"></script> 
 <script src="js/jquery-3.3.1.min.js"></script> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <script type="text/javascript">	
@@ -73,4 +75,3 @@ function abrir_modif_cliente() {
 </script> 
 </body>
 </html>
-
