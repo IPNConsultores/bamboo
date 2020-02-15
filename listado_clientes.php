@@ -54,81 +54,86 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Modificación Cliente</title>
-<!-- Bootstrap -->
-<link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modificación Cliente</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
 </head>
+
 <body>
-<script
-      src="https://code.jquery.com/jquery-3.3.1.js"
-      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-      crossorigin="anonymous">
-  </script>
-  <script> 
-      $(function(){$("#header").load("header.html");});
-  </script>
-  <div id="header"></div>
-  
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    </script>
+    <script>
+    $(function() {
+        $("#header").load("header.html");
+    });
+    </script>
+    <div id="header"></div>
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
+    <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
 
-</style>
-<!-- body code goes here -->
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    </style>
+    <!-- body code goes here -->
 
-  <div class=  "container">
-    <p> Clientes / Modificación <br>
-    </p>
-    <form class="needs-validation" novalidate method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-      <h5 class="form-row">&nbsp;Buscador de Clientes</h5>
-      <br>
-      <label for="Buscador">Nombre o Rut sin dígito verificador</label>
-      <div class= "form-row; needs-validation">
-        <div class= "col-md-4; form-inline">
-          <input class="form-control" type="text" name="buscacliente" id="buscacliente" required>
-          <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;" type="submit">Buscar</button>
-          <div class="invalid-feedback"> No puedes dejar este campo en blanco 
-          </div>
-        </div>
-      </div>
-    </form>
+    <div class="container">
+        <p> Clientes / Modificación <br>
+        </p>
+        <form class="needs-validation" novalidate method="POST"
+            action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <h5 class="form-row">&nbsp;Buscador de Clientes</h5>
             <br>
-    <form class="needs-validation" novalidate>
-      <h5 class="form-row">&nbsp;Datos personales</h5>
-      <br>
-      <div class="form-row">
-      <table id="listado"> 
-        <tr>
-        <th>#</th>
-        <th>Rut</th>
-        <th>Nombre</th> 
-        <th>Teléfono</th>
-        <th>Correo Electrónico</th>
-        <th>Acción</th>
-    </tr>
-      <?php echo $lista; ?>
-</table>
-      </div>
-    </form>
-  </div>
+            <label for="Buscador">Nombre o Rut sin dígito verificador</label>
+            <div class="form-row; needs-validation">
+                <div class="col-md-4; form-inline">
+                    <input class="form-control" type="text" name="buscacliente" id="buscacliente" required>
+                    <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
+                        type="submit">Buscar</button>
+                    <div class="invalid-feedback"> No puedes dejar este campo en blanco
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <form class="needs-validation" novalidate>
+            <h5 class="form-row">&nbsp;Datos personales</h5>
+            <br>
+            <div class="form-row">
+                <table id="listado">
+                    <tr>
+                        <th>#</th>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                        <th>Acción</th>
+                    </tr>
+                    <?php echo $lista; ?>
+                </table>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
