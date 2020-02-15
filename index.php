@@ -19,15 +19,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
-    </script>
-    <script>
-    $(function() {
-        $("#header").load("header.html");
-    });
-    </script>
-    <div id="header"></div>
+    <div id="header"><?php include 'header.html' ?></div>
     <div id="contenido_index">
         <p>Index</p>
     </div>
