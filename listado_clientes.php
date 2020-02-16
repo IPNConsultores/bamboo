@@ -14,12 +14,15 @@ $num=0;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["Sbuscacliente"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
     } else{
     //inicio feabarcas
-    $busqueda=estandariza_info($_POST["buscacliente"]);
+    if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
+    if (!empty(trim($_POST["Sbuscacliente"]))){$busqueda=estandariza_info($_POST["Sbuscacliente"]);}
+ 
     $numero=$trozos=0;
+
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'asesori1_bamboo');
 
@@ -45,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</button></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</button></td><tr>'. "<br>";
     }
 
     //fin feabarcas

@@ -46,9 +46,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         </div>
                     </li>
 
-                    <form class="form-inline" method="post" action="listado_clientes.php">
+                    <form class="form-inline" method="POST" action="listado_clientes.php">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success " id="buscacliente" name="buscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Search</button>
+                        <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Search</button>
                     </form>
                 </ul>
                 <form class="form-inline">
