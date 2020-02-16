@@ -17,6 +17,7 @@ While($row=mysqli_fetch_object($resultado))
         $direccionp=$row->direccion_personal;
         $direccionl=$row->direccion_laboral;
         $correo=$row->correo;
+        echo $nombre;
    }
 ?>
 <!DOCTYPE html>
