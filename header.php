@@ -46,7 +46,7 @@ alert(mensaje); // this is the message in ""
 	</div>
    <ul class="navbar-nav mr-auto">
     <form class="form-inline">
-      <li class="dropdown"><a href="#" class="dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?>
+      <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?>
           <Usuario>
           </a>
           <ul class="dropdown-menu">
