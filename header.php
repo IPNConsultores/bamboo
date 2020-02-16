@@ -44,7 +44,7 @@
                 <form class="form-inline">
                     <div class="pull-right">
                         <ul class="nav pull-right">
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SERVER["REMOTE_USER"]); ?> <Usuario></a>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?> <Usuario></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="icon-cog"></i> Preferencias</a></li>
                                     <li class="divider"></li>
