@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,14 +18,7 @@
 
 <body>
     <!-- body code goes here -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">	
-    </script>	
-    <script>	
-        $(function() {	
-            $("#header").load("header.php");	
-        });	
-    </script>
-    <div id="header" data-source="header.php"></div>
+    <div id="header"><?php include 'header.php' ?></div>
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
