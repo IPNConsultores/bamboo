@@ -17,7 +17,6 @@ While($row=mysqli_fetch_object($resultado))
         $direccionp=$row->direccion_personal;
         $direccionl=$row->direccion_laboral;
         $correo=$row->correo;
-        echo $nombre;
    }
 ?>
 <!DOCTYPE html>
@@ -40,17 +39,6 @@ While($row=mysqli_fetch_object($resultado))
 <body>
     <!-- body code goes here -->
     <div id="header"><?php include 'header.php' ?></div>
-    <?php echo $id; ?>
-    <?php echo $rut; ?>
-    <?php echo $dv; ?>
-    <?php echo $nombre; ?>
-    <?php echo $apellidop; ?>
-    <?php echo $apellidom; ?>
-    <?php echo $telefono; ?>
-    <?php echo $direccionp; ?>
-    <?php echo $direccionl; ?>
-    <?php echo $correo; ?>
-
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
