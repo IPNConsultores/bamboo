@@ -9,14 +9,18 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Untitled Document</title>
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+<!-- Bootstrap -->
 <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+
 <script>
 function alertas(mensaje)
 {
@@ -34,12 +38,12 @@ alert(mensaje); // this is the message in ""
     <p class="h2" style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;"> &nbsp;Gestión Bamboo</p>
   </div>
 </div>
-<nav class="navbar navbar-expand navbar-light shadow p-1" style="background-color: #A5CCAB; OVERFLOW=AUTO">
+<nav class="navbar navbar-expand navbar-light shadow p-1"  style= "background-color: #A5CCAB; OVERFLOW=AUTO">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active"> <a class="nav-link" type="button" href="index.php">Home <span class="sr-only">(current)</span> </a> </li>
-    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
+    <li class="nav-item active"> <a class="nav-link" type="button" href="index.php">Inicio <span class="sr-only">(current)</span> </a> </li>
+    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" type="button" href="creacion_cliente.php">Creación</a> <a class="dropdown-item" type="button" href="listado_clientes.php">Modificación</a> </div>
     </li>
   </ul>
@@ -49,7 +53,7 @@ alert(mensaje); // this is the message in ""
       <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?>
           <Usuario>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="nav-item dropdown-menu">
             <li><a href="backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
             <li class="divider"></li>
             <li><a href="backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
@@ -68,5 +72,6 @@ alert(mensaje); // this is the message in ""
   <form id="load" class="needs-validation" novalidate>
   </form>
 </div>
+	
 </body>
 </html>
