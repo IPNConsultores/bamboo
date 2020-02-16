@@ -55,48 +55,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
     <title>Modificación Cliente</title>
     <!-- Bootstrap -->
-    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
-    </script>
-    <script>
-    $(function() {
-        $("#header").load("header.html");
-    });
-    </script>
-    <div id="header"></div>
-
     <style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td,
-    th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
+ 
     </style>
     <!-- body code goes here -->
-
+    <div id="header"><?php include 'header.html' ?></div>
     <div class="container">
         <p> Clientes / Modificación <br>
         </p>
