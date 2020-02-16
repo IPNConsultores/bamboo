@@ -23,7 +23,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 
 <body>
-    <div id="header"><?php include 'header.html' ?></div>
+    <div id="header"><?php include 'header.php' ?></div>
     <div id="contenido_index">
         <p>Index</p>
     </div>
