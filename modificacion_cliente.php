@@ -19,6 +19,11 @@ While($row=mysqli_fetch_object($resultado))
         $direccionl=$row->direccion_laboral;
         $correo=$row->correo;
    }
+function modificar(){
+    mysqli_set_charset( $link, 'utf8');
+    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_query($link, 'UPDATE clientes SET id=[value-1],nombre_cliente=[value-2],apellido_paterno=[value-3],apellido_materno=[value-4],rut_sin_dv=[value-5],dv=[value-6],telefono=[value-7],direccion_personal=[value-8],direccion_laboral=[value-9],correo=[value-10] WHERE id=id;');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,6 +49,7 @@ While($row=mysqli_fetch_object($resultado))
         <p> Clientes / Creación <br>
         </p>
         <form action="backend/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
+        <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">

@@ -7,6 +7,7 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+echo $_POST["Sbuscacliente"];
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';

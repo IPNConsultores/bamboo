@@ -48,7 +48,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                     <form class="form-inline" method="POST" action="listado_clientes.php">
                         <input class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Search</button>
+                        <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                     </form>
                 </ul>
                 <form class="form-inline">
@@ -56,7 +56,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         <ul class="nav pull-right">
                             <li class="dropdown"><a href="#" class="dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?> <Usuario></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
+                                    <li><a href="backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
                                     <li class="divider"></li>
                                     <li><a href="backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                                 </ul>
