@@ -52,4 +52,4 @@ foreach ($indicesServer as $arg) {
 }
 echo '</table>' ;
 
-</html>
+?>
