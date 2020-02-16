@@ -1,6 +1,6 @@
 <?php
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-$idcliente=estandariza_info($_GET["cliente"]);
+$idcliente=$_GET["cliente"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
