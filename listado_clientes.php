@@ -1,4 +1,5 @@
 <?php
+session_start();
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -44,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar" onclick="modificacion_cliente.php?cliente='.$id.'">modificar</button></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar" action="modificacion_cliente.php?cliente='.$id.'">modificar</button></td><tr>'. "<br>";
     }
 
     //fin feabarcas
@@ -73,7 +74,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <body>
     <style>
- 
+ table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(en) {
+    background-color: #dddddd;
+}
     </style>
     <!-- body code goes here -->
     <div id="header"><?php include 'header.php' ?></div>

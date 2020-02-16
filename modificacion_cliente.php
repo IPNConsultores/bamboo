@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 $idcliente=$_GET["cliente"];
 mysqli_set_charset( $link, 'utf8');
