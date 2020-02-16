@@ -31,7 +31,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" type="button" href="Creación_ClienteV3.html">Creación</a>
+                            <a class="dropdown-item" type="button" href="creacion_cliente.php">Creación</a>
                             <a class="dropdown-item" type="button" href="listado_clientes.php">Modificación</a>
                         </div>
                     </li>
@@ -46,7 +46,7 @@
                         <ul class="nav pull-right">
                             <li class="dropdown"><a href="#" class="dropdown-toggle" style="color:black" data-toggle="dropdown">Bienvenido!, <?php echo htmlspecialchars($_SESSION["username"]); ?> <Usuario></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="icon-cog"></i> Preferencias</a></li>
+                                    <li><a href="registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
                                     <li class="divider"></li>
                                     <li><a href="backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                                 </ul>

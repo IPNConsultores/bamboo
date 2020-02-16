@@ -39,11 +39,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {
     //Mostramos los titulos de los articulos o lo que deseemos...
         $rut=$row->rut;
+        $id=$row->id;
         $nombre=$row->nombre;
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar">modificar</button></td><tr>'. "\n";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button id="boton-modificar" onclick="modificacion_cliente.php?cliente='.id.'">modificar</button></td><tr>'. "<br>";
     }
 
     //fin feabarcas
@@ -86,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label for="Buscador">Nombre o Rut sin dígito verificador</label>
             <div class="form-row; needs-validation">
                 <div class="col-md-4; form-inline">
-                    <input class="form-control" type="text" name="buscacliente" id="buscacliente" required>
+                    <input class="form-control" type="text" name="buscacliente" id="buscacliente" value="<?php echo $data; ?>" required>
                     <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
                         type="submit">Buscar</button>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco
