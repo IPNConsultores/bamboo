@@ -68,9 +68,9 @@ alert(mensaje); // this is the message in ""
 function abrir_home() {
        $( "#load" ).empty();}	
 function abrir_creacion_cliente() {
-       $( "#load" ).load( "Creación_ClienteV3.html" );}
+       $( "#load" ).load( "creacion_cliente.php" );}
 function abrir_modif_cliente() {
-       $( "#load" ).load( "Modificación_Cliente.html" );}
+       $( "#load" ).load( "modificacion_cliente.php" );}
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 
 </script> 
