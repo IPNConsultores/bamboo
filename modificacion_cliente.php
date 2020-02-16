@@ -3,7 +3,7 @@ require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 $idcliente=$_GET["cliente"];
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'asesori1_bamboo');
-$resultado=mysqli_query($link, 'SELECT * from clientes where id=\''.$idcliente.'\' );');
+$resultado=mysqli_query($link, 'SELECT * from clientes where id='.$idcliente.';');
 While($row=mysqli_fetch_object($resultado))
     {
     //Mostramos los titulos de los articulos o lo que deseemos...
