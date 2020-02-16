@@ -19,6 +19,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+    <script>
+function alertas(mensaje)
+{
+alert(mensaje); // this is the message in ""
+}
+</script>
 </head>
 
 <body>
@@ -48,7 +54,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                     <form class="form-inline" method="POST" action="listado_clientes.php">
                         <input class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Buscar</button>
+                        <button class="btn btn-outline-success "  id="Sbuscacliente" name="Sbuscacliente" type="submit" style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                     </form>
                 </ul>
                 <form class="form-inline">

@@ -107,13 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 
 <body>
-<div id="header"><?php include 'header.php' ?></div>
-    <div class="container" style="overflow:auto;  background-color: #536656; ">
-        <p class="h6" style=" color:white; text-align: center"><img src="http://www.bambooseguros.cl/img/logo-2.png"
-                width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
-        <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
-    </div>
-
+<div id="header"><?php include './header.php' ?></div>
     <div class="modal-dialog modal-login">
         <div class="modal-content col-lg-10">
             <div class="modal-header">

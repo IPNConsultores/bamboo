@@ -7,13 +7,13 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-echo $_POST["Sbuscacliente"];
+
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+    echo $_POST["Sbuscacliente"];
     // Check if username is empty
     if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["Sbuscacliente"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
