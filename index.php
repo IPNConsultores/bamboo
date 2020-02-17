@@ -16,7 +16,7 @@
 <body>
     <div id="header"><?php include 'header.php' ?></div>
     <div id="contenido_index">
-        <p>Index</p>
+        <p>Index_laqweaquesea</p>
     </div>
 </body>
 
