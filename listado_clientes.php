@@ -7,7 +7,24 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-
+//inicio feabarcas v1.96
+/*
+mysqli_set_charset( $link, 'utf8');
+mysqli_select_db($link, 'asesori1_bamboo');
+$resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+While($row=mysqli_fetch_object($resultado))
+{
+//Mostramos los titulos de los articulos o lo que deseemos...
+    $rut=$row->rut;
+    $id=$row->id;
+    $nombre=$row->nombre;
+    $telefono=$row->telefono;
+    $correo=$row->correo;
+    $num=$num+1;
+    $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+}
+*/
+//fin feabarcas v1.96
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';

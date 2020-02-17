@@ -51,8 +51,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                                 class="sr-only">(current)</span> </a> </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item"
-                                type="button" href="creacion_cliente.php">Creación</a> <a class="dropdown-item"
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                        <a class="dropdown-item"
+                                type="button" href="creacion_cliente.php">Creación</a> 
+                                <a class="dropdown-item"
                                 type="button" href="listado_clientes.php">Modificación</a> </div>
                     </li>
                 </ul>
