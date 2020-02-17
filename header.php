@@ -47,15 +47,15 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                     class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"> <a class="nav-link" type="button" href="index.php">Inicio <span
+                    <li class="nav-item active"> <a class="nav-link" type="button" href="/bamboo/index.php">Inicio <span
                                 class="sr-only">(current)</span> </a> </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
                         <a class="dropdown-item"
-                                type="button" href="creacion_cliente.php">Creación</a> 
+                                type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="listado_clientes.php">Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php">Modificación</a> </div>
                     </li>
                 </ul>
             </div>
@@ -66,13 +66,13 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                             <Usuario>
                         </a>
                         <ul class="nav-item dropdown-menu">
-                            <li><a href="backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
+                            <li><a href="/bamboo/backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
                             <li class="divider"></li>
-                            <li><a href="backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
+                            <li><a href="/bamboo/backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </form>
-                <form class="form-inline" method="POST" action="listado_clientes.php">
+                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php">
                     <input class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
                     <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit"
                         style="background-color:#536656;color:#A5CCAB ">Buscar</button>

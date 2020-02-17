@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: /bamboo/backend/login.php");
+                header("location: /bamboo/index.php");
             } else{
                 echo "Algo salió mal. Favor intentar más tarde.";
             }
