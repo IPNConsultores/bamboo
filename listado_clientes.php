@@ -97,7 +97,7 @@ tr:nth-child(en) {
     <!-- body code goes here -->
     <div id="header"><?php include 'header.php' ?></div>
     <div class="container">
-        <p> Clientes / Modificación <br>
+        <p> Clientes / Modificación test Erick <br>
         </p>
         <form class="needs-validation" novalidate method="POST"
             action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
