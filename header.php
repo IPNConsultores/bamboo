@@ -20,7 +20,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- Bootstrap -->
-    <!--<link href="css/bootstrap-4.3.1.css" rel="stylesheet">-->
+    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
 
     <script>
     function alertas(mensaje) {

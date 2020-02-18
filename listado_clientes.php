@@ -94,24 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 
 <body>
-    <style>
- table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
-td,
-th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(en) {
-    background-color: #dddddd;
-}
-    </style>
     <!-- body code goes here -->
     <div id="header"><?php include 'header.php' ?></div>
     <div class="container">
@@ -137,7 +120,7 @@ tr:nth-child(en) {
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">
-                <table id="listado">
+                <table class="table" id="listado">
                     <tr>
                         <th>#</th>
                         <th>Rut</th>
