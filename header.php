@@ -72,10 +72,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         </ul>
                     </li>
                 </form>
-                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php">
+                <form class="form-inline" method="GET" action="/bamboo/listado_clientes.php" >
                     <input class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
                     <button class="btn btn-outline-success " id="busqueda_header" name="busqueda_header" type="submit"
-                        style="background-color:#536656;color:#A5CCAB " action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >Buscar</button>
+                        style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                 </form>
             </ul>
         </nav>

@@ -28,6 +28,11 @@ While($row=mysqli_fetch_object($resultado))
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
+ if($_SERVER["REQUEST_METHOD"] == "GET"){
+    echo $_GET["busqueda_header"];
+    $test=$_GET["busqueda_header"];
+    $lista=$lista.'<tr><td>'.$num.'</td><td>'.$test.'</td><td>'.$test.'</td><td>'.$test.'</td><td>'.$test.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+ }
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     echo $_POST["busqueda_header"];
