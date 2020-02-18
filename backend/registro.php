@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 
 <body>
-<div id="header"><?php include '/bamboo/header.php' ?></div>
+<div id="header"><?php include '../header.php' ?></div>
     <div class="modal-dialog modal-login">
         <div class="modal-content col-lg-10">
             <div class="modal-header">
