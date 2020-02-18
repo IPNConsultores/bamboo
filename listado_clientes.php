@@ -8,7 +8,8 @@ function estandariza_info($data) {
   }
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 //inicio feabarcas v1.96
-/*
+
+if($_SESSION["auxiliar"]=1){
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'asesori1_bamboo');
 $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -22,28 +23,24 @@ While($row=mysqli_fetch_object($resultado))
     $correo=$row->correo;
     $num=$num+1;
     $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+    $_SESSION["auxiliar"]=1    
 }
-*/
+}
+
 //fin feabarcas v1.96
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
- if($_SERVER["REQUEST_METHOD"] == "GET"){
-    echo $_GET["busqueda_header"];
-    $test=$_GET["busqueda_header"];
-    $lista=$lista.'<tr><td>'.$num.'</td><td>'.$test.'</td><td>'.$test.'</td><td>'.$test.'</td><td>'.$test.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
- }
-// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo $_POST["busqueda_header"];
+    echo $_POST["busqueda"];
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda_header"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
     } else{
     //inicio feabarcas
     if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
 
-    if (!empty(trim($_POST["busqueda_header"]))){$busqueda=estandariza_info($_POST["busqueda_header"]);}
+    if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
  
     $numero=$trozos=0;
 

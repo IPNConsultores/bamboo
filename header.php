@@ -7,6 +7,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
   exit;
 }
+$_SESSION["auxiliar"]=0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -72,8 +73,8 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         </ul>
                     </li>
                 </form>
-                <form class="form-inline" method="GET" action="/bamboo/listado_clientes.php" >
-                    <input class="form-control" name="busqueda_header" type="text" placeholder="Buscar" aria-label="Buscar">
+                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" >
+                    <input class="form-control" name="busqueda" type="text" placeholder="Buscar" aria-label="Buscar">
                     <button class="btn btn-outline-success "  type="submit"
                         style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                 </form>
@@ -85,7 +86,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
         <form id="load" class="needs-validation" novalidate>
         </form>
     </div>
-
+	<script>
+        function variable(){
+            $_SESSION["auxiliar"]=1;
+        }
+	</script>
 </body>
-
 </html>
