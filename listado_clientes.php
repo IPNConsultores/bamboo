@@ -30,14 +30,15 @@ $num=0;
  $rut=$nombre=$telefono=$correo=$lista='';
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo $_POST["Sbuscacliente"];
+    echo $_POST["busqueda_header"];
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["Sbuscacliente"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda_header"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
     } else{
     //inicio feabarcas
     if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
-    if (!empty(trim($_POST["Sbuscacliente"]))){$busqueda=estandariza_info($_POST["Sbuscacliente"]);}
+
+    if (!empty(trim($_POST["busqueda_header"]))){$busqueda=estandariza_info($_POST["busqueda_header"]);}
  
     $numero=$trozos=0;
 
