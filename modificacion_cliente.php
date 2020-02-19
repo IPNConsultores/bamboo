@@ -44,7 +44,7 @@ function modificar(){
 
 <body>
     <!-- body code goes here -->
-    <div id="header"><?php include 'header.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
