@@ -12,9 +12,9 @@ $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
-/*
+
 if($_SESSION["auxiliar"]=1){
-    
+    unset($_SESSION["auxiliar"]);
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'asesori1_bamboo');
     $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -32,7 +32,7 @@ if($_SESSION["auxiliar"]=1){
         }
     mysqli_close($link);
 }
-*/
+
 //fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
