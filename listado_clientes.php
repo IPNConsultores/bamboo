@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include 'header.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <p> Clientes / Modificación <br>
         </p>
