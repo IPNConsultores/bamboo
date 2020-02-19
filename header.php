@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-
+$_SESSION["auxiliar"]=1;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
@@ -55,7 +55,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1; echo "Variable auxiliar enviada: ".$_SESSION["auxiliar"];?>" >Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>" >Modificación</a> </div>
                     </li>
                 </ul>
             </div>
