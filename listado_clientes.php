@@ -11,7 +11,7 @@ require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
- echo $_SESSION["auxiliar"];
+ echo "variable auxiliar recibida: ".$_SESSION["auxiliar"];
 //inicio feabarcas v1.96
 
 if($_SESSION["auxiliar"]=1){
