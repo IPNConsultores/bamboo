@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-
+$_SESSION["auxiliar"]=0;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
@@ -20,13 +20,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- Bootstrap -->
-    <!--<link href="css/bootstrap-4.3.1.css" rel="stylesheet">-->
-
-    <script>
-    function alertas(mensaje) {
-        alert(mensaje); // this is the message in ""
-    }
-    </script>
+    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
 </head>
 
 <body>
@@ -55,7 +49,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php">Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>" >Modificación</a> </div>
                     </li>
                 </ul>
             </div>
@@ -72,9 +66,9 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         </ul>
                     </li>
                 </form>
-                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php">
-                    <input class="form-control" type="text" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-success " id="Sbuscacliente" name="Sbuscacliente" type="submit"
+                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" >
+                    <input class="form-control" name="busqueda" type="text" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-success "  type="submit"
                         style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                 </form>
             </ul>
@@ -85,7 +79,5 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
         <form id="load" class="needs-validation" novalidate>
         </form>
     </div>
-
 </body>
-
 </html>

@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div id="header"><?php include 'header.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div id="contenido_index">
-        <p>Index_laqweaquesea</p>
+        <p>Index</p>
     </div>
 </body>
 

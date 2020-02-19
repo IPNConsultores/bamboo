@@ -6,38 +6,44 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
+
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-//inicio feabarcas v1.96
-/*
-mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'asesori1_bamboo');
-$resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
-While($row=mysqli_fetch_object($resultado))
-{
-//Mostramos los titulos de los articulos o lo que deseemos...
-    $rut=$row->rut;
-    $id=$row->id;
-    $nombre=$row->nombre;
-    $telefono=$row->telefono;
-    $correo=$row->correo;
-    $num=$num+1;
-    $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
-}
-*/
-//fin feabarcas v1.96
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
-// Processing form data when form is submitted
+//inicio feabarcas v1.96
+
+if($_SESSION["auxiliar"]=1){
+    unset($_SESSION["auxiliar"]);
+    mysqli_set_charset( $link, 'utf8');
+    mysqli_select_db($link, 'asesori1_bamboo');
+    $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+    While($row=mysqli_fetch_object($resultado))
+        {
+        //Mostramos los titulos de los articulos o lo que deseemos...
+            $rut=$row->rut;
+            $id=$row->id;
+            $nombre=$row->nombre;
+            $telefono=$row->telefono;
+            $correo=$row->correo;
+            $num=$num+1;
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+               
+        }
+    mysqli_close($link);
+}
+
+//fin feabarcas v1.96
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo $_POST["Sbuscacliente"];
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["Sbuscacliente"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
     } else{
     //inicio feabarcas
     if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
-    if (!empty(trim($_POST["Sbuscacliente"]))){$busqueda=estandariza_info($_POST["Sbuscacliente"]);}
+
+    if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
  
     $numero=$trozos=0;
 
@@ -66,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/backend/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
     }
 
     //fin feabarcas
@@ -93,26 +99,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 
 <body>
-    <style>
- table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
-td,
-th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(en) {
-    background-color: #dddddd;
-}
-    </style>
     <!-- body code goes here -->
-    <div id="header"><?php include 'header.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <p> Clientes / Modificación <br>
         </p>
@@ -136,7 +125,7 @@ tr:nth-child(en) {
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">
-                <table id="listado">
+                <table class="table" id="listado">
                     <tr>
                         <th>#</th>
                         <th>Rut</th>
