@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-$_SESSION["auxiliar"]=1;
+$_SESSION["auxiliar"]=0;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
@@ -21,12 +21,6 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
-
-    <script>
-    function todos_los_clientes(){
-        $_SESSION["auxiliar"]=1;
-    }
-	</script>
 </head>
 
 <body>
