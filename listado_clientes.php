@@ -11,7 +11,7 @@ require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
-
+ echo $_SESSION["auxiliar"];
 //inicio feabarcas v1.96
 
 if($_SESSION["auxiliar"]=1){
@@ -31,12 +31,12 @@ if($_SESSION["auxiliar"]=1){
             $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
                
         }
+    mysqli_close($link);
 }
 
 //fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo $_POST["busqueda"];
     // Check if username is empty
     if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";

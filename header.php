@@ -55,7 +55,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>" >Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1; echo $_SESSION["auxiliar"];?>" >Modificación</a> </div>
                     </li>
                 </ul>
             </div>
