@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div id="header"><?php include 'header2.php' ?></div>
+    <div id="header"><?php include 'header2.php'; ini_set("display_errors",1);
+error_reporting(E_ALL); ?></div>
     <div id="contenido_index">
         <p>Index</p>
     </div>
