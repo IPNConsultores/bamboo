@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-$_SESSION["auxiliar"]=0;
+$_SESSION["auxiliar"]=false;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
@@ -45,11 +45,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                                 class="sr-only">(current)</span> </a> </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-                        <a class="dropdown-item"
-                                type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
-                                <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>" >Modificación</a> </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" type="button" href="/bamboo/creacion_cliente.php">Creación</a>
+                            <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php"
+                                onclick="<?php $_SESSION["auxiliar"]=true;?>">Modificación</a> </div>
                     </li>
                 </ul>
             </div>
@@ -60,15 +59,16 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                             <Usuario>
                         </a>
                         <ul class="nav-item dropdown-menu">
-                            <li><a href="/bamboo/backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a></li>
+                            <li><a href="/bamboo/backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a>
+                            </li>
                             <li class="divider"></li>
                             <li><a href="/bamboo/backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </form>
-                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" >
+                <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php">
                     <input class="form-control" name="busqueda" type="text" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-success "  type="submit"
+                    <button class="btn btn-outline-success " type="submit"
                         style="background-color:#536656;color:#A5CCAB ">Buscar</button>
                 </form>
             </ul>
@@ -80,4 +80,5 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
         </form>
     </div>
 </body>
+
 </html>
