@@ -40,7 +40,8 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active"> <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a> </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
+		  <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>">Modificación</a> </div>
         </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Polizas </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
@@ -51,13 +52,13 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
           <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Bienvenido, <?php echo htmlspecialchars($_SESSION["username"]); ?>
             <Usuario>
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Crear Nuevo usuario</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/bamboo/backend/registro.php"><i class="icon-cog"></i>Crear Nuevo usuario</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Cerrar Sesión</a> </div>
+              <a class="dropdown-item" href="/bamboo/backend/logout.php"><i class="icon-off"></i>Cerrar Sesión</a> </div>
           </li>
         </ul>
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
     </div>
   </nav>
