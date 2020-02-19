@@ -7,7 +7,6 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
   exit;
 }
-$_SESSION["auxiliar"]=0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,7 +55,7 @@ $_SESSION["auxiliar"]=0;
                         <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php">Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php" onclick="todos_los_clientes()" >Modificación</a> </div>
                     </li>
                 </ul>
             </div>
@@ -87,7 +86,7 @@ $_SESSION["auxiliar"]=0;
         </form>
     </div>
 	<script>
-        function variable(){
+        function todos_los_clientes(){
             $_SESSION["auxiliar"]=1;
         }
 	</script>

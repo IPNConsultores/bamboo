@@ -23,7 +23,7 @@ While($row=mysqli_fetch_object($resultado))
     $correo=$row->correo;
     $num=$num+1;
     $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
-    $_SESSION["auxiliar"]=1    
+    $_SESSION["auxiliar"]=0;   
 }
 }
 
