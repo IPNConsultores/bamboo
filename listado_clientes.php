@@ -10,6 +10,7 @@ require_once "/home/asesori1/public_html/bamboo/backend/config.php";
 //inicio feabarcas v1.96
 
 if($_SESSION["auxiliar"]=1){
+    echo "éxito";
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'asesori1_bamboo');
 $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
