@@ -1,6 +1,6 @@
 <?php
 require_once "/home/asesori1/public_html/bamboo/backend/config.php";
-$id=estandariza_info($_POST["idcliente"]);
+$id=$_GET["cliente"];
 mysqli_set_charset( $link, 'utf8');
 mysqli_query($link, 'delete from clientes WHERE id='.$id.';');
 function estandariza_info($data) {
