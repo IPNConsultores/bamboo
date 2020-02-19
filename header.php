@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-
+$_SESSION["auxiliar"]=0;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /bamboo/backend/login.php" );
@@ -21,12 +21,6 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
-
-    <script>
-    function alertas(mensaje) {
-        alert(mensaje); // this is the message in ""
-    }
-    </script>
 </head>
 
 <body>
@@ -55,7 +49,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                         <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
                                 <a class="dropdown-item"
-                                type="button" href="/bamboo/listado_clientes.php" onclick="todos_los_clientes()" >Modificación</a> </div>
+                                type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>" >Modificación</a> </div>
                     </li>
                 </ul>
             </div>
@@ -85,10 +79,5 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
         <form id="load" class="needs-validation" novalidate>
         </form>
     </div>
-	<script>
-        function todos_los_clientes(){
-            $_SESSION["auxiliar"]=1;
-        }
-	</script>
 </body>
 </html>
