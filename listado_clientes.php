@@ -15,7 +15,7 @@ $num=0;
 //inicio feabarcas v1.96
 
 if($_SESSION["auxiliar"]=1){
-    echo "éxito";
+    $_SESSION["auxiliar"]=0;
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'asesori1_bamboo');
     $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -29,7 +29,7 @@ if($_SESSION["auxiliar"]=1){
             $correo=$row->correo;
             $num=$num+1;
             $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
-            $_SESSION["auxiliar"]=0;   
+               
         }
 }
 
