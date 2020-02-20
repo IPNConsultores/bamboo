@@ -34,7 +34,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
       <p class="h2" style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;"> &nbsp;Gestión Bamboo</p>
     </div>
   </div>
-  <nav class= "navbar navbar-expand navbar-light shadow p1" style="background-color: #A5CCAB">
+  <nav class= "navbar navbar-expand-lg navbar-light shadow p1" style="background-color: #A5CCAB">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span
      class="navbar-toggler-icon"></span> </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
