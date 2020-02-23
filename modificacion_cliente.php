@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/bamboo/backend/config.php";
 $idcliente=$_GET["cliente"];
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $resultado=mysqli_query($link, 'SELECT * from clientes where id='.$idcliente.';');
 While($row=mysqli_fetch_object($resultado))
     {
@@ -21,7 +21,7 @@ While($row=mysqli_fetch_object($resultado))
    }
 function modificar(){
     mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     mysqli_query($link, 'UPDATE clientes SET id=[value-1],nombre_cliente=[value-2],apellido_paterno=[value-3],apellido_materno=[value-4],rut_sin_dv=[value-5],dv=[value-6],telefono=[value-7],direccion_personal=[value-8],direccion_laboral=[value-9],correo=[value-10] WHERE id=id;');
 }
 ?>

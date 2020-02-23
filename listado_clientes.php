@@ -7,7 +7,7 @@ function estandariza_info($data) {
     return $data;
   }
 
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/bamboo/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -16,7 +16,7 @@ $num=0;
 if($_SESSION["auxiliar"]==true){
     $_SESSION["auxiliar"]=false;
     mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
     While($row=mysqli_fetch_object($resultado))
         {
@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $numero=$trozos=0;
 
     mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
     if ($busqueda<>''){
     //CUENTA EL NUMERO DE PALABRAS

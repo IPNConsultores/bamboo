@@ -1,10 +1,10 @@
 <?php
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/bamboo/backend/config.php";
 $busqueda=estandariza_info($_POST["buscacliente"]);
 $numero=$trozos=0;
 mysqli_set_charset( $link, 'utf8');
 
-mysqli_select_db($link, 'asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 if ($busqueda<>''){
   //CUENTA EL NUMERO DE PALABRAS
   $trozos=explode(" ",$busqueda);
