@@ -9,5 +9,5 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-header("Location:http://ipnconsultores.cl/bamboo/index.php");
+header("Location:http://gestionipn.cl/bamboo/index.php");
 ?>

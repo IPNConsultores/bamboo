@@ -27,7 +27,7 @@ if($_SESSION["auxiliar"]==true){
             $telefono=$row->telefono;
             $correo=$row->correo;
             $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
                
         }
     mysqli_close($link);
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
     }
 
     //fin feabarcas
