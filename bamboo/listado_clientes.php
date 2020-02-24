@@ -7,16 +7,16 @@ function estandariza_info($data) {
     return $data;
   }
 
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
-/*
-if($_SESSION["auxiliar"]=1){
-    
+
+if($_SESSION["auxiliar"]==true){
+    $_SESSION["auxiliar"]=false;
     mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
     While($row=mysqli_fetch_object($resultado))
         {
@@ -27,12 +27,12 @@ if($_SESSION["auxiliar"]=1){
             $telefono=$row->telefono;
             $correo=$row->correo;
             $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a></td><tr>'. "<br>";
                
         }
     mysqli_close($link);
 }
-*/
+
 //fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $numero=$trozos=0;
 
     mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
     if ($busqueda<>''){
     //CUENTA EL NUMERO DE PALABRAS
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/backend/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
     }
 
     //fin feabarcas
@@ -112,7 +112,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label for="Buscador">Nombre o Rut sin dígito verificador</label>
             <div class="form-row; needs-validation">
                 <div class="col-md-4; form-inline">
-                    <input class="form-control" type="text" name="buscacliente" id="buscacliente" value="<?php echo $data; ?>" required>
+                    <input class="form-control" type="text" name="buscacliente" id="buscacliente"
+                        value="<?php echo $data; ?>" required>
                     <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
                         type="submit">Buscar</button>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco

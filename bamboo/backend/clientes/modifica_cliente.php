@@ -1,5 +1,5 @@
 <?php
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 $id=estandariza_info($_POST["idcliente"]);
 $rut=estandariza_info($_POST["rut"]);
 $dv=estandariza_info($_POST["rut"]);
@@ -18,5 +18,5 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-header("Location:http://ipnconsultores.cl/bamboo/index.php");
+header("Location:http://gestionipn.cl/bamboo/index.php");
 ?>

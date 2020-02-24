@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
@@ -155,7 +155,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Crear usuario">
                     </div>
-                    <p>Ya tienes una cuenta? <a href="/bamboo/backend/login.php">Ingresa aquí</a>.</p>
+                    <p>Ya tienes una cuenta? <a href="/bamboo/backend/login/login.php">Ingresa aquí</a>.</p>
                 </form>
             </div>
         </div>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+    <title>Modificación Cliente</title>
+    <!-- Bootstrap -->
+<title>Documento sin título</title>
+</head>
+
+<body>
+	
+	<style>
+ table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(en) {
+    background-color: #dddddd;
+}
+    </style>
+    <!-- body code goes here -->
+    <div id="header"><?php include 'header.php' ?></div>
+    <div class="container">
+        <p> Clientes / Modificación <br>
+        </p>
+        <form class="needs-validation" novalidate method="POST"
+            action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <h5 class="form-row">&nbsp;Buscador de Polizas</h5>
+            <br>
+            <label for="Buscador">Poliza, Nombre o Rut sin dígito verificador</label>
+            <div class="form-row; needs-validation">
+                <div class="col-md-4; form-inline">
+                    <input class="form-control" type="text" name="buscacliente" id="buscacliente" value="<?php echo $data; ?>" required>
+                    <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
+                        type="submit">Buscar</button>
+                    <div class="invalid-feedback"> No puedes dejar este campo en blanco
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <form class="needs-validation" novalidate>
+            <h5 class="form-row">&nbsp;Información de Polizas</h5>
+            <br>
+            <div class="form-row">
+                <table id="listado">
+                    <tr>
+                        <th>#</th>
+                        <th>Poliza</th>
+						<th>Nombre Cliente</th>
+						<th>Rut</th>
+                        <th>Tipo</th>
+                        <th>Cotejamiento</th>
+                        <th>Atributos</th>
+                        <th>Nulo</th>
+						<th>Predeterminado</th>
+						<th>Comentarios</th>
+						<th>Extra</th>
+						<th>Acción</th>
+						<th>Acción´</th>
+						<th>Acción´´</th>
+                    </tr>
+                    <?php echo $lista; ?>
+                </table>
+            </div>
+        </form>
+    </div>
+	
+</body>
+</html>

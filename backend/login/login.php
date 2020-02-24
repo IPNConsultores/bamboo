@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once "/home/asesori1/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
-                            $_SESSION["auxiliar"]=0;
+                            $_SESSION["auxiliar"]=false;
                             // Redirect user to welcome page
                             header("location: /bamboo/index.php");
                         } else{
