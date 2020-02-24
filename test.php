@@ -59,8 +59,8 @@ $days = 7;
 $dbhost = 'localhost';
 $BBDDs = array('asesori1_reccius_db');
 $backup_path= '/home/gestio10/backup_mysql/';
-
-
+require_once "/home/gestio10/public_html/bamboo/backend/config.php";
+ 
 foreach($BBDDs as $dbname){
     if (!file_exists('/home/gestio10/backup_mysql/'.$dbname)) {
     mkdir('/home/gestio10/backup_mysql/'.$dbname, 0755, true);}
@@ -72,6 +72,7 @@ foreach($BBDDs as $dbname){
         {
              if (filemtime('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo) < ( time() - ( $days * 24 * 60 * 60 ) ) )  
             {  
+                //descomentar
                 //unlink('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo);  
             } 
         }
