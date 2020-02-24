@@ -4,7 +4,7 @@ session_start();
 $_SESSION["auxiliar"]=false;
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
-  header( "location: /backend/login.php" );
+  header( "location: /backend/login/login.php" );
   exit;
 }
 ?>
@@ -59,10 +59,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                             <Usuario>
                         </a>
                         <ul class="nav-item dropdown-menu">
-                            <li><a href="/bamboo/backend/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a>
+                            <li><a href="/bamboo/backend/login/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/bamboo/backend/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
+                            <li><a href="/bamboo/backend/login/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </form>
