@@ -55,12 +55,14 @@ echo '</table>' ;
 
 //header('Content-type: text/plain');
 
-$days = 7;
-$dbhost = 'localhost';
-$BBDDs = array('asesori1_reccius_db');
+require_once "/home/gestio10/backup_mysql/config.php";
+$BBDDs = array('gestio10_asesori1_reccius_db','gestio10_asesori1_bamboo','gestio10_asesori1_mercado_publico');
 $backup_path= '/home/gestio10/backup_mysql/';
-require_once "/home/gestio10/public_html/bamboo/backend/config.php";
- 
+
+$days = 7;
+
+
+
 foreach($BBDDs as $dbname){
     if (!file_exists('/home/gestio10/backup_mysql/'.$dbname)) {
     mkdir('/home/gestio10/backup_mysql/'.$dbname, 0755, true);}
@@ -72,7 +74,6 @@ foreach($BBDDs as $dbname){
         {
              if (filemtime('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo) < ( time() - ( $days * 24 * 60 * 60 ) ) )  
             {  
-                //descomentar
                 //unlink('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo);  
             } 
         }
@@ -80,23 +81,23 @@ foreach($BBDDs as $dbname){
     
 $backup_file = $dbname. "_" .date("Ymd_His", strtotime('-3 hours')).".sql";
 $backup_rutacompleta = $backup_path.$dbname."/".$backup_file;
-
-    if ($link){
+$connection=mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    if ($connection){
         
         echo "conectado;<br>";
         $tables = array();
-        $result = mysqli_query($link,"SHOW TABLES");
+        $result = mysqli_query($connection,"SHOW TABLES");
         while($row = mysqli_fetch_row($result)){
             $tables[] = $row[0];
         }
         
         $return = '';
         foreach($tables as $table){
-              $result = mysqli_query($link,"SELECT * FROM ".$table);
+              $result = mysqli_query($connection,"SELECT * FROM ".$table);
               $num_fields = mysqli_num_fields($result);
               
               $return .= 'DROP TABLE '.$table.';';
-              $row2 = mysqli_fetch_row(mysqli_query($link,"SHOW CREATE TABLE ".$table));
+              $row2 = mysqli_fetch_row(mysqli_query($connection,"SHOW CREATE TABLE ".$table));
               $return .= "\n\n".$row2[1].";\n\n";
               echo "<br> Tabla:".$table.": columnas(".$num_fields.")";
           for($i=0;$i<$num_fields;$i++){
@@ -142,6 +143,4 @@ $backup_rutacompleta = $backup_path.$dbname."/".$backup_file;
             }
         }
 }
-
-
 ?>
