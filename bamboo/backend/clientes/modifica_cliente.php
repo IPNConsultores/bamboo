@@ -1,5 +1,5 @@
 <?php
-require_once "/home/gestio10/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 $id=estandariza_info($_POST["idcliente"]);
 $rut=estandariza_info($_POST["rut"]);
 $dv=estandariza_info($_POST["rut"]);

@@ -7,7 +7,7 @@ function estandariza_info($data) {
     return $data;
   }
 
-require_once "/home/gestio10/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $telefono=$row->telefono;
         $correo=$row->correo;
         $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/backend/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
+        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://ipnconsultores.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
     }
 
     //fin feabarcas

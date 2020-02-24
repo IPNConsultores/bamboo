@@ -1,13 +1,3 @@
-<?php
-// Initialize the session
-session_start();
-$_SESSION["auxiliar"]=false;
-// Check if the user is logged in, if not then redirect him to login page
-if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
-  header( "location: /backend/login.php" );
-  exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,11 +9,11 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
-    <title>Gestión IPN</title>
+    <title>Bamboo Seguros</title>
 </head>
 
 <body>
-
+    <div id="header"><?php include 'header2.php'; ?></div>
     <div id="contenido_index">
         <p>Index</p>
     </div>

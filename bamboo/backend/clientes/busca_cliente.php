@@ -1,5 +1,5 @@
 <?php
-require_once "/home/gestio10/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
 $busqueda=estandariza_info($_POST["buscacliente"]);
 $numero=$trozos=0;
 mysqli_set_charset( $link, 'utf8');

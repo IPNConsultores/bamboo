@@ -1,5 +1,5 @@
 <?php
-require_once "/home/gestio10/public_html/bamboo/backend/config.php";
+require_once "/home/gestio10/public_html/backend/config.php";
  $nombre=estandariza_info($_POST["nombre"]);
  $apellidop=estandariza_info($_POST["apellidop"]);
  $apellidom=estandariza_info($_POST["apellidom"]);
