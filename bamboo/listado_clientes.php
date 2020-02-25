@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
