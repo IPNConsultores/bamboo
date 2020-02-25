@@ -59,10 +59,10 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                             <Usuario>
                         </a>
                         <ul class="nav-item dropdown-menu">
-                            <li><a href="/bamboo/backend/login/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a>
+                            <li><a href="/backend/login/registro.php"><i class="icon-cog"></i> Crear nuevo usuario</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/bamboo/backend/login/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
+                            <li><a href="/backend/login/logout.php"><i class="icon-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </form>
