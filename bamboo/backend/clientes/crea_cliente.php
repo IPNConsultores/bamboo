@@ -29,7 +29,7 @@ if($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_store_result($stmt);
         
         if(mysqli_stmt_num_rows($stmt) == 1){
-            $error = "El usuario ya esta utilizado.";
+            echo "El usuario ya esta utilizado.";
         } else{
           mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\');');
             header("Location:http://gestionipn.cl/bamboo/index.php");

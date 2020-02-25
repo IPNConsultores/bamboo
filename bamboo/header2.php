@@ -7,6 +7,9 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /backend/login/login.php" );
   exit;
 }
+function valida_rut(){
+  
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,9 +55,11 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
               <a class="dropdown-item" href="/bamboo/backend/logout.php"><i class="icon-off"></i>Cerrar Sesión</a> </div>
           </li>
         </ul>
+      <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" onclick="todos_los_clientes()">
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color:#536656;color:#A5CCAB">Buscar</button>
       </form>
+    </form>
     </div>
   </nav>
 </div>
@@ -65,7 +70,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
 </div>
 <script>
         function todos_los_clientes(){
-            $_SESSION["auxiliar"]=1;
+            $_SESSION["auxiliar"]=true;
         }
 	</script> 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
