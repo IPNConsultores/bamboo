@@ -69,16 +69,18 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
                                 <Usuario>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item"
-                                    href="/bamboo/backend/login/registro.php"><i class="icon-cog"></i>Crear Nuevo usuario</a>
+                                    href="/backend/login/registro.php"><i class="icon-cog"></i>Crear Nuevo usuario</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/bamboo/backend/login/logout.php"><i
+                                <a class="dropdown-item" href="/backend/login/logout.php"><i
                                         class="icon-off"></i>Cerrar Sesión</a>
                             </div>
                         </li>
                     </ul>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                        style="background-color:#536656;color:#A5CCAB">Buscar</button>
+                    <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php">
+                        <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        style="background-color:#536656;color:#A5CCAB ">Buscar</button>
+                    </form>
                 </form>
             </div>
         </nav>
