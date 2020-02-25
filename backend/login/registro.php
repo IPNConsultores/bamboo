@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 
 <body>
-<div id="header"><?php include '../header2.php' ?></div>
+<div id="header"><?php include 'require_once "/home/gestio10/public_html/bamboo/header2.php' ?></div>
     <div class="modal-dialog modal-login">
         <div class="modal-content col-lg-10">
             <div class="modal-header">
