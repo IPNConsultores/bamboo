@@ -8,7 +8,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   exit;
 }
 function valida_rut(){
-  
+
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ function valida_rut(){
         <li class="nav-item active"> <a class="nav-link" href="/bamboo/index.php">Inicio <span class="sr-only">(current)</span></a> </li>
         <li class="dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
-		  <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>">Modificación</a> </div>
+		  <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>">Listado de clientes</a> </div>
         </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
@@ -70,6 +70,7 @@ function valida_rut(){
 </div>
 <script>
         function todos_los_clientes(){
+          echo $_SESSION["auxiliar"];
             $_SESSION["auxiliar"]=true;
         }
 	</script> 
