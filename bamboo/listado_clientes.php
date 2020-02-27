@@ -38,7 +38,7 @@ if($_SESSION["auxiliar"]=='header'){
     $_SESSION["auxiliar"]='';
 }
 if($_SESSION["auxiliar"]=='buscador'){
-    echo 'buscador';
+    echo 'buscador '.$_POST["busqueda"];
     $_SESSION["auxiliar"]='';
 }
 //fin feabarcas v1.96

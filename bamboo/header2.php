@@ -56,9 +56,10 @@ function valida_rut(){
           </li>
         </ul>
       <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]='buscador';?>">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color:#536656;color:#A5CCAB">Buscar</button>
-      </form>
+      <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar" aria-label="Buscar">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        style="background-color:#536656;color:#A5CCAB">Buscar</button>
+       </form>
     </form>
     </div>
   </nav>
