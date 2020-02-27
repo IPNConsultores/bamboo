@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);

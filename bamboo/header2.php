@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-$_SESSION["auxiliar"]=false;
+
 // Check if the user is logged in, if not then redirect him to login page
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
   header( "location: /backend/login/login.php" );
@@ -50,9 +50,9 @@ function valida_rut(){
           <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Bienvenido, <?php echo htmlspecialchars($_SESSION["username"]); ?>
             <Usuario>
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/bamboo/backend/registro.php"><i class="icon-cog"></i>Crear Nuevo usuario</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/backend/login/registro.php"><i class="icon-cog"></i>Crear Nuevo usuario</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/bamboo/backend/logout.php"><i class="icon-off"></i>Cerrar Sesión</a> </div>
+              <a class="dropdown-item" href="/backend/login/logout.php"><i class="icon-off"></i>Cerrar Sesión</a> </div>
           </li>
         </ul>
       <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" onclick="todos_los_clientes()">
@@ -70,8 +70,9 @@ function valida_rut(){
 </div>
 <script>
         function todos_los_clientes(){
-          echo $_SESSION["auxiliar"];
+          echo "header antes: (".$_SESSION["auxiliar"].")\n";
             $_SESSION["auxiliar"]=true;
+            echo "header despues: (".$_SESSION["auxiliar"].")\n";
         }
 	</script> 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
