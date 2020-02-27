@@ -39,7 +39,7 @@ function valida_rut(){
         <li class="nav-item active"> <a class="nav-link" href="/bamboo/index.php">Inicio <span class="sr-only">(current)</span></a> </li>
         <li class="dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Clientes </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" type="button" href="/bamboo/creacion_cliente.php">Creación</a> 
-		  <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]=1;?>">Listado de clientes</a> </div>
+		  <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]='header';?>">Listado de clientes</a> </div>
         </li>
         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
@@ -55,7 +55,7 @@ function valida_rut(){
               <a class="dropdown-item" href="/backend/login/logout.php"><i class="icon-off"></i>Cerrar Sesión</a> </div>
           </li>
         </ul>
-      <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" onclick="todos_los_clientes()">
+      <form class="form-inline" method="POST" action="/bamboo/listado_clientes.php" onclick="<?php $_SESSION["auxiliar"]='buscador';?>">
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color:#536656;color:#A5CCAB">Buscar</button>
       </form>
@@ -71,7 +71,7 @@ function valida_rut(){
 <script>
         function todos_los_clientes(){
           echo "header antes: (".$_SESSION["auxiliar"].")\n";
-            $_SESSION["auxiliar"]=true;
+            $_SESSION["auxiliar"]='buscador';
             echo "header despues: (".$_SESSION["auxiliar"].")\n";
         }
 	</script> 

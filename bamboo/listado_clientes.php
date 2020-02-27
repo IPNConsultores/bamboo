@@ -33,7 +33,14 @@ if($_SESSION["auxiliar"]==true){
         }
     mysqli_close($link);
 }
-
+if($_SESSION["auxiliar"]=='header'){
+    echo 'header';
+    $_SESSION["auxiliar"]='';
+}
+if($_SESSION["auxiliar"]=='buscador'){
+    echo 'buscador';
+    $_SESSION["auxiliar"]='';
+}
 //fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
