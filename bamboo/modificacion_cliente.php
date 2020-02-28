@@ -49,8 +49,8 @@ function modificar(){
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
-        <form action="/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
-        <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">
+        <form action="/bamboo/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
+            <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">
@@ -73,12 +73,14 @@ function modificar(){
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="11111111" value="<?php echo $rut; ?>" required>
+                            <input type="text" class="form-control" name="rut" placeholder="11111111"
+                                value="<?php echo $rut; ?>" required>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
                             <label for="RUT">&nbsp;</label>
-                            <input type="text" class="form-control" name="dv" placeholder="K" value="<?php echo $dv; ?>" required>
+                            <input type="text" class="form-control" name="dv" placeholder="K" value="<?php echo $dv; ?>"
+                                required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -87,26 +89,30 @@ function modificar(){
                     <label for="validationCustomUsername">E-mail</label>
                     <div class="input-group">
                         <div class="input-group-prepend"> <span class="input-group-text" id="mail">@</span> </div>
-                        <input type="email" class="form-control" value="<?php echo $correo; ?>" name="correo_electronico" required>
+                        <input type="email" class="form-control" value="<?php echo $correo; ?>"
+                            name="correo_electronico" required>
                         <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustomUsername">Telefono</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="telefono" value="<?php echo $telefono; ?>" placeholder="569XXXXXX" required>
+                        <input type="text" class="form-control" name="telefono" value="<?php echo $telefono; ?>"
+                            placeholder="569XXXXXX" required>
                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="Dirección">Dirección Particular</label>
-                    <input type="text" class="form-control" value="<?php echo $direccionp; ?>" name="direccionp" required>
+                    <input type="text" class="form-control" value="<?php echo $direccionp; ?>" name="direccionp"
+                        required>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustomUsername">Dirección Laboral</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" value="<?php echo $direccionl; ?>" name="direccionl" required>
+                        <input type="text" class="form-control" value="<?php echo $direccionl; ?>" name="direccionl"
+                            required>
                         <div class="invalid-feedback"> No puedes dejar este campo en blanco</div>
                     </div>
                 </div>
@@ -115,8 +121,8 @@ function modificar(){
             <button class="btn" type="submit" style="background-color: #536656; color: white">Modificar</button>
         </form>
     </div>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
