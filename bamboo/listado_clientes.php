@@ -2,8 +2,8 @@
 session_start();
 print_r($_SESSION);
 echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
-echo " busca cliente listado (".$_POST["buscacliente"].")";
-echo " busqueda  header(".$_POST["busqueda"].")";
+echo " busca cliente listado (".$_POST["buscacliente"].")\n";
+echo " busqueda  header(".$_POST["busqueda"].")\n";
 
 if($_SESSION["auxiliar"]='header'){
     echo 'header1';
@@ -118,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($link);
 }
 $_SESSION["auxiliar"]="";
-echo "auxiliar reseteado".$_SESSION["auxiliar"];
+echo "\n auxiliar reseteado".$_SESSION["auxiliar"];
 print_r($_SESSION);
 ?>
 <!DOCTYPE html>
