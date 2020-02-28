@@ -74,8 +74,7 @@ function valida_rut(){
                             </div>
                         </li>
                     </ul>
-                    <form class="form-inline" action="/bamboo/listado_clientes.php" method="POST" 
-                        onclick="<?php $_SESSION["auxiliar"]='buscador';?>">
+                    <form class="form-inline" action="/bamboo/listado_clientes.php" method="POST">
                         <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
                             aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
@@ -91,17 +90,10 @@ function valida_rut(){
         </form>
     </div>
     <script>
-    function todos_los_clientes() {
-        echo "header antes: (".$_SESSION["auxiliar"].
-        ")\n";
-        $_SESSION["auxiliar"] = 'buscador';
-        echo "header despues: (".$_SESSION["auxiliar"].
-        ")\n";
-    }
     </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!--    <script src="js/jquery-3.3.1.min.js"></script>-->
-
+    <!-- onclick="?php $_SESSION["auxiliar"]='buscador';?" -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--
 <script src="js/popper.min.js"></script> 
