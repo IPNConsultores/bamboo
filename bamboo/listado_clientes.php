@@ -114,8 +114,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
-$_SESSION["auxiliar"]='';
+$_SESSION["auxiliar"]="";
 echo "auxiliar reseteado".$_SESSION["auxiliar"];
+print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -152,7 +153,7 @@ echo "auxiliar reseteado".$_SESSION["auxiliar"];
                     <input class="form-control" type="text" name="buscacliente" id="buscacliente"
                         value="<?php echo $data; ?>" required>
                     <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
-                        type="submit">Buscar</button>
+                        type="submit" onclick="<?php $_SESSION["auxiliar"]="buscador_listado";?>"  >Buscar</button>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco
                     </div>
                 </div>

@@ -79,7 +79,7 @@ function valida_rut(){
                         <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
                             aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            style="background-color:#536656;color:#A5CCAB" onclick="<?php $_SESSION["auxiliar"]="buscador";?>" >Buscar</button>
+                            style="background-color:#536656;color:#A5CCAB" onclick="<?php $_SESSION["auxiliar"]="buscador_header";?>" >Buscar</button>
                     </form>
                 
             </div>
