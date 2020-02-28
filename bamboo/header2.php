@@ -74,7 +74,7 @@ function valida_rut(){
                             </div>
                         </li>
                     </ul>
-                    <form class="form-inline" href="/bamboo/listado_clientes.php" method="POST">
+                    <form class="form-inline" action="/bamboo/listado_clientes.php" method="POST">
                         <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
                             aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"

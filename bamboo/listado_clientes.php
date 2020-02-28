@@ -5,10 +5,7 @@ if($_SESSION["auxiliar"]='header'){
     echo 'header1';
     $_SESSION["auxiliar"]='';
 }
-if("header"==$_SESSION["auxiliar"]){
-    echo 'header2 invertido';
-    $_SESSION["auxiliar"]='';
-}
+
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -18,7 +15,7 @@ function estandariza_info($data) {
 
 require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
- $busqueda=$busqueda_err='';
+ $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
 
@@ -41,10 +38,7 @@ if($_SESSION["auxiliar"]='header'){
         }
     mysqli_close($link);
 }
-if($_SESSION["auxiliar"]=="header"){
-    echo 'header2';
-    $_SESSION["auxiliar"]='';
-}
+
 if($_SESSION["auxiliar"]='buscador'){
     echo 'buscador '.$_POST["busqueda"];
     $_SESSION["auxiliar"]='';
@@ -97,7 +91,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
-$_SESSION["auxiliar"]=''
+$_SESSION["auxiliar"]='';
+echo $_SESSION["auxiliar"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
