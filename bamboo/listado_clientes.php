@@ -28,6 +28,10 @@ if("header"==$_SESSION["auxiliar"]){
     echo 'header8';
     $_SESSION["auxiliar"]='';
 }
+if($_SESSION["auxiliar"]='buscador'){
+    echo 'buscador ('.$_POST["busqueda"].'-'.$_SESSION["auxiliar"].')';
+    $_SESSION["auxiliar"]='';
+}
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -40,7 +44,7 @@ $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
-
+/*
 if($_SESSION["auxiliar"]==false){
     $_SESSION["auxiliar"]='';
     mysqli_set_charset( $link, 'utf8');
@@ -60,11 +64,8 @@ if($_SESSION["auxiliar"]==false){
         }
     mysqli_close($link);
 }
+*/
 
-if($_SESSION["auxiliar"]='buscador'){
-    echo 'buscador ('.$_POST["busqueda"].'-'.$_SESSION["auxiliar"].')';
-    $_SESSION["auxiliar"]='';
-}
 //fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
