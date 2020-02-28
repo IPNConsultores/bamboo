@@ -1,6 +1,14 @@
 <?php
 session_start();
 echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
+if($_SESSION["auxiliar"]='header'){
+    echo 'header';
+    $_SESSION["auxiliar"]='';
+}
+if($_SESSION["auxiliar"]==='header'){
+    echo 'header';
+    $_SESSION["auxiliar"]='';
+}
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
