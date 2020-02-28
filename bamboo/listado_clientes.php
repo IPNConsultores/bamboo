@@ -5,7 +5,7 @@ if($_SESSION["auxiliar"]='header'){
     echo 'header1';
     $_SESSION["auxiliar"]='';
 }
-if('header'==$_SESSION["auxiliar"]){
+if("header"==$_SESSION["auxiliar"]){
     echo 'header2 invertido';
     $_SESSION["auxiliar"]='';
 }
@@ -22,8 +22,8 @@ $num=0;
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
 
-if($_SESSION["auxiliar"]==true){
-    $_SESSION["auxiliar"]=false;
+if($_SESSION["auxiliar"]='header'){
+    $_SESSION["auxiliar"]='';
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -41,11 +41,11 @@ if($_SESSION["auxiliar"]==true){
         }
     mysqli_close($link);
 }
-if($_SESSION["auxiliar"]=='header'){
+if($_SESSION["auxiliar"]=="header"){
     echo 'header2';
     $_SESSION["auxiliar"]='';
 }
-if($_SESSION["auxiliar"]=='buscador'){
+if($_SESSION["auxiliar"]='buscador'){
     echo 'buscador '.$_POST["busqueda"];
     $_SESSION["auxiliar"]='';
 }
@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //inicio feabarcas
     if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
 
-    //if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
+    if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
  
     $numero=$trozos=0;
 
