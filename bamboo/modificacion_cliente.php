@@ -49,7 +49,7 @@ function modificar(){
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
-        <form action="backend/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
+        <form action="/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
         <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
