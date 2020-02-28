@@ -141,27 +141,22 @@
             <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Inicial</label>
               <div class="md-form">
-  <input placeholder="Selected date" type="date" id="date-picker-example" class="form-control">
+  <input placeholder="Selected date" type="date" id="fechainicio" class="form-control">
 </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
 			  <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Final</label>
               <div class="md-form">
-  <input placeholder="Selected date" type="date" id="date-picker-example" class="form-control">
+  <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
 </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
+            	
             <div class="col-md-4 mb-3">
-              <label for="ApellidoP">Apellido Paterno</label>
-              <input type="text" class="form-control" name="apellidop" required>
-              <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="ApellidoM">Apellido Materno</label>
-              <input type="text" class="form-control" name="apellidom" required>
-              <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-            </div>
+              <label for="polizaantigua">Póliza Renovada</label>
+              <input type="text" class="form-control" name="polizaantigua" >
+           </div>
           </div>
         </div>
         <p>Datos Asegurado<br>
