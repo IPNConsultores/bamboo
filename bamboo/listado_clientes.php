@@ -1,5 +1,6 @@
 <?php
 session_start();
+print_r($_SESSION);
 echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
 if($_SESSION["auxiliar"]='header'){
     echo 'header1';
