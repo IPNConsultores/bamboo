@@ -50,7 +50,7 @@ function valida_rut(){
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item"
                                 type="button" href="/bamboo/creacion_cliente.php">Creación</a>
                             <a class="dropdown-item" type="button" href="/bamboo/listado_clientes.php"
-                                onclick="<?php $_SESSION["auxiliar"]='header';?>">Listado de clientes</a> </div>
+                                onclick="<?php $_SESSION["auxiliar"]="header";?>">Listado de clientes</a> </div>
                     </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas
@@ -74,13 +74,14 @@ function valida_rut(){
                             </div>
                         </li>
                     </ul>
+                    </form>
                     <form class="form-inline" action="/bamboo/listado_clientes.php" method="POST">
                         <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
                             aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            style="background-color:#536656;color:#A5CCAB">Buscar</button>
+                            style="background-color:#536656;color:#A5CCAB" onclick="<?php $_SESSION["auxiliar"]="header";?>" >Buscar</button>
                     </form>
-                </form>
+                
             </div>
         </nav>
     </div>
