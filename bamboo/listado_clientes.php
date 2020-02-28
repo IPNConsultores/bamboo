@@ -2,11 +2,11 @@
 session_start();
 echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
 if($_SESSION["auxiliar"]='header'){
-    echo 'header';
+    echo 'header1';
     $_SESSION["auxiliar"]='';
 }
 if($_SESSION["auxiliar"]==='header'){
-    echo 'header';
+    echo 'header3';
     $_SESSION["auxiliar"]='';
 }
 function estandariza_info($data) {
@@ -42,7 +42,7 @@ if($_SESSION["auxiliar"]==true){
     mysqli_close($link);
 }
 if($_SESSION["auxiliar"]=='header'){
-    echo 'header';
+    echo 'header2';
     $_SESSION["auxiliar"]='';
 }
 if($_SESSION["auxiliar"]=='buscador'){
