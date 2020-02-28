@@ -5,8 +5,8 @@ if($_SESSION["auxiliar"]='header'){
     echo 'header1';
     $_SESSION["auxiliar"]='';
 }
-if($_SESSION["auxiliar"]==='header'){
-    echo 'header3';
+if('header'==$_SESSION["auxiliar"]){
+    echo 'header2 invertido';
     $_SESSION["auxiliar"]='';
 }
 function estandariza_info($data) {
