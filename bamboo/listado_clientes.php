@@ -5,7 +5,34 @@ if($_SESSION["auxiliar"]='header'){
     echo 'header1';
     $_SESSION["auxiliar"]='';
 }
-
+if($_SESSION["auxiliar"]=='header'){
+    echo 'header2';
+    $_SESSION["auxiliar"]='';
+}
+if($_SESSION["auxiliar"]="header"){
+    echo 'header3';
+    $_SESSION["auxiliar"]='';
+}
+if($_SESSION["auxiliar"]=="header"){
+    echo 'header4';
+    $_SESSION["auxiliar"]='';
+}
+if('header'=$_SESSION["auxiliar"]){
+    echo 'header5';
+    $_SESSION["auxiliar"]='';
+}
+if('header'==$_SESSION["auxiliar"]){
+    echo 'header6';
+    $_SESSION["auxiliar"]='';
+}
+if("header"=$_SESSION["auxiliar"]){
+    echo 'header7';
+    $_SESSION["auxiliar"]='';
+}
+if("header"==$_SESSION["auxiliar"]){
+    echo 'header8';
+    $_SESSION["auxiliar"]='';
+}
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -19,7 +46,7 @@ $num=0;
  $rut=$nombre=$telefono=$correo=$lista='';
 //inicio feabarcas v1.96
 
-if($_SESSION["auxiliar"]='header'){
+if($_SESSION["auxiliar"]==false){
     $_SESSION["auxiliar"]='';
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
