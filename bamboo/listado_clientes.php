@@ -17,18 +17,12 @@ if($_SESSION["auxiliar"]=="header"){
     echo 'header4';
     $_SESSION["auxiliar"]='';
 }
-if('header'=$_SESSION["auxiliar"]){
-    echo 'header5';
-    $_SESSION["auxiliar"]='';
-}
+
 if('header'==$_SESSION["auxiliar"]){
     echo 'header6';
     $_SESSION["auxiliar"]='';
 }
-if("header"=$_SESSION["auxiliar"]){
-    echo 'header7';
-    $_SESSION["auxiliar"]='';
-}
+
 if("header"==$_SESSION["auxiliar"]){
     echo 'header8';
     $_SESSION["auxiliar"]='';
