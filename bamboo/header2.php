@@ -56,7 +56,7 @@ function valida_rut(){
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item"
-                                href="#">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
+                                href="/bamboo/creacion_poliza.php">Creación</a> <a class="dropdown-item" href="#">Modificación</a> </div>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
