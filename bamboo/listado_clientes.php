@@ -1,36 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION);
-echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
-echo " busca cliente listado (".$_POST["buscacliente"].")\n";
-echo " busqueda  header(".$_POST["busqueda"].")\n";
 
-if($_SESSION["auxiliar"]='header'){
-    echo 'header1';
-    $_SESSION["auxiliar"]='';
-}
-if($_SESSION["auxiliar"]="header"){
-    echo 'header3';
-    $_SESSION["auxiliar"]='';
-}
-if(empty(trim($_POST["buscacliente"]))){
-    echo 'header4';
-    $_SESSION["auxiliar"]='';
-}
-
-if(empty(trim($_POST["busqueda"]))){
-    echo 'header6';
-    $_SESSION["auxiliar"]='';
-}
-
-if("header"==$_SESSION["auxiliar"]){
-    echo 'header8';
-    $_SESSION["auxiliar"]='';
-}
-if($_SESSION["auxiliar"]='buscador'){
-    echo 'buscador ('.$_POST["busqueda"].'-'.$_SESSION["auxiliar"].')';
-    $_SESSION["auxiliar"]='';
-}
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -128,10 +98,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Close connection
     mysqli_close($link);
+
 }
-unset($_SESSION["auxiliar"]);
-echo "\n auxiliar reseteado".$_SESSION["auxiliar"];
-print_r($_SESSION);
+else
+{
+    mysqli_set_charset( $link, 'utf8');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+    While($row=mysqli_fetch_object($resultado))
+        {
+        //Mostramos los titulos de los articulos o lo que deseemos...
+            $rut=$row->rut;
+            $id=$row->id;
+            $nombre=$row->nombre;
+            $telefono=$row->telefono;
+            $correo=$row->correo;
+            $num=$num+1;
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
+               
+        }
+    mysqli_close($link);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
