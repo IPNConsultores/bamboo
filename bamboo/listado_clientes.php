@@ -40,7 +40,7 @@ if($_SESSION["auxiliar"]='header'){
 }
 
 if($_SESSION["auxiliar"]='buscador'){
-    echo 'buscador '.$_POST["busqueda"];
+    echo 'buscador ('.$_POST["busqueda"].'-'.$_SESSION["auxiliar"].')';
     $_SESSION["auxiliar"]='';
 }
 //fin feabarcas v1.96
@@ -92,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($link);
 }
 $_SESSION["auxiliar"]='';
-echo $_SESSION["auxiliar"];
+echo "auxiliar reseteado".$_SESSION["auxiliar"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
