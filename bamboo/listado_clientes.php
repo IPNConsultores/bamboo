@@ -2,6 +2,9 @@
 session_start();
 print_r($_SESSION);
 echo "listado cliente: (".$_SESSION["auxiliar"].")\n";
+echo " busca cliente listado (".$_POST["buscacliente"].")";
+echo " busqueda  header(".$_POST["busqueda"].")";
+
 if($_SESSION["auxiliar"]='header'){
     echo 'header1';
     $_SESSION["auxiliar"]='';
