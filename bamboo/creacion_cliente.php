@@ -83,13 +83,8 @@ return $resultado;
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
-<<<<<<< HEAD
-                            <input type="text" class="form-control" id="id_rut"  pattern="\d{3,8}-[\d|kK]{1}" name="rut" placeholder="11111111-0"
-                            onchange="valida_rut()" required>
-=======
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
                             oninput="checkRut(this)" required>
->>>>>>> origin/master
                             <script>
                             function valida_rut() {
                                 
@@ -108,14 +103,12 @@ return $resultado;
                                 */
                             }
                             </script>
-<<<<<<< HEAD
-                        <div class="invalid-feedback"> No puedes dejar este campo en blanco o sin DV </div>
-=======
-                            
+
+                           
                             <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
->>>>>>> origin/master
                         </div>
-                       </div>
+                      
+                    </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustomUsername">E-mail</label>
