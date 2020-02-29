@@ -101,7 +101,7 @@ return $resultado;
                                 }
                             }
                             </script>
-                            <script src="/bamboo/js/validarRUT.js"></script>
+                            
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
@@ -173,6 +173,7 @@ return $resultado;
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
     <script src="/bamboo/js/jquery.redirect.js"></script>
+    <script src="/bamboo/js/validarRUT.js"></script>
 </body>
 
 </html>
