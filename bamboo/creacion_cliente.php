@@ -56,6 +56,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
                             function valida_rut() {
                                 var dato = $('#rut').val();
                                 alert(dato);
+                                /*
                                 $.ajax({
                                     type: "post",
                                     url: "/bamboo/backend/clientes/clientes_duplicados.php",
@@ -63,6 +64,24 @@ require_once "/home/gestio10/public_html/backend/config.php";
                                     success: success,
                                     dataType: dataType
                                 });
+                                */
+                                jQuery.ajax({
+                                    type: "POST",
+                                    url: '/bamboo/backend/clientes/clientes_duplicados.php',
+                                    dataType: 'json',
+                                    data: {
+                                        rut: dato
+                                    },
+
+                                    success: function(obj, textstatus) {
+                                        if (!('error' in obj)) {
+                                            yourVariable = obj.result;
+                                        } else {
+                                            console.log(obj.error);
+                                        }
+                                    }
+                                });
+
                                 if (dato == '17029236-7') {
                                     var r = confirm(
                                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"

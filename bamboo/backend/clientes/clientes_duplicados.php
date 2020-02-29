@@ -1,5 +1,7 @@
 <?php
+ header('Content-Type: application/json');
 require_once "/home/gestio10/public_html/backend/config.php";
+
 $valor=$_POST["rut"];
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
@@ -31,6 +33,6 @@ if($stmt = mysqli_prepare($link, $sql)){
     }
 }
 mysqli_stmt_close($stmt);
-return $resultado;
+echo $resultado;
 
 ?>
