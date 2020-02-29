@@ -1,37 +1,5 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-function valida_duplicado(){
-    $valor=$_POST["rut"];
-mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-
-$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-        
-if($stmt = mysqli_prepare($link, $sql)){
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "s", $param_username);
-    
-    // Set parameters
-    $param_username = estandariza_info($valor);
-    
-    // Attempt to execute the prepared statement
-    if(mysqli_stmt_execute($stmt)){
-        /* store result */
-        mysqli_stmt_store_result($stmt);
-        
-        if(mysqli_stmt_num_rows($stmt) == 1){
-            $resultado='El usuario ya esta utilizado.';
-        } else{
-            $resultado='ok'; 
-        }
-    } else{
-            $resultado='Oops! Algo salió mal. Favor intentar más tarde.';
-        //echo "Oops! Algo salió mal. Favor intentar más tarde.";
-    }
-}
-mysqli_stmt_close($stmt);
-return $resultado;
-}
 
 ?>
 <!DOCTYPE html>
@@ -88,6 +56,13 @@ return $resultado;
                             function valida_rut() {
                                 var dato = $('#rut').val();
                                 alert(dato);
+                                $.ajax({
+                                    type: "post",
+                                    url: "/bamboo/backend/clientes/clientes_duplicados.php",
+                                    rut: dato,
+                                    success: success,
+                                    dataType: dataType
+                                });
                                 if (dato == '17029236-7') {
                                     var r = confirm(
                                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
