@@ -11,7 +11,7 @@ if ($busqueda<>''){
   $numero=count($trozos);
  if ($numero==1) {
   //SI SOLO HAY UNA PALABRA DE BUSQUEDA SE ESTABLECE UNA INSTRUCION CON LIKE
-  $resultado=mysqli_query($link, 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  where nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';');
+  $resultado=mysqli_query($link, 'SELECT CONTACT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre  FROM clientes WHERE  where nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\' or CONTACT(rut_sin_dv, \'-\',dv) like \'%'.$busqueda.'%\';');
  } elseif ($numero>1) {
  //SI HAY UNA FRASE SE UTILIZA EL ALGORTIMO DE BUSQUEDA AVANZADO DE MATCH AGAINST
  //busqueda de frases con mas de una palabra y un algoritmo especializado

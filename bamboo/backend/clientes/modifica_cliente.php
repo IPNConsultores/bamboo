@@ -1,8 +1,9 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
+$rut_completo = preg_replace('/[^k0-9]/i', '', $_POST["rut"]);
 $id=estandariza_info($_POST["idcliente"]);
-$rut=estandariza_info($_POST["rut"]);
-$dv=estandariza_info($_POST["rut"]);
+$rut=estandariza_info(substr($rut_completo, 0, strlen($rut_completo)-1));
+ $dv=estandariza_info(substr($rut_completo -1));
 $nombre=estandariza_info($_POST["nombre"]);
 $apellidop=estandariza_info($_POST["apellidop"]);
 $apellidom=estandariza_info($_POST["apellidom"]);
