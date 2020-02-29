@@ -87,8 +87,9 @@ return $resultado;
                             <script>
                             function test() {
                                 var dato = $('#id_rut').val();
+                                alert("alerta")
                                 var r = confirm(
-                                    'El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?'
+                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                     );
                                 if (r == true) {
                                     $.ajax({
