@@ -304,7 +304,7 @@
   <div class="card">
     <div class= "card-header" id="headingThree">
       <h5 class ="mb-0">
-        <button class= "btn btn-link collapsed" type ="button" data-toggle ="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
+        <button class= "btn btn-link collapsed" type ="button" data-toggle ="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
       </h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
