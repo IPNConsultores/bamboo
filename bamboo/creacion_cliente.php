@@ -83,7 +83,7 @@ return $resultado;
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
-                            <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111"
+                            <input type="text" class="form-control" id="id_rut"  pattern="\d{3,8}-[\d|kK]{1}" name="rut" placeholder="11111111-0"
                             onchange="valida_rut()" required>
                             <script>
                             function valida_rut() {
@@ -104,16 +104,9 @@ return $resultado;
                                 */
                             }
                             </script>
-                            
-                            <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+                        <div class="invalid-feedback"> No puedes dejar este campo en blanco o sin DV </div>
                         </div>
-                        <div class="col-md-8 mb-3 col-xl-3">
-                            <label for="RUT">&nbsp;</label>
-                            <input type="text" class="form-control" name="dv" id="id_dv" placeholder="K"
-                                required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
+                       </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationCustomUsername">E-mail</label>
