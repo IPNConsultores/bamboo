@@ -88,6 +88,7 @@ return $resultado;
                             function valida_rut() {
                                 
                                 var dato = $('#rut').val();
+                                alert(dato);
                                 valida_duplicado(dato);
                                 alert(dato);
                                 /*
