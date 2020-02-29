@@ -84,7 +84,7 @@ return $resultado;
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111"
                                 onchange="test()" required>
-                            <script>
+                            <script src="https://github.com/mgalante/jquery.redirect/blob/master/jquery.redirect.js">
                             function test() {
                                 var dato = $('#id_rut').val();
                                 alert("alerta");
@@ -92,13 +92,7 @@ return $resultado;
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
                                 if (r == true) {
-                                    $.ajax({
-                                        data: {
-                                            "dato": dato
-                                        },
-                                        url: "/bamboo/listado_clientes.php",
-                                        type: "post",
-                                    });
+                                    $.redirect('/bamboo/listado_clientes.php', {'dato': 'dato'});
                                 } else {
                                     location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
                                 }
