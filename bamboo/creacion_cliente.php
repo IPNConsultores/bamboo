@@ -1,12 +1,11 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-function valida_duplicado(){
-    $valor='';
-    $valor=$_POST['dato'];
+function valida_duplicado($dato){
+    $valor=$dato;
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
-$sql = "SELECT id FROM clientes WHERE rut_sin_dv = ?";
+$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
         
 if($stmt = mysqli_prepare($link, $sql)){
     // Bind variables to the prepared statement as parameters
@@ -89,6 +88,7 @@ return $resultado;
                             function valida_rut() {
                                 
                                 var dato = $('#rut').val();
+                                valida_duplicado(dato);
                                 alert(dato);
                                 /*
                                 var r = confirm(
