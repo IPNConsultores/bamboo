@@ -92,7 +92,7 @@ return $resultado;
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
                                 if (r == true) {
-                                    $.redirect('/bamboo/listado_clientes.php', {'dato': 'dato'},'post');
+                                    $.redirect('/bamboo/listado_clientes.php', {'dato': dato},'post');
                                 } else {
                                     location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
                                 }
