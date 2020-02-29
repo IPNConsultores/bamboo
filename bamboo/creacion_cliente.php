@@ -90,21 +90,19 @@ return $resultado;
                                 alert("alerta");
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                    );
+                                );
                                 if (r == true) {
                                     $.ajax({
-                                            data: {
-                                                "dato": dato
-                                            },
-                                            url: "/bamboo/listado_clientes.php",
-                                            type: "post",
-                                        }
-                                        else {
-                                            location.href ="http://gestionipn.cl/bamboo/creacion_cliente.php";
-                                        }
-                                    )
-                                };
-                            };
+                                        data: {
+                                            "dato": dato
+                                        },
+                                        url: "/bamboo/listado_clientes.php",
+                                        type: "post",
+                                    });
+                                } else {
+                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                }
+                            }
                             </script>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
