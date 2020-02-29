@@ -88,7 +88,6 @@ return $resultado;
                             <script>
                             function valida_rut() {
                                 var dato = $('#id_rut').val();
-                                alert("alerta");
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
