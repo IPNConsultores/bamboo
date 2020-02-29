@@ -49,6 +49,7 @@ return $resultado;
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+    <script src="/bamboo/js/jquery.redirect.js"></script>
 
 </head>
 
@@ -83,9 +84,9 @@ return $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111"
-                                onchange="test()" required>
-                            <script src="https://github.com/mgalante/jquery.redirect/blob/master/jquery.redirect.js">
-                            function test() {
+                                onchange="valida_rut()" required>
+                            <script>
+                            function valida_rut() {
                                 var dato = $('#id_rut').val();
                                 alert("alerta");
                                 var r = confirm(
