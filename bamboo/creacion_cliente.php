@@ -1,5 +1,6 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
+echo valida_duplicado('17029236-7');
 function valida_duplicado($rut){
     $valor=$rut;
 mysqli_set_charset( $link, 'utf8');
@@ -90,29 +91,6 @@ echo $resultado;
                             function valida_rut() {
                                 var dato = $('#rut').val();
                                 alert(dato);
-                                /*
-                                $.ajax({
-                                    type: "post",
-                                    url: "/bamboo/backend/clientes/clientes_duplicados.php",
-                                    rut: dato,
-                                    success: success,
-                                    dataType: dataType
-                                });
-                                
-                                jQuery.ajax({
-                                    type: "POST",
-                                    url: '/bamboo/backend/clientes/clientes_duplicados.php',
-                                    dataType: 'json',
-                                    data:rut: dato,
-                                    success: function(obj, textstatus) {
-                                        if (!('error' in obj)) {
-                                            yourVariable = obj.result;
-                                        } else {
-                                            console.log(obj.error);
-                                        }
-                                    }
-                                });
-*/
                                 var respuesta = <?php echo valida_duplicado('17029236-7'); ?> ;
                                 if (respuesta == '1') {
                                     var r = confirm(
