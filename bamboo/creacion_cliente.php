@@ -59,15 +59,6 @@ return $resultado;
     <div class="container">
         <p> Clientes / Creación <br>
         </p>
-        <div class="alert alert-danger" role="alert" id="alertas" style="visibility: hidden">
-            <h4 class="alert-heading">Rut duplicado</h4>
-            <p>El rut que acabas de ingresar ya se encuentra en la base de datos.</p>
-            <hr>
-            <p class="mb-0">¿Deseas ver la información asociada al rut?</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
         <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
@@ -96,12 +87,23 @@ return $resultado;
                             <script>
                             function test() {
                                 var dato = $('#id_rut').val();
-                                alert(
+                                var r = confirm(
                                     'El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?'
+                                    );
+                                if (r == true) {
+                                    $.ajax({
+                                            data: {
+                                                "dato": dato
+                                            },
+                                            url: "/bamboo/listado_clientes.php",
+                                            type: "post",
+                                        }
+                                        else {
+                                            location.href ="http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                        }
                                     )
+                                }
                             }
-                            element = document.querySelector('#alertas');
-                            element.style.visibility = 'visible'
                             </script>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
