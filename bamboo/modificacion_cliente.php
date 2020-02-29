@@ -32,7 +32,7 @@ function modificar(){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creación de Cliente</title>
+    <title>Modificar cliente</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -47,7 +47,7 @@ function modificar(){
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <p> Clientes / Creación <br>
+        <p> Clientes / Modificar cliente <br>
         </p>
         <form action="/bamboo/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
             <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">

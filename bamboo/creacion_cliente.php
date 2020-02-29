@@ -84,11 +84,12 @@ return $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
-                            oninput="checkRut(this)" required>
+                            oninput="checkRut(this)" onchange="valida_rut()" required>
                             <script>
                             function valida_rut() {
                                 
                                 var dato = $('#rut').val();
+                                alert(dato);
                                 /*
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
