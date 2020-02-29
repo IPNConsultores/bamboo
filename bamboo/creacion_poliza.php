@@ -4,14 +4,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bamboo Seguros</title>
+<title>Creación Póliza</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-</head>
 
 <body>
 <!-- body code goes here -->
@@ -151,12 +150,12 @@
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style="color:#536656">Compañía, Vigencia y Materia</button>
         </h5>
       </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-			<label for="compania"><b>Compañía</b></label><br>
+          <label for="compania"><b>Compañía</b></label>
+          <br>
           <div class="form-row">
             <div class="form-inline">
-              <label for="sel1">Selecionar Compañía:&nbsp;</label>
               <select class="form-control" id="selcompania">
                 <option>BCI Seguros</option>
                 <option>Chilena Consolidada</option>
@@ -174,8 +173,15 @@
                 <option>Sura</option>
                 <option>Unnio</option>
               </select>
-              <label for="sel1">&nbsp&nbsp&nbsp&nbsp;Ramo:&nbsp;</label>
-              <select class="form-control" id="selcompania">
+            </div>
+          </div>
+          <br>
+          <label for="poliza"><b>Póliza</b></label>
+          <br>
+          <div class="form-row">
+            <div class= "col-md-2 mb-3">
+              <label for="sel1">Ramo:&nbsp;</label>
+              <select class="form-control" id="ramo">
                 <option>VEH</option>
                 <option>Hogar</option>
                 <option>A. VIAJE</option>
@@ -184,14 +190,10 @@
                 <option>APV</option>
                 <option>D&O</option>
                 <option>AP</option>
-                <option></option>
                 <option>Vida</option>
                 <option>Garantía</option>
               </select>
             </div>
-          </div>
-          <br>
-          <div class="form-row">
             <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Inicial</label>
               <div class="md-form">
@@ -206,30 +208,110 @@
               </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-            <div class="col-md-4 mb-3">
+          </div>
+          <div class="form-row">
+            <div class="col">
               <label for="polizaantigua">Póliza Renovada</label>
               <input type="text" class="form-control" name="polizaantigua" >
             </div>
-          </div>
-			<div class="form-row">
-			<div class="col-md-4 mb-3">
+            <div class="col">
               <label for="poliza">Número de Poliza</label>
               <input type="text" class="form-control" name="poliza" required>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-			<div class="col-md-4 mb-3">
+            <div class="col">
+              <label for="cobertura">Cobertura</label>
+              <input type="text" class="form-control" name="cobertura">
+            </div>
+          </div>
+          <br>
+          <label for="materia"><b>Materia</b></label>
+          <br>
+          <div class="form-row">
+            <div class="col">
               <label for="poliza">Materia Asegurada</label>
               <input type="text" class="form-control" name="materia" required>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-				<div class="col-md-4 mb-3">
+            <div class="col">
               <label for="poliza">Patente o Ubicación</label>
               <input type="text" class="form-control" name="materia" required>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-				
-				
+          </div>
+          <br>
+          <label for="materia"><b>Deducible, Primas y Montos</b></label>
+          <br>
+          <div  class= "form-row">
+            <div class="col-md-4 mb-3;form-inline">
+              <label for="deducible">Deducible</label>
+              <input type="text" class="form-control" name="deducible">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="deducible">Prima Afecta</label>
+				<div class="form-inline">
+              <input type="text" class="form-control" name="prima_afecta" onkeyup="sumar(this.value);">
+              <select class="form-control" id="moneda_prima">
+                <option>UF</option>
+                <option>USD</option>
+                <option>CLP</option>
+              </select>
 			</div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="deducible">Prima Excenta</label>
+				<div class= "form-inline">
+              <input type="text" class="form-control" name="prima_afecta" onkeyup="sumar(this.value);">
+              <select class="form-control" id="moneda_prima">
+                <option>UF</option>
+                <option>USD</option>
+                <option>CLP</option>
+              </select>
+			</div>
+            </div>
+          </div>
+			<div  class= "form-row">
+            
+            <div class="col-md-4 mb-3; form-inline">
+				
+              <label for="deducible">Prima total</label>
+			<div class= "form-inline">
+              <input type="text" class="form-control" name="prima_total">
+              <select class="form-control" id="moneda_prima">
+                <option>UF</option>
+                <option>USD</option>
+                <option>CLP</option>
+              </select>
+			</div>
+<script>function sumar (valor) {
+    var total = 0;	
+    valor = parseInt(valor); // Convertir el valor a un entero (número).
+	
+    total = document.getElementById('prima_total').innerHTML;
+	
+    // Aquí valido si hay un valor previo, si no hay datos, le pongo un cero "0".
+    total = (total == null || total == undefined || total == "") ? 0 : total;
+	
+    /* Esta es la suma. */
+    total = (parseInt(total) + parseInt(valor));
+	
+    // Colocar el resultado de la suma en el control "span".
+    document.getElementById('prima_total').innerHTML = total;
+}
+</script>
+            </div>
+            <div class="col-md-4 mb-3; form-inline">
+              <label for="deducible">Prima Bruta Anual</label>
+				<div class= "form-inline">
+              <input type="text" class="form-control" name="prima_afecta">
+              <select class="form-control" id="moneda_prima">
+                <option>UF</option>
+                <option>USD</option>
+                <option>CLP</option>
+              </select>
+		     </div>
+            </div>
+          </div>
         </div>
         
         <!--
@@ -302,8 +384,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+<script src="/bamboo/js/jquery.redirect.js"></script>
+<script src="/bamboo/js/validarRUT.js"></script>
 </body>
 </html>
