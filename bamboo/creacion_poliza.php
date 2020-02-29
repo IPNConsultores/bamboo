@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bamboo Seguros</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bamboo Seguros</title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
 </head>
-
 
 <body>
 <!-- body code goes here -->
@@ -32,16 +30,34 @@
       <div class="card-body">
         <p>Datos Proponente<br>
         <div class="form-row">
-          <div class="col-md-4 mb-3 col-lg-3" style= "align:left">
-            <label for="RUT" style= "align:left">RUT</label>
-            <input type="text" class="form-control" name="rutprop" placeholder="11111111" required>
-            <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-          </div>
-          <div class="col-md-2 mb-3 col-xl-3">
-            <label for="RUT">&nbsp;</label>
-            <input type="text" class="form-control" name="dvprop" placeholder="K" required>
-            <div class="invalid-feedback"></div>
-          </div>
+                   <div class="form-row">
+                        <div class="col-md mb-3">
+                            <label for="RUT">RUT</label>
+                            <input type="text" class="form-control" id="rutprop" name="rutprop" placeholder="1111111-1"
+                            oninput="checkRut(this)" required>
+                            <script>
+                            function valida_rut() {
+                                
+                                var dato = $('#rut').val();
+                                /*
+                                var r = confirm(
+                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                                );
+                                if (r == true) {
+                                    $.redirect('/bamboo/listado_clientes.php', {
+                                        'dato': dato
+                                    }, 'post');
+                                } else {
+                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                }
+                                */
+                            }
+                            </script>
+                            <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
+                        </div>
+                      
+                    </div>
+          
           <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
             <label for="prop">&nbsp;</label>
             <br>
@@ -66,17 +82,35 @@
           </div>
         </div>
         <p>Datos Asegurado<br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3 col-lg-3" style= "align:left">
-            <label for="RUT" style= "align:left">RUT</label>
-            <input type="text" class="form-control" name="rutaseg" placeholder="11111111" required>
-            <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-          </div>
-          <div class="col-md-2 mb-3 col-xl-3">
-            <label for="RUT">&nbsp;</label>
-            <input type="text" class="form-control" name="dvaseg" placeholder="K" required>
-            <div class="invalid-feedback"></div>
-          </div>
+            <div class="form-row">
+                   <div class="form-row">
+                        <div class="col-md mb-3">
+                            <label for="RUT">RUT</label>
+                            <input type="text" class="form-control" id="rutaseg" name="rutaseg" placeholder="1111111-1"
+                            oninput="checkRut(this)" required>
+                            <script>
+                            function valida_rut() {
+                                
+                                var dato = $('#rut').val();
+                                /*
+                                var r = confirm(
+                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                                );
+                                if (r == true) {
+                                    $.redirect('/bamboo/listado_clientes.php', {
+                                        'dato': dato
+                                    }, 'post');
+                                } else {
+                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                }
+                                */
+                            }
+                            </script>
+                            <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
+                        </div>
+                      
+                    </div>
+          
           <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
             <label for="prop">&nbsp;</label>
             <br>
@@ -99,12 +133,16 @@
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
           </div>
-          <div class="Form-row"></div>
+        </div>
+          <div class="form-row">
+			  <div class ="form-row">
           <div class="col col-lg-12">
             <label for="Nombre">Grupo</label>
             <input type="text" class="form-control" name="grupo" required>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
+			  </div>
+			  </div>
         </div>
       </div>
     </div>
@@ -144,22 +182,21 @@
             <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Inicial</label>
               <div class="md-form">
-  <input placeholder="Selected date" type="date" id="fechainicio" class="form-control">
-</div>
+                <input placeholder="Selected date" type="date" id="fechainicio" class="form-control">
+              </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-			  <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Final</label>
               <div class="md-form">
-  <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
-</div>
+                <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
+              </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-            	
             <div class="col-md-4 mb-3">
               <label for="polizaantigua">Póliza Renovada</label>
               <input type="text" class="form-control" name="polizaantigua" >
-           </div>
+            </div>
           </div>
         </div>
         <p>Datos Asegurado<br>
@@ -288,10 +325,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
 </body>
