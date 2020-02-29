@@ -84,10 +84,11 @@ return $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111"
-                                onchange="valida_rut()" required>
+                            onchange="checkRut(this)" required>
                             <script>
                             function valida_rut() {
                                 var dato = $('#id_rut').val();
+                                
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
@@ -100,25 +101,13 @@ return $resultado;
                                 }
                             }
                             </script>
+                            <script src="/bamboo/js/validarRUT.js"></script>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
                             <label for="RUT">&nbsp;</label>
-                            <input type="text" class="form-control" name="dv" id="id_dv" placeholder="K" onchange="valida_digito()"
+                            <input type="text" class="form-control" name="dv" id="id_dv" placeholder="K"
                                 required>
-                            <script>
-                            function valida_digito() {
-                                rut = $('#id_rut').val();
-                                    var M = 0,
-                                        S = 1;
-                                    for (; rut; rut = Math.floor(rut / 10))
-                                        S = (S + rut % 10 * (9 - M++ % 6)) % 11;
-                                    //return S?S-1:'k';
-
-                                    alert(S ? S - 1 : 'k');
-                                
-                            }
-                            </script>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
