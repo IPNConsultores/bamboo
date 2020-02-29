@@ -39,7 +39,7 @@ if($_SESSION["auxiliar"]==false){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if username is empty
-    if(empty(trim($_POST["dato"])) and empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
