@@ -104,7 +104,7 @@ return $resultado;
                             }
                             </script>
                             
-                            <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
+                            <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
                             <label for="RUT">&nbsp;</label>
