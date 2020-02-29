@@ -31,7 +31,7 @@ if($stmt = mysqli_prepare($link, $sql)){
     }
 }
 mysqli_stmt_close($stmt);
-return $resultado
+return $resultado;
 }
 
 ?>
