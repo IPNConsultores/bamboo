@@ -307,7 +307,7 @@
         <button class= "btn btn-link collapsed" type ="button" data-toggle ="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
       </h5>
     </div>
-    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
         <label for="propuesta"><b>Propuesta</b></label>
         <br>
