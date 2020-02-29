@@ -84,11 +84,13 @@ return $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111"
-                            onchange="checkRut(this)" required>
+                            onchange="valida_rut()" required>
                             <script>
                             function valida_rut() {
-                                var dato = $('#id_rut').val();
                                 
+                                var dato = $('#id_rut').val();
+                                checkRut(dato);
+                                /*
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
@@ -99,6 +101,7 @@ return $resultado;
                                 } else {
                                     location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
                                 }
+                                */
                             }
                             </script>
                             
