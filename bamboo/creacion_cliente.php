@@ -92,7 +92,9 @@ return $resultado;
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                 );
                                 if (r == true) {
-                                    $.redirect('/bamboo/listado_clientes.php', {'dato': dato},'post');
+                                    $.redirect('/bamboo/listado_clientes.php', {
+                                        'dato': dato
+                                    }, 'post');
                                 } else {
                                     location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
                                 }
@@ -102,7 +104,21 @@ return $resultado;
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
                             <label for="RUT">&nbsp;</label>
-                            <input type="text" class="form-control" name="dv" placeholder="K" required>
+                            <input type="text" class="form-control" name="dv" id="id_dv" placeholder="K" onchange="valida_digito()"
+                                required>
+                            <script>
+                            function valida_digito() {
+                                rut = $('#id_rut').val();
+                                    var M = 0,
+                                        S = 1;
+                                    for (; rut; rut = Math.floor(rut / 10))
+                                        S = (S + rut % 10 * (9 - M++ % 6)) % 11;
+                                    //return S?S-1:'k';
+
+                                    alert(S ? S - 1 : 'k');
+                                
+                            }
+                            </script>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -167,7 +183,7 @@ return $resultado;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-        <script src="/bamboo/js/jquery.redirect.js"></script>
+    <script src="/bamboo/js/jquery.redirect.js"></script>
 </body>
 
 </html>
