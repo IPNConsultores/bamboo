@@ -1,6 +1,8 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
 function valida_duplicado(){
+    $valor='';
+    $valor=$_POST['dato'];
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
@@ -11,7 +13,7 @@ if($stmt = mysqli_prepare($link, $sql)){
     mysqli_stmt_bind_param($stmt, "s", $param_username);
     
     // Set parameters
-    $param_username = estandariza_info($_POST["rut"]);
+    $param_username = estandariza_info($valor);
     
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
@@ -19,17 +21,17 @@ if($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_store_result($stmt);
         
         if(mysqli_stmt_num_rows($stmt) == 1){
-            echo "El usuario ya esta utilizado.";
+            $resultado='El usuario ya esta utilizado.';
         } else{
-          mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\');');
-            header("Location:http://gestionipn.cl/bamboo/index.php");
-            
+            $resultado='ok'; 
         }
     } else{
-        echo "Oops! Algo salió mal. Favor intentar más tarde.";
+            $resultado='Oops! Algo salió mal. Favor intentar más tarde.';
+        //echo "Oops! Algo salió mal. Favor intentar más tarde.";
     }
 }
 mysqli_stmt_close($stmt);
+return $resultado
 }
 
 ?>
@@ -80,7 +82,12 @@ mysqli_stmt_close($stmt);
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="11111111" required>
+                            <input type="text" class="form-control" id="id_rut" name="rut" placeholder="11111111" onchange="test()" required> 
+                                <script>
+                                function test(){
+                                var dato = $('#id_rut').val();
+                                alert(dato)}
+                                </script>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
                         <div class="col-md-8 mb-3 col-xl-3">
