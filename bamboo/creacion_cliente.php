@@ -87,7 +87,7 @@ return $resultado;
                             <script>
                             function test() {
                                 var dato = $('#id_rut').val();
-                                alert("alerta")
+                                alert("alerta");
                                 var r = confirm(
                                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                     );
@@ -103,8 +103,8 @@ return $resultado;
                                             location.href ="http://gestionipn.cl/bamboo/creacion_cliente.php";
                                         }
                                     )
-                                }
-                            }
+                                };
+                            };
                             </script>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
                         </div>
