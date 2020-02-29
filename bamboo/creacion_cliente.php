@@ -1,7 +1,7 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-function valida_duplicado($dato){
-    $valor=$dato;
+function valida_duplicado(){
+    $valor=$_POST["rut"];
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
@@ -83,33 +83,30 @@ return $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
-                            oninput="checkRut(this)" onchange="valida_rut()" required>
+                                oninput="checkRut(this)" onchange="valida_rut()" required>
                             <script>
                             function valida_rut() {
-                                
                                 var dato = $('#rut').val();
                                 alert(dato);
-                                valida_duplicado(dato);
-                                alert(dato);
-                                /*
-                                var r = confirm(
-                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                );
-                                if (r == true) {
-                                    $.redirect('/bamboo/listado_clientes.php', {
-                                        'dato': dato
-                                    }, 'post');
-                                } else {
-                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                if (dato == '17029236-7') {
+                                    var r = confirm(
+                                        "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                                    );
+                                    if (r == true) {
+                                        $.redirect('/bamboo/listado_clientes.php', {
+                                            'dato': dato
+                                        }, 'post');
+                                    } else {
+                                        location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                    }
                                 }
-                                */
                             }
                             </script>
 
-                           
+
                             <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
                         </div>
-                      
+
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
