@@ -3,6 +3,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $resultado='';
 //$valor=$_REQUEST["rut"];
 echo "test";
+return "test";
 /*
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
