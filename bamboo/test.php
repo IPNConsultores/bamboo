@@ -58,6 +58,7 @@ echo '</table>' ;
 ?>
 
 <script>
+/*
     function valida_rut() {
 
         var dato = $('#rut').val();
@@ -82,7 +83,7 @@ echo '</table>' ;
             }
         });}
 
-/*
+
         
                 if (responseText == 'duplicado') {
                     var r = confirm(
@@ -97,22 +98,23 @@ echo '</table>' ;
                     }
                 }
                 */
-                $(document).ready(function () {
-	$("#btnsend").click(function () {
-		$.ajax({
-			type: "GET",
-			url: "/bamboo/backend/clientes/clientes_duplicados.php",
+$(document).ready(function() {
+    $("#btnsend").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/bamboo/backend/clientes/clientes_duplicados.php",
             data: {
                 "rut": rut_sin_dv
             }
-			success: function (data) {
-				$("#retriever").text(data);
-			}
-		});
-	});
-});
+            success: function(data) {
+                $("#retriever").text("test")
+                $("#retriever").text(data);
 
-    </script>
+            }
+        });
+    });
+});
+</script>
 
 
 <!DOCTYPE html>
@@ -124,7 +126,7 @@ echo '</table>' ;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Creación Clientes</title>
     <!-- Bootstrap -->
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 
 </head>
@@ -132,7 +134,7 @@ echo '</table>' ;
 
 <body>
     <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1" required>
-    <button  id="btnsend" class="btn" style="background-color: #536656; color: white">Registrar</button>
+    <button id="btnsend" class="btn" style="background-color: #536656; color: white">Registrar</button>
     <div id="retriever"></div>
 
 </body>
