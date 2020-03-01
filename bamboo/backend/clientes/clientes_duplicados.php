@@ -21,14 +21,14 @@ if($stmt = mysqli_prepare($link, $sql)){
         mysqli_stmt_store_result($stmt);
         
         if(mysqli_stmt_num_rows($stmt) == 1){
-            $resultado='1';
+            $resultado='duplicado';
             //duplicado
         } else{
-            $resultado='0'; 
+            $resultado='válido'; 
             //éxito
         }
     } else{
-            $resultado='3';
+            $resultado='error';
         //echo "Oops! Algo salió mal. Favor intentar más tarde.";
     }
 }
