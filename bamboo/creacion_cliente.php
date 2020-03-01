@@ -105,9 +105,11 @@ echo $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
-                                oninput="checkRut(this)" onchange="<?php valida_rut() ?>" required>
-                            <script>
-                            function valida_rut() {
+                                oninput="checkRut(this)" onchange="<?php valida_rut(); ?>" required>
+                           
+                           <script>
+                            /*
+                            function valida_rut1() {
                                 var dato = $('#rut').val();
                                 alert(dato);
                                 var respuesta = <?php echo valida_duplicado('17029236-7'); ?> ;
@@ -124,7 +126,9 @@ echo $resultado;
                                     }
                                 }
                             }
+                            */
                             </script>
+                            
 
 
                             <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
