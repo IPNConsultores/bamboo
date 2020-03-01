@@ -31,7 +31,7 @@ if($stmt = mysqli_prepare($link, $sql)){
         //echo "Oops! Algo salió mal. Favor intentar más tarde.";
     }
 }
-mysqli_stmt_close($stmt);
+//mysqli_stmt_close($stmt);
 echo $resultado;
 
 ?>
