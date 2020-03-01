@@ -55,92 +55,90 @@ echo '</table>' ;
 
 //header('Content-type: text/plain');
 
-require_once "/home/gestio10/backup_mysql/config.php";
-$BBDDs = array('gestio10_asesori1_reccius_db','gestio10_asesori1_bamboo','gestio10_asesori1_mercado_publico');
-$backup_path= '/home/gestio10/backup_mysql/';
-
-$days = 7;
-
-
-
-foreach($BBDDs as $dbname){
-    if (!file_exists('/home/gestio10/backup_mysql/'.$dbname)) {
-    mkdir('/home/gestio10/backup_mysql/'.$dbname, 0755, true);}
-    
-    
-        $directorio  = scandir('/home/gestio10/backup_mysql/'.$dbname.'/');
-       foreach ($directorio as $archivo) {
-        if (!is_dir($archivo))//verificamos si es o no un directorio
-        {
-             if (filemtime('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo) < ( time() - ( $days * 24 * 60 * 60 ) ) )  
-            {  
-                //unlink('/home/gestio10/backup_mysql/'.$dbname.'/'.$archivo);  
-            } 
-        }
-   }
-    
-$backup_file = $dbname. "_" .date("Ymd_His", strtotime('-3 hours')).".sql";
-$backup_rutacompleta = $backup_path.$dbname."/".$backup_file;
-$connection=mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    if ($connection){
-        
-        echo "conectado;<br>";
-        $tables = array();
-        $result = mysqli_query($connection,"SHOW TABLES");
-        while($row = mysqli_fetch_row($result)){
-            $tables[] = $row[0];
-        }
-        
-        $return = '';
-        foreach($tables as $table){
-              $result = mysqli_query($connection,"SELECT * FROM ".$table);
-              $num_fields = mysqli_num_fields($result);
-              
-              $return .= 'DROP TABLE '.$table.';';
-              $row2 = mysqli_fetch_row(mysqli_query($connection,"SHOW CREATE TABLE ".$table));
-              $return .= "\n\n".$row2[1].";\n\n";
-              echo "<br> Tabla:".$table.": columnas(".$num_fields.")";
-          for($i=0;$i<$num_fields;$i++){
-            while($row = mysqli_fetch_row($result)){
-              $return .= "INSERT INTO ".$table." VALUES(";
-              for($j=0;$j<$num_fields;$j++){
-                $row[$j] = addslashes($row[$j]);
-                if(isset($row[$j])){ $return .= '"'.$row[$j].'"';}
-                else{ $return .= '""';}
-                if($j<$num_fields-1){ $return .= ',';}
-              }
-              $return .= ");\n";
-            }
-          }
-          $return .= "\n\n\n";
-        }
-        
-        //save file
-        
-        echo "<br><br> Respaldo creado en la siguiente ruta: ".$backup_rutacompleta."<br>";
-        $handle = fopen($backup_rutacompleta,"w+");
-        fwrite($handle,$return);
-        fclose($handle);
-        echo "<br><br> Respaldo exitoso";
-        }
-    else{
-        
-        echo "no conectado;<br>";
-                
-            $Tokens = array("o.sYQGqK57I6MgCTi8fUDhCGEQdB405nYN", "o.YVXz7PeAD357yTJwHFCiBmk3noXGhf03", "o.DPCT6WDlyv3hBYhKagkBeagCQlTc6z8l", "o.0Jl4p0hnJGrcXmW0KYlFyRBoqDeB4s05");
-            foreach ($Tokens as &$authToken) {
-                    $curl = curl_init('https://api.pushbullet.com/v2/pushes');
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, ["Authorization: Bearer $authToken"]);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, [
-                    	"type" => "note", 
-                    	"title" => "Backup fallido", 
-                    	"body" => date("Y/m/d H:i:s", strtotime('-3 hours'))." [".$dbname."] -> Durante backup no se logra conectar con servidor"]
-                    	);
-                    
-                    $response = curl_exec($curl);
-            }
-        }
-}
 ?>
+
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creación Clientes</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+
+</head>
+
+
+<body>
+    <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1" required>
+    <button onclick="valida_rut()" class="btn" style="background-color: #536656; color: white">Registrar</button>
+
+    <script>
+    function valida_rut() {
+
+        var dato = $('#rut').val();
+        var rut_sin_dv = dato.replace('-', '');
+        rut_sin_dv = rut_sin_dv.slice(0, -1);
+        alert(dato);
+        //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
+        xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + rut_sin_dv,
+            true);
+        xhttp.send();
+        echo responseText;
+
+        jQuery.ajax({
+            url: '/bamboo/backend/clientes/clientes_duplicados.php',
+            type: "get",
+            data: {
+                rut: rut_sin_dv
+            }
+
+            success: function(data) {
+                alert(data);
+                //jQuery("#container" ).append(data);
+            },
+            fail: function(error) {
+                alert("error" + error);
+            }
+        });
+
+
+        /*
+                if (responseText == 'duplicado') {
+                    var r = confirm(
+                        "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                    );
+                    if (r == true) {
+                        $.redirect('/bamboo/listado_clientes.php', {
+                            'dato': dato
+                        }, 'post');
+                    } else {
+                        location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                    }
+                }
+                */
+    }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="/bamboo/js/jquery.redirect.js"></script>
+    <script src="/bamboo/js/validarRUT.js"></script>
+</body>
+
+</html>

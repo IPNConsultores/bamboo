@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$lista='';
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -12,7 +12,7 @@ $num=0;
 
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $resultado=mysqli_query($link, 'SELECT * FROM tareas where estado =\'activo\'order by fecha_vencimiento desc;');
+    $resultado=mysqli_query($link, 'SELECT * FROM tareas where estado =\'activo\'order by fecha_vencimiento desc, prioridad asc;');
     While($row=mysqli_fetch_object($resultado))
         {
         //Mostramos los titulos de los articulos o lo que deseemos...
@@ -23,8 +23,9 @@ $num=0;
             $fecha_vencimiento=$row->fecha_vencimiento;
             $tarea=$row->tarea;
             $estado=$row->estado;
+            $prioridad=$row->prioridad;
             $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_vencimiento.'</td><td>'.$id_poliza.'</td><td>'.$fecha_vencimiento.'</td><td><a class="button" name="boton-modificar" href="#">Marcar como completada</a><a> </a><a class="button" name="boton-elimina-cliente" href="#">Eliminar</a></td><tr>'. "<br>";
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$prioridad.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_vencimiento.'</td><td>'.$id_poliza.'</td><td>'.$fecha_vencimiento.'</td><td><a class="button" name="boton-modificar" href="#">Marcar como completada</a><a> </a><a class="button" name="boton-elimina-cliente" href="#">Eliminar</a></td><tr>'. "<br>";
                
         }
     mysqli_close($link);
@@ -61,6 +62,8 @@ $num=0;
             <div class="form-row">
                 <table class="table" id="listado_tareas">
                     <tr>
+                        <th>#</th>
+                        <th>Prioridad</th>
                         <th>Estado</th>
                         <th>Tarea</th>
                         <th>Fecha vencimiento</th>
