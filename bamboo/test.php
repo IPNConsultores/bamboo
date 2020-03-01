@@ -57,8 +57,6 @@ echo '</table>' ;
 
 ?>
 
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -90,6 +88,7 @@ echo '</table>' ;
         rut_sin_dv = rut_sin_dv.slice(0, -1);
         alert(dato);
         //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
+        /*
         jQuery.ajax({
             url: '/bamboo/backend/clientes/clientes_duplicados.php',
             type: "get",
@@ -107,7 +106,7 @@ echo '</table>' ;
         });
 
 
-        /*
+        
                 if (responseText == 'duplicado') {
                     var r = confirm(
                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
