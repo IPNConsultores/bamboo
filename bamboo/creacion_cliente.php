@@ -115,7 +115,7 @@ echo $resultado;
                                 var rut_sin_dv = dato.replace('-','');
                                 rut_sin_dv = rut_sin_dv.slice(0,-1);
                                 alert(dato);
-                                //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
+                                /*var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
                                 xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {
@@ -136,7 +136,7 @@ echo $resultado;
                                     } else {
                                         location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
                                     }
-                                }
+                                } */
                             }
                             </script>
 
