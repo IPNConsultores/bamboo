@@ -90,12 +90,6 @@ echo '</table>' ;
         rut_sin_dv = rut_sin_dv.slice(0, -1);
         alert(dato);
         //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
-        xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + rut_sin_dv,
-            true);
-        xhttp.send();
-        echo responseText;
-
         jQuery.ajax({
             url: '/bamboo/backend/clientes/clientes_duplicados.php',
             type: "get",
