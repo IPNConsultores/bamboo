@@ -12,7 +12,8 @@
 <script>
 $(document).ready(function () {
 	$("#btnSend").click(function () {
-        alert("test");
+        alert("test")
+        /*
 		$.ajax({
 			type: "GET",
 			url: "/backend/clientes/clientes_duplicados.php",
@@ -22,7 +23,7 @@ $(document).ready(function () {
 			fail: function () {
 				alert("fail");
 			}
-		});
+		});*/
 	});
 });
 
