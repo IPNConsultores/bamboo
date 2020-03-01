@@ -1,5 +1,11 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
 require_once "/home/gestio10/public_html/backend/config.php";
+
 /*
 function validarut(){
    echo" <script>

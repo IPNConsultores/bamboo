@@ -88,12 +88,12 @@ echo '</table>' ;
         rut_sin_dv = rut_sin_dv.slice(0, -1);
         alert(dato);
         //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
-        /*
-        jQuery.ajax({
+        
+        $.ajax({
             url: '/bamboo/backend/clientes/clientes_duplicados.php',
             type: "get",
             data: {
-                rut: rut_sin_dv
+                "rut": rut_sin_dv
             }
 
             success: function(data) {
@@ -105,7 +105,7 @@ echo '</table>' ;
             }
         });
 
-
+/*
         
                 if (responseText == 'duplicado') {
                     var r = confirm(

@@ -1,5 +1,10 @@
 <?php
-session_start();
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 
 function estandariza_info($data) {
     $data = trim($data);
