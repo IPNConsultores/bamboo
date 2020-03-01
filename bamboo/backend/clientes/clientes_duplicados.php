@@ -1,7 +1,6 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
 $resultado='';
-echo "busqueda :(".$_REQUEST["rut"].")\n";
 $valor=$_REQUEST["rut"];
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
@@ -25,7 +24,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             $resultado='duplicado';
             //duplicado
         } else{
-            $resultado='válido'; 
+            $resultado='valido'; 
             //éxito
         }
     } else{
@@ -34,7 +33,7 @@ if($stmt = mysqli_prepare($link, $sql)){
     }
 }
 //mysqli_stmt_close($stmt);
-echo "resultado :(".$resultado.")";
+echo $resultado;
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);

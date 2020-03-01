@@ -112,6 +112,8 @@ echo $resultado;
                             <script>
                             function valida_rut() {
                                 var dato = $('#rut').val();
+                                var rut_sin_dv = dato.replace('-','');
+                                rut_sin_dv = rut_sin_dv.slice(0,-1);
                                 alert(dato);
                                 //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
                                 xhttp = new XMLHttpRequest();
@@ -120,10 +122,10 @@ echo $resultado;
                                         alert(responseText) ;
                                     }
                                 };
-                                xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + dato, true);
+                                xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + rut_sin_dv, true);
                                 xhttp.send();
                                 echo responseText;
-                                if (respuesta == '1') {
+                                if (responseText == 'valido') {
                                     var r = confirm(
                                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                                     );
