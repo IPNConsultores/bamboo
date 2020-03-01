@@ -12,10 +12,10 @@
 <script>
 $(document).ready(function () {
 	$("#btnSend").click(function () {
-
+        alert("test");
 		$.ajax({
 			type: "GET",
-			url: "/bamboo/backend/clientes/clientes_duplicados.php",
+			url: "/backend/clientes/clientes_duplicados.php",
 			success: function () {
 				alert("exito");
 			}
