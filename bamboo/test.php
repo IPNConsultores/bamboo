@@ -16,8 +16,8 @@ $(document).ready(function () {
 		$.ajax({
 			type: "GET",
 			url: "/bamboo/backend/clientes/clientes_duplicados.php",
-			success: function (data) {
-				$("#retriever").text(data);
+			success: function () {
+				alert("exito");
 			}
 			fail: function () {
 				alert("fail");
