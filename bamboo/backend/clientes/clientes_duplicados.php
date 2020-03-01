@@ -35,4 +35,11 @@ if($stmt = mysqli_prepare($link, $sql)){
 }
 //mysqli_stmt_close($stmt);
 echo "resultado :(".$resultado.")";
+function estandariza_info($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
 ?>
