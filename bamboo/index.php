@@ -1,10 +1,8 @@
 <?php
-<?php
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-?>
 $lista='';
 function estandariza_info($data) {
     $data = trim($data);

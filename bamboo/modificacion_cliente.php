@@ -1,10 +1,8 @@
 <?php
-<?php
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-?>
 require_once "/home/gestio10/public_html/backend/config.php";
 $idcliente=$_GET["cliente"];
 mysqli_set_charset( $link, 'utf8');
