@@ -100,6 +100,7 @@ echo '</table>' ;
                 */
 $(document).ready(function() {
     $("#btnsend").click(function() {
+        alert("test");
         $.ajax({
             type: "GET",
             url: "/bamboo/backend/clientes/clientes_duplicados.php",
