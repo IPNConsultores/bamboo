@@ -2,6 +2,8 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $resultado='';
 $valor=$_REQUEST["rut"];
+echo $valor;
+/*
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
@@ -17,7 +19,7 @@ if($stmt = mysqli_prepare($link, $sql)){
     
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
-        /* store result */
+        // store result 
         mysqli_stmt_store_result($stmt);
         
         if(mysqli_stmt_num_rows($stmt) == 1){
@@ -40,5 +42,5 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-
+*/
 ?>

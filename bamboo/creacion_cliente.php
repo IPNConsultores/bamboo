@@ -120,6 +120,23 @@ echo $resultado;
                                 xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + rut_sin_dv, true);
                                 xhttp.send();
                                 echo responseText;
+
+                                jQuery.ajax({
+   action : 'make_booking',
+   type   : "get",
+   data   : {
+      action: 'make_booking'
+   }
+   url    : MBAjax.admin_url,
+   success: function(data) {
+      alert(data);
+      //jQuery("#container" ).append(data);
+   },
+   fail: function(error){
+      alert("error" + error);
+   }
+});
+
                                 if (responseText == 'duplicado') {
                                     var r = confirm(
                                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
