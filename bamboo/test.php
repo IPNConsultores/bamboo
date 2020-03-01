@@ -15,9 +15,12 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "GET",
-			url: "/backend/data/ajax1.htm",
+			url: "/bamboo/backend/clientes/clientes_duplicados.php",
 			success: function (data) {
 				$("#retriever").text(data);
+			}
+			fail: function () {
+				alert("fail");
 			}
 		});
 	});
