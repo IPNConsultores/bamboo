@@ -106,10 +106,11 @@ $(document).ready(function() {
             data: {
                 "rut": rut_sin_dv
             }
-            success: function(data) {
-                $("#retriever").text("test")
-                $("#retriever").text(data);
-
+            success: function() {
+                alert("éxito");
+            }
+            fail: function() {
+                alert("fail");
             }
         });
     });
@@ -122,7 +123,6 @@ $(document).ready(function() {
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Creación Clientes</title>
     <!-- Bootstrap -->
@@ -135,7 +135,7 @@ $(document).ready(function() {
 <body>
     <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1" required>
     <button id="btnsend" class="btn" style="background-color: #536656; color: white">Registrar</button>
-    <div id="retriever"></div>
+    <div id="retriever">test</div>
 
 </body>
 
