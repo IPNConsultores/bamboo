@@ -1,60 +1,62 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
+/*
 function validarut(){
    echo" <script>
         var dato = $('#rut').val();
         alert(dato);
         var respuesta = <?php echo valida_duplicado('17029236-7'); ?> ;
-        if (respuesta == '1') {
-            var r = confirm(
-                \"El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?\"
-            );
-            if (r == true) {
-                $.redirect('/bamboo/listado_clientes.php', {
-                    'dato': dato
-                }, 'post');
-            } else {
-                location.href = \"http://gestionipn.cl/bamboo/creacion_cliente.php\";
-            }
-        }
-    </script> ";  
+if (respuesta == '1') {
+var r = confirm(
+\"El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?\"
+);
+if (r == true) {
+$.redirect('/bamboo/listado_clientes.php', {
+'dato': dato
+}, 'post');
+} else {
+location.href = \"http://gestionipn.cl/bamboo/creacion_cliente.php\";
+}
+}
+</script> ";
 }
 //echo valida_duplicado('17029236-7');
 function valida_duplicado($rut){
-    $valor=$rut;
+$valor=$rut;
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 $sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-        
+
 if($stmt = mysqli_prepare($link, $sql)){
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "s", $param_username);
-    
-    // Set parameters
-    $param_username = estandariza_info($valor);
-    
-    // Attempt to execute the prepared statement
-    if(mysqli_stmt_execute($stmt)){
-        /* store result */
-        mysqli_stmt_store_result($stmt);
-        
-        if(mysqli_stmt_num_rows($stmt) == 1){
-            $resultado='1';
-            //duplicado
-        } else{
-            $resultado='0'; 
-            //éxito
-        }
-    } else{
-            $resultado='3';
-        //echo "Oops! Algo salió mal. Favor intentar más tarde.";
-    }
+// Bind variables to the prepared statement as parameters
+mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+// Set parameters
+$param_username = estandariza_info($valor);
+
+// Attempt to execute the prepared statement
+if(mysqli_stmt_execute($stmt)){
+// store result
+mysqli_stmt_store_result($stmt);
+
+if(mysqli_stmt_num_rows($stmt) == 1){
+$resultado='1';
+//duplicado
+} else{
+$resultado='0';
+//éxito
+}
+} else{
+$resultado='3';
+//echo "Oops! Algo salió mal. Favor intentar más tarde.";
+}
 }
 mysqli_stmt_close($stmt);
 echo $resultado;
 
 }
+*/
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -105,14 +107,22 @@ echo $resultado;
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
-                                oninput="checkRut(this)" onchange="<?php valida_rut(); ?>" required>
-                           
-                           <script>
-                            /*
-                            function valida_rut1() {
+                                oninput="checkRut(this)" onchange="valida_rut()" required>
+
+                            <script>
+                            function valida_rut() {
                                 var dato = $('#rut').val();
                                 alert(dato);
-                                var respuesta = <?php echo valida_duplicado('17029236-7'); ?> ;
+                                //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
+                                xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        alert(responseText) ;
+                                    }
+                                };
+                                xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + dato, true);
+                                xhttp.send();
+                                echo responseText;
                                 if (respuesta == '1') {
                                     var r = confirm(
                                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
@@ -126,9 +136,8 @@ echo $resultado;
                                     }
                                 }
                             }
-                            */
                             </script>
-                            
+
 
 
                             <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
