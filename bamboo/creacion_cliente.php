@@ -1,6 +1,25 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-echo 'variable';
+function validarut(){
+   echo" <script>
+        var dato = $('#rut').val();
+        alert(dato);
+        var respuesta = <?php echo valida_duplicado('17029236-7'); ?> ;
+        if (respuesta == '1') {
+            var r = confirm(
+                \"El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?\"
+            );
+            if (r == true) {
+                $.redirect('/bamboo/listado_clientes.php', {
+                    'dato': dato
+                }, 'post');
+            } else {
+                location.href = \"http://gestionipn.cl/bamboo/creacion_cliente.php\";
+            }
+        }
+    </script> ";  
+}
+//echo valida_duplicado('17029236-7');
 function valida_duplicado($rut){
     $valor=$rut;
 mysqli_set_charset( $link, 'utf8');
@@ -36,7 +55,6 @@ mysqli_stmt_close($stmt);
 echo $resultado;
 
 }
-echo valida_duplicado('17029236-7');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -87,7 +105,7 @@ echo valida_duplicado('17029236-7');
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
-                                oninput="checkRut(this)" onchange="valida_rut()" required>
+                                oninput="checkRut(this)" onchange="<?php valida_rut() ?>" required>
                             <script>
                             function valida_rut() {
                                 var dato = $('#rut').val();
