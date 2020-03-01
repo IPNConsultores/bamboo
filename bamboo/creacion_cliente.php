@@ -1,6 +1,6 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-echo valida_duplicado('17029236-7');
+echo 'variable';
 function valida_duplicado($rut){
     $valor=$rut;
 mysqli_set_charset( $link, 'utf8');
@@ -36,6 +36,7 @@ mysqli_stmt_close($stmt);
 echo $resultado;
 
 }
+echo valida_duplicado('17029236-7');
 ?>
 <!DOCTYPE html>
 <html lang="es">
