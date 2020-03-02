@@ -24,7 +24,7 @@
                 dataType: 'JSON',
                 success: function(response) {
                     console.log(response.respuesta);
-					alert(response.respuesta));
+					alert(response.respuesta);
                     // put on console what server sent back...
                 }
             });

@@ -4,7 +4,7 @@ $resultado='test';
 //$valor=$_REQUEST["rut"];
 
     if(isset($_POST['rut']) && !empty($_POST['rut'])) {
-        echo json_encode(array("respuesta"=>$resultado));
+        echo json_encode(array("respuesta"=>$_POST['rut']));
     }
 
 /*
