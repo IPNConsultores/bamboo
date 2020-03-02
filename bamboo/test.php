@@ -17,7 +17,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/backend/clientes/clientes_duplicados.php",
+                url: "/bamboo/backend/clientes/clientes_duplicados.php",
                 data: {
                     rut: '17029236'
                 },
