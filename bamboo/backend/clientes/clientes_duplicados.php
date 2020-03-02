@@ -1,9 +1,12 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-$resultado='';
+$resultado='test';
 //$valor=$_REQUEST["rut"];
-echo "test";
-return "test";
+
+    if(isset($_POST['rut']) && !empty($_POST['rut'])) {
+        echo json_encode(array("respuesta"=>$resultado));
+    }
+
 /*
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
