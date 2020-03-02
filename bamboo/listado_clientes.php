@@ -157,7 +157,7 @@ else
                     <input class="form-control" type="text" name="buscacliente" id="buscacliente"
                         value="<?php echo $data; ?>" required>
                     <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
-                        type="submit" onclick="<?php $_SESSION["auxiliar"]="buscador_listado";?>"  >Buscar</button>
+                        type="submit" onclick="<?php $_SESSION["auxiliar"]="buscador_listado";?>">Buscar</button>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco
                     </div>
                 </div>
@@ -182,7 +182,19 @@ else
             </div>
         </form>
     </div>
+    <script>
+    function confirma_eliminar() {
 
+        var r = confirm(
+            "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
+        );
+        if (r == true) {
+//eliminar
+        } else {
+//no hacer nada
+        }
+    }
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
