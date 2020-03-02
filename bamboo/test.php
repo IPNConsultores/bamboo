@@ -23,8 +23,8 @@
                 },
                 dataType: 'JSON',
                 success: function(response) {
-                    console.log(response.respuesta);
-					alert(response.respuesta);
+                    console.log(response.blablabla);
+					alert(response.blablabla);
                     // put on console what server sent back...
                 }
             });
@@ -37,11 +37,19 @@
     <div id="result" class="well left-col"></div>
     <div class="right-col">
         <div id="retriever"></div>
+		<div id="button">
+        <input type="button" id="btnSend" value="Trigger AJAX" class="btn btn-primary btn-small">
+    </div>
+
+		<br>
+		<br>
+		<br>
+		<br>
         <div id="button">
             <button type="button" class="fas fa-search"></button>
             <button type="button" class="fas fa-edit"></button>
             <button type="button" class="fas fa-trash-alt"></button>
-            <button d="btnSend" type="button" class="fas fa-clipboard-list"></button>
+            <button id="btnSend" type="button" class="fas fa-clipboard-list"></button>
         </div>
 
         <a class="fas fa-edit" name="boton-modificar" href="#"></a>

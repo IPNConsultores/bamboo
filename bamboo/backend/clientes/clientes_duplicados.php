@@ -1,10 +1,15 @@
 <?php
-require_once "/home/gestio10/public_html/backend/config.php";
-$resultado='test';
-//$valor=$_REQUEST["rut"];
+//require_once "/home/gestio10/public_html/backend/config.php";
+$resultado='nulo';
+/*$valor=$_REQUEST["rut"];
 
     if(isset($_POST['rut']) && !empty($_POST['rut'])) {
-        echo json_encode(array("respuesta"=>$_POST['rut']));
+        $resultado=$_POST['rut'];
+        echo json_encode(array("respuesta"=>$resultado));
+    }
+   */
+    if(isset($_POST['rut']) && !empty($_POST['rut'])) {
+        echo json_encode(array("blablabla"=>$variable));
     }
 
 /*
