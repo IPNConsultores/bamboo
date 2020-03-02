@@ -38,7 +38,10 @@ $(document).ready(function () {
 		<button type="button" class="fas fa-edit"></button>
 		<button type="button" class="fas fa-trash-alt"></button>
 		<button d="btnSend" type="button" class="fas fa-clipboard-list"></button>
-    </div>
+	</div>
+	
+	<a class="fas fa-edit" name="boton-modificar" href="#">modificar</a>
+	<a class="fas fa-trash-alt" name="boton-elimina-cliente" href="#">eliminar</a>
 </div>
 </body>
 </html>
