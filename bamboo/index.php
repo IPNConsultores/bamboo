@@ -78,6 +78,25 @@ $num=0;
                 </table>
             </div>
         </form>
+        <form class="needs-validation" novalidate>
+        <br><h5 class="form-row">&nbsp;Pólizas próximas a vencer</h5>
+            <br>
+            <div class="form-row">
+                <table class="table" id="listado_polizas">
+                    <tr>
+                        <th>#</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Tarea</th>
+                        <th>Fecha vencimiento</th>
+                        <th>póliza asociada</th>
+                        <th>Cliente asociado</th>
+                        <th>Acción</th>
+                    </tr>
+                    <?php echo $lista_polizas; ?>
+                </table>
+            </div>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

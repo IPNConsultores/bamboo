@@ -7,7 +7,7 @@
 </head>
 <body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
+<script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 <!-- Javascript -->
 <script>
 $(document).ready(function () {
@@ -34,7 +34,10 @@ $(document).ready(function () {
 <div class="right-col">
     <div id="retriever"></div>
     <div id="button">
-        <input type="button" id="btnSend" value="Trigger AJAX" class="btn btn-primary btn-small">
+		<input type="button" id="btnSend" value="Trigger AJAX" class="fas fa-search">
+		<input type="button" id="btnSend" value="Trigger AJAX" class="fas fa-edit">
+		<input type="button" id="btnSend" value="Trigger AJAX" class="fas fa-trash-alt">
+		<input type="button" id="btnSend" value="Trigger AJAX" class="fas fa-clipboard-list">
     </div>
 </div>
 </body>

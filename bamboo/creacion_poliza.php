@@ -37,24 +37,6 @@
               <label for="RUT">RUT</label>
               <input type="text" class="form-control" id="rutprop" name="rutprop" placeholder="1111111-1"
                             oninput="checkRut(this)" required>
-              <script>
-                            function valida_rut() {
-                                
-                                var dato = $('#rut').val();
-                                /*
-                                var r = confirm(
-                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                );
-                                if (r == true) {
-                                    $.redirect('/bamboo/listado_clientes.php', {
-                                        'dato': dato
-                                    }, 'post');
-                                } else {
-                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
-                                }
-                                */
-                            }
-                            </script>
               <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
             </div>
           </div>
@@ -91,21 +73,7 @@
               <script>
                             function valida_rut() {
                                 
-                                var dato = $('#rut').val();
-                                /*
-                                var r = confirm(
-                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                );
-                                if (r == true) {
-                                    $.redirect('/bamboo/listado_clientes.php', {
-                                        'dato': dato
-                                    }, 'post');
-                                } else {
-                                    location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
-                                }
-                                */
-                            }
-                            </script>
+
               <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
             </div>
           </div>
