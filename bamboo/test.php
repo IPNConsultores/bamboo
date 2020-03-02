@@ -40,8 +40,14 @@ $(document).ready(function () {
 		<button d="btnSend" type="button" class="fas fa-clipboard-list"></button>
 	</div>
 	
-	<a class="fas fa-edit" name="boton-modificar" href="#">modificar</a>
-	<a class="fas fa-trash-alt" name="boton-elimina-cliente" href="#">eliminar</a>
+	<a class="fas fa-edit" name="boton-modificar" href="#"></a>
+	<a class="fas fa-trash-alt" name="boton-elimina-cliente" href="#"></a>
+	<br>
+	<button class="fas fa-edit" name="boton-modificar" href="#"></button>
+	<button class="fas fa-trash-alt" name="boton-elimina-cliente" href="#"></button>
+	<br>
+	<i type="button" class="fas fa-edit" name="boton-modificar" href="#"></i>
+	<i type="button" class="fas fa-trash-alt" name="boton-elimina-cliente" href="#"></i>
 </div>
 </body>
 </html>
