@@ -34,12 +34,10 @@ $(document).ready(function () {
 <div class="right-col">
     <div id="retriever"></div>
     <div id="button">
-		<i type="button" id="btnSend" value="Trigger AJAX" class="fas fa-search"></i>
-		<i type="button" id="btnSend" value="Trigger AJAX" class="fas fa-edit"></i>
-		<i type="button" id="btnSend" value="Trigger AJAX" class="fas fa-trash-alt"></i>
-		<i class="fas fa-clipboard-list"></i>
 		<button type="button" class="fas fa-search"></button>
-		<button type="button"><i class="fas fa-clipboard-list"></i> </button>
+		<button type="button" class="fas fa-edit"></button>
+		<button type="button" class="fas fa-trash-alt"></button>
+		<button d="btnSend" type="button" class="fas fa-clipboard-list"></button>
     </div>
 </div>
 </body>
