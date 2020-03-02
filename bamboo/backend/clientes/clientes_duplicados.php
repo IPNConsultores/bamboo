@@ -9,7 +9,8 @@ $resultado='nulo';
     }
    */
     if(isset($_POST['rut']) && !empty($_POST['rut'])) {
-        echo json_encode(array("blablabla"=>10));
+        $resultado=$_POST['rut'];
+        echo json_encode(array("resultado"=>$resultado));
     }
 
 /*

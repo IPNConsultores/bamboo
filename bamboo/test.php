@@ -23,8 +23,8 @@
                 },
                 dataType: 'JSON',
                 success: function(response) {
-                    console.log(response.blablabla);
-					alert(response.blablabla);
+                    console.log(response.resultado);
+					alert(response.resultado);
                     // put on console what server sent back...
                 }
             });

@@ -120,43 +120,33 @@ echo $resultado;
                                 var dato = $('#rut').val();
                                 var rut_sin_dv = dato.replace('-', '');
                                 rut_sin_dv = rut_sin_dv.slice(0, -1);
-                                alert(dato);
-                                //var respuesta = ?php echo valida_duplicado('17029236-7'); ? ;
-                                xhttp = new XMLHttpRequest();
-                                xhttp.open("GET", "/bamboo/backend/clientes/clientes_duplicados.php?rut=" + rut_sin_dv,
-                                    true);
-                                xhttp.send();
-                                echo responseText;
 
-                                jQuery.ajax({
-                                    action: 'make_booking',
-                                    type: "get",
-                                    data: {
-                                        action: 'make_booking'
-                                    }
-                                    url: MBAjax.admin_url,
-                                    success: function(data) {
-                                        alert(data);
-                                        //jQuery("#container" ).append(data);
-                                    },
-                                    fail: function(error) {
-                                        alert("error" + error);
+                                $.ajax({
+                                        type: "POST",
+                                        url: "/bamboo/backend/clientes/clientes_duplicados.php",
+                                        data: {
+                                            rut: rut_sin_dv
+                                        },
+                                        dataType: 'JSON',
+                                        success: function(response) {
+                                            console.log(response.resultado);
+                                            alert(response.resultado);
+                                            if (response.resultado == 'duplicado') {
+                                                var r = confirm(
+                                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                                                );
+                                                if (r == true) {
+                                                    $.redirect('/bamboo/listado_clientes.php', {
+                                                        'dato': dato
+                                                    }, 'post');
+                                                } else {
+                                                    location.href =
+                                                        "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                                                }
+                                            }
+                                        }
                                     }
                                 });
-
-                                if (responseText == 'duplicado') {
-                                    var r = confirm(
-                                        "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                    );
-                                    if (r == true) {
-                                        $.redirect('/bamboo/listado_clientes.php', {
-                                            'dato': dato
-                                        }, 'post');
-                                    } else {
-                                        location.href = "http://gestionipn.cl/bamboo/creacion_cliente.php";
-                                    }
-                                }
-                            }
                             </script>
 
 
