@@ -115,39 +115,6 @@ echo $resultado;
                             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
                                 oninput="checkRut(this)" onchange="valida_rut()" required>
 
-                            <script>
-                            function valida_rut() {
-                                var dato = $('#rut').val();
-                                var rut_sin_dv = dato.replace('-', '');
-                                rut_sin_dv = rut_sin_dv.slice(0, -1);
-
-                                $.ajax({
-                                        type: "POST",
-                                        url: "/bamboo/backend/clientes/clientes_duplicados.php",
-                                        data: {
-                                            rut: rut_sin_dv
-                                        },
-                                        dataType: 'JSON',
-                                        success: function(response) {
-                                            console.log(response.resultado);
-                                            alert(response.resultado);
-                                            if (response.resultado == 'duplicado') {
-                                                var r = confirm(
-                                                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                                                );
-                                                if (r == true) {
-                                                    $.redirect('/bamboo/listado_clientes.php', {
-                                                        'dato': dato
-                                                    }, 'post');
-                                                } else {
-                                                    location.href =
-                                                        "http://gestionipn.cl/bamboo/creacion_cliente.php";
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
-                            </script>
 
 
 
@@ -210,7 +177,7 @@ echo $resultado;
     })();
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -218,6 +185,40 @@ echo $resultado;
     </script>
     <script src="/bamboo/js/jquery.redirect.js"></script>
     <script src="/bamboo/js/validarRUT.js"></script>
+
 </body>
 
 </html>
+<script>
+function valida_rut() {
+    var dato = $('#rut').val();
+    var rut_sin_dv = dato.replace('-', '');
+    rut_sin_dv = rut_sin_dv.slice(0, -1);
+
+    $.ajax({
+            type: "POST",
+            url: "/bamboo/backend/clientes/clientes_duplicados.php",
+            data: {
+                rut: rut_sin_dv
+            },
+            dataType: 'JSON',
+            success: function(response) {
+                console.log(response.resultado);
+                alert(response.resultado);
+                if (response.resultado == 'duplicado') {
+                    var r = confirm(
+                        "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                    );
+                    if (r == true) {
+                        $.redirect('/bamboo/listado_clientes.php', {
+                            'dato': dato
+                        }, 'post');
+                    } else {
+                        location.href =
+                            "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                    }
+                }
+            }
+        }
+    });
+</script>
