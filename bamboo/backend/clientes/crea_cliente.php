@@ -15,11 +15,9 @@ mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\');');
 
-$script ="<script>
-$.redirect('/bamboo/listado_clientes.php', {
-  'dato': ".$rut."
-}, 'post');
-</script>";
+echo '<script type="text/javascript">
+redirige('.$rut.');
+</script>';
 //header("Location:http://gestionipn.cl/bamboo/index.php");
 
 function estandariza_info($data) {
@@ -30,10 +28,11 @@ function estandariza_info($data) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<body>
-<script src="/bamboo/js/jquery.redirect.js"></script>
-<div><?php echo $script; ?>></div>
-</body>
-</html>
+<script src="/bamboo/js/jquery.redirect.js">
+redirige(<?php echo $rut;?>);
+function redirige($dato){
+  $.redirect('/bamboo/listado_clientes.php', {
+  'dato': $dato
+}, 'post');
+}
+</script>
