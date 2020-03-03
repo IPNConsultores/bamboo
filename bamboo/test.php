@@ -8,6 +8,9 @@
 </head>
 
 <body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+    </script>
+    </script>
     <script src="/bamboo/js/bootstrap-notify.js"></script>
     <script src="/bamboo/js/bootstrap-notify.min.js"></script>
     <!-- Javascript -->
