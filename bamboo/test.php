@@ -19,7 +19,7 @@
                 type: "POST",
                 url: "/bamboo/backend/clientes/clientes_duplicados.php",
                 data: {
-                    rut: '17029236'
+                    rut: '17029236-7'
                 },
                 dataType: 'JSON',
                 success: function(response) {
