@@ -193,7 +193,7 @@ function valida_rut_duplicado() {
     var dato = $('#rut').val();
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
-
+alert(rut_sin_dv);
     $.ajax({
         type: "POST",
         url: "/bamboo/backend/clientes/clientes_duplicados.php",
@@ -203,6 +203,7 @@ function valida_rut_duplicado() {
         dataType: 'JSON',
         success: function(response) {
             console.log(response.resultado);
+            /*
             if (response.resultado == 'duplicado') {
                 var r = confirm(
                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
@@ -216,6 +217,7 @@ function valida_rut_duplicado() {
                         "http://gestionipn.cl/bamboo/creacion_cliente.php";
                 }
             }
+            */
         }
 
     });
