@@ -203,7 +203,6 @@ function valida_rut_duplicado() {
         dataType: 'JSON',
         success: function(response) {
             console.log(response.resultado);
-            alert(response.resultado);
             if (response.resultado == 'duplicado') {
                 var r = confirm(
                     "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
