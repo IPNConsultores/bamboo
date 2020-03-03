@@ -21,17 +21,25 @@ if (isset($_POST['rut']) && !empty($_POST['rut']))
             if (mysqli_stmt_num_rows($stmt) == 1)
             {
                 $resultado = 'duplicado';
+                echo json_encode(array(
+                    "resultado" => "duplicado"
+                ));
                 //duplicado
             }
             else
             {
                 $resultado = 'valido';
+                echo json_encode(array(
+                    "resultado" => "valido"
+                ));
                 //éxito
             }
         }
         else
         {
-            $resultado = 'error';
+            echo json_encode(array(
+                "resultado" => "error"
+            ));
             //echo "Oops! Algo salió mal. Favor intentar más tarde.";
         }
     }
@@ -44,8 +52,6 @@ if (isset($_POST['rut']) && !empty($_POST['rut']))
         $data = htmlspecialchars($data);
         return $data;
     }
-    echo json_encode(array(
-        "resultado" => $resultado
-    ));
+
 }
 ?>
