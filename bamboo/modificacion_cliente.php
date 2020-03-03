@@ -77,14 +77,8 @@ function modificar(){
                         <div class="col-md-8 mb-3">
                             <label for="RUT">RUT</label>
                             <input type="text" class="form-control" name="rut" placeholder="11111111"
-                                value="<?php echo $rut; ?>" required>
+                                value="<?php echo $rut.'-'.$dv; ?>"  disabled >
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-                        </div>
-                        <div class="col-md-8 mb-3 col-xl-3">
-                            <label for="RUT">&nbsp;</label>
-                            <input type="text" class="form-control" name="dv" placeholder="K" value="<?php echo $dv; ?>"
-                                required>
-                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
