@@ -44,14 +44,12 @@ if (isset($_POST['rut']) && !empty($_POST['rut']))
         }
     }
     //mysqli_stmt_close($stmt);
-    echo $resultado;
-    function estandariza_info($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
+}
+function estandariza_info($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 ?>
