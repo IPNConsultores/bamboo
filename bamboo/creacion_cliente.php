@@ -195,29 +195,30 @@ function valida_rut_duplicado() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
 
     $.ajax({
-            type: "POST",
-            url: "/bamboo/backend/clientes/clientes_duplicados.php",
-            data: {
-                rut: rut_sin_dv
-            },
-            dataType: 'JSON',
-            success: function(response) {
-                console.log(response.resultado);
-                alert(response.resultado);
-                if (response.resultado == 'duplicado') {
-                    var r = confirm(
-                        "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
-                    );
-                    if (r == true) {
-                        $.redirect('/bamboo/listado_clientes.php', {
-                            'dato': dato
-                        }, 'post');
-                    } else {
-                        location.href =
-                            "http://gestionipn.cl/bamboo/creacion_cliente.php";
-                    }
+        type: "POST",
+        url: "/bamboo/backend/clientes/clientes_duplicados.php",
+        data: {
+            rut: rut_sin_dv
+        },
+        dataType: 'JSON',
+        success: function(response) {
+            console.log(response.resultado);
+            alert(response.resultado);
+            if (response.resultado == 'duplicado') {
+                var r = confirm(
+                    "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
+                );
+                if (r == true) {
+                    $.redirect('/bamboo/listado_clientes.php', {
+                        'dato': dato
+                    }, 'post');
+                } else {
+                    location.href =
+                        "http://gestionipn.cl/bamboo/creacion_cliente.php";
                 }
             }
         }
+
     });
+}
 </script>
