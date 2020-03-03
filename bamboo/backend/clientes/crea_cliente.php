@@ -32,7 +32,7 @@ function estandariza_info($data) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="/bamboo/js/jquery.redirect.js">
+<!--<script src="/bamboo/js/jquery.redirect.js">-->
 </script>
 </head>
 <body>
