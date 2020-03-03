@@ -1,11 +1,11 @@
 <?php
 require_once "/home/gestio10/public_html/backend/config.php";
-$rut_completo = preg_replace('/[^k0-9]/i', '', $_POST["rut"]);
+$rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $nombre=estandariza_info($_POST["nombre"]);
  $apellidop=estandariza_info($_POST["apellidop"]);
  $apellidom=estandariza_info($_POST["apellidom"]);
  $rut=estandariza_info(substr($rut_completo, 0, strlen($rut_completo)-1));
- $dv=estandariza_info(substr($rut_completo -1));
+ $dv=estandariza_info(substr($rut_completo, -1,1));
  $correo_electronico=estandariza_info($_POST["correo_electronico"]);
  $direccionp=estandariza_info($_POST["direccionp"]);
  $direccionl=estandariza_info($_POST["direccionl"]);
@@ -23,3 +23,13 @@ function estandariza_info($data) {
   return $data;
 }
 ?>
+
+<script>
+/*
+function redirige(){
+$.redirect('/bamboo/listado_clientes.php', {
+    'dato': rut_sin_dv
+}, 'post');
+}
+*/
+</script>
