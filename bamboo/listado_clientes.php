@@ -10,7 +10,6 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-  echo "dato :(".$_POST["dato"].")";
 require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err=$data='';

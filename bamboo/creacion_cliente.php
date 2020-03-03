@@ -190,6 +190,9 @@ echo $resultado;
 </html>
 <script>
 function valida_rut_duplicado() {
+    if (document.getElementById("rut").checkValidity()==true){
+        alert("validador ok");
+    }
     var dato = $('#rut').val();
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
@@ -208,7 +211,7 @@ function valida_rut_duplicado() {
                 );
                 if (r == true) {
                     $.redirect('/bamboo/listado_clientes.php', {
-                        'dato': dato
+                        'dato': rut_sin_dv
                     }, 'post');
                 } else {
                     location.href =
