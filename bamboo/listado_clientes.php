@@ -41,7 +41,7 @@ if($_SESSION["auxiliar"]==false){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))and empty(trim($_POST["dato"]))){
+    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
         $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //inicio feabarcas
     if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
     if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
-    if (!empty(trim($_POST["dato"]))){$busqueda=estandariza_info($_POST["dato"]);}
+   // if (!empty(trim($_POST["dato"]))){$busqueda=estandariza_info($_POST["dato"]);}
     $numero=$trozos=0;
 
     mysqli_set_charset( $link, 'utf8');

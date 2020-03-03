@@ -42,7 +42,7 @@ function estandariza_info($data) {
 <script >
 var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
-  'dato': rut
+  'busqueda': rut
 }, 'post');
 
 

@@ -150,7 +150,7 @@ function valida_rut_duplicado() {
                     );
                     if (r == true) {
                         $.redirect('/bamboo/listado_clientes.php', {
-                            'dato': rut_sin_dv
+                            'busqueda': rut_sin_dv
                         }, 'post');
                     } else {
                         location.href =
