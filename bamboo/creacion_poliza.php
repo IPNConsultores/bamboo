@@ -69,10 +69,7 @@
             <div class="col-md mb-3">
               <label for="RUT">RUT</label>
               <input type="text" class="form-control" id="rutaseg" name="rutaseg" placeholder="1111111-1"
-                            oninput="checkRut(this)" required>
-              <script>
-                            function valida_rut() {
-                                
+                            oninput="checkRut(this)" required>                
 
               <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
             </div>
