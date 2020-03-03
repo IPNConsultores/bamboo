@@ -28,6 +28,7 @@ function estandariza_info($data) {
 }
 ?>
 
+<?php echo $rut; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,10 +40,9 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-alert("test");
-
+var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
-  'dato': 17029236
+  'dato': rut
 }, 'post');
 
 
