@@ -37,10 +37,7 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-window.document.onload = function(e){ 
-    console.log("document.onload", e, Date.now() ,window.tdiff,  
-    (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred) ); 
-}
+alert("test");
 
 /*function redirige($dato){
   $.redirect('/bamboo/listado_clientes.php', {
