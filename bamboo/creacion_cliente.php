@@ -190,9 +190,6 @@ echo $resultado;
 </html>
 <script>
 function valida_rut_duplicado() {
-    if ($('#rut').checkValidity() === false){
-        alert("validación ok");
-    }
     var dato = $('#rut').val();
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
