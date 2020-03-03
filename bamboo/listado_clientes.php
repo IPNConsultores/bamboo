@@ -166,17 +166,21 @@ else
         <form class="needs-validation" novalidate>
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
-            <div class="form-row">
-                <table class="table" id="listado">
+            <div class="table-responsive">
+                <table class="table table-hover" id="listado">
                     <tr>
+                    <thead>
                         <th>#</th>
                         <th>Rut</th>
                         <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Correo Electrónico</th>
                         <th>Acción</th>
+                    </thead>
                     </tr>
+                    <tbody>
                     <?php echo $lista; ?>
+                    </tbody>
                 </table>
             </div>
         </form>
