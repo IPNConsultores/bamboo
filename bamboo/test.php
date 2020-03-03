@@ -8,30 +8,10 @@
 </head>
 
 <body>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
+    <script src="/bamboo/js/bootstrap-notify.js"></script>
+    <script src="/bamboo/js/bootstrap-notify.min.js"></script>
     <!-- Javascript -->
-    <script>
-    $(document).ready(function() {
-        $("#btnSend").click(function() {
 
-            $.ajax({
-                type: "POST",
-                url: "/bamboo/backend/clientes/clientes_duplicados.php",
-                data: {
-                    rut: '17029236-7'
-                },
-                dataType: 'JSON',
-                success: function(response) {
-                    console.log(response.resultado);
-					alert(response.resultado);
-                    // put on console what server sent back...
-                }
-            });
-
-        });
-    });
-    </script>
 
     <!-- HTML -->
     <div id="result" class="well left-col"></div>
@@ -40,7 +20,16 @@
 		<div id="button">
         <input type="button" id="btnSend" value="Trigger AJAX" class="btn btn-primary btn-small">
     </div>
-
+<script>
+function notifica(){
+    $.notify({
+	title: '<strong>Heads up!</strong>',
+	message: 'You can use any of bootstraps other alert styles as well by default.'
+},{
+	type: 'success'
+});
+}
+</script>
 		<br>
 		<br>
 		<br>

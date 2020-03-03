@@ -32,18 +32,17 @@ function estandariza_info($data) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--<script src="/bamboo/js/jquery.redirect.js">-->
+<script src="/bamboo/js/jquery.redirect.js">
 </script>
 </head>
 <body>
 <script >
 alert("test");
 
-/*function redirige($dato){
   $.redirect('/bamboo/listado_clientes.php', {
-  'dato': $dato
+  'dato': 17029236
 }, 'post');
-}*/
+
 
 </script>
 </body>
