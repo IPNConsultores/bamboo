@@ -16,11 +16,12 @@ While($row=mysqli_fetch_object($resultado))
    $nombre=$row["nombre"];
    $apellidop=$row["apellidop"];
    $apellidom=$row["apellidom"];
+   echo $apellidom;
    echo json_encode(array(
-    "rut" => $rut,
-    "nombre"=> $nombre,
-    "apellidop"=> $apellidop,
-    "apellidom"=> $apellidom
+    "rut" =>& $rut,
+    "nombre"=>& $nombre,
+    "apellidop"=>& $apellidop,
+    "apellidom"=>& $apellidom
 ));
 }   
 }
