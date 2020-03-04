@@ -463,10 +463,10 @@ function valida_rut_duplicado_prop() {
         },
         dataType: 'JSON',
         success: function(response) {
-            debug.console(response.rut);
-            debug.console(response.nombre);
-            debug.console(response.apellidop);
-            debug.console(response.apellidom);
+            console.log(response.rut);
+            console.log(response.nombre);
+            console.log(response.apellidop);
+            console.log(response.apellidom);
 
         }
 
@@ -488,10 +488,10 @@ function valida_rut_duplicado_aseg() {
         },
         dataType: 'JSON',
         success: function(response) {
-            debug.console(response.rut);
-            debug.console(response.nombre);
-            debug.console(response.apellidop);
-            debug.console(response.apellidom);
+            console.log(response.rut);
+            console.log(response.nombre);
+            console.log(response.apellidop);
+            console.log(response.apellidom);
 
         }
 
