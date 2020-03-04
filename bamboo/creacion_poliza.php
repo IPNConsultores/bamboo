@@ -463,9 +463,9 @@ function valida_rut_duplicado_prop() {
         success: function(response) {
             console.log(response.resultado);
 
-            document.getElementById("nombre_prop").innerHTML = "response.nombre";
-            document.getElementById("apellidop_prop").innerHTML = "response.apellidop";
-            document.getElementById("apellidom_prop").innerHTML = "response.apellidom";
+            document.getElementById("nombre_prop").value = response.nombre;
+            document.getElementById("apellidop_prop").value = response.apellidop;
+            document.getElementById("apellidom_prop").value = response.apellidom;
 
         }
 
@@ -488,9 +488,9 @@ function valida_rut_duplicado_aseg() {
         dataType: 'JSON',
         success: function(response) {
             console.log(response.resultado);
-            document.getElementById("nombre_seg").innerHTML = "response.nombre";
-            document.getElementById("apellidop_seg").innerHTML = "response.apellidop";
-            document.getElementById("apellidom_seg").innerHTML = "response.apellidom";
+            document.getElementById("nombre_seg").value = response.nombre;
+            document.getElementById("apellidop_seg").value = response.apellidop;
+            document.getElementById("apellidom_seg").value = response.apellidom;
 
         }
 
