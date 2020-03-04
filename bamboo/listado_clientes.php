@@ -167,6 +167,7 @@ else
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="table-responsive">
+            
                 <table class="table table-hover" id="listado">
                     <tr>
                     <thead>

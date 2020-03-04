@@ -8,11 +8,13 @@
 </head>
 
 <body>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     </script>
     <script src="/bamboo/js/bootstrap-notify.js"></script>
     <script src="/bamboo/js/bootstrap-notify.min.js"></script>
+    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
     <!-- Javascript -->
 
 
@@ -24,15 +26,7 @@
         <input type="button" id="btnSend" value="Trigger AJAX" class="btn btn-primary btn-small">
     </div>
 <script>
-function notifica(){
-    $.notify({
-	title: '<strong>Heads up!</strong>',
-	message: 'You can use any of bootstraps other alert styles as well by default.'
-},{
-	type: 'success'
-});
-}
-</script>
+
 		<br>
 		<br>
 		<br>

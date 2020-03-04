@@ -48,7 +48,7 @@
                                 <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
                                     <label for="prop">&nbsp;</label>
                                     <br>
-                                    
+
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
@@ -58,12 +58,14 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoP">Apellido Paterno</label>
-                                        <input type="text" id="apellidop_prop"  class="form-control" name="apellidop" required>
+                                        <input type="text" id="apellidop_prop" class="form-control" name="apellidop"
+                                            required>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoM">Apellido Materno</label>
-                                        <input type="text" id="apellidom_prop"  class="form-control" name="apellidom" required>
+                                        <input type="text" id="apellidom_prop" class="form-control" name="apellidom"
+                                            required>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                 </div>
@@ -84,22 +86,25 @@
                                     <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
                                         <label for="prop">&nbsp;</label>
                                         <br>
-                                        
+
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="Nombre">Nombre</label>
-                                            <input type="text" id="nombre_seg" class="form-control" name="nombreaseg" required>
+                                            <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
+                                                required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="ApellidoP">Apellido Paterno</label>
-                                            <input type="text" id="apellidop_seg" class="form-control" name="apellidopaseg" required>
+                                            <input type="text" id="apellidop_seg" class="form-control"
+                                                name="apellidopaseg" required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="ApellidoM">Apellido Materno</label>
-                                            <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg" required>
+                                            <input type="text" id="apellidom_seg" class="form-control"
+                                                name="apellidomaseg" required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                     </div>
@@ -461,12 +466,11 @@ function valida_rut_duplicado_prop() {
         },
         dataType: 'JSON',
         success: function(response) {
-            console.log(response.resultado);
-
-            document.getElementById("nombre_prop").value = response.nombre;
-            document.getElementById("apellidop_prop").value = response.apellidop;
-            document.getElementById("apellidom_prop").value = response.apellidom;
-
+            if (response.resultado == 'antiguo') {
+                document.getElementById("nombre_prop").value = response.nombre;
+                document.getElementById("apellidop_prop").value = response.apellidop;
+                document.getElementById("apellidom_prop").value = response.apellidom;
+            }
         }
 
     });
@@ -487,11 +491,11 @@ function valida_rut_duplicado_aseg() {
         },
         dataType: 'JSON',
         success: function(response) {
-            console.log(response.resultado);
-            document.getElementById("nombre_seg").value = response.nombre;
-            document.getElementById("apellidop_seg").value = response.apellidop;
-            document.getElementById("apellidom_seg").value = response.apellidom;
-
+            if (response.resultado == 'antiguo') {
+                document.getElementById("nombre_seg").value = response.nombre;
+                document.getElementById("apellidop_seg").value = response.apellidop;
+                document.getElementById("apellidom_seg").value = response.apellidom;
+            }
         }
 
     });
