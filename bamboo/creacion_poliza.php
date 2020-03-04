@@ -436,14 +436,13 @@
                     }, false);
                 });
             }, false);
-        })();
+        })(); 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
     <script src="/bamboo/js/jquery.redirect.js"></script>
     <script src="/bamboo/js/validarRUT.js"></script>
-
 
 
 </body>
@@ -462,7 +461,7 @@ function valida_rut_duplicado_prop() {
         },
         dataType: 'JSON',
         success: function(response) {
-          alert(response.nombre);
+            alert(response.nombre);
             console.log(response.rut);
             console.log(response.nombre);
             console.log(response.apellidop);
