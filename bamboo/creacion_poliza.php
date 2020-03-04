@@ -36,7 +36,7 @@
             <div class="col-md mb-3">
               <label for="RUT">RUT</label>
               <input type="text" class="form-control" id="rutprop" name="rutprop" placeholder="1111111-1"
-                            oninput="checkRut(this)" required>
+                            oninput="checkRut(this)" onchange="valida_rut_duplicado_prop()" required>
               <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
             </div>
           </div>
@@ -69,7 +69,7 @@
             <div class="col-md mb-3">
               <label for="RUT">RUT</label>
               <input type="text" class="form-control" id="rutaseg" name="rutaseg" placeholder="1111111-1"
-                            oninput="checkRut(this)" required>                
+                            oninput="checkRut(this)" onchange="valida_rut_duplicado_aseg()" required>                
 
               <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
             </div>
@@ -431,3 +431,53 @@
     </script>
 </body>
 </html>
+<script>
+function valida_rut_duplicado_prop() {
+    if (document.getElementById("rutprop").checkValidity() == true) {
+        var dato = $('#rutprop').val();
+        var rut_sin_dv = dato.replace('-', '');
+        rut_sin_dv = rut_sin_dv.slice(0, -1);
+        $.ajax({
+            type: "POST",
+            url: "/bamboo/backend/clientes/busqueda_nombre.php",
+            data: {
+                rut: rut_sin_dv
+            },
+            dataType: 'JSON',
+            success: function(response) {
+            debug.console(response.rut);
+            debug.console(response.nombre);
+            debug.console(response.apellidop);
+            debug.console(response.apellidom);
+
+            }
+
+        });
+    }
+
+}
+function valida_rut_duplicado_aseg() {
+    if (document.getElementById("rutaseg").checkValidity() == true) {
+        var dato = $('#rutaseg').val();
+        var rut_sin_dv = dato.replace('-', '');
+        rut_sin_dv = rut_sin_dv.slice(0, -1);
+        $.ajax({
+            type: "POST",
+            url: "/bamboo/backend/clientes/busqueda_nombre.php",
+            data: {
+                rut: rut_sin_dv
+            },
+            dataType: 'JSON',
+            success: function(response) {
+            debug.console(response.rut);
+            debug.console(response.nombre);
+            debug.console(response.apellidop);
+            debug.console(response.apellidom);
+
+            }
+
+        });
+    }
+
+}
+</script>
