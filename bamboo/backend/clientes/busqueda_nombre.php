@@ -8,9 +8,9 @@ $resultado = '';
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
         //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-    $sql = "SELECT id, nombre, apellidop, apellidom FROM clientes WHERE rut_sin_dv =".$busqueda.";";
+    $sql = "SELECT id, nombre, apellidop, apellidom FROM clientes WHERE rut_sin_dv =".$busqueda." ;";
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $resultado=mysqli_query($link,$sql);
+    $resultado=mysqli_query($link, $sql);
     While($row=mysqli_fetch_object($resultado))
     {
         //Mostramos los titulos de los articulos o lo que deseemos...
