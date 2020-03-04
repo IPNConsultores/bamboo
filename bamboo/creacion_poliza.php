@@ -464,7 +464,7 @@ function valida_rut_duplicado_prop() {
         dataType: 'JSON',
         success: function(response) {
             alert(response.nombre);
-            console.log(response.rut);
+            console.log(response.resultado);
             console.log(response.nombre);
             console.log(response.apellidop);
             console.log(response.apellidom);
@@ -490,7 +490,7 @@ function valida_rut_duplicado_aseg() {
         dataType: 'JSON',
         success: function(response) {
             alert(response.nombre);
-            console.log(response.rut);
+            console.log(response.resultado);
             console.log(response.nombre);
             console.log(response.apellidop);
             console.log(response.apellidom);
