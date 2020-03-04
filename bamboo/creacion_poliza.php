@@ -463,6 +463,7 @@ function valida_rut_duplicado_prop() {
         },
         dataType: 'JSON',
         success: function(response) {
+          alert(response.nombre);
             console.log(response.rut);
             console.log(response.nombre);
             console.log(response.apellidop);
@@ -480,22 +481,8 @@ function valida_rut_duplicado_aseg() {
     var dato = $('#rutaseg').val();
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
-    $.ajax({
-        type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
-        data: {
-            rut: rut_sin_dv
-        },
-        dataType: 'JSON',
-        success: function(response) {
-            console.log(response.rut);
-            console.log(response.nombre);
-            console.log(response.apellidop);
-            console.log(response.apellidom);
+    alert(rut_sin_dv);
 
-        }
-
-    });
 
 
 }
