@@ -53,17 +53,17 @@
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
                                         <label for="Nombre">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" required>
+                                        <input type="text" id="nombre_prop" class="form-control" name="nombre" required>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoP">Apellido Paterno</label>
-                                        <input type="text" class="form-control" name="apellidop" required>
+                                        <input type="text" id="apellidop_prop"  class="form-control" name="apellidop" required>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoM">Apellido Materno</label>
-                                        <input type="text" class="form-control" name="apellidom" required>
+                                        <input type="text" id="apellidom_prop"  class="form-control" name="apellidom" required>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                 </div>
@@ -89,17 +89,17 @@
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="Nombre">Nombre</label>
-                                            <input type="text" class="form-control" name="nombreaseg" required>
+                                            <input type="text" id="nombre_seg" class="form-control" name="nombreaseg" required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="ApellidoP">Apellido Paterno</label>
-                                            <input type="text" class="form-control" name="apellidopaseg" required>
+                                            <input type="text" id="apellidop_seg" class="form-control" name="apellidopaseg" required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="ApellidoM">Apellido Materno</label>
-                                            <input type="text" class="form-control" name="apellidomaseg" required>
+                                            <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg" required>
                                             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                         </div>
                                     </div>
@@ -462,9 +462,10 @@ function valida_rut_duplicado_prop() {
         dataType: 'JSON',
         success: function(response) {
             console.log(response.resultado);
-            console.log(response.nombre);
-            console.log(response.apellidop);
-            console.log(response.apellidom);
+
+            document.getElementById("nombre_prop").innerHTML = "response.nombre";
+            document.getElementById("apellidop_prop").innerHTML = "response.apellidop";
+            document.getElementById("apellidom_prop").innerHTML = "response.apellidom";
 
         }
 
@@ -487,9 +488,9 @@ function valida_rut_duplicado_aseg() {
         dataType: 'JSON',
         success: function(response) {
             console.log(response.resultado);
-            console.log(response.nombre);
-            console.log(response.apellidop);
-            console.log(response.apellidom);
+            document.getElementById("nombre_seg").innerHTML = "response.nombre";
+            document.getElementById("apellidop_seg").innerHTML = "response.apellidop";
+            document.getElementById("apellidom_seg").innerHTML = "response.apellidom";
 
         }
 
