@@ -48,8 +48,7 @@
                                 <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
                                     <label for="prop">&nbsp;</label>
                                     <br>
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                        style="background-color:#536656;color:#A5CCAB;position:inherit">Buscar</button>
+                                    
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
@@ -85,8 +84,7 @@
                                     <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
                                         <label for="prop">&nbsp;</label>
                                         <br>
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                            style="background-color:#536656;color:#A5CCAB;position:inherit">Buscar</button>
+                                        
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
@@ -463,7 +461,6 @@ function valida_rut_duplicado_prop() {
         },
         dataType: 'JSON',
         success: function(response) {
-            alert(response.nombre);
             console.log(response.resultado);
             console.log(response.nombre);
             console.log(response.apellidop);
@@ -489,7 +486,6 @@ function valida_rut_duplicado_aseg() {
         },
         dataType: 'JSON',
         success: function(response) {
-            alert(response.nombre);
             console.log(response.resultado);
             console.log(response.nombre);
             console.log(response.apellidop);
