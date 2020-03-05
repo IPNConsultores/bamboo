@@ -14,30 +14,6 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
-//inicio feabarcas v1.96
-/*
-if($_SESSION["auxiliar"]==false){
-    $_SESSION["auxiliar"]='';
-    mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
-    While($row=mysqli_fetch_object($resultado))
-        {
-        //Mostramos los titulos de los articulos o lo que deseemos...
-            $rut=$row->rut;
-            $id=$row->id;
-            $nombre=$row->nombre;
-            $telefono=$row->telefono;
-            $correo=$row->correo;
-            $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="button" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="button" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
-               
-        }
-    mysqli_close($link);
-}
-*/
-
-//fin feabarcas v1.96
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if username is empty
@@ -167,7 +143,7 @@ else
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="table-responsive">
-            
+
                 <table class="table table-hover" id="listado">
                     <tr>
                     <thead>
@@ -208,3 +184,12 @@ else
 </body>
 
 </html>
+<script>
+//<a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a>
+//<a> </a>
+//<a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a>
+function modifica(id) {
+    var div = document.getElementById(id);
+    
+}
+</script>
