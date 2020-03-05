@@ -115,7 +115,7 @@ else
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-<script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
 
@@ -150,17 +150,17 @@ else
 
                 <table class="table table-hover" id="listado">
                     <tr>
-                    <thead>
-                        <th>#</th>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Correo Electrónico</th>
-                        <th>Acción</th>
-                    </thead>
+                        <thead>
+                            <th>#</th>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Correo Electrónico</th>
+                            <th>Acción</th>
+                        </thead>
                     </tr>
                     <tbody>
-                    <?php echo $lista; ?>
+                        <?php echo $lista; ?>
                     </tbody>
                 </table>
             </div>
@@ -173,9 +173,9 @@ else
             "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
         );
         if (r == true) {
-//eliminar
+            //eliminar
         } else {
-//no hacer nada
+            //no hacer nada
         }
     }
     </script>
@@ -194,19 +194,23 @@ else
 //<a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a>
 function botones(id, accion) {
     console.log("ID:" + id + " => acción:" + accion);
-switch(accion){
-    case "elimina":{
-        console.log("Cliente eliminado con ID:"+id);
+    switch (accion) {
+        case "elimina": {
+            console.log("Cliente eliminado con ID:" + id);
+            break;
+        }
+        case "modifica": {
+            console.log("Modifica cliente ID:" + id);
+            break;
+        }
+        case "tarea": {
+            console.log("Asignar tarea a ID:" + id);
+            break;
+        }
+        case "info": {
+            console.log("Busqueda de ID:" + id);
+            break;
+        }
     }
-    case "modifica":{
-        console.log("Modifica cliente ID:"+id);        
-    }
-    case "tarea":{
-        console.log("Asignar tarea a ID:"+id);        
-    }
-    case "info":{
-        console.log("Busqueda de ID:"+id);       
-    }
-}
 }
 </script>
