@@ -204,7 +204,7 @@ function botones(id, accion) {
             },
         });
         //notificación cliente eliminado
-        location.reload();
+        location.reload(true);
             break;
         }
         case "modifica": {
