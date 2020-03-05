@@ -91,8 +91,12 @@ else
             $telefono=$row->telefono;
             $correo=$row->correo;
             $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td><tr>'. "<br>";
-               
+            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" class="btn btn-primary" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente" class="btn btn-primary" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente" class="btn btn-primary" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario" class="btn btn-primary" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list">></i></button>
+            </td></tr>'."<br>";
+            //$lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td></tr>'. "<br>";
+ 
+                //<button title="Busca toda la información asociada a este cliente" class="btn btn-primary" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente" class="btn btn-primary" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente" class="btn btn-primary" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario" class="btn btn-primary" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list">></i></button>
+       
         }
     mysqli_close($link);
 }
@@ -188,8 +192,21 @@ else
 //<a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a>
 //<a> </a>
 //<a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a>
-function modifica(id) {
-    var div = document.getElementById(id);
-    
+function botones(id, accion) {
+    log.console("ID:"+id+" acción:"+accion);
+switch(accion){
+    case "elimina":{
+log.console("Cliente eliminado con ID:"+id);
+    }
+    case "modifica":{
+        log.console("Modifica cliente ID:"+id);        
+    }
+    case "tarea":{
+        log.console("Asignar tarea a ID:"+id);        
+    }
+    case "info":{
+        log.console("Busqueda de ID:"+id);       
+    }
+}
 }
 </script>
