@@ -204,7 +204,7 @@ function botones(id, accion) {
             },
         });
         //notificación cliente eliminado
-        location.reload(true);
+        window.location.replace("http://gestionipn.cl/bamboo/listado_clientes.php")
             break;
         }
         case "modifica": {
