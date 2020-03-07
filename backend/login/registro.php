@@ -1,3 +1,5 @@
+<script>
+
 function alerta(mensaje, tipo) {
     $.notify({
         // options
@@ -5,9 +7,6 @@ function alerta(mensaje, tipo) {
     }, {
         // settings
         type: tipo
-        placement: {
-                    from: "bottom"
-                }
     });
 }
 </script>
@@ -183,4 +182,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
-<script>

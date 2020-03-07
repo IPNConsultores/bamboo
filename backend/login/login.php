@@ -6,9 +6,6 @@ function alerta(mensaje, tipo) {
     }, {
         // settings
         type: tipo
-        placement: {
-                    from: "bottom"
-                }
     });
 }
 </script>
