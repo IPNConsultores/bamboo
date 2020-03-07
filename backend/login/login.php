@@ -68,14 +68,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "La contraseña ingresada no es válida.";
+                            echo '<script type="text/javascript">alerta("La contraseña ingresada no es válida." ,"warning");</script>'; 
+
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "El usuario y contraseña no coinciden.";
+	echo '<script type="text/javascript">alerta("El usuario y contraseña no coinciden." ,"warning");</script>'; 
                 }
             } else{
-                echo "Oops! Algo salió mal. Favor intentar más tarde.";
+
+	echo '<script type="text/javascript">alerta("Oops! Algo salió mal. Favor intentar más tarde." ,"warning");</script>'; 
             }
         }
         
@@ -101,6 +104,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
     <style type="text/css">
     body {
         font-family: 'Varela Round', sans-serif;
@@ -282,3 +287,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
+<script>
+function alerta(mensaje, tipo) {
+    $.notify({
+        // options
+        message: mensaje
+    }, {
+        // settings
+        type: tipo
+    });
+}
+</script>

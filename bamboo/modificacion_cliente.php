@@ -110,7 +110,7 @@ While($row=mysqli_fetch_object($resultado))
                 </div>
             </div>
 
-            <button class="btn" type="submit" style="background-color: #536656; color: white">Modificar</button>
+            <button class="btn" type="submit" onclick="alerta()" style="background-color: #536656; color: white">Modificar</button>
         </form>
     </div>
 
@@ -120,6 +120,19 @@ While($row=mysqli_fetch_object($resultado))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
+        <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
 </body>
 
 </html>
+<script>
+function alerta(){
+    $.notify({
+                    // options
+                    message: 'Cliente modificado con éxito'
+                }, {
+                    // settings
+                    type: 'success'
+                });
+}
+</script>

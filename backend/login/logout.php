@@ -10,5 +10,6 @@ session_destroy();
  
 // Redirect to login page
 header("location: /backend/login/login.php");
+
 exit;
 ?>

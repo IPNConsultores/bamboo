@@ -28,12 +28,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "El usuario ya esta utilizado.";
+                    $username_err = "";
+                    echo '<script type="text/javascript">alerta("El usuario ya esta utilizado." ,"warning");</script>'; 
+ 
                 } else{
                     $username = trim($_POST["username"]);
                 }
             } else{
-                echo "Oops! Algo salió mal. Favor intentar más tarde.";
+                echo '<script type="text/javascript">alerta("Oops! Algo salió mal. Favor intentar más tarde." ,"warning");</script>'; 
+ 
             }
         }
          
@@ -43,20 +46,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Favor ingresar contraseña.";     
+         echo '<script type="text/javascript">alerta("Favor ingresar contraseña." ,"warning");</script>'; 
+ 
     } elseif(strlen(trim($_POST["password"])) < 8){
-        $password_err = "La contraseña debe tener al menos 8 caracteres.";
+  echo '<script type="text/javascript">alerta("La contraseña debe tener al menos 8 caracteres." ,"warning");</script>'; 
+   
     } else{
         $password = trim($_POST["password"]);
     }
     
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Favor confirmar contraseña.";     
+        echo '<script type="text/javascript">alerta("Favor confirmar contraseña." ,"warning");</script>'; 
+   
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Ambas contraseñas no coinciden.";
+               echo '<script type="text/javascript">alerta("Ambas contraseñas no coinciden." ,"warning");</script>'; 
+ 
         }
     }
     
@@ -77,9 +84,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
+                echo '<script type="text/javascript">alerta("Usuario creado con éxito" ,"success");</script>'; 
+ 
                 header("location: /bamboo/index.php");
             } else{
-                echo "Algo salió mal. Favor intentar más tarde.";
+                echo '<script type="text/javascript">alerta("Oops! Algo salió mal. Favor intentar más tarde." ,"warning");</script>'; 
+ 
             }
         }
          
@@ -101,6 +111,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
     <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
     <title>Registro de nuevo usuario</title>
 </head>
@@ -158,3 +170,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
+<script>
+function alerta(mensaje, tipo) {
+    $.notify({
+        // options
+        message: mensaje
+    }, {
+        // settings
+        type: tipo
+    });
+}
+</script>

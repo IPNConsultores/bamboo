@@ -166,24 +166,13 @@ else
             </div>
         </form>
     </div>
-    <script>
-    function confirma_eliminar() {
-
-        var r = confirm(
-            "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
-        );
-        if (r == true) {
-            //eliminar
-        } else {
-            //no hacer nada
-        }
-    }
-    </script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
     <script src="/assets/js/jquery.redirect.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
 </body>
 
 </html>
@@ -196,29 +185,63 @@ function botones(id, accion) {
     switch (accion) {
         case "elimina": {
             console.log("Cliente eliminado con ID:" + id);
-            $.ajax({
-            type: "POST",
-            url: "/bamboo/backend/clientes/elimina_cliente.php",
-            data: {
-                cliente: id
-            },
-        });
-        //notificación cliente eliminado
-        window.location.replace("http://gestionipn.cl/bamboo/listado_clientes.php")
-            break;
+            var r = confirm(
+                "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
+            );
+            if (r == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/bamboo/backend/clientes/elimina_cliente.php",
+                    data: {
+                        cliente: id
+                    },
+                });
+                $.notify({
+                    // options
+                    message: 'Cliente eliminado con éxito'
+                }, {
+                    // settings
+                    type: 'success'
+                });
+                break;
+
+            } else {
+                $.notify({
+                    // options
+                    message: 'Proceso de eliminación de cliente cancelado'
+                }, {
+                    // settings
+                    type: 'info'
+                });
+                break;
+            }
         }
         case "modifica": {
             $.redirect('/bamboo/modificacion_cliente.php', {
-                            'cliente': id
-                        }, 'post');
+                'cliente': id
+            }, 'post');
             break;
         }
         case "tarea": {
             console.log("Asignar tarea a ID:" + id);
+            $.notify({
+                // options
+                message: 'Tarea Asignada'
+            }, {
+                // settings
+                type: 'success'
+            });
             break;
         }
         case "info": {
             console.log("Busqueda de ID:" + id);
+            $.notify({
+                // options
+                message: 'Recopilando información del cliente'
+            }, {
+                // settings
+                type: 'danger'
+            });
             break;
         }
     }

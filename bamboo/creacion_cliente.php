@@ -93,7 +93,7 @@ if(!isset($_SESSION))
                 </div>
             </div>
 
-            <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+            <button class="btn" type="submit" onclick="alerta()" style="background-color: #536656; color: white">Registrar</button>
         </form>
     </div>
 
@@ -124,6 +124,8 @@ if(!isset($_SESSION))
     </script>
     <script src="/assets/js/jquery.redirect.js"></script>
     <script src="/assets/js/validarRUT.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
 
 </body>
 
@@ -151,9 +153,17 @@ function valida_rut_duplicado() {
                         $.redirect('/bamboo/listado_clientes.php', {
                             'busqueda': rut_sin_dv
                         }, 'post');
+                        
                     } else {
                         location.href =
                             "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                            $.notify({
+                    // options
+                    message: 'Se han limpiado los valores del formulario'
+                }, {
+                    // settings
+                    type: 'info'
+                });
                     }
                 }
 
@@ -162,5 +172,14 @@ function valida_rut_duplicado() {
         });
     }
 
+}
+function alerta(){
+    $.notify({
+                    // options
+                    message: 'Cliente creado con éxito'
+                }, {
+                    // settings
+                    type: 'success'
+                });
 }
 </script>
