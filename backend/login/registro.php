@@ -1,3 +1,16 @@
+function alerta(mensaje, tipo) {
+    $.notify({
+        // options
+        message: mensaje
+    }, {
+        // settings
+        type: tipo
+        placement: {
+                    from: "bottom"
+                }
+    });
+}
+</script>
 <?php
 // Include config file
 require_once "/home/gestio10/public_html/backend/config.php";
@@ -171,13 +184,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 </html>
 <script>
-function alerta(mensaje, tipo) {
-    $.notify({
-        // options
-        message: mensaje
-    }, {
-        // settings
-        type: tipo
-    });
-}
-</script>

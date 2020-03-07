@@ -202,6 +202,9 @@ function botones(id, accion) {
                 }, {
                     // settings
                     type: 'success'
+                    placement: {
+                    from: "bottom"
+                }
                 });
                 break;
 
@@ -212,6 +215,9 @@ function botones(id, accion) {
                 }, {
                     // settings
                     type: 'info'
+                    placement: {
+                    from: "bottom"
+                }
                 });
                 break;
             }
@@ -230,6 +236,9 @@ function botones(id, accion) {
             }, {
                 // settings
                 type: 'success'
+                placement: {
+                    from: "bottom"
+                }
             });
             break;
         }
@@ -240,7 +249,11 @@ function botones(id, accion) {
                 message: 'Recopilando información del cliente'
             }, {
                 // settings
-                type: 'danger'
+                type: 'danger',
+                placement: {
+                    from: "bottom"
+                }
+
             });
             break;
         }

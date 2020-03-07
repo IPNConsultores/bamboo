@@ -1,3 +1,17 @@
+<script>
+function alerta(mensaje, tipo) {
+    $.notify({
+        // options
+        message: mensaje
+    }, {
+        // settings
+        type: tipo
+        placement: {
+                    from: "bottom"
+                }
+    });
+}
+</script>
 <?php
 // Initialize the session
 session_start();
@@ -287,14 +301,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
-<script>
-function alerta(mensaje, tipo) {
-    $.notify({
-        // options
-        message: mensaje
-    }, {
-        // settings
-        type: tipo
-    });
-}
-</script>
