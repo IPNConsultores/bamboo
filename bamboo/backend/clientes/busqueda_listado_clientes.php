@@ -6,7 +6,7 @@ $resultado=$resultado1 =$busqueda= '';
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
     $sql = "SELECT CONCAT(rut_sin_dv, \'-\',dv) as rut, apellido_materno, apellido_paterno, correo, direccion_laboral, direccion_personal, id, nombre_cliente, telefono
-    FROM clientes WHERE rut_sin_dv = ?";
+    FROM clientes";
     if ($stmt = mysqli_prepare($link, $sql))
     {
         // Bind variables to the prepared statement as parameters

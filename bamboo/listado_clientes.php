@@ -203,6 +203,7 @@ function botones(id, accion) {
                     // settings
                     type: 'success'
                 });
+                //location
                 break;
 
             } else {
@@ -240,7 +241,7 @@ function botones(id, accion) {
                 message: 'Recopilando información del cliente'
             }, {
                 // settings
-                type: 'danger'
+                type: 'info'
 
             });
             break;
