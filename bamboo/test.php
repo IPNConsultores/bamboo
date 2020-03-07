@@ -26,7 +26,7 @@
         <p> Clientes / Modificación <br>
         </p>
         <br>
-        <table id="listado_clientes" class="table table-hover" id="listado">
+        <table id="listado_clientes" class="display" width="100%">
                     <tr>
                         <thead>
                             <th>Rut</th>
