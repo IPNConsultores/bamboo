@@ -20,7 +20,7 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
       "direccionp" =>& $row->direccion_personal,
       "telefono" =>& $row->telefono,
       "rut" =>& $row->rut
-    ));
+    )).",";
   }
   $codigo.=']';
   echo $codigo;
