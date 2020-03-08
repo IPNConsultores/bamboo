@@ -22,8 +22,8 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
         "direccionl" =>& $row->direccion_laboral,
         "direccionp" =>& $row->direccion_personal,
         "telefono" =>& $row->telefono,
-        "rut" =>& $row->rut
-    }else{
+        "rut" =>& $row->rut));
+    } else {
     $codigo.= ",".json_encode(array(
       "id" =>& $row->id,
       "nombre"=>& $row->nombre_cliente,
