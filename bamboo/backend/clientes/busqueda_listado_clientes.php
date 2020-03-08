@@ -7,9 +7,10 @@ require_once "/home/gestio10/public_html/backend/config.php";
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
 $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_paterno, correo, direccion_laboral, direccion_personal, id, nombre_cliente, telefono FROM clientes";
     $resultado=mysqli_query($link, $sql);
+    $codigo='[';
   While($row=mysqli_fetch_object($resultado))
   {
-    echo json_encode(array(
+    $codigo.= json_encode(array(
       "id" =>& $row->id,
       "nombre"=>& $row->nombre_cliente,
       "apellidop"=>& $row->apellido_paterno,
@@ -21,4 +22,6 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
       "rut" =>& $row->rut
     ));
   }
+  $codigo.=']';
+  echo $codigo;
 ?>

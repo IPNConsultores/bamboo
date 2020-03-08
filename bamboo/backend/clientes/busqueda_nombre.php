@@ -2,11 +2,11 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $resultado=$resultado1 =$busqueda= '';
     $busqueda=$_POST["rut"];
-        mysqli_set_charset($link, 'utf8');
+
+    mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-    $sql = "SELECT CONCAT(rut_sin_dv, \'-\',dv) as rut, apellido_materno, apellido_paterno, correo, direccion_laboral, direccion_personal, id, nombre_cliente, telefono
-    FROM clientes WHERE rut_sin_dv = ?";
+    $sql = "SELECT id, nombre_cliente, apellido_paterno, apellido_materno FROM clientes WHERE rut_sin_dv = ?";
     if ($stmt = mysqli_prepare($link, $sql))
     {
         // Bind variables to the prepared statement as parameters
@@ -23,19 +23,14 @@ $resultado=$resultado1 =$busqueda= '';
             if (mysqli_stmt_num_rows($stmt) == 1)
             {
 
-    mysqli_stmt_bind_result($stmt, $rut, $apellido_materno, $apellido_paterno, $correo, $direccion_laboral, $direccion_personal,  $id, $nombre_cliente, $telefono);
+    mysqli_stmt_bind_result($stmt, $id, $nombre, $apellidop, $apellidom);
 while (mysqli_stmt_fetch($stmt)) {
     echo json_encode(array(
-            "resultado" => "antiguo",
+ "resultado" => "antiguo",
             "id" =>& $id,
-            "nombre"=>& $nombre_cliente,
-            "apellidop"=>& $apellido_paterno,
-            "apellidom"=>& $apellido_materno,
-            "correo_electronico" =>& $correo,
-            "direccionl" =>& $direccion_laboral,
-            "direccionp" =>& $direccion_personal,
-            "telefono" =>& $telefono,
-            "rut" =>& $rut
+            "nombre"=>& $nombre,
+            "apellidop"=>& $apellidop,
+            "apellidom"=>& $apellidom
         ));
 }
             }
