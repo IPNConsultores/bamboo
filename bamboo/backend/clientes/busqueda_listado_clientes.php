@@ -11,8 +11,8 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
     $codigo='[';
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
-  {
-    if ($conta==0){
+  {$conta=$conta+1;
+    if ($conta==1){
       $codigo.= json_encode(array(
         "id" =>& $row->id,
         "nombre"=>& $row->nombre_cliente,
@@ -24,7 +24,7 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
         "telefono" =>& $row->telefono,
         "rut" =>& $row->rut));
     } else {
-    $codigo.= ",".json_encode(array(
+    $codigo.= ', '.json_encode(array(
       "id" =>& $row->id,
       "nombre"=>& $row->nombre_cliente,
       "apellidop"=>& $row->apellido_paterno,
