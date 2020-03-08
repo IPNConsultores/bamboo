@@ -29,11 +29,16 @@
         <table id="listado_clientes" class="display" width="100%">
                     <tr>
                         <thead>
+                            <th></th>
                             <th>Rut</th>
                             <th>Nombre</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
+                            <th>Apellido paterno</th>
+                            <th>Apellido materno</th>
                             <th>Teléfono</th>
+                            <th>e-mail</th>
+                            <th>Dirección Privada</th>
+                            <th>Dirección Laboral</th>
+                            <th>id</th>
                         </thead>
                     </tr>
                 </table>
@@ -50,26 +55,152 @@
 
 </html>
 <script>
-    $.ajax({
-        url: "/bamboo/backend/clientes/busqueda_listado_clientes.php",
-        dataType: 'JSON',
-        success: function(response) {
-            if (response.resultado == 'antiguo') {
-                console.log(response)
+
+    $(document).ready(function() {
+   var table = $('#listado_clientes').DataTable( {
+    "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+        "columns": [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            },
+            { "data": "rut" },
+            { "data": "nombre" },
+            { "data": "apellidop" },
+            { "data": "apellidom" },
+            { "data": "telefono" },
+            { "data": "correo_electronico" },
+            { "data": "direccionp" },
+            { "data": "direccionl" },
+            { "data": "id" }
+            
+        ],
+        "columnDefs": [
+            {
+                "targets": [ 6,7,8,9 ],
+                "visible": false,
+            },
+            {
+                "targets": [ 5,6,7,8,9 ],
+                "searchable": false
             }
+        ],
+        "order": [[ 2, "asc" ], [ 3, "asc" ]]
+    } );
+       $('#listado_clientes tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
         }
-    });
-$(document).ready(function() {
-    $('#listado_clientes').DataTable( {
-        columns: [
-            { title: "rut" },
-            { title: "nombre" },
-            { title: "apellidop" },
-            { title: "apellidom" },
-            { title: "telefono" },
-        ]
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
     } );
 } );
 
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Nombre completo:</td>'+
+            '<td>'+d.nombre+' '+d.apellidop+' '+d.apellidom+'</td>'+
+            '</tr>'+
+                    '<tr>'+
+            '<td>Correo electrónico:</td>'+
+            '<td>'+d.correo_electronico+'</td>'+
+            '</tr>'+
+                                '<tr>'+
+            '<td>Dirección particular:</td>'+
+            '<td>'+d.direccionp+'</td>'+
+            '</tr>'+
+                                '<tr>'+
+            '<td>Dirección laboral:</td>'+
+            '<td>'+d.direccionl+'</td>'+
+            '</tr>'+
+                        '</tr>'+
+
+            '<tr>'+
+            '<td>Acciones</td>'+
+            '<td><button title="Busca toda la información asociada a este cliente" type="button" id="+d.id+" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="+d.id+" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="+d.id+" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="+d.id+" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>'+
+            
+        '</tr>'+
+    '</table>';
+}
+function botones(id, accion) {
+    console.log("ID:" + id + " => acción:" + accion);
+    switch (accion) {
+        case "elimina": {
+            console.log("Cliente eliminado con ID:" + id);
+            var r = confirm(
+                "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
+            );
+            if (r == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/bamboo/backend/clientes/elimina_cliente.php",
+                    data: {
+                        cliente: id
+                    },
+                });
+                $.notify({
+                    // options
+                    message: 'Cliente eliminado con éxito'
+                }, {
+                    // settings
+                    type: 'success'
+                });
+                //location
+                break;
+
+            } else {
+                $.notify({
+                    // options
+                    message: 'Proceso de eliminación de cliente cancelado'
+                }, {
+                    // settings
+                    type: 'info'
+                });
+                break;
+            }
+        }
+        case "modifica": {
+            $.redirect('/bamboo/modificacion_cliente.php', {
+                'cliente': id
+            }, 'post');
+            break;
+        }
+        case "tarea": {
+            console.log("Asignar tarea a ID:" + id);
+            $.notify({
+                // options
+                message: 'Tarea Asignada'
+            }, {
+                // settings
+                type: 'success'
+            });
+            break;
+        }
+        case "info": {
+            console.log("Busqueda de ID:" + id);
+            $.notify({
+                // options
+                message: 'Recopilando información del cliente'
+            }, {
+                // settings
+                type: 'info'
+
+            });
+            break;
+        }
+    }
+}
 
 </script>
