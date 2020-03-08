@@ -1,5 +1,6 @@
 <?php
-$resultado ='';
+$resultado =$codigo=$conta='';
+
 require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
@@ -8,9 +9,22 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_paterno, correo, direccion_laboral, direccion_personal, id, nombre_cliente, telefono FROM clientes";
     $resultado=mysqli_query($link, $sql);
     $codigo='[';
+    $conta=0;
   While($row=mysqli_fetch_object($resultado))
   {
-    $codigo.= json_encode(array(
+    if ($conta==0){
+      $codigo.= json_encode(array(
+        "id" =>& $row->id,
+        "nombre"=>& $row->nombre_cliente,
+        "apellidop"=>& $row->apellido_paterno,
+        "apellidom"=>& $row->apellido_materno,
+        "correo_electronico" =>& $row->correo,
+        "direccionl" =>& $row->direccion_laboral,
+        "direccionp" =>& $row->direccion_personal,
+        "telefono" =>& $row->telefono,
+        "rut" =>& $row->rut
+    }else{
+    $codigo.= ",".json_encode(array(
       "id" =>& $row->id,
       "nombre"=>& $row->nombre_cliente,
       "apellidop"=>& $row->apellido_paterno,
@@ -20,7 +34,7 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
       "direccionp" =>& $row->direccion_personal,
       "telefono" =>& $row->telefono,
       "rut" =>& $row->rut
-    )).",";
+    ));}
   }
   $codigo.=']';
   echo $codigo;
