@@ -8,7 +8,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
 $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_paterno, correo, direccion_laboral, direccion_personal, id, nombre_cliente, telefono FROM clientes";
     $resultado=mysqli_query($link, $sql);
-    $codigo='[';
+    $codigo='{
+      "data": [';
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
   {$conta=$conta+1;
@@ -36,6 +37,6 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_materno, apellido_pat
       "rut" =>& $row->rut
     ));}
   }
-  $codigo.=']';
+  $codigo.=']}';
   echo $codigo;
 ?>
