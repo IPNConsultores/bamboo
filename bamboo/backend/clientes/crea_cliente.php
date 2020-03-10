@@ -28,8 +28,6 @@ function estandariza_info($data) {
 }
 ?>
 
-<?php echo $rut; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

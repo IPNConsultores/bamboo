@@ -15,91 +15,12 @@ $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])){
     // Check if username is empty
-    if(empty(trim($_POST["buscacliente"])) and empty(trim($_POST["busqueda"]))){
-        $busqueda_err = "Favor realiza una busqueda. Puedes buscar por rut, nombre o apellido";
-        mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
-        While($row=mysqli_fetch_object($resultado))
-            {
-            //Mostramos los titulos de los articulos o lo que deseemos...
-                $rut=$row->rut;
-                $id=$row->id;
-                $nombre=$row->nombre;
-                $telefono=$row->telefono;
-                $correo=$row->correo;
-                $num=$num+1;
-                $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
-            </td></tr>'."<br>";        
-            }
-        mysqli_close($link);
-    } else{
-    //inicio feabarcas
-    if (!empty(trim($_POST["buscacliente"]))){$busqueda=estandariza_info($_POST["buscacliente"]);}
-    if (!empty(trim($_POST["busqueda"]))){$busqueda=estandariza_info($_POST["busqueda"]);}
-   // if (!empty(trim($_POST["dato"]))){$busqueda=estandariza_info($_POST["dato"]);}
-    $numero=$trozos=0;
 
-    mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-
-    if ($busqueda<>''){
-    //CUENTA EL NUMERO DE PALABRAS
-        $trozos=explode(" ",$busqueda);
-        $numero=count($trozos);
-        if ($numero==1) {
-        //SI SOLO HAY UNA PALABRA DE BUSQUEDA SE ESTABLECE UNA INSTRUCION CON LIKE
-            $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes WHERE  nombre_cliente like \'%'.$busqueda.'%\' or apellido_paterno like \'%'.$busqueda.'%\' or rut_sin_dv like \'%'.$busqueda.'%\';');
-        } elseif ($numero>1) {
-        //SI HAY UNA FRASE SE UTILIZA EL ALGORTIMO DE BUSQUEDA AVANZADO DE MATCH AGAINST
-        //busqueda de frases con mas de una palabra y un algoritmo especializado
-            $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo , MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) AS Score FROM clientes WHERE MATCH(nombre_cliente, apellido_paterno ,apellido_materno , rut_sin_dv) AGAINST ( \''.$busqueda.'\' ) ORDER BY Score DESC LIMIT 50;');
-        }
-    }
-        While($row=mysqli_fetch_object($resultado))
-    {
-    //Mostramos los titulos de los articulos o lo que deseemos...
-        $rut=$row->rut;
-        $id=$row->id;
-        $nombre=$row->nombre;
-        $telefono=$row->telefono;
-        $correo=$row->correo;
-        $num=$num+1;
-        $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
-            </td></tr>'."<br>";   }
-
-    //fin feabarcas
-    }
-
-    // Close connection
-    mysqli_close($link);
-
+echo "<script type= text/javascript> $('#listado_clientes').dataTable().fnFilter('".estandariza_info($_POST["busqueda"])."');</script>";
 }
-else
-{
-    mysqli_set_charset( $link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes ORDER BY apellido_paterno ASC, apellido_materno ASC;');
-    While($row=mysqli_fetch_object($resultado))
-        {
-        //Mostramos los titulos de los articulos o lo que deseemos...
-            $rut=$row->rut;
-            $id=$row->id;
-            $nombre=$row->nombre;
-            $telefono=$row->telefono;
-            $correo=$row->correo;
-            $num=$num+1;
-            $lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
-            </td></tr>'."<br>";
-            //$lista=$lista.'<tr><td>'.$num.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a><a> </a><a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a></td></tr>'. "<br>";
- 
-                //<button title="Busca toda la información asociada a este cliente"  type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list">></i></button>
-       
-        }
-    mysqli_close($link);
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -112,6 +33,7 @@ else
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/datatables.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
@@ -126,45 +48,23 @@ else
     <div class="container">
         <p> Clientes / Modificación <br>
         </p>
-        <form class="needs-validation" novalidate method="POST"
-            action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <h5 class="form-row">&nbsp;Buscador de Clientes</h5>
-            <br>
-            <label for="Buscador">Nombre o Rut sin dígito verificador</label>
-            <div class="form-row; needs-validation">
-                <div class="col-md-4; form-inline">
-                    <input class="form-control" type="text" name="buscacliente" id="buscacliente"
-                        value="<?php echo $data; ?>" required>
-                    <button class="btn my-sm-0" style="background-color: #536656; color: white; margin-left:5px;"
-                        type="submit" onclick="<?php $_SESSION["auxiliar"]="buscador_listado";?>">Buscar</button>
-                    <div class="invalid-feedback"> No puedes dejar este campo en blanco
-                    </div>
-                </div>
-            </div>
-        </form>
         <br>
-        <form class="needs-validation" novalidate>
-            <h5 class="form-row">&nbsp;Datos personales</h5>
-            <br>
-            <div class="table-responsive">
-
-                <table class="table table-hover" id="listado">
-                    <tr>
-                        <thead>
-                            <th>#</th>
-                            <th>Rut</th>
-                            <th>Nombre</th>
-                            <th>Teléfono</th>
-                            <th>Correo Electrónico</th>
-                            <th>Acción</th>
-                        </thead>
-                    </tr>
-                    <tbody>
-                        <?php echo $lista; ?>
-                    </tbody>
-                </table>
-            </div>
-        </form>
+        <table id="listado_clientes" class="display" width="100%">
+            <tr>
+                <thead>
+                    <th></th>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Apellido paterno</th>
+                    <th>Apellido materno</th>
+                    <th>Teléfono</th>
+                    <th>e-mail</th>
+                    <th>Dirección Privada</th>
+                    <th>Dirección Laboral</th>
+                    <th>id</th>
+                </thead>
+            </tr>
+        </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -173,18 +73,135 @@ else
     <script src="/assets/js/jquery.redirect.js"></script>
     <script src="/assets/js/bootstrap-notify.js"></script>
     <script src="/assets/js/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/datatables.min.js"></script>
 </body>
 
 </html>
 <script>
-//<a class="fas fa-edit" name="boton-modificar" id="'.$id.'" href="http://gestionipn.cl/bamboo/modificacion_cliente.php?cliente='.$id.'">modificar</a>
-//<a> </a>
-//<a class="fas fa-trash-alt" name="boton-elimina-cliente" id="'.$id.'" href="http://gestionipn.cl/bamboo/backend/clientes/elimina_cliente.php?cliente='.$id.'">eliminar</a>
+$(document).ready(function() {
+    var table = $('#listado_clientes').DataTable({
+        "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            },
+            {
+                "data": "rut"
+            },
+            {
+                "data": "nombre"
+            },
+            {
+                "data": "apellidop"
+            },
+            {
+                "data": "apellidom"
+            },
+            {
+                "data": "telefono"
+            },
+            {
+                "data": "correo_electronico"
+            },
+            {
+                "data": "direccionp"
+            },
+            {
+                "data": "direccionl"
+            },
+            {
+                "data": "id"
+            }
+
+        ],
+        //          "search": {
+        //          "search": "abarca"
+        //          },
+        "columnDefs": [{
+                "targets": [6, 7, 8, 9],
+                "visible": false,
+            },
+            {
+                "targets": [5, 6, 7, 8, 9],
+                "searchable": false
+            }
+        ],
+        "order": [
+            [3, "asc"],
+            [4, "asc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        }
+    });
+    $('#listado_clientes tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+});
+
+function format(d) {
+    // `d` is the original data object for the row
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Nombre completo:</td>' +
+        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Correo electrónico:</td>' +
+        '<td>' + d.correo_electronico + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Dirección particular:</td>' +
+        '<td>' + d.direccionp + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Dirección laboral:</td>' +
+        '<td>' + d.direccionl + '</td>' +
+        '</tr>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td>Acciones</td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id="+d.id+" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="+d.id+" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="+d.id+" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="+d.id+" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+
+        '</tr>' +
+        '</table>';
+}
+
 function botones(id, accion) {
-    console.log("ID:" + id + " => acción:" + accion);
+    console.log("ID:" + d.id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log("Cliente eliminado con ID:" + id);
+            console.log("Cliente eliminado con ID:" + d.id);
             var r = confirm(
                 "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
             );
@@ -193,7 +210,7 @@ function botones(id, accion) {
                     type: "POST",
                     url: "/bamboo/backend/clientes/elimina_cliente.php",
                     data: {
-                        cliente: id
+                        cliente: d.id
                     },
                 });
                 $.notify({
@@ -203,6 +220,7 @@ function botones(id, accion) {
                     // settings
                     type: 'success'
                 });
+                table.ajax.reload();
                 //location
                 break;
 
@@ -219,7 +237,7 @@ function botones(id, accion) {
         }
         case "modifica": {
             $.redirect('/bamboo/modificacion_cliente.php', {
-                'cliente': id
+                'cliente': d.id
             }, 'post');
             break;
         }
