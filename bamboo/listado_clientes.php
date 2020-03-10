@@ -198,10 +198,10 @@ function format(d) {
 }
 
 function botones(id, accion) {
-    console.log("ID:" + id + " => acción:" + accion);
+    console.log("ID:" + d.id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log("Cliente eliminado con ID:" + id);
+            console.log("Cliente eliminado con ID:" + d.id);
             var r = confirm(
                 "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
             );
@@ -210,7 +210,7 @@ function botones(id, accion) {
                     type: "POST",
                     url: "/bamboo/backend/clientes/elimina_cliente.php",
                     data: {
-                        cliente: id
+                        cliente: d.id
                     },
                 });
                 $.notify({
@@ -237,7 +237,7 @@ function botones(id, accion) {
         }
         case "modifica": {
             $.redirect('/bamboo/modificacion_cliente.php', {
-                'cliente': id
+                'cliente': d.id
             }, 'post');
             break;
         }
