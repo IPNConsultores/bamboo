@@ -17,8 +17,7 @@ $num=0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])){
     // Check if username is empty
-    alert(estandariza_info($_POST["busqueda"]));
-    
+
 echo "<script type= text/javascript> $('#listado_clientes').dataTable().fnFilter(".estandariza_info($_POST["busqueda"]).");</script>";
 }
 
