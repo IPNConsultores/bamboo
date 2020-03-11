@@ -15,10 +15,10 @@ $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
 
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])){
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
     // Check if username is empty
-
-echo "<script type= text/javascript> $('#listado_clientes').dataTable().fnFilter('".estandariza_info($_POST["busqueda"])."');</script>";
+//$('#listado_clientes').dataTable().fnFilter('".estandariza_info($_POST["busqueda"])."')
+echo "<script type= text/javascript> alert('".estandariza_info($_POST["busqueda"])."'); </script>";
 }
 
 ?>
@@ -198,10 +198,10 @@ function format(d) {
 }
 
 function botones(id, accion) {
-    console.log("ID:" + d.id + " => acción:" + accion);
+    console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log("Cliente eliminado con ID:" + d.id);
+            console.log("Cliente eliminado con ID:" + id);
             var r = confirm(
                 "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
             );
@@ -210,7 +210,7 @@ function botones(id, accion) {
                     type: "POST",
                     url: "/bamboo/backend/clientes/elimina_cliente.php",
                     data: {
-                        cliente: d.id
+                        cliente: id
                     },
                 });
                 $.notify({
@@ -237,7 +237,7 @@ function botones(id, accion) {
         }
         case "modifica": {
             $.redirect('/bamboo/modificacion_cliente.php', {
-                'cliente': d.id
+                'cliente': id
             }, 'post');
             break;
         }
