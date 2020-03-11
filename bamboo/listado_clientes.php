@@ -82,8 +82,9 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
 </html>
 <script>
+var table = ''
 $(document).ready(function() {
-    var table = $('#listado_clientes').DataTable({
+     table = $('#listado_clientes').DataTable({
         "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
         "columns": [{
                 "className": 'details-control',
