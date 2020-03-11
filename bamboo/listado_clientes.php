@@ -3,7 +3,7 @@
     { 
         session_start(); 
     } 
-
+$buscar='';
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -18,7 +18,7 @@ $num=0;
 if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
     // Check if username is empty
 //$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
-echo "<script type=\"text/javascript\"> $('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\"); </script>";
+$buscar= estandariza_info($_POST["busqueda"]);
 }
 
 ?>
@@ -65,6 +65,10 @@ echo "<script type=\"text/javascript\"> $('#listado_clientes').dataTable().fnFil
                 </thead>
             </tr>
         </table>
+    </div>
+    <div id="auxiliar" style="display: none;" >
+        <input id="var1" value="<?php 
+        echo htmlspecialchars($buscar);?>">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -166,6 +170,7 @@ $(document).ready(function() {
             tr.addClass('shown');
         }
     });
+    $('#listado_clientes').dataTable().fnFilter(document.getElementById("var1").value);
 });
 
 function format(d) {
@@ -191,7 +196,7 @@ function format(d) {
 
         '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id="+d.id+" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="+d.id+" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="+d.id+" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="+d.id+" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id='+d.id+' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id='+d.id+' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id='+d.id+' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id='+d.id+' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
