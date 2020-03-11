@@ -33,7 +33,7 @@ function estandariza_info($data) {
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
-<script src="/bamboo/js/jquery.redirect.js">
+<script src="/assets/js/jquery.redirect.js">
 </script>
 </head>
 <body>
