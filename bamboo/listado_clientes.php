@@ -198,8 +198,8 @@ console.log(fecha+' <--'+dd)
                     filename: 'Listado clientes al: '+fecha,
                     exportOptions: {
                     columns: [1, 2,3,4,5,6,7,8]}
-                }
                 },
+                
        {
                     
                     orientation: 'landscape',
