@@ -35,9 +35,10 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/datatables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css"/>
- 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
@@ -70,9 +71,9 @@ $buscar= estandariza_info($_POST["busqueda"]);
             </tr>
         </table>
     </div>
-        <div id="botones"></div>
-    
-    <div id="auxiliar" style="display: none;" >
+    <div id="botones"></div>
+
+    <div id="auxiliar" style="display: none;">
         <input id="var1" value="<?php 
         echo htmlspecialchars($buscar);?>">
     </div>
@@ -85,20 +86,20 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <script src="/assets/js/bootstrap-notify.min.js"></script>
     <script src="/assets/js/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </body>
 
 </html>
 <script>
 var table = ''
 $(document).ready(function() {
-     table = $('#listado_clientes').DataTable({
-         	
+    table = $('#listado_clientes').DataTable({
+
         "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
         "columns": [{
                 "className": 'details-control',
@@ -187,31 +188,29 @@ $(document).ready(function() {
     });
     $('#listado_clientes').dataTable().fnFilter(document.getElementById("var1").value);
     var dd = new Date();
-var fecha = '' + dd.getFullYear() +'-'+ (("0" + (dd.getMonth() + 1)).slice(-2)) +'-'+ (("0" + (dd.getDate() + 1)).slice(-2))  +' ('+ dd.getHours()+ dd.getMinutes()+ dd.getSeconds()+')';
-console.log(fecha+' <--'+dd)
+    var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
+        .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
+
     var buttons = new $.fn.dataTable.Buttons(table, {
-     buttons: [
-              {
-                    sheetName: 'Clientes',
-                    orientation: 'landscape',
-                    extend: 'excelHtml5',
-                    filename: 'Listado clientes al: '+fecha,
-                    exportOptions: {
-                    columns: [1, 2,3,4,5,6,7,8]}
-                },
-                
-       {
-                    
-                    orientation: 'landscape',
-                    extend: 'pdfHtml5',
-                    filename: 'Listado clientes al: '+fecha,
-                    exportOptions: {
-                    columns: [1, 2,3,4,5,6,7,8]}
+        buttons: [{
+                sheetName: 'Clientes',
+                orientation: 'landscape',
+                extend: 'excelHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
                 }
+            },
+            {
+                orientation: 'landscape',
+                extend: 'pdfHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
                 }
-       
-    ]
-}).container().appendTo($('#botones'));
+            }
+        ]
+    }).container().appendTo($('#botones'));
 });
 
 function format(d) {
@@ -237,7 +236,14 @@ function format(d) {
 
         '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id='+d.id+' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id='+d.id+' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id='+d.id+' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id='+d.id+' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        d.id +
+        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        d.id +
+        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.id +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
@@ -312,5 +318,4 @@ function botones(id, accion) {
         }
     }
 }
-
 </script>
