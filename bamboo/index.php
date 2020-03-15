@@ -59,10 +59,42 @@ $num=0;
         <p> Resumen de tareas <br>
         </p>
         <br>
-        <form class="needs-validation" novalidate>
-            <h5 class="form-row">&nbsp;Tareas pendientes</h5>
-            <br>
-            <div class="form-row">
+    </div>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne" style="background-color:whitesmoke">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Tareas y compromisos</button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                <table class="display" width="100%" id="listado_tareas">
+                    <tr>
+                        <th>#</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Tarea</th>
+                        <th>Fecha vencimiento</th>
+                        <th>póliza asociada</th>
+                        <th>Cliente asociado</th>
+                        <th>Acción</th>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
+                        style="color:#536656">Pólizas próximas a vencer</button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
                 <table class="table" id="listado_tareas">
                     <tr>
                         <th>#</th>
@@ -74,31 +106,11 @@ $num=0;
                         <th>Cliente asociado</th>
                         <th>Acción</th>
                     </tr>
-                    <?php echo $lista; ?>
                 </table>
+                </div>
             </div>
-        </form>
-        <form class="needs-validation" novalidate>
-        <br><h5 class="form-row">&nbsp;Pólizas próximas a vencer</h5>
-            <br>
-            <div class="form-row">
-                <table class="table" id="listado_polizas">
-                    <tr>
-                        <th>#</th>
-                        <th>Prioridad</th>
-                        <th>Estado</th>
-                        <th>Tarea</th>
-                        <th>Fecha vencimiento</th>
-                        <th>póliza asociada</th>
-                        <th>Cliente asociado</th>
-                        <th>Acción</th>
-                    </tr>
-                    <?php echo $lista_polizas; ?>
-                </table>
-            </div>
-        </form>
+        </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
