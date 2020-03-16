@@ -123,7 +123,7 @@ $num=0;
 </html>
 <script>
 $(document).ready(function() {
-    table = $('#listado_tareas').DataTable({
+    table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
         "columns": [{
@@ -199,7 +199,7 @@ $(document).ready(function() {
     });
     $('#listado_tareas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
-        var row = table.row(tr);
+        var row = table_tareas.row(tr);
 
         if (row.child.isShown()) {
             // This row is already open - close it
@@ -207,7 +207,7 @@ $(document).ready(function() {
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format(row.data())).show();
+            row.child(detalle_tareas(row.data())).show();
             tr.addClass('shown');
         }
     });
@@ -215,7 +215,7 @@ $(document).ready(function() {
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
-    var buttons = new $.fn.dataTable.Buttons(table, {
+    var buttons = new $.fn.dataTable.Buttons(table_tareas, {
         buttons: [{
                 sheetName: 'Clientes',
                 orientation: 'landscape',
@@ -235,9 +235,119 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_tareas'));
+    table_poliza = $('#listado_polizas').DataTable({
+        "ajax": "prueba2.php",
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            },
+            /*
+            compania: "Renta"
+vigencia_final: "2020-10-15"
+numero_poliza: "1013134-2"
+materia_asegurada: "Unidades (comercial)"
+poliza: null
+patente_ubicacion: "Diagonal pje Matte 956 -957 Santiago"
+cobertura: "INC + SISMO "
+nom_clienteP: "Comunidad Edificio Diagonal Pje Matte  "
+rut_clienteP: "56005300-2"
+telefonoP: "5699876639"
+correoP: "correodeprueba@bamboo.cl"
+nom_clienteA: "Comunidad Edificio Diagonal Pje Matte  "
+rut_clienteA: "56005300-2"
+telefonoA: "5699876639"
+correoA: "correodeprueba@bamboo.cl"
+            */
+            {
+                "data": "numero_poliza", title:"Nro Póliza" 
+            },
+            {
+                "data": "compania", title:"Compañía" 
+            },
+            {
+                "data": "cobertura", title:"Cobertura" 
+            },
+            {
+                "data": "vigencia_final" , title:"Vigencia Final" 
+            },
+            {
+                "data": "materia_asegurada", title:"Materia asegurada" 
+            },
+            {
+                "data": "patente_ubicacion", title:"Observaciones materia asegurada" 
+            }
+
+        ],
+        //          "search": {
+        //          "search": "abarca"
+        //          },
+        "order": [
+            
+            [4, "asc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        }
+    });
+    $('#listado_polizas tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table_poliza.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(detalle_polizas(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+    var dd = new Date();
+    var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
+        .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
+
+    var buttons = new $.fn.dataTable.Buttons(table_poliza, {
+        buttons: [{
+                sheetName: 'Clientes',
+                orientation: 'landscape',
+                extend: 'excelHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7]
+                }
+            },
+            {
+                orientation: 'landscape',
+                extend: 'pdfHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7]
+                }
+            }
+        ]
+    }).container().appendTo($('#botones_poliza'));
 });
 
-function format(d) {
+function detalle_tareas(d) {
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
@@ -251,6 +361,36 @@ function format(d) {
         '<tr>' +
         '<td>Teléfono:</td>' +
         '<td>' + d.telefono + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td>Acciones</td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        d.id +
+        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        d.id +
+        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.id +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+
+        '</tr>' +
+        '</table>';
+}
+function detalle_polizas(d) {
+    // `d` is the original data object for the row
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Rut Proponiente:</td>' +
+        '<td>' + d.rut_clienteP+ '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Correo electrónico:</td>' +
+        '<td>' + d.correop+ '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Teléfono:</td>' +
+        '<td>' + d.telefonop + '</td>' +
         '</tr>' +
 
         '<tr>' +
