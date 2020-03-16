@@ -120,3 +120,158 @@ $num=0;
 </body>
 
 </html>
+<script>
+$(document).ready(function() {
+    table = $('#listado_tareas').DataTable({
+
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            },
+            {
+                "data": "prioridad"
+            },
+            {
+                "data": "estado"
+            },
+            {
+                "data": "tarea"
+            },
+            {
+                "data": "fecha_vencimiento"
+            },
+            {
+                "data": "poliza"
+            },
+            {
+                "data": "nom_cliente"
+            },
+            {
+                "data": "rut_cliente"
+            },
+            {
+                "data": "telefono"
+            },
+            {
+                "data": "correo"
+            },
+            {
+                "data": "id_tarea"
+            }
+
+        ],
+        //          "search": {
+        //          "search": "abarca"
+        //          },
+        "columnDefs": [{
+                "targets": [7, 8, 9],
+                "visible": false,
+            }
+        ],
+        "order": [
+            
+            [2, "desc"],
+            [4, "asc"],
+            [1, "asc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        }
+    });
+    $('#listado_tareas tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+    $('#listado_tareas').dataTable().fnFilter(document.getElementById("var1").value);
+    var dd = new Date();
+    var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
+        .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
+
+    var buttons = new $.fn.dataTable.Buttons(table, {
+        buttons: [{
+                sheetName: 'Clientes',
+                orientation: 'landscape',
+                extend: 'excelHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            },
+            {
+                orientation: 'landscape',
+                extend: 'pdfHtml5',
+                filename: 'Listado clientes al: ' + fecha,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            }
+        ]
+    }).container().appendTo($('#botones'));
+});
+
+function format(d) {
+    // `d` is the original data object for the row
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Nombre completo:</td>' +
+        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Correo electrónico:</td>' +
+        '<td>' + d.correo_electronico + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Dirección particular:</td>' +
+        '<td>' + d.direccionp + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Dirección laboral:</td>' +
+        '<td>' + d.direccionl + '</td>' +
+        '</tr>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td>Acciones</td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        d.id +
+        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        d.id +
+        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.id +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+
+        '</tr>' +
+        '</table>';
+}
+
+</script>
