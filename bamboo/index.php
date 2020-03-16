@@ -72,7 +72,7 @@ $num=0;
                             <th>id tarea</th>
                         </tr>
                     </table>
-                    <div id="botones"></div>
+                    <div id="botones_tarea"></div>
                 </div>
             </div>
         </div>
@@ -86,22 +86,18 @@ $num=0;
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                    <table class="table" id="listado_tareas1">
-                        <tr>
-                            <th></th>
-                            <th>Prioridad</th>
-                            <th>Estado</th>
-                            <th>Tarea</th>
-                            <th>Fecha vencimiento</th>
-                            <th>póliza asociada</th>
-                            <th>Cliente asociado</th>
-                            <th>Rut Cliente</th>
-                            <th>Teléfono</th>
-                            <th>e-Mail</th>
-                            <th>id tarea</th>
-                        </tr>
-                    </table>
-                    <div id="botones"></div>
+                <table class="display" width="100%" id="listado_polizas">
+                    <tr>
+                         <th></th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Tarea</th>
+                        <th>Fecha vencimiento</th>
+                        <th>póliza asociada</th>
+                        <th>Cliente asociado</th>
+                    </tr>
+                </table>
+                    <div id="botones_poliza"></div>
                 </div>
             </div>
         </div>
@@ -238,7 +234,7 @@ $(document).ready(function() {
                 }
             }
         ]
-    }).container().appendTo($('#botones'));
+    }).container().appendTo($('#botones_tareas'));
 });
 
 function format(d) {
