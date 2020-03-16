@@ -137,22 +137,22 @@ $(document).ready(function() {
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
-                "data": "prioridad"
+                "data": "prioridad", title:"Prioridad" 
             },
             {
-                "data": "estado"
+                "data": "estado", title:"Estado" 
             },
             {
-                "data": "tarea"
+                "data": "tarea", title:"Tarea o Actividad" 
             },
             {
-                "data": "fecha_vencimiento"
+                "data": "fecha_vencimiento" , title:"Fecha vencimiento" 
             },
             {
-                "data": "poliza"
+                "data": "poliza", title:"Nro Póliza" 
             },
             {
-                "data": "nom_cliente"
+                "data": "nom_cliente", title:"Nombre cliente" 
             },
             {
                 "data": "rut_cliente"
@@ -245,21 +245,16 @@ function format(d) {
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Nombre completo:</td>' +
-        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
+        '<td>Rut:</td>' +
+        '<td>' + d.rut_cliente+ '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Correo electrónico:</td>' +
-        '<td>' + d.correo_electronico + '</td>' +
+        '<td>' + d.correo+ '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Dirección particular:</td>' +
-        '<td>' + d.direccionp + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Dirección laboral:</td>' +
-        '<td>' + d.direccionl + '</td>' +
-        '</tr>' +
+        '<td>Teléfono:</td>' +
+        '<td>' + d.telefono + '</td>' +
         '</tr>' +
 
         '<tr>' +
