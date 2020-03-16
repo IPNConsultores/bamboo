@@ -236,7 +236,7 @@ $(document).ready(function() {
         ]
     }).container().appendTo($('#botones_tareas'));
     table_poliza = $('#listado_polizas').DataTable({
-        "ajax": "prueba2.php",
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
