@@ -155,13 +155,13 @@ $(document).ready(function() {
                 "data": "nom_cliente", title:"Nombre cliente" 
             },
             {
-                "data": "rut_cliente"
+                "data": "rut_cliente", title:"Rut cliente" 
             },
             {
-                "data": "telefono"
+                "data": "telefono", title:"Teléfono" 
             },
             {
-                "data": "correo"
+                "data": "correo", title:"e-Mail" 
             },
             {
                 "data": "id_tarea"
