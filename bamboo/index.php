@@ -32,7 +32,7 @@ $num=0;
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-
+<script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
 
@@ -367,44 +367,13 @@ function detalle_tareas(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id +
-        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id +
-        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        ' name="elimina" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
-
-        '</tr>' +
-        '</table>';
-}
-function test(d) {
-    // `d` is the original data object for the row
-    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-        '<tr>' +
-        '<td>Rut Proponiente:</td>' +
-        '<td>' + d.rut_clienteP+ '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Correo electrónico:</td>' +
-        '<td>' + d.correop+ '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Teléfono:</td>' +
-        '<td>' + d.telefonop + '</td>' +
-        '</tr>' +
-
-        '<tr>' +
-        '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
-        d.id +
-        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
-        d.id +
-        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
-        d.id +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
-        '</td>' +
+        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
@@ -418,37 +387,37 @@ function detalle_polizas(d){
         '<tr><td>Correo</td><td>'+d.correoP+'</td><td>'+d.correoA+'</td></tr>'+
         '<tr><td>Acciones por cliente</td><td>'+
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idP +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a>'+
+        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>'+
         '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.idP +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>'+
         '</td><td>'+
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idA +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a>'+
+        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>'+
         '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.idA +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>'+
         '</td></tr>'+
         '<tr><td>Acciones por póliza</td><td colspan="2" >'+
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id_poliza +
-        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id_poliza +
-        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id_poliza +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button>'+
         '</td></tr>'+
         '</table>'
 }
-function botones(id, accion) {
+function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log("Cliente/poliza eliminado con ID:" + id);
+            console.log(base+" eliminado con ID:" + id);
             $.notify({
                 // options
-                message: 'Cliente/poliza modificado'
+                message: base+' modificado'
             }, {
                 // settings
                 type: 'danger'
@@ -456,10 +425,10 @@ function botones(id, accion) {
             break;
         }
         case "modifica": {
-            console.log("Cliente/poliza modificado con ID:" + id);
+            console.log(base+" modificado con ID:" + id);
             $.notify({
                 // options
-                message: 'Cliente/poliza modificado'
+                message: base+' modificado'
             }, {
                 // settings
                 type: 'success'
@@ -467,7 +436,7 @@ function botones(id, accion) {
             break;
         }
         case "tarea": {
-            console.log("Asignar tarea a ID:" + id);
+            console.log("Asignar tarea a "+base+" ID:" + id);
             $.notify({
                 // options
                 message: 'Tarea Asignada'
@@ -478,7 +447,7 @@ function botones(id, accion) {
             break;
         }
         case "info": {
-            console.log("Busqueda de ID:" + id);
+            console.log("Busqueda de "+base+" ID:" + id);
             $.notify({
                 // options
                 message: 'Recopilando información del cliente'
