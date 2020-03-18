@@ -62,11 +62,11 @@
   <div class="form-row">
     <div class="col-md-2 mb-3">
       <label for="sel1">Prioridad:&nbsp;</label>
-      <select class="form-control" id="ramo">
-        <option style= "color:darkred">Urgente</option>
-        <option style= "color:red">Alta</option>
-        <option style= "color:orange">Media</option>
-        <option style= "color:darkgreen">Baja</option>
+      <select class="form-control" id="prioridad">
+        <option style= "color:darkred" value="urgente">Urgente</option>
+        <option style= "color:red" value="alta">Alta</option>
+        <option style= "color:orange"value="media">Media</option>
+        <option style= "color:darkgreen" value="baja">Baja</option>
       </select>
     </div>
     <div class="col-md-4 mb-3">
