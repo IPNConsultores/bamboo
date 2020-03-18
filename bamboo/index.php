@@ -72,7 +72,7 @@ $num=0;
                             <th>id tarea</th>
                         </tr>
                     </table>
-                    <div id="botones_tarea"></div>
+                    <div id="botones_tareas"></div>
                 </div>
             </div>
         </div>
@@ -235,6 +235,7 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_tareas'));
+    
     table_poliza = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "columns": [{
@@ -377,7 +378,7 @@ function detalle_tareas(d) {
         '</tr>' +
         '</table>';
 }
-function detalle_polizas(d) {
+function test(d) {
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
@@ -402,9 +403,92 @@ function detalle_polizas(d) {
         d.id +
         ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        '</td>' +
 
         '</tr>' +
         '</table>';
+}
+function detalle_polizas(d){
+  return '  <table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">'+
+        '<tr><th></th><th>Proponiente</th><th>Asegurado</th></tr>'+
+        '<tr><td>Nombre</td><td>'+d.nom_clienteP+'</td><td>'+d.nom_clienteA+'</td></tr>'+
+        '<tr><td >Rut</td><td>'+d.rut_clienteP+'</td><td>'+d.rut_clienteA+'</td></tr>'+
+        '<tr><td>Teléfono</td><td>'+d.telefonoP+'</td><td>'+d.telefonoA+'</td></tr>'+
+        '<tr><td>Correo</td><td>'+d.correoP+'</td><td>'+d.correoA+'</td></tr>'+
+        '<tr><td>Acciones por cliente</td><td>'+
+        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idP +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a>'+
+        '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.idP +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        '</td><td>'+
+        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idA +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a>'+
+        '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.idA +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        '</td></tr>'+
+        '<tr><td>Acciones por póliza</td><td colspan="2" >'+
+        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
+        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        d.id_poliza +
+        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        d.id_poliza +
+        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.id_poliza +
+        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>'+
+        '</td></tr>'+
+        '</table>'
+}
+function botones(id, accion) {
+    console.log("ID:" + id + " => acción:" + accion);
+    switch (accion) {
+        case "elimina": {
+            console.log("Cliente/poliza eliminado con ID:" + id);
+            $.notify({
+                // options
+                message: 'Cliente/poliza modificado'
+            }, {
+                // settings
+                type: 'danger'
+            });
+            break;
+        }
+        case "modifica": {
+            console.log("Cliente/poliza modificado con ID:" + id);
+            $.notify({
+                // options
+                message: 'Cliente/poliza modificado'
+            }, {
+                // settings
+                type: 'success'
+            });
+            break;
+        }
+        case "tarea": {
+            console.log("Asignar tarea a ID:" + id);
+            $.notify({
+                // options
+                message: 'Tarea Asignada'
+            }, {
+                // settings
+                type: 'warning'
+            });
+            break;
+        }
+        case "info": {
+            console.log("Busqueda de ID:" + id);
+            $.notify({
+                // options
+                message: 'Recopilando información del cliente'
+            }, {
+                // settings
+                type: 'info'
+
+            });
+            break;
+        }
+    }
 }
 </script>
