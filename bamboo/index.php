@@ -44,7 +44,7 @@ $num=0;
         <p> Resumen de tareas <br>
         </p>
         <br>
-    </div>
+    
 
     <div class="accordion" id="accordionExample">
         <div class="card">
@@ -102,6 +102,7 @@ $num=0;
             </div>
         </div>
     </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
