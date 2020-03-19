@@ -54,6 +54,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
         <p> Clientes / Modificación <br>
         </p>
         <br>
+		<div class="container">
         <table id="listado_clientes" class="display" width="100%">
             <tr>
                 <thead>
@@ -71,6 +72,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             </tr>
         </table>
     </div>
+		</div>
     <div id="botones"></div>
 
     <div id="auxiliar" style="display: none;">
