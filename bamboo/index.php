@@ -57,7 +57,7 @@ $num=0;
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    <table class="table" width="100%" id="listado_tareas">
+                    <table class="display"  id="listado_tareas" style="margin-left: 0px; width:100%;">
                         <tr>
                             <th></th>
                             <th>Prioridad</th>
@@ -127,6 +127,7 @@ $(document).ready(function() {
     table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
+        "scrollX": true,
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
@@ -168,6 +169,7 @@ $(document).ready(function() {
         //          "search": {
         //          "search": "abarca"
         //          },
+        
         "columnDefs": [{
             "targets": [7, 8, 9, 10],
             "visible": false,
@@ -239,12 +241,14 @@ $(document).ready(function() {
     
     table_poliza = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "scrollX": true,
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
+            
             /*
             compania: "Renta"
 vigencia_final: "2020-10-15"
