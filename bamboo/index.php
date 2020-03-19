@@ -57,7 +57,7 @@ $num=0;
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    <table class="table" width="100%" id="listado_tareas">
+                    <table class="display"  id="listado_tareas" style="margin-left: 0px; width:100%;">
                         <tr>
                             <th></th>
                             <th>Prioridad</th>
