@@ -131,7 +131,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="modal-dialog modal-login">
         <div class="modal-content col-lg-10">
             <div class="modal-header">
-                <h4 class="modal-title">Inicio de Sesión</h4>
+                <h4 class="modal-title">Crear Usuario Nuevo</h4>
             </div>
             <div class="modal-body">
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
@@ -168,9 +168,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Crear usuario">
+                        <input type="submit" class="btn btn-primary" value="Crear usuario" style="background-color:#536656;color:#A5CCAB">
                     </div>
-                    <p>Ya tienes una cuenta? <a href="/bamboo/backend/login/login.php">Ingresa aquí</a>.</p>
+           
                 </form>
             </div>
         </div>
