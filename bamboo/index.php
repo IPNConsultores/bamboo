@@ -167,6 +167,7 @@ $(document).ready(function() {
         //          "search": {
         //          "search": "abarca"
         //          },
+        "scrollX": true,
         "columnDefs": [{
             "targets": [7, 8, 9, 10],
             "visible": false,
@@ -244,6 +245,7 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
+            "scrollX": true,
             /*
             compania: "Renta"
 vigencia_final: "2020-10-15"
