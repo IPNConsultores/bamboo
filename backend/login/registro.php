@@ -168,7 +168,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Crear usuario" style="background-color:#536656;color:#A5CCAB">
+                        <input type="submit" class="btn btn-primary float-right" value="Crear usuario" style="background-color:#536656;color:#A5CCAB;">
                     </div>
            
                 </form>
