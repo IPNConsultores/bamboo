@@ -148,7 +148,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             -->
             <div class="form-row">
-                <table name="tabla_clientes" class="table table-hover table-dark">
+                <table name="tabla_clientes" class="table table-striped">
                     <tr>
                         <thead>
                             <th>#</th>
@@ -181,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             -->
             <div class="form-row">
-                <table name="tabla_polizas" class="table table-hover table-dark">
+                <table name="tabla_polizas" class="table table-striped">
                     <tr>
                         <thead>
                             <th>#</th>

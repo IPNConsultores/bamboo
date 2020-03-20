@@ -32,7 +32,7 @@ $num=0;
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-<script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
 
@@ -44,65 +44,65 @@ $num=0;
         <p> Resumen de tareas <br>
         </p>
         <br>
-    
 
-    <div class="accordion" id="accordionExample">
-        <div class="card">
-            <div class="card-header" id="headingOne" style="background-color:whitesmoke">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Tareas y
-                        compromisos</button>
-                </h5>
-            </div>
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    <table class="display"  id="listado_tareas" style="width:100%">
-                        <tr>
-                            <th></th>
-                            <th>Prioridad</th>
-                            <th>Estado</th>
-                            <th>Tarea</th>
-                            <th>Fecha vencimiento</th>
-                            <th>póliza asociada</th>
-                            <th>Cliente asociado</th>
-                            <th>Rut Cliente</th>
-                            <th>Teléfono</th>
-                            <th>e-Mail</th>
-                            <th>id tarea</th>
-                        </tr>
-                    </table>
-                    <div id="botones_tareas"></div>
+
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne" style="background-color:whitesmoke">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Tareas y
+                            compromisos</button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table class="display" id="listado_tareas" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Tarea</th>
+                                <th>Fecha vencimiento</th>
+                                <th>póliza asociada</th>
+                                <th>Cliente asociado</th>
+                                <th>Rut Cliente</th>
+                                <th>Teléfono</th>
+                                <th>e-Mail</th>
+                                <th>id tarea</th>
+                            </tr>
+                        </table>
+                        <div id="botones_tareas"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                        style="color:#536656">Pólizas próximas a vencer</button>
-                </h5>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                <table class="display" style="width:100%" id="listado_polizas">
-                    <tr>
-                         <th></th>
-                        <th>Prioridad</th>
-                        <th>Estado</th>
-                        <th>Tarea</th>
-                        <th>Fecha vencimiento</th>
-                        <th>póliza asociada</th>
-                        <th>Cliente asociado</th>
-                    </tr>
-                </table>
-                    <div id="botones_poliza"></div>
+            <div class="card">
+                <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
+                            style="color:#536656">Pólizas próximas a vencer</button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table class="display" style="width:100%" id="listado_polizas">
+                            <tr>
+                                <th></th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Tarea</th>
+                                <th>Fecha vencimiento</th>
+                                <th>póliza asociada</th>
+                                <th>Cliente asociado</th>
+                            </tr>
+                        </table>
+                        <div id="botones_poliza"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -135,31 +135,40 @@ $(document).ready(function() {
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
-                "data": "prioridad", title:"Prioridad" 
+                "data": "prioridad",
+                title: "Prioridad"
             },
             {
-                "data": "estado", title:"Estado" 
+                "data": "estado",
+                title: "Estado"
             },
             {
-                "data": "tarea", title:"Tarea o Actividad" 
+                "data": "tarea",
+                title: "Tarea o Actividad"
             },
             {
-                "data": "fecha_vencimiento" , title:"Fecha vencimiento" 
+                "data": "fecha_vencimiento",
+                title: "Fecha vencimiento"
             },
             {
-                "data": "poliza", title:"Nro Póliza" 
+                "data": "poliza",
+                title: "Nro Póliza"
             },
             {
-                "data": "nom_cliente", title:"Nombre cliente" 
+                "data": "nom_cliente",
+                title: "Nombre cliente"
             },
             {
-                "data": "rut_cliente", title:"Rut cliente" 
+                "data": "rut_cliente",
+                title: "Rut cliente"
             },
             {
-                "data": "telefono", title:"Teléfono" 
+                "data": "telefono",
+                title: "Teléfono"
             },
             {
-                "data": "correo", title:"e-Mail" 
+                "data": "correo",
+                title: "e-Mail"
             },
             {
                 "data": "id_tarea"
@@ -169,7 +178,7 @@ $(document).ready(function() {
         //          "search": {
         //          "search": "abarca"
         //          },
-        
+
         "columnDefs": [{
             "targets": [7, 8, 9, 10],
             "visible": false,
@@ -238,7 +247,7 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_tareas'));
-    
+
     table_poliza = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
@@ -248,7 +257,7 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
-            
+
             /*
             compania: "Renta"
 vigencia_final: "2020-10-15"
@@ -267,22 +276,28 @@ telefonoA: "5699876639"
 correoA: "correodeprueba@bamboo.cl"
             */
             {
-                "data": "numero_poliza", title:"Nro Póliza" 
+                "data": "numero_poliza",
+                title: "Nro Póliza"
             },
             {
-                "data": "compania", title:"Compañía" 
+                "data": "compania",
+                title: "Compañía"
             },
             {
-                "data": "cobertura", title:"Cobertura" 
+                "data": "cobertura",
+                title: "Cobertura"
             },
             {
-                "data": "vigencia_final" , title:"Vigencia Final" 
+                "data": "vigencia_final",
+                title: "Vigencia Final"
             },
             {
-                "data": "materia_asegurada", title:"Materia asegurada" 
+                "data": "materia_asegurada",
+                title: "Materia asegurada"
             },
             {
-                "data": "patente_ubicacion", title:"Observaciones materia asegurada" 
+                "data": "patente_ubicacion",
+                title: "Observaciones materia asegurada"
             }
 
         ],
@@ -290,7 +305,7 @@ correoA: "correodeprueba@bamboo.cl"
         //          "search": "abarca"
         //          },
         "order": [
-            
+
             [4, "asc"]
         ],
         "oLanguage": {
@@ -358,11 +373,11 @@ function detalle_tareas(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Rut:</td>' +
-        '<td>' + d.rut_cliente+ '</td>' +
+        '<td>' + d.rut_cliente + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Correo electrónico:</td>' +
-        '<td>' + d.correo+ '</td>' +
+        '<td>' + d.correo + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Teléfono:</td>' +
@@ -383,27 +398,28 @@ function detalle_tareas(d) {
         '</tr>' +
         '</table>';
 }
-function detalle_polizas(d){
-  return '  <table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">'+
-        '<tr><th></th><th>Proponiente</th><th>Asegurado</th></tr>'+
-        '<tr><td>Nombre</td><td>'+d.nom_clienteP+'</td><td>'+d.nom_clienteA+'</td></tr>'+
-        '<tr><td >Rut</td><td>'+d.rut_clienteP+'</td><td>'+d.rut_clienteA+'</td></tr>'+
-        '<tr><td>Teléfono</td><td>'+d.telefonoP+'</td><td>'+d.telefonoA+'</td></tr>'+
-        '<tr><td>Correo</td><td>'+d.correoP+'</td><td>'+d.correoA+'</td></tr>'+
-        '<tr><td>Acciones por cliente</td><td>'+
+
+function detalle_polizas(d) {
+    return '  <table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+        '<tr><th></th><th>Proponiente</th><th>Asegurado</th></tr>' +
+        '<tr><td>Nombre</td><td>' + d.nom_clienteP + '</td><td>' + d.nom_clienteA + '</td></tr>' +
+        '<tr><td >Rut</td><td>' + d.rut_clienteP + '</td><td>' + d.rut_clienteA + '</td></tr>' +
+        '<tr><td>Teléfono</td><td>' + d.telefonoP + '</td><td>' + d.telefonoA + '</td></tr>' +
+        '<tr><td>Correo</td><td>' + d.correoP + '</td><td>' + d.correoA + '</td></tr>' +
+        '<tr><td>Acciones por cliente</td><td>' +
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idP +
-        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>'+
+        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.idP +
-        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>'+
-        '</td><td>'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>' +
+        '</td><td>' +
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idA +
-        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>'+
+        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.idA +
-        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>'+
-        '</td></tr>'+
-        '<tr><td>Acciones por póliza</td><td colspan="2" >'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>' +
+        '</td></tr>' +
+        '<tr><td>Acciones por póliza</td><td colspan="2" >' +
         '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
         ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id_poliza +
@@ -411,18 +427,19 @@ function detalle_polizas(d){
         d.id_poliza +
         ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id_poliza +
-        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button>'+
-        '</td></tr>'+
+        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button>' +
+        '</td></tr>' +
         '</table>'
 }
+
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log(base+" eliminado con ID:" + id);
+            console.log(base + " eliminado con ID:" + id);
             $.notify({
                 // options
-                message: base+' modificado'
+                message: base + ' modificado'
             }, {
                 // settings
                 type: 'danger'
@@ -430,10 +447,10 @@ function botones(id, accion, base) {
             break;
         }
         case "modifica": {
-            console.log(base+" modificado con ID:" + id);
+            console.log(base + " modificado con ID:" + id);
             $.notify({
                 // options
-                message: base+' modificado'
+                message: base + ' modificado'
             }, {
                 // settings
                 type: 'success'
@@ -441,18 +458,21 @@ function botones(id, accion, base) {
             break;
         }
         case "tarea": {
-            console.log("Asignar tarea a "+base+" ID:" + id);
-            $.notify({
-                // options
-                message: 'Tarea Asignada'
-            }, {
-                // settings
-                type: 'warning'
-            });
-            break;
+            if (base == 'cliente') {
+                $.redirect('/bamboo/creacion_actividades.php', {
+                    'id_cliente': id
+                }, 'post');
+                break;
+            } else if (base == 'poliza'){
+                $.redirect('/bamboo/creacion_actividades.php', {
+                    'id_poliza': id
+                }, 'post');
+                break;
+
+            }
         }
         case "info": {
-            console.log("Busqueda de "+base+" ID:" + id);
+            console.log("Busqueda de " + base + " ID:" + id);
             $.notify({
                 // options
                 message: 'Recopilando información del cliente'
