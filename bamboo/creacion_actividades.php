@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <body>
     <div id="header">
-        <?php include 'header2.php' ?>
+        <?php //include 'header2.php' ?>
     </div>
     <div class="container">
         <p> Actividad / Creación <br>
