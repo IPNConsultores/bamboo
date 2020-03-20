@@ -296,14 +296,9 @@ function botones(id, accion) {
             break;
         }
         case "tarea": {
-            console.log("Asignar tarea a ID:" + id);
-            $.notify({
-                // options
-                message: 'Tarea Asignada'
-            }, {
-                // settings
-                type: 'success'
-            });
+            $.redirect('/bamboo/creacion_actividades.php', {
+                'id_cliente': id
+            }, 'post');
             break;
         }
         case "info": {

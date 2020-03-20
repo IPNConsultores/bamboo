@@ -1,10 +1,10 @@
 <?php
-/*
+
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-*/
+
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <body>
     <div id="header">
-        <?php //include 'header2.php' ?>
+        <?php include 'header2.php' ?>
     </div>
     <div class="container">
         <p> Actividad / Creación <br>
