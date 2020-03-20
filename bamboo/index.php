@@ -393,7 +393,7 @@ function detalle_tareas(d) {
         d.id +
         ' name="elimina" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" id=' +d.id+'onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
+        ' name="tarea" id=' +d.id+' onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
@@ -462,14 +462,13 @@ function botones(id, accion, base) {
                 $.redirect('/bamboo/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
-                break;
-            } else if (base == 'poliza'){
+            }
+            if (base == 'poliza'){
                 $.redirect('/bamboo/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
-                break;
-
             }
+            break;
         }
         case "info": {
             console.log("Busqueda de " + base + " ID:" + id);
