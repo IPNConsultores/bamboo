@@ -1,3 +1,100 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+
+function estandariza_info($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+require_once "/home/gestio10/public_html/backend/config.php";
+$num_cliente=$num_poliza=0;
+ $busqueda=$busqueda_err=$data=$resultado_poliza='';
+ $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza='';
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+// Viene desde cliente
+    if(!empty(trim($_POST["id_cliente"]))){
+        $busqueda=$_POST["id_cliente"];
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+        //cliente
+        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        While($row=mysqli_fetch_object($resultado))
+            {
+                $rut=$row->rut;
+                $id=$row->id;
+                $nombre=$row->nombre;
+                $telefono=$row->telefono;
+                $correo=$row->correo;
+                $num_cliente=$num_cliente+1;
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
+            </td></tr>'."<br>";        
+            }
+            //poliza
+            $resultado_poliza=mysqli_query($link, 'SELECT id, compania, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura FROM polizas where rut_proponente="'.$rutsindv.'" or rut_asegurado="'.$rutsindv.'"  order by compania, numero_poliza;');
+
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $poliza= $row->numero_poliza;
+                    $materia_asegurada= $row->materia_asegurada;
+                    $poliza = $row->poliza;
+                    $patente_ubicacion = $row->patente_ubicacion;
+                    $cobertura = $row->cobertura;
+                    $num_poliza=$num_poliza+1;
+                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza"></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
+                }            
+        mysqli_close($link);
+    } 
+// Viene desde póliza
+    if(!empty(trim($_POST["id_poliza"]))){
+        $busqueda=$_POST["id_poliza"];
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+            //poliza
+            $resultado_poliza=mysqli_query($link, 'SELECT id, compania, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where rut_proponente="'.$rutsindv.'" or rut_asegurado="'.$rutsindv.'" order by compania, numero_poliza;');
+
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $poliza= $row->numero_poliza;
+                    $materia_asegurada= $row->materia_asegurada;
+                    $poliza = $row->poliza;
+                    $patente_ubicacion = $row->patente_ubicacion;
+                    $cobertura = $row->cobertura;
+                    $rut_proponente = $row->rut_proponente;
+                    $rut_asegurado = $row->rut_asegurado;
+                    $num_poliza=$num_poliza+1;
+                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza" checked disabled></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
+                }     
+        //cliente
+        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  rut in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        While($row=mysqli_fetch_object($resultado))
+            {
+                $rut=$row->rut;
+                $id=$row->id;
+                $nombre=$row->nombre;
+                $telefono=$row->telefono;
+                $correo=$row->correo;
+                $num_cliente=$num_cliente+1;
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente"></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
+            </td></tr>'."<br>";        
+            }       
+        mysqli_close($link);
+    } 
+    
+
+}
+?>
+
 <!doctype html>
 <html>
 
@@ -24,7 +121,8 @@
         <h5 class="form-row">&nbsp;Datos Actividad</h5>
         <br>
         <form action="" class="needs-validation" method="POST" novalidate>
-            <label> Datos Cliente Asociado <em>(Opcional)</em></label>
+            <label> Datos Cliente Asociado <em>(Opcional)</em></label><br>
+            <!--
             <div class="form-row">
                 <div class="col-md-8 mb-3 col-lg-3">
                     <div class="form-row col-lg-12">
@@ -47,8 +145,29 @@
                     </div>
                 </div>
             </div>
+            -->
+            <div class="form-row">
+                <table name="tabla_clientes" class="table table-hover table-dark">
+                    <tr>
+                        <thead>
+                            <th>#</th>
+                            <th>Seleccionar cliente</th>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Correo Electrónico</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                        <?php echo $tabla_clientes; ?>
+                    </tbody>
+                </table>
+            </div>
+
             <br>
             <label> Datos Póliza Asociada <em>(Opcional)</em></label>
+            <br>
+            <!--
             <div Class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="poliza">Número de Poliza</label>
@@ -58,6 +177,26 @@
                     <label for="poliza">Compañía</label>
                     <input type="text" class="form-control" name="compania">
                 </div>
+            </div>
+            -->
+            <div class="form-row">
+                <table name="tabla_polizas" class="table table-hover table-dark">
+                    <tr>
+                        <thead>
+                            <th>#</th>
+                            <th>Seleccionar póliza</th>
+                            <th>Número Póliza</th>
+                            <th>Compañia</th>
+                            <th>Cobertura</th>
+                            <th>Vigencia Final</th>
+                            <th>Materia Asegurada</th>
+                            <th>Observaciones materia asegurada</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                        <?php echo $tabla_poliza; ?>
+                    </tbody>
+                </table>
             </div>
             <br>
             <label> Datos Actividad</label>
@@ -74,7 +213,8 @@
                 <div class="col-md-4 mb-3">
                     <label for="Nombre">Fecha de Vencimiento</label>
                     <div class="md-form">
-                        <input placeholder="Selected date" type="date" name="fechainicio" class="form-control" required>
+                        <input placeholder="Selected date" type="date" name="fechavencimiento" class="form-control"
+                            required>
                     </div>
                     <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>

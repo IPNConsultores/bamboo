@@ -10,14 +10,18 @@ $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $poliza=estandariza_info($_POST["poliza"]);
  $compania=estandariza_info($_POST["compania"]);
  $prioridad=estandariza_info($_POST["prioridad"]);
- $fechainicio=estandariza_info($_POST["fechainicio"]);
+ $fechavencimiento=estandariza_info($_POST["fechavencimiento"]);
  $tarea=estandariza_info($_POST["tarea"]);
 
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-mysqli_query($link, 'insert into tareas(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\');');
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($rut_completo=='' && $poliza==''){
+      mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\');');
+    }
+    
+}
 }
 //echo '<script type="text/javascript">
 //redirige('.$rut.');
