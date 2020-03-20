@@ -223,7 +223,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-row">
                 <div class="col">
                     <label for="poliza">Tarea a Realizar</label>
-                    <textarea class="form-control" name="tarea" rows="3"></textarea>
+                    <textarea class="form-control" name="tarea" rows="3"><?php echo "rut proponente: ".$rut_proponente." asegurado: ".$rut_asegurado ?></textarea>
                 </div>
 
             </div>
