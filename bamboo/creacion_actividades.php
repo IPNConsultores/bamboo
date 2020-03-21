@@ -44,7 +44,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $vigencia_final= $row->vigencia_final;
                     $poliza= $row->numero_poliza;
                     $materia_asegurada= $row->materia_asegurada;
-                    $poliza = $row->poliza;
                     $patente_ubicacion = $row->patente_ubicacion;
                     $cobertura = $row->cobertura;
                     $num_poliza=$num_poliza+1;
@@ -66,7 +65,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $vigencia_final= $row->vigencia_final;
                     $poliza= $row->numero_poliza;
                     $materia_asegurada= $row->materia_asegurada;
-                    $poliza = $row->poliza;
                     $patente_ubicacion = $row->patente_ubicacion;
                     $cobertura = $row->cobertura;
                     $rut_proponente = $row->rut_proponente;
@@ -85,8 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $correo=$row->correo;
                 $num_cliente=$num_cliente+1;
                 $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
-                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente"></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td><td><button title="Busca toda la información asociada a este cliente" type="button" id="'.$id.'" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="'.$id.'" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="'.$id.'" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="'.$id.'" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button>
-            </td></tr>'."<br>";        
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente"></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }       
         mysqli_close($link);
     } 
@@ -120,9 +117,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </p>
         <h5 class="form-row">&nbsp;Datos Actividad</h5>
         <br>
-        <form action="" class="needs-validation" method="POST" novalidate>
-            <label> Datos Cliente Asociado <em>(Opcional)</em></label><br>
-            <!--
+
+        <label> Datos Cliente Asociado <em>(Opcional)</em></label><br>
+        <!--
             <div class="form-row">
                 <div class="col-md-8 mb-3 col-lg-3">
                     <div class="form-row col-lg-12">
@@ -146,28 +143,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
             -->
-            <div class="form-row">
-                <table name="tabla_clientes" class="table table-striped">
-                    <tr>
-                        <thead>
-                            <th>#</th>
-                            <th>Seleccionar cliente</th>
-                            <th>Rut</th>
-                            <th>Nombre</th>
-                            <th>Teléfono</th>
-                            <th>Correo Electrónico</th>
-                        </thead>
-                    </tr>
-                    <tbody>
-                        <?php echo $tabla_clientes; ?>
-                    </tbody>
-                </table>
-            </div>
+        <div class="form-row">
+            <table name="tabla_clientes" class="table table-striped">
+                <tr>
+                    <thead>
+                        <th>#</th>
+                        <th>Seleccionar cliente</th>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                    </thead>
+                </tr>
+                <tbody>
+                    <?php echo $tabla_clientes; ?>
+                </tbody>
+            </table>
+        </div>
 
-            <br>
-            <label> Datos Póliza Asociada <em>(Opcional)</em></label>
-            <br>
-            <!--
+        <br>
+        <label> Datos Póliza Asociada <em>(Opcional)</em></label>
+        <br>
+        <!--
             <div Class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="poliza">Número de Poliza</label>
@@ -179,26 +176,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
             -->
-            <div class="form-row">
-                <table name="tabla_polizas" class="table table-striped">
-                    <tr>
-                        <thead>
-                            <th>#</th>
-                            <th>Seleccionar póliza</th>
-                            <th>Número Póliza</th>
-                            <th>Compañia</th>
-                            <th>Cobertura</th>
-                            <th>Vigencia Final</th>
-                            <th>Materia Asegurada</th>
-                            <th>Observaciones materia asegurada</th>
-                        </thead>
-                    </tr>
-                    <tbody>
-                        <?php echo $tabla_poliza; ?>
-                    </tbody>
-                </table>
-            </div>
-            <br>
+        <div class="form-row">
+            <table name="tabla_polizas" class="table table-striped">
+                <tr>
+                    <thead>
+                        <th>#</th>
+                        <th>Seleccionar póliza</th>
+                        <th>Número Póliza</th>
+                        <th>Compañia</th>
+                        <th>Cobertura</th>
+                        <th>Vigencia Final</th>
+                        <th>Materia Asegurada</th>
+                        <th>Observaciones materia asegurada</th>
+                    </thead>
+                </tr>
+                <tbody>
+                    <?php echo $tabla_poliza; ?>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <form action="" class="needs-validation" method="POST" novalidate>
             <label> Datos Actividad</label>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
@@ -223,7 +221,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-row">
                 <div class="col">
                     <label for="poliza">Tarea a Realizar</label>
-                    <textarea class="form-control" name="tarea" rows="3"><?php echo "rut proponente: ".$rut_proponente." asegurado: ".$rut_asegurado ?></textarea>
+                    <textarea class="form-control" name="tarea" rows="3"></textarea>
                 </div>
 
             </div>
