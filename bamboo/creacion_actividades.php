@@ -196,22 +196,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </table>
         </div>
         <br>
-        <form action="" class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php" novalidate>
-            <label> Datos Actividad</label>
+        <label> Datos Actividad</label>
+        <form action="" class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php"
+            novalidate>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
                     <label for="sel1">Prioridad:&nbsp;</label>
-                    <select class="form-control" name="prioridad">
-                        <option style="color:darkred" value="urgente">0.- Urgente</option>
-                        <option style="color:red" value="alta">1.- Alto</option>
-                        <option style="color:orange" value="media">2.- Medio</option>
-                        <option style="color:darkgreen" value="baja">3.- Bajo</option>
+                    <select class="form-control" name="prioridad" id="prioridad">
+                        <option style="color:darkred" value="0.- Urgente">0.- Urgente</option>
+                        <option style="color:red" value="1.- Alto">1.- Alto</option>
+                        <option style="color:orange" value="2.- Medio">2.- Medio</option>
+                        <option style="color:darkgreen" value="3.- Bajo">3.- Bajo</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="Nombre">Fecha de Vencimiento</label>
                     <div class="md-form">
-                        <input placeholder="Selected date" type="date" name="fechavencimiento" class="form-control"
+                        <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento" class="form-control"
                             required>
                     </div>
                     <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
@@ -221,7 +222,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-row">
                 <div class="col">
                     <label for="poliza">Tarea a Realizar</label>
-                    <textarea class="form-control" name="tarea" rows="3"></textarea>
+                    <textarea class="form-control" name="tarea" id="tarea" rows="3"></textarea>
                 </div>
 
             </div>
@@ -242,3 +243,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
+<script>
+function test() {
+    console.log("prioridad : "+document.getElementById('prioridad').value);
+    console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
+    console.log("tarea : "+document.getElementById('tarea').value);
+}
+</script>

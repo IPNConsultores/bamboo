@@ -3,11 +3,11 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+  mysqli_select_db($link, 'gestio10_asesori1_bamboo');
   $prioridad=estandariza_info($_POST["prioridad"]);
   $fechavencimiento=estandariza_info($_POST["fechavencimiento"]);
   $tarea=estandariza_info($_POST["tarea"]);
-
+echo 'insert into tareas(fecha_vencimiento, tarea, prioridad) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\');';
     //if (empty(trim($_POST["id_cliente"])) && empty(trim($_POST["id_poliza"]))){
 
       mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\');');
@@ -26,7 +26,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
       mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad, id_poliza ) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\', '.$id_poliza.');');
     }
     */
-    header("location: /bamboo/index.php");
+    //header("location: /bamboo/index.php");
 }
 
 function estandariza_info($data) {
