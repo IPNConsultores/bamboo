@@ -7,12 +7,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $prioridad=estandariza_info($_POST["prioridad"]);
   $fechavencimiento=estandariza_info($_POST["fechavencimiento"]);
   $tarea=estandariza_info($_POST["tarea"]);
+  $relaciones=$_POST["relaciones"];
   $largo=6;
 $token = bin2hex(random_bytes($largo));
+echo "prioridad: ".$prioridad."\n";
+echo "fechavencimiento: ".$fechavencimiento."\n";
+echo "tarea: ".$tarea."\n";
+echo "relaciones: ".$relaciones;
+
 //echo 'insert into tareas(fecha_vencimiento, tarea, prioridad) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\');';
     //if (empty(trim($_POST["id_cliente"])) && empty(trim($_POST["id_poliza"]))){
 
-      mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad, token) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\', \''.$token.'\');');
+      //mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad, token) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\', \''.$token.'\');');
     /*}
     if(!empty(trim($_POST["id_cliente"])) && !empty(trim($_POST["id_poliza"]))){
       $id_cliente=estandariza_info($_POST["id_cliente"]);

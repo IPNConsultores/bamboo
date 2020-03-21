@@ -200,7 +200,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <br>
         <label> Datos Actividad</label>
         <!-- -->
-        <form class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php" novalidate>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
                     <label for="sel1">Prioridad:&nbsp;</label>
@@ -230,9 +229,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <br>
 
-            <button class="btn" type="button" onclick="test()"
+            <button class="btn" type="button" onclick="post()"
                 style="background-color: #536656; color: white">Registrar</button>
-        </form>
+        
         <br>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -247,7 +246,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 </html>
 <script>
-function test() {
+function post() {
     //console.log("prioridad : "+document.getElementById('prioridad').value);
     //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
     //console.log("tarea : "+document.getElementById('tarea').value);
@@ -274,6 +273,15 @@ function test() {
             }
     }
     arreglo += ']}';
-    console.log(arreglo);
+    $.ajax({
+                    type: "POST",
+                    url: "/bamboo/backend/actividades/crea_tarea.php",
+                    data: {
+                        prioridad: document.getElementById('prioridad').value,
+                        fechavencimiento: document.getElementById('fechavencimiento').value,
+                        tarea: document.getElementById('tarea').value,
+                        relaciones: arreglo
+                    },
+                });
 }
 </script>
