@@ -197,7 +197,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
         <br>
         <label> Datos Actividad</label>
-        <form action="" class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php"
+        <!-- action="/bamboo/backend/actividades/crea_tarea.php"-->
+        <form class="needs-validation" method="POST" 
             novalidate>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
@@ -228,7 +229,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <br>
 
-            <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+            <button class="btn" type="button" onclick="test()" style="background-color: #536656; color: white">Registrar</button>
         </form>
         <br>
     </div>
