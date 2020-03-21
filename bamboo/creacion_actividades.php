@@ -40,6 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             While($row=mysqli_fetch_object($resultado_poliza))
                 {
+                    $id= $row ->id;
                     $compania = $row->compania;
                     $vigencia_final= $row->vigencia_final;
                     $poliza= $row->numero_poliza;
@@ -61,6 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             While($row=mysqli_fetch_object($resultado_poliza))
                 {
+                    $id= $row ->id;
                     $compania = $row->compania;
                     $vigencia_final= $row->vigencia_final;
                     $poliza= $row->numero_poliza;
@@ -249,7 +251,7 @@ function test() {
     //console.log("prioridad : "+document.getElementById('prioridad').value);
     //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
     //console.log("tarea : "+document.getElementById('tarea').value);
-    var arreglo = '{ data:[';
+    var arreglo = '{data:[';
     var num = 0;
     var coma = '';
     var clientes = document.getElementsByName('check_cliente');
@@ -259,7 +261,7 @@ function test() {
                 num = 1;
                 coma = ',';
             }
-        arreglo += coma + '{ id: "' + clientes[i].getAttribute('id') + '" , base: "clientes" }';
+        arreglo += coma + '{id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
 
     }
     var polizas = document.getElementsByName('check_poliza');
@@ -269,7 +271,7 @@ function test() {
                 num = 1;
                 coma = ',';
             }
-        arreglo += coma + '{ id: "' + polizas[j].getAttribute('id') + '" , base: "polizas" }';
+        arreglo += coma + '{id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
     }
     arreglo += ']}';
     console.log(arreglo);
