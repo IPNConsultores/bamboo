@@ -196,16 +196,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </table>
         </div>
         <br>
-        <form action="" class="needs-validation" method="POST" novalidate>
+        <form action="" class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php" novalidate>
             <label> Datos Actividad</label>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
                     <label for="sel1">Prioridad:&nbsp;</label>
                     <select class="form-control" name="prioridad">
-                        <option style="color:darkred" value="urgente">Urgente</option>
-                        <option style="color:red" value="alta">Alta</option>
-                        <option style="color:orange" value="media">Media</option>
-                        <option style="color:darkgreen" value="baja">Baja</option>
+                        <option style="color:darkred" value="urgente">0.- Urgente</option>
+                        <option style="color:red" value="alta">1.- Alto</option>
+                        <option style="color:orange" value="media">2.- Medio</option>
+                        <option style="color:darkgreen" value="baja">3.- Bajo</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
