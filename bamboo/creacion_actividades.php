@@ -273,5 +273,6 @@ function test() {
     }
     arreglo = +']}';
     console.log(arreglo);
+    alerta(arreglo);
 }
 </script>
