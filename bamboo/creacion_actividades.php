@@ -248,15 +248,15 @@ function test() {
     //console.log("prioridad : "+document.getElementById('prioridad').value);
     //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
     //console.log("tarea : "+document.getElementById('tarea').value);
-    var items = document.getElementsByName('check_cliente');
-    for (var i = 0; i < items.length; i++) {
-        if (items[i].type == 'checkbox' && items[i].checked == true)
-        console.log('{ id:' + items[i].getAttribute( 'id' ) + ' , base:"clientes" },');
+    var clientes = document.getElementsByName('check_cliente');
+    for (var i = 0; i < clientes.length; i++) {
+        if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
+        console.log('{ id:' + clientes[i].getAttribute( 'id' ) + ' , base:"clientes" },');
     }
-    var items = document.getElementsByName('check_poliza');
-    for (var i = 0; i < items.length; i++) {
-        if (items[i].type == 'checkbox' && items[i].checked == true)
-        console.log('{ id:' + items[i].getAttribute( 'id' ) + ' , base:"polizas" },');
+    var polizas = document.getElementsByName('check_poliza');
+    for (var i = 0; i < polizas.length; i++) {
+        if (polizas[i].type == 'checkbox' && polizas[i].checked == true)
+        console.log('{ id:' + polizas[i].getAttribute( 'id' ) + ' , base:"polizas" },');
     }
 }
 </script>
