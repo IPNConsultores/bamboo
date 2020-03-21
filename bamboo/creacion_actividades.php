@@ -259,7 +259,7 @@ function test() {
                 num = 1;
                 coma = ',';
             }
-        arreglo = +coma + '{ id: "' + clientes[i].getAttribute('id') + '" , base: "clientes" }';
+        arreglo += coma + '{ id: "' + clientes[i].getAttribute('id') + '" , base: "clientes" }';
 
     }
     var polizas = document.getElementsByName('check_poliza');
@@ -269,10 +269,10 @@ function test() {
                 num = 1;
                 coma = ',';
             }
-        arreglo = +coma + '{ id: "' + polizas[j].getAttribute('id') + '" , base: "polizas" }';
+        arreglo += coma + '{ id: "' + polizas[j].getAttribute('id') + '" , base: "polizas" }';
     }
-    arreglo = +']}';
+    arreglo += ']}';
     console.log(arreglo);
-    alerta(arreglo);
+    alert(arreglo);
 }
 </script>
