@@ -257,24 +257,23 @@ function test() {
     var clientes = document.getElementsByName('check_cliente');
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
-            if (num == 0) {
+
+        arreglo += coma + ' {id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
+        if (num == 0) {
                 num = 1;
                 coma = ',';
             }
-        arreglo += coma + '{id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
-
     }
     var polizas = document.getElementsByName('check_poliza');
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
-            if (num == 0) {
+        arreglo += coma + ' {id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
+        if (num == 0) {
                 num = 1;
                 coma = ',';
             }
-        arreglo += coma + '{id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
     }
     arreglo += ']}';
     console.log(arreglo);
-    alert(arreglo);
 }
 </script>
