@@ -198,23 +198,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <br>
         <label> Datos Actividad</label>
         <!-- -->
-        <form class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php"
-            novalidate>
+        <form class="needs-validation" method="POST" action="/bamboo/backend/actividades/crea_tarea.php" novalidate>
             <div class="form-row">
                 <div class="col-md-2 mb-3">
                     <label for="sel1">Prioridad:&nbsp;</label>
                     <select class="form-control" name="prioridad" id="prioridad">
-                        <option style="color:darkred" value="0.- Urgente">0.- Urgente</option>
-                        <option style="color:red" value="1.- Alto">1.- Alto</option>
-                        <option style="color:orange" value="2.- Medio">2.- Medio</option>
-                        <option style="color:darkgreen" value="3.- Bajo">3.- Bajo</option>
+                        <option style="color:darkred" value="0.- Urgente">Urgente</option>
+                        <option style="color:red" value="1.- Alto">Alto</option>
+                        <option style="color:orange" value="2.- Medio">Medio</option>
+                        <option style="color:darkgreen" value="3.- Bajo">Bajo</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="Nombre">Fecha de Vencimiento</label>
                     <div class="md-form">
-                        <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento" class="form-control"
-                            required>
+                        <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
+                            class="form-control" required>
                     </div>
                     <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
@@ -229,7 +228,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <br>
 
-            <button class="btn" type="submit"  style="background-color: #536656; color: white">Registrar</button>
+            <button class="btn" type="button" onclick="test()" style="background-color: #536656; color: white">Registrar</button>
         </form>
         <br>
     </div>
@@ -246,8 +245,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </html>
 <script>
 function test() {
-    console.log("prioridad : "+document.getElementById('prioridad').value);
-    console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
-    console.log("tarea : "+document.getElementById('tarea').value);
+    //console.log("prioridad : "+document.getElementById('prioridad').value);
+    //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
+    //console.log("tarea : "+document.getElementById('tarea').value);
+    var items = document.getElementsByName('check_cliente');
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].type == 'checkbox' && items[i].checked == true)
+        console.log('{ id:' + items[i].getAttribute( 'id' ) + ' , base:"clientes" },');
+    }
+    var items = document.getElementsByName('check_poliza');
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].type == 'checkbox' && items[i].checked == true)
+        console.log('{ id:' + items[i].getAttribute( 'id' ) + ' , base:"polizas" },');
+    }
 }
 </script>
