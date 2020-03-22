@@ -250,14 +250,14 @@ function post() {
     //console.log("prioridad : "+document.getElementById('prioridad').value);
     //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
     //console.log("tarea : "+document.getElementById('tarea').value);
-    var arreglo = '{data:[';
+    var arreglo = '[';
     var num = 0;
     var coma = '';
     var clientes = document.getElementsByName('check_cliente');
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
 
-            arreglo += coma + ' {id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
+            arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
         if (num == 0) {
             num = 1;
             coma = ',';
@@ -266,14 +266,14 @@ function post() {
     var polizas = document.getElementsByName('check_poliza');
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
-            arreglo += coma + ' {id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
+            arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
         if (num == 0) {
             num = 1;
             coma = ',';
         }
     }
-    arreglo += ']}';
-    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
+    arreglo += ']';
+    $.redirect('/prueba.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
