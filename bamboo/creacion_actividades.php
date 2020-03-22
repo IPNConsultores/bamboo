@@ -200,38 +200,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <br>
         <label> Datos Actividad</label>
         <!-- -->
-            <div class="form-row">
-                <div class="col-md-2 mb-3">
-                    <label for="sel1">Prioridad:&nbsp;</label>
-                    <select class="form-control" name="prioridad" id="prioridad">
-                        <option style="color:darkred" value="0.- Urgente">Urgente</option>
-                        <option style="color:red" value="1.- Alto" selected>Alto</option>
-                        <option style="color:orange" value="2.- Medio">Medio</option>
-                        <option style="color:darkgreen" value="3.- Bajo">Bajo</option>
-                    </select>
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label for="sel1">Prioridad:&nbsp;</label>
+                <select class="form-control" name="prioridad" id="prioridad">
+                    <option style="color:darkred" value="0.- Urgente">Urgente</option>
+                    <option style="color:red" value="1.- Alto" selected>Alto</option>
+                    <option style="color:orange" value="2.- Medio">Medio</option>
+                    <option style="color:darkgreen" value="3.- Bajo">Bajo</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="Nombre">Fecha de Vencimiento</label>
+                <div class="md-form">
+                    <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
+                        class="form-control" required>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label for="Nombre">Fecha de Vencimiento</label>
-                    <div class="md-form">
-                        <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
-                            class="form-control" required>
-                    </div>
-                    <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label for="poliza">Tarea a Realizar</label>
+                <textarea class="form-control" name="tarea" id="tarea" rows="3"></textarea>
             </div>
 
-            <div class="form-row">
-                <div class="col">
-                    <label for="poliza">Tarea a Realizar</label>
-                    <textarea class="form-control" name="tarea" id="tarea" rows="3"></textarea>
-                </div>
+        </div>
+        <br>
 
-            </div>
-            <br>
+        <button class="btn" type="button" onclick="post()"
+            style="background-color: #536656; color: white">Registrar</button>
 
-            <button class="btn" type="button" onclick="post()"
-                style="background-color: #536656; color: white">Registrar</button>
-        
         <br>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -257,31 +257,27 @@ function post() {
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
 
-        arreglo += coma + ' {id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
+            arreglo += coma + ' {id:"' + clientes[i].getAttribute('id') + '",base: "clientes"}';
         if (num == 0) {
-                num = 1;
-                coma = ',';
-            }
+            num = 1;
+            coma = ',';
+        }
     }
     var polizas = document.getElementsByName('check_poliza');
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
-        arreglo += coma + ' {id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
+            arreglo += coma + ' {id:"' + polizas[j].getAttribute('id') + '",base:"polizas"}';
         if (num == 0) {
-                num = 1;
-                coma = ',';
-            }
+            num = 1;
+            coma = ',';
+        }
     }
     arreglo += ']}';
-    $.ajax({
-                    type: "POST",
-                    url: "/bamboo/backend/actividades/crea_tarea.php",
-                    data: {
-                        prioridad: document.getElementById('prioridad').value,
-                        fechavencimiento: document.getElementById('fechavencimiento').value,
-                        tarea: document.getElementById('tarea').value,
-                        relaciones: arreglo
-                    },
-                });
+    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
+        'prioridad': document.getElementById('prioridad').value,
+        'fechavencimiento': document.getElementById('fechavencimiento').value,
+        'tarea': document.getElementById('tarea').value,
+        'relaciones': arreglo
+    }, 'post');
 }
 </script>
