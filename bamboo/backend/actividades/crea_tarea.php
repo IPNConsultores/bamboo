@@ -34,7 +34,7 @@ echo "relaciones: ".$relaciones;
       mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad, id_poliza ) values (\''.$fechavencimiento.'\', \''.$tarea.'\', \''.$prioridad.'\', '.$id_poliza.');');
     }
     */
-    header("location: /bamboo/index.php");
+    //header("location: /bamboo/index.php");
 }
 
 function estandariza_info($data) {

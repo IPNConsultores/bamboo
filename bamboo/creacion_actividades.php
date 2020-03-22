@@ -205,7 +205,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <label for="sel1">Prioridad:&nbsp;</label>
                     <select class="form-control" name="prioridad" id="prioridad">
                         <option style="color:darkred" value="0.- Urgente">Urgente</option>
-                        <option style="color:red" value="1.- Alto">Alto</option>
+                        <option style="color:red" value="1.- Alto" selected>Alto</option>
                         <option style="color:orange" value="2.- Medio">Medio</option>
                         <option style="color:darkgreen" value="3.- Bajo">Bajo</option>
                     </select>
