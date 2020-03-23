@@ -273,7 +273,7 @@ function post() {
         }
     }
     arreglo += ']';
-    $.redirect('/prueba.php', {
+    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
