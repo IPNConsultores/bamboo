@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $correo=$row->correo;
                 $num_cliente=$num_cliente+1;
                 $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
-                $tabla_tareas=$tabla_tareas.'<tr><td>'.$num_cliente.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }       
             $resultado_tareas=mysqli_query($link, 'select a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas as a left join tareas_relaciones as b on a.id=b.id_tarea and b.id is not null where base="polizas" and id_relacion="'.$busqueda.'"  order by estado, prioridad asc, fecha_vencimiento desc;');
 
