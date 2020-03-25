@@ -302,15 +302,9 @@ function botones(id, accion) {
             break;
         }
         case "info": {
-            console.log("Busqueda de ID:" + id);
-            $.notify({
-                // options
-                message: 'Recopilando información del cliente'
-            }, {
-                // settings
-                type: 'info'
-
-            });
+            $.redirect('bamboo/consolidado.php', {
+                    'id_cliente': id
+                }, 'post');
             break;
         }
     }
