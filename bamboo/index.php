@@ -471,15 +471,16 @@ function botones(id, accion, base) {
             break;
         }
         case "info": {
-            console.log("Busqueda de " + base + " ID:" + id);
-            $.notify({
-                // options
-                message: 'Recopilando información del cliente'
-            }, {
-                // settings
-                type: 'info'
-
-            });
+            if (base == 'cliente') {
+                $.redirect('/bamboo/consolidado.php', {
+                    'id_cliente': id
+                }, 'post');
+            }
+            if (base == 'poliza'){
+                $.redirect('/bamboo/consolidado.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
             break;
         }
     }
