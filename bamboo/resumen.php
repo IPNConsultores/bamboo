@@ -167,7 +167,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <tr>
                         <thead>
                             <th>#</th>
-                            <th>Seleccionar póliza</th>
                             <th>Número Póliza</th>
                             <th>Compañia</th>
                             <th>Cobertura</th>
