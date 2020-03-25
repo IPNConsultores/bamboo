@@ -167,7 +167,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <tr>
                         <thead>
                             <th>#</th>
-                            <th>Seleccionar póliza</th>
+                          
                             <th>Número Póliza</th>
                             <th>Compañia</th>
                             <th>Cobertura</th>
@@ -190,6 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <table id="listado_tareas" class="table table-striped">
                     <tr>
                         <thead>
+                        <th>#</th>
                             <th>Prioridad</th>
                             <th>Estado</th>
                             <th>Tarea o Actividad</th>
