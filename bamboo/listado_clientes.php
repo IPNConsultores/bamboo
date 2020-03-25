@@ -302,7 +302,7 @@ function botones(id, accion) {
             break;
         }
         case "info": {
-            $.redirect('/bamboo/consolidado.php', {
+            $.redirect('/bamboo/resumen.php', {
                     'id_cliente': id
                 }, 'post');
             break;

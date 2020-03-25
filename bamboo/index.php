@@ -472,12 +472,12 @@ function botones(id, accion, base) {
         }
         case "info": {
             if (base == 'cliente') {
-                $.redirect('/bamboo/consolidado.php', {
+                $.redirect('/bamboo/resumen.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza'){
-                $.redirect('/bamboo/consolidado.php', {
+                $.redirect('/bamboo/resumen.php', {
                     'id_poliza': id
                 }, 'post');
             }
