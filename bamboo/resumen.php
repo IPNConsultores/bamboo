@@ -57,9 +57,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $fecha_ingreso = $row->fecha_ingreso;
                     $fecha_vencimiento= $row->fecha_vencimiento;
                     $tarea= $row->tarea;
-                    $estado= $row->estado;
                     $prioridad = $row->prioridad;
                     $num_tareas=$num_tareas+1;
+
+                    switch ($row->estado) {
+                        case 'Pendiente':
+                            $estado='<span class="badge badge-primary">'.$row->estado.'</span>';
+                            break;
+                        case 'Completado':
+                                $estado='<span class="badge badge-secondary">'.$row->estado.'</span>';
+                                break;
+                        case 'Atrasado':
+                            $estado='<span class="badge badge-danger">'.$row->estado.'</span>';
+                            break;
+                        case 'Próximo a vencer':
+                            $estado='<span class="badge badge-warning">'.$row->estado.'</span>';
+                            break;
+                        default:
+                            $estado='<span class="badge badge-light">'.$row->estado.'</span>';
+                            break;
+                    }
+
                     $tabla_tareas=$tabla_tareas.'<tr><td>'.$num_tareas.'</td><td>'.$prioridad.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_ingreso.'</td><td>'.$fecha_vencimiento.'</td></tr>'."<br>";        
                 }            
                     
@@ -101,16 +119,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }       
             $resultado_tareas=mysqli_query($link, 'select a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas as a left join tareas_relaciones as b on a.id=b.id_tarea and b.id is not null where base="polizas" and id_relacion="'.$busqueda.'"  order by estado, prioridad asc, fecha_vencimiento desc;');
-
+        //tareas
             While($row=mysqli_fetch_object($resultado_tareas))
                 {
                     $id= $row ->id;
                     $fecha_ingreso = $row->fecha_ingreso;
                     $fecha_vencimiento= $row->fecha_vencimiento;
                     $tarea= $row->tarea;
-                    $estado= $row->estado;
                     $prioridad = $row->prioridad;
                     $num_tareas=$num_tareas+1;
+
+                    switch ($row->estado) {
+                        case 'Pendiente':
+                            $estado='<span class="badge badge-primary">Pendiente</span>';
+                            break;
+                        case 'Completado':
+                                $estado='<span class="badge badge-secondary">Completado</span>';
+                                break;
+                        case 'Atrasado':
+                            $estado='<span class="badge badge-danger">Atrasado</span>';
+                            break;
+                        case 'Próximo a vencer':
+                            $estado='<span class="badge badge-warning">Próximo a vencer</span>';
+                            break;
+                        default:
+                            $estado='<span class="badge badge-light">'.$row->estado.'</span>';
+                            break;
+                    }
+
                     $tabla_tareas=$tabla_tareas.'<tr><td>'.$num_tareas.'</td><td>'.$prioridad.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_ingreso.'</td><td>'.$fecha_vencimiento.'</td></tr>'."<br>";        
                 }
 
