@@ -153,8 +153,8 @@ $(document).ready(function() {
                 title: "Prima exenta"
             },
             {
-                "data": "prima_bruta",
-                title: "Prima bruta"
+                "data": "prima_bruta_anual",
+                title: "Prima bruta anual"
             }
 
         ],
