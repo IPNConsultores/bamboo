@@ -17,6 +17,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
       $codigo.= json_encode(array(
         "ramo" =>& $row->ramo,
         "tipo_poliza" =>& $row->tipo_poliza,
+        "moneda_prima" =>& $row->moneda_prima,
         "vigencia_inicial" =>& $row->vigencia_inicial,
         "deducible" =>& $row->deducible,
         "prima_afecta" =>& $row->prima_afecta,
@@ -27,7 +28,6 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "vigencia_final"=>& $row->vigencia_final,
         "numero_poliza"=>& $row->numero_poliza,
         "materia_asegurada"=>& $row->materia_asegurada,
-        "poliza" =>& $row->poliza,
         "patente_ubicacion" =>& $row->patente_ubicacion,
         "cobertura" =>& $row->cobertura,
         "nom_clienteP" =>& $row->nom_clienteP,
@@ -45,6 +45,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
     $codigo.= ', '.json_encode(array(
       "ramo" =>& $row->ramo,
       "tipo_poliza" =>& $row->tipo_poliza,
+      "moneda_prima" =>& $row->moneda_prima,
       "vigencia_inicial" =>& $row->vigencia_inicial,
       "deducible" =>& $row->deducible,
       "prima_afecta" =>& $row->prima_afecta,
@@ -55,7 +56,6 @@ require_once "/home/gestio10/public_html/backend/config.php";
       "vigencia_final"=>& $row->vigencia_final,
       "numero_poliza"=>& $row->numero_poliza,
       "materia_asegurada"=>& $row->materia_asegurada,
-      "poliza" =>& $row->poliza,
       "patente_ubicacion" =>& $row->patente_ubicacion,
       "cobertura" =>& $row->cobertura,
       "nom_clienteP" =>& $row->nom_clienteP,

@@ -121,7 +121,7 @@ $(document).ready(function() {
                 title: "Ramo"
             },
             {
-                "data": "vigencia_inicio",
+                "data": "vigencia_inicial",
                 title: "Vigencia Inicio"
             },
             {
@@ -162,7 +162,7 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12, 13],
+                "targets": [9,10, 11, 12],
                 "visible": false,
             },
             {
@@ -240,19 +240,19 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
-        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
+        '<td>' + d.moneda_prima +' '+ d.deducible '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima afecta:</td>' +
-        '<td>' + d.correo_electronico + '</td>' +
+        '<td>' + d.moneda_prima +' '+ d.prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima exenta:</td>' +
-        '<td>' + d.direccionp + '</td>' +
+        '<td>' + d.moneda_prima +' '+ d.prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima bruta anual:</td>' +
-        '<td>' + d.direccionl + '</td>' +
+        '<td>' + d.moneda_prima +' '+ d.prima_bruta_anual + '</td>' +
         '</tr>' +
         '</tr>' +
 
