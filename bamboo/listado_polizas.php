@@ -17,7 +17,7 @@ $num=0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
     // Check if username is empty
-//$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
+//$('#listado_polizas').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
 $buscar= estandariza_info($_POST["busqueda"]);
 }
 
@@ -55,55 +55,53 @@ $buscar= estandariza_info($_POST["busqueda"]);
         </p>
         <br>
         <div class="container">
-            <table id="listado_clientes" class="display" width="100%">
+            <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
-                    <thead>
-                        <th></th>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Apellido paterno</th>
-                        <th>Apellido materno</th>
-                        <th>Teléfono</th>
-                        <th>e-mail</th>
-                        <th>Dirección Privada</th>
-                        <th>Dirección Laboral</th>
-                        <th>id</th>
-                    </thead>
+                    <th></th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Materia</th>
                 </tr>
             </table>
-            <div id="botones"></div>
+            <div id="botones_poliza"></div>
         </div>
-    </div>
 
-
-    <div id="auxiliar" style="display: none;">
-        <input id="var1" value="<?php 
+        <div id="auxiliar" style="display: none;">
+            <input id="var1" value="<?php 
         echo htmlspecialchars($buscar);?>">
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/jquery.redirect.js"></script>
-    <script src="/assets/js/bootstrap-notify.js"></script>
-    <script src="/assets/js/bootstrap-notify.min.js"></script>
-    <script src="/assets/js/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+        <script src="/assets/js/jquery.redirect.js"></script>
+        <script src="/assets/js/bootstrap-notify.js"></script>
+        <script src="/assets/js/bootstrap-notify.min.js"></script>
+        <script src="/assets/js/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js">
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </body>
 
 </html>
 <script>
 var table = ''
 $(document).ready(function() {
-    table = $('#listado_clientes').DataTable({
-
-        "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+    table = $('#listado_polizas').DataTable({
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
@@ -111,31 +109,52 @@ $(document).ready(function() {
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
-                "data": "rut"
+                "data": "numero_poliza",
+                title: "Nro Póliza"
             },
             {
-                "data": "nombre"
+                "data": "compania",
+                title: "Compañía"
             },
             {
-                "data": "apellidop"
+                "data": "ramo",
+                title: "Ramo"
             },
             {
-                "data": "apellidom"
+                "data": "vigencia_inicio",
+                title: "Vigencia Inicio"
             },
             {
-                "data": "telefono"
+                "data": "vigencia_final",
+                title: "Vigencia Término"
             },
             {
-                "data": "correo_electronico"
+                "data": "materia_asegurada",
+                title: "Materia asegurada"
             },
             {
-                "data": "direccionp"
+                "data": "tipo_poliza",
+                title: "Tipo póliza"
             },
             {
-                "data": "direccionl"
+                "data": "patente_ubicacion",
+                title: "Observaciones materia asegurada"
             },
             {
-                "data": "id"
+                "data": "deducible",
+                title: "Deducible"
+            },
+            {
+                "data": "prima_afecta",
+                title: "Prima afecta"
+            },
+            {
+                "data": "prima_exenta",
+                title: "Prima exenta"
+            },
+            {
+                "data": "prima_bruta",
+                title: "Prima bruta"
             }
 
         ],
@@ -143,7 +162,7 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [6, 7, 8, 9],
+                "targets": [10, 11, 12, 13],
                 "visible": false,
             },
             {
@@ -175,7 +194,7 @@ $(document).ready(function() {
             }
         }
     });
-    $('#listado_clientes tbody').on('click', 'td.details-control', function() {
+    $('#listado_polizas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -189,7 +208,7 @@ $(document).ready(function() {
             tr.addClass('shown');
         }
     });
-    $('#listado_clientes').dataTable().fnFilter(document.getElementById("var1").value);
+    $('#listado_polizas').dataTable().fnFilter(document.getElementById("var1").value);
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
@@ -220,19 +239,19 @@ function format(d) {
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Nombre completo:</td>' +
+        '<td>Deducible:</td>' +
         '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Correo electrónico:</td>' +
+        '<td>Prima afecta:</td>' +
         '<td>' + d.correo_electronico + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Dirección particular:</td>' +
+        '<td>Prima exenta:</td>' +
         '<td>' + d.direccionp + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Dirección laboral:</td>' +
+        '<td>Prima bruta anual:</td>' +
         '<td>' + d.direccionl + '</td>' +
         '</tr>' +
         '</tr>' +

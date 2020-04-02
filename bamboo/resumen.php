@@ -181,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <table name="tabla_clientes" class="table table-striped">
                     <tr>
                         <thead>
-                            <th>Seleccionar cliente</th>
+                            <th>#</th>
                             <th>Rut</th>
                             <th>Nombre</th>
                             <th>Teléfono</th>
@@ -225,6 +225,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <table id="listado_tareas" class="table table-striped">
                     <tr>
                         <thead>
+                            <th>#</th>
                             <th>Prioridad</th>
                             <th>Estado</th>
                             <th>Tarea o Actividad</th>
