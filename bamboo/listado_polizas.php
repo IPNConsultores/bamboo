@@ -240,7 +240,7 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
-        '<td>' + d.moneda_prima +' '+ d.deducible '</td>' +
+        '<td>' + d.moneda_prima +' '+ d.deducible +'</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima afecta:</td>' +
