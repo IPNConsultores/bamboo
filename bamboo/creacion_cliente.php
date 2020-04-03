@@ -49,7 +49,7 @@ if ( !isset( $_SESSION ) ) {
       </div>
       <div class="col-md-4 mb-3">
         <div class="form-row">
-          <div class="col-md-8 mb-3">
+          <div class="col-md-8 mb-3 col-lg-12">
             <label for="RUT">RUT</label>
             <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
                                 oninput="checkRut(this)" onchange="valida_rut_duplicado()" required>
@@ -86,6 +86,14 @@ if ( !isset( $_SESSION ) ) {
       </div>
       <br>
     </div>
+	<div class="form-row">
+		
+	  <div class="col-md-4 mb-3 col-lg-8">
+        <label for="referido">Referido</label>
+        <input type="text" class="form-control" name="nombrereferido">
+      </div>
+	  
+	  </div>
     <br>
     <h5 class="form-row">&nbsp;Información de Contacto</h5>
     <br>
