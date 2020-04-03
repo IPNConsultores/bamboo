@@ -71,7 +71,9 @@ mysqli_set_charset( $link, 'utf8');
                         $template=str_replace('_[FORMA_PAGO]_',$forma_pago, $template);
                         $template=str_replace('_[PRIMA_ANUAL]_',$prima_bruta_anual, $template);
                         $template=str_replace('_[VEHICULO]_',$materia_asegurada, $template);
+                        $template=str_replace('_[SALTO_LINEA]_','<br>', $template);
                         
+
         mysqli_close($link);
         } 
     }
