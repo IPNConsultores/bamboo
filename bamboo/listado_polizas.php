@@ -293,11 +293,9 @@ function format(d) {
         d.id +
         ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button" id=' +
         d.id +
-        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
-        'id='+ d.id_poliza +
-        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button></td>' +
+        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button></td>' +
 
         '</tr>' +
         '</table>';
