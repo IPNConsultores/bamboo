@@ -1,125 +1,111 @@
 <?php
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if ( !isset( $_SESSION ) ) {
+  session_start();
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creación Clientes</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creación Clientes</title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
-
+    </script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <!-- body code goes here -->
-    <div id="header"><?php include 'header2.php' ?></div>
-    <div class="container">
-        <p> Clientes / Creación <br>
-        </p>
-        <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
-            <h5 class="form-row">&nbsp;Datos personales</h5>
-            <br>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label for="Nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" required>
-                    <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="ApellidoP">Apellido Paterno</label>
-                    <input type="text" class="form-control" name="apellidop" required>
-                    <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="ApellidoM">Apellido Materno</label>
-                    <input type="text" class="form-control" name="apellidom" required>
-                    <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-row">
-                        <div class="col-md-8 mb-3">
-                            <label for="RUT">RUT</label>
-                            <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
+<!-- body code goes here -->
+<div id="header">
+<?php include 'header2.php' ?>
+</div>
+<div class="container">
+  <p>Clientes / Creación<br>
+  </p>
+  <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
+    <h5 class="form-row">&nbsp;Datos personales</h5>
+    <br>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="Nombre">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ApellidoP">Apellido Paterno</label>
+        <input type="text" class="form-control" name="apellidop" required>
+        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ApellidoM">Apellido Materno</label>
+        <input type="text" class="form-control" name="apellidom" required>
+        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="form-row">
+          <div class="col-md-8 mb-3">
+            <label for="RUT">RUT</label>
+            <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
                                 oninput="checkRut(this)" onchange="valida_rut_duplicado()" required>
-
-
-
-
-                            <div class="invalid-feedback"> Dígito verificador no válido. Verifica rut ingresado </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustomUsername">E-mail</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"> <span class="input-group-text" id="mail">@</span> </div>
-                        <input type="email" class="form-control" name="correo_electronico" required>
-                        <div class="invalid-feedback"> Campo en blanco o sin formato mail (aaa@bbb.xxx) </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustomUsername">Telefono</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="telefono" placeholder="569XXXXXX" required>
-                        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="Dirección">Dirección Particular</label>
-                    <input type="text" class="form-control" name="direccionp" required>
-                    <div class="invalid-feedback"> No puedes dejar este campo en blanco </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustomUsername">Dirección Laboral</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="direccionl" required>
-                        <div class="invalid-feedback"> No puedes dejar este campo en blanco</div>
-                    </div>
-                </div> 
-				<br>			
-            </div>
-			<br>
-			
-			<h5 class="form-row">&nbsp;Información de Contacto</h5><br>
-			<div class="form-row">
-			
-			<div class ="container" id="main">
-
-<input type="button" id="btAdd" value="Añadir" class="btn" style="background-color: #536656; color: white" />
-<input type="button" id="btRemove" value="Eliminar" class="btn" style="background-color: #536656; color: white" />
-<br>
-<br>
-	  
-<div class="container-md">
-<table class="table" id="mytable">
-    
-<tr>
-    
-<th>Nombre Contacto</th>
-	<th>Telefono</th>    
-<th>E-mail</th> 
-	</tr>
-  </table>
-  <br>
-</div>
-</div>
-	
-<script type="text/javascript">
+            <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">E-mail</label>
+        <div class="input-group">
+          <div class="input-group-prepend"><span class="input-group-text" id="mail">@</span></div>
+          <input type="email" class="form-control" name="correo_electronico" required>
+          <div class="invalid-feedback">Campo en blanco o sin formato mail (aaa@bbb.xxx)</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Telefono</label>
+        <div class="input-group">
+          <input type="text" class="form-control" name="telefono" placeholder="569XXXXXX" required>
+          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="Dirección">Dirección Particular</label>
+        <input type="text" class="form-control" name="direccionp" required>
+        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Dirección Laboral</label>
+        <div class="input-group">
+          <input type="text" class="form-control" name="direccionl" required>
+          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <br>
+    <h5 class="form-row">&nbsp;Información de Contacto</h5>
+    <br>
+    <div class="form-row">
+      <div class ="container" id="main">
+        <input type="button" id="btAdd" value="Añadir" class="btn" style="background-color: #536656; color: white" />
+        <input type="button" id="btRemove" value="Eliminar" class="btn" style="background-color: #536656; color: white" />
+        <br>
+        <div class="container-md">
+          <table class="table" id="mytable">
+            <tr>
+              <th>Nombre Contacto</th>
+              <th>Telefono</th>
+              <th>E-mail</th>
+            </tr>
+          </table>
+          <br>
+        </div>
+      </div>
+      <script type="text/javascript">
 $(document).ready(function() {
         var iCnt = 0;
 
@@ -174,15 +160,11 @@ $( "#mytable" ).append( $(newElement) );
     });
     
 </script>
-			
-			
-			</div>
-            <button class="btn" type="submit" onclick="alerta()" style="background-color: #536656; color: white">Registrar</button>
-        </form>
     </div>
-
-
-    <script>
+    <button class="btn" type="submit" onclick="alerta()" style="background-color: #536656; color: white">Registrar</button>
+  </form>
+</div>
+<script>
     (function() {
         'use strict';
         window.addEventListener('load', function() {
@@ -201,18 +183,16 @@ $( "#mytable" ).append( $(newElement) );
         }, false);
     })();
     </script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="/assets/js/jquery.redirect.js"></script>
-    <script src="/assets/js/validarRUT.js"></script>
-    <script src="/assets/js/bootstrap-notify.js"></script>
-    <script src="/assets/js/bootstrap-notify.min.js"></script>
+<script src="/assets/js/jquery.redirect.js"></script>
+<script src="/assets/js/validarRUT.js"></script>
+<script src="/assets/js/bootstrap-notify.js"></script>
+<script src="/assets/js/bootstrap-notify.min.js"></script>
 
 </body>
-
 </html>
 <script>
 function valida_rut_duplicado() {
