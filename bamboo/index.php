@@ -483,6 +483,14 @@ function botones(id, accion, base) {
             }
             break;
         }
+        case "correo": {
+            if (base == 'poliza'){
+                $.redirect('/bamboo/template_poliza.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
+            break;
+        }
     }
 }
 </script>

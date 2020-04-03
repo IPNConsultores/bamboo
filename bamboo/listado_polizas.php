@@ -94,6 +94,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
         </script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+        
 </body>
 
 </html>
@@ -102,6 +103,10 @@ var table = ''
 $(document).ready(function() {
     table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "searchPanes":{
+            "columns":[2,3,13,14],
+        },
+        "dom": 'Pfrtip',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
@@ -155,6 +160,14 @@ $(document).ready(function() {
             {
                 "data": "prima_bruta_anual",
                 title: "Prima bruta anual"
+            },
+            {
+                "data": "anomes_final",
+                title: "Añomes final"
+            },
+            {
+                "data": "anomes_inicial",
+                title: "Añomes inicial"
             }
 
         ],
@@ -162,12 +175,18 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [9,10, 11, 12],
+                "targets": [9,10, 11, 12,13,14],
                 "visible": false,
             },
             {
-                "targets": [5, 6, 7, 8, 9],
+                "targets": [9,10, 11, 12,13,14],
                 "searchable": false
+            },
+            {
+                "searchPanes": {
+                    "preSelect":['202003'],
+                },
+                "targets":[14],
             }
         ],
         "order": [
@@ -191,6 +210,15 @@ $(document).ready(function() {
                 "sNext": "Siguiente",
                 "sPrevious": "Anterior",
                 "sLast": "Última"
+            }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
+                }
             }
         }
     });
@@ -259,72 +287,77 @@ function format(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
-        ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id +
-        ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id +
-        ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
+        d.id +
+        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
 }
 
-function botones(id, accion) {
+function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "elimina": {
-            console.log("Cliente eliminado con ID:" + id);
-            var r = confirm(
-                "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
-            );
-            if (r == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "/bamboo/backend/clientes/elimina_cliente.php",
-                    data: {
-                        cliente: id
-                    },
-                });
-                $.notify({
-                    // options
-                    message: 'Cliente eliminado con éxito'
-                }, {
-                    // settings
-                    type: 'success'
-                });
-                table.ajax.reload();
-                //location
-                break;
-
-            } else {
-                $.notify({
-                    // options
-                    message: 'Proceso de eliminación de cliente cancelado'
-                }, {
-                    // settings
-                    type: 'info'
-                });
-                break;
-            }
+            console.log(base + " eliminado con ID:" + id);
+            $.notify({
+                // options
+                message: base + ' modificado'
+            }, {
+                // settings
+                type: 'danger'
+            });
+            break;
         }
         case "modifica": {
-            $.redirect('/bamboo/modificacion_cliente.php', {
-                'cliente': id
-            }, 'post');
+            console.log(base + " modificado con ID:" + id);
+            $.notify({
+                // options
+                message: base + ' modificado'
+            }, {
+                // settings
+                type: 'success'
+            });
             break;
         }
         case "tarea": {
-            $.redirect('/bamboo/creacion_actividades.php', {
-                'id_cliente': id
-            }, 'post');
+            if (base == 'cliente') {
+                $.redirect('/bamboo/creacion_actividades.php', {
+                    'id_cliente': id
+                }, 'post');
+            }
+            if (base == 'poliza'){
+                $.redirect('/bamboo/creacion_actividades.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
             break;
         }
         case "info": {
-            $.redirect('/bamboo/resumen.php', {
-                'id_cliente': id
-            }, 'post');
+            if (base == 'cliente') {
+                $.redirect('/bamboo/resumen.php', {
+                    'id_cliente': id
+                }, 'post');
+            }
+            if (base == 'poliza'){
+                $.redirect('/bamboo/resumen.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
+            break;
+        }
+        case "correo": {
+            if (base == 'poliza'){
+                $.redirect('/bamboo/template_poliza.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
             break;
         }
     }
