@@ -19,7 +19,7 @@ if(!isset($_SESSION))
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
 
 </head>
 
@@ -90,9 +90,93 @@ if(!isset($_SESSION))
                         <input type="text" class="form-control" name="direccionl" required>
                         <div class="invalid-feedback"> No puedes dejar este campo en blanco</div>
                     </div>
-                </div>
+                </div> 
+				<br>			
             </div>
+			<br>
+			
+			<h5 class="form-row">&nbsp;Información de Contacto</h5><br>
+			<div class="form-row">
+			
+			<div class ="container" id="main">
 
+<input type="button" id="btAdd" value="Añadir" class="btn" style="background-color: #536656; color: white" />
+<input type="button" id="btRemove" value="Eliminar" class="btn" style="background-color: #536656; color: white" />
+<br>
+<br>
+	  
+<div class="container-md">
+<table class="table" id="mytable">
+    
+<tr>
+    
+<th>Nombre Contacto</th>
+	<th>Telefono</th>    
+<th>E-mail</th> 
+	</tr>
+  </table>
+  <br>
+</div>
+</div>
+	
+<script type="text/javascript">
+$(document).ready(function() {
+        var iCnt = 0;
+
+// Crear un elemento div añadiendo estilos CSS
+        var container = $(document.createElement('div')).css({
+            padding: '10px', margin: '20px', width: '340px',
+        });
+
+        $('#btAdd').click(function() {
+            if (iCnt <= 4) {
+
+                iCnt = iCnt + 1;
+
+                // Añadir caja de texto.
+     
+                if (iCnt == 1) { var divSubmit = $(document.createElement('div'));
+//                    $(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()"' + 
+//                            'id=btSubmit value=Enviar />');
+								
+                }
+var newElement = '<tr id =registro' + iCnt +'><td><input type="text" value="" id=nombrecontact ' + iCnt +' name="Nombre[]" placeholder=""/></td><td><input type="text" value="" id=telefonocontact ' + iCnt +' name="Telefono[]" placeholder="56900000000"/></td><td><input type="email" value="" id=emailcontact' + iCnt +' name="email[]" placeholder="aaa@bbb.com"/></td></tr>';	
+$( "#mytable" ).append( $(newElement) );
+				
+ $('#main').after(container, divSubmit); 
+            }
+            else {      //se establece un limite para añadir elementos, 5 es el limite
+                
+                $(container).append('<label id=label>Limite Alcanzado</label> '); 
+                $('#btAdd').attr('class', 'btn'); 
+                $('#btAdd').attr('disabled', 'disabled');
+
+            }
+        });
+
+        $('#btRemove').click(function() {   // Elimina un elemento por click
+            
+			if (iCnt != 0) {iCnt = iCnt - 1; $('#btAdd').removeAttr('disabled'); $('#registro' + iCnt ).remove() }
+      		if (iCnt == 4) {$('#label').remove(); }
+            if (iCnt == 0) {$('#mytable').remove(); 
+               $(container).remove(); 
+//                $('#btSubmit').remove(); 
+                $('#btAdd').removeAttr('disabled'); 
+                $('#btAdd').attr('class', 'btn') 
+							
+	var newElement2 = '<table class="table" id="mytable"><tr><th>Nombre Contacto</th><th>Telefono</th><th>E-mail</th></tr></table>';
+$( "#main" ).append( $(newElement2) );
+$( "#mytable" ).append( $(newElement) );
+            }
+        });
+
+       
+    });
+    
+</script>
+			
+			
+			</div>
             <button class="btn" type="submit" onclick="alerta()" style="background-color: #536656; color: white">Registrar</button>
         </form>
     </div>
