@@ -354,7 +354,7 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'poliza'){
-                $.redirect('/bamboo/template_poliza.php, {
+                $.redirect('/bamboo/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
