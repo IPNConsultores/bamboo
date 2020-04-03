@@ -62,10 +62,10 @@ function valida_rut(){
                                 href="/bamboo/creacion_poliza.php">Creación</a> <a class="dropdown-item" href="/bamboo/listado_polizas.php">Listado de pólizas</a> </div>
                     </li>
 					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
-						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actividades</a>
+						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Otros</a>
 						<div class ="dropdown-menu" aria-labelledby="navbarDropdown"> 
-							<a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación </a>
-							<a class="dropdown-item" href="#">Modificación </a>						
+							<a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación tareas</a>
+							<a class="dropdown-item" href="#">Crear/Modificar template correos</a>						
 						</div>				
 					</li>
                 </ul>

@@ -8,29 +8,16 @@ function estandariza_info($data) {
 }
 require_once "/home/gestio10/public_html/backend/config.php";
 
-
-
-mysqli_set_charset( $link, 'utf8');
-            mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-                //poliza
-
-
-        mysqli_set_charset( $link, 'utf8');
-            mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-                //poliza
- $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos where producto="vehiculo" and instancia="envio_poliza"');
-                While($row=mysqli_fetch_object($resultado_template))
-                    {
-                        $template=$row->template;
-                    }
-
-
-
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
-
-
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+            //poliza
+$resultado_template=mysqli_query($link, 'SELECT template FROM template_correos where producto="vehiculo" and instancia="envio_poliza"');
+            While($row=mysqli_fetch_object($resultado_template))
+                {
+                    $template=$row->template;
+                }
 
         // Viene desde póliza
         if(!empty(trim($_POST["id_poliza"]))){
