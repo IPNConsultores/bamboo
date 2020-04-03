@@ -84,14 +84,19 @@ if ( !isset( $_SESSION ) ) {
           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
         </div>
       </div>
+		<div class="col-md-4 mb-3">
+        <label for="referido">Referido</label>
+        <input type="text" class="form-control" name="nombrereferido">
+      </div>
+		<div class="col-md-4 mb-3">
+        <label for="grupo">Grupo</label>
+        <input type="text" class="form-control" name="grupo">
+      </div>
       <br>
     </div>
 	<div class="form-row">
 		
-	  <div class="col-md-4 mb-3 col-lg-8">
-        <label for="referido">Referido</label>
-        <input type="text" class="form-control" name="nombrereferido">
-      </div>
+	  
 	  
 	  </div>
     <br>
