@@ -111,7 +111,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                     <br>
                 </div>
                 <div class="col" style="align-self: center">
-                    <button class="btn" type="submit"
+                    <button class="btn" type="submit" onclick="cargar_template()"
                         style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
                         template</button>
                 </div>
