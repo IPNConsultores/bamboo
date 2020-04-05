@@ -15,6 +15,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     switch ( $_POST[ "tipo" ] ) {
       case "probar":
         $template = estandariza_info( $_POST[ "template" ] );
+        break;
       case "guardar":
         $template = estandariza_info( $_POST[ "template" ] );
         $instancia = $_POST[ "instancia_aux" ];
@@ -286,6 +287,11 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 		</div>
 		<br>
       </div>
+      <div id="auxiliar" style="display: none;">
+                          <input name="tipo" id="tipo">
+                          <input name="producto_aux" id="producto_aux">
+                          <input name="instancia_aux" id="instancia_aux">
+                      </div>
   </form>
   </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
