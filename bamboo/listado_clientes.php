@@ -51,7 +51,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <p> Clientes / Modificación <br>
+        <p> Clientes / Listado de clientes <br>
         </p>
         <br>
         <div class="container">

@@ -17,7 +17,7 @@ $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');');
-
+/*
 if ($contactos==0){
 }
 else{
@@ -28,6 +28,7 @@ else{
     mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
   }
 }
+*/
 //echo '<script type="text/javascript">
 //redirige('.$rut.');
 //</script>';
