@@ -115,7 +115,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 <div class="row"
                     style="overflow-y: scroll;height: 200px;border-style: solid; border-width: thin;border-color: #D2D8DD">
                     <table class="table" id="formato">
-                        <thead style="display: block">
+                        <thead >
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
@@ -202,7 +202,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 <div class="row"
                     style="overflow-y:scroll;height: 200px;border: solid; border-width: thin;border-color: #D2D8DD">
                     <table class="table" id="formato">
-                        <thead style="display: block">
+                        <thead>
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
@@ -254,9 +254,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         <div class="col">
             <h6>Template</h6>
             <textarea class="form-control" rows="10" style="height: 200px" id='template' name='template'
-                text-indent:0px;>
-                          <?php echo $template; ?>
-                      </textarea>
+                style="text-indent:0px";><?php echo $template; ?></textarea>
             <br>
             <h6>Resultado</h6>
             <div class="form-control bg-light text-dark" rows="10"

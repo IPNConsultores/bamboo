@@ -126,7 +126,7 @@ if ( !isset( $_SESSION ) ) {
                 <input name="contactos" id="contactos">
             </div>
 
-            <button class="btn" type="submit" onclick="alerta()"
+            <button class="btn" type="submit" 
                 style="background-color: #536656; color: white">Registrar</button>
         </form>
     </div>
