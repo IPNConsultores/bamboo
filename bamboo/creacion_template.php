@@ -294,4 +294,8 @@ function envio_data(boton) {
     }
 
 }
+function cargar_template(){
+  document.getElementById('instancia').value = "<?php echo $instancia;?>";
+  document.getElementById('seguro').value = "<?php echo $producto;?>";
+}
 </script>

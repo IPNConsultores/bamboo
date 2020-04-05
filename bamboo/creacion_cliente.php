@@ -87,7 +87,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="referido">Referido</label>
-                    <input type="text" class="form-control" name="nombrereferido">
+                    <input type="text" class="form-control" name="referido">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="grupo">Grupo</label>
@@ -239,10 +239,14 @@ $(document).ready(function() {
             }
             var newElement = '<tr id =registro' + iCnt +
                 '><td><input type="text" value="" id="nombrecontact ' + iCnt +
-                '" name="Nombre[]" placeholder=""/></td><td><input type="text" value="" id="telefonocontact ' +
+                '" name="nombrecontact ' + iCnt +
+                '" placeholder=""/></td><td><input type="text" value="" id="telefonocontact ' +
                 iCnt +
-                '" name="Telefono[]" placeholder="56 9 XXXX XXXX"/></td><td><input type="email" value="" id="emailcontact ' +
-                iCnt + '" name="email[]" placeholder="aaa@bbb.com"/></td></tr>';
+                '" name="telefonocontact ' +
+                iCnt +
+                '" placeholder="56 9 XXXX XXXX"/></td><td><input type="email" value="" id="emailcontact ' +
+                iCnt + '" name=emailcontact ' +
+                iCnt + '" placeholder="aaa@bbb.com"/></td></tr>';
             $("#mytable").append($(newElement));
 
             $('#main').after(container, divSubmit);
