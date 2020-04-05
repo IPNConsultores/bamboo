@@ -1,7 +1,5 @@
 <?php
-$template=$resultado_template='';
-$instancia='envio_poliza';
-$producto='vehiculo';
+$template=$resultado_template=$instancia=$producto='';
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -90,7 +88,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
             <div class="row">
                 <div class="col">
                     <label><b>Instancia</b></label>
-                    <select class="form-control" name="instancia" id="instancia" value="<?php echo $instancia;?>">
+                    <select class="form-control" name="instancia" id="instancia" value="<?php echo $_POST[ "instancia" ];?>">
                         <option value="envio_poliza">Informar seguro</option>
                         <option value="renovacion">Renovación</option>
                         <option value="otro">Otro</option>
@@ -98,7 +96,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 </div>
                 <div class="col">
                     <label><b>Producto</b></label>
-                    <select class="form-control" name="seguro" id="seguro" value="<?php echo $producto;?>">
+                    <select class="form-control" name="seguro" id="seguro" value="<?php echo $_POST[ "seguro" ];?>">
                         <option value="vehiculo">Vehiculo</option>
                         <option value="hogar">Hogar</option>
                         <option value="viaje">A. VIAJE</option>
