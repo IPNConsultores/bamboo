@@ -74,10 +74,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         <option value="renovacion">Renovación</option>
         <option value="otro">Otro</option>
       </select>
-        <br>
-        <button class="btn" type="submit" style="background-color: #536656; color: white">Buscar template</button>
       </div>
-		</form>
     <div class="col">
         <label ><b>Producto</b></label>
         <select class="form-control" name="seguro" id="producto">
@@ -94,200 +91,197 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       </select>
         <br>
       </div>
+   
+        <button class="btn" type="submit" style="background-color: #536656; color: white; height: 45; align-self: center">Buscar template</button>
+      
+  </form>
   </div>
-    <div class="row">
+<div class="row">
     <div class="col-6 col-md-4" style="border-right-style: solid; border-right-width: thin;">
-	<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
-      <h6>Diccionario de Campos</h6>
-      <div class="row" style="overflow-y: scroll;height: 200px;border-bottom-style: solid; border-bottom-width: thin;">	
-      <table class = "table" id="formato" >
-		  <thead>
-        <tr>
-          <th>Comando</th>
-          <th>Definición</th>
-        </tr>
-	 </thead>
-		  <tbody>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  
-		  </tbody>
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
+    <h6>Diccionario de Campos</h6>
+    <div class="row" style="overflow-y: scroll;height: 200px;border-bottom-style: solid; border-bottom-width: thin;">
+        <table class = "table" id="formato" >
+        <thead>
+            <tr>
+            <th>Comando</th>
+            <th>Definición</th>
+          </tr>
+          </thead>
+        <tbody>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+          </tbody>
       </table>
-		  </div>
-		<br>
-      <h6>Diccionario de Formato</h6>
-      <div class="row" style="overflow-y:scroll;height: 200px" >		
-      <table class = "table" id="formato" >
-		  <thead>
-        <tr>
-          <th>Comando</th>
-          <th>Definición</th>
-        </tr>
-	 </thead>
-		  <tbody>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  <tr>
-			<td>_[NRO_POLIZA]_</td>
-			<td>Número Póliza</td>
-			  </tr>
-			  <tr>
-			<td> _[RAMO]_</td>
-			<td>Ramo</td>
-			  </tr>
-			  <tr>
-			<td> _[NOMBRE_CLIENTE]_ </td>
-			<td> Nombre Cliente</td>
-		  </tr>
-		  
-		  </tbody>
+      </div>
+    <br>
+    <h6>Diccionario de Formato</h6>
+    <div class="row" style="overflow-y:scroll;height: 200px" >
+        <table class = "table" id="formato" >
+        <thead>
+            <tr>
+            <th>Comando</th>
+            <th>Definición</th>
+          </tr>
+          </thead>
+        <tbody>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+            <tr>
+            <td>_[NRO_POLIZA]_</td>
+            <td>Número Póliza</td>
+          </tr>
+            <tr>
+            <td>_[RAMO]_</td>
+            <td>Ramo</td>
+          </tr>
+            <tr>
+            <td>_[NOMBRE_CLIENTE]_</td>
+            <td>Nombre Cliente</td>
+          </tr>
+          </tbody>
       </table>
-		  </div>
-		<br>
-		 <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Probar</button>
+      </div>
+    <br>
+    <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Probar</button>
     <button class="btn" name="guardar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Guardar</button>
     </div>
-		
     <div class="col" >
-		<h6>Template</h6>
+        <h6>Template</h6>
         <textarea class ="form-control" rows="10"  id='template' name='template' text-indent:0px;>
                           <?php echo $template; ?>
                       </textarea>
-		<br>
-		
-		<h6>Resultado</h6>
-		<div class="col bg-dark text-dark" border-style: solid;>
-          <?php echo $template_ejemplo; ?>
-      </div>
-		
+        <br>
+        <h6>Resultado</h6>
+        <div class="col bg-light text-dark" style="height: 100px" border-style: solid;><?php echo $template_ejemplo; ?></div>
       </div>
   </form>
   </div>
