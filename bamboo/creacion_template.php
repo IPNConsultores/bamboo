@@ -282,7 +282,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                       </textarea>
         <br>
         <h6>Resultado</h6>
-        <div class="form-control bg-light text-dark" rows="10" style="height: 200; border-style: solid;overflow-y: scroll"><?php echo $template_ejemplo; ?>
+        <div class="form-control bg-light text-dark" rows="10" style="height: 200px; border-style: solid;overflow-y: scroll"><?php echo $template_ejemplo; ?>
 		</div>
 		<br>
       </div>
