@@ -284,15 +284,13 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 		<br>
 		
 		<h6>Resultado</h6>
-		<div class="col-md-6 bg-light text-dark" border-style: solid;>
+		<div class="col bg-dark text-dark" border-style: solid;>
           <?php echo $template_ejemplo; ?>
       </div>
 		
       </div>
   </form>
   </div>
-<div class="col-md-6 bg-light text-dark" border-style: solid;><?php echo $template_ejemplo; ?></div>
-</div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
           integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
       </script>
