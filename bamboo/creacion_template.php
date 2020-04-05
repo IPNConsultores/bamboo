@@ -20,7 +20,16 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         $template = estandariza_info( $_POST[ "template" ] );
         $instancia = $_POST[ "instancia_aux" ];
         $producto = $_POST[ "seguro_aux" ];
-        mysqli_query( $link, 'UPDATE template_correos SET template="' . $template . '" where producto="' . $producto . '" and instancia="' . $instancia . '"' );
+        $verif_combi = mysqli_query( $link, 'SELECT COUNT(*) AS contador FROM template_correos WHERE producto="' . $producto . '" and instancia="' . $instancia . '"' );
+        While( $row = mysqli_fetch_object( $verif_combi ) ) {
+          $verif = estandariza_info( $row->contador );
+        }
+        if (!$verif==0){
+          mysqli_query( $link, 'UPDATE template_correos SET template="' . $template . '" where producto="' . $producto . '" and instancia="' . $instancia . '"' );
+        }
+        else{
+          mysqli_query( $link, 'INSERT INTO template_correos(template, producto, instancia) values ("' . $template . '","' . $producto . '", "' . $instancia . '");' );
+        }
         break;
     }
 
