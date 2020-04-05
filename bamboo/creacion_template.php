@@ -1,5 +1,5 @@
 <?php
-
+$template=$resultado_template='';
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -19,7 +19,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       case "guardar":
         $template = estandariza_info( $_POST[ "template" ] );
         $instancia = $_POST[ "instancia_aux" ];
-        $producto = $_POST[ "producto_aux" ];
+        $producto = $_POST[ "seguro_aux" ];
         mysqli_query( $link, 'UPDATE template_correos SET template="' . $template . '" where producto="' . $producto . '" and instancia="' . $instancia . '"' );
         break;
     }
@@ -87,7 +87,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 </div>
                 <div class="col">
                     <label><b>Producto</b></label>
-                    <select class="form-control" name="seguro" id="producto">
+                    <select class="form-control" name="seguro" id="seguro">
                         <option value="vehiculo">Vehiculo</option>
                         <option value="hogar">Hogar</option>
                         <option value="viaje">A. VIAJE</option>
@@ -115,7 +115,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 <div class="row"
                     style="overflow-y: scroll;height: 200px;border-style: solid; border-width: thin;border-color: #D2D8DD">
                     <table class="table" id="formato">
-                        <thead>
+                        <thead style="display: block">
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
@@ -202,7 +202,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 <div class="row"
                     style="overflow-y:scroll;height: 200px;border: solid; border-width: thin;border-color: #D2D8DD">
                     <table class="table" id="formato">
-                        <thead>
+                        <thead style="display: block">
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
@@ -266,7 +266,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         </div>
         <div id="auxiliar" style="display: none;">
             <input name="tipo" id="tipo">
-            <input name="producto_aux" id="producto_aux">
+            <input name="seguro_aux" id="seguro_aux">
             <input name="instancia_aux" id="instancia_aux">
         </div>
         </form>
@@ -282,7 +282,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 function envio_data(boton) {
     document.getElementById("tipo").value = boton;
     if (boton == "guardar") {
-        document.getElementById("producto_aux").value = document.getElementById("seguro").value;
+        document.getElementById("seguro_aux").value = document.getElementById("seguro").value;
         document.getElementById("instancia_aux").value = document.getElementById("instancia").value;
     }
 
