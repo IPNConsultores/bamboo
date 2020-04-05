@@ -100,7 +100,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     <div class="col-6 col-md-4">
     <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
     <h6>Diccionario de Campos</h6>
-    <div class="row" style="overflow-y: scroll;height: 200px;border-bottom-style: solid; border-bottom-width: thin;">
+    <div class="row" style="overflow-y: scroll;height: 200px;border-style: solid; border-width: thin;border-color: #D2D8DD">
         <table class = "table" id="formato" >
         <thead>
             <tr>
@@ -186,7 +186,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       </div>
     <br>
     <h6>Diccionario de Formato</h6>
-    <div class="row" style="overflow-y:scroll;height: 200px" >
+    <div class="row" style="overflow-y:scroll;height: 200px;border: solid; border-width: thin;border-color: #D2D8DD">
         <table class = "table" id="formato" >
         <thead>
             <tr>
@@ -275,14 +275,15 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     <button class="btn" name="guardar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Guardar</button>
     </div>
 		<br>
-    <div class="col" style="border-left: solid; border-left-width: thin;" >
+    <div class="col">
         <h6>Template</h6>
         <textarea class ="form-control" rows="10"  id='template' name='template' text-indent:0px;>
                           <?php echo $template; ?>
                       </textarea>
         <br>
         <h6>Resultado</h6>
-        <div class="col bg-light text-dark" rows="10" style="height: auto" border-style: solid;><?php echo $template_ejemplo; ?></div>
+        <div class="form-control bg-light text-dark" rows="10" style="height: auto; border-style: solid;"><?php echo $template_ejemplo; ?>
+		</div>
 		<br>
       </div>
   </form>
