@@ -65,9 +65,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 <?php include 'header2.php' ?>
 </div>
 <div class="container" >
-    
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name="solicita_template">
     <div class="row">
-	<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name="solicita_template">
     <div class="col">
         <label ><b>Instancia</b></label>
         <select class="form-control" name="instancia" id="instancia">
@@ -98,7 +97,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   </form>
   </div>
 <div class="row">
-    <div class="col-6 col-md-4" style="border-right-style: solid; border-right-width: thin;">
+    <div class="col-6 col-md-4">
     <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
     <h6>Diccionario de Campos</h6>
     <div class="row" style="overflow-y: scroll;height: 200px;border-bottom-style: solid; border-bottom-width: thin;">
@@ -275,14 +274,15 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Probar</button>
     <button class="btn" name="guardar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Guardar</button>
     </div>
-    <div class="col" >
+    <div class="col" style="border-left: -style: solid; border-left-width: thin;" >
         <h6>Template</h6>
         <textarea class ="form-control" rows="10"  id='template' name='template' text-indent:0px;>
                           <?php echo $template; ?>
                       </textarea>
         <br>
         <h6>Resultado</h6>
-        <div class="col bg-light text-dark" style="height: 100px" border-style: solid;><?php echo $template_ejemplo; ?></div>
+        <div class="col bg-light text-dark" style="height: auto" border-style: solid;><?php echo $template_ejemplo; ?></div>
+		<br>
       </div>
   </form>
   </div>
