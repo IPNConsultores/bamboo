@@ -1,5 +1,7 @@
 <?php
 $template=$resultado_template='';
+$instancia='envio_poliza';
+$producto='vehiculo';
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -88,7 +90,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
             <div class="row">
                 <div class="col">
                     <label><b>Instancia</b></label>
-                    <select class="form-control" name="instancia" id="instancia">
+                    <select class="form-control" name="instancia" id="instancia" value="<?php echo $instancia;?>">
                         <option value="envio_poliza">Informar seguro</option>
                         <option value="renovacion">Renovación</option>
                         <option value="otro">Otro</option>
@@ -96,7 +98,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 </div>
                 <div class="col">
                     <label><b>Producto</b></label>
-                    <select class="form-control" name="seguro" id="seguro">
+                    <select class="form-control" name="seguro" id="seguro" value="<?php echo $producto;?>">
                         <option value="vehiculo">Vehiculo</option>
                         <option value="hogar">Hogar</option>
                         <option value="viaje">A. VIAJE</option>
@@ -111,7 +113,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                     <br>
                 </div>
                 <div class="col" style="align-self: center">
-                    <button class="btn" type="submit" onclick="cargar_template()"
+                    <button class="btn" type="submit"
                         style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
                         template</button>
                 </div>
@@ -294,8 +296,5 @@ function envio_data(boton) {
     }
 
 }
-function cargar_template(){
-  document.getElementById('instancia').value = "<?php echo $instancia;?>";
-  document.getElementById('seguro').value = "<?php echo $producto;?>";
-}
+
 </script>

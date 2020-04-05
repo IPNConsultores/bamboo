@@ -238,14 +238,14 @@ $(document).ready(function() {
 
             }
             var newElement = '<tr id =registro' + iCnt +
-                '><td><input type="text" value="" id="nombrecontact ' + iCnt +
-                '" name="nombrecontact ' + iCnt +
-                '" placeholder=""/></td><td><input type="text" value="" id="telefonocontact ' +
+                '><td><input type="text" value="" id="nombrecontact' + iCnt +
+                '" name="nombrecontact' + iCnt +
+                '" placeholder=""/></td><td><input type="text" value="" id="telefonocontact' +
                 iCnt +
-                '" name="telefonocontact ' +
+                '" name="telefonocontact' +
                 iCnt +
-                '" placeholder="56 9 XXXX XXXX"/></td><td><input type="email" value="" id="emailcontact ' +
-                iCnt + '" name=emailcontact ' +
+                '" placeholder="56 9 XXXX XXXX"/></td><td><input type="email" value="" id="emailcontact' +
+                iCnt + '" name=emailcontact' +
                 iCnt + '" placeholder="aaa@bbb.com"/></td></tr>';
             $("#mytable").append($(newElement));
 
