@@ -274,14 +274,15 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Probar</button>
     <button class="btn" name="guardar" type="submit" style="background-color: #536656; color: white" onclick="envio_data(this.name)" >Guardar</button>
     </div>
-    <div class="col" style="border-left: -style: solid; border-left-width: thin;" >
+		<br>
+    <div class="col" style="border-left: solid; border-left-width: thin;" >
         <h6>Template</h6>
         <textarea class ="form-control" rows="10"  id='template' name='template' text-indent:0px;>
                           <?php echo $template; ?>
                       </textarea>
         <br>
         <h6>Resultado</h6>
-        <div class="col bg-light text-dark" style="height: auto" border-style: solid;><?php echo $template_ejemplo; ?></div>
+        <div class="col bg-light text-dark" rows="10" style="height: auto" border-style: solid;><?php echo $template_ejemplo; ?></div>
 		<br>
       </div>
   </form>
