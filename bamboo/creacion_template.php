@@ -47,10 +47,10 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   }
 
   $template_ejemplo = $template;
+  $template_ejemplo = str_replace( '_[NOMBRE_CLIENTE]_', 'Juan Pérez', $template_ejemplo );
   $template_ejemplo = str_replace( '_[NRO_POLIZA]_', '1923898', $template_ejemplo );
   $template_ejemplo = str_replace( '_[RAMO]_', 'VEH', $template_ejemplo );
   $template_ejemplo = str_replace( '_[COMPANIA]_', 'Sura', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[NOMBRE_CLIENTE]_', 'Juan Pérez', $template_ejemplo );
   $template_ejemplo = str_replace( '_[VIGENCIA_INICIAL]_', '2020-04-01', $template_ejemplo );
   $template_ejemplo = str_replace( '_[VIGENCIA_FINAL]_', '2021-04-01', $template_ejemplo );
   $template_ejemplo = str_replace( '_[COBERTURA]_', 'Auto Premium', $template_ejemplo );
@@ -59,8 +59,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   $template_ejemplo = str_replace( '_[FORMA_PAGO]_', '11 cuotas PAT', $template_ejemplo );
   $template_ejemplo = str_replace( '_[PRIMA_ANUAL]_', '31.54', $template_ejemplo );
   $template_ejemplo = str_replace( '_[VEHICULO]_', 'Mercedes Benz E200 año 2014', $template_ejemplo );
+  
   $template_ejemplo = str_replace( '_[SALTO_LINEA]_', '<br>', $template_ejemplo );
-
   $template_ejemplo = str_replace( '_[NEG_ini]_', '<b>', $template_ejemplo );
   $template_ejemplo = str_replace( '_[NEG_fin]_', '</b>', $template_ejemplo );
   $template_ejemplo = str_replace( '_[SUB_ini]_', '<u>', $template_ejemplo );
@@ -102,7 +102,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                     <label><b>Producto</b></label>
                     <select class="form-control" name="seguro" id="seguro">
                         <option value="vehiculo" <?php if ($producto == "vehiculo") echo "selected" ?> >Vehiculo</option>
-                        <option value="hogar" <?php if ($producto == "hogar") echo "selected" ?> >Hogar</option>
+                        <option value="hogar_persona" <?php if ($producto == "hogar_persona") echo "selected" ?> >Hogar persona</option>
+                        <option value="hogar_pyme" <?php if ($producto == "hogar_pyme") echo "selected" ?> >Hogar PyME</option>
                         <option value="viaje" <?php if ($producto == "viaje") echo "selected" ?> >A. VIAJE</option>
                         <option value="rc_do" <?php if ($producto == "rc_do") echo "selected" ?> >RC - D&O</option>
                         <option value="inc" <?php if ($producto == "inc") echo "selected" ?> >INC</option>
@@ -136,14 +137,6 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
-                            </tr>
-                            <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
-                            </tr>
-                            <tr>
                                 <td>_[NOMBRE_CLIENTE]_</td>
                                 <td>Nombre Cliente</td>
                             </tr>
@@ -156,57 +149,42 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                                 <td>Ramo</td>
                             </tr>
                             <tr>
-                                <td>_[NOMBRE_CLIENTE]_</td>
-                                <td>Nombre Cliente</td>
+                                <td>_[COMPANIA]_</td>
+                                <td>Compañía</td>
                             </tr>
                             <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
+                                <td>_[VIGENCIA_INICIAL]_</td>
+                                <td>Fecha vigencia inicial</td>
                             </tr>
                             <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
+                                <td>_[VIGENCIA_FINAL]_</td>
+                                <td>Fecha vigencia Final</td>
                             </tr>
                             <tr>
-                                <td>_[NOMBRE_CLIENTE]_</td>
-                                <td>Nombre Cliente</td>
+                                <td>_[COBERTURA]_</td>
+                                <td>Cobertura</td>
                             </tr>
                             <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
+                                <td>_[DEDUCIBLE]_</td>
+                                <td>Deducible</td>
                             </tr>
                             <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
+                                <td>_[PRIMERA_CUOTA]_</td>
+                                <td>Fecha primera cuota</td>
                             </tr>
                             <tr>
-                                <td>_[NOMBRE_CLIENTE]_</td>
-                                <td>Nombre Cliente</td>
+                                <td>_[FORMA_PAGO]_</td>
+                                <td>Forma de Pago</td>
                             </tr>
                             <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
+                                <td>_[PRIMA_ANUAL]_</td>
+                                <td>Prima Anual Bruta</td>
                             </tr>
                             <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
+                                <td>_[VEHICULO]_</td>
+                                <td>Vehiculo</td>
                             </tr>
-                            <tr>
-                                <td>_[NOMBRE_CLIENTE]_</td>
-                                <td>Nombre Cliente</td>
-                            </tr>
-                            <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
-                            </tr>
-                            <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
-                            </tr>
-                            <tr>
-                                <td>_[NOMBRE_CLIENTE]_</td>
-                                <td>Nombre Cliente</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
