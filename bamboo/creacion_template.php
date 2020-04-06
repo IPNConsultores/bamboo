@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 $template=$resultado_template=$instancia=$producto='';
 function estandariza_info( $data ) {
   $data = trim( $data );
@@ -89,7 +93,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                 <div class="col">
                     <label><b>Instancia</b></label>
                     <select class="form-control" name="instancia" id="instancia">
-                        <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar seguro</option>
+                        <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
                         <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Renovación</option>
                         <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
                     </select>
