@@ -104,6 +104,7 @@ $(document).ready(function() {
     table = $('#listado_clientes').DataTable({
 
         "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+        "scrollX": true,
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,

@@ -103,6 +103,7 @@ var table = ''
 $(document).ready(function() {
     table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],
         },
