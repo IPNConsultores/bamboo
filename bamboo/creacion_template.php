@@ -88,25 +88,25 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
             <div class="row">
                 <div class="col">
                     <label><b>Instancia</b></label>
-                    <select class="form-control" name="instancia" id="instancia" value="<?php echo $_POST[ "instancia" ];?>">
-                        <option value="envio_poliza">Informar seguro</option>
-                        <option value="renovacion">Renovación</option>
-                        <option value="otro">Otro</option>
+                    <select class="form-control" name="instancia" id="instancia">
+                        <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar seguro</option>
+                        <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Renovación</option>
+                        <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
                     </select>
                 </div>
                 <div class="col">
                     <label><b>Producto</b></label>
-                    <select class="form-control" name="seguro" id="seguro" value="<?php echo $_POST[ "seguro" ];?>">
-                        <option value="vehiculo">Vehiculo</option>
-                        <option value="hogar">Hogar</option>
-                        <option value="viaje">A. VIAJE</option>
-                        <option value="rc_do">RC - D&O</option>
-                        <option value="inc">INC</option>
-                        <option value="apv">APV</option>
-                        <option value="ap">AP</option>
-                        <option value="vida">Vida</option>
-                        <option value="garantia">Garantía</option>
-                        <option value="otro">Otro</option>
+                    <select class="form-control" name="seguro" id="seguro">
+                        <option value="vehiculo" <?php if ($producto == "vehiculo") echo "selected" ?> >Vehiculo</option>
+                        <option value="hogar" <?php if ($producto == "hogar") echo "selected" ?> >Hogar</option>
+                        <option value="viaje" <?php if ($producto == "viaje") echo "selected" ?> >A. VIAJE</option>
+                        <option value="rc_do" <?php if ($producto == "rc_do") echo "selected" ?> >RC - D&O</option>
+                        <option value="inc" <?php if ($producto == "inc") echo "selected" ?> >INC</option>
+                        <option value="apv" <?php if ($producto == "apv") echo "selected" ?> >APV</option>
+                        <option value="ap" <?php if ($producto == "ap") echo "selected" ?> >AP</option>
+                        <option value="vida" <?php if ($producto == "vida") echo "selected" ?> >Vida</option>
+                        <option value="garantia" <?php if ($producto == "garantia") echo "selected" ?> >Garantía</option>
+                        <option value="otro" <?php if ($producto == "otro") echo "selected" ?> >Otro</option>
                     </select>
                     <br>
                 </div>
