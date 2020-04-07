@@ -9,6 +9,7 @@ function estandariza_info($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
 require_once "/home/gestio10/public_html/backend/config.php";
 $num_cliente=$num_poliza=$num_tareas=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza=$resultado_tareas='';
