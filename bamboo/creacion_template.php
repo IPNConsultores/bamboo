@@ -127,14 +127,17 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
                 <h6>Diccionario de Campos</h6>
                 <div class="row"
-                    style="overflow-y: scroll;height: 200px;border-style: solid; border-width: thin;border-color: #D2D8DD">
-                    <table class="table" id="formato">
+                    style="height: 200px;margin-bottom: 0px;border-style: solid; border-width: thin;border-color: #D2D8DD">
+                    <table class="table" id="formato" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 0px">
                         <thead >
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
                             </tr>
                         </thead>
+					</table>
+						<div style= "height:120px; overflow-x:auto;margin-top: 0px;border: 1px solid rgba(255,255,255,0.3);">
+					<table class="table">
                         <tbody>
                             <tr>
                                 <td>_[NOMBRE_CLIENTE]_</td>
@@ -187,18 +190,23 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                             
                         </tbody>
                     </table>
+				</div>
                 </div>
                 <br>
                 <h6>Diccionario de Formato</h6>
                 <div class="row"
-                    style="overflow-y:scroll;height: 200px;border: solid; border-width: thin;border-color: #D2D8DD">
-                    <table class="table" id="formato">
-                        <thead>
+                    style="height: 200px;border: solid; border-width: thin;border-color: #D2D8DD">
+                     <table class="table" id="formato" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 0px">
+                        <thead >
                             <tr>
                                 <th>Comando</th>
                                 <th>Definición</th>
                             </tr>
                         </thead>
+					</table>
+					</table>
+					<div style= "height:120px; width:400px; overflow-x:auto;margin-top: 0px;">
+					<table class="table" style: "width:400px">
                         <tbody>
                             <tr>
                                 <td>_[SALTO_LINEA]_</td>
@@ -234,6 +242,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                             </tr>                          
                         </tbody>
                     </table>
+					</div>
                 </div>
                 <br>
                 <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white"
