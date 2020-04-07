@@ -136,7 +136,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                             </tr>
                         </thead>
 					</table>
-						<div style= "height:120px; overflow-x:auto;margin-top: 0px;border: 1px solid rgba(255,255,255,0.3);">
+						<div style= "height:120px; width:400px; overflow-x:auto;margin-top: 0px;">
 					<table class="table">
                         <tbody>
                             <tr>
