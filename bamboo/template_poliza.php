@@ -84,11 +84,31 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
     </div>
 
     <div class="container">
+           <div class="row">
+                <div class="col-4">
+                    <label><b>Instancia</b></label>
+                    <select class="form-control" name="instancia" id="instancia">
+                        <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
+                        <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Renovación</option>
+                        <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
+                    </select>
+                </div>
+                  <div class="col" style="align-self:flex-end">
+                    <button class="btn" type="submit"
+                        style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
+                        template</button>
+                </div>
+        </form>
+    </div>
         
-        
-      
+      <br>
         <div name='correo'>
-        <?php echo $template; ?>
+		<div class=col>
+				<h6>Resultado</h6>
+            <div class="form-control bg-light text-dark" rows="10"
+                style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?>
+            </div>
+        
         </div>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
