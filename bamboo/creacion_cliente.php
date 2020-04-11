@@ -109,10 +109,11 @@ if ( !isset( $_SESSION ) ) {
                 <label class="form-check-label" for="inlineRadio2">Si</label>
             </div>
             <div id="info_contactos" style="display: none;">
+
                 <br>
+                <br> <br>
                 <h5 class="form-row">&nbsp;Información de Contacto</h5>
-                <br>
-                <br>
+
                 <br>
                 <div class="form-row">
                     <div class="container" id="main">
