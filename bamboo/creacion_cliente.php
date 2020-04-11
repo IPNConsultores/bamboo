@@ -96,38 +96,49 @@ if ( !isset( $_SESSION ) ) {
                 <br>
             </div>
             <div class="form-row">
-
-
-
             </div>
-            <br>
-            <h5 class="form-row">&nbsp;Información de Contacto</h5>
-            <br>
-            <div class="form-row">
-                <div class="container" id="main">
-                    <input type="button" id="btAdd" value="Añadir" class="btn"
-                        style="background-color: #536656; color: white" />
-                    <input type="button" id="btRemove" value="Eliminar" class="btn"
-                        style="background-color: #536656; color: white" />
-                    <br>
-                    <div class="container-md">
-                        <table class="table" id="mytable">
-                            <tr>
-                                <th>Nombre Contacto</th>
-                                <th>Telefono</th>
-                                <th>E-mail</th>
-                            </tr>
-                        </table>
-                        <br>
+            <div class="form-check form-check-inline">
+            <label class="form-check-label">¿Quieres asociar algún contacto a este cliente nuevo?</label>
+                <input class="form-check-input" type="radio" name="no" id="radio_no"
+                    value="sin_contacto" onclick="checkRadio(this.name)">
+                <label class="form-check-label" for="inlineRadio1">No</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="si" id="radio_si"
+                    value="con_contacto">
+                <label class="form-check-label" for="inlineRadio2">Si</label>
+            </div>
+            <div id="info_contactos" style="display: none;">
+                <br>
+                <h5 class="form-row">&nbsp;Información de Contacto</h5>
+                <br>
+                <div class="form-row">
+                    <div class="container" id="main">
+                        <input type="button" id="btAdd" value="Añadir" class="btn"
+                            style="background-color: #536656; color: white" />
+                        <input type="button" id="btRemove" value="Eliminar" class="btn"
+                            style="background-color: #536656; color: white" />
+                        <br><br>
+                        <div class="container-md">
+                            <table class="table" id="mytable">
+                                <tr>
+                                    <th>Nombre Contacto</th>
+                                    <th>Telefono</th>
+                                    <th>E-mail</th>
+                                </tr>
+                            </table>
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
             <div id="auxiliar" style="display: none;">
                 <input name="contactos" id="contactos">
             </div>
 
-            <button class="btn" type="submit" 
-                style="background-color: #536656; color: white">Registrar</button>
+            <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
         </form>
     </div>
     <script>
@@ -288,5 +299,20 @@ $(document).ready(function() {
 
 function envio_contactos(boton) {
     document.getElementById("contactos").value = iCnt;
+}
+
+function checkRadio(name) {
+    if(name == "si"){
+    console.log("Choice: ", name);
+        document.getElementById("radio_si").checked = true;
+        document.getElementById("radio_no").checked = false;
+        document.getElementById("info_contactos").style.display = "inline";
+
+    } else if (name == "no"){
+        console.log("Choice: ", name);
+        document.getElementById("radio_no").checked = true;
+        document.getElementById("radio_si").checked = false;
+        document.getElementById("info_contactos").style.display = "none";
+    }
 }
 </script>
