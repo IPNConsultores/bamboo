@@ -99,13 +99,13 @@ if ( !isset( $_SESSION ) ) {
             </div>
             <div class="form-check form-check-inline">
             <label class="form-check-label">¿Quieres asociar algún contacto a este cliente nuevo?</label>
-                <input class="form-check-input" type="radio" name="no" id="radio_no"
-                    value="sin_contacto" onclick="checkRadio(this.name)">
-                <label class="form-check-label" for="inlineRadio1">No</label>
+                <input class="form-check-input" type="radio" name="no_contacto" id="radio_no"
+                    value="sin_contacto" onclick="checkRadio(this.name)" checked="checked">
+                <label class="form-check-label" for="inlineRadio1" >No</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="si" id="radio_si"
-                    value="con_contacto">
+                <input class="form-check-input" type="radio" name="si_contacto" id="radio_si"
+                    value="con_contacto" onclick="checkRadio(this.name)">
                 <label class="form-check-label" for="inlineRadio2">Si</label>
             </div>
             <div id="info_contactos" style="display: none;">
@@ -302,13 +302,13 @@ function envio_contactos(boton) {
 }
 
 function checkRadio(name) {
-    if(name == "si"){
+    if(name == "si_contacto"){
     console.log("Choice: ", name);
         document.getElementById("radio_si").checked = true;
         document.getElementById("radio_no").checked = false;
         document.getElementById("info_contactos").style.display = "inline";
 
-    } else if (name == "no"){
+    } else if (name == "no_contacto"){
         console.log("Choice: ", name);
         document.getElementById("radio_no").checked = true;
         document.getElementById("radio_si").checked = false;
