@@ -112,6 +112,8 @@ if ( !isset( $_SESSION ) ) {
                 <br>
                 <h5 class="form-row">&nbsp;Información de Contacto</h5>
                 <br>
+                <br>
+                <br>
                 <div class="form-row">
                     <div class="container" id="main">
                         <input type="button" id="btAdd" value="Añadir" class="btn"
