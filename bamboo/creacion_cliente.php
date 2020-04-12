@@ -253,13 +253,13 @@ $(document).ready(function() {
 
             }
             var newElement = '<tr id =registro' + iCnt +
-                '><td><input type="text" value="" id="nombrecontact' + iCnt +
+                '><td><input class="form-control" type="text" value="" id="nombrecontact' + iCnt +
                 '" name="nombrecontact' + iCnt +
-                '" required/></td><td><input type="text" value="" id="telefonocontact' +
+                '" required/></td><td><input class="form-control" type="text" value="" id="telefonocontact' +
                 iCnt +
                 '" name="telefonocontact' +
                 iCnt +
-                '" placeholder="56 9 XXXX XXXX" required /></td><td><input type="email" value="" id="emailcontact' +
+                '" placeholder="56 9 XXXX XXXX" required /></td><td><input class="form-control" type="email" value="" id="emailcontact' +
                 iCnt + '" name=emailcontact' +
                 iCnt + '" placeholder="aaa@bbb.com" required /></td></tr>';
             $("#mytable").append($(newElement));
