@@ -22,14 +22,14 @@ if ( !isset( $_SESSION ) ) {
 </head>
 
 <body>
-    <!-- body code goes here -->
+    <!-- body code goes here "/bamboo/backend/clientes/crea_cliente.php"-->
     <div id="header">
         <?php include 'header2.php' ?>
     </div>
     <div class="container">
         <p>Clientes / Creación<br>
         </p>
-        <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
+        <form action="/prueba3.php" class="needs-validation" method="POST" novalidate>
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">
@@ -98,7 +98,7 @@ if ( !isset( $_SESSION ) ) {
             <div class="form-row">
             </div>
             <div class="form-check form-check-inline">
-                <label class="form-check-label">¿Quieres asociar algún contacto a este cliente nuevo?: </label>
+                <label class="form-check-label" style="padding-left:5em">¿Quieres asociar algún contacto a este cliente nuevo?: </label>
                 <input class="form-check-input" type="radio" name="no_contacto" id="radio_no" value="sin_contacto"
                     onclick="checkRadio(this.name)" checked="checked">
                 <label class="form-check-label" for="inlineRadio1">No</label>
@@ -307,13 +307,11 @@ function envio_contactos(boton) {
 
 function checkRadio(name) {
     if (name == "si_contacto") {
-        console.log("Choice: ", name);
         document.getElementById("radio_si").checked = true;
         document.getElementById("radio_no").checked = false;
         document.getElementById("info_contactos").style.display = "inline";
 
     } else if (name == "no_contacto") {
-        console.log("Choice: ", name);
         document.getElementById("radio_no").checked = true;
         document.getElementById("radio_si").checked = false;
         document.getElementById("info_contactos").style.display = "none";
