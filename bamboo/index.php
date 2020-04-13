@@ -75,7 +75,7 @@ While($row2=mysqli_fetch_object($resultado2))
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include '/header2.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <canvas id="myChart" width="400" height="100"></canvas><br><hr>
         <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
