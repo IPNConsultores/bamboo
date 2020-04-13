@@ -15,15 +15,17 @@ require_once "/home/gestio10/public_html/backend/config.php";
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  if ( isset( $_POST[ "template" ] ) ) {
+ 
     switch ( $_POST[ "tipo" ] ) {
       case "probar":
         $template = estandariza_info( $_POST[ "template" ] );
+        $instancia = $_POST[ "instancia" ];
+        $producto = $_POST[ "seguro" ];
         break;
       case "guardar":
         $template = estandariza_info( $_POST[ "template" ] );
-        $instancia = $_POST[ "instancia_aux" ];
-        $producto = $_POST[ "seguro_aux" ];
+        $instancia = $_POST[ "instancia" ];
+        $producto = $_POST[ "seguro" ];
         $verif_combi = mysqli_query( $link, 'SELECT COUNT(*) AS contador FROM template_correos WHERE producto="' . $producto . '" and instancia="' . $instancia . '"' );
         While( $row = mysqli_fetch_object( $verif_combi ) ) {
           $verif = estandariza_info( $row->contador );
@@ -35,16 +37,16 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
           mysqli_query( $link, 'INSERT INTO template_correos(template, producto, instancia) values ("' . $template . '","' . $producto . '", "' . $instancia . '");' );
         }
         break;
+        case "buscar":
+            $instancia = $_POST[ "instancia" ];
+            $producto = $_POST[ "seguro" ];
+            $resultado_template = mysqli_query( $link, 'SELECT template FROM template_correos where producto="' . $producto . '" and instancia="' . $instancia . '"' );
+            While( $row = mysqli_fetch_object( $resultado_template ) ) {
+              $template = estandariza_info( $row->template );
+            }
+            break;
     }
 
-  } else {
-    $instancia = $_POST[ "instancia" ];
-    $producto = $_POST[ "seguro" ];
-    $resultado_template = mysqli_query( $link, 'SELECT template FROM template_correos where producto="' . $producto . '" and instancia="' . $instancia . '"' );
-    While( $row = mysqli_fetch_object( $resultado_template ) ) {
-      $template = estandariza_info( $row->template );
-    }
-  }
 
   $template_ejemplo = $template;
   $template_ejemplo = str_replace( '_[NOMBRE_CLIENTE]_', 'Juan Pérez', $template_ejemplo );
@@ -88,7 +90,11 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         <?php include 'header2.php' ?>
     </div>
     <div class="container">
-        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name="solicita_template">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
+
+                    <div id="auxiliar" style="display: none;">
+            <input name="tipo" id="tipo">
+        </div>
             <div class="row">
                 <div class="col">
                     <label><b>Instancia</b></label>
@@ -116,15 +122,15 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                     <br>
                 </div>
                 <div class="col" style="align-self: center">
-                    <button class="btn" type="submit"
+                    <button name="buscar" class="btn" type="submit" onclick="envio_data(this.name)"
                         style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
                         template</button>
                 </div>
-        </form>
+
     </div>
     <div class="row">
         <div class="col-6 col-md-4">
-            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='editor_template'>
+            
                 <h6>Diccionario de Campos</h6>
                 <div class="row"
                     style="height: 200px;margin-bottom: 0px;border-style: solid; border-width: thin;border-color: #D2D8DD">
@@ -262,11 +268,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
             </div>
             <br>
         </div>
-        <div id="auxiliar" style="display: none;">
-            <input name="tipo" id="tipo">
-            <input name="seguro_aux" id="seguro_aux">
-            <input name="instancia_aux" id="instancia_aux">
-        </div>
+
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -279,11 +281,6 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 <script>
 function envio_data(boton) {
     document.getElementById("tipo").value = boton;
-    if (boton == "guardar") {
-        document.getElementById("seguro_aux").value = document.getElementById("seguro").value;
-        document.getElementById("instancia_aux").value = document.getElementById("instancia").value;
-    }
-
 }
 
 </script>

@@ -79,9 +79,8 @@ While($row2=mysqli_fetch_object($resultado2))
     <div class="container">
         <canvas id="myChart" width="400" height="100"></canvas><br><hr>
         <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
-
-        <p> Resumen de tareas <br>
-        </p>
+        <hr><br>
+        <p> Resumen de tareas <br></p>
         <br>
         <div class="accordion" id="accordionExample">
             <div class="card">
