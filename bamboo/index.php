@@ -601,22 +601,22 @@ var myDoughnutChart = new Chart(ctx2, {
 function genera_data(data) {
     switch (data) {
         case 'stock': {
-            var arreglo = < ? php echo json_encode($stock); ? > ;
+            var arreglo = <?php echo json_encode($stock);?> ;
             return arreglo;
             break;
         }
         case 'salidas': {
-            var arreglo = < ? php echo json_encode($salidas); ? > ;
+            var arreglo = <?php echo json_encode($salidas);?> ;
             return arreglo;
             break;
         }
         case 'entradas': {
-            var arreglo = < ? php echo json_encode($entradas); ? > ;
+            var arreglo = <?php echo json_encode($entradas);?> ;
             return arreglo;
             break;
         }
         case 'leyendas': {
-            var arreglo = < ? php echo json_encode($leyendas); ? > ;
+            var arreglo = <?php echo json_encode($leyendas);?> ;
             return arreglo;
             break;
         }
