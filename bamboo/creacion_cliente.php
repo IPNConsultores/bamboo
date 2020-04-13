@@ -29,7 +29,7 @@ if ( !isset( $_SESSION ) ) {
     <div class="container">
         <p>Clientes / Creación<br>
         </p>
-        <form action="/prueba3.php" class="needs-validation" method="POST" novalidate>
+        <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>
             <div class="form-row">

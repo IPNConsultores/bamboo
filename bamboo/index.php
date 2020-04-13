@@ -3,6 +3,7 @@
     { 
         session_start(); 
     } 
+   
 $lista='';
 function estandariza_info($data) {
     $data = trim($data);
@@ -12,6 +13,40 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
+
+mysqli_set_charset($link, 'utf8');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
+$sql = "SELECT *, concat(mes,'-',SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
+    $resultado=mysqli_query($link, $sql);
+
+    $leyendas = $stock=$salidas=$entradas=$ramo=$cantidad=array();
+While($row=mysqli_fetch_object($resultado))
+  {
+      if($row->anomes==date("Ym")){
+      array_push($leyendas," (actual) --> ".$row->anomes_nombre);          
+      }else{
+      array_push($leyendas,$row->anomes_nombre );
+      }
+      
+      array_push($stock,$row->stock );
+      array_push($entradas,$row->entradas );
+      array_push($salidas,$row->salidas );
+  }
+  
+$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM `polizas` where estado<>'cerrado' group by ramo order by count(*) desc");
+While($row2=mysqli_fetch_object($resultado2))
+  {
+      array_push($ramo,$row2->ramo );
+      array_push($cantidad,$row2->cantidad );
+  }
+
+
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,14 +68,17 @@ $num=0;
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include 'header2.php' ?></div>
+    <div id="header"><?php include '/bamboo/header2.php' ?></div>
     <div class="container">
+        <canvas id="myChart" width="400" height="100"></canvas>
+        <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
         <p> Resumen de tareas <br>
         </p>
         <br>
@@ -393,7 +431,8 @@ function detalle_tareas(d) {
         d.id +
         ' name="elimina" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
         d.id +
-        ' name="tarea" id=' +d.id+' onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
+        ' name="tarea" id=' + d.id +
+        ' onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
 
         '</tr>' +
         '</table>';
@@ -426,9 +465,9 @@ function detalle_polizas(d) {
         ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id_poliza +
         ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button"' +
-        'id='+ d.id_poliza +
+        'id=' + d.id_poliza +
         ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
-        'id='+ d.id_poliza +
+        'id=' + d.id_poliza +
         ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button>' +
         '</td></tr>' +
         '</table>'
@@ -465,7 +504,7 @@ function botones(id, accion, base) {
                     'id_cliente': id
                 }, 'post');
             }
-            if (base == 'poliza'){
+            if (base == 'poliza') {
                 $.redirect('/bamboo/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
@@ -478,7 +517,7 @@ function botones(id, accion, base) {
                     'id_cliente': id
                 }, 'post');
             }
-            if (base == 'poliza'){
+            if (base == 'poliza') {
                 $.redirect('/bamboo/resumen.php', {
                     'id_poliza': id
                 }, 'post');
@@ -486,11 +525,100 @@ function botones(id, accion, base) {
             break;
         }
         case "correo": {
-            if (base == 'poliza'){
+            if (base == 'poliza') {
                 $.redirect('/bamboo/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
+            break;
+        }
+    }
+}
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: genera_data('leyendas'),
+        datasets: [{
+            label: 'Pólizas activas',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: genera_data('stock')
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0
+                }
+            }]
+        }
+    }
+});
+
+var randomScalingFactor = function() {
+    return Math.round(Math.random() * 100);
+};
+var ctx2 = document.getElementById('torta').getContext('2d');
+var myDoughnutChart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: < ? php echo json_encode($cantidad); ? > ,
+            backgroundColor : ["rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)",
+                "rgb(200, 205, 86)", "rgb(155, 205, 86)", "rgb(105, 205, 86)", "rgb(55, 205, 86)",
+                "rgb(0, 205, 86)", "rgb(0, 155, 86)", "rgb(0, 105, 86)"
+            ],
+
+            label: 'Ramo'
+        }],
+        labels: < ? php echo json_encode($ramo); ? >
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'left',
+        },
+        title: {
+            display: true,
+            text: 'Distribución de pólizas por ramo'
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    }
+});
+
+function genera_data(data) {
+    switch (data) {
+        case 'stock': {
+            var arreglo = < ? php echo json_encode($stock); ? > ;
+            return arreglo;
+            break;
+        }
+        case 'salidas': {
+            var arreglo = < ? php echo json_encode($salidas); ? > ;
+            return arreglo;
+            break;
+        }
+        case 'entradas': {
+            var arreglo = < ? php echo json_encode($entradas); ? > ;
+            return arreglo;
+            break;
+        }
+        case 'leyendas': {
+            var arreglo = < ? php echo json_encode($leyendas); ? > ;
+            return arreglo;
             break;
         }
     }
