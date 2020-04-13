@@ -75,15 +75,14 @@ While($row2=mysqli_fetch_object($resultado2))
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include '/bamboo/header2.php' ?></div>
+    <div id="header"><?php include '/header2.php' ?></div>
     <div class="container">
-        <canvas id="myChart" width="400" height="100"></canvas>
+        <canvas id="myChart" width="400" height="100"></canvas><br><hr>
         <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
+
         <p> Resumen de tareas <br>
         </p>
         <br>
-
-
         <div class="accordion" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne" style="background-color:whitesmoke">
@@ -571,7 +570,7 @@ var myDoughnutChart = new Chart(ctx2, {
     type: 'pie',
     data: {
         datasets: [{
-            data: < ? php echo json_encode($cantidad); ? > ,
+            data: <?php echo json_encode($cantidad);?> ,
             backgroundColor : ["rgb(255, 99, 132)",
                 "rgb(54, 162, 235)",
                 "rgb(255, 205, 86)",
@@ -581,7 +580,7 @@ var myDoughnutChart = new Chart(ctx2, {
 
             label: 'Ramo'
         }],
-        labels: < ? php echo json_encode($ramo); ? >
+        labels: <?php echo json_encode($ramo);?>
     },
     options: {
         responsive: true,
