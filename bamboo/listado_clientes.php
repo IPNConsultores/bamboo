@@ -61,13 +61,14 @@ $buscar= estandariza_info($_POST["busqueda"]);
                         <th></th>
                         <th>Rut</th>
                         <th>Nombre</th>
-                        <th>Apellido paterno</th>
-                        <th>Apellido materno</th>
+                        <th>Referido por</th>
+                        <th>Grupo</th>
                         <th>Teléfono</th>
                         <th>e-mail</th>
                         <th>Dirección Privada</th>
                         <th>Dirección Laboral</th>
                         <th>id</th>
+                        <th>apellidop</th>
                     </thead>
                 </tr>
             </table>
@@ -118,10 +119,10 @@ $(document).ready(function() {
                 "data": "nombre"
             },
             {
-                "data": "apellidop"
+                "data": "referido"
             },
             {
-                "data": "apellidom"
+                "data": "grupo"
             },
             {
                 "data": "telefono"
@@ -137,6 +138,9 @@ $(document).ready(function() {
             },
             {
                 "data": "id"
+            },
+            {
+                "data": "apellidop"
             }
 
         ],
@@ -144,17 +148,16 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [6, 7, 8, 9],
+                "targets": [5,6, 7, 8, 9,10],
                 "visible": false,
             },
             {
-                "targets": [5, 6, 7, 8, 9],
+                "targets": [5, 6, 7, 8, 9,10],
                 "searchable": false
             }
         ],
         "order": [
-            [3, "asc"],
-            [4, "asc"]
+            [10, "asc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
@@ -222,7 +225,7 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Nombre completo:</td>' +
-        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
+        '<td>' + d.nombre + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Correo electrónico:</td>' +

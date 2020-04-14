@@ -58,7 +58,16 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
                         $template=str_replace('_[FORMA_PAGO]_',$forma_pago, $template);
                         $template=str_replace('_[PRIMA_ANUAL]_',$prima_bruta_anual, $template);
                         $template=str_replace('_[VEHICULO]_',$materia_asegurada, $template);
-                        $template=str_replace('_[SALTO_LINEA]_','<br>', $template);
+
+
+                        $template = str_replace( '_[SALTO_LINEA]_', '<br>', $template );
+                        $template = str_replace( '_[NEG_ini]_', '<b>', $template );
+                        $template = str_replace( '_[NEG_fin]_', '</b>', $template );
+                        $template = str_replace( '_[SUB_ini]_', '<u>', $template );
+                        $template = str_replace( '_[SUB_fin]_', '</u>', $template );
+                        $template = str_replace( '_[CUR_ini]_', '<em>', $template );
+                        $template = str_replace( '_[CUR_fin]_', '</em>', $template );
+                        $template = str_replace( '_[LINEA]_', '<hr>', $template );
                         
 
         mysqli_close($link);
