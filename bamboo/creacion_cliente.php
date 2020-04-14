@@ -98,12 +98,11 @@ if ( !isset( $_SESSION ) ) {
             <div class="form-row">
             </div>
             <div class="form-check form-check-inline">
-                <label class="form-check-label" style="padding-left:5em">¿Quieres asociar algún contacto a este cliente nuevo?: </label>
+                <label class="form-check-label" style="padding-left:5em">¿Quieres asociar algún contacto a este cliente nuevo?:&nbsp;&nbsp; </label>
                 <input class="form-check-input" type="radio" name="no_contacto" id="radio_no" value="sin_contacto"
                     onclick="checkRadio(this.name)" checked="checked">
-                <label class="form-check-label" for="inlineRadio1">No</label>
-            </div>
-            <div class="form-check form-check-inline">
+                <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
+          
                 <input class="form-check-input" type="radio" name="si_contacto" id="radio_si" value="con_contacto"
                     onclick="checkRadio(this.name)">
                 <label class="form-check-label" for="inlineRadio2">Si</label>
