@@ -284,7 +284,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             d.id +
             ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
             '</tr>' +
-            '</table><br>'+$contactos ;
+            '</table><br>'+$contactos+' ' ;
     }
 
     function botones(id, accion) {
