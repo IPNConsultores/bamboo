@@ -222,42 +222,47 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
     function format(d) {
         // `d` is the original data object for the row
-        $conf_tabla='<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">';
-            $contactos='';
-            switch (d.contactos) {
-            case "0": {
-                $contactos='Cliente sin contactos registrados';
-            }
+        $conf_tabla = '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">';
+        $contactos = '';
+        switch (d.contactos) {
             case "1": {
-                $contactos=$conf_tabla+'<tr><th></th><th>Contacto 1</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nombre1 + '</td>/tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correo1 + '</td></tr></table>'
+                $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th></tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td>/tr>' +
+                    '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td></tr>' +
+                    '<tr><td>Correo</td><td>' + d.correo1 + '</td></tr></table>'
+                break
             }
             case "2": {
-                $contactos=$conf_tabla+'<tr><th></th><th>Contacto 1</th><th>Contacto 2</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td></tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td></tr></table>'
-            }
+                $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th><th>Contacto 2</th></tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td></tr>' +
+                    '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td></tr>' +
+                    '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td></tr></table>'
+                break
+                }
             case "3": {
-                $contactos=$conf_tabla+'<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td></tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td></tr></table>'
-            }
+                $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th></tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td></tr>' +
+                    '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td></tr>' +
+                    '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td></tr></table>'
+                break
+                }
             case "4": {
-                $contactos=$conf_tabla+'<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th><th>Contacto 4</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td><td>' + d.nombre4 + '</td></tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td><td>' + d.telefono4 + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td><td>' + d.correo4 + '</td></tr></table>'
-            }
+                $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th><th>Contacto 4</th></tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td><td>' + d.nombre4 + '</td></tr>' +
+                    '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td><td>' + d.telefono4 + '</td></tr>' +
+                    '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td><td>' + d.correo4 + '</td></tr></table>'
+                break
+                }
             case "5": {
-                $contactos=$conf_tabla+'<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th><th>Contacto 4</th><th>Contacto 5</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td><td>' + d.nombre4 + '</td><td>' + d.nombre5 + '</td></tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td><td>' + d.telefono4 + '</td><td>' + d.telefono5 + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td><td>' + d.correo4 + '</td><td>' + d.correo5 + '</td></tr></table>'
-
+                $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th><th>Contacto 2</th><th>Contacto 3</th><th>Contacto 4</th><th>Contacto 5</th></tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td><td>' + d.nombre2 + '</td><td>' + d.nombre3 + '</td><td>' + d.nombre4 + '</td><td>' + d.nombre5 + '</td></tr>' +
+                    '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td><td>' + d.telefono2 + '</td><td>' + d.telefono3 + '</td><td>' + d.telefono4 + '</td><td>' + d.telefono5 + '</td></tr>' +
+                    '<tr><td>Correo</td><td>' + d.correo1 + '</td><td>' + d.correo2 + '</td><td>' + d.correo3 + '</td><td>' + d.correo4 + '</td><td>' + d.correo5 + '</td></tr></table>'
+                break
+            }
+            default: {
+                $contactos = 'Cliente sin contactos registrados';
+                break
             }
         }
         return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
@@ -285,8 +290,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
             d.id +
             ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
             '</tr>' +
-            '</table><br>'+
-            $contactos+'<br>' ;
+            '</table><br>' +
+            $contactos + '<br>';
     }
 
     function botones(id, accion) {
