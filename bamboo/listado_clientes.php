@@ -223,7 +223,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
     function format(d) {
         // `d` is the original data object for the row
         $conf_tabla='<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">';
-        switch (d.contactos) {
+            $contactos='';
+            switch (d.contactos) {
             case 0: {
                 $contactos='Cliente sin contactos registrados';
             }
@@ -274,7 +275,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             '</tr>' +
             '</tr>' +
             '<tr>' +
-                '<br>'+$contactos+'<br>'+
+            $contactos+
             '<td>Acciones</td>' +
             '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
             ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
