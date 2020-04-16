@@ -275,7 +275,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
             '</tr>' +
             '</tr>' +
             '<tr>' +
-            $contactos+
             '<td>Acciones</td>' +
             '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
             ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
@@ -286,7 +285,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
             d.id +
             ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
             '</tr>' +
-            '</table>' ;
+            '</table><br>'+
+            $contactos+'<br>' ;
     }
 
     function botones(id, accion) {
