@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+        <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,472 +19,454 @@
 </div>
 <div class="container">
 <p>Póliza / Creación<br>
-    </p>
+        </p>
 <h5 class="form-row">&nbsp;Datos Póliza</h5>
 <br>
 <br>
 <div class="form-check form-check-inline">
-      <label class="form-check-label" >¿Es renovación de una póliza?:&nbsp;&nbsp;</label>
-      <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
+          <label class="form-check-label" >¿Es renovación de una póliza?:&nbsp;&nbsp;</label>
+          <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                     onclick="checkRadio(this.name)" checked="checked">
-      <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-      <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
+          <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
+          <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
                     onclick="checkRadio(this.name)">
-      <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-      <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
-      <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
+          <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+		 <a href="#modal_poliza" role="button" class="btn" data-toggle="modal" style="background-color: #536656; color: white;">Launch Demo Modal</a>
+          <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
+          <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
+              <div class="modal-content">
         <div class="modal-header">
-              <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
+                  <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
         <div class="modal-body">
-              <div class ="container-fluid">
+                  <div class ="container-fluid">
             <table class="table" id="listado_polizas">
-                  <tr>
+                      <tr>
                 <th>Póliza</th>
                 <th>Compañia</th>
                 <th>Ramo</th>
                 <th>Nombre Asegurado</th>
                 <th>Fecha fin</th>
               </tr>
-                </table>
+                    </table>
             <div id="botones_poliza"></div>
           </div>
-            </div>
+                </div>
         <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
       </div>
-        </div>
+            </div>
   </div>
-    </div>
+          <div class="col">
+    <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior" id ="poliza_renovada" style="display:none;">
+  </div>
+        </div>
 <br>
 <br>
 <div class="accordion" id="accordionExample">
-      <div class="card">
+          <div class="card">
     <div class="card-header" id="headingOne" style="background-color:whitesmoke">
-          <h5 class="mb-0">
+              <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y
-            Proponente</button>
+                Proponente</button>
       </h5>
-        </div>
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
-        <div class="form-check form-check-inline">
-              <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
-              <input class="form-check-input" type="radio" name="diferentes" id="radio2_no" value="diferentes"
-                    onclick="checkRadio2(this.name)" checked="checked">
-              <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-              <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
-                    onclick="checkRadio2(this.name)">
-              <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-              <button class="btn" id="busca_rut" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;">Buscar RUT</button>
-              <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                <div class="modal-header">
-                      <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                <div class="modal-body">
-                      <div class ="container-fluid">
-                    <table class="table" id="listado_polizas">
-                          <tr>
-                        <th>Póliza</th>
-                        <th>Compañia</th>
-                        <th>Ramo</th>
-                        <th>Nombre Asegurado</th>
-                        <th>Fecha fin</th>
-                      </tr>
-                        </table>
-                    <div id="botones_poliza"></div>
-                  </div>
-                    </div>
-                <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-              </div>
-                </div>
-          </div>
             </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+        <div class="form-check form-check-inline">
+                  <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
+                  <input class="form-check-input" type="radio" name="diferentes" id="radio2_no" value="diferentes"
+                    onclick="checkRadio2(this.name)" checked="checked">
+                  <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
+                  <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
+                    onclick="checkRadio2(this.name)">
+                  <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+                  <button class="btn" id="busca_rut" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;">Buscar RUT</button>
+                  <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                <div class="modal-header">
+                          <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                <div class="modal-body">
+                          <div class ="container-fluid">
+                    <table class="table" id="listado_cliente">
+                              <tr>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                      </tr>
+                            </table>
+                    <div id="botones_cliente"></div>
+                  </div>
+                        </div>
+                <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+              </div>
+                    </div>
+          </div>
+                </div>
         <p>Datos Proponente<br>
-            <div class="form-row">
-              <div class="form-row">
-                <div class="col-md mb-3">
-                  <label for="RUT">RUT</label>
-                  <input type="text" class="form-control" id="rutprop" name="rutprop"
+                <div class="form-row">
+                  <div class="form-row">
+                    <div class="col-md mb-3">
+                      <label for="RUT">RUT</label>
+                      <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
                                             onchange="valida_rut_duplicado_prop();copiadatos()" onkeyup="copiadatos()" required>
-                  <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
-                    ingresado</div>
-                </div>
-              </div>
-              <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
-                <label for="prop">&nbsp;</label>
-                <br>
-              </div>
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label for="Nombre">Nombre</label>
-                  <input type="text" id="nombre_prop" class="form-control" name="nombre" oninput="copiadatos()" onkeyup="copiadatos()" required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="ApellidoP">Apellido Paterno</label>
-                  <input type="text" id="apellidop_prop" class="form-control" oninput="copiadatos()" name="apellidop" onkeyup="copiadatos()"
+                      <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
+                        ingresado</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
+                    <label for="prop">&nbsp;</label>
+                    <br>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                      <label for="Nombre">Nombre</label>
+                      <input type="text" id="nombre_prop" class="form-control" name="nombre" oninput="copiadatos()" onkeyup="copiadatos()" required>
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="ApellidoP">Apellido Paterno</label>
+                      <input type="text" id="apellidop_prop" class="form-control" oninput="copiadatos()" name="apellidop" onkeyup="copiadatos()"
                                             required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="ApellidoM">Apellido Materno</label>
-                  <input type="text" id="apellidom_prop" class="form-control" name="apellidom" oninput="copiadatos()" onkeyup="copiadatos()"
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="ApellidoM">Apellido Materno</label>
+                      <input type="text" id="apellidom_prop" class="form-control" name="apellidom" oninput="copiadatos()" onkeyup="copiadatos()"
                                             required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
         <p>Datos Asegurado<br>
-            <div class="form-row">
-              <div class="form-row">
-                <div class="col-md mb-3">
-                  <label for="RUT">RUT</label>
-                  <input type="text" class="form-control" id="rutaseg" name="rutaseg"
+                <div class="form-row">
+                  <div class="form-row">
+                    <div class="col-md mb-3">
+                      <label for="RUT">RUT</label>
+                      <input type="text" class="form-control" id="rutaseg" name="rutaseg"
                                                 placeholder="1111111-1" oninput="checkRut(this)"
                                                 onchange="valida_rut_duplicado_aseg()" required>
-                  <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
-                    ingresado</div>
-                </div>
-              </div>
-              <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
-                <label for="prop">&nbsp;</label>
-                <br>
-              </div>
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label for="Nombre">Nombre</label>
-                  <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
+                      <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
+                        ingresado</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
+                    <label for="prop">&nbsp;</label>
+                    <br>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                      <label for="Nombre">Nombre</label>
+                      <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
                                                 required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="ApellidoP">Apellido Paterno</label>
-                  <input type="text" id="apellidop_seg" class="form-control"
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="ApellidoP">Apellido Paterno</label>
+                      <input type="text" id="apellidop_seg" class="form-control"
                                                 name="apellidopaseg" required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="ApellidoM">Apellido Materno</label>
-                  <input type="text" id="apellidom_seg" class="form-control"
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="ApellidoM">Apellido Materno</label>
+                      <input type="text" id="apellidom_seg" class="form-control"
                                                 name="apellidomaseg" required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
       </div>
-        </div>
+            </div>
   </div>
-      <div class="card">
+          <div class="card">
     <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
-          <h5 class="mb-0">
+              <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
                             style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
       </h5>
-        </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-          <div class="card-body">
+            </div>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
         <label for="compania"><b>Compañía</b></label>
         <br>
         <div class="form-row">
-              <div class="form-inline">
+                  <div class="form-inline">
             <select class="form-control" id="selcompania">
-                  <option>BCI Seguros</option>
-                  <option>Chilena Consolidada</option>
-                  <option>CHUBB</option>
-                  <option>Confuturo</option>
-                  <option>Consorcio</option>
-                  <option>Continental</option>
-                  <option>HDI Seguros</option>
-                  <option>Maphre</option>
-                  <option>Ohio National Financial Group</option>
-                  <option>Orsan</option>
-                  <option>Reale Seguros</option>
-                  <option>Renta Nacional</option>
-                  <option>Southbridge</option>
-                  <option>Sura</option>
-                  <option>Unnio</option>
-                </select>
+                      <option>BCI Seguros</option>
+                      <option>Chilena Consolidada</option>
+                      <option>CHUBB</option>
+                      <option>Confuturo</option>
+                      <option>Consorcio</option>
+                      <option>Continental</option>
+                      <option>HDI Seguros</option>
+                      <option>Maphre</option>
+                      <option>Ohio National Financial Group</option>
+                      <option>Orsan</option>
+                      <option>Reale Seguros</option>
+                      <option>Renta Nacional</option>
+                      <option>Southbridge</option>
+                      <option>Sura</option>
+                      <option>Unnio</option>
+                    </select>
           </div>
-            </div>
+                </div>
         <br>
         <label for="poliza"><b>Póliza</b></label>
         <br>
         <div class="form-row">
-              <div class="col-md-2 mb-3">
+                  <div class="col-md-2 mb-3">
             <label for="sel1">Ramo:&nbsp;</label>
             <select class="form-control" id="ramo">
-                  <option>VEH</option>
-                  <option>Hogar</option>
-                  <option>A. VIAJE</option>
-                  <option>RC</option>
-                  <option>INC</option>
-                  <option>APV</option>
-                  <option>D&O</option>
-                  <option>AP</option>
-                  <option>Vida</option>
-                  <option>Garantía</option>
-                </select>
+                      <option>VEH</option>
+                      <option>Hogar</option>
+                      <option>A. VIAJE</option>
+                      <option>RC</option>
+                      <option>INC</option>
+                      <option>APV</option>
+                      <option>D&O</option>
+                      <option>AP</option>
+                      <option>Vida</option>
+                      <option>Garantía</option>
+                    </select>
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="Nombre">Vigencia Inicial</label>
             <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechainicio"
+                      <input placeholder="Selected date" type="date" id="fechainicio"
                                         class="form-control">
-                </div>
+                    </div>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="Nombre">Vigencia Final</label>
             <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
-                </div>
+                      <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
+                    </div>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
-            </div>
+                </div>
         <div class="form-row">
-              <div class="col">
-            <label for="polizaantigua">Póliza Renovada</label>
-            <input type="text" class="form-control" name="polizaantigua">
-          </div>
-              <div class="col">
+                  <div class="col-4">
             <label for="poliza">Número de Poliza</label>
             <input type="text" class="form-control" name="poliza" required>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
-              <div class="col">
+                  <div class="col-4">
             <label for="cobertura">Cobertura</label>
             <input type="text" class="form-control" name="cobertura">
           </div>
-            </div>
+                </div>
         <br>
         <label for="materia"><b>Materia</b></label>
         <br>
         <div class="form-row">
-              <div class="col">
+                  <div class="col">
             <label for="poliza">Materia Asegurada</label>
             <input type="text" class="form-control" name="materia" required>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
-              <div class="col">
+                  <div class="col">
             <label for="poliza">Patente o Ubicación</label>
             <input type="text" class="form-control" name="materia" required>
             <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
           </div>
-            </div>
+                </div>
         <br>
         <label for="materia"><b>Deducible, Primas y Montos</b></label>
         <br>
+        <div class= "form-row; form-inline">
+                  <label for="moneda_prima">Moneda Prima</label>
+                  <div class="col-1">
+            <select class="form-control" id="moneda_poliza">
+                      <option>UF</option>
+                      <option>USD</option>
+                      <option>CLP</option>
+                    </select>
+          </div>
+                </div>
+        <br>
         <div class="form-row">
-              <div class="col-md-4 mb-3;form-inline">
+                  <div class="col-md-4 mb-3">
             <label for="deducible">Deducible</label>
-            <input type="text" class="form-control" name="deducible">
+            <input type="text" class="form-control" name="deducible" onchange = "concatenar(this.name)">
           </div>
-              <div class="col-md-4 mb-3">
-            <label for="deducible">Prima Afecta</label>
-            <div class="form-inline">
-                  <input type="text" class="form-control" name="prima_afecta">
-                  <select class="form-control" id="moneda_prima">
-                <option>UF</option>
-                <option>USD</option>
-                <option>CLP</option>
-              </select>
+                  <div class="col-md-4 mb-3">
+            <label for="prima_afecta">Prima Afecta</label>
+            <input type="text" class="form-control" name="prima_afecta" onchange = "concatenar(this.name)">
+          </div>
+                  <div class="col-md-4 mb-3">
+            <label for="prima_excenta">Prima Excenta</label>
+            <input type="text" class="form-control" name="prima_excenta" onchange = "concatenar(this.name)">
+          </div>
                 </div>
-          </div>
-              <div class="col-md-4 mb-3">
-            <label for="deducible">Prima Excenta</label>
-            <div class="form-inline">
-                  <input type="text" class="form-control" name="prima_afecta">
-                  <select class="form-control" id="moneda_prima">
-                <option>UF</option>
-                <option>USD</option>
-                <option>CLP</option>
-              </select>
-                </div>
-          </div>
-            </div>
         <div class="form-row">
-              <div class="col-md-4 mb-3; form-inline">
-            <label for="deducible">Prima total</label>
-            <div class="form-inline">
-                  <input type="text" class="form-control" name="prima_total">
-                  <select class="form-control" id="moneda_prima">
-                <option>UF</option>
-                <option>USD</option>
-                <option>CLP</option>
-              </select>
-                </div>
+                  <div class="col-md-4 mb-3">
+            <label for="prima_afecta">Prima Neta</label>
+            <input type="text" class="form-control" name="prima_neta">
           </div>
-              <div class="col-md-4 mb-3">
-            <label for="deducible">Prima Bruta Anual</label>
-            <div class="form-inline">
-                  <input type="text" class="form-control" name="prima_afecta">
-                  <select class="form-control" id="moneda_prima">
-                <option>UF</option>
-                <option>USD</option>
-                <option>CLP</option>
-              </select>
-                </div>
+                  <div class="col-md-4 mb-3">
+            <label for="prima_afecta">Prima Bruta Anual</label>
+            <input type="text" class="form-control" name="prima_bruta">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="monto_aseg">Monto Asegurado</label>
             <input type="text" class="form-control" name="monto_aseg">
           </div>
-            </div>
+                </div>
       </div>
-        </div>
+            </div>
   </div>
-      <div class="card">
+          <div class="card">
     <div class="card-header" id="headingThree">
-          <h5 class="mb-0">
+              <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
                             style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
       </h5>
-        </div>
+            </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-          <div class="card-body">
+              <div class="card-body">
         <label for="propuesta"><b>Propuesta</b></label>
         <br>
         <div class="form-row">
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="monto_aseg">Número de Propuesta</label>
             <input type="text" class="form-control" name="monto_aseg">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="monto_aseg">Fecha Envío Propuesta</label>
             <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechaprop" class="form-control">
-                </div>
+                      <input placeholder="Selected date" type="date" id="fechaprop" class="form-control">
+                    </div>
           </div>
-            </div>
+                </div>
         <br>
         <label for="endoso"><b>Endoso</b></label>
         <br>
         <div class="form-row">
-              <div class="form-inline">
+                  <div class="form-inline">
             <select class="form-control" id="moneda_prima">
-                  <option>Si</option>
-                  <option>No</option>
-                </select>
+                      <option>Si</option>
+                      <option>No</option>
+                    </select>
             <div class="col">
-                  <input type="text" class="form-control" name="endoso">
-                </div>
+                      <input type="text" class="form-control" name="endoso">
+                    </div>
           </div>
-            </div>
+                </div>
         <br>
         <label for="materia"><b>Comisión</b></label>
         <br>
         <div class="form-row">
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="comision">Comisión Correspondiente</label>
             <div class="form-inline">
-                  <input type="text" class="form-control" name="comision">
-                  <select class="form-control" id="moneda_prima">
+                      <input type="text" class="form-control" name="comision">
+                      <select class="form-control" id="moneda_prima">
                 <option>UF</option>
                 <option>USD</option>
                 <option>CLP</option>
               </select>
-                </div>
+                    </div>
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label>Porcentaje Comisión del Corredor</label>
             <input type="text" class="form-control" name="porcentaje">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label>Comisión Bruta a Pago</label>
             <input type="text" class="form-control" name="comisionbruta">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label>Comisión Neta a Pago</label>
             <input type="text" class="form-control" name="comisionneta">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label>Número de Boleta</label>
             <input type="text" class="form-control" name="boleta">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="comision">Comisión Negativa</label>
             <input type="text" class="form-control" name="comisionneg">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="comision">Boleta Comisión Negativa</label>
             <input type="text" class="form-control" name="boletaneg">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="fechadeposito">Fecha Depósito</label>
             <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechadeposito"
+                      <input placeholder="Selected date" type="date" id="fechadeposito"
                                         class="form-control">
-                </div>
+                    </div>
           </div>
-            </div>
+                </div>
         <br>
         <label for="pago"><b>Pago</b></label>
         <br>
         <div class="form-row">
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="formapago">Forma de Pago</label>
             <input type="text" class="form-control" name="formapago">
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="valorcuota">Valor Cuota</label>
             <div class="form-inline">
-                  <input type="text" class="form-control" name="valorcuota">
-                  <select class="form-control" id="moneda_prima">
+                      <input type="text" class="form-control" name="valorcuota">
+                      <select class="form-control" id="moneda_prima">
                 <option>UF</option>
                 <option>USD</option>
                 <option>CLP</option>
               </select>
-                </div>
+                    </div>
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="fechaprimer">Fecha Primer Deposito</label>
             <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechaprimer"
+                      <input placeholder="Selected date" type="date" id="fechaprimer"
                                         class="form-control">
-                </div>
+                    </div>
           </div>
-            </div>
+                </div>
         <br>
         <label for="pago"><b>Referido</b></label>
         <br>
         <div class="form-row">
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label>Vendedor:</label>
             <div class="col-md-5">
-                  <select class="form-control" id="vendedor">
+                      <select class="form-control" id="vendedor">
                 <option>Si</option>
                 <option>No</option>
               </select>
-                </div>
+                    </div>
           </div>
-              <div class="col-md-4 mb-3">
+                  <div class="col-md-4 mb-3">
             <label for="formapago">Referido</label>
             <input type="text" class="form-control" name="referido">
           </div>
-            </div>
+                </div>
       </div>
-        </div>
+            </div>
   </div>
-      <br>
-      <form action="" class="needs-validation" method="POST" novalidate>
+          <br>
+          <form action="" class="needs-validation" method="POST" novalidate>
     <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
   </form>
-      <br>
-    </div>
+          <br>
+        </div>
 <script>
         (function() {
             'use strict';
@@ -510,7 +492,7 @@
         </script>
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 
 </body>
 </html>
@@ -568,11 +550,14 @@ function valida_rut_duplicado_aseg() {
         document.getElementById("radio_si").checked = false;
         document.getElementById("radio_no").checked = true;
         document.getElementById("busca_poliza").style.display = "none";
+		document.getElementById("poliza_renovada").style.display = "none"
 
     } else if (name == "renovacion") {
         document.getElementById("radio_no").checked = false;
         document.getElementById("radio_si").checked = true;
-       document.getElementById("busca_poliza").style.display = "block";
+       document.getElementById("busca_poliza").style.display = "block" ;
+		 document.getElementById("poliza_renovada").style.display = "block";
+		document.getElementById("poliza_renovada").disabled = "true"
     }
 }
 </script>
@@ -581,6 +566,10 @@ function valida_rut_duplicado_aseg() {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
+		document.getElementById("nombre_seg").disabled = false;
+        document.getElementById("rutaseg").disabled = false;
+		document.getElementById("apellidop_seg").disabled = false;
+		document.getElementById("apellidom_seg").disabled = false;
       
 
     } else if (name == "iguales") {
@@ -606,7 +595,21 @@ function valida_rut_duplicado_aseg() {
 		
 		</script>
 <script>
-	$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
+		function concatenar(name){
+			var  moneda = document.getElementById("moneda_poliza").val();
+			var  texto = document.getElementsByName(name).val();
+			var final = texto + ' ' + moneda;
+			
+			document.getElementByName(name).val()= final;
+			
+		}
+		
+		</script>
+<script>
+			
+		$('#modal_poliza').on('shown.bs.modal', function () {
+  $('#modal_text').trigger('focus')
 })
-	</script>
+		
+		
+		</script>
