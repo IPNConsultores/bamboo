@@ -129,18 +129,18 @@
               <div class="form-row">
                 <div class="col-md-4 mb-3">
                   <label for="Nombre">Nombre</label>
-                  <input type="text" id="nombre_prop" class="form-control" name="nombre" onkeyup="copiadatos()" required>
+                  <input type="text" id="nombre_prop" class="form-control" name="nombre" onchange="copiadatos()" onkeyup="copiadatos()" required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="ApellidoP">Apellido Paterno</label>
-                  <input type="text" id="apellidop_prop" class="form-control" name="apellidop" onkeyup="copiadatos()"
+                  <input type="text" id="apellidop_prop" class="form-control" onchange="copiadatos()" name="apellidop" onkeyup="copiadatos()"
                                             required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="ApellidoM">Apellido Materno</label>
-                  <input type="text" id="apellidom_prop" class="form-control" name="apellidom" onkeyup="copiadatos()"
+                  <input type="text" id="apellidom_prop" class="form-control" name="apellidom" onchange="copiadatos()" onkeyup="copiadatos()"
                                             required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
