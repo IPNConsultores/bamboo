@@ -19,8 +19,8 @@ $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, concat(nombr
         $contador_contactos=0;
       $cant_contactos=$fila->contador;
       $resultado_contactos=mysqli_query($link, "SELECT  nombre,telefono, correo FROM clientes_contactos where id_cliente='".$row->id."';");
-        $contactos_array=array("contactos"=>&$fila->contador);
-        if ($cant_contactos=="7"){
+        $contactos_array=array("contactos"=>& $fila->contador);
+        if (!$cant_contactos=="0"){
       while($indice=mysqli_fetch_object($resultado_contactos)){
           $contador_contactos=$contador_contactos+1;
           $contactos_array=array_merge($contactos_array, array(
