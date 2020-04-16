@@ -21,10 +21,11 @@ mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apel
 
 if (!$contactos==0){
   for ($i=1; $i<=$contactos;$i++){
+    $indice="Contacto ".$i;
     $nombrecontact=estandariza_info($_POST["nombrecontact".$i]);
     $telefonocontact=estandariza_info($_POST["telefonocontact".$i]);
     $emailcontact=estandariza_info($_POST["emailcontact".$i]);
-    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
+    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo, indice) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."','".$indice."' from clientes where rut_sin_dv='".$rut."';");
   }
 }
 
