@@ -117,7 +117,7 @@
                   <label for="RUT">RUT</label>
                   <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop()" onkeyup="copiadatos()" required>
+                                            onchange="valida_rut_duplicado_prop();copiadatos()" onkeyup="copiadatos()" required>
                   <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                     ingresado</div>
                 </div>
