@@ -10,7 +10,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script> 
+    </script>
 
 <body>
 <!-- body code goes here -->
@@ -31,23 +31,35 @@
       <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
                     onclick="checkRadio(this.name)">
       <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-       <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Poliza</button>
-  <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
+      <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
+      <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+          <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal_text">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">...</div>
+              <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        <div class="modal-body">
+              <div class ="container-fluid">
+            <table class="table" id="listado_polizas">
+                  <tr>
+                <th>Póliza</th>
+                <th>Compañia</th>
+                <th>Ramo</th>
+                <th>Nombre Asegurado</th>
+                <th>Fecha fin</th>
+              </tr>
+                </table>
+            <div id="botones_poliza"></div>
+          </div>
+            </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
       </div>
-    </div>
+        </div>
   </div>
-</div>
+    </div>
 <br>
 <br>
 <div class="accordion" id="accordionExample">
@@ -59,8 +71,45 @@
             Proponente</button>
       </h5>
         </div>
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
+        <div class="form-check form-check-inline">
+              <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
+              <input class="form-check-input" type="radio" name="diferentes" id="radio2_no" value="diferentes"
+                    onclick="checkRadio2(this.name)" checked="checked">
+              <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
+              <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
+                    onclick="checkRadio2(this.name)">
+              <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+              <button class="btn" id="busca_rut" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;">Buscar RUT</button>
+              <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                <div class="modal-header">
+                      <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <div class="modal-body">
+                      <div class ="container-fluid">
+                    <table class="table" id="listado_polizas">
+                          <tr>
+                        <th>Póliza</th>
+                        <th>Compañia</th>
+                        <th>Ramo</th>
+                        <th>Nombre Asegurado</th>
+                        <th>Fecha fin</th>
+                      </tr>
+                        </table>
+                    <div id="botones_poliza"></div>
+                  </div>
+                    </div>
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+              </div>
+                </div>
+          </div>
+            </div>
         <p>Datos Proponente<br>
             <div class="form-row">
               <div class="form-row">
@@ -68,7 +117,7 @@
                   <label for="RUT">RUT</label>
                   <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this)"
-                                            onchange="valida_rut_duplicado_prop()" required>
+                                            onchange="valida_rut_duplicado_prop()" onkeyup="copiadatos()" required>
                   <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                     ingresado</div>
                 </div>
@@ -80,18 +129,18 @@
               <div class="form-row">
                 <div class="col-md-4 mb-3">
                   <label for="Nombre">Nombre</label>
-                  <input type="text" id="nombre_prop" class="form-control" name="nombre" required>
+                  <input type="text" id="nombre_prop" class="form-control" name="nombre" onkeyup="copiadatos()" required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="ApellidoP">Apellido Paterno</label>
-                  <input type="text" id="apellidop_prop" class="form-control" name="apellidop"
+                  <input type="text" id="apellidop_prop" class="form-control" name="apellidop" onkeyup="copiadatos()"
                                             required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <label for="ApellidoM">Apellido Materno</label>
-                  <input type="text" id="apellidom_prop" class="form-control" name="apellidom"
+                  <input type="text" id="apellidom_prop" class="form-control" name="apellidom" onkeyup="copiadatos()"
                                             required>
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
@@ -133,15 +182,6 @@
                   <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
               </div>
-            </div>
-        <div class="form-row">
-              <div class="form-row">
-            <div class="col col-lg-12">
-                  <label for="Nombre">Grupo</label>
-                  <input type="text" class="form-control" name="grupo" required>
-                  <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-                </div>
-          </div>
             </div>
       </div>
         </div>
@@ -471,7 +511,7 @@
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	
+
 </body>
 </html>
 <script>
@@ -536,6 +576,35 @@ function valida_rut_duplicado_aseg() {
     }
 }
 </script>
+<script>
+	function checkRadio2(name) {
+    if (name == "diferentes") {
+        document.getElementById("radio2_si").checked = false;
+        document.getElementById("radio2_no").checked = true;
+      
+
+    } else if (name == "iguales") {
+        document.getElementById("radio2_no").checked = false;
+        document.getElementById("radio2_si").checked = true;
+		document.getElementById("nombre_seg").disabled = "true";
+        document.getElementById("rutaseg").disabled = "true";
+		document.getElementById("apellidop_seg").disabled = "true";
+		document.getElementById("apellidom_seg").disabled = "true";
+    }
+}
+</script>
+<script>
+		function copiadatos() {
+    if (document.getElementById("radio2_si").name == "iguales") {
+        document.getElementById("rutaseg").value =  document.getElementById("rutprop").value;
+        document.getElementById("nombre_seg").value =  document.getElementById("nombre_prop").value;
+		document.getElementById("apellidop_seg").value = document.getElementById("apellidop_prop").value;
+		document.getElementById("apellidom_seg").value = document.getElementById("apellidom_prop").value;
+      
+    } 
+} 
+		
+		</script>
 <script>
 	$('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
