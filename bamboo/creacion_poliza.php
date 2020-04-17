@@ -31,7 +31,7 @@
           <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
                     onclick="checkRadio(this.name)">
           <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-		 <a href="#modal_poliza" role="button" class="btn" data-toggle="modal" style="background-color: #536656; color: white;">Launch Demo Modal</a>
+          
           <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
           <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -607,9 +607,9 @@ function valida_rut_duplicado_aseg() {
 		</script>
 <script>
 			
-		$('#modal_poliza').on('shown.bs.modal', function () {
-  $('#modal_text').trigger('focus')
+$('#modal_poliza').on('shown.bs.modal', function () {
+$('#modal_text').trigger('focus')
 })
 		
 		
-		</script>
+</script>
