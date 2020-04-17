@@ -300,15 +300,15 @@
         <div class="form-row">
                   <div class="col-md-4 mb-3">
             <label for="deducible">Deducible</label>
-            <input type="text" class="form-control" name="deducible" onchange = "concatenar(this.name)">
+            <input type="text" class="form-control" name="deducible" oninput = "concatenar(this.name)">
           </div>
                   <div class="col-md-4 mb-3">
             <label for="prima_afecta">Prima Afecta</label>
-            <input type="text" class="form-control" name="prima_afecta" onchange = "concatenar(this.name)">
+            <input type="text" class="form-control" name="prima_afecta" oninput = "concatenar(this.name)">
           </div>
                   <div class="col-md-4 mb-3">
             <label for="prima_excenta">Prima Excenta</label>
-            <input type="text" class="form-control" name="prima_excenta" onchange = "concatenar(this.name)">
+            <input type="text" class="form-control" name="prima_excenta" oninput = "concatenar(this.name)">
           </div>
                 </div>
         <div class="form-row">
@@ -543,8 +543,7 @@ function valida_rut_duplicado_aseg() {
 
     });
 }
-</script>
-<script>
+
 	function checkRadio(name) {
     if (name == "nueva") {
         document.getElementById("radio_si").checked = false;
@@ -560,8 +559,7 @@ function valida_rut_duplicado_aseg() {
 		document.getElementById("poliza_renovada").disabled = "true"
     }
 }
-</script>
-<script>
+
 	function checkRadio2(name) {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
@@ -581,8 +579,7 @@ function valida_rut_duplicado_aseg() {
 		document.getElementById("apellidom_seg").disabled = "true";
     }
 }
-</script>
-<script>
+
 		function copiadatos() {
     if (document.getElementById("radio2_si").name == "iguales") {
         document.getElementById("rutaseg").value =  document.getElementById("rutprop").value;
@@ -592,20 +589,12 @@ function valida_rut_duplicado_aseg() {
       
     } 
 } 
-		
-		</script>
-<script>
 		function concatenar(name){
 			var  moneda = document.getElementById("moneda_poliza").val();
 			var  texto = document.getElementsByName(name).val();
 			var final = texto + ' ' + moneda;
-			
 			document.getElementByName(name).val()= final;
-			
 		}
-		
-		</script>
-<script>
 			
 		$('#modal_poliza').on('shown.bs.modal', function () {
   $('#modal_text').trigger('focus')
