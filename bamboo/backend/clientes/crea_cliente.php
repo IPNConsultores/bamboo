@@ -13,21 +13,19 @@ $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $telefono=estandariza_info($_POST["telefono"]);
  $referido=estandariza_info($_POST["referido"]);
  $grupo=estandariza_info($_POST["grupo"]);
- $contactos=estandariza_info($_POST["contactos"]);
+
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');');
 
-if (!$contactos==0){
-  for ($i=1; $i<=$contactos;$i++){
-    $indice="Contacto ".$i;
-    $nombrecontact=estandariza_info($_POST["nombrecontact".$i]);
-    $telefonocontact=estandariza_info($_POST["telefonocontact".$i]);
-    $emailcontact=estandariza_info($_POST["emailcontact".$i]);
-    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo, indice) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."','".$indice."' from clientes where rut_sin_dv='".$rut."';");
+  foreach (array_keys($_POST['nombrecontact']) as $key) {
+    $nombrecontact = $_POST['nombrecontact'][$key];
+    $telefonocontact = $_POST['telefonocontact'][$key];
+    $emailcontact = $_POST['emailcontact'][$key];
+    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
   }
-}
+
 
 //echo '<script type="text/javascript">
 //redirige('.$rut.');
