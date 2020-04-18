@@ -8,9 +8,16 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    <link rel="stylesheet" href="/assets/css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <body>
 <!-- body code goes here -->
@@ -72,7 +79,7 @@
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y Proponente</button>
       </h5>
     </div>
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
         <div class="form-check form-check-inline">
           <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
