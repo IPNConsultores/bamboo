@@ -196,12 +196,12 @@
   <div class="card">
     <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse show"
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
                             style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
       </h5>
     </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         <label for="compania"><b>Compañía</b></label>
         <br>
