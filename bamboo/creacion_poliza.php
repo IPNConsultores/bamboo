@@ -78,7 +78,7 @@
           <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y Proponente</button>
         </h5>
       </div>
-      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
           <div class="form-check form-check-inline">
             <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
@@ -123,7 +123,7 @@
                 <label for="RUT">RUT</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop();copiadatos()" oninput="copiadatos()" required>
+                                            onchange="valida_rut_duplicado_prop();copiadatos()" required>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
               </div>
@@ -135,18 +135,18 @@
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="Nombre">Nombre</label>
-                <input type="text" id="nombre_prop" class="form-control" name="nombre" oninput="copiadatos()" onkeyup="copiadatos()" required>
+                <input type="text" id="nombre_prop" class="form-control" name="nombre" oninput="copiadatos()" required>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="ApellidoP">Apellido Paterno</label>
-                <input type="text" id="apellidop_prop" class="form-control" oninput="copiadatos()" name="apellidop" onkeyup="copiadatos()"
+                <input type="text" id="apellidop_prop" class="form-control" oninput="copiadatos()" name="apellidop"
                                             required>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="ApellidoM">Apellido Materno</label>
-                <input type="text" id="apellidom_prop" class="form-control" name="apellidom" oninput="copiadatos()" onkeyup="copiadatos()"
+                <input type="text" id="apellidom_prop" class="form-control" name="apellidom" oninput="copiadatos()"
                                             required>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
@@ -577,13 +577,18 @@ function valida_rut_duplicado_aseg() {
 }
 
 		function copiadatos() {
-    if (document.getElementById("radio2_si").name == "iguales") {
+    if (document.getElementById("radio2_si").checked) {
         document.getElementById("rutaseg").value =  document.getElementById("rutprop").value;
         document.getElementById("nombre_seg").value =  document.getElementById("nombre_prop").value;
 		document.getElementById("apellidop_seg").value = document.getElementById("apellidop_prop").value;
 		document.getElementById("apellidom_seg").value = document.getElementById("apellidom_prop").value;
       
-    } 
+    }
+			else {
+		
+				
+				
+			}
 } 
 		function concatenar(name){
 			var  moneda = document.getElementById("moneda_poliza").value;
