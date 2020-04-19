@@ -203,10 +203,8 @@ $(document).ready(function() {
             "visible": false,
         }],
         "order": [
-
-            [2, "desc"],
-            [4, "asc"],
-            [1, "asc"]
+            [1, "asc"],
+            [4, "asc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
@@ -399,7 +397,7 @@ function detalle_tareas(d) {
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
             for (i = 0; i < d.clientes; i++) {
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + i + '</td><td>' + d.nombre[i] + '</td><td>' + d
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + i+1 + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
                     .id_cliente[i] +
@@ -412,10 +410,14 @@ function detalle_tareas(d) {
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
-                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Acciones</th></tr>';
+                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
             for (j = 0; j < d.polizas; j++) {
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
-                    .numero_poliza[j] + '</td><td>' + d.compania[i] +
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + j+1 + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
+                    .numero_poliza[j] + '</td><td>' + d.compania[j] +
+                    '</td><td>' + d.ramo[j] +
+                    '</td><td>' + d.vigencia_inicial[j] +
+                    '</td><td>' + d.vigencia_final[j] +
+                    '</td><td>' + d.materia_asegurada[j] +
                     '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
                     .id_poliza[j] +
                     ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
@@ -427,7 +429,7 @@ function detalle_tareas(d) {
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Acciones</td>' +
+        '<td>Acciones:</td>' +
         '<td><button title="Busca toda la información asociada a esta tarea" type="button" id=' + d.id_tarea +
         ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id_tarea +
@@ -438,10 +440,10 @@ function detalle_tareas(d) {
         ' name="cerrar_tarea" id=' + d.id_tarea +
         ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
-        '<tr><td> </td></tr>'+
-        '<tr>'+ $sin_rel +$tabla_clientes+'</tr>'+
-        '<tr><td> </td></tr>'+
-        '<tr>'+$tabla_polizas+'</tr>'+
+        '<tr><td>Clientes:</td>'+
+        '<td>'+ $tabla_clientes+'</td></tr>'+
+        '<tr><td>Pólizas:</td>'+
+        '<td>'+$tabla_polizas+'</td></tr>'+
         '</table>';
 }
 
