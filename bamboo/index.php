@@ -182,7 +182,7 @@ $(document).ready(function() {
                 title: "Tarea o Actividad"
             },
             {
-                "data": "fecha_vencimiento",
+                "data": "fecvencimiento",
                 title: "Fecha vencimiento"
             },
             {
