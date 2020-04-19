@@ -1,244 +1,89 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clientes</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/datatables.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
-</head>
-
-
-<body>
-
-    <!-- body code goes here -->
-    <div id="header"><?php include 'header2.php' ?></div>
-    <div class="container">
-        <p> Clientes / Modificación <br>
-        </p>
-        <br>
-        <table id="listado_clientes" class="display" width="100%">
-            <tr>
-                <thead>
-                    <th></th>
-                    <th>Rut</th>
-                    <th>Nombre</th>
-                    <th>Apellido paterno</th>
-                    <th>Apellido materno</th>
-                    <th>Teléfono</th>
-                    <th>e-mail</th>
-                    <th>Dirección Privada</th>
-                    <th>Dirección Laboral</th>
-                    <th>id</th>
-                </thead>
-            </tr>
-        </table>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/jquery.redirect.js"></script>
-    <script src="/assets/js/bootstrap-notify.js"></script>
-    <script src="/assets/js/bootstrap-notify.min.js"></script>
-    <script src="/assets/js/datatables.min.js"></script>
-</body>
-
-</html>
-<script>
-$(document).ready(function() {
-    var table = $('#listado_clientes').DataTable({
-        "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
-        "columns": [{
-                "className": 'details-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": '<i class="fas fa-search-plus"></i>'
-            },
-            {
-                "data": "rut"
-            },
-            {
-                "data": "nombre"
-            },
-            {
-                "data": "apellidop"
-            },
-            {
-                "data": "apellidom"
-            },
-            {
-                "data": "telefono"
-            },
-            {
-                "data": "correo_electronico"
-            },
-            {
-                "data": "direccionp"
-            },
-            {
-                "data": "direccionl"
-            },
-            {
-                "data": "id"
-            }
-
-        ],
-        //          "search": {
-        //          "search": "abarca"
-        //          },
-        "columnDefs": [{
-                "targets": [6, 7, 8, 9],
-                "visible": false,
-            },
-            {
-                "targets": [5, 6, 7, 8, 9],
-                "searchable": false
-            }
-        ],
-        "order": [
-            [3, "asc"],
-            [4, "asc"]
-        ],
-        "oLanguage": {
-            "sSearch": "Búsqueda rápida",
-            "sLengthMenu": 'Mostrar <select>' +
-                '<option value="10">10</option>' +
-                '<option value="25">30</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">todos</option>' +
-                '</select> registros',
-            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
-            "sLengthMenu": "Muestra _MENU_ registros por página",
-            "sZeroRecords": "No hay registros asociados",
-            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
-            "sInfoEmpty": "No hay registros disponibles",
-            "oPaginate": {
-                "sNext": "Siguiente",
-                "sPrevious": "Anterior",
-                "sLast": "Última"
-            }
-        }
-    });
-    $('#listado_clientes tbody').on('click', 'td.details-control', function() {
-        var tr = $(this).closest('tr');
-        var row = table.row(tr);
-
-        if (row.child.isShown()) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            // Open this row
-            row.child(format(row.data())).show();
-            tr.addClass('shown');
-        }
-    });
-});
-
-function format(d) {
-    // `d` is the original data object for the row
-    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-        '<tr>' +
-        '<td>Nombre completo:</td>' +
-        '<td>' + d.nombre + ' ' + d.apellidop + ' ' + d.apellidom + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Correo electrónico:</td>' +
-        '<td>' + d.correo_electronico + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Dirección particular:</td>' +
-        '<td>' + d.direccionp + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Dirección laboral:</td>' +
-        '<td>' + d.direccionl + '</td>' +
-        '</tr>' +
-        '</tr>' +
-
-        '<tr>' +
-        '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id="+d.id+" name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id="+d.id+" name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id="+d.id+" name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id="+d.id+" name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
-
-        '</tr>' +
-        '</table>';
-}
-
-function botones(id, accion) {
-    console.log("ID:" + id + " => acción:" + accion);
-    switch (accion) {
-        case "elimina": {
-            console.log("Cliente eliminado con ID:" + id);
-            var r = confirm(
-                "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
-            );
-            if (r == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "/bamboo/backend/clientes/elimina_cliente.php",
-                    data: {
-                        cliente: id
-                    },
-                });
-                $.notify({
-                    // options
-                    message: 'Cliente eliminado con éxito'
-                }, {
-                    // settings
-                    type: 'success'
-                });
-                //location
-                break;
-
-            } else {
-                $.notify({
-                    // options
-                    message: 'Proceso de eliminación de cliente cancelado'
-                }, {
-                    // settings
-                    type: 'info'
-                });
-                break;
-            }
-        }
-        case "modifica": {
-            $.redirect('/bamboo/modificacion_cliente.php', {
-                'cliente': id
-            }, 'post');
-            break;
-        }
-        case "tarea": {
-            console.log("Asignar tarea a ID:" + id);
-            $.notify({
-                // options
-                message: 'Tarea Asignada'
-            }, {
-                // settings
-                type: 'success'
-            });
-            break;
-        }
-        case "info": {
-            console.log("Busqueda de ID:" + id);
-            $.notify({
-                // options
-                message: 'Recopilando información del cliente'
-            }, {
-                // settings
-                type: 'info'
-
-            });
-            break;
-        }
+<?php
+$resultado =$codigo=$conta='';
+require_once "/home/gestio10/public_html/backend/config.php";
+    mysqli_set_charset($link, 'utf8');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    $codigo='{
+      "data": [';
+    $conta=0;
+    $resul_tareas=mysqli_query($link, "SELECT a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas as a left join tareas_relaciones as b on a.id=b.id_tarea group by a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad");
+  While($tareas=mysqli_fetch_object($resul_tareas))
+  {$conta=$conta+1;
+    $relaciones=array("relaciones" =>& $tareas->relaciones, "clientes" =>& $tareas->clientes , "polizas" =>& $tareas->polizas);
+    if (!$tareas->relaciones=="0"){
+                    $contador_clientes=$contador_polizas=0;
+        $result_relaciones=mysqli_query($link, "SELECT base, id_relacion FROM tareas_relaciones where id_tarea='".$tareas->id."';");
+        while ($rel_tareas=mysqli_fetch_object($result_relaciones))
+        {
+            switch($rel_tareas->base){
+                case "polizas":{
+                    $resul_rel=mysqli_query($link, "SELECT  estado , compania, ramo, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT(b.nombre_cliente, ' ', b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT(b.rut_sin_dv, '-',b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT(c.nombre_cliente, ' ', c.apellido_paterno, ' ', c.apellido_materno) as nom_clienteA, CONCAT(c.rut_sin_dv, '-',c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id='".$rel_tareas->id_relacion."' order by estado, vigencia_final asc;");
+                    while($list_polizas=mysqli_fetch_object($resul_rel))
+                    {
+                        $contador_polizas=$contador_polizas+1;
+                        $relaciones=array_merge($relaciones, array(
+                            "ramo".$contador_polizas =>& $list_polizas->ramo,
+                            "estado".$contador_polizas =>& $list_polizas->estado, 
+                            "tipo_poliza".$contador_polizas =>& $list_polizas->tipo_poliza,
+                            "vigencia_inicial".$contador_polizas =>& $list_polizas->vigencia_inicial,
+                            "vigencia_final".$contador_polizas =>& $list_polizas->vigencia_final,
+                            "compania".$contador_polizas =>& $list_polizas->compania,
+                            "vigencia_final".$contador_polizas =>& $list_polizas->vigencia_final,
+                            "numero_poliza".$contador_polizas =>& $list_polizas->numero_poliza,
+                            "materia_asegurada".$contador_polizas =>& $list_polizas->materia_asegurada,
+                            "patente_ubicacion".$contador_polizas =>& $list_polizas->patente_ubicacion,
+                            "cobertura".$contador_polizas =>& $list_polizas->cobertura,
+                            "nom_clienteP".$contador_polizas =>& $list_polizas->nom_clienteP,
+                            "rut_clienteP".$contador_polizas =>& $list_polizas->rut_clienteP,
+                            "telefonoP".$contador_polizas =>& $list_polizas->telefonoP,
+                            "correoP".$contador_polizas =>& $list_polizas->correoP,
+                            "nom_clienteA".$contador_polizas =>& $list_polizas->nom_clienteA,
+                            "rut_clienteA" =>& $list_polizas->rut_clienteA,
+                            "telefonoA".$contador_polizas =>& $list_polizas->telefonoA,
+                            "correoA".$contador_polizas =>& $list_polizas->correoA,
+                            "id_proponente".$contador_polizas =>& $list_polizas->idP,
+                            "id_asegurado".$contador_polizas =>& $list_polizas->idA,
+                            "id_poliza".$contador_polizas =>& $list_polizas->id_poliza
+                            ));
+                    }
+                    break;
+                }
+                case "clientes":{
+                    $resul_clientes=mysqli_query($link, "SELECT id, concat(nombre_cliente,' ', apellido_paterno, ' ', apellido_materno) as nombre, telefono, correo  FROM clientes where id='".$rel_tareas->id_relacion."';");
+                  while($list_clientes=mysqli_fetch_object($resul_clientes)){
+                      $contador_clientes=$contador_clientes+1;
+                      $relaciones=array_merge($relaciones, array(
+                        "id_cliente".$contador_clientes =>& $list_clientes->id,
+                          "nombre".$contador_clientes =>& $list_clientes->nombre,
+                          "telefono".$contador_clientes =>& $list_clientes->telefono,
+                          "correo".$contador_clientes =>& $list_clientes->correo 
+                          ));
+                  }
+                    break;
+                }
+            } 
+        } 
     }
-}
-</script>
+        if ($conta==1){
+      $codigo.= json_encode(array_merge(array(
+        "id_tarea" =>& $tareas->id,
+        "fecingreso" =>& $tareas->fecha_ingreso,
+        "fecvencimiento" =>& $tareas->fecha_vencimiento, 
+        "tarea" =>& $tareas->tarea, 
+        "estado" =>& $tareas->estado, 
+        "prioridad" =>& $tareas->prioridad), 
+        $relaciones));
+    } else {
+    $codigo.= ', '.json_encode(array_merge(array(
+        "id_tarea" =>& $tareas->id,
+        "fecingreso" =>& $tareas->fecha_ingreso,
+        "fecvencimiento" =>& $tareas->fecha_vencimiento, 
+        "tarea" =>& $tareas->tarea, 
+        "estado" =>& $tareas->estado, 
+        "prioridad" =>& $tareas->prioridad), 
+        $relaciones)
+    );}
+  }
+  $codigo.=']}';
+  echo $codigo;
+?>
