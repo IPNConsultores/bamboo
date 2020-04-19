@@ -398,7 +398,7 @@ function detalle_tareas(d) {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
-            for (i = 1; i <= d.clientes; i++) {
+            for (i = 0; i < d.clientes; i++) {
                 $tabla_clientes = $tabla_clientes + '<tr><td>' + i + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
@@ -413,8 +413,8 @@ function detalle_tareas(d) {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Acciones</th></tr>';
-            for (j = 1; j <= d.polizas; j++) {
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + j + '</td><td>' + d.estado[j] + '</td><td>' + d
+            for (j = 0; j < d.polizas; j++) {
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[i] +
                     '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
                     .id_poliza[j] +

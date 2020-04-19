@@ -46,7 +46,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
                     }
                         $relaciones=array_merge($relaciones, array(
                             "ramo" =>& $ramo,
-                            "estado" =>& $estado, 
+                            "estado_poliza" =>& $estado, 
                             "tipo_poliza" =>& $tipo_poliza,
                             "vigencia_inicial" =>& $vigencia_inicial,
                             "vigencia_final" =>& $vigencia_final,
