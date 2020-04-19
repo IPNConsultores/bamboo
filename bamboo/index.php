@@ -77,7 +77,8 @@ While($row2=mysqli_fetch_object($resultado2))
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <canvas id="myChart" width="400" height="100"></canvas><br><hr>
+        <canvas id="myChart" width="400" height="100"></canvas><br>
+        <hr>
         <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
         <hr><br>
         <p> Resumen de tareas <br></p>
@@ -100,11 +101,7 @@ While($row2=mysqli_fetch_object($resultado2))
                                 <th>Estado</th>
                                 <th>Tarea</th>
                                 <th>Fecha vencimiento</th>
-                                <th>póliza asociada</th>
-                                <th>Cliente asociado</th>
-                                <th>Rut Cliente</th>
-                                <th>Teléfono</th>
-                                <th>e-Mail</th>
+                                <th>Fecha creación tarea</th>
                                 <th>id tarea</th>
                             </tr>
                         </table>
@@ -155,8 +152,8 @@ While($row2=mysqli_fetch_object($resultado2))
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
-	<br>
-	<br>
+    <br>
+    <br>
 </body>
 
 </html>
@@ -189,24 +186,8 @@ $(document).ready(function() {
                 title: "Fecha vencimiento"
             },
             {
-                "data": "poliza",
-                title: "Nro Póliza"
-            },
-            {
-                "data": "nom_cliente",
-                title: "Nombre cliente"
-            },
-            {
-                "data": "rut_cliente",
-                title: "Rut cliente"
-            },
-            {
-                "data": "telefono",
-                title: "Teléfono"
-            },
-            {
-                "data": "correo",
-                title: "e-Mail"
+                "data": "fecingreso",
+                title: "Fecha creación tarea"
             },
             {
                 "data": "id_tarea"
@@ -218,7 +199,7 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-            "targets": [7, 8, 9, 10],
+            "targets": [6],
             "visible": false,
         }],
         "order": [
@@ -407,34 +388,60 @@ correoA: "correodeprueba@bamboo.cl"
 });
 
 function detalle_tareas(d) {
+    $sin_rel=$tabla_clientes=$tabla_polizas='';
+    if (d.relaciones == 0) {
+        $sin_rel= '<div><span>Tarea sin asociar a clientes  o pólizas</span></div>';
+    } else {
+        if (d.clientes == 0) {
+            $tabla_clientes = '<div><span>Tarea sin asociar a clientes</span></div>';
+        } else {
+            $tabla_clientes =
+                '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+                '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
+            for (i = 1; i <= d.clientes; i++) {
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + i + '</td><td>' + d.nombre[i] + '</td><td>' + d
+                    .telefono[i] + '</td><td>' + d.correo[i] +
+                    '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
+                    .id_cliente[i] +
+                    ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
+            }
+            $tabla_clientes = $tabla_clientes + '</table>';
+        }
+        if (d.polizas == 0) {
+            $tabla_polizas = '<div><span>Tarea sin asociar a pólizas</span></div>';
+        } else {
+            $tabla_polizas =
+                '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Acciones</th></tr>';
+            for (j = 1; j <= d.polizas; j++) {
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + j + '</td><td>' + d.estado[j] + '</td><td>' + d
+                    .numero_poliza[j] + '</td><td>' + d.compania[i] +
+                    '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
+                    .id_poliza[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
+            }
+            $tabla_polizas = $tabla_polizas + '</table>';
+        }
+    }
+
     // `d` is the original data object for the row
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Rut:</td>' +
-        '<td>' + d.rut_cliente + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Correo electrónico:</td>' +
-        '<td>' + d.correo + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Teléfono:</td>' +
-        '<td>' + d.telefono + '</td>' +
-        '</tr>' +
-
-        '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
-        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
-        d.id +
-        ' name="modifica" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
-        d.id +
-        ' name="elimina" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
-        d.id +
-        ' name="tarea" id=' + d.id +
-        ' onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
-
+        '<td><button title="Busca toda la información asociada a esta tarea" type="button" id=' + d.id_tarea +
+        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        d.id_tarea +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        d.id_tarea +
+        ' name="elimina" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Marca tarea como completada"  type="button" id=' +
+        d.id_tarea +
+        ' name="cerrar_tarea" id=' + d.id_tarea +
+        ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
+        '<tr><td> </td></tr>'+
+        '<tr>'+ $sin_rel +$tabla_clientes+'</tr>'+
+        '<tr><td> </td></tr>'+
+        '<tr>'+$tabla_polizas+'</tr>'+
         '</table>';
 }
 
@@ -532,6 +539,11 @@ function botones(id, accion, base) {
             }
             break;
         }
+        case "cerrar_tarea": {
+            if (base == 'tarea') {
+            }
+            break;
+        }
     }
 }
 
@@ -602,22 +614,22 @@ var myDoughnutChart = new Chart(ctx2, {
 function genera_data(data) {
     switch (data) {
         case 'stock': {
-            var arreglo = <?php echo json_encode($stock);?> ;
+            var arreglo = <?php echo json_encode($stock);?>;
             return arreglo;
             break;
         }
         case 'salidas': {
-            var arreglo = <?php echo json_encode($salidas);?> ;
+            var arreglo = <?php echo json_encode($salidas);?>;
             return arreglo;
             break;
         }
         case 'entradas': {
-            var arreglo = <?php echo json_encode($entradas);?> ;
+            var arreglo = <?php echo json_encode($entradas);?>;
             return arreglo;
             break;
         }
         case 'leyendas': {
-            var arreglo = <?php echo json_encode($leyendas);?> ;
+            var arreglo = <?php echo json_encode($leyendas);?>;
             return arreglo;
             break;
         }

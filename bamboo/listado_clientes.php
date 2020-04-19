@@ -227,7 +227,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
         switch (d.contactos) {
             case "1": {
                 $contactos = $conf_tabla + '<tr><th></th><th>Contacto 1</th></tr>' +
-                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td>/tr>' +
+                    '<tr><td>Nombre</td><td>' + d.nombre1 + '</td></tr>' +
                     '<tr><td>Teléfono</td><td>' + d.telefono1 + '</td></tr>' +
                     '<tr><td>Correo</td><td>' + d.correo1 + '</td></tr></table>'
                 break
