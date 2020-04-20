@@ -631,12 +631,7 @@ function valida_rut_duplicado_aseg() {
 
 			
 $('#modal_poliza').on('shown.bs.modal', function () {
-$('#modal_text').trigger('focus')
-})
-		
-var table = ''
-$(document).ready(function() {
-    table = $('#listado_polizas').DataTable({
+  table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
@@ -786,5 +781,11 @@ $(document).ready(function() {
             }
         }
     });
+$('#modal_text').trigger('focus')
+})
+		
+var table = ''
+$(document).ready(function() {
+    
 });
 </script>
