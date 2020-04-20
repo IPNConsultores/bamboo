@@ -24,18 +24,12 @@ require_once "/home/gestio10/public_html/backend/config.php";
                     while($list_polizas=mysqli_fetch_object($resul_rel))
                     {
                       switch ($list_polizas->estado) {
-                        case 'Pendiente':
+                        case 'Activo':
                             $estado_pol='badge badge-primary';
                             break;
-                        case 'Completado':
-                                $estado_pol='badge badge-secondary';
-                                break;
-                        case 'Atrasado':
-                            $estado_pol='badge badge-danger';
-                            break;
-                        case 'Próximo a vencer':
-                            $estado_pol='badge badge-warning';
-                            break;
+                        case 'Cerrado':
+                              $estado_pol='badge badge-dark';
+                              break;
                         default:
                             $estado_pol='badge badge-light';
                             break;
