@@ -396,10 +396,10 @@ function detalle_tareas(d) {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
-                $cont=0;
+                $cont_i=1;
             for (i = 0; i < d.clientes; i++) {
-                $cont=$cont+i;
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont + '</td><td>' + d.nombre[i] + '</td><td>' + d
+                $cont_i=$cont_i+i;
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
                     .id_cliente[i] +
@@ -413,10 +413,10 @@ function detalle_tareas(d) {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
-                $cont=0;
+                $cont_j=1;
             for (j = 0; j < d.polizas; j++) {
-                $cont=$cont+j;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
+                $cont_j=$cont_j+j;
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[j] +
                     '</td><td>' + d.ramo[j] +
                     '</td><td>' + d.vigencia_inicial[j] +

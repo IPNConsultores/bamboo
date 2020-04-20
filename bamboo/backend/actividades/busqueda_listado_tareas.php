@@ -25,19 +25,19 @@ require_once "/home/gestio10/public_html/backend/config.php";
                     {
                       switch ($list_polizas->estado) {
                         case 'Pendiente':
-                            $estado_pol='<span class="badge badge-primary">'.$list_polizas->estado.'</span>';
+                            $estado_pol='<span class=\"badge badge-primary\">'.$list_polizas->estado.'</span>';
                             break;
                         case 'Completado':
-                                $estado_pol='<span class="badge badge-secondary">'.$list_polizas->estado.'</span>';
+                                $estado_pol='<span class=\"badge badge-secondary\">'.$list_polizas->estado.'</span>';
                                 break;
                         case 'Atrasado':
-                            $estado_pol='<span class="badge badge-danger">'.$list_polizas->estado.'</span>';
+                            $estado_pol='<span class=\"badge badge-danger\">'.$list_polizas->estado.'</span>';
                             break;
                         case 'Próximo a vencer':
-                            $estado_pol='<span class="badge badge-warning">'.$list_polizas->estado.'</span>';
+                            $estado_pol='<span class=\"badge badge-warning\">'.$list_polizas->estado.'</span>';
                             break;
                         default:
-                            $estado_pol='<span class="badge badge-light">'.$list_polizas->estado.'</span>';
+                            $estado_pol='<span class=\"badge badge-light\">'.$list_polizas->estado.'</span>';
                             break;
                     }
                         array_push($ramo, $list_polizas->ramo);
@@ -111,19 +111,19 @@ require_once "/home/gestio10/public_html/backend/config.php";
     }
     switch ($tareas->estado) {
       case 'Pendiente':
-          $estado_sw='<span class="badge badge-primary">'.$tareas->estado.'</span>';
+          $estado_sw='<span class=\"badge badge-primary\">'.$tareas->estado.'</span>';
           break;
       case 'Completado':
-              $estado_sw='<span class="badge badge-secondary">'.$tareas->estado.'</span>';
+              $estado_sw='<span class=\"badge badge-secondary\">'.$tareas->estado.'</span>';
               break;
       case 'Atrasado':
-          $estado_sw='<span class="badge badge-danger">'.$tareas->estado.'</span>';
+          $estado_sw='<span class=\"badge badge-danger\">'.$tareas->estado.'</span>';
           break;
       case 'Próximo a vencer':
-          $estado_sw='<span class="badge badge-warning">'.$tareas->estado.'</span>';
+          $estado_sw='<span class=\"badge badge-warning\">'.$tareas->estado.'</span>';
           break;
       default:
-          $estado_sw='<span class="badge badge-light">'.$tareas->estado.'</span>';
+          $estado_sw='<span class=\"badge badge-light\">'.$tareas->estado.'</span>';
           break;
   }
         if ($conta==1){
@@ -141,7 +141,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
         "tarea" =>& $tareas->tarea, 
-        "estado" =>& $tareas->estado, 
+        "estado" =>& $estado_sw, 
         "prioridad" =>& $tareas->prioridad), 
         $relaciones)
     );}
