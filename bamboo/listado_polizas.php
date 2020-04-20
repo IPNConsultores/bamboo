@@ -59,6 +59,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                     <th></th>
+                    <th>Estado</th>
                     <th>Póliza</th>
                     <th>Compañia</th>
                     <th>Ramo</th>
@@ -114,6 +115,10 @@ $(document).ready(function() {
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
+            },
+            {
+                "data": "estado",
+                title: "Estado"
             },
             {
                 "data": "numero_poliza",
@@ -177,19 +182,39 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [9,10, 11, 12,13,14],
+                "targets": [10, 11, 12,13,14,15],
                 "visible": false,
             },
             {
-                "targets": [9,10, 11, 12,13,14],
+                "targets": [10, 11, 12,13,14,15],
                 "searchable": false
             },
             {
                 "searchPanes": {
-                    "preSelect":['202003'],
+                    "preSelect":['202004'],
                 },
                 "targets":[14],
-            }
+            },
+            {
+        targets: 1,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Activo':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Cerrado':
+                                estado='<span class="badge badge-dark">'+data+'</span>';
+                                break;
+                        case 'Atrasado':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }}
         ],
         "order": [
             [3, "asc"],
