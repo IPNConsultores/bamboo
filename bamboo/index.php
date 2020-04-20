@@ -416,7 +416,7 @@ function detalle_tareas(d) {
                 $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
                 $cont_j=$cont_j+1;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="'d.estado_poliza_alerta[j]'">'+d.estado_poliza[j]+'</span></td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[j] +
                     '</td><td>' + d.ramo[j] +
                     '</td><td>' + d.vigencia_inicial[j] +
