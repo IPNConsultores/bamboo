@@ -23,8 +23,25 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
                     while($list_polizas=mysqli_fetch_object($resul_rel))
                     {
+                      switch ($list_polizas->estado) {
+                        case 'Pendiente':
+                            $estado_pol='<span class="badge badge-primary">'.$list_polizas->estado.'</span>';
+                            break;
+                        case 'Completado':
+                                $estado_pol='<span class="badge badge-secondary">'.$list_polizas->estado.'</span>';
+                                break;
+                        case 'Atrasado':
+                            $estado_pol='<span class="badge badge-danger">'.$list_polizas->estado.'</span>';
+                            break;
+                        case 'Próximo a vencer':
+                            $estado_pol='<span class="badge badge-warning">'.$list_polizas->estado.'</span>';
+                            break;
+                        default:
+                            $estado_pol='<span class="badge badge-light">'.$list_polizas->estado.'</span>';
+                            break;
+                    }
                         array_push($ramo, $list_polizas->ramo);
-                        array_push($estado, $list_polizas->estado);
+                        array_push($estado, $estado_pol);
                         array_push($vigencia_inicial, $list_polizas->vigencia_inicial);
                         array_push($vigencia_final, $list_polizas->vigencia_final);
                         array_push($compania, $list_polizas->compania);
@@ -92,13 +109,30 @@ require_once "/home/gestio10/public_html/backend/config.php";
             } 
         } 
     }
+    switch ($tareas->estado) {
+      case 'Pendiente':
+          $estado_sw='<span class="badge badge-primary">'.$tareas->estado.'</span>';
+          break;
+      case 'Completado':
+              $estado_sw='<span class="badge badge-secondary">'.$tareas->estado.'</span>';
+              break;
+      case 'Atrasado':
+          $estado_sw='<span class="badge badge-danger">'.$tareas->estado.'</span>';
+          break;
+      case 'Próximo a vencer':
+          $estado_sw='<span class="badge badge-warning">'.$tareas->estado.'</span>';
+          break;
+      default:
+          $estado_sw='<span class="badge badge-light">'.$tareas->estado.'</span>';
+          break;
+  }
         if ($conta==1){
       $codigo.= json_encode(array_merge(array(
         "id_tarea" =>& $tareas->id,
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
         "tarea" =>& $tareas->tarea, 
-        "estado" =>& $tareas->estado, 
+        "estado" =>& $estado_sw, 
         "prioridad" =>& $tareas->prioridad), 
         $relaciones));
     } else {

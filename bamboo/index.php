@@ -388,16 +388,18 @@ correoA: "correodeprueba@bamboo.cl"
 function detalle_tareas(d) {
     $sin_rel=$tabla_clientes=$tabla_polizas='';
     if (d.relaciones == 0) {
-        $sin_rel= '<div><span>Tarea sin asociar a clientes  o pólizas</span></div>';
+        $sin_rel= 'Tarea sin asociar a clientes  o pólizas';
     } else {
         if (d.clientes == 0) {
-            $tabla_clientes = '<div><span>Tarea sin asociar a clientes</span></div>';
+            $tabla_clientes = 'Tarea sin asociar a clientes';
         } else {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
+                $cont=0;
             for (i = 0; i < d.clientes; i++) {
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + i+1 + '</td><td>' + d.nombre[i] + '</td><td>' + d
+                $cont=$cont+i;
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
                     .id_cliente[i] +
@@ -406,13 +408,15 @@ function detalle_tareas(d) {
             $tabla_clientes = $tabla_clientes + '</table>';
         }
         if (d.polizas == 0) {
-            $tabla_polizas = '<div><span>Tarea sin asociar a pólizas</span></div>';
+            $tabla_polizas = 'Tarea sin asociar a pólizas';
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
+                $cont=0;
             for (j = 0; j < d.polizas; j++) {
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + j+1 + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
+                $cont=$cont+j;
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[j] +
                     '</td><td>' + d.ramo[j] +
                     '</td><td>' + d.vigencia_inicial[j] +
