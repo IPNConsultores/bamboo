@@ -34,19 +34,12 @@ While($row=mysqli_fetch_object($resultado))
       array_push($salidas,$row->salidas );
   }
   
-$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM `polizas` where estado='Abierto' group by ramo order by count(*) desc");
+$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM polizas where estado='Activo' group by ramo order by count(*) desc");
 While($row2=mysqli_fetch_object($resultado2))
   {
       array_push($ramo,$row2->ramo );
       array_push($cantidad,$row2->cantidad );
   }
-
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -567,6 +560,9 @@ function botones(id, accion, base) {
         }
         case "cerrar_tarea": {
             if (base == 'tarea') {
+                $.redirect('/bamboo/actividades/cierra_tarea.php', {
+                    'id_tarea': id
+                }, 'post');
             }
             break;
         }
