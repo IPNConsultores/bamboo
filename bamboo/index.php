@@ -200,30 +200,31 @@ $(document).ready(function() {
 
         "columnDefs": [{
             "targets": [6],
-            "visible": false,
-            {
+            "visible": false
+
+        },
+        {
         targets: 2,
         render: function (data, type, row, meta) {
-            $estado='';
+             var estado='';
             switch (data) {
                         case 'Pendiente':
-                            $estado='<span class="badge badge-primary">'+data+'</span>';
+                            estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
                         case 'Completado':
-                                $estado='<span class="badge badge-secondary">'+data+'</span>';
+                                estado='<span class="badge badge-secondary">'+data+'</span>';
                                 break;
                         case 'Atrasado':
-                            $estado='<span class="badge badge-danger">'+data+'</span>';
+                            estado='<span class="badge badge-danger">'+data+'</span>';
                             break;
                         case 'Próximo a vencer':
-                            $estado='<span class="badge badge-warning">'+data+'</span>';
+                            estado='<span class="badge badge-warning">'+data+'</span>';
                             break;
                         default:
-                            $estado='<span class="badge badge-light">'+data+'</span>';
+                            estado='<span class="badge badge-light">'+data+'</span>';
                             break;
                     }
-          return $estado;  //render link in cell
-        }
+          return estado;  //render link in cell
         }],
         "order": [
             [1, "asc"],
