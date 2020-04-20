@@ -134,7 +134,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
         "tarea" =>& $tareas->tarea, 
-        "estado" =>& $$tareas->estado, 
+        "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
         "prioridad" =>& $tareas->prioridad), 
         $relaciones));
@@ -144,7 +144,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
         "tarea" =>& $tareas->tarea, 
-        "estado" =>& $$tareas->estado, 
+        "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
         "prioridad" =>& $tareas->prioridad), 
         $relaciones)
