@@ -201,6 +201,29 @@ $(document).ready(function() {
         "columnDefs": [{
             "targets": [6],
             "visible": false,
+            {
+        targets: 2,
+        render: function (data, type, row, meta) {
+            $estado='';
+            switch (data) {
+                        case 'Pendiente':
+                            $estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Completado':
+                                $estado='<span class="badge badge-secondary">'+data+'</span>';
+                                break;
+                        case 'Atrasado':
+                            $estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        case 'Próximo a vencer':
+                            $estado='<span class="badge badge-warning">'+data+'</span>';
+                            break;
+                        default:
+                            $estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return $estado;  //render link in cell
+        }
         }],
         "order": [
             [1, "asc"],
@@ -396,9 +419,9 @@ function detalle_tareas(d) {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
-                $cont_i=1;
+                $cont_i=0;
             for (i = 0; i < d.clientes; i++) {
-                $cont_i=$cont_i+i;
+                $cont_i=$cont_i+1;
                 $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
@@ -413,10 +436,10 @@ function detalle_tareas(d) {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
-                $cont_j=1;
+                $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
-                $cont_j=$cont_j+j;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
+                $cont_j=$cont_j+1;
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="'d.estado_poliza_alerta[j]'">'+d.estado_poliza[j]+'</span></td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[j] +
                     '</td><td>' + d.ramo[j] +
                     '</td><td>' + d.vigencia_inicial[j] +
