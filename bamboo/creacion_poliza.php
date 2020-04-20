@@ -30,7 +30,7 @@
   <br>
   <br>
   <div class="form-check form-check-inline">
-    <label class="form-check-label" >¿Es renovación de una póliza?:&nbsp;&nbsp;</label>
+    <label class="form-check-label" >¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
     <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                     onclick="checkRadio(this.name)" checked="checked">
     <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
@@ -47,15 +47,21 @@
           </div>
           <div class="modal-body">
             <div class ="container-fluid">
-              <table class="table" id="listado_polizas">
+            <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
-                  <th>Póliza</th>
-                  <th>Compañia</th>
-                  <th>Ramo</th>
-                  <th>Nombre Asegurado</th>
-                  <th>Fecha fin</th>
+                    <th></th>
+                    <th>Estado</th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Materia</th>
                 </tr>
-              </table>
+            </table>
               <div id="botones_poliza"></div>
             </div>
           </div>
@@ -81,7 +87,7 @@
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
           <div class="form-check form-check-inline">
-            <label class="form-check-label" >¿Asegurado es el mismo que Proponente?:&nbsp;&nbsp;</label>
+            <label class="form-check-label" >¿Cliente Asegurado y Proponente son la misma persona?:&nbsp;&nbsp;</label>
             <input class="form-check-input" type="radio" name="diferentes" id="radio2_no" value="diferentes"
                     onclick="checkRadio2(this.name)" checked="checked">
             <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
@@ -628,5 +634,157 @@ $('#modal_poliza').on('shown.bs.modal', function () {
 $('#modal_text').trigger('focus')
 })
 		
-		
+var table = ''
+$(document).ready(function() {
+    table = $('#listado_polizas').DataTable({
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "scrollX": true,
+        "searchPanes":{
+            "columns":[2,3,13,14],
+        },
+        "dom": 'Pfrtip',
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": "id"
+            },
+            {
+                "data": "estado",
+                title: "Estado"
+            },
+            {
+                "data": "numero_poliza",
+                title: "Nro Póliza"
+            },
+            {
+                "data": "compania",
+                title: "Compañía"
+            },
+            {
+                "data": "ramo",
+                title: "Ramo"
+            },
+            {
+                "data": "vigencia_inicial",
+                title: "Vigencia Inicio"
+            },
+            {
+                "data": "vigencia_final",
+                title: "Vigencia Término"
+            },
+            {
+                "data": "materia_asegurada",
+                title: "Materia asegurada"
+            },
+            {
+                "data": "tipo_poliza",
+                title: "Tipo póliza"
+            },
+            {
+                "data": "patente_ubicacion",
+                title: "Observaciones materia asegurada"
+            },
+            {
+                "data": "deducible",
+                title: "Deducible"
+            },
+            {
+                "data": "prima_afecta",
+                title: "Prima afecta"
+            },
+            {
+                "data": "prima_exenta",
+                title: "Prima exenta"
+            },
+            {
+                "data": "prima_bruta_anual",
+                title: "Prima bruta anual"
+            },
+            {
+                "data": "anomes_final",
+                title: "Añomes final"
+            },
+            {
+                "data": "anomes_inicial",
+                title: "Añomes inicial"
+            }
+
+        ],
+        //          "search": {
+        //          "search": "abarca"
+        //          },
+        "columnDefs": [{
+                "targets": [10, 11, 12,13,14,15],
+                "visible": false,
+            },
+            {
+                "targets": [10, 11, 12,13,14,15],
+                "searchable": false
+            },
+            {
+                "searchPanes": {
+                    "preSelect":['202004'],
+                },
+                "targets":[14],
+            },
+            {
+        targets: 1,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Activo':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Cerrado':
+                                estado='<span class="badge badge-dark">'+data+'</span>';
+                                break;
+                        case 'Atrasado':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }},
+        {
+        targets: 0,
+        render: function (data, type, row, meta) {
+          return '<a href="'+data+'">Renovar</a>';  //render link in cell
+        }}
+        ],
+        "order": [
+            [3, "asc"],
+            [4, "asc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+            "sInfoFiltered": "(_TOTAL_ registros de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
+                }
+            }
+        }
+    });
+   
 </script>
