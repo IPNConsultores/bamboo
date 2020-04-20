@@ -200,31 +200,7 @@ $(document).ready(function() {
 
         "columnDefs": [{
             "targets": [6],
-            "visible": false
-
-        },
-        {
-        targets: 2,
-        render: function (data, type, row, meta) {
-             var estado='';
-            switch (data) {
-                        case 'Pendiente':
-                            estado='<span class="badge badge-primary">'+data+'</span>';
-                            break;
-                        case 'Completado':
-                                estado='<span class="badge badge-secondary">'+data+'</span>';
-                                break;
-                        case 'Atrasado':
-                            estado='<span class="badge badge-danger">'+data+'</span>';
-                            break;
-                        case 'Próximo a vencer':
-                            estado='<span class="badge badge-warning">'+data+'</span>';
-                            break;
-                        default:
-                            estado='<span class="badge badge-light">'+data+'</span>';
-                            break;
-                    }
-          return estado;  //render link in cell
+            "visible": false,
         }],
         "order": [
             [1, "asc"],
@@ -440,7 +416,7 @@ function detalle_tareas(d) {
                 $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
                 $cont_j=$cont_j+1;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="'d.estado_poliza_alerta[j]'">'+d.estado_poliza[j]+'</span></td><td>' + d
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td>' + d.estado_poliza[j] + '</td><td>' + d
                     .numero_poliza[j] + '</td><td>' + d.compania[j] +
                     '</td><td>' + d.ramo[j] +
                     '</td><td>' + d.vigencia_inicial[j] +
@@ -666,3 +642,28 @@ function genera_data(data) {
     }
 }
 </script>
+/* ,
+        {
+        targets: 2,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Pendiente':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Completado':
+                                estado='<span class="badge badge-secondary">'+data+'</span>';
+                                break;
+                        case 'Atrasado':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        case 'Próximo a vencer':
+                            estado='<span class="badge badge-warning">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }
+        */
