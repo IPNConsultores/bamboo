@@ -786,5 +786,5 @@ $(document).ready(function() {
             }
         }
     });
-   
+});
 </script>
