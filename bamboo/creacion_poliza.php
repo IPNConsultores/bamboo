@@ -8,10 +8,9 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="/assets/css/datatables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+        <link rel="stylesheet" href="/assets/css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
@@ -494,6 +493,7 @@
         </script>
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 
 </body>
@@ -625,13 +625,10 @@ function valida_rut_duplicado_aseg() {
 		
 	}
 	}
-	
-		</script>
-<script>
-
 			
 $('#modal_poliza').on('shown.bs.modal', function () {
-  table = $('#listado_polizas').DataTable({
+  console.log("test");
+ var table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
@@ -781,6 +778,7 @@ $('#modal_poliza').on('shown.bs.modal', function () {
             }
         }
     });
+
 $('#modal_text').trigger('focus')
 })
 		
