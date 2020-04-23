@@ -38,15 +38,15 @@
     <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
     <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza" style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
     <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div id="test1" class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
             <div class ="container-fluid">
-            <table class="display" style="width:100%" id="listado_polizas">
+         <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                     <th></th>
                     <th>Estado</th>
@@ -59,7 +59,7 @@
                     <th>Observaciones</th>
                     <th>Materia</th>
                 </tr>
-            </table>
+            </table> 
               <div id="botones_poliza"></div>
             </div>
           </div>
@@ -94,7 +94,7 @@
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
             <button class="btn" id="busca_rut" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;">Buscar RUT</button>
             <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
@@ -102,14 +102,18 @@
                   </div>
                   <div class="modal-body">
                     <div class ="container-fluid">
-                      <table class="table" id="listado_cliente">
-                        <tr>
-                          <th>RUT</th>
-                          <th>Nombre</th>
-                          <th>Apellido Paterno</th>
-                          <th>Apellido Materno</th>
-                        </tr>
-                      </table>
+<table id="listado_clientes" class="display" width="100%">
+                <tr>
+                    <thead>
+                        <th></th>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Referido por</th>
+                        <th>Grupo</th>
+                        <th>apellidop</th>
+                    </thead>
+                </tr>
+            </table>
                       <div id="botones_cliente"></div>
                     </div>
                   </div>
@@ -467,21 +471,7 @@
   </form>
   <br>
 </div>
-<table class="display" style="width:100%" id="listado_polizas1">
-                <tr>
-                    <th></th>
-                    <th>Estado</th>
-                    <th>Póliza</th>
-                    <th>Compañia</th>
-                    <th>Ramo</th>
-                    <th>Inicio Vigencia</th>
-                    <th>Fin Vigencia</th>
-                    <th>Materia Asegurada</th>
-                    <th>Tipo póliza</th>
-                    <th>Observaciones</th>
-                    <th>Materia</th>
-                </tr>
-            </table>
+
 <script>
         (function() {
             'use strict';
@@ -640,15 +630,15 @@ function valida_rut_duplicado_aseg() {
 	}
 	}
 			
-$('#modal_poliza').on('shown.bs.modal', function () {
-$('#modal_text').trigger('focus')
+$('#test1').on('shown.bs.modal', function () {
+  console.log("test");
+/*
+
+*/
+  //$('#modal_text').trigger('focus')
 })
 		
-var table = ''
-$(document).ready(function() {
-    
-  console.log("test");
- table = $('#listado_polizas').DataTable({
+var table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
@@ -722,18 +712,18 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15],
+                "targets": [10, 11, 12,13,14],
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15],
+                "targets": [10, 11, 12,13,14],
                 "searchable": false
             },
             {
                 "searchPanes": {
                     "preSelect":['202004'],
                 },
-                "targets":[14],
+                "targets":[13],
             },
             {
         targets: 1,
@@ -758,7 +748,7 @@ $(document).ready(function() {
         {
         targets: 0,
         render: function (data, type, row, meta) {
-          return '<a href="#" id="'+data+'">Renovar</a>';  //render link in cell
+          return '<button type="button" href="'+data+'" class="btn btn-outline-primary">Renovar</button>';  //render link in cell
         }}
         ],
         "order": [
@@ -794,5 +784,68 @@ $(document).ready(function() {
             }
         }
     });
-});
+    var tabla_clientes = $('#listado_clientes').DataTable({
+
+            "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+            "scrollX": true,
+            "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": "id",
+                "render": function ( data, type, full, meta ) {
+      return '<button type="button" href="'+data+'" class="btn btn-outline-primary">Seleccionar</button>';
+    }
+            },
+            {
+                "data": "rut"
+            },
+            {
+                "data": "nombre"
+            },
+            {
+                "data": "referido"
+            },
+            {
+                "data": "grupo"
+            },
+            {
+                "data": "apellidop"
+            }
+
+            ],
+            //          "search": {
+            //          "search": "abarca"
+            //          },
+            "columnDefs": [{
+                "targets": [5],
+                "visible": false,
+            },
+            {
+                "targets": [5],
+                "searchable": false
+            }
+            ],
+            "order": [
+                [5, "asc"]
+            ],
+            "oLanguage": {
+                "sSearch": "Búsqueda rápida",
+                "sLengthMenu": 'Mostrar <select>' +
+                    '<option value="10">10</option>' +
+                    '<option value="25">30</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">todos</option>' +
+                    '</select> registros',
+                "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+                "sLengthMenu": "Muestra _MENU_ registros por página",
+                "sZeroRecords": "No hay registros asociados",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "No hay registros disponibles",
+                "oPaginate": {
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior",
+                    "sLast": "Última"
+                }
+            }
+        });
 </script>
