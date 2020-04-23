@@ -8,9 +8,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="/assets/css/datatables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
-
+<link rel="stylesheet" href="/assets/css/datatables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
@@ -19,7 +18,7 @@
 
 <body>
 <!-- body code goes here -->
-<div id="header">
+
 <?php include 'header2.php' ?>
 </div>
 <div class="container">
@@ -46,20 +45,20 @@
           </div>
           <div class="modal-body">
             <div class ="container-fluid">
-         <table class="display" style="width:100%" id="listado_polizas">
+              <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
-                    <th></th>
-                    <th>Estado</th>
-                    <th>Póliza</th>
-                    <th>Compañia</th>
-                    <th>Ramo</th>
-                    <th>Inicio Vigencia</th>
-                    <th>Fin Vigencia</th>
-                    <th>Materia Asegurada</th>
-                    <th>Observaciones</th>
-                    <th>Materia</th>
+                  <th></th>
+                  <th>Estado</th>
+                  <th>Póliza</th>
+                  <th>Compañia</th>
+                  <th>Ramo</th>
+                  <th>Inicio Vigencia</th>
+                  <th>Fin Vigencia</th>
+                  <th>Materia Asegurada</th>
+                  <th>Observaciones</th>
+                  <th>Materia</th>
                 </tr>
-            </table> 
+              </table>
               <div id="botones_poliza"></div>
             </div>
           </div>
@@ -92,39 +91,10 @@
             <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
                     onclick="checkRadio2(this.name)">
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-            <button class="btn" id="busca_rut" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;">Buscar RUT</button>
-            <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class ="container-fluid">
-<table id="listado_clientes" class="display" width="100%">
-                <tr>
-                    <thead>
-                        <th></th>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Referido por</th>
-                        <th>Grupo</th>
-                        <th>apellidop</th>
-                    </thead>
-                </tr>
-            </table>
-                      <div id="botones_cliente"></div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
-          <p>Datos Proponente<br>
+          <p><strong>Datos Proponente<br>
+            </strong></p>
           <div class="form-row">
             <div class="form-row">
               <div class="col-md mb-3">
@@ -134,12 +104,45 @@
                                             onchange="valida_rut_duplicado_prop();copiadatos()" required>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
+							  
+                
               </div>
-            </div>
-            <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
-              <label for="prop">&nbsp;</label>
-              <br>
-            </div>
+				<button class="btn" id="busca_rut_prop" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white; margin-top: 30px;margin-left: 5px; height: 40px">Buscar RUT</button>
+                <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class ="container-fluid">
+                          <table id="listado_clientes" class="display" width="100%">
+                            <tr>
+                            <thead>
+                            <th></th>
+                              <th>Rut</th>
+                              <th>Nombre</th>
+                              <th>Referido por</th>
+                              <th>Grupo</th>
+                              <th>apellidop</th>
+                              </thead>
+                            </tr></table>
+                          <div id="botones_cliente"></div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			  </div>
+              <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
+                <label for="prop">&nbsp;</label>
+                <br>
+              </div>
+            
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="Nombre">Nombre</label>
@@ -160,7 +163,7 @@
               </div>
             </div>
           </div>
-          <p>Datos Asegurado<br>
+			<p><strong>Datos Asegurado<br></strong></p>
           <div class="form-row">
             <div class="form-row">
               <div class="col-md mb-3">
@@ -170,7 +173,38 @@
                                                 onchange="valida_rut_duplicado_aseg()" required>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
+				  
               </div>
+				<button class="btn" id="busca_rut_aseg" data-toggle="modal" data-target="#modal_cliente" style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px">Buscar RUT</button>
+            <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog" aria-labelledby="modal_text_cliente" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modal_text_cliente">Buscar RUT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class ="container-fluid">
+                      <table id="listado_clientes" class="display" width="100%">
+                        <tr>
+                        <thead>
+                        <th></th>
+                          <th>Rut</th>
+                          <th>Nombre</th>
+                          <th>Referido por</th>
+                          <th>Grupo</th>
+                          <th>apellidop</th>
+                          </thead>
+                        </tr></table>
+                      <div id="botones_cliente"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
             <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
               <label for="prop">&nbsp;</label>
@@ -471,7 +505,6 @@
   </form>
   <br>
 </div>
-
 <script>
         (function() {
             'use strict';
@@ -574,6 +607,7 @@ function valida_rut_duplicado_aseg() {
         document.getElementById("rutaseg").disabled = false;
 		document.getElementById("apellidop_seg").disabled = false;
 		document.getElementById("apellidom_seg").disabled = false;
+		document.getElementById("busca_rut_aseg").style.display = "block";
       
 
     } else if (name == "iguales") {
@@ -583,6 +617,7 @@ function valida_rut_duplicado_aseg() {
         document.getElementById("rutaseg").disabled = "true";
 		document.getElementById("apellidop_seg").disabled = "true";
 		document.getElementById("apellidom_seg").disabled = "true";
+		document.getElementById("busca_rut_aseg").style.display = "none";
     }
 }
 
