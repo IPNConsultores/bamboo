@@ -10,7 +10,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="/assets/css/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
-    
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
@@ -56,7 +56,6 @@
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
                     <th>Materia Asegurada</th>
-                    <th>Tipo póliza</th>
                     <th>Observaciones</th>
                     <th>Materia</th>
                 </tr>
@@ -468,6 +467,21 @@
   </form>
   <br>
 </div>
+<table class="display" style="width:100%" id="listado_polizas1">
+                <tr>
+                    <th></th>
+                    <th>Estado</th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Materia</th>
+                </tr>
+            </table>
 <script>
         (function() {
             'use strict';
@@ -627,8 +641,14 @@ function valida_rut_duplicado_aseg() {
 	}
 			
 $('#modal_poliza').on('shown.bs.modal', function () {
+$('#modal_text').trigger('focus')
+})
+		
+var table = ''
+$(document).ready(function() {
+    
   console.log("test");
- var table = $('#listado_polizas').DataTable({
+ table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
@@ -667,10 +687,6 @@ $('#modal_poliza').on('shown.bs.modal', function () {
             {
                 "data": "materia_asegurada",
                 title: "Materia asegurada"
-            },
-            {
-                "data": "tipo_poliza",
-                title: "Tipo póliza"
             },
             {
                 "data": "patente_ubicacion",
@@ -742,7 +758,7 @@ $('#modal_poliza').on('shown.bs.modal', function () {
         {
         targets: 0,
         render: function (data, type, row, meta) {
-          return '<a href="'+data+'">Renovar</a>';  //render link in cell
+          return '<a href="#" id="'+data+'">Renovar</a>';  //render link in cell
         }}
         ],
         "order": [
@@ -778,12 +794,5 @@ $('#modal_poliza').on('shown.bs.modal', function () {
             }
         }
     });
-
-$('#modal_text').trigger('focus')
-})
-		
-var table = ''
-$(document).ready(function() {
-    
 });
 </script>
