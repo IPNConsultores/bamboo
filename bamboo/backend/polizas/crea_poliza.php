@@ -36,14 +36,13 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $fechaprimer=estandariza_info($_POST["fechaprimer"]);
  $con_vendedor=estandariza_info($_POST["con_vendedor"]);
  $nombre_vendedor=estandariza_info($_POST["nombre_vendedor"]);
-
+ $poliza_renovada=estandariza_info($_POST["poliza_renovada"]);
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-$query='INSERT INTO polizas( estado, tipo_poliza, rut_proponente, dv_proponente, rut_asegurado, dv_asegurado,  compania, vigencia_inicial, vigencia_final, mes_vencimiento, ano_vencimiento, poliza_renovada, ramo, numero_poliza, materia_asegurada, patente_ubicacion, cobertura, deducible, moneda_prima, prima_afecta, moneda_comision, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, numero_propuesta, fecha_envio_propuesta, comision, porcentaje_comision, comision_bruta, comision_neta, vendedor, referido, forma_pago, moneda_valor_cuota, valor_cuota, fecha_primera_cuota) ' & _
-'VALUES ( "Activo", tipo_poliza, rut_proponente, dv_proponente, rut_asegurado, dv_asegurado,  compania, vigencia_inicial, vigencia_final, mes_vencimiento, ano_vencimiento, poliza_renovada, ramo, numero_poliza, materia_asegurada, patente_ubicacion, cobertura, deducible, moneda_prima, prima_afecta, moneda_comision, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, numero_propuesta, fecha_envio_propuesta, comision, porcentaje_comision, comision_bruta, comision_neta, vendedor, referido, forma_pago, moneda_valor_cuota, valor_cuota, fecha_primera_cuota)';
-mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');');
-
+$query='INSERT INTO polizas (  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota, ,  vendedor,  poliza_renovada) VALUES ("'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$nro_poliza.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$nro_propuesta.'","'.$fechaprop.'","'.$moneda_comision.'","'.$comision.'","'.$porcentaje_comsion.'","'.$comisionbruta.'","'.$comisionneta.'","'.$modo_pago.'","'.$cuotas.'","'.$valorcuota.'","'.$fechaprimer.'","'.$con_vendedor.'","'.$nombre_vendedor.'","'.$poliza_renovada.'");';
+//mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');');
+ECHO $query;
 
 
 function estandariza_info($data) {

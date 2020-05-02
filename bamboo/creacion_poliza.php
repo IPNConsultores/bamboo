@@ -72,6 +72,8 @@
                 </div>
             </div>
             <div class="col">
+            <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate>
+
                 <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
                     id="poliza_renovada" style="display:none;">
             </div>
@@ -101,8 +103,7 @@
                             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
 
                         </div>
-                        <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate>
-                            <p><strong>Datos Proponente<br>
+                                                    <p><strong>Datos Proponente<br>
                                 </strong></p>
                             <div class="form-row">
                                 <div class="form-row">
