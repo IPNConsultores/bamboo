@@ -63,12 +63,12 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
+/*
 var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
   'busqueda': rut
 }, 'post');
-
-
+*/
 </script>
 </body>
 </html>
