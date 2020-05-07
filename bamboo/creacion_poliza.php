@@ -241,7 +241,7 @@
                         <br>
                         <div class="form-row">
                             <div class="form-inline">
-                                <select class="form-control" id="selcompania">
+                                <select class="form-control" name="selcompania" id="selcompania">
                                     <option>BCI Seguros</option>
                                     <option>Chilena Consolidada</option>
                                     <option>CHUBB</option>
@@ -266,7 +266,7 @@
                         <div class="form-row">
                             <div class="col-md-2 mb-3">
                                 <label for="sel1">Ramo:&nbsp;</label>
-                                <select class="form-control" id="ramo">
+                                <select class="form-control" name="ramo" id="ramo">
                                     <option>VEH</option>
                                     <option>Hogar</option>
                                     <option>A. VIAJE</option>
@@ -282,7 +282,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="Nombre">Vigencia Inicial</label>
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" id="fechainicio"
+                                    <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
                                         class="form-control">
                                 </div>
                                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
@@ -290,7 +290,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="Nombre">Vigencia Final</label>
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
+                                    <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control">
                                 </div>
                                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                             </div>
@@ -327,7 +327,7 @@
                         <div class="form-row; form-inline">
                             <label for="moneda_prima">Moneda Prima</label>
                             <div class="col-1">
-                                <select class="form-control" id="moneda_poliza">
+                                <select class="form-control" id="moneda_poliza" name="moneda_poliza">
                                     <option>UF</option>
                                     <option>USD</option>
                                     <option>CLP</option>
@@ -338,30 +338,30 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="deducible">Deducible</label>
-                                <input type="text" class="form-control" id="deducible" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control" name="deducible" id="deducible" oninput="concatenar(this.id)">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="prima_afecta">Prima Afecta</label>
-                                <input type="text" class="form-control" id="prima_afecta" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control" name="prima_afecta" id="prima_afecta" oninput="concatenar(this.id)">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="prima_exenta">Prima Exenta</label>
-                                <input type="text" class="form-control" id="prima_exenta"
+                                <input type="text" class="form-control" id="prima_exenta" name="prima_exenta"
                                     oninput="concatenar(this.id)">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="prima_afecta">Prima Neta</label>
-                                <input type="text" class="form-control" id="prima_neta" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control" id="prima_neta" name="prima_neta" oninput="concatenar(this.id)">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="prima_afecta">Prima Bruta Anual</label>
-                                <input type="text" class="form-control" id="prima_bruta" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control" id="prima_bruta" name="prima_bruta" oninput="concatenar(this.id)">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="monto_aseg">Monto Asegurado</label>
-                                <input type="text" class="form-control" id="monto_aseg" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control" name="monto_aseg" id="monto_aseg" oninput="concatenar(this.id)">
                             </div>
                         </div>
                     </div>
@@ -399,7 +399,7 @@
                                 <label for="comision">Comisión Correspondiente</label>
                                 <div class="form-inline">
                                     <input type="text" class="form-control" id="comision" name="comision">
-                                    <select class="form-control" id="moneda_comision">
+                                    <select class="form-control" name="moneda_comision" id="moneda_comision">
                                         <option>UF->dejar igual que prima</option>
                                         <option>USD</option>
                                         <option>CLP</option>
@@ -446,7 +446,7 @@
                                 <label for="formapago">Forma de Pago</label>
                                 <div class="form-row">
                                     <div class="col-4">
-                                        <select class="form-control" id="modo_pago" onChange="modopago()">
+                                        <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
                                             <option>PAT</option>
                                             <option>PAC</option>
                                             <option>Cupon de Pago</option>
@@ -454,19 +454,19 @@
                                     </div>
                                     &nbsp;
                                     <div class="col">
-                                        <input type="text" class="form-control" id="cuotas"
+                                        <input type="text" class="form-control" id="cuotas" name="cuotas"
                                             placeholder="Cantidad de Cuotas">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="valorcuota">Valor Cuota</label>
-                                <input type="text" class="form-control" id="valorcuota" oninput="concatenar(this.id)">
+                                <input type="text" class="form-control"  name="valorcuota" id="valorcuota" oninput="concatenar(this.id)">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="fechaprimer">Fecha Primera Cuota</label>
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" id="fechaprimer"
+                                    <input placeholder="Selected date" type="date" id="fechaprimer" name="fechaprimer"
                                         class="form-control">
                                 </div>
                             </div>
@@ -478,14 +478,14 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-row">
                                     <div class="col-4">
-                                        <select class="form-control" id="con_vendedor" onChange="validavendedor()">
+                                        <select class="form-control" name="con_vendedor" id="con_vendedor" onChange="validavendedor()">
                                             <option>Si</option>
                                             <option>No</option>
                                         </select>
                                     </div>
                                     &nbsp;
                                     <div class="col">
-                                        <input type="text" class="form-control" id="nombre_vendedor"
+                                        <input type="text" class="form-control" id="nombre_vendedor" name="nombre_vendedor"
                                             placeholder="Nombre Vendedor">
                                     </div>
                                 </div>

@@ -1,7 +1,7 @@
 <?php
 
 require_once "/home/gestio10/public_html/backend/config.php";
-$rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rut_prop"]));
+$rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
 $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $rut_prop=estandariza_info(substr($rut_completo_prop, 0, strlen($rut_completo_prop)-1));
  $dv_prop=estandariza_info(substr($rut_completo_prop, -1,1));
@@ -26,7 +26,6 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $fechaprop=estandariza_info($_POST["fechaprop"]);
  $moneda_comision=estandariza_info($_POST["moneda_comision"]);
  $comision=estandariza_info($_POST["comision"]);
-
  $porcentaje_comsion=estandariza_info($_POST["porcentaje_comsion"]);
  $comisionbruta=estandariza_info($_POST["comisionbruta"]);
  $comisionneta=estandariza_info($_POST["comisionneta"]);
