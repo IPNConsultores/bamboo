@@ -295,19 +295,19 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
-        '<td>' + d.moneda_prima +' '+ d.deducible +'</td>' +
+        '<td>' + d.moneda_poliza +' '+ d.deducible +'</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima afecta:</td>' +
-        '<td>' + d.moneda_prima +' '+ d.prima_afecta + '</td>' +
+        '<td>' + d.moneda_poliza +' '+ d.prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima exenta:</td>' +
-        '<td>' + d.moneda_prima +' '+ d.prima_exenta + '</td>' +
+        '<td>' + d.moneda_poliza +' '+ d.prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima bruta anual:</td>' +
-        '<td>' + d.moneda_prima +' '+ d.prima_bruta_anual + '</td>' +
+        '<td>' + d.moneda_poliza +' '+ d.prima_bruta_anual + '</td>' +
         '</tr>' +
         '</tr>' +
 

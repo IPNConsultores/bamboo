@@ -325,7 +325,7 @@
                         <label for="materia"><b>Deducible, Primas y Montos</b></label>
                         <br>
                         <div class="form-row; form-inline">
-                            <label for="moneda_prima">Moneda Prima</label>
+                            <label for="moneda_poliza">Moneda Prima</label>
                             <div class="col-1">
                                 <select class="form-control" id="moneda_poliza" name="moneda_poliza">
                                     <option>UF</option>

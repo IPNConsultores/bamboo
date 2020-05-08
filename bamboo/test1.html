@@ -294,7 +294,7 @@
           <label for="materia"><b>Deducible, Primas y Montos</b></label>
           <br>
           <div class= "form-row; form-inline">
-            <label for="moneda_prima">Moneda Prima</label>
+            <label for="moneda_poliza">Moneda Prima</label>
             <div class="col-1">
               <select class="form-control" id="moneda_poliza">
                 <option>UF</option>
@@ -367,7 +367,7 @@
               <label for="comision">Comisión Correspondiente</label>
               <div class="form-inline">
                 <input type="text" class="form-control" name="comision">
-                <select class="form-control" id="moneda_prima">
+                <select class="form-control" id="moneda_poliza">
                   <option>UF</option>
                   <option>USD</option>
                   <option>CLP</option>

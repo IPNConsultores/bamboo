@@ -23,11 +23,11 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
         if(!empty(trim($_POST["id_poliza"]))){
             $busqueda=$_POST["id_poliza"];
             
-                $resultado_poliza=mysqli_query($link, 'SELECT fecha_primera_cuota, forma_pago, moneda_prima, deducible, prima_afecta, prima_exenta, prima_bruta_anual, id, ramo, compania, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where id='.$busqueda.' order by compania, numero_poliza;');
+                $resultado_poliza=mysqli_query($link, 'SELECT fecha_primera_cuota, forma_pago, moneda_poliza, deducible, prima_afecta, prima_exenta, prima_bruta_anual, id, ramo, compania, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where id='.$busqueda.' order by compania, numero_poliza;');
     
                 While($row=mysqli_fetch_object($resultado_poliza))
                     {
-                        $moneda_prima= $row ->moneda_prima;
+                        $moneda_poliza= $row ->moneda_poliza;
                         $deducible= $row ->deducible;
                         $fecha_primera_cuota= $row ->fecha_primera_cuota;
                         $forma_pago= $row ->forma_pago;
