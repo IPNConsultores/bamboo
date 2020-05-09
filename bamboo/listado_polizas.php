@@ -270,10 +270,10 @@ $(document).ready(function() {
 
     var buttons = new $.fn.dataTable.Buttons(table, {
         buttons: [{
-                sheetName: 'Clientes',
+                sheetName: 'Pólizas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6, 7, 8]
                 }
@@ -281,13 +281,13 @@ $(document).ready(function() {
             {
                 orientation: 'landscape',
                 extend: 'pdfHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [19, 20, 23, 24, 29]
                 }
             }
         ]
-    }).container().appendTo($('#botones'));
+    }).container().appendTo($('#botones_poliza'));
 });
 
 function format(d) {

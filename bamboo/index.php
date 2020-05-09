@@ -378,10 +378,10 @@ correoA: "correodeprueba@bamboo.cl"
 
     var buttons = new $.fn.dataTable.Buttons(table_poliza, {
         buttons: [{
-                sheetName: 'Clientes',
+                sheetName: 'Pólizas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6, 7]
                 }
@@ -389,7 +389,7 @@ correoA: "correodeprueba@bamboo.cl"
             {
                 orientation: 'landscape',
                 extend: 'pdfHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6, 7]
                 }
@@ -402,9 +402,11 @@ function detalle_tareas(d) {
     $sin_rel=$tabla_clientes=$tabla_polizas='';
     if (d.relaciones == 0) {
         $sin_rel= 'Tarea sin asociar a clientes  o pólizas';
+        $tabla_clientes = 'Sin clientes asociados';
+        $tabla_polizas = 'Sin pólizas asociadas';
     } else {
         if (d.clientes == 0) {
-            $tabla_clientes = 'Tarea sin asociar a clientes';
+            $tabla_clientes = 'Sin clientes asociados';
         } else {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
@@ -421,7 +423,7 @@ function detalle_tareas(d) {
             $tabla_clientes = $tabla_clientes + '</table>';
         }
         if (d.polizas == 0) {
-            $tabla_polizas = 'Tarea sin asociar a pólizas';
+            $tabla_polizas = 'Sin pólizas asociadas';
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
@@ -560,7 +562,7 @@ function botones(id, accion, base) {
         }
         case "cerrar_tarea": {
             if (base == 'tarea') {
-                $.redirect('/bamboo/actividades/cierra_tarea.php', {
+                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id
                 }, 'post');
             }

@@ -62,12 +62,12 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-/*
-var rut='<?php //echo $rut; ?>'
+
+var nro_poliza='<?php echo $nro_poliza; ?>'
   $.redirect('/bamboo/listado_poliza.php', {
-  'busqueda': rut
+  'busqueda': nro_poliza
 }, 'post');
-*/
+
 </script>
 </body>
 </html>
