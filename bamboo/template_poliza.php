@@ -117,7 +117,12 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
             <div class="form-control bg-light text-dark" rows="10"
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?>
             </div>
+			<br>
         
+                    <button class="btn" type="submit"
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="https://mail.google.com/mail/view=cm&fs=1&su=SUBJECT&body=$template" target=_blank">Enviar mail</button>
+                
+			<br>
         </div>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
