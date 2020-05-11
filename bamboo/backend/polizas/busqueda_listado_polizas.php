@@ -43,7 +43,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "correoA" =>& $row->correoA,
         "idP" =>& $row->idP,
         "idA" =>& $row->idA,
-        "grupo" =>& $row->grupo
+        "grupo" =>& $row->grupo,
         "id_poliza"=>& $row->id_poliza));
     } else {
     $codigo.= ', '.json_encode(array(
@@ -75,7 +75,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
       "correoA" =>& $row->correoA,
       "idP" =>& $row->idP,
       "idA" =>& $row->idA,
-      "grupo" =>& $row->grupo
+      "grupo" =>& $row->grupo,
       "id_poliza"=>& $row->id_poliza
     ));}
   }
