@@ -73,9 +73,14 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
         mysqli_close($link);
         } 
     }
-
-
 ?>
+<?php
+$subject = urlencode('Envío de documentación');
+$body = urlencode($resultado_template);
+$url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&subject=$subject&body=$body");
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -119,11 +124,12 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
             </div>
 			<br>
         
-                    <button class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="https://mail.google.com/mail/view=cm&fs=1&su=SUBJECT&body=$template" target=_blank">Enviar mail</button>
+                    <a class="btn" type="submit"
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
                 
-			<br>
+			
         </div>
+			<br>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
