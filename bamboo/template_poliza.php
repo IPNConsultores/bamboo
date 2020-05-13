@@ -109,7 +109,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
                 </div>
                   <div class="col" style="align-self:flex-end">
                     <button class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
+                        style="background-color: #536656; color: white; height: 45; align-self: center" onchange=tomar_mail()>Buscar
                         template</button>
                 </div>
         </form>
@@ -119,13 +119,13 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
         <div name='correo'>
 		<div class=col>
 				<h6>Resultado</h6>
-            <div class="form-control bg-light text-dark" rows="10"
+            <div id="template_coreo" class="form-control bg-light text-dark" rows="10"
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?>
             </div>
 			<br>
         
                     <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body="+$body2 target="_blank">Enviar mail</a>
                 
 			
         </div>
@@ -135,5 +135,18 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
      <script src="/assets/js/jquery.redirect.js"></script>
+	
+	<script>
+	
+	function tomar_mail() {
+		var body2 = ''
+				
+		document.getElementById("template_correo").text = body2;
+		
+			
+	}
+	
+	</script>
+	
 </body>
 </html>
