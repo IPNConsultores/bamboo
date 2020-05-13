@@ -145,8 +145,8 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 		var body2 = ''
 		var body3 =''
 				
-		document.getElementById("template_correo").text = body2;
-		$template = body3;
+		document.getElementById("template_correo").innerHTML = body2;
+		document.getElementById("template_correo").innerText = body3;
 		alert(body2);
 		alert(body3);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body2);
