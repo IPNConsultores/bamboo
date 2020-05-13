@@ -121,9 +121,9 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
         <div name='correo'>
 		<div class=col>
 				<h6>Resultado</h6>
-            <div id="template_correo" class="form-control bg-light text-dark" rows="10"
+            <input id="template_correo" class="form-control bg-light text-dark" rows="10"
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?>
-            </div>
+            </input>
 			<br>
         
                     <a class="btn" type="submit"
