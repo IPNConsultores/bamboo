@@ -74,11 +74,13 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
         } 
     }
 ?>
+<!--
 <?php
 $subject = urlencode('Envío de documentación');
 $body = urlencode($template);
 $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
 ?>
+-->
 
 
 
@@ -109,7 +111,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
                 </div>
                   <div class="col" style="align-self:flex-end">
                     <button class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center" onchange=tomar_mail()>Buscar
+                        style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
                         template</button>
                 </div>
         </form>
@@ -125,7 +127,8 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 			<br>
         
                     <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body="+$body2 target="_blank">Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" 
+					   target="_blank" onClick="mail()">Enviar mail</a>
                 
 			
         </div>
@@ -138,11 +141,11 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 	
 	<script>
 	
-	function tomar_mail() {
+	function mail() {
 		var body2 = ''
 				
 		document.getElementById("template_correo").text = body2;
-		
+		window.open("https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body="+body2)
 			
 	}
 	
