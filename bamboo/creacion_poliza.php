@@ -1,3 +1,53 @@
+<?php
+if ( !isset( $_SESSION ) ) {
+  session_start();
+}
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
+    require_once "/home/gestio10/public_html/backend/config.php";
+    mysqli_set_charset( $link, 'utf8');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada from polizas where id='.$_POST["id_poliza"];
+      $resultado=mysqli_query($link, $query);
+      While($row=mysqli_fetch_object($resultado))
+      {
+         $rut_prop=$row->rut_proponente;
+         $dv_prop=$row->dv_proponente;
+         $rut_aseg=$row->rut_asegurado;
+         $dv_aseg=$row->dv_asegurado;
+         $rut_completo_prop = $rut_prop.'-'.$dv_prop;
+        $rut_completo_aseg = $rut_aseg.'-'.$dv_aseg;
+         $selcompania=$row->selcompania;
+         $ramo=$row->ramo;
+         $fechainicio=$row->fechainicio;
+         $fechavenc=$row->fechavenc;
+         $nro_poliza=$row->nro_poliza;
+         $cobertura=$row->cobertura;
+         $materia=$row->materia;
+         $detalle_materia=$row->detalle_materia;
+         $moneda_poliza=$row->moneda_poliza;
+         $deducible=$row->deducible;
+         $prima_afecta=$row->prima_afecta;
+         $prima_exenta=$row->prima_exenta;
+         $prima_neta=$row->prima_neta;
+         $prima_bruta=$row->prima_bruta;
+         $monto_aseg=$row->monto_aseg;
+         $nro_propuesta=$row->nro_propuesta;
+         $fechaprop=$row->fechaprop;
+         $moneda_comision=$row->moneda_comision;
+         $comision=$row->comision;
+         $porcentaje_comsion=$row->porcentaje_comsion;
+         $comisionbruta=$row->comisionbruta;
+         $comisionneta=$row->comisionneta;
+         $modo_pago=$row->modo_pago;
+         $cuotas=$row->cuotas;
+         $valorcuota=$row->valorcuota;
+         $fechaprimer=$row->fechaprimer;
+         $con_vendedor=$row->con_vendedor;
+         $nombre_vendedor=$row->nombre_vendedor;
+         $poliza_renovada=$row->poliza_renovada;
+      }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
