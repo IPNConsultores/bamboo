@@ -121,9 +121,9 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
         <div name='correo'>
 		<div class=col>
 				<h6>Resultado</h6>
-            <input id="template_correo" class="form-control bg-light text-dark" rows="10"
+            <div id="template_correo" class="form-control bg-light text-dark" rows="10"
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?>
-            </input>
+            </div>
 			<br>
         
                     <a class="btn" type="submit"
@@ -146,7 +146,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 		var body3 =''
 				
 		document.getElementById("template_correo").innerHTML = body2;
-		document.getElementById("template_correo").innerText = body3;
+		<?php echo $template; ?> = body3;
 		alert(body2);
 		alert(body3);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body2);
