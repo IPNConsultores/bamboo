@@ -150,7 +150,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 		b.innerHTML = body3;
 		alert(a.innerHTML);
 		alert(b.innerHTML);
-		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body2);
+		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='<?php echo $template; ?>);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body3);	
 	}
 	
