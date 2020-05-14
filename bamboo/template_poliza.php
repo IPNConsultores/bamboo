@@ -142,13 +142,14 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 	<script>
 	
 	function mail() {
+		var a = document.getElementById("template_correo")
+		var b = document.getElementById("template_correo")
 		var body2 = ''
-		var body3 =''
-				
-		document.getElementById("template_correo").innerHTML = body2;
-		<?php echo $template; ?> = body3;
-		alert(body2);
-		alert(body3);
+		var body3 = ''
+		a.innerHTML = body2;
+		b.innerHTML = body3;
+		alert(a.innerHTML);
+		alert(b.innerHTML);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body2);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body3);	
 	}
