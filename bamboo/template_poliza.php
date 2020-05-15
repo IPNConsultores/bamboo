@@ -77,20 +77,12 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
 
 <?php
 $subject = urlencode('Envío de documentación');
-$body = $template;
-						$body = str_replace( '_[SALTO_LINEA]_', '%0A', $body );
-                        $body = str_replace( '_[NEG_ini]_', '**', $body );
-                        $body = str_replace( '_[NEG_fin]_', '**', $body );
-                        $body = str_replace( '_[SUB_ini]_', '*', $body );
-                        $body = str_replace( '_[SUB_fin]_', '*',$body );
-                        $body = str_replace( '_[CUR_ini]_', '***', $body );
-                        $body = str_replace( '_[CUR_fin]_', '***', $body );
-                        $body = str_replace( '_[LINEA]_', '<hr>', $body );
-
-$url ="https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body";
-
-
+$body = urlencode($resultado_template);
+$url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&subject=$subject&body=$body");
 ?>
+
+
+
 
 
 
@@ -136,10 +128,9 @@ $url ="https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body";
             </div>
 			<br>
         
-                    <a class="btn" type="submit"
+                      <a class="btn" type="submit"
                         style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
                 
-			
         </div>
 			<br>
     </div>
