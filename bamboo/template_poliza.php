@@ -136,7 +136,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 			<br>
         
                     <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank" onClick = alert(<?php echo $body; ?>)>Enviar mail</a>
                 
 			
         </div>
