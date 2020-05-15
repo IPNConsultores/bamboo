@@ -82,8 +82,8 @@ if(isset($r[1])){
 $r= 'asdf';
 }
 
-
-$subject = urlencode(obtenerasunto($template,'ASUNTO: ','Estimado'));		
+$subject = print_r(obtenerasunto($template,'ASUNTO: ','Estimado'));
+$subject = urlencode($subject);		
 
 
 $body = $template;
