@@ -73,6 +73,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 }
 ?>
 <?php
+
 function obtenerasunto($texto,$inicio,$fin){
 $r = explode($inicio, $texto);
 if(isset($r[1])){
@@ -82,7 +83,7 @@ if(isset($r[1])){
 $r= 'asdf';
 }
 
-$subject = print_r(obtenerasunto($template,'ASUNTO: ','Estimado'));
+$subject = var_dump(obtenerasunto($template,'ASUNTO: ','Estimado'));
 $subject = urlencode($subject);		
 
 
