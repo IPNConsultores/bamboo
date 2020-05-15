@@ -76,8 +76,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 $subject = urlencode( 'Envío de documentación' );
 $body = $template;
 $body =str_replace( '<br>', '%0A', $body );
-$body =str_replace( '<b>', '', $body );
-$body =str_replace( '</b>', '', $body );
+$body =str_replace( '<b>', '**', $body );
+$body =str_replace( '</b>', '**', $body );
 $body =str_replace( '<hr>', '%0A%0A', $body );
 $body =urlencode($body);
 
