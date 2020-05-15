@@ -85,7 +85,7 @@ $r= 'asdf';
 
 echo obtenerasunto($template,'ASUNTO: ','Estimado');
 
-$subject = &obtenerasunto($template,'ASUNTO: ','Estimado');
+$subject =& obtenerasunto($template,'ASUNTO: ','Estimado');
 $subject = urlencode($subject);		
 
 
