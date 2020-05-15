@@ -74,7 +74,7 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
         } 
     }
 ?>
-<!--
+
 <?php
 $subject = urlencode('Envío de documentación');
 $body = $template;
@@ -87,11 +87,10 @@ $body = $template;
                         $body = str_replace( '_[CUR_fin]_', '***', $body );
                         $body = str_replace( '_[LINEA]_', '<hr>', $body );
 
-$url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
+$url ="https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body";
 
 
 ?>
--->
 
 
 
