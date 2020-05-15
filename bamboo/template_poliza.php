@@ -120,7 +120,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?></div>
     <br>
     <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?php $url ?>"target="_blank">Enviar mail</a></div>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<? $url ?>"target="_blank">Enviar mail</a></div>
   <br>
 </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
