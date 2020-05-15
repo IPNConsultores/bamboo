@@ -74,7 +74,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 ?>
 <?php
 $subject = urlencode( 'Envío de documentación' );
-$body = urlencode( $template );
+$body = $template;
 $body =str_replace( '<br>', '%0A', $body );
 $body =str_replace( '<b>', '', $body );
 $body =str_replace( '</b>', '', $body );
