@@ -83,7 +83,7 @@ $r= 'asdf';
 }
 
 $subject = obtenerasunto($template,'ASUNTO: ','Estimado');
-		
+$subject = urlencode($subject);		
 
 
 $body = $template;
