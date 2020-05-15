@@ -89,10 +89,7 @@ $body = $template;
 
 $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
 
-echo '<script type="text/javascript">
-    alert($body);
-    window.location.href="index.php";
-    </script>';
+
 ?>
 -->
 
@@ -141,7 +138,7 @@ echo '<script type="text/javascript">
 			<br>
         
                     <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank" onClick = alert(<?php echo $body; ?>)>Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
                 
 			
         </div>
