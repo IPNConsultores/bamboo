@@ -134,7 +134,7 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 			<br>
         
                       <a class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank">Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?=$url?>"target="_blank" onClick="mail()">Enviar mail</a>
                 
         </div>
 			<br>
@@ -151,11 +151,16 @@ $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&
 		var b = document.getElementById("template_correo")
 		var body2 = ''
 		var body3 = ''
+		
+		body2 = body2.replace( '<br>', '%0A', $body );
+        body2 = body2.replace( '<b>', '**', $body );
+        body2 = body2.replace( '</b>','**', $body );
+		
 		a.innerHTML = body2;
 		b.innerHTML = body3;
 		alert(a.innerHTML);
 		alert(b.innerHTML);
-		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body=<?php echo $template; ?>');
+		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body2);
 		window.open('https://mail.google.com/mail/?view=cm&fs=1&su=prueba&body='+body3);	
 	}
 	
