@@ -76,7 +76,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 $subject = urlencode( 'Envío de documentación' );
 $body = urlencode( $template );
 $body = str_replace( '<br>', '', $body );
-
+$body =urlencode($body);
 
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
 ?>
@@ -119,7 +119,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject
                 style="height: 400px; border-style: solid;overflow-y: scroll"><?php echo $template; ?></div>
     <br>
     <a class="btn" type="btn"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?php echo $url; ?>" target="_blank">Enviar mail</a>
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?php echo urldecode($url); ?>" target="_blank">Enviar mail</a>
   <br>
 </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
