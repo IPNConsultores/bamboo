@@ -77,13 +77,9 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
 
 <?php
 $subject = urlencode('Envío de documentación');
-$body = urlencode($resultado_template);
+$body = urlencode($template);
 $url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&subject=$subject&body=$body");
 ?>
-
-
-
-
 
 
 <!DOCTYPE html>
