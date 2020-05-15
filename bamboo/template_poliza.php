@@ -75,14 +75,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 <?php
 $subject = urlencode( 'Envío de documentación' );
 $body = urlencode( $template );
-$body = str_replace( '<br>', '%0A', $body );
-$body = str_replace( '<b>', '**', $body );
-$body = str_replace( '</b>', '**', $body );
-$body = str_replace( '_[SUB_ini]_', '<u>', $template );
-$body = str_replace( '_[SUB_fin]_', '</u>', $template );
-$body = str_replace( '_[CUR_ini]_', '<em>', $template );
-$body = str_replace( '_[CUR_fin]_', '</em>', $template );
-$body = str_replace( '_[LINEA]_', '<hr>', $template );
+$body = str_replace( '<br>', '\%0A', $body );
+
 
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
 ?>
