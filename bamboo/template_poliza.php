@@ -84,9 +84,12 @@ $r= 'asdf';
 }
 
 echo obtenerasunto($template,'ASUNTO: ','Estimado');
+print_r($r[0]);
 
 $subject =& obtenerasunto($template,'ASUNTO: ','Estimado');
+print_r($subject);
 $subject = urlencode($subject);		
+print_r($subject);
 
 
 $body = $template;
