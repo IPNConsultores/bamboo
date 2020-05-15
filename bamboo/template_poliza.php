@@ -78,7 +78,16 @@ $resultado_template=mysqli_query($link, 'SELECT template FROM template_correos w
 <?php
 $subject = urlencode('Envío de documentación');
 $body = urlencode($template);
-$url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&subject=$subject&body=$body");
+ 						$body = str_replace( '<br>', '%0A', $body );
+                        $body = str_replace( '<b>', '**', $body );
+                        $body = str_replace( '</b>','**', $body );
+                        $body = str_replace( '_[SUB_ini]_', '<u>', $template );
+                        $body = str_replace( '_[SUB_fin]_', '</u>', $template );
+                        $body = str_replace( '_[CUR_ini]_', '<em>', $template );
+                        $body = str_replace( '_[CUR_fin]_', '</em>', $template );
+                        $body = str_replace( '_[LINEA]_', '<hr>', $template );
+                        
+$url = htmlspecialchars("https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
 ?>
 
 
