@@ -79,6 +79,8 @@ $body =str_replace( '<br>', '%0A', $body );
 $body =str_replace( '<b>', '**', $body );
 $body =str_replace( '</b>', '**', $body );
 $body =str_replace( '<hr>', '%0A%0A', $body );
+$body =str_replace( '<u>', '', $body );
+$body =str_replace( '</u>', '', $body );
 $body =urlencode($body);
 
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
