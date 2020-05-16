@@ -8,7 +8,7 @@ $camino='';
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha from polizas where id=257';
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha , boleta from polizas where id=257';
       $resultado=mysqli_query($link, $query);
       While($row=mysqli_fetch_object($resultado))
       {
@@ -49,7 +49,7 @@ $camino='';
          $con_vendedor=$row->vendedor;
          $nombre_vendedor=$row->nombre_vendedor;
          $poliza_renovada=$row->poliza_renovada;
-         
+         $boleta=$row->numero_boleta;
          $comision_negativa=$row->comision_negativa;
          $boleta_negativa=$row->boleta_negativa;
          $depositado_fecha=$row->depositado_fecha;
@@ -1011,7 +1011,7 @@ if (orgn=='precargar'){
     document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
     document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
     document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-    
+    document.getElementById("boleta").value = '<?php echo $boleta; ?>';   
     valida_rut_duplicado_prop();
     valida_rut_duplicado_aseg();
 }
