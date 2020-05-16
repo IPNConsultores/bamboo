@@ -8,7 +8,7 @@ $camino='';
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada from polizas where id=254';
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha from polizas where id=257';
       $resultado=mysqli_query($link, $query);
       While($row=mysqli_fetch_object($resultado))
       {
@@ -49,6 +49,10 @@ $camino='';
          $con_vendedor=$row->vendedor;
          $nombre_vendedor=$row->nombre_vendedor;
          $poliza_renovada=$row->poliza_renovada;
+         
+         $comision_negativa=$row->comision_negativa;
+         $boleta_negativa=$row->boleta_negativa;
+         $depositado_fecha=$row->depositado_fecha;
       }
 
 ?>
@@ -1000,9 +1004,9 @@ if (orgn=='precargar'){
     document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
     document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
     document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
-    document.getElementById("fechadeposito").value = '';
-    document.getElementById("comisionneg").value = '';
-    document.getElementById("boletaneg").value = '';
+    document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
+    document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
+    document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
     document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
     document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
     document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
