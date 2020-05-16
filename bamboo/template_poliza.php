@@ -74,29 +74,31 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 ?>
 <?php
 
-function &obtenerasunto($texto,$inicio,$fin){
-$r = explode($inicio, $texto);
-if(isset($r[1])){
-	$r = explode($fin,$r[1]);
-	return $r[0];
-	}	
-$r= 'asdf';
-}
-
-echo obtenerasunto($template,'ASUNTO: ','Estimado');
-print_r($r[0]);
-
-$subject =& obtenerasunto($template,'ASUNTO: ','Estimado');
-print_r($subject);
-$subject = urlencode($subject);		
-print_r($subject);
-
 
 $body = $template;
+
+$body =str_replace( '_[SU_ini]_', '_[SU]_', $body);
+$body =str_replace( '_[SU_fin]_', '_[SU]_', $body);
+
+$array = explode('_[SU]_', $body );
+$subject = $array[1];
+$body = $array[2];
+
+$subject =str_replace( 'ASUNTO:', '', $subject );
+$subject =str_replace( '<br>', '%0A', $subject );
+$subject =str_replace( '<b>', '', $subject );
+$subject =str_replace( '</b>', '', $subject );
+$subject =str_replace( '<hr>', '%0A%0A', $subject );
+$subject =str_replace( '<u>', '', $subject );
+$subject =str_replace( '</u>', '', $subject );
+$subject =str_replace( '•', '• ', $subject );
+$subject =urlencode($subject);
+
 $body =str_replace( '<br>', '%0A', $body );
 $body =str_replace( '<b>', '', $body );
 $body =str_replace( '</b>', '', $body );
 $body =str_replace( '<hr>', '%0A%0A', $body );
+$body =str_replace( '%0A%0AEstimado(a)', 'Estimado(a)', $body );
 $body =str_replace( '<u>', '', $body );
 $body =str_replace( '</u>', '', $body );
 $body =str_replace( '•', '• ', $body );
