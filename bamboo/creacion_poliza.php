@@ -2,51 +2,55 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
+$camino='';
+
+
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada from polizas where id='.$_POST["id_poliza"];
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada from polizas where id=254';
       $resultado=mysqli_query($link, $query);
       While($row=mysqli_fetch_object($resultado))
       {
+          $camino='precargar';
          $rut_prop=$row->rut_proponente;
          $dv_prop=$row->dv_proponente;
          $rut_aseg=$row->rut_asegurado;
          $dv_aseg=$row->dv_asegurado;
          $rut_completo_prop = $rut_prop.'-'.$dv_prop;
         $rut_completo_aseg = $rut_aseg.'-'.$dv_aseg;
-         $selcompania=$row->selcompania;
+         $selcompania=$row->compania;
          $ramo=$row->ramo;
-         $fechainicio=$row->fechainicio;
-         $fechavenc=$row->fechavenc;
-         $nro_poliza=$row->nro_poliza;
+         $fechainicio=$row->vigencia_inicial;
+         $fechavenc=$row->vigencia_final;
+         $nro_poliza=$row->numero_poliza;
          $cobertura=$row->cobertura;
-         $materia=$row->materia;
-         $detalle_materia=$row->detalle_materia;
+         $materia=$row->materia_asegurada;
+         $detalle_materia=$row->patente_ubicacion;
          $moneda_poliza=$row->moneda_poliza;
          $deducible=$row->deducible;
          $prima_afecta=$row->prima_afecta;
          $prima_exenta=$row->prima_exenta;
          $prima_neta=$row->prima_neta;
-         $prima_bruta=$row->prima_bruta;
-         $monto_aseg=$row->monto_aseg;
-         $nro_propuesta=$row->nro_propuesta;
-         $fechaprop=$row->fechaprop;
+         $prima_bruta=$row->prima_bruta_anual;
+         $monto_aseg=$row->monto_asegurado;
+         $nro_propuesta=$row->numero_propuesta;
+         $fechaprop=$row->fecha_envio_propuesta;
          $moneda_comision=$row->moneda_comision;
          $comision=$row->comision;
-         $porcentaje_comsion=$row->porcentaje_comsion;
-         $comisionbruta=$row->comisionbruta;
-         $comisionneta=$row->comisionneta;
-         $modo_pago=$row->modo_pago;
-         $cuotas=$row->cuotas;
-         $valorcuota=$row->valorcuota;
-         $fechaprimer=$row->fechaprimer;
-         $con_vendedor=$row->con_vendedor;
+         $porcentaje_comsion=$row->porcentaje_comision;
+         $comisionbruta=$row->comision_bruta;
+         $comisionneta=$row->comision_neta;
+         $modo_pago=$row->forma_pago;
+         $cuotas=$row->nro_cuotas;
+         $moneda_cuota=$row->valor_cuota;
+         $valorcuota=$row->valor_cuota;
+         $fechaprimer=$row->fecha_primera_cuota;
+         $con_vendedor=$row->vendedor;
          $nombre_vendedor=$row->nombre_vendedor;
          $poliza_renovada=$row->poliza_renovada;
       }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,6 +78,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
     <div class="container">
         <p>Póliza / Creación<br>
         </p>
+        <button type="btn" onclick="precargar_data()">cargar</button>
+        <a class="btn" type="btn"
+                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?php echo urldecode($url); ?>" target="_blank">Enviar mail</a>
         <h5 class="form-row">&nbsp;Datos Póliza</h5>
         <br>
         <br>
@@ -292,21 +299,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                         <div class="form-row">
                             <div class="form-inline">
                                 <select class="form-control" name="selcompania" id="selcompania">
-                                    <option>BCI Seguros</option>
-                                    <option>Chilena Consolidada</option>
-                                    <option>CHUBB</option>
-                                    <option>Confuturo</option>
-                                    <option>Consorcio</option>
-                                    <option>Continental</option>
-                                    <option>HDI Seguros</option>
-                                    <option>Maphre</option>
-                                    <option>Ohio National Financial Group</option>
-                                    <option>Orsan</option>
-                                    <option>Reale Seguros</option>
-                                    <option>Renta Nacional</option>
-                                    <option>Southbridge</option>
-                                    <option>Sura</option>
-                                    <option>Unnio</option>
+                                    <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
+                                    <option value="Chilena Consolidada" <?php if ($selcompania == "Chilena Consolidada") echo "selected" ?> >Chilena Consolidada</option>
+                                    <option value="CHUBB" <?php if ($selcompania == "CHUBB") echo "selected" ?> >CHUBB</option>
+                                    <option value="Confuturo" <?php if ($selcompania == "Confuturo") echo "selected" ?> >Confuturo</option>
+                                    <option value="Consorcio" <?php if ($selcompania == "Consorcio") echo "selected" ?> >Consorcio</option>
+                                    <option value="Continental" <?php if ($selcompania == "Continental") echo "selected" ?> >Continental</option>
+                                    <option value="HDI Seguros" <?php if ($selcompania == "HDI Seguros") echo "selected" ?> >HDI Seguros</option>
+                                    <option value="Maphre" <?php if ($selcompania == "Maphre") echo "selected" ?> >Maphre</option>
+                                    <option value="Ohio National Financial Group" <?php if ($selcompania == "Ohio National Financial Group") echo "selected" ?> >Ohio National Financial Group</option>
+                                    <option value="Orsan" <?php if ($selcompania == "Orsan") echo "selected" ?> >Orsan</option>
+                                    <option value="Reale Seguros" <?php if ($selcompania == "Reale Seguros") echo "selected" ?> >Reale Seguros</option>
+                                    <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
+                                    <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
+                                    <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
+                                    <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
                                 </select>
                             </div>
                         </div>
@@ -317,16 +324,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                             <div class="col-md-2 mb-3">
                                 <label for="sel1">Ramo:&nbsp;</label>
                                 <select class="form-control" name="ramo" id="ramo">
-                                    <option>VEH</option>
-                                    <option>Hogar</option>
-                                    <option>A. VIAJE</option>
-                                    <option>RC</option>
-                                    <option>INC</option>
-                                    <option>APV</option>
-                                    <option>D&O</option>
-                                    <option>AP</option>
-                                    <option>Vida</option>
-                                    <option>Garantía</option>
+                                    <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
+                                    <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+                                    <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
+                                    <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
+                                    <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
+                                    <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
+                                    <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
+                                    <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
+                                    <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
+                                    <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -378,9 +385,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                             <label for="moneda_poliza">Moneda Prima</label>
                             <div class="col-1">
                                 <select class="form-control" id="moneda_poliza" name="moneda_poliza">
-                                    <option>UF</option>
-                                    <option>USD</option>
-                                    <option>CLP</option>
+                                    <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
+                                    <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
+                                    <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
                                 </select>
                             </div>
                         </div>
@@ -450,9 +457,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                                 <div class="form-inline">
                                     <input type="text" class="form-control" id="comision" name="comision">
                                     <select class="form-control" name="moneda_comision" id="moneda_comision">
-                                        <option>UF->dejar igual que prima</option>
-                                        <option>USD</option>
-                                        <option>CLP</option>
+                                        <option value="UF" <?php if ($moneda_comision == "UF") echo "selected" ?> >UF->dejar igual que prima</option>
+                                        <option value="USD" <?php if ($moneda_comision == "USD") echo "selected" ?> >USD</option>
+                                        <option value="CLP" <?php if ($moneda_comision == "CLP") echo "selected" ?> >CLP</option>
                                     </select>
                                 </div>
                             </div>
@@ -470,7 +477,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label>Número de Boleta</label>
-                                <input type="text" class="form-control" name="boleta">
+                                <input type="text" class="form-control" name="boleta" id="boleta">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="fechadeposito">Fecha Depósito</label>
@@ -481,11 +488,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="comision">Comisión Negativa</label>
-                                <input type="text" class="form-control" name="comisionneg">
+                                <input type="text" class="form-control" name="comisionneg" id="comisionneg">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="comision">Boleta Comisión Negativa</label>
-                                <input type="text" class="form-control" name="boletaneg">
+                                <input type="text" class="form-control" name="boletaneg" id="boletaneg">
                             </div>
                         </div>
                         <br>
@@ -495,11 +502,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                             <div class="col-md-4 mb-3">
                                 <label for="formapago">Forma de Pago</label>
                                 <div class="form-row">
+                                <div class="form-inline">
+                                    <select class="form-control" name="moneda_cuota" id="moneda_cuota">
+                                        <option value="UF" <?php if ($moneda_cuota == "UF") echo "selected" ?> >UF</option>
+                                        <option value="USD" <?php if ($moneda_cuota == "USD") echo "selected" ?> >USD</option>
+                                        <option value="CLP" <?php if ($moneda_cuota == "CLP") echo "selected" ?> >CLP</option>
+                                    </select>
+                                </div>
                                     <div class="col-4">
                                         <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
-                                            <option>PAT</option>
-                                            <option>PAC</option>
-                                            <option>Cupon de Pago</option>
+                                            <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
+                                            <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
+                                            <option value="OTROS" <?php if ($modo_pago == "OTROS") echo "selected" ?> >Cupon de Pago</option>
                                         </select>
                                     </div>
                                     &nbsp;
@@ -529,8 +543,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
                                 <div class="form-row">
                                     <div class="col-4">
                                         <select class="form-control" name="con_vendedor" id="con_vendedor" onChange="validavendedor()">
-                                            <option>Si</option>
-                                            <option>No</option>
+                                            <option value="Si" <?php if ($con_vendedor == "Si") echo "selected" ?> >Si</option>
+                                            <option value="No" <?php if ($con_vendedor == "No") echo "selected" ?> >No</option>
                                         </select>
                                     </div>
                                     &nbsp;
@@ -704,10 +718,10 @@ function modopago() {
 }
 
 function validavendedor() {
-    if (document.getElementById("vendedor1").value == "Si") {
-        document.getElementById("vendedor2").disabled = false;
+    if (document.getElementById("con_vendedor").value == "Si") {
+        document.getElementById("nombre_vendedor").disabled = false;
     } else {
-        document.getElementById("vendedor2").disabled = true;
+        document.getElementById("nombre_vendedor").disabled = true;
 
     }
 }
@@ -962,5 +976,41 @@ function renovar_poliza(poliza) {
     $('#modal_poliza').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
+}
+function precargar_data(){
+var orgn='<?php echo $camino; ?>';
+if (orgn=='precargar'){
+    document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+    document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
+    
+    document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+    document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+    document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
+    document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
+    document.getElementById("materia").value = '<?php echo $materia; ?>';
+    document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
+    document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+    document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
+    document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
+    document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
+    document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
+    document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
+    document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+    document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+    document.getElementById("comision").value = '<?php echo $comision; ?>';
+    document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
+    document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
+    document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
+    document.getElementById("fechadeposito").value = '';
+    document.getElementById("comisionneg").value = '';
+    document.getElementById("boletaneg").value = '';
+    document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
+    document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+    document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+    document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+    
+    valida_rut_duplicado_prop();
+    valida_rut_duplicado_aseg();
+}
 }
 </script>
