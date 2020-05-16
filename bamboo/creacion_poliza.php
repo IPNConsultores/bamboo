@@ -516,10 +516,9 @@ $camino='';
                                             <option value="OTROS" <?php if ($modo_pago == "OTROS") echo "selected" ?> >Cupon de Pago</option>
                                         </select>
                                     </div>
-                                    &nbsp;
                                     <div class="col">
                                         <input type="text" class="form-control" id="cuotas" name="cuotas"
-                                            placeholder="Cantidad de Cuotas">
+                                            placeholder="Número de Cuotas">
                                     </div>
                                 </div>
                             </div>
