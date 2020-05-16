@@ -42,7 +42,7 @@ mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $query='INSERT INTO polizas (  estado, tipo_poliza, moneda_cuota,  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada) VALUES ( "Activo", "Nuevo", "UF","'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$nro_poliza.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$nro_propuesta.'","'.$fechaprop.'","'.$moneda_comision.'","'.$comision.'","'.$porcentaje_comsion.'","'.$comisionbruta.'","'.$comisionneta.'","'.$modo_pago.'","'.$cuotas.'","'.$valorcuota.'","'.$fechaprimer.'","'.$con_vendedor.'","'.$nombre_vendedor.'","'.$poliza_renovada.'");';
 mysqli_query($link, $query);
-//ECHO $query;
+ECHO $query;
 
 
 function estandariza_info($data) {
@@ -64,10 +64,10 @@ function estandariza_info($data) {
 <body>
 <script >
 
-var nro_poliza= <?php echo $nro_poliza; ?>;
-  $.redirect('/bamboo/listado_polizas.php', {
-  'busqueda': nro_poliza
-}, 'post');
+//var nro_poliza= <?php echo $nro_poliza; ?>;
+//  $.redirect('/bamboo/listado_polizas.php', {
+//  'busqueda': nro_poliza
+//}, 'post');
 
 </script>
 </body>
