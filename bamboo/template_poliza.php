@@ -104,7 +104,46 @@ $body =str_replace( '</u>', '', $body );
 $body =str_replace( '•', '• ', $body );
 $body =urlencode($body);
 
-$url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&su=$subject&body=$body");
+
+mysqli_set_charset( $link, 'utf8' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+  //correo_Cliente
+  $resultado_correo_cliente = mysqli_query( $link, "SELECT a.correo, a.rut_sin_dv, a.id , count(b.correo) cuenta_contacto FROM clientes a LEFT JOIN clientes_contactos b on a.id = b.id_cliente where a.rut_sin_dv = ".$rut_proponente." or a.rut_sin_dv =".$rut_proponente." group by a.correo, a.rut_sin_dv, a.id order by cuenta_contacto desc;"  );
+  
+  $destinatario ='';
+  
+  While( $row = mysqli_fetch_object( $resultado_correo_cliente ) ) {
+      
+      $correo = $row->correo;
+      $destinatario = $destinatario.";".$correo;
+      $id = $row->id;
+      $cuenta_contacto = $row->cuenta_contacto;
+      
+      
+       if($cuenta_contacto !== 0){
+          //correo_contacto
+          $resultado_correo_contacto = mysqli_query ($link, "select correo ,id_cliente as id, null as cuenta_contacto from clientes_contactos where id_cliente =".$id.";");
+          
+          While ($row2 = mysqli_fetch_object($resultado_correo_contacto)){
+              
+              $correo_contact = $row2->correo;
+              $id_cliente = $row2->id;
+              $cuenta_contacto_contact = $row2->cuenta_contacto;
+              $destinatario = $destinatario.";".$correo_contact;
+              
+                
+          }
+         
+      
+      }
+   
+      
+     
+    }
+
+
+
+$url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destinatario&su=$subject&body=$body");
 ?>
 
 <!DOCTYPE html>
