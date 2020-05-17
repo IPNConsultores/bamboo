@@ -524,6 +524,11 @@ function botones(id, accion, base) {
                 // settings
                 type: 'success'
             });
+            if (base == 'poliza') {
+                $.redirect('/bamboo/creacion_poliza.php', {
+                'id_poliza': poliza,
+                }, 'post');
+            }
             break;
         }
         case "tarea": {

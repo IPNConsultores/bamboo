@@ -3,16 +3,21 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino='';
-
- $id_poliza=estandariza_info($_POST["id_poliza"]);
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
+    if (isset($_POST["renovar"])==true){
+              $camino='renovar';
+    }
+    else{
+            $camino='modificar';
+    }
+    $id_poliza=estandariza_info($_POST["id_poliza"]);
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha, numero_boleta from polizas where id=261';
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha, numero_boleta from polizas where id='.$id_poliza;
       $resultado=mysqli_query($link, $query);
       While($row=mysqli_fetch_object($resultado))
       {
-          $camino='modificar';
          $rut_prop=$row->rut_proponente;
          $dv_prop=$row->dv_proponente;
          $rut_aseg=$row->rut_asegurado;
@@ -56,9 +61,9 @@ $camino='';
          
       }
 
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
-//
+
 }
+
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -990,45 +995,72 @@ function renovar_poliza(poliza) {
     $('#modal_poliza').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
+      $.redirect('/bamboo/creacion_poliza.php', {
+  'id_poliza': poliza,
+  'renovar':true
+}, 'post');
 }
-function precargar_data(){
-var orgn='<?php echo $camino; ?>';
-if (orgn=='modificar'){
-    document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-    document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
-    
-    document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
-    document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
-    document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
-    document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
-    document.getElementById("materia").value = '<?php echo $materia; ?>';
-    document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
-    document.getElementById("deducible").value = '<?php echo $deducible; ?>';
-    document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
-    document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
-    document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
-    document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
-    document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
-    document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
-    document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
-    document.getElementById("comision").value = '<?php echo $comision; ?>';
-    document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
-    document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
-    document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
-    document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
-    document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
-    document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
-        document.getElementById("boleta").value = '<?php echo $boleta; ?>';
-    document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
-    document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
-    document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
-    document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-    document.getElementById("formulario").action="/bamboo/backend/polizas/modifica_poliza.php";
-    document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
-    
-    valida_rut_duplicado_prop();
-    valida_rut_duplicado_aseg();
-    
-}
-}
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var orgn='<?php echo $camino; ?>';
+    switch  (orgn){
+        case 'modificar':{
+            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
+            document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+            document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+            document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
+            document.getElementById("materia").value = '<?php echo $materia; ?>';
+            document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
+            document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+            document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
+            document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
+            document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
+            document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
+            document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
+            document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+            document.getElementById("comision").value = '<?php echo $comision; ?>';
+            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
+            document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
+            document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
+            document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
+            document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
+            document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
+            document.getElementById("boleta").value = '<?php echo $boleta; ?>';
+            document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
+            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+            document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+            document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("formulario").action="/bamboo/backend/polizas/modifica_poliza.php";
+            document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
+            document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
+            valida_rut_duplicado_prop();
+            valida_rut_duplicado_aseg();
+            break;
+        }
+            case 'renovar':{
+            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
+            document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
+            document.getElementById("materia").value = '<?php echo $materia; ?>';
+            document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
+            document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+            document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
+            document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
+            document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
+            document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
+            document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
+            document.getElementById("boleta").value = '<?php echo $boleta; ?>';
+            document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
+            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+            valida_rut_duplicado_prop();
+            valida_rut_duplicado_aseg();
+            break;
+        }
+    }
+  });
+
+
 </script>
