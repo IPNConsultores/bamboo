@@ -4,15 +4,15 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino='';
 
-
+ $id_poliza=estandariza_info($_POST["id_poliza"]);
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha , boleta from polizas where id=257';
+    $query= 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha, numero_boleta from polizas where id=261';
       $resultado=mysqli_query($link, $query);
       While($row=mysqli_fetch_object($resultado))
       {
-          $camino='precargar';
+          $camino='modificar';
          $rut_prop=$row->rut_proponente;
          $dv_prop=$row->dv_proponente;
          $rut_aseg=$row->rut_asegurado;
@@ -43,7 +43,7 @@ $camino='';
          $comisionneta=$row->comision_neta;
          $modo_pago=$row->forma_pago;
          $cuotas=$row->nro_cuotas;
-         $moneda_cuota=$row->valor_cuota;
+         $moneda_cuota=$row->moneda_valor_cuota;
          $valorcuota=$row->valor_cuota;
          $fechaprimer=$row->fecha_primera_cuota;
          $con_vendedor=$row->vendedor;
@@ -53,8 +53,18 @@ $camino='';
          $comision_negativa=$row->comision_negativa;
          $boleta_negativa=$row->boleta_negativa;
          $depositado_fecha=$row->depositado_fecha;
+         
       }
 
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["id_poliza"])==true){
+//
+}
+function estandariza_info($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -83,8 +93,7 @@ $camino='';
         <p>Póliza / Creación<br>
         </p>
         <button type="btn" onclick="precargar_data()">cargar</button>
-        <a class="btn" type="btn"
-                        style="background-color: #536656; color: white; height: 45; align-self: center;" href="<?php echo urldecode($url); ?>" target="_blank">Enviar mail</a>
+  
         <h5 class="form-row">&nbsp;Datos Póliza</h5>
         <br>
         <br>
@@ -133,8 +142,10 @@ $camino='';
                 </div>
             </div>
             <div class="col">
-            <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate>
-
+            <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate id="formulario">
+            <div id="auxiliar" style="display: none;">
+                <input name="id_poliza" id="id_poliza">
+            </div>
                 <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
                     id="poliza_renovada" style="display:none;">
             </div>
@@ -486,7 +497,7 @@ $camino='';
                             <div class="col-md-4 mb-3">
                                 <label for="fechadeposito">Fecha Depósito</label>
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" name="fechadeposito" id="fechadeposito"
+                                    <input placeholder="Selected date" type="date" id="fechadeposito"
                                         class="form-control">
                                 </div>
                             </div>
@@ -982,7 +993,7 @@ function renovar_poliza(poliza) {
 }
 function precargar_data(){
 var orgn='<?php echo $camino; ?>';
-if (orgn=='precargar'){
+if (orgn=='modificar'){
     document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
     document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
     
@@ -1007,13 +1018,17 @@ if (orgn=='precargar'){
     document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
     document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
     document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
+        document.getElementById("boleta").value = '<?php echo $boleta; ?>';
     document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
     document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
     document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
     document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-    document.getElementById("boleta").value = '<?php echo $boleta; ?>';   
+    document.getElementById("formulario").action="/bamboo/backend/polizas/modifica_poliza.php";
+    document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
+    
     valida_rut_duplicado_prop();
     valida_rut_duplicado_aseg();
+    
 }
 }
 </script>
