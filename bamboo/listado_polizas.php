@@ -175,14 +175,35 @@ $(document).ready(function() {
             {
                 "data": "anomes_inicial",
                 title: "Añomes inicial"
+            },
+            {
+                "data": "moneda_poliza",
+                title: "Moneda póliza"
+            },
+            {
+                "data": "nom_clienteP",
+                title: "Proponente"
+            },
+            {
+                "data": "rut_clienteP",
+                title: "Rut Proponente"
+            },
+            {
+                "data": "nom_clienteA",
+                title: "Asegurado"
+            },
+            {
+                "data": "rut_clienteA",
+                title: "Rut Asegurado"
             }
+
 
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15],
+                "targets": [10, 11, 12,13,14,15,16,17,18,19],
                 "visible": false,
             },
             {
@@ -191,9 +212,9 @@ $(document).ready(function() {
             },
             {
                 "searchPanes": {
-                    "preSelect":['202004'],
+                    "preSelect":['Activo'],
                 },
-                "targets":[14],
+                "targets":[1],
             },
             {
         targets: 1,
@@ -283,7 +304,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [19, 20, 23, 24, 29]
+                    columns: [18,19, 20,21]
                 }
             }
         ]

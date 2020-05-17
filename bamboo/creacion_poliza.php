@@ -170,10 +170,10 @@ function estandariza_info($data) {
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
                                 persona?:&nbsp;&nbsp;</label>
-                            <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
+                            <input class="form-check-input" type="radio" name="radio2_no" id="radio2_no"
                                 value="diferentes" onclick="checkRadio2(this.name)" checked="checked">
                             <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-                            <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
+                            <input class="form-check-input" type="radio" name="radio2_si" id="radio2_si" value="iguales"
                                 onclick="checkRadio2(this.name)">
                             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
 
