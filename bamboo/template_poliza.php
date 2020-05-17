@@ -68,7 +68,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     $template = str_replace( '_[LINEA]_', '<hr>', $template );
 
 
-    mysqli_close( $link );
+    
   }
 }
 
@@ -139,7 +139,7 @@ mysqli_set_charset( $link, 'utf8' );
      
     }
 
-
+mysqli_close( $link );
 
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destinatario&su=$subject&body=$body");
 
