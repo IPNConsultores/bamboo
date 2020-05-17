@@ -1047,6 +1047,8 @@ function renovar_poliza(poliza) {
                         document.getElementById("radio2_si").checked = false;
                         document.getElementById("radio2_no").checked = true;
             }
+            document.getElementById("radio_no").checked = false;
+        document.getElementById("radio_si").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
@@ -1062,9 +1064,6 @@ function renovar_poliza(poliza) {
             document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
-            $('#modal_poliza').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             break;

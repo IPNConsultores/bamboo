@@ -439,7 +439,7 @@ function detalle_tareas(d) {
                     '</td><td>' + d.materia_asegurada[j] +
                     '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
                     .id_poliza[j] +
-                    ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
+                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
         }
