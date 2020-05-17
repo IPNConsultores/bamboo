@@ -492,8 +492,6 @@ function detalle_polizas(d) {
         d.id_poliza +
         ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id_poliza +
-        ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button"' +
-        'id=' + d.id_poliza +
         ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
         'id=' + d.id_poliza +
         ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button>' +
@@ -526,7 +524,7 @@ function botones(id, accion, base) {
             });
             if (base == 'poliza') {
                 $.redirect('/bamboo/creacion_poliza.php', {
-                'id_poliza': poliza,
+                'id_poliza': id,
                 }, 'post');
             }
             break;

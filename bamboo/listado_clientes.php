@@ -286,8 +286,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
             d.id +
             ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
             d.id +
-            ' name="elimina" onclick="botones(this.id, this.name)"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
-            d.id +
             ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
             '</tr>' +
             '</table><br>' +
