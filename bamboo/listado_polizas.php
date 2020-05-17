@@ -313,11 +313,11 @@ function format(d) {
 
         '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
         ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
-        d.id +
+        d.id_poliza +
         ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
-        d.id +
+        d.id_poliza +
         ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
         'id='+ d.id_poliza +
         ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button></td>' +
