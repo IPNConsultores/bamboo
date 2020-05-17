@@ -108,7 +108,7 @@ $body =urlencode($body);
 mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
   //correo_Cliente
-  $resultado_correo_cliente = mysqli_query( $link, "SELECT a.correo, a.rut_sin_dv, a.id , count(b.correo) cuenta_contacto FROM clientes a LEFT JOIN clientes_contactos b on a.id = b.id_cliente where a.rut_sin_dv = $rut_proponente or a.rut_sin_dv = $rut_proponente group by a.correo, a.rut_sin_dv, a.id order by cuenta_contacto desc;"  );
+  $resultado_correo_cliente = mysqli_query( $link, 'SELECT a.correo, a.rut_sin_dv, a.id , count(b.correo) cuenta_contacto FROM clientes a LEFT JOIN clientes_contactos b on a.id = b.id_cliente where a.rut_sin_dv ='.$rut_proponente.' or a.rut_sin_dv ='.$rut_proponente.' group by a.correo, a.rut_sin_dv, a.id order by cuenta_contacto desc;"  ');
   
   $destinatario ='';
   
