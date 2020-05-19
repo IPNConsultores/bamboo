@@ -171,15 +171,15 @@ function estandariza_info($data) {
                             <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
                                 persona?:&nbsp;&nbsp;</label>
                             <input class="form-check-input" type="radio" name="radio2_no" id="radio2_no"
-                                value="diferentes" onclick="checkRadio2(this.name)" checked="checked">
+                                value="diferentes" onclick="<strong>checkRadio2</strong>(this.name)" checked="checked">
                             <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
                             <input class="form-check-input" type="radio" name="radio2_si" id="radio2_si" value="iguales"
                                 onclick="checkRadio2(this.name)">
                             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
 
                         </div>
-                                                    <p><strong>Datos Proponente<br>
-                                </strong></p>
+                        <br>                            
+						<p><strong>Datos Proponente<br></strong></p>
                             <div class="form-row">
                                 <div class="form-row">
                                     <div class="col-md mb-3">
@@ -240,19 +240,19 @@ function estandariza_info($data) {
                                     <div class="col-md-4 mb-3">
                                         <label for="Nombre">Nombre</label>
                                         <input type="text" id="nombre_prop" class="form-control" name="nombre"
-                                            onchange="copiadatos()" required>
+                                            onchange="copiadatos()" required disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoP">Apellido Paterno</label>
                                         <input type="text" id="apellidop_prop" class="form-control"
-                                            onchange="copiadatos()" name="apellidop" required>
+                                            onchange="copiadatos()" name="apellidop" disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoM">Apellido Materno</label>
                                         <input type="text" id="apellidom_prop" class="form-control" name="apellidom"
-                                            onchange="copiadatos()" required>
+                                            onchange="copiadatos()" disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                 </div>
@@ -282,19 +282,19 @@ function estandariza_info($data) {
                                     <div class="col-md-4 mb-3">
                                         <label for="Nombre">Nombre</label>
                                         <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
-                                            required>
+                                            required disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoP">Apellido Paterno</label>
                                         <input type="text" id="apellidop_seg" class="form-control" name="apellidopaseg"
-                                            required>
+                                            disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="ApellidoM">Apellido Materno</label>
                                         <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg"
-                                            required>
+                                            disabled>
                                         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                                     </div>
                                 </div>
@@ -684,20 +684,14 @@ function checkRadio2(name) {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
-        document.getElementById("nombre_seg").disabled = false;
         document.getElementById("rutaseg").disabled = false;
-        document.getElementById("apellidop_seg").disabled = false;
-        document.getElementById("apellidom_seg").disabled = false;
         document.getElementById("busca_rut_aseg").style.display = "block";
 
 
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
-        document.getElementById("nombre_seg").disabled = "true";
         document.getElementById("rutaseg").disabled = "true";
-        document.getElementById("apellidop_seg").disabled = "true";
-        document.getElementById("apellidom_seg").disabled = "true";
         document.getElementById("busca_rut_aseg").style.display = "none";
     }
 }
