@@ -79,16 +79,15 @@ if ( !isset( $_SESSION ) ) {
         </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="Dirección">Dirección 1</label>
-        <label style= "color: darkred">*</label>
-        <input type="text" class="form-control" name="direccionp" required>
-        <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+        <label for="Dirección">Dirección Principal</label>
+                <input type="text" class="form-control" name="direccionp">
+        
       </div>
       <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Dirección 2</label>
+        <label for="validationCustomUsername">Dirección Secundaria</label>
         <div class="input-group">
           <input type="text" class="form-control" name="direccionl">
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+          
         </div>
       </div>
       
