@@ -510,8 +510,13 @@ function estandariza_info( $data ) {
                                         class="form-control">
                 </div>
               </div>
+              </div>
+              <br>
+            <label for="materia"><b>Comisión Negativa</b></label>
+            <br>
+            <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="comision">Comisión Negativa</label>
+                <label for="comision">Monto</label>
                 <input type="text" class="form-control" name="comisionneg" id="comisionneg">
               </div>
               <div class="col-md-4 mb-3">
@@ -586,6 +591,7 @@ function estandariza_info( $data ) {
     <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
   </form>
   <br>
+  <br>
 </div>
 <script>
     (function() {
@@ -606,7 +612,7 @@ function estandariza_info( $data ) {
         }, false);
     })();
     </script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
@@ -1071,7 +1077,6 @@ function renovar_poliza(poliza) {
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
-
             break;
         }
     }
