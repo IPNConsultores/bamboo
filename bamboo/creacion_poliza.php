@@ -479,17 +479,17 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
                 <label for="comision">Comisión Correspondiente</label>
                 <div class="form-inline">
-                  <input type="text" class="form-control" id="comision" name="comision">
-                  <select class="form-control" name="moneda_comision" id="moneda_comision">
-                    <option value="UF" <?php if ($moneda_comision == "UF") echo "selected" ?> >UF->dejar igual que prima</option>
-                    <option value="USD" <?php if ($moneda_comision == "USD") echo "selected" ?> >USD</option>
-                    <option value="CLP" <?php if ($moneda_comision == "CLP") echo "selected" ?> >CLP</option>
-                  </select>
+                   <div class="input-group-prepend"><span class="input-group-text" id="moneda5">UF</span></div>
+                    <input type="text" class="form-control" id="comision" name="comision">
+                 
                 </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Porcentaje Comisión del Corredor</label>
+                <div class="form-inline">
                 <input type="text" class="form-control" id="porcentaje_comsion" name="porcentaje_comsion">
+                <div class="input-group-prepend"><span class="input-group-text" id="porcentaje_comi">%</span></div>
+              </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Comisión Bruta a Pago</label>
