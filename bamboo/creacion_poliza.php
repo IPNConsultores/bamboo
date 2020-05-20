@@ -525,36 +525,36 @@ function estandariza_info( $data ) {
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="formapago">Forma de Pago</label>
-                <div class="form-row">
+                
                   <div class="form-inline">
-                    <select class="form-control" name="moneda_cuota" id="moneda_cuota">
+                   
+                    <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
+                      <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
+                      <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
+                      <option value="OTROS" <?php if ($modo_pago == "OTROS") echo "selected" ?> >Otro</option>
+                    </select>
+                  
+                  
+                    <input type="text" class="form-control" id="cuotas" name="cuotas"  placeholder="Número de Cuotas">
+                  
+                
+              </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="valorcuota">Valor Cuota</label>
+				  <div class = "form-inline">
+				  <select class="form-control" name="moneda_cuota" id="moneda_cuota">
                       <option value="UF" <?php if ($moneda_cuota == "UF") echo "selected" ?> >UF</option>
                       <option value="USD" <?php if ($moneda_cuota == "USD") echo "selected" ?> >USD</option>
                       <option value="CLP" <?php if ($moneda_cuota == "CLP") echo "selected" ?> >CLP</option>
                     </select>
-                  </div>
-                  <div class="col-4">
-                    <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
-                      <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
-                      <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
-                      <option value="OTROS" <?php if ($modo_pago == "OTROS") echo "selected" ?> >Cupon de Pago</option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <input type="text" class="form-control" id="cuotas" name="cuotas"
-                                            placeholder="Número de Cuotas">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="valorcuota">Valor Cuota</label>
                 <input type="text" class="form-control"  name="valorcuota" id="valorcuota" oninput="concatenar(this.id)">
               </div>
+				  </div>
               <div class="col-md-4 mb-3">
                 <label for="fechaprimer">Fecha Primera Cuota</label>
                 <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechaprimer" name="fechaprimer"
-                                        class="form-control">
+                  <input type="text" class="form-control" id="fechaprimer" name="fechaprimer">
                 </div>
               </div>
             </div>
@@ -1071,6 +1071,7 @@ function renovar_poliza(poliza) {
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
+
             break;
         }
     }
