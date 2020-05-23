@@ -89,8 +89,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }       
         mysqli_close($link);
     } 
-    
 
+
+}
+else {    
+echo '<style>.info_clientes { display:none;}</style>';
 }
 ?>
 
@@ -117,10 +120,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container">
         <p> Actividad / Creación <br>
         </p>
-        <h5 class="form-row">&nbsp;Datos Actividad</h5>
-        <br>
+        <h5 class="form-row" >&nbsp;Datos Actividad</h5>
+        <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> 
 
-        <label> Datos Cliente Asociado <em>(Opcional)</em></label><br>
+        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Cliente Asociado <em>(Opcional)</em></label><br>
         <!--
             <div class="form-row">
                 <div class="col-md-8 mb-3 col-lg-3">
@@ -145,8 +148,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
             -->
-        <div class="form-row">
-            <table name="tabla_clientes" class="table table-striped">
+        <div class="form-row" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
+            <table name="tabla_clientes" id="info_clientes" class="table table-striped">
                 <tr>
                     <thead>
                         <th>#</th>
@@ -163,9 +166,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </table>
         </div>
 
-        <br>
-        <label> Datos Póliza Asociada <em>(Opcional)</em></label>
-        <br>
+        <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
+        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Póliza Asociada <em>(Opcional)</em></label>
+        <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
         <!--
             <div Class="form-row">
                 <div class="col-md-4 mb-3">
@@ -178,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
             -->
-        <div class="form-row">
+        <div class="form-row" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
             <table name="tabla_polizas" class="table table-striped">
                 <tr>
                     <thead>
@@ -198,7 +201,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </table>
         </div>
         <br>
-        <label> Datos Actividad</label>
+        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Actividad</label>
         <!-- -->
         <div class="form-row">
             <div class="col-md-2 mb-3">
