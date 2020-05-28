@@ -3,10 +3,92 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 
+      
+    require_once "/home/gestio10/public_html/backend/config.php";
+    mysqli_set_charset( $link, 'utf8' );
+    mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
+  and isset( $_POST[ "idcliente" ] ) == true ) {
+    $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id ='.$idcliente.';";
+
+    $resultado=mysqli_query($link, $sql);
+    $codigo='{
+      "data": [';
+    $conta=0;
+  While($row=mysqli_fetch_object($resultado))
+  {     $conta=$conta+1;
+        $rut= $row->rut;
+        $nombre_cliente= $row-> nombre_cliente;
+        $apellidop= $row->apellido_paterno;
+        $apellidom= $row->apellido_materno;
+        $correo = $row->correo;
+        $direccionl = $row->direccion_laboral;
+        $direccionp = $row ->direccion_personal;
+        $id = $row -> id;
+        $telefono = $row-> telefono;
+        $fecha_ingreso = $row -> fecha_ingreso;
+        $referido = $row-> referido;
+        $grupo = $grupo -> grupo;
+  
+    $resultado_contador_contactos=mysqli_query($link, "SELECT count(*) as contador FROM clientes_contactos where id_cliente='".$row->id."';");
+    while ($fila=mysqli_fetch_object($resultado_contador_contactos))
+    {
+        $contador_contactos=0;
+      $cant_contactos=$fila->contador;
+      $resultado_contactos=mysqli_query($link, "SELECT  nombre,telefono, correo FROM clientes_contactos where id_cliente='".$row->id."';");
+        $contactos_array=array("contactos"=>& $fila->contador);
+        if (!$cant_contactos=="0"){
+      while($indice=mysqli_fetch_object($resultado_contactos)){
+          $contador_contactos=$contador_contactos+1;
+          $contactos_array=array_merge($contactos_array, array(
+              "nombre".$contador_contactos =>& $indice->nombre,
+              "telefono".$contador_contactos =>& $indice->telefono,
+              "correo".$contador_contactos =>& $indice->correo 
+              ));
+      }}
+      
+    }
+        if ($conta==1){
+      $codigo.= json_encode(array_merge(array(
+        "id" =>& $row->id,
+        "nombre"=>& $row->nombre,
+        "apellidop"=>& $row->apellido_paterno,
+        "correo_electronico" =>& $row->correo,
+        "direccionl" =>& $row->direccion_laboral,
+        "direccionp" =>& $row->direccion_personal,
+        "telefono" =>& $row->telefono,
+        "fecingreso" =>& $row->fecha_ingreso,
+        "referido" =>& $row->referido,
+        "grupo" =>& $row->grupo,
+        "rut" =>& $row->rut), 
+        $contactos_array));
+    } else {
+    $codigo.= ', '.json_encode(array_merge(array(
+      "id" =>& $row->id,
+      "nombre"=>& $row->nombre,
+      "apellidop"=>& $row->apellido_paterno,
+      "correo_electronico" =>& $row->correo,
+      "direccionl" =>& $row->direccion_laboral,
+      "direccionp" =>& $row->direccion_personal,
+      "telefono" =>& $row->telefono,
+      "fecingreso" =>& $row->fecha_ingreso,
+      "referido" =>& $row->referido,
+      "grupo" =>& $row->grupo,
+      "rut" =>& $row->rut), 
+        $contactos_array)
+    );}
+  }
+  $codigo.=']}';
+    
+}
+      
+  
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
-<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +103,8 @@ if ( !isset( $_SESSION ) ) {
 </head>
 
 <body>
+
+
 <!-- body code goes here "/bamboo/backend/clientes/crea_cliente.php"-->
 <div id="header">
 <?php include 'header2.php' ?>
@@ -35,19 +119,19 @@ if ( !isset( $_SESSION ) ) {
       <div class="col-md-4 mb-3">
         <label for="Nombre"> Nombre</label><label style= "color: darkred">*</label>
         
-        <input type="text" class="form-control" name="nombre" required>
+        <input type="text" class="form-control" name="nombre"  id="nombre" required>
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3">
         <label for="ApellidoP">Apellido Paterno</label>
         <label style= "color: darkred">*</label>
-        <input type="text" class="form-control" name="apellidop" required>
+        <input type="text" class="form-control" name="apellidop" id="apellidop" required>
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3">
         <label for="ApellidoM">Apellido Materno</label>
         <label style= "color: darkred">*</label>
-        <input type="text" class="form-control" name="apellidom" required>
+        <input type="text" class="form-control" name="apellidom" id="apellidom" required>
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3">
@@ -55,7 +139,7 @@ if ( !isset( $_SESSION ) ) {
           <div class="col-md-8 mb-3 col-lg-12">
             <label for="RUT">RUT</label>
             <label style= "color: darkred">*</label>
-            <input type="text" class="form-control" id="rut" name="rut" placeholder="1111111-1"
+            <input type="text" class="form-control" id="rut" name="rut" id="rut" placeholder="1111111-1"
                                 oninput="checkRut(this)" onchange="valida_rut_duplicado()" required>
             <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
           </div>
@@ -66,7 +150,7 @@ if ( !isset( $_SESSION ) ) {
         <label style= "color: darkred">*</label>
         <div class="input-group">
           <div class="input-group-prepend"><span class="input-group-text" id="mail">@</span></div>
-          <input type="email" class="form-control" name="correo_electronico" required>
+          <input type="email" class="form-control" name="correo_electronico" id="correo" required>
           <div class="invalid-feedback">Campo en blanco o sin formato mail (aaa@bbb.xxx)</div>
         </div>
       </div>
@@ -74,30 +158,30 @@ if ( !isset( $_SESSION ) ) {
         <label for="validationCustomUsername">Telefono</label>
         <label style= "color: darkred">*</label>
         <div class="input-group">
-          <input type="text" class="form-control" name="telefono" placeholder="56 9 XXXX XXXX" required>
+          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="56 9 XXXX XXXX" required>
           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
         </div>
       </div>
       <div class="col-md-4 mb-3">
         <label for="Dirección">Dirección Principal</label>
-                <input type="text" class="form-control" name="direccionp">
+                <input type="text" class="form-control" name="direccionp" id="direccionp">
         
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Dirección Secundaria</label>
         <div class="input-group">
-          <input type="text" class="form-control" name="direccionl">
+          <input type="text" class="form-control" name="direccionl" id="direccionl">
           
         </div>
       </div>
       
         <div class="col-md-4 mb-3">
           <label for="referido">Referido</label>
-          <input type="text" class="form-control" name="referido">
+          <input type="text" class="form-control" name="referido" id="referido">
         </div>
         <div class="col-md-4 mb-3">
           <label for="grupo">Grupo</label>
-          <input type="text" class="form-control" name="grupo">
+          <input type="text" class="form-control" name="grupo" id="grupo">
         </div>
       
       
@@ -147,6 +231,7 @@ if ( !isset( $_SESSION ) ) {
     <hr>
     <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
   </form>
+  
 </div>
 <script>
     (function() {
@@ -175,6 +260,7 @@ if ( !isset( $_SESSION ) ) {
 <script src="/assets/js/validarRUT.js"></script>
 <script src="/assets/js/bootstrap-notify.js"></script>
 <script src="/assets/js/bootstrap-notify.min.js"></script>
+
 
 </body>
 </html>
@@ -314,4 +400,77 @@ function checkRadio(name) {
         document.getElementById("info_contactos").style.display = "none";
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+      
+      var cant_contact = <?php echo intval($cant_contactos); ?>;
+      var info_contact = <?php echo json_encode($contactos_array);?>;
+      
+      
+      if( cant_contact !== 0){
+          
+        document.getElementById("radio_si").checked = true;
+        document.getElementById("radio_no").checked = false;
+        document.getElementById("info_contactos").style.display = "inline";
+        document.getElementById("rut").disabled ="true";
+        
+         document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
+         document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
+         document.getElementById("apellidop").value = '<?php echo $apellidom; ?>';
+         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("correo").value = '<?php echo $correo; ?>';
+         document.getElementById("telefono").value = '<?php echo $telefono; ?>';
+         document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
+         document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
+         document.getElementById("referido").value = '<?php echo $referido; ?>';
+         document.getElementById("grupo").value = '<?php echo $grupo; ?>';
+    
+    for ($k= 1; $k <= cant_contact ;$k++){
+         
+       var container = $(document.createElement('div')).css({
+        padding: '10px',
+        margin: '20px',
+        width: '340px',
+    });
+    var divSubmit = $(document.createElement('div'));
+              
+           var newElement= '<tr id =registro' +$k+ 
+          '><td><input class="form-control" type="text" value="" id="nombrecontact'+$k+'" name="nombrecontact'+$k+
+          '" /></td><td><input class="form-control" type="text" value="" id="telefonocontact'+$k+'" name="telefonocontact'+$k+
+          '" /></td><td><input class="form-control" type="email" value="" id="emailcontact'+$k+'" name="emailcontact'+$k+
+          '" /></td></tr>';
+          
+            $("#mytable").append($(newElement));
+
+            newElement = '';
+            
+            document.getElementById("nombrecontact"+$k).value = info_contact["nombre"+ $k]
+            document.getElementById("telefonocontact"+$k).value = info_contact["telefono"+ $k]
+            document.getElementById("emailcontact"+$k).value = info_contact["correo"+ $k]
+            
+           }
+       
+        
+      }
+      
+      else {
+           document.getElementById("radio_si").checked = false;
+        document.getElementById("radio_no").checked = true;
+        
+        document.getElementById("rut").disabled ="true";
+        
+         document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
+         document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
+         document.getElementById("apellidop").value = '<?php echo $apellidom; ?>';
+         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("correo").value = '<?php echo $correo; ?>';
+         document.getElementById("telefono").value = '<?php echo $telefono; ?>';
+         document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
+         document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
+         document.getElementById("referido").value = '<?php echo $referido; ?>';
+         document.getElementById("grupo").value = '<?php echo $grupo; ?>';
+          
+      }
+      
+  });
 </script>
