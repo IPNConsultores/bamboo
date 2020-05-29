@@ -3,8 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = '';
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
-  and isset( $_POST[ "id_poliza" ] ) == true ) {
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
   } else {
@@ -129,7 +128,8 @@ function estandariza_info( $data ) {
                 <th>Fin Vigencia</th>
                 <th>Materia Asegurada</th>
                 <th>Observaciones</th>
-                <th>Materia</th>
+                <th></th>
+                <th></th>
               </tr>
             </table>
             <div id="botones_poliza"></div>
@@ -806,45 +806,30 @@ var table = $('#listado_polizas').DataTable({
             "data": "materia_asegurada",
             title: "Materia asegurada"
         },
+
         {
             "data": "patente_ubicacion",
             title: "Observaciones materia asegurada"
         },
         {
-            "data": "deducible",
-            title: "Deducible"
+            "data": "nom_clienteP",
+            title: "Nombre proponente"
         },
         {
-            "data": "prima_afecta",
-            title: "Prima afecta"
-        },
-        {
-            "data": "prima_exenta",
-            title: "Prima exenta"
-        },
-        {
-            "data": "prima_bruta_anual",
-            title: "Prima bruta anual"
-        },
-        {
-            "data": "anomes_final",
-            title: "Añomes final"
-        },
-        {
-            "data": "anomes_inicial",
-            title: "Añomes inicial"
-        }
+            "data": "nom_clienteA",
+            title: "Nombre asegurado"
+        },       
 
     ],
     //          "search": {
     //          "search": "abarca"
     //          },
     "columnDefs": [{
-            "targets": [10, 11, 12, 13, 14],
+            "targets": [9, 10],
             "visible": false,
         },
         {
-            "targets": [10, 11, 12, 13, 14],
+            "targets": [5,6],
             "searchable": false
         },
         {

@@ -61,47 +61,47 @@ $buscar= estandariza_info($_POST["busqueda"]);
             <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                     <th></th>
-                    <th>Estado1</th>
-                    <th>Póliza2</th>
-                    <th>Compañia3</th>
-                    <th>Ramo4</th>
-                    <th>Inicio Vigencia5</th>
-                    <th>Fin Vigencia6</th>
-                    <th>Materia Asegurada7</th>
-                    <th>Tipo póliza8</th>
-                    <th>Observaciones9</th>
-                    <th>Deducible10</th>
-                    <th>Prima afecta11</th>
-                    <th>Prima exenta12</th>
-                    <th>Prima bruta anual13</th>
-                    <th>Añomes final14</th>
-                    <th>Añomes inicial15</th>
-                    <th>Moneda póliza16</th>
-                    <th>Cobertura17</th>
-                    <th>Proponente18</th>
-                    <th>Rut Proponente19</th>
-                    <th>Asegurado20</th>
-                    <th>Rut Asegurado21</th>
-                    <th>grupo22</th>
-                    <th>referido23</th>
-                    <th>monto_asegurado24</th>
-                    <th>numero_propuesta25</th>
-                    <th>fecha_envio_propuesta26</th>
-                    <th>comision27</th>
-                    <th>porcentaje_comision28</th>
-                    <th>comision_bruta29</th>
-                    <th>comision_neta30</th>
-                    <th>numero_boleta31</th>
-                    <th>boleta_negativa32</th>
-                    <th>comision_negativa33</th>
-                    <th>depositado_fecha34</th>
-                    <th>vendedor35</th>
-                    <th>nombre_vendedor36</th>
-                    <th>forma_pago37</th>
-                    <th>nro_cuotas38</th>
-                    <th>valor_cuota39</th>
-                    <th>fecha_primera_cuota40</th>
-                   <th>Prima neta41</th>
+                    <th>Estado</th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Deducible</th>
+                    <th>Prima afecta</th>
+                    <th>Prima exenta</th>
+                    <th>Prima bruta anual</th>
+                    <th>Añomes final</th>
+                    <th>Añomes inicial</th>
+                    <th>Moneda póliza</th>
+                    <th>Cobertura</th>
+                    <th>Proponente</th>
+                    <th>Rut Proponente</th>
+                    <th>Asegurado</th>
+                    <th>Rut Asegurado</th>
+                    <th>grupo</th>
+                    <th>referido</th>
+                    <th>monto_asegurado</th>
+                    <th>numero_propuesta</th>
+                    <th>fecha_envio_propuesta</th>
+                    <th>comision</th>
+                    <th>porcentaje_comision</th>
+                    <th>comision_bruta</th>
+                    <th>comision_neta</th>
+                    <th>numero_boleta</th>
+                    <th>boleta_negativa</th>
+                    <th>comision_negativa</th>
+                    <th>depositado_fecha</th>
+                    <th>vendedor</th>
+                    <th>nombre_vendedor</th>
+                    <th>forma_pago</th>
+                    <th>nro_cuotas</th>
+                    <th>valor_cuota</th>
+                    <th>fecha_primera_cuota</th>
+                   <th>Prima neta</th>
                 </tr>
             </table>
             <div id="botones_poliza"></div>
@@ -323,7 +323,7 @@ $(document).ready(function() {
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
                 "searchable": false
             },
             {
@@ -432,19 +432,19 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.deducible +'</td>' +
+        '<td>' + d.deducible +'</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima afecta:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_afecta + '</td>' +
+        '<td>' + d.prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima exenta:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_exenta + '</td>' +
+        '<td>' + d.prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima bruta anual:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_bruta_anual + '</td>' +
+        '<td>' + d.prima_bruta_anual + '</td>' +
         '</tr>' +
         '</tr>' +
 
