@@ -61,16 +61,47 @@ $buscar= estandariza_info($_POST["busqueda"]);
             <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                     <th></th>
-                    <th>Estado</th>
-                    <th>Póliza</th>
-                    <th>Compañia</th>
-                    <th>Ramo</th>
-                    <th>Inicio Vigencia</th>
-                    <th>Fin Vigencia</th>
-                    <th>Materia Asegurada</th>
-                    <th>Tipo póliza</th>
-                    <th>Observaciones</th>
-                    <th>Materia</th>
+                    <th>Estado1</th>
+                    <th>Póliza2</th>
+                    <th>Compañia3</th>
+                    <th>Ramo4</th>
+                    <th>Inicio Vigencia5</th>
+                    <th>Fin Vigencia6</th>
+                    <th>Materia Asegurada7</th>
+                    <th>Tipo póliza8</th>
+                    <th>Observaciones9</th>
+                    <th>Deducible10</th>
+                    <th>Prima afecta11</th>
+                    <th>Prima exenta12</th>
+                    <th>Prima bruta anual13</th>
+                    <th>Añomes final14</th>
+                    <th>Añomes inicial15</th>
+                    <th>Moneda póliza16</th>
+                    <th>Cobertura17</th>
+                    <th>Proponente18</th>
+                    <th>Rut Proponente19</th>
+                    <th>Asegurado20</th>
+                    <th>Rut Asegurado21</th>
+                    <th>grupo22</th>
+                    <th>referido23</th>
+                    <th>monto_asegurado24</th>
+                    <th>numero_propuesta25</th>
+                    <th>fecha_envio_propuesta26</th>
+                    <th>comision27</th>
+                    <th>porcentaje_comision28</th>
+                    <th>comision_bruta29</th>
+                    <th>comision_neta30</th>
+                    <th>numero_boleta31</th>
+                    <th>boleta_negativa32</th>
+                    <th>comision_negativa33</th>
+                    <th>depositado_fecha34</th>
+                    <th>vendedor35</th>
+                    <th>nombre_vendedor36</th>
+                    <th>forma_pago37</th>
+                    <th>nro_cuotas38</th>
+                    <th>valor_cuota39</th>
+                    <th>fecha_primera_cuota40</th>
+                   <th>Prima neta41</th>
                 </tr>
             </table>
             <div id="botones_poliza"></div>
@@ -182,6 +213,10 @@ $(document).ready(function() {
                 title: "Moneda póliza"
             },
             {
+                "data": "cobertura",
+                title: "Cobertura"
+            },
+            {
                 "data": "nom_clienteP",
                 title: "Proponente"
             },
@@ -196,6 +231,86 @@ $(document).ready(function() {
             {
                 "data": "rut_clienteA",
                 title: "Rut Asegurado"
+            },
+            {
+                "data": "grupo",
+                title: "Grupo"
+            },
+            {
+                "data": "referido",
+                title: "Referido"
+            },
+            {
+                "data": "monto_asegurado",
+                title: "Monto Asegurado"
+            },
+            {
+                "data": "numero_propuesta",
+                title: "Propuesta"
+            },
+            {
+                "data": "fecha_envio_propuesta",
+                title: "Fecha envío propuesto"
+            },
+            {
+                "data": "comision",
+                title: "Comisión"
+            },
+            {
+                "data": "porcentaje_comision",
+                title: "% Comisión"
+            },
+            {
+                "data": "comision_bruta",
+                title: "Comisión Bruta"
+            },
+            {
+                "data": "comision_neta",
+                title: "Comisión Neta"
+            },
+            {
+                "data": "numero_boleta",
+                title: "Número boleta"
+            },
+            {
+                "data": "boleta_negativa",
+                title: "Boleta negativa"
+            },
+            {
+                "data": "comision_negativa",
+                title: "Comisión negativa"
+            },
+            {
+                "data": "depositado_fecha",
+                title: "Fecha depósito"
+            },
+            {
+                "data": "vendedor",
+                title: "vendedor"
+            },
+            {
+                "data": "nombre_vendedor",
+                title: "Nombre vendedor"
+            },
+            {
+                "data": "forma_pago",
+                title: "Forma de pago"
+            },
+            {
+                "data": "nro_cuotas",
+                title: "Número de cuotas"
+            },
+            {
+                "data": "valor_cuota",
+                title: "Valor cuota"
+            },
+            {
+                "data": "fecha_primera_cuota",
+                title: "Fecha primera cuota"
+            },
+            {
+                "data": "prima_neta",
+                title: "Prima neta"
             }
 
 
@@ -204,11 +319,11 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15,16,17,18,19],
+                "targets": [10, 11, 12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15],
+                "targets": [10, 11, 12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
                 "searchable": false
             },
             {
@@ -297,7 +412,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             },
             {
@@ -305,7 +420,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [18,19, 20,21]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             }
         ]
