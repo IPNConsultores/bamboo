@@ -478,6 +478,11 @@ function botones(id, accion, base) {
             break;
         }
         case "modifica": {
+            if (base == 'poliza') {
+                $.redirect('/bamboo/creacion_poliza.php', {
+                'id_poliza': id,
+                }, 'post');
+            }
             console.log(base + " modificado con ID:" + id);
             $.notify({
                 // options
@@ -486,11 +491,7 @@ function botones(id, accion, base) {
                 // settings
                 type: 'success'
             });
-            if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_poliza.php', {
-                'id_poliza': id,
-                }, 'post');
-            }
+
             break;
         }
         case "tarea": {

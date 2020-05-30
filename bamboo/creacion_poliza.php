@@ -766,7 +766,7 @@ var table = $('#listado_polizas').DataTable({
     "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
     "scrollX": true,
     "searchPanes": {
-        "columns": [2, 3, 13, 14],
+        "columns": [2, 3, 8,9],
     },
     "dom": 'Pfrtip',
     "columns": [{
@@ -818,8 +818,7 @@ var table = $('#listado_polizas').DataTable({
         {
             "data": "nom_clienteA",
             title: "Nombre asegurado"
-        },       
-
+        }    
     ],
     //          "search": {
     //          "search": "abarca"
