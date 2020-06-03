@@ -457,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function() {
            document.getElementById("radio_si").checked = false;
         document.getElementById("radio_no").checked = true;
         
-        document.getElementById("rut").disabled ="true";
+        document.getElementById("rut").disabled ="false";
         
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
