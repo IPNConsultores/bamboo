@@ -130,6 +130,7 @@ function estandariza_info( $data ) {
                 <th>Observaciones</th>
                 <th></th>
                 <th></th>
+                <th></th>
               </tr>
             </table>
             <div id="botones_poliza"></div>
