@@ -43,6 +43,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+            <script src="/assets/js/bootstrap-notify.js"></script>
+        <script src="/assets/js/bootstrap-notify.min.js"></script>
     <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
@@ -68,7 +70,38 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Materia Asegurada</th>
                     <th>Tipo póliza</th>
                     <th>Observaciones</th>
-                    <th>Materia</th>
+                    <th>Deducible</th>
+                    <th>Prima afecta</th>
+                    <th>Prima exenta</th>
+                    <th>Prima bruta anual</th>
+                    <th>Añomes final</th>
+                    <th>Añomes inicial</th>
+                    <th>Moneda póliza</th>
+                    <th>Cobertura</th>
+                    <th>Proponente</th>
+                    <th>Rut Proponente</th>
+                    <th>Asegurado</th>
+                    <th>Rut Asegurado</th>
+                    <th>grupo</th>
+                    <th>referido</th>
+                    <th>monto_asegurado</th>
+                    <th>numero_propuesta</th>
+                    <th>fecha_envio_propuesta</th>
+                    <th>comision</th>
+                    <th>porcentaje_comision</th>
+                    <th>comision_bruta</th>
+                    <th>comision_neta</th>
+                    <th>numero_boleta</th>
+                    <th>boleta_negativa</th>
+                    <th>comision_negativa</th>
+                    <th>depositado_fecha</th>
+                    <th>vendedor</th>
+                    <th>nombre_vendedor</th>
+                    <th>forma_pago</th>
+                    <th>nro_cuotas</th>
+                    <th>valor_cuota</th>
+                    <th>fecha_primera_cuota</th>
+                   <th>Prima neta</th>
                 </tr>
             </table>
             <div id="botones_poliza"></div>
@@ -83,8 +116,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
         </script>
         <script src="/assets/js/jquery.redirect.js"></script>
-        <script src="/assets/js/bootstrap-notify.js"></script>
-        <script src="/assets/js/bootstrap-notify.min.js"></script>
+
         <script src="/assets/js/datatables.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js">
@@ -181,6 +213,10 @@ $(document).ready(function() {
                 title: "Moneda póliza"
             },
             {
+                "data": "cobertura",
+                title: "Cobertura"
+            },
+            {
                 "data": "nom_clienteP",
                 title: "Proponente"
             },
@@ -195,6 +231,86 @@ $(document).ready(function() {
             {
                 "data": "rut_clienteA",
                 title: "Rut Asegurado"
+            },
+            {
+                "data": "grupo",
+                title: "Grupo"
+            },
+            {
+                "data": "referido",
+                title: "Referido"
+            },
+            {
+                "data": "monto_asegurado",
+                title: "Monto Asegurado"
+            },
+            {
+                "data": "numero_propuesta",
+                title: "Propuesta"
+            },
+            {
+                "data": "fecha_envio_propuesta",
+                title: "Fecha envío propuesto"
+            },
+            {
+                "data": "comision",
+                title: "Comisión"
+            },
+            {
+                "data": "porcentaje_comision",
+                title: "% Comisión"
+            },
+            {
+                "data": "comision_bruta",
+                title: "Comisión Bruta"
+            },
+            {
+                "data": "comision_neta",
+                title: "Comisión Neta"
+            },
+            {
+                "data": "numero_boleta",
+                title: "Número boleta"
+            },
+            {
+                "data": "boleta_negativa",
+                title: "Boleta negativa"
+            },
+            {
+                "data": "comision_negativa",
+                title: "Comisión negativa"
+            },
+            {
+                "data": "depositado_fecha",
+                title: "Fecha depósito"
+            },
+            {
+                "data": "vendedor",
+                title: "vendedor"
+            },
+            {
+                "data": "nombre_vendedor",
+                title: "Nombre vendedor"
+            },
+            {
+                "data": "forma_pago",
+                title: "Forma de pago"
+            },
+            {
+                "data": "nro_cuotas",
+                title: "Número de cuotas"
+            },
+            {
+                "data": "valor_cuota",
+                title: "Valor cuota"
+            },
+            {
+                "data": "fecha_primera_cuota",
+                title: "Fecha primera cuota"
+            },
+            {
+                "data": "prima_neta",
+                title: "Prima neta"
             }
 
 
@@ -203,11 +319,11 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15,16,17,18,19],
+                "targets": [10, 11, 12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15],
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
                 "searchable": false
             },
             {
@@ -296,7 +412,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             },
             {
@@ -304,7 +420,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [18,19, 20,21]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             }
         ]
@@ -316,19 +432,19 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.deducible +'</td>' +
+        '<td>' + d.deducible +'</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima afecta:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_afecta + '</td>' +
+        '<td>' + d.prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima exenta:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_exenta + '</td>' +
+        '<td>' + d.prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Prima bruta anual:</td>' +
-        '<td>' + d.moneda_poliza +' '+ d.prima_bruta_anual + '</td>' +
+        '<td>' + d.prima_bruta_anual + '</td>' +
         '</tr>' +
         '</tr>' +
 
@@ -362,6 +478,11 @@ function botones(id, accion, base) {
             break;
         }
         case "modifica": {
+            if (base == 'poliza') {
+                $.redirect('/bamboo/creacion_poliza.php', {
+                'id_poliza': id,
+                }, 'post');
+            }
             console.log(base + " modificado con ID:" + id);
             $.notify({
                 // options
@@ -370,11 +491,7 @@ function botones(id, accion, base) {
                 // settings
                 type: 'success'
             });
-            if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_poliza.php', {
-                'id_poliza': id,
-                }, 'post');
-            }
+
             break;
         }
         case "tarea": {
