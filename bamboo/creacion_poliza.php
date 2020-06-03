@@ -128,9 +128,8 @@ function estandariza_info( $data ) {
                 <th>Fin Vigencia</th>
                 <th>Materia Asegurada</th>
                 <th>Observaciones</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>nom_clienteP</th>
+                <th>nom_clienteA</th>
               </tr>
             </table>
             <div id="botones_poliza"></div>
@@ -807,7 +806,6 @@ var table = $('#listado_polizas').DataTable({
             "data": "materia_asegurada",
             title: "Materia asegurada"
         },
-
         {
             "data": "patente_ubicacion",
             title: "Observaciones materia asegurada"
@@ -831,12 +829,6 @@ var table = $('#listado_polizas').DataTable({
         {
             "targets": [5,6],
             "searchable": false
-        },
-        {
-            "searchPanes": {
-                "preSelect": ['202004'],
-            },
-            "targets": [13],
         },
         {
             targets: 1,
