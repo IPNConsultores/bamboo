@@ -462,7 +462,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
-         document.getElementById("apellidop").value = '<?php echo $apellidom; ?>';
+         document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
