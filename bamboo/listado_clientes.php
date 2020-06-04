@@ -331,8 +331,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
                 }
             }
             case "modifica": {
-                $.redirect('/bamboo/modificacion_cliente.php', {
-                    'cliente': id
+                $.redirect('/bamboo/creacion_cliente.php', {
+                    'id_cliente': id
                 }, 'post');
                 break;
             }
