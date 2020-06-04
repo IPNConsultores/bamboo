@@ -11,7 +11,7 @@ if ( !isset( $_SESSION ) ) {
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
   and isset( $_POST[ "id_cliente" ] ) == true ) {
 	
-	$idcliente = $_POST[ "id_cliente" ];
+	$idcliente=$_POST["id_cliente"];
     $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id ='.$idcliente.';";
 
     $resultado=mysqli_query($link, $sql);
@@ -476,4 +476,3 @@ document.addEventListener("DOMContentLoaded", function() {
       
   });
 </script>
-© 2020 GitHub, Inc. GitHub, Inc.
