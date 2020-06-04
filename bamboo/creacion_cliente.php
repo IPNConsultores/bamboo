@@ -105,7 +105,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
 
 <body>
 
-<?php echo $sql ?>
+
 <!-- body code goes here "/bamboo/backend/clientes/crea_cliente.php"-->
 <div id="header">
 <?php include 'header2.php' ?>
@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
-         document.getElementById("apellidop").value = '<?php echo $apellidom; ?>';
+         document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
