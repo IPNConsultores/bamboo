@@ -144,6 +144,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
             <label style= "color: darkred">*</label>
             <input type="text" class="form-control" id="rut" name="rut" id="rut" placeholder="1111111-1"
                                 oninput="checkRut(this)" onchange="valida_rut_duplicado()" required>
+			  <input type="text" class="form-control" name="rut2"  id="rut2" style="display: none">
             <div class="invalid-feedback">Dígito verificador no válido. Verifica rut ingresado</div>
           </div>
         </div>
@@ -422,6 +423,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
+		  document.getElementById("rut2").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
          document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
@@ -470,6 +472,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
+		  document.getElementById("rut2").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
          document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
