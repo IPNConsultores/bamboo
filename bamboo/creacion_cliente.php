@@ -11,7 +11,7 @@ if ( !isset( $_SESSION ) ) {
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) == true ) {
 	
 	$idcliente=$_POST["id_cliente"];
-   $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
+   $sql = "SELECT id,CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
 
     $resultado=mysqli_query($link, $sql);
     $codigo='{
@@ -19,6 +19,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
   {     $conta=$conta+1;
+   		$id=$row->id;
         $rut= $row->rut;
         $nombre_cliente= $row-> nombre_cliente;
         $apellidop= $row->apellido_paterno;
@@ -121,6 +122,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
         <label for="Nombre"> Nombre</label><label style= "color: darkred">*</label>
         
         <input type="text" class="form-control" name="nombre"  id="nombre" required>
+		 <input type="text" class="form-control" name="id"  id="id" style="display: none">
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3">
@@ -415,7 +417,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("info_contactos").style.display = "inline";
         document.getElementById("rut").disabled ="true";
         
-         document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
+         document.getElementById("id").value = '<?php echo $id; ?>';
+		 document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
@@ -462,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("radio_no").checked = true;
         
         document.getElementById("rut").disabled =false;
-        
+        document.getElementById("id").value = '<?php echo $id; ?>';
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
