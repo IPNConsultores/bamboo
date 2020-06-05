@@ -113,7 +113,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
 <div class="container">
   <p>Clientes / Creación<br>
   </p>
-  <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" novalidate>
+  <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" id="formulario"novalidate>
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
     <div class="form-row">
@@ -425,6 +425,9 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
+		 document.getElementById("formulario").action="/bamboo/backend/polizas/crea_poliza.php";
+         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
     
     for ($k= 1; $k <= cant_contact ;$k++){
          
@@ -470,6 +473,9 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
+		 document.getElementById("formulario").action="/bamboo/backend/polizas/crea_poliza.php";
+         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
       }
       
