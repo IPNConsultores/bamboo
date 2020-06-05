@@ -11,7 +11,7 @@ if ( !isset( $_SESSION ) ) {
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) == true ) {
 	
 	$idcliente=$_POST["id_cliente"];
-    $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
+   $sql = "SELECT CONCAT(rut_sin_dv, '-',dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat(nombre_cliente ,' ', apellido_paterno,' ', apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
 
     $resultado=mysqli_query($link, $sql);
     $codigo='{
@@ -82,10 +82,10 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
   }
   $codigo.=']}';
     
-}
+
       
   
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -230,7 +230,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     </div>
     <br>
     <hr>
-    <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+    <button class="btn" type="submit" style="background-color: #536656; color: white" id="boton_submit">Registrar</button>
   </form>
   
 </div>
@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/backend/polizas/crea_poliza.php";
+		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
     
@@ -473,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/backend/polizas/crea_poliza.php";
+		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
