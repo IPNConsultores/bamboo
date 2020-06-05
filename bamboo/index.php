@@ -163,6 +163,10 @@ $(document).ready(function() {
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
+                "data": "id_tarea",
+                title: "Tarea"
+            },
+            {
                 "data": "prioridad",
                 title: "Prioridad"
             },
@@ -181,9 +185,6 @@ $(document).ready(function() {
             {
                 "data": "fecingreso",
                 title: "Fecha creación tarea"
-            },
-            {
-                "data": "id_tarea"
             }
 
         ],
@@ -191,12 +192,9 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
 
-        "columnDefs": [{
-            "targets": [6],
-            "visible": false,
-        },
+        "columnDefs": [
         {
-        targets: 2,
+        targets: 3,
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
@@ -216,8 +214,8 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }}],
         "order": [
-            [1, "asc"],
-            [4, "asc"]
+            [2, "asc"],
+            [5, "asc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
@@ -450,9 +448,9 @@ function detalle_tareas(d) {
         '<tr>' +
         '<td>Acciones:</td>' +
         '<td><button title="Busca toda la información asociada a esta tarea" type="button" id=' + d.id_tarea +
-        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de esta tarea"  type="button" id=' +
         d.id_tarea +
-        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina esta tarea"  type="button" id=' +
         d.id_tarea +
         ' name="elimina" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Marca tarea como completada"  type="button" id=' +
         d.id_tarea +
@@ -502,15 +500,13 @@ function detalle_polizas(d) {
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
-        case "elimina": {
-            console.log(base + " eliminado con ID:" + id);
-            $.notify({
-                // options
-                message: base + ' modificado'
-            }, {
-                // settings
-                type: 'danger'
-            });
+        case "elimina": {            
+            if (base == 'tarea') {
+                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
+                    'id_tarea': id,
+                    'accion':accion,
+                }, 'post');
+            }
             break;
         }
         case "modifica": {
@@ -554,6 +550,12 @@ function botones(id, accion, base) {
                 }, 'post');
             }
             break;
+            if (base == 'tarea') {
+                $.redirect('/bamboo/resumen.php', {
+                    'id_tarea': id
+                }, 'post');
+            }
+            break;
         }
         case "correo": {
             if (base == 'poliza') {
@@ -566,7 +568,8 @@ function botones(id, accion, base) {
         case "cerrar_tarea": {
             if (base == 'tarea') {
                 $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
-                    'id_tarea': id
+                    'id_tarea': id,
+                    'accion':accion,
                 }, 'post');
             }
             break;
