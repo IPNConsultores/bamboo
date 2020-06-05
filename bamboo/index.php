@@ -549,7 +549,6 @@ function botones(id, accion, base) {
                     'id_poliza': id
                 }, 'post');
             }
-            break;
             if (base == 'tarea') {
                 $.redirect('/bamboo/resumen.php', {
                     'id_tarea': id

@@ -3,6 +3,9 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
+echo "<br> id_cliente :".$_POST["id_cliente"];
+echo "<br> id_poliza :".$_POST["id_poliza"];
+echo "<br> id_tarea :".$_POST["id_tarea"];
 function estandariza_info($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -158,7 +161,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
         //tareas
-        $resultado_tareas=mysqli_query($link, 'select id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas where id"'.$busqueda.'";');
+        $resultado_tareas=mysqli_query($link, 'select id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas where id="'.$busqueda.'";');
         
         While($row=mysqli_fetch_object($resultado_tareas))
             {
