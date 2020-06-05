@@ -23,7 +23,7 @@ mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apel
     $nombrecontact = $_POST['nombrecontact'][$key];
     $telefonocontact = $_POST['telefonocontact'][$key];
     $emailcontact = $_POST['emailcontact'][$key];
-    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
+    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
   }
 
 
