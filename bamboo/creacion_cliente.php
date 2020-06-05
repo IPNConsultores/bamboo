@@ -230,9 +230,9 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     </div>
     <div id="auxiliar" style="display: none;">
       <input name="contactos" id="contactos">
-	  <input name="nombrecontact" id="nombrecontact">
-	  <input name="telefonocontact" id="telefonocontact">
-	 <input name="correocontact" id="correocontact">		
+	  <input name="nombrecontact[]" id="nombrecontact">
+	  <input name="telefonocontact[]" id="telefonocontact">
+	 <input name="correocontact[]" id="correocontact">		
     </div>
     <br>
     <hr>
