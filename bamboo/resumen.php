@@ -3,6 +3,9 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
+echo "<br> id_cliente :".$_POST["id_cliente"];
+echo "<br> id_poliza :".$_POST["id_poliza"];
+echo "<br> id_tarea :".$_POST["id_tarea"];
 function estandariza_info($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -151,6 +154,73 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
 
         mysqli_close($link);
+    } 
+    // Viene desde tarea
+    if(!empty(trim($_POST["id_tarea"]))){
+        $busqueda=$_POST["id_tarea"];
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+        //tareas
+        $resultado_tareas=mysqli_query($link, 'select id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas where id="'.$busqueda.'";');
+        
+        While($row=mysqli_fetch_object($resultado_tareas))
+            {
+                $id= $row ->id;
+                $fecha_ingreso = $row->fecha_ingreso;
+                $fecha_vencimiento= $row->fecha_vencimiento;
+                $tarea= $row->tarea;
+                $prioridad = $row->prioridad;
+                $num_tareas=$num_tareas+1;
+
+                switch ($row->estado) {
+                    case 'Pendiente':
+                        $estado='<span class="badge badge-primary">'.$row->estado.'</span>';
+                        break;
+                    case 'Completado':
+                            $estado='<span class="badge badge-secondary">'.$row->estado.'</span>';
+                            break;
+                    case 'Atrasado':
+                        $estado='<span class="badge badge-danger">'.$row->estado.'</span>';
+                        break;
+                    case 'Próximo a vencer':
+                        $estado='<span class="badge badge-warning">'.$row->estado.'</span>';
+                        break;
+                    default:
+                        $estado='<span class="badge badge-light">'.$row->estado.'</span>';
+                        break;
+                }
+
+                $tabla_tareas=$tabla_tareas.'<tr><td>'.$num_tareas.'</td><td>'.$prioridad.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_ingreso.'</td><td>'.$fecha_vencimiento.'</td></tr>'."<br>";        
+            }   
+        //cliente
+        $resultado=mysqli_query($link, 'SELECT a.id, CONCAT(rut_sin_dv, \'-\',dv) as rut, CONCAT(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes as a left join tareas_relaciones as b on a.id=b.id_relacion and b.base=\'clientes\' where b.id_tarea='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        While($row=mysqli_fetch_object($resultado))
+            {
+                $rut=$row->rut;
+                $id=$row->id;
+                $nombre=$row->nombre;
+                $telefono=$row->telefono;
+                $correo=$row->correo;
+                $num_cliente=$num_cliente+1;
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
+            }
+            //poliza
+            $resultado_poliza=mysqli_query($link, 'SELECT a.id, compania, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura FROM polizas as a left join tareas_relaciones as b on a.id=b.id_relacion and b.base=\'polizas\' where b.id_tarea='.$busqueda.' order by compania, numero_poliza');
+
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    $id= $row ->id;
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $poliza= $row->numero_poliza;
+                    $materia_asegurada= $row->materia_asegurada;
+                    $patente_ubicacion = $row->patente_ubicacion;
+                    $cobertura = $row->cobertura;
+                    $num_poliza=$num_poliza+1;
+                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
+                }                     
+          mysqli_close($link);
     } 
   }
 ?>
