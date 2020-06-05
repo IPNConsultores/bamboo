@@ -177,10 +177,10 @@ function estandariza_info( $data ) {
             <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
               persona?:&nbsp;&nbsp;</label>
             <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
-                                value="diferentes" onclick="checkRadio2(this.name)" checked="checked">
+                                value="diferentes" onchange="checkRadio2(this.name)" checked="checked">
             <label class="form-check-label">No&nbsp;</label>
             <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
-                                onclick="checkRadio2(this.name)">
+                                onclick="checkRadio2(this.name)" onchange="copiadatos()">
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
           </div>
           <br>
@@ -1044,6 +1044,8 @@ function renovar_poliza(poliza) {
              if ('<?php echo $rut_completo_prop; ?>'=='<?php echo $rut_completo_aseg; ?>'){
                         document.getElementById("radio2_si").checked = false;
                         document.getElementById("radio2_no").checked = true;
+                        document.getElementById("busca_poliza").style.display = "block";
+                        document.getElementById("poliza_renovada").style.display = "block";
             }
             document.getElementById("radio_no").checked = false;
         document.getElementById("radio_si").checked = true;
