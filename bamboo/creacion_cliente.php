@@ -230,6 +230,9 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     </div>
     <div id="auxiliar" style="display: none;">
       <input name="contactos" id="contactos">
+	  <input name="nombrecontact" id="nombrecontact">
+	  <input name="telefonocontact" id="telefonocontact">
+	 <input name="correocontact" id="correocontact">		
     </div>
     <br>
     <hr>
@@ -430,6 +433,9 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
+		  
+		
+		  
 		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
@@ -458,6 +464,9 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("emailcontact"+$k).value = info_contact["correo"+ $k]
             
            }
+		   document.getElementById("nombrecontact").value = info_contact["nombre"]
+		 document.getElementById("telefonocontact").value = info_contact["telefono"]
+		 document.getElementById("correocontact").value = info_contact["correo"]
        
         
       }
