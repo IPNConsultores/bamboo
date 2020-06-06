@@ -99,6 +99,7 @@ While($row2=mysqli_fetch_object($resultado2))
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>
+                                
                     </div>
                 </div>
             </div>
@@ -114,13 +115,48 @@ While($row2=mysqli_fetch_object($resultado2))
                     <div class="card-body">
                         <table class="display" style="width:100%" id="listado_polizas">
                             <tr>
-                                <th></th>
-                                <th>Prioridad</th>
-                                <th>Estado</th>
-                                <th>Tarea</th>
-                                <th>Fecha vencimiento</th>
-                                <th>póliza asociada</th>
-                                <th>Cliente asociado</th>
+                    <th></th>
+                    <th>Estado</th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Deducible</th>
+                    <th>Prima afecta</th>
+                    <th>Prima exenta</th>
+                    <th>Prima bruta anual</th>
+                    <th>Añomes final</th>
+                    <th>Añomes inicial</th>
+                    <th>Moneda póliza</th>
+                    <th>Cobertura</th>
+                    <th>Proponente</th>
+                    <th>Rut Proponente</th>
+                    <th>Asegurado</th>
+                    <th>Rut Asegurado</th>
+                    <th>grupo</th>
+                    <th>referido</th>
+                    <th>monto_asegurado</th>
+                    <th>numero_propuesta</th>
+                    <th>fecha_envio_propuesta</th>
+                    <th>comision</th>
+                    <th>porcentaje_comision</th>
+                    <th>comision_bruta</th>
+                    <th>comision_neta</th>
+                    <th>numero_boleta</th>
+                    <th>boleta_negativa</th>
+                    <th>comision_negativa</th>
+                    <th>depositado_fecha</th>
+                    <th>vendedor</th>
+                    <th>nombre_vendedor</th>
+                    <th>forma_pago</th>
+                    <th>nro_cuotas</th>
+                    <th>valor_cuota</th>
+                    <th>fecha_primera_cuota</th>
+                   <th>Prima neta</th>
                             </tr>
                         </table>
                         <div id="botones_poliza"></div>
@@ -128,6 +164,7 @@ While($row2=mysqli_fetch_object($resultado2))
                 </div>
             </div>
         </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </script>
@@ -262,7 +299,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado clientes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [1, 2, 3, 4, 5, 6]
                 }
             },
             {
@@ -270,39 +307,29 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado clientes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [1, 2, 3, 4, 5, 6]
                 }
             }
         ]
     }).container().appendTo($('#botones_tareas'));
 
-    table_poliza = $('#listado_polizas').DataTable({
+     table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
+        "searchPanes":{
+            "columns":[2,3,13,14],
+        },
+        "dom": 'Pfrtip',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
-
-            /*
-            compania: "Renta"
-vigencia_final: "2020-10-15"
-numero_poliza: "1013134-2"
-materia_asegurada: "Unidades (comercial)"
-poliza: null
-patente_ubicacion: "Diagonal pje Matte 956 -957 Santiago"
-cobertura: "INC + SISMO "
-nom_clienteP: "Comunidad Edificio Diagonal Pje Matte  "
-rut_clienteP: "56005300-2"
-telefonoP: "5699876639"
-correoP: "correodeprueba@bamboo.cl"
-nom_clienteA: "Comunidad Edificio Diagonal Pje Matte  "
-rut_clienteA: "56005300-2"
-telefonoA: "5699876639"
-correoA: "correodeprueba@bamboo.cl"
-            */
+            {
+                "data": "estado",
+                title: "Estado"
+            },
             {
                 "data": "numero_poliza",
                 title: "Nro Póliza"
@@ -312,28 +339,200 @@ correoA: "correodeprueba@bamboo.cl"
                 title: "Compañía"
             },
             {
-                "data": "cobertura",
-                title: "Cobertura"
+                "data": "ramo",
+                title: "Ramo"
+            },
+            {
+                "data": "vigencia_inicial",
+                title: "Vigencia Inicio"
             },
             {
                 "data": "vigencia_final",
-                title: "Vigencia Final"
+                title: "Vigencia Término"
             },
             {
                 "data": "materia_asegurada",
                 title: "Materia asegurada"
             },
             {
+                "data": "tipo_poliza",
+                title: "Tipo póliza"
+            },
+            {
                 "data": "patente_ubicacion",
                 title: "Observaciones materia asegurada"
+            },
+            {
+                "data": "deducible",
+                title: "Deducible"
+            },
+            {
+                "data": "prima_afecta",
+                title: "Prima afecta"
+            },
+            {
+                "data": "prima_exenta",
+                title: "Prima exenta"
+            },
+            {
+                "data": "prima_bruta_anual",
+                title: "Prima bruta anual"
+            },
+            {
+                "data": "anomes_final",
+                title: "Añomes final"
+            },
+            {
+                "data": "anomes_inicial",
+                title: "Añomes inicial"
+            },
+            {
+                "data": "moneda_poliza",
+                title: "Moneda póliza"
+            },
+            {
+                "data": "cobertura",
+                title: "Cobertura"
+            },
+            {
+                "data": "nom_clienteP",
+                title: "Proponente"
+            },
+            {
+                "data": "rut_clienteP",
+                title: "Rut Proponente"
+            },
+            {
+                "data": "nom_clienteA",
+                title: "Asegurado"
+            },
+            {
+                "data": "rut_clienteA",
+                title: "Rut Asegurado"
+            },
+            {
+                "data": "grupo",
+                title: "Grupo"
+            },
+            {
+                "data": "referido",
+                title: "Referido"
+            },
+            {
+                "data": "monto_asegurado",
+                title: "Monto Asegurado"
+            },
+            {
+                "data": "numero_propuesta",
+                title: "Propuesta"
+            },
+            {
+                "data": "fecha_envio_propuesta",
+                title: "Fecha envío propuesto"
+            },
+            {
+                "data": "comision",
+                title: "Comisión"
+            },
+            {
+                "data": "porcentaje_comision",
+                title: "% Comisión"
+            },
+            {
+                "data": "comision_bruta",
+                title: "Comisión Bruta"
+            },
+            {
+                "data": "comision_neta",
+                title: "Comisión Neta"
+            },
+            {
+                "data": "numero_boleta",
+                title: "Número boleta"
+            },
+            {
+                "data": "boleta_negativa",
+                title: "Boleta negativa"
+            },
+            {
+                "data": "comision_negativa",
+                title: "Comisión negativa"
+            },
+            {
+                "data": "depositado_fecha",
+                title: "Fecha depósito"
+            },
+            {
+                "data": "vendedor",
+                title: "vendedor"
+            },
+            {
+                "data": "nombre_vendedor",
+                title: "Nombre vendedor"
+            },
+            {
+                "data": "forma_pago",
+                title: "Forma de pago"
+            },
+            {
+                "data": "nro_cuotas",
+                title: "Número de cuotas"
+            },
+            {
+                "data": "valor_cuota",
+                title: "Valor cuota"
+            },
+            {
+                "data": "fecha_primera_cuota",
+                title: "Fecha primera cuota"
+            },
+            {
+                "data": "prima_neta",
+                title: "Prima neta"
             }
+
 
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
+        "columnDefs": [{
+                "targets": [10, 11, 12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "visible": false,
+            },
+            {
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "searchable": false
+            },
+            {
+                "searchPanes": {
+                    "preSelect":['Activo'],
+                },
+                "targets":[1],
+            },
+            {
+        targets: 1,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Activo':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Cerrado':
+                                estado='<span class="badge badge-dark">'+data+'</span>';
+                                break;
+                        case 'Atrasado':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }}
+        ],
         "order": [
-
+            [3, "asc"],
             [4, "asc"]
         ],
         "oLanguage": {
@@ -354,11 +553,20 @@ correoA: "correodeprueba@bamboo.cl"
                 "sPrevious": "Anterior",
                 "sLast": "Última"
             }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
+                }
+            }
         }
     });
     $('#listado_polizas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
-        var row = table_poliza.row(tr);
+        var row = table.row(tr);
 
         if (row.child.isShown()) {
             // This row is already open - close it
@@ -370,18 +578,19 @@ correoA: "correodeprueba@bamboo.cl"
             tr.addClass('shown');
         }
     });
+    $('#listado_polizas').dataTable().fnFilter(document.getElementById("var1").value);
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
-    var buttons = new $.fn.dataTable.Buttons(table_poliza, {
-        buttons: [{
+    var buttons2 = new $.fn.dataTable.Buttons(table, {
+        buttons2: [{
                 sheetName: 'Pólizas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             },
             {
@@ -389,7 +598,7 @@ correoA: "correodeprueba@bamboo.cl"
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
                 }
             }
         ]
@@ -465,36 +674,38 @@ function detalle_tareas(d) {
 }
 
 function detalle_polizas(d) {
-    return '  <table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
-        '<tr><th></th><th>Proponiente</th><th>Asegurado</th></tr>' +
-        '<tr><td>Nombre</td><td>' + d.nom_clienteP + '</td><td>' + d.nom_clienteA + '</td></tr>' +
-        '<tr><td >Rut</td><td>' + d.rut_clienteP + '</td><td>' + d.rut_clienteA + '</td></tr>' +
-        '<tr><td>Teléfono</td><td>' + d.telefonoP + '</td><td>' + d.telefonoA + '</td></tr>' +
-        '<tr><td>Correo</td><td>' + d.correoP + '</td><td>' + d.correoA + '</td></tr>' +
-        '<tr><td>Acciones por cliente</td><td>' +
-        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idP +
-        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
-        d.idP +
-        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>' +
-        '</td><td>' +
-        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.idA +
-        ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<a> </a><button title="Asigna una tarea o comentario"  type="button" id=' +
-        d.idA +
-        ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button>' +
-        '</td></tr>' +
-        '<tr><td>Acciones por póliza</td><td colspan="2" >' +
-        '<button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Deducible:</td>' +
+        '<td>' + d.deducible +'</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima afecta:</td>' +
+        '<td>' + d.prima_afecta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima exenta:</td>' +
+        '<td>' + d.prima_exenta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima bruta anual:</td>' +
+        '<td>' + d.prima_bruta_anual + '</td>' +
+        '</tr>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td>Acciones</td>' +
+        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
         ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
         d.id_poliza +
         ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
         d.id_poliza +
         ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
-        'id=' + d.id_poliza +
-        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button>' +
-        '</td></tr>' +
-        '</table>'
+        'id='+ d.id_poliza +
+        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button></td>' +
+
+        '</tr>' +
+        '</table>';
 }
 
 function botones(id, accion, base) {
