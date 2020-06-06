@@ -330,7 +330,7 @@ $(document).ready(function() {
     var rut = document.getElementById("rut").value;
     if( rut !=="")
     {
-         iCnt = <?php echo $cant_contactos; ?>+1;
+         iCnt = <?php echo $cant_contactos; ?>;
         
     }
     else{
@@ -365,8 +365,9 @@ $(document).ready(function() {
 
             $('#main').after(container, divSubmit);
         } else { //se establece un limite para añadir elementos, 5 es el limite
+            iCnt = iCnt + 1;
 
-            $(container).append('<label id=label>Limite Alcanzado</label> ');
+            $("#mytable").append('<label id=label>Limite Alcanzado</label> ');
             $('#btAdd').attr('class', 'btn');
             $('#btAdd').attr('disabled', 'disabled');
 
@@ -376,12 +377,14 @@ $(document).ready(function() {
     $('#btRemove').click(function() { // Elimina un elemento por click
 
         if (iCnt != 0) {
-            iCnt = iCnt - 1;
+           
             $('#btAdd').removeAttr('disabled');
-            $('#registro' + iCnt).remove()
-        }
-        if (iCnt == 4) {
+            $('#registro' + iCnt).remove();
+             iCnt = iCnt - 1;
+        if (iCnt == 5) {
             $('#label').remove();
+            
+        }
         }
         if (iCnt == 0) {
             
