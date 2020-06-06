@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  
 		
 		  
-		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
+		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
     
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
+		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
