@@ -423,9 +423,9 @@ document.addEventListener("DOMContentLoaded", function() {
       
       var cant_contact = <?php echo intval($cant_contactos); ?>;
       var info_contact = <?php echo json_encode($contactos_array);?>;
-      var iCnt = cant_contact;
       
-      if( cant_contact !== 0){
+      
+       if( cant_contact !== 0){
           
         document.getElementById("radio_si").checked = true;
         document.getElementById("radio_no").checked = false;
@@ -443,7 +443,8 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
 		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
-         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("rut2").value = '<?php echo $rut; ?>';
+		 document.getElementById("id").value = '<?php echo $id; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
     
     for ($k= 1; $k <= cant_contact ;$k++){
@@ -486,7 +487,8 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
 		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
-         document.getElementById("rut").value = '<?php echo $rut; ?>';
+         document.getElementById("rut2").value = '<?php echo $rut; ?>';
+		  document.getElementById("id").value = '<?php echo $id; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
       }
