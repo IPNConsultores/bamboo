@@ -449,19 +449,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     var divSubmit = $(document.createElement('div'));
               
-           var newElement= '<tr id =registro' +$k+ 
-          '><td><input class="form-control" type="text" value="" id="nombrecontact'+$k+'" name="nombrecontact'+$k+
-          '" /></td><td><input class="form-control" type="text" value="" id="telefonocontact'+$k+'" name="telefonocontact'+$k+
-          '" /></td><td><input class="form-control" type="email" value="" id="emailcontact'+$k+'" name="emailcontact'+$k+
-          '" /></td></tr>';
+           var newElement= '<tr id ="registro[]"><td><input class="form-control" type="text" value="" id="nombrecontact[]" name="nombrecontact[]"/></td><td><input class="form-control" type="text" value="" id="telefonocontact[]" name="telefonocontact[]" /></td><td><input class="form-control" type="email" value="" id="emailcontact[]" name="emailcontact[]"" /></td></tr>';
           
             $("#mytable").append($(newElement));
 
             newElement = '';
             
-            document.getElementById("nombrecontact"+$k).value = info_contact["nombre"+ $k]
-            document.getElementById("telefonocontact"+$k).value = info_contact["telefono"+ $k]
-            document.getElementById("emailcontact"+$k).value = info_contact["correo"+ $k]
+            document.getElementById("nombrecontact[]").value = info_contact["nombre"+ $k]
+            document.getElementById("telefonocontact[]").value = info_contact["telefono"+ $k]
+            document.getElementById("emailcontact[]").value = info_contact["correo"+ $k]
             
            }
 		   document.getElementById("nombrecontact").value = info_contact["nombre"]
