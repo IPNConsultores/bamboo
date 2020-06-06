@@ -325,8 +325,17 @@ function alerta() {
     });
 }
 $(document).ready(function() {
+      
     var iCnt = 0;
-
+    var rut = document.getElementById("rut").value;
+    if( rut !=="")
+    {
+         iCnt = <?php echo $cant_contactos; ?>+1;
+        
+    }
+    else{
+     iCnt = 0;
+}
     // Crear un elemento div añadiendo estilos CSS
     var container = $(document.createElement('div')).css({
         padding: '10px',
@@ -375,6 +384,8 @@ $(document).ready(function() {
             $('#label').remove();
         }
         if (iCnt == 0) {
+            
+            
             $('#mytable').remove();
             $(container).remove();
             //                $('#btSubmit').remove(); 
@@ -412,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
       var cant_contact = <?php echo intval($cant_contactos); ?>;
       var info_contact = <?php echo json_encode($contactos_array);?>;
-      
+      var iCnt = cant_contact;
       
       if( cant_contact !== 0){
           
@@ -421,22 +432,17 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("info_contactos").style.display = "inline";
         document.getElementById("rut").disabled ="true";
         
-         document.getElementById("id").value = '<?php echo $id; ?>';
-		 document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
+         document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
-		  document.getElementById("rut2").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
          document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		  
-		
-		  
-		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
+		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
     
@@ -449,21 +455,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     var divSubmit = $(document.createElement('div'));
               
-            var newElement= '<tr id ="registro['+$k+']"><td><input class="form-control" type="text" value="" id="nombrecontact['+$k+']" name="nombrecontact['+$k+']"/></td><td><input class="form-control" type="text" value="" id="telefonocontact['+$k+']" name="telefonocontact['+$k+']" /></td><td><input class="form-control" type="email" value="" id="emailcontact['+$k+']" name="emailcontact['+$k+']"" /></td></tr>';
+            var newElement= '<tr id ="registro'+$k+'"><td><input class="form-control" type="text" value="" id="nombrecontact['+$k+']" name="nombrecontact['+$k+']"/></td><td><input class="form-control" type="text" value="" id="telefonocontact['+$k+']" name="telefonocontact['+$k+']" /></td><td><input class="form-control" type="email" value="" id="emailcontact['+$k+']" name="emailcontact['+$k+']"" /></td></tr>';
           
             $("#mytable").append($(newElement));
 
-           
             document.getElementById("nombrecontact["+$k+"]").value = info_contact["nombre"+$k]
             document.getElementById("telefonocontact["+$k+"]").value = info_contact["telefono"+ $k]
             document.getElementById("emailcontact["+$k+"]").value = info_contact["correo"+ $k]
             
             
-          
-
-           
            }
-		 
        
         
       }
@@ -472,20 +473,19 @@ document.addEventListener("DOMContentLoaded", function() {
            document.getElementById("radio_si").checked = false;
         document.getElementById("radio_no").checked = true;
         
-        document.getElementById("rut").disabled =false;
-        document.getElementById("id").value = '<?php echo $id; ?>';
+        document.getElementById("rut").readonly =false;
+        
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
          document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
          document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
-		  document.getElementById("rut2").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
          document.getElementById("direccionp").value = '<?php echo $direccionp; ?>';
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
+		 document.getElementById("formulario").action="/bamboo/test2_cesar.php";
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
