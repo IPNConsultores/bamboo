@@ -460,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function() {
             
             
           
-            $("#mytable").append($(newElement));
 
            
            }
