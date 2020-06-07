@@ -16,30 +16,30 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $materia=estandariza_info($_POST["materia"]);
  $detalle_materia=estandariza_info($_POST["detalle_materia"]);
  $moneda_poliza=estandariza_info($_POST["moneda_poliza"]);
- $deducible=estandariza_info($_POST["deducible"]);
- $prima_afecta=estandariza_info($_POST["prima_afecta"]);
- $prima_exenta=estandariza_info($_POST["prima_exenta"]);
- $prima_neta=estandariza_info($_POST["prima_neta"]);
- $prima_bruta=estandariza_info($_POST["prima_bruta"]);
+ $deducible=cambia_puntos_por_coma(estandariza_info($_POST["deducible"]));
+ $prima_afecta=cambia_puntos_por_coma(estandariza_info($_POST["prima_afecta"]));
+ $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"]));
+ $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"]));
+ $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"]));
  $monto_aseg=estandariza_info($_POST["monto_aseg"]);
  $nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
  $fechaprop=estandariza_info($_POST["fechaprop"]);
  $moneda_comision=estandariza_info($_POST["moneda_comision"]);
- $comision=estandariza_info($_POST["comision"]);
- $porcentaje_comsion=estandariza_info($_POST["porcentaje_comsion"]);
- $comisionbruta=estandariza_info($_POST["comisionbruta"]);
- $comisionneta=estandariza_info($_POST["comisionneta"]);
+ $comision=cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
+ $porcentaje_comsion=cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
+ $comisionbruta=cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
+ $comisionneta=cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
  $modo_pago=estandariza_info($_POST["modo_pago"]);
  $cuotas=estandariza_info($_POST["cuotas"]);
  $moenda_cuota=estandariza_info($_POST["moneda_cuota"]);
- $valorcuota=estandariza_info($_POST["valorcuota"]);
+ $valorcuota=cambia_puntos_por_coma(estandariza_info($_POST["valorcuota"]));
  $fechaprimer=estandariza_info($_POST["fechaprimer"]);
  $con_vendedor=estandariza_info($_POST["con_vendedor"]);
  $nombre_vendedor=estandariza_info($_POST["nombre_vendedor"]);
  $poliza_renovada=estandariza_info($_POST["poliza_renovada"]);
 
  $fechadeposito=estandariza_info($_POST["fechadeposito"]);
- $comisionneg=estandariza_info($_POST["comisionneg"]);
+ $comisionneg=cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
  $boletaneg=estandariza_info($_POST["boletaneg"]);
  $boleta=estandariza_info($_POST["boleta"]);
 
@@ -55,6 +55,9 @@ function estandariza_info($data) {
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
+}
+function cambia_puntos_por_coma($data){
+ $data= replace($data, ',' , '.' );
 }
 ?>
 
