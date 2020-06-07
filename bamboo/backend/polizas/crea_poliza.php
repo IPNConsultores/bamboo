@@ -1,5 +1,8 @@
 <?php
-
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 require_once "/home/gestio10/public_html/backend/config.php";
 $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
 $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));

@@ -578,7 +578,9 @@ $(document).ready(function() {
             tr.addClass('shown');
         }
     });
-    $('#listado_polizas').dataTable().fnFilter(document.getElementById("var1").value);
+    //$('#listado_polizas').dataTable().fnFilter('Activo');
+    table.search( 'Activo').draw();
+    
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';

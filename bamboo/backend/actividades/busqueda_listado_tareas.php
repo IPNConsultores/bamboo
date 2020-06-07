@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 $resultado =$codigo=$conta='';
 require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset($link, 'utf8');

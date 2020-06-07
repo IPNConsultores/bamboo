@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 require_once "/home/gestio10/public_html/backend/config.php";
 $resultado=$resultado1 =$busqueda= '';
     $busqueda=$_POST["rut"];
