@@ -13,7 +13,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha, numero_boleta from polizas where id=' . $id_poliza;
+  $query = 'select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso from polizas where id=' . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -56,6 +56,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $comision_negativa = $row->comision_negativa;
     $boleta_negativa = $row->boleta_negativa;
     $depositado_fecha = $row->depositado_fecha;
+    $endoso = $row->endoso;
 
   }
 
@@ -457,6 +458,7 @@ function estandariza_info( $data ) {
       </div>
 		</div>
 		</div>
+		</div>
       <div class="card">
         <div class="card-header" id="headingThree" style="background-color:whitesmoke">
           <h5 class="mb-0">
@@ -592,6 +594,23 @@ function estandariza_info( $data ) {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingfour" style="background-color:whitesmoke">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
+                            style="color:#536656">Endosos</button>
+          </h5>
+        </div>
+        <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+          <div class="card-body">
+            <label for="endoso"><b>Endosos</b></label>
+            <br>
+            <textarea class="form-control" rows="2" style="height:100px" id='endoso' name='endoso'
+                style="text-indent:0px";></textarea>
           </div>
         </div>
       </div>
@@ -1035,6 +1054,7 @@ function renovar_poliza(poliza) {
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
             document.getElementById("formulario").action="/bamboo/backend/polizas/modifica_poliza.php";
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
+            document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
@@ -1064,6 +1084,7 @@ function renovar_poliza(poliza) {
             document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             break;
