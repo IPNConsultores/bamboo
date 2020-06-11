@@ -80,12 +80,12 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-/*
+
 var nro_poliza= <?php echo $nro_poliza; ?>;
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza
 }, 'post');
-*/
+
 </script>
 </body>
 </html>
