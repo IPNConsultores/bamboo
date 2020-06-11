@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 require_once "/home/gestio10/public_html/backend/config.php";
 $busqueda=estandariza_info($_POST["buscacliente"]);
 $numero=$trozos=0;

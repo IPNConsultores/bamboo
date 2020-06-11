@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 require_once "/home/gestio10/public_html/backend/config.php";
 $id=estandariza_info($_POST["id_tarea"]);
 mysqli_set_charset( $link, 'utf8');

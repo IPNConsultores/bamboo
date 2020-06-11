@@ -578,7 +578,9 @@ $(document).ready(function() {
             tr.addClass('shown');
         }
     });
-    $('#listado_polizas').dataTable().fnFilter(document.getElementById("var1").value);
+    //$('#listado_polizas').dataTable().fnFilter('Activo');
+    table.search( 'Activo').draw();
+    
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
@@ -695,10 +697,10 @@ function detalle_polizas(d) {
 
         '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d.id_poliza +
-        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de este cliente"  type="button" id=' +
+        '<td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d.id_poliza +
+        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de esta póliza"  type="button" id=' +
         d.id_poliza +
-        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina este cliente"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Asigna una tarea a esta póliza"  type="button" id=' +
         d.id_poliza +
         ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="genera correo"  type="button"' +
         'id='+ d.id_poliza +

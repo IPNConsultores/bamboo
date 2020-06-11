@@ -1,5 +1,8 @@
 <?php
-
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -22,7 +25,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
     $busqueda = $_POST[ "id_poliza" ];
 
-    $resultado_poliza = mysqli_query( $link, 'SELECT fecha_primera_cuota, forma_pago, moneda_poliza, deducible, prima_afecta, prima_exenta, prima_bruta_anual, id, ramo, compania, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where id=' . $busqueda . ' order by compania, numero_poliza;' );
+    $resultado_poliza = mysqli_query( $link, "SELECT fecha_primera_cuota, forma_pago, moneda_poliza, deducible, prima_afecta, prima_exenta, prima_bruta_anual, a.id, ramo, compania, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado, concat(b.nombre_cliente, ' ', b.apellido_paterno) as nombre_asegurado FROM polizas as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;" );
 
     While( $row = mysqli_fetch_object( $resultado_poliza ) ) {
       $moneda_poliza = $row->moneda_poliza;
@@ -41,13 +44,13 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       $cobertura = $row->cobertura;
       $rut_proponente = $row->rut_proponente;
       $rut_asegurado = $row->rut_asegurado;
-
+      $nombre_asegurado = $row->nombre_asegurado;
     }
 
     $template = str_replace( '_[NRO_POLIZA]_', $numero_poliza, $template );
     $template = str_replace( '_[RAMO]_', $ramo, $template );
     $template = str_replace( '_[COMPANIA]_', $compania, $template );
-    $template = str_replace( '_[NOMBRE_CLIENTE]_', 'Felipe Abarca', $template );
+    $template = str_replace( '_[NOMBRE_CLIENTE]_', $nombre_asegurado, $template );
     $template = str_replace( '_[VIGENCIA_INICIAL]_', $vigencia_inicial, $template );
     $template = str_replace( '_[VIGENCIA_FINAL]_', $vigencia_final, $template );
     $template = str_replace( '_[COBERTURA]_', $cobertura, $template );
