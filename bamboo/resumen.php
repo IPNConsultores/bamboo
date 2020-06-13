@@ -3,9 +3,6 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
-echo "<br> id_cliente :".$_POST["id_cliente"];
-echo "<br> id_poliza :".$_POST["id_poliza"];
-echo "<br> id_tarea :".$_POST["id_tarea"];
 function estandariza_info($data) {
   $data = trim($data);
   $data = stripslashes($data);

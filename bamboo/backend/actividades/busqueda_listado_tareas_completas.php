@@ -10,7 +10,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
     $codigo='{
       "data": [';
     $conta=0;
-    $resul_tareas=mysqli_query($link, "SELECT a.id, DATE_FORMAT(fecha_ingreso, '%Y-%m-%d') as fecha_ingreso ,fecha_vencimiento, tarea, estado, prioridad, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas as a left join tareas_relaciones as b on a.id=b.id_tarea WHERE estado in ('Cerrado') group by a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad");
+    $resul_tareas=mysqli_query($link, "SELECT a.fecha_completada, a.id, DATE_FORMAT(fecha_ingreso, '%Y-%m-%d') as fecha_ingreso ,fecha_vencimiento, tarea, estado, prioridad, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas as a left join tareas_relaciones as b on a.id=b.id_tarea WHERE estado in ('Cerrado') group by a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad");
   While($tareas=mysqli_fetch_object($resul_tareas))
   {$conta=$conta+1;
     $relaciones=array("relaciones" =>& $tareas->relaciones, "clientes" =>& $tareas->clientes , "polizas" =>& $tareas->polizas);
@@ -131,6 +131,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "id_tarea" =>& $tareas->id,
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
+        "feccompletada" =>& $tareas->fecha_completada,
         "tarea" =>& $tareas->tarea, 
         "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
@@ -141,6 +142,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "id_tarea" =>& $tareas->id,
         "fecingreso" =>& $tareas->fecha_ingreso,
         "fecvencimiento" =>& $tareas->fecha_vencimiento, 
+        "feccompletada" =>& $tareas->fecha_completada,
         "tarea" =>& $tareas->tarea, 
         "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
