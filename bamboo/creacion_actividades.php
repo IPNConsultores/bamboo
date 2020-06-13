@@ -203,36 +203,90 @@ echo '<style>.info_clientes { display:none;}</style>';
         <br>
         <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Actividad</label>
         <!-- -->
-        <div class="form-row">
-            <div class="col">
+        <div class="form-row align-self-start">
+            <div class="col-3">
                 <label for="poliza">Desea que esta tarea se agende:</label>
             </div>
-            <div class="col">
-                <input class="form-check-input" type="radio" name="unica" id="tarea_unica" value="unico"
+            <div class="col-2">
+               <input class="form-check-input" type="radio" name="unica" id="tarea_unica" value="unico"
                 onclick="checkTipoTarea(this.name)" checked="checked">
-                <label class="form-check-label">Sólo una vez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label class="form-check-label">Sólo una vez</label>
+            </div>
+                <div class="col align-self-start">
                 <input class="form-check-input" type="radio" name="recurrente" id="tarea_recurrente" value="recurrente"
                 onclick="checkTipoTarea(this.name)">
                  <label class="form-check-label" for="inlineRadio2">Más de una vez</label>
+                 
+                <div class="col justify-content-end" id="panel_dias" style="display: none">
+                <div class="form-inline">
+                <label> Repetir todos los días</label>
+                <div class="col-1">
+                <select  class ="form-control" name="dia_mes" id="dia_mes">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                </select>
+                </div>
+               
+                <label for="Nombre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de cada mes</label>
+                </div>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
+            </div>
+            
+            
         </div>
         <div class="form-row" id="pregunta_fecha" style="display: none">
-            <div class="col">
+            <div class="col-4">
                 <label for="poliza">Fecha de finalización de serie de tareas:</label>
             </div>
-            <div class="col">
-                <input class="form-check-input" type="radio" name="sin_fecha" id="sin_fecha" value="sin_fecha"
+            
+            <div class="row align-items-start">
+            <div class="col-3 md;">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="form-check-input" type="radio" name="sin_fecha" id="sin_fecha" value="sin_fecha"
                 onclick="checkTipoTarea(this.name)" checked="checked">
                 <label class="form-check-label">Sin fecha de término</label>
-                
-                <input class="form-check-input" type="radio" name="con_fecha" id="con_fecha" value="con_fecha"
+            </div>
+            <div class="col-inline md-2 mb-5">
+                 <input class="form-check-input" type="radio" name="con_fecha" id="con_fecha" value="con_fecha"
                 onclick="checkTipoTarea(this.name)">
                 <label class="form-check-label">Definir fecha de término</label>
-                <input style="display: none" placeholder="Selecciona una fecha" type="date" id="fechavencimiento_recurrente" name="fechavencimiento_recurrente"
-                        class="form-control" required>
+                                <input style="display: none" placeholder="Selecciona una fecha" type="date" id="fechavencimiento_recurrente" name="fechavencimiento_recurrente"
+                        class="form-control" required> 
+                
+            
+            </div>
             </div>
         </div>
-        
+        <br>
         <div class="form-row">
             <div class="col-md-2 mb-3">
                 <label for="sel1">Prioridad:&nbsp;</label>
@@ -251,47 +305,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                 </div>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
-            <div class="col-md-4 mb-3" id="panel_dias" style="display: none">
-                <label> </label>
-                <div class="md-form">
-                <label>Que se repita todos los días </label>
-                <select name="dia_mes" id="dia_mes">
-                    <option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-<option>13</option>
-<option>14</option>
-<option>15</option>
-<option>16</option>
-<option>17</option>
-<option>18</option>
-<option>19</option>
-<option>20</option>
-<option>21</option>
-<option>22</option>
-<option>23</option>
-<option>24</option>
-<option>25</option>
-<option>26</option>
-<option>27</option>
-<option>28</option>
-<option>29</option>
-<option>30</option>
-<option>31</option>
-                </select>
-                <label for="Nombre"> de cada mes</label>
-                </div>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-            </div>
+           
         </div>
 
         <div class="form-row">
