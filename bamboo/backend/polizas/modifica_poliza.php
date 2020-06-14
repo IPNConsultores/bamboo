@@ -47,6 +47,7 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $boletaneg=estandariza_info($_POST["boletaneg"]);
  $boleta=estandariza_info($_POST["boleta"]);
 $endoso=estandariza_info($_POST["endoso"]);
+$comentario= estandariza_info($_POST["comentario"]);
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
@@ -56,10 +57,10 @@ moneda_poliza="'.$moneda_poliza.'",  deducible="'.$deducible.'",  prima_afecta="
 prima_bruta_anual="'.$prima_bruta.'",  monto_asegurado="'.$monto_aseg.'",  numero_propuesta="'.$nro_propuesta.'",  fecha_envio_propuesta="'.$fechaprop.'",  
 moneda_comision="'.$moneda_comision.'",  comision="'.$comision.'",  porcentaje_comision="'.$porcentaje_comsion.'",  comision_bruta="'.$comisionbruta.'",
 comision_neta="'.$comisionneta.'",  forma_pago="'.$modo_pago.'", nro_cuotas="'.$cuotas.'",  valor_cuota="'.$valorcuota.'",  fecha_primera_cuota="'.$fechaprimer.'", 
-vendedor="'.$con_vendedor.'", nombre_vendedor="'.$nombre_vendedor.'", endoso="'.$endoso.'" ,  poliza_renovada="'.$poliza_renovada.'" WHERE id='.$id_poliza.';';
+vendedor="'.$con_vendedor.'", nombre_vendedor="'.$nombre_vendedor.'", endoso="'.$endoso.'" , informacion_adicional="'.$comentario.'"  ,  poliza_renovada="'.$poliza_renovada.'" WHERE id='.$id_poliza.';';
 
 mysqli_query($link, $query);
-ECHO $query;
+//ECHO $query;
 
 
 function estandariza_info($data) {
