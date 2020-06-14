@@ -608,9 +608,9 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
           <div class="card-body">
-                <label for="comentarios"><b>Comentarios</b></label>
+                <label for="comentario"><b>Comentarios</b></label>
             <br>
-            <textarea class="form-control" rows="2" style="height:100px" id='comentarios' name='comentarios'
+            <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
                 style="text-indent:0px";></textarea>
                 <br>
             <label for="endoso"><b>Endosos</b></label>
