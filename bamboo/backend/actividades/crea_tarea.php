@@ -13,11 +13,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $fechavencimiento = $_POST["fechavencimiento"];
     $tarea = $_POST["tarea"];
     $relaciones = $_POST["relaciones"];
+    
+    $tarea_recurrente = $_POST["tarea_recurrente"];
+    $tarea_con_fin = $_POST["tarea_con_fin"];
+    $dia = $_POST["dia"];
+     
+    if($tarea_con_fin==1)
+    {
+        $fecha='\''.$_POST["fecha"].'\'';
+    }
+    else
+    {
+        $fecha='null';
+    }
+    
+    
     $obj = json_decode($relaciones, true);
-    echo $prioridad . "<br>";
-    echo $fechavencimiento . "<br>";
-    echo $tarea . "<br>";
+    echo "prioridad-".$prioridad . "<br>";
+    echo "fechavencimiento-".$fechavencimiento . "<br>";
+    echo "tarea-".$tarea . "<br>";
+    echo "tarea_recurrente-".$tarea_recurrente . "<br>";
+    echo "tarea_con_fin-".$tarea_con_fin . "<br>";
+    echo "dia-".$dia . "<br>";
+    echo "fecha-".$fecha . "<br>";
     $largo = 6;
+    
+    //crea tarea recurrente si aplica
+     
+if ($tarea_recurrente==0){
     
     //crea token
     $token = bin2hex(random_bytes($largo));
@@ -39,13 +62,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         mysqli_query($link, 'insert into tareas_relaciones (id_tarea, base, id_relacion) values (' . $id_tarea . ', \'' . $value["base"] . '\',' . $value["id"] . ');');
     }
+    //elimina token
+    mysqli_query($link, 'update tareas set token=null where token=\'' . $token . '\';');
+    
+}
+else
+{
+    mysqli_query($link, 'insert into tareas_recurrentes(estado,tarea, prioridad, fecha_ingreso,recurrente,tarea_con_fecha_fin,fecha_fin,dia_recordatorio) values (\'Activo\' , \'' . $tarea . '\', \'' . $prioridad . '\', current_date, '.$tarea_recurrente.' , '.$tarea_con_fin.' , ' .$fecha.' , '.$dia.');');
+   // echo 'insert into tareas_recurrentes(tarea, prioridad, fecha_ingreso,recurrente,tarea_con_fecha_fin,fecha_fin,dia_recordatorio) values (\'' . $tarea . '\', \'' . $prioridad . '\', current_date, '.$tarea_recurrente.' , '.$tarea_con_fin.' , ' .$fecha.' , '.$dia.');';
+    
+}
 
 }
-//elimina token
-mysqli_query($link, 'update tareas set token=null where token=\'' . $token . '\';');
-
 // vuelve al index
-header("location: /bamboo/index.php");
+//header("location: /bamboo/index.php");
 
 function estandariza_info($data)
 {
