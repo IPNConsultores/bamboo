@@ -334,7 +334,27 @@ echo '<style>.info_clientes { display:none;}</style>';
 </html>
 <script>
 function post() {
-    //console.log("prioridad : "+document.getElementById('prioridad').value);
+    /*
+    console.log('tarea_unica:'+document.getElementById('tarea_unica').checked);
+    console.log('tarea_recurrente:'+document.getElementById('tarea_recurrente').checked);
+    console.log('dia_mes:'+document.getElementById('dia_mes').value);
+    console.log('sin_fecha:'+document.getElementById('sin_fecha').checked);
+    console.log('con_fecha:'+document.getElementById('con_fecha').checked);
+    console.log('fechavencimiento_recurrente:'+document.getElementById('fechavencimiento_recurrente').value);
+    */
+    var tarea_recurrente=0;
+    var tarea_con_fin=0;
+    var dia=0;
+    var fecha;
+    if(document.getElementById('tarea_recurrente').checked){
+        tarea_recurrente=1;
+        dia=document.getElementById('dia_mes').value;
+        if(document.getElementById('con_fecha').checked){
+        tarea_con_fin=1;
+        fecha=document.getElementById('fechavencimiento_recurrente').value;
+        }
+    }
+
     //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
     //console.log("tarea : "+document.getElementById('tarea').value);
     var arreglo = '[';
@@ -360,13 +380,22 @@ function post() {
         }
     }
     arreglo += ']';
-    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
+    ///bamboo/backend/actividades/crea_tarea.php
+    $.redirect('bamboo/test2.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
-        'relaciones': arreglo
+        'relaciones': arreglo,
+        //tarea recurrente
+        'tarea_recurrente': tarea_recurrente,
+        'dia': dia,
+        'tarea_con_fin': tarea_con_fin,
+        'fecha': fecha
+        //fin tarea recurrente
     }, 'post');
+    
 }
+
 function checkTipoTarea(tipoTarea){
     console.log(tipoTarea);
     switch(tipoTarea){
