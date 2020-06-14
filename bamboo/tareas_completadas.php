@@ -1,48 +1,60 @@
 <?php
-if ( !isset( $_SESSION ) ) {
-  session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+$buscar='';
+function estandariza_info($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+require_once "/home/gestio10/public_html/backend/config.php";
+$num=0;
+ $busqueda=$busqueda_err=$data='';
+ $rut=$nombre=$telefono=$correo=$lista='';
+
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
+    // Check if username is empty
+//$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
+$buscar= estandariza_info($_POST["busqueda"]);
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tareas Completadas</title>
-<!-- Bootstrap -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clientes</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
 
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="/assets/css/datatables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
-<script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script> 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        </script>
+    <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
+
 <body>
-<!-- body code goes here -->
 
-
-<?php include 'header2.php' ?>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<div class="container">
-  <p>Tareas / Tareas Completadas<br>
-  </p>
-  <h5 class="form-row">&nbsp;Tareas Completadas</h5>
-  <br>
-  <br>
-  <div class="form">
-  
+    <!-- body code goes here -->
+    <div id="header"><?php include 'header2.php' ?></div>
+    <div class="container">
+        <p> Clientes / Listado de clientes <br>
+        </p>
+        <br>
+        <div class="container">
   <table class="table" id="tareas_completas" style="width:100%">
                             <tr>
                                 <th></th>
@@ -54,27 +66,31 @@ if ( !isset( $_SESSION ) ) {
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>
-  
- 
-</div>
-<br>
-<br>
+        </div>
+    </div>
 
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+
+    <div id="auxiliar" style="display: none;">
+        <input id="var1" value="<?php 
+        echo htmlspecialchars($buscar);?>">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-<script src="/assets/js/jquery.redirect.js"></script>
-<script src="/assets/js/validarRUT.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+        </script>
+    <script src="/assets/js/jquery.redirect.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </body>
+
 </html>
 <script>
 
@@ -108,7 +124,7 @@ $(document).ready(function() {
             {
                 "data": "feccompletada",
                 title: "Fecha término"
-            },
+            }
 
         ],
         //          "search": {
@@ -180,10 +196,10 @@ $(document).ready(function() {
 
     var buttons = new $.fn.dataTable.Buttons(table_tareas, {
         buttons: [{
-                sheetName: 'Clientes',
+                sheetName: 'Tareas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5]
                 }
@@ -191,13 +207,14 @@ $(document).ready(function() {
             {
                 orientation: 'landscape',
                 extend: 'pdfHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5]
                 }
             }
         ]
     }).container().appendTo($('#botones_tareas'));
+});
 function detalle_tareas(d) {
     $sin_rel=$tabla_clientes=$tabla_polizas='';
     if (d.relaciones == 0) {
@@ -338,38 +355,5 @@ function botones(id, accion, base) {
         }
     }
 }
-
-var origen = '';
-
-function origen_busqueda(origen_boton) {
-    origen = origen_boton;
-}
-
-
-function renovar_poliza(poliza) {
-    console.log(poliza);
-    $('#modal_poliza').modal('hide');
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-      $.redirect('/bamboo/test2_cesar.php', {
-  'id_poliza': poliza,
-  'renovar':true
-}, 'post');
-}
-document.addEventListener("DOMContentLoaded", function(event) {
-    var orgn='<?php echo $camino; ?>';
-    switch  (orgn){
-        case 'modificar':{
-            break;
-        }
-            case 'renovar':{
-            
-            document.getElementById("poliza_seleccionada").value =  '<?php echo $nro_poliza; ?>';
-        
-            break;
-        }
-    }
-  });
-
 
 </script>
