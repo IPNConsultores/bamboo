@@ -63,7 +63,7 @@ function estandariza_info($data) {
 }
 function cambia_puntos_por_coma($data){
 // $data= replace($data, ',' , '.' );
-$data= $data
+$data= $data;
 }
 ?>
 
