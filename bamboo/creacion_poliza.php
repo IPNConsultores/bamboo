@@ -57,7 +57,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $boleta_negativa = $row->boleta_negativa;
     $depositado_fecha = $row->depositado_fecha;
     $endoso = $row->endoso;
-    $comentario = $row->informacion_adiconal;
+    $comentario = $row->informacion_adicional;
 
   }
 
