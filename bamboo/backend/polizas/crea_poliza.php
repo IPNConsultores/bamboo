@@ -62,8 +62,8 @@ function estandariza_info($data) {
   return $data;
 }
 function cambia_puntos_por_coma($data){
-// $data= replace($data, ',' , '.' );
-$data= $data;
+ $data= str_replace($data, ',' , '.' );
+
 }
 ?>
 
