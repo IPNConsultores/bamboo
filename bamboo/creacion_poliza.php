@@ -519,7 +519,7 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
                 <label for="fechadeposito">Fecha Depósito</label>
                 <div class="md-form">
-                  <input placeholder="Selected date" type="date" id="fechadeposito"
+                  <input placeholder="Selected date" type="date" name="fechadeposito" id="fechadeposito"
                                         class="form-control">
                 </div>
               </div>

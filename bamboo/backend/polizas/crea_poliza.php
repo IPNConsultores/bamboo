@@ -3,6 +3,7 @@
     { 
         session_start(); 
     } 
+
 require_once "/home/gestio10/public_html/backend/config.php";
 $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
 $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
@@ -24,7 +25,7 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"]));
  $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"]));
  $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"]));
- $monto_aseg=estandariza_info($_POST["monto_aseg"]);
+ $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"]));
  $nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
  $fechaprop=estandariza_info($_POST["fechaprop"]);
  $moneda_comision=estandariza_info($_POST["moneda_comision"]);
@@ -45,24 +46,13 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $comisionneg=cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
  $boletaneg=estandariza_info($_POST["boletaneg"]);
  $boleta=estandariza_info($_POST["boleta"]);
- $comentario=estandariza_info($_POST["comentario"]);
- $endoso=estandariza_info($_POST["endoso"]);
+$comentario=estandariza_info($_POST["comentario"]);
+$endoso=estandariza_info($_POST["endoso"]);
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-$query='INSERT INTO polizas (numero_boleta, comision_negativa, boleta_negativa, depositado_fecha,  estado, tipo_poliza, moneda_valor_cuota,  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, endoso, informacion_adicional) VALUES ( "'.$boleta.'","'.$comisionneg.'", "'.$boletaneg.'", "'.$fechadeposito.'", "Activo", "Nuevo","'.$moenda_cuota.'","'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$nro_poliza.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$nro_propuesta.'","'.$fechaprop.'","'.$moneda_comision.'","'.$comision.'","'.$porcentaje_comsion.'","'.$comisionbruta.'","'.$comisionneta.'","'.$modo_pago.'","'.$cuotas.'","'.$valorcuota.'","'.$fechaprimer.'","'.$con_vendedor.'","'.$nombre_vendedor.'","'.$poliza_renovada.'","'.$endoso.'","'.$comentario.'");';
-//mysqli_query($link, $query);
-ECHO $query;
-echo "prima afecta".$prima_afecta."<br>";
-echo "prima exenta".$prima_exenta."<br>";
-echo "prima neta".$prima_neta."<br>";
-echo "prima bruta".$prima_bruta."<br>";
-echo "comision".$comision."<br>";
-echo "% comision".$porcentaje_comsion."<br>";
- echo "comision bruta".$comisionbruta."<br>";
-echo  "comision neta".$comisionneta."<br>";
-echo "valor cuota".$valorcuota."<br>";
- 
+$query='INSERT INTO polizas (numero_boleta, comision_negativa, boleta_negativa, depositado_fecha,  estado, tipo_poliza, moneda_valor_cuota,  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  comision,  porcentaje_comision,  comision_bruta,  comision_neta,  forma_pago, nro_cuotas,  valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada,endoso,informacion_adicional) VALUES ( "'.$boleta.'","'.$comisionneg.'", "'.$boletaneg.'", "'.$fechadeposito.'", "Activo", "Nuevo","'.$moenda_cuota.'","'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$nro_poliza.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$nro_propuesta.'","'.$fechaprop.'","'.$moneda_comision.'","'.$comision.'","'.$porcentaje_comsion.'","'.$comisionbruta.'","'.$comisionneta.'","'.$modo_pago.'","'.$cuotas.'","'.$valorcuota.'","'.$fechaprimer.'","'.$con_vendedor.'","'.$nombre_vendedor.'","'.$poliza_renovada.'","'.$endoso.'","'.$comentario.'");';
+mysqli_query($link, $query);
 
 
 function estandariza_info($data) {
@@ -72,8 +62,8 @@ function estandariza_info($data) {
   return $data;
 }
 function cambia_puntos_por_coma($data){
- $data= str_replace( ',' , '.', $data );
-
+$data=str_replace(',','.',$data);
+return $data;
 }
 ?>
 
@@ -88,10 +78,10 @@ function cambia_puntos_por_coma($data){
 <body>
 <script >
 
-//var nro_poliza= <?php echo $nro_poliza; ?>;
-//  $.redirect('/bamboo/listado_polizas.php', {
-//  'busqueda': nro_poliza
-//}, 'post');
+var nro_poliza= <?php echo $nro_poliza; ?>;
+  $.redirect('/bamboo/listado_polizas.php', {
+  'busqueda': nro_poliza
+}, 'post');
 
 </script>
 </body>
