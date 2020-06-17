@@ -736,6 +736,11 @@ function botones(id, accion, base) {
                 'id_poliza': id,
                 }, 'post');
             }
+            if (base == 'tarea') {
+                $.redirect('/bamboo/test2.php', {
+                'id_tarea': id,
+                }, 'post');
+            }
             break;
         }
         case "tarea": {
