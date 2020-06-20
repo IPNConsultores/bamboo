@@ -50,17 +50,54 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
   $template_ejemplo = $template;
   $template_ejemplo = str_replace( '_[NOMBRE_CLIENTE]_', 'Juan Pérez', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[NRO_POLIZA]_', '1923898', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[RAMO]_', 'VEH', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[COMPANIA]_', 'Sura', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[VIGENCIA_INICIAL]_', '2020-04-01', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[VIGENCIA_FINAL]_', '2021-04-01', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[COBERTURA]_', 'Auto Premium', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[DEDUCIBLE]_', '10', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[PRIMERA_CUOTA]_', '2020-04-01', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[FORMA_PAGO]_', '11 cuotas PAT', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[PRIMA_ANUAL]_', '31.54', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[VEHICULO]_', 'Mercedes Benz E200 año 2014', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[ESTADO]_','Activa', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[TIPO_POLIZA]_','Renovada', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[RUT_PROP]_','12345678', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[DV_PROP]_','9', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[RUT_ASEG]_','12345678', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[DV_ASEG]_','9', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[GRUPO]_','Red Salud', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COMPANIA]_','SURA', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[VIGENCIA_INICIAL]_','01-01-2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[VIGENCIA_FINAL]_','31-12-2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MES_VENCIMIENTO]_','12', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[ANO_VENCIMIENTO]_','2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[POLIZA_RENOVADA]_','1111111', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[RAMO]_','VEH', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[NUMERO_POLIZA]_','1923898', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MATERIA_ASEGURADA]_','Mercedez', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PATENTE_UBICACION]_','AABB 00', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COBERTURA]_','Premium', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[DEDUCIBLE]_','5', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MONEDA_POLIZA]_','UF ', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PRIMA_AFECTA]_','16.19', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MONEDA_COMISION]_','UF ', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PRIMA_EXENTA]_','0', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PRIMA_NETA]_','24,62', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PRIMA_BRUTA_ANUAL]_','295,44', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MONTO_ASEGURADO]_','Valor Comercial', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[NUMERO_PROPUESTA]_','111111', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[FECHA_ENVIO_PROPUESTA]_','01-02-2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[ENDOSO]_','Modificación de Nombre Asegurado', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COMISION]_','1,5', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[PORCENTAJE_COMISION]_','13', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COMISION_BRUTA]_','35963', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COMISION_NETA]_','32124', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[NUMERO_BOLETA]_','5', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MONEDA_COM_NEG]_','Peso', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[COMISION_NEGATIVA]_','6532', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[BOLETA_NEGATIVA]_','7', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[DEPOSITADO_FECHA]_','01-03-2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[VENDEDOR]_','Si', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[NOMBRE_VENDEDOR]_','John Doug', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[FORMA_PAGO]_','PAT', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[MONEDA_VALOR_CUOTA]_','CLP', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[VALOR_CUOTA]_','1,7', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[FECHA_PRIMERA_CUOTA]_','01-02-2020', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[NRO_CUOTAS]_','12', $template_ejemplo );
+ $template_ejemplo = str_replace( '_[INFO_ADICIONAL]_','comentarios adicionales', $template_ejemplo );
+
+
   
   $template_ejemplo = str_replace( '_[SALTO_LINEA]_', '<br>', $template_ejemplo );
   $template_ejemplo = str_replace( '_[NEG_ini]_', '<b>', $template_ejemplo );
@@ -70,6 +107,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   $template_ejemplo = str_replace( '_[CUR_ini]_', '<em>', $template_ejemplo );
   $template_ejemplo = str_replace( '_[CUR_fin]_', '</em>', $template_ejemplo );
   $template_ejemplo = str_replace( '_[LINEA]_', '<hr>', $template_ejemplo );
+  $template_ejemplo = str_replace( '_[SU_ini]_', '', $template_ejemplo );
+  $template_ejemplo = str_replace( '_[SU_fin]_', '', $template_ejemplo );
 }
 
 
@@ -100,7 +139,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                     <label><b>Instancia</b></label>
                     <select class="form-control" name="instancia" id="instancia">
                         <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
-                        <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Renovación</option>
+                        <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Envío Póliza Renovada</option>
+                         <option value="solicitar_info" <?php if ($instancia == "solicitar_info ") echo "selected" ?> >Solicita Información</option>
                         <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
                     </select>
                 </div>
@@ -149,47 +189,53 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                                 <td>_[NOMBRE_CLIENTE]_</td>
                                 <td>Nombre Cliente</td>
                             </tr>
-                            <tr>
-                                <td>_[NRO_POLIZA]_</td>
-                                <td>Número Póliza</td>
-                            </tr>
-                            <tr>
-                                <td>_[RAMO]_</td>
-                                <td>Ramo</td>
-                            </tr>
-                            <tr>
-                                <td>_[COMPANIA]_</td>
-                                <td>Compañía</td>
-                            </tr>
-                            <tr>
-                                <td>_[VIGENCIA_INICIAL]_</td>
-                                <td>Fecha vigencia inicial</td>
-                            </tr>
-                            <tr>
-                                <td>_[VIGENCIA_FINAL]_</td>
-                                <td>Fecha vigencia Final</td>
-                            </tr>
-                            <tr>
-                                <td>_[COBERTURA]_</td>
-                                <td>Cobertura</td>
-                            </tr>
-                            <tr>
-                                <td>_[DEDUCIBLE]_</td>
-                                <td>Deducible</td>
-                            </tr>
-                            <tr>
-                                <td>_[PRIMERA_CUOTA]_</td>
-                                <td>Fecha primera cuota</td>
-                            </tr>
-                            <tr>
-                                <td>_[FORMA_PAGO]_</td>
-                                <td>Forma de Pago</td>
-                            </tr>
-                            <tr>
-                                <td>_[PRIMA_ANUAL]_</td>
-                                <td>Prima Anual Bruta</td>
-                            </tr>
-                            <tr>
+                            <tr><td>_[ESTADO]_</td><td>Estado Poliza</td></tr>
+<tr><td>_[TIPO_POLIZA]_</td><td>Tipo de Poliza</td></tr>
+<tr><td>_[RUT_PROP]_</td><td>Rut Proponente</td></tr>
+<tr><td>_[DV_PROP]_</td><td>DV Proponente</td></tr>
+<tr><td>_[RUT_ASEG]_</td><td>Rut Asegurado</td></tr>
+<tr><td>_[DV_ASEG]_</td><td>DV Asegurado</td></tr>
+<tr><td>_[GRUPO]_</td><td>Grupo</td></tr>
+<tr><td>_[COMPANIA]_</td><td>Compañía</td></tr>
+<tr><td>_[VIGENCIA_INICIAL]_</td><td>Vigencia Inicial</td></tr>
+<tr><td>_[VIGENCIA_FINAL]_</td><td>Vigencia Final</td></tr>
+<tr><td>_[MES_VENCIMIENTO]_</td><td>Mes Vencimiento</td></tr>
+<tr><td>_[ANO_VENCIMIENTO]_</td><td>Año Vencimiento</td></tr>
+<tr><td>_[POLIZA_RENOVADA]_</td><td>Poliza Renovada</td></tr>
+<tr><td>_[RAMO]_</td><td>Ramo</td></tr>
+<tr><td>_[NUMERO_POLIZA]_</td><td>Numero Póliza</td></tr>
+<tr><td>_[MATERIA_ASEGURADA]_</td><td>Materia Asegurada</td></tr>
+<tr><td>_[PATENTE_UBICACION]_</td><td>Patente o Ubicación</td></tr>
+<tr><td>_[COBERTURA]_</td><td>Cobertura</td></tr>
+<tr><td>_[DEDUCIBLE]_</td><td>Deducible</td></tr>
+<tr><td>_[MONEDA_POLIZA]_</td><td>Moneda Póliza</td></tr>
+<tr><td>_[PRIMA_AFECTA]_</td><td>Prima Afecta</td></tr>
+<tr><td>_[MONEDA_COMISION]_</td><td>Moneda Comisión</td></tr>
+<tr><td>_[PRIMA_EXENTA]_</td><td>Prima Exenta</td></tr>
+<tr><td>_[PRIMA_NETA]_</td><td>Prima Neta</td></tr>
+<tr><td>_[PRIMA_BRUTA_ANUAL]_</td><td>Prima Bruta Anual</td></tr>
+<tr><td>_[MONTO_ASEGURADO]_</td><td>Monto Asegurado</td></tr>
+<tr><td>_[NUMERO_PROPUESTA]_</td><td>Numero Propuesta</td></tr>
+<tr><td>_[FECHA_ENVIO_PROP]_</td><td>Fecha Envío Propuesta</td></tr>
+<tr><td>_[ENDOSO]_</td><td>Endoso</td></tr>
+<tr><td>_[COMISION]_</td><td>Comisión</td></tr>
+<tr><td>_[PORCENTAJE_COMISION]_</td><td>Porcentaje</td></tr>
+<tr><td>_[COMISION_BRUTA]_</td><td>Comisión Bruta</td></tr>
+<tr><td>_[COMISION_NETA]_</td><td>Comisión Neta</td></tr>
+<tr><td>_[NUMERO_BOLETA]_</td><td>Número boleta</td></tr>
+<tr><td>_[MONEDA_COM_NEG]_</td><td>Moneda Comisión Negativa</td></tr>
+<tr><td>_[COMISION_NEGATIVA]_</td><td>Comisión Negativa</td></tr>
+<tr><td>_[BOLETA_NEGATIVA]_</td><td>Boleta Negativa</td></tr>
+<tr><td>_[DEPOSITADO_FECHA]_</td><td>Fecha Primer depósito</td></tr>
+<tr><td>_[VENDEDOR]_</td><td>Vendedor</td></tr>
+<tr><td>_[NOMBRE_VENDEDOR]_</td><td>Nombre Vendedor</td></tr>
+<tr><td>_[FORMA_PAGO]_</td><td>Forma de Pago</td></tr>
+<tr><td>_[MONEDA_VALOR_CUOTA]_</td><td>Moneda Valor Cuota</td></tr>
+<tr><td>_[VALOR_CUOTA]_</td><td>Valor cuota</td></tr>
+<tr><td>_[FECHA_PRIMERA_CUOTA]_</td><td>Fecha Primera Cuota</td></tr>
+<tr><td>_[NRO_CUOTAS]_</td><td>Numero de Cuotas</td></tr>
+<tr><td>_[INFO_ADICIONAL]_</td><td>Información Adicional</td></tr>
+
                                 <td>_[VEHICULO]_</td>
                                 <td>Vehiculo</td>
                             </tr>
@@ -245,7 +291,15 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
                             <tr>
                                 <td>_[SUB_fin]_</td>
                                 <td>Subrayado fin</td>
-                            </tr>                          
+                            </tr>   
+                            <tr>
+                                <td>_[SU_ini]_</td>
+                                <td>Asunto inicio</td>
+                            </tr> 
+                            <tr>
+                                <td>_[SU_fin]_</td>
+                                <td>Asunto fin</td>
+                            </tr>     
                         </tbody>
                     </table>
 					</div>
