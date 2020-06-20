@@ -737,7 +737,7 @@ function botones(id, accion, base) {
                 }, 'post');
             }
             if (base == 'tarea') {
-                $.redirect('/bamboo/test2.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                 'id_tarea': id,
                 }, 'post');
             }

@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
     
     $obj = json_decode($relaciones, true);
+    /*
     echo "prioridad-".$prioridad . "<br>";
     echo "fechavencimiento-".$fechavencimiento . "<br>";
     echo "tarea-".$tarea . "<br>";
@@ -36,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     echo "tarea_con_fin-".$tarea_con_fin . "<br>";
     echo "dia-".$dia . "<br>";
     echo "fecha-".$fecha . "<br>";
+    */
     $largo = 6;
     
     //crea tarea recurrente si aplica
@@ -75,7 +77,7 @@ else
 
 }
 // vuelve al index
-//header("location: /bamboo/index.php");
+header("location: /bamboo/index.php");
 
 function estandariza_info($data)
 {
