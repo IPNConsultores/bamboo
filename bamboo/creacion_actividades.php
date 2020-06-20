@@ -15,7 +15,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num_cliente=$num_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
  $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza='';
-$origen=$aux_modificar='';
+$origen=$aux_modificar=$id_tarea='';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 // Viene desde cliente
     if(!empty(trim($_POST["id_cliente"]))){
@@ -97,10 +97,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
             //poliza
-            $resultado_tarea=mysqli_query($link, 'SELECT a.tarea, a.estado, a.prioridad, a.fecha_vencimiento, recurrente, tarea_con_fecha_fin, fecha_fin, dia_recordatorio FROM tareas as a left join tareas_recurrentes as b on a.id_tarea_recurrente=b.id where a.id='.$busqueda);
+            $resultado_tarea=mysqli_query($link, 'SELECT a.id, a.tarea, a.estado, a.prioridad, a.fecha_vencimiento, recurrente, tarea_con_fecha_fin, fecha_fin, dia_recordatorio FROM tareas as a left join tareas_recurrentes as b on a.id_tarea_recurrente=b.id where a.id='.$busqueda);
 
             While($row=mysqli_fetch_object($resultado_tarea))
                 {
+                    $id_tarea= $row->id;
                     $tarea= $row->tarea;
                     $estado = $row->estado;
                     $prioridad= $row->prioridad;
@@ -457,6 +458,7 @@ function post() {
         //fin tarea recurrente
         //inicio aux modificar
         'modificar': '<?php echo $aux_modificar; ?>',
+        'id_tarea': '<?php echo $id_tarea; ?>'
         //fin aux modificar
     }, 'post');
     
