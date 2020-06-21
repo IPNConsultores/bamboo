@@ -176,6 +176,14 @@ function copia_ramo(){
     document.getElementById("ramo2").value = document.getElementById("ramo").value;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+
+
+
+document.getElementById("ramo").value = '<?php echo $ramo_poliza; ?>';
+
+});
+
 </script>
 </div>
  </form>
