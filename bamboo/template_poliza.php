@@ -276,8 +276,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 </head>
 
 <body>
-    <?php echo $busqueda ?>
-    <?php echo  $ramo_poliza ?>
+  
     
 <script>
 
@@ -297,7 +296,7 @@ alert("prueba")
 </div>
 <div class="container">
   <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='eviar_template'>
-      <div id="auxiliar" diaplay:"none">
+      <div id="auxiliar" display:"none">
       <input name="tipo" id="tipo">
       <input name="id" id="id">
       <input name="ramo" id="ramo">
