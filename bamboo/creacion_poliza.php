@@ -348,7 +348,8 @@ function estandariza_info( $data ) {
           <label for="sel1">Ramo:&nbsp;</label>
           <select class="form-control" name="ramo" id="ramo">
             <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
-            <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+            <option value="Hogar_persona" <?php if ($ramo == "Hogar_Persona") echo "selected" ?> >Hogar_Persona</option>
+			<option value="Hogar_pyme" <?php if ($ramo == "Hogar_pyme") echo "selected" ?> >Hogar_pyme</option>
             <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
             <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
             <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>

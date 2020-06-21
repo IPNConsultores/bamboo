@@ -16,49 +16,164 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
   //poliza
-  $resultado_template = mysqli_query( $link, 'SELECT template FROM template_correos where producto="vehiculo" and instancia="envio_poliza"' );
+  
+  $instancia = "envio_poliza";
+  if ( $_POST[ "tipo" ] == "buscar"){
+      
+      $instancia = $_POST[ "instancia" ];
+      $busqueda = $_POST["id"];
+      $ramo = $POST["ramo"];
+  }
+  else
+  {
+  $busqueda = $_POST[ "id_poliza" ];
+  }
+  $query_ramo = "SELECT ramo from polizas where id=". $busqueda ." ;";
+  $resultado_ramo_poliza = mysqli_query($link,$query_ramo);
+  
+   While( $row = mysqli_fetch_object( $resultado_ramo_poliza ) ) {
+    $ramo_poliza = $row->ramo;
+  }
+  
+  
+  $ramo_poliza = str_replace('VEH','vehiculo',$ramo_poliza);
+  $ramo_poliza = str_replace('Hogar','hogar_persona',$ramo_poliza);
+    $ramo_poliza = str_replace('Hogar_Persona','hogar_persona',$ramo_poliza);
+        $ramo_poliza = str_replace('Hogar_pyme','hogar_pyme',$ramo_poliza);
+  $ramo_poliza = str_replace('A. VIAJE','viaje',$ramo_poliza);
+  $ramo_poliza = str_replace('RC','rc_do',$ramo_poliza);
+  $ramo_poliza = str_replace('INC','inc',$ramo_poliza);
+  $ramo_poliza = str_replace('APV','apv',$ramo_poliza);
+  $ramo_poliza = str_replace('D&O','rc_do',$ramo_poliza);
+  $ramo_poliza = str_replace('AP','ap',$ramo_poliza);
+  $ramo_poliza = str_replace('Vida','vida',$ramo_poliza);
+  $ramo_poliza = str_replace('Garantia','garantia',$ramo_poliza);
+  
+  
+
+  $query_template =  "SELECT template FROM template_correos where producto='".$ramo_poliza."' and instancia='".$instancia."'";
+  
+  
+  
+  
+  $resultado_template = mysqli_query( $link, $query_template);
+  
   While( $row = mysqli_fetch_object( $resultado_template ) ) {
     $template = $row->template;
   }
 
   // Viene desde póliza
   if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
-    $busqueda = $_POST[ "id_poliza" ];
 
-    $resultado_poliza = mysqli_query( $link, "SELECT fecha_primera_cuota, forma_pago, moneda_poliza, deducible, prima_afecta, prima_exenta, prima_bruta_anual, a.id, ramo, compania, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado, concat(b.nombre_cliente, ' ', b.apellido_paterno) as nombre_asegurado FROM polizas as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;" );
+    $query =  "SELECT  a.id, estado, tipo_poliza, rut_proponente, dv_proponente, rut_asegurado, dv_asegurado, a.grupo, compania, vigencia_inicial, vigencia_final, mes_vencimiento, ano_vencimiento, poliza_renovada, ramo, numero_poliza, materia_asegurada, patente_ubicacion, cobertura, deducible, moneda_poliza, prima_afecta, moneda_comision, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, numero_propuesta, fecha_envio_propuesta, endoso, comision, porcentaje_comision, comision_bruta, comision_neta, numero_boleta, moneda_comision_negativa, comision_negativa, boleta_negativa, depositado_fecha, vendedor, nombre_vendedor, forma_pago, moneda_valor_cuota, valor_cuota, fecha_primera_cuota, nro_cuotas, informacion_adicional, concat_ws('',b.nombre_cliente, ' ', b.apellido_paterno) as nombre_asegurado FROM polizas as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;"; 
+    $resultado_poliza = mysqli_query( $link,$query);
+
 
     While( $row = mysqli_fetch_object( $resultado_poliza ) ) {
-      $moneda_poliza = $row->moneda_poliza;
-      $deducible = $row->deducible;
-      $fecha_primera_cuota = $row->fecha_primera_cuota;
-      $forma_pago = $row->forma_pago;
-      $prima_bruta_anual = $row->prima_bruta_anual;
-      $id = $row->id;
-      $ramo = $row->ramo;
-      $numero_poliza = $row->numero_poliza;
-      $compania = $row->compania;
-      $vigencia_final = $row->vigencia_final;
-      $vigencia_inicial = $row->vigencia_inicial;
-      $materia_asegurada = $row->materia_asegurada;
-      $patente_ubicacion = $row->patente_ubicacion;
-      $cobertura = $row->cobertura;
-      $rut_proponente = $row->rut_proponente;
-      $rut_asegurado = $row->rut_asegurado;
-      $nombre_asegurado = $row->nombre_asegurado;
+     $estado= $row->estado;
+    $tipo_poliza= $row->tipo_poliza;
+    $rut_proponente= $row->rut_proponente;
+    $dv_proponente= $row->dv_proponente;
+    $rut_asegurado= $row->rut_asegurado;
+    $dv_asegurado= $row->dv_asegurado;
+    $grupo= $row->grupo;
+    $compania= $row->compania;
+    $vigencia_inicial= $row->vigencia_inicial;
+    $vigencia_final= $row->vigencia_final;
+    $mes_vencimiento= $row->mes_vencimiento;
+    $ano_vencimiento= $row->ano_vencimiento;
+    $poliza_renovada= $row->poliza_renovada;
+    $ramo= $row->ramo;
+    $numero_poliza= $row->numero_poliza;
+    $materia_asegurada= $row->materia_asegurada;
+    $patente_ubicacion= $row->patente_ubicacion;
+    $cobertura= $row->cobertura;
+    $deducible= $row->deducible;
+    $moneda_poliza= $row->moneda_poliza;
+    $prima_afecta= $row->prima_afecta;
+    $moneda_comision= $row->moneda_comision;
+    $prima_exenta= $row->prima_exenta;
+    $prima_neta= $row->prima_neta;
+    $prima_bruta_anual= $row->prima_bruta_anual;
+    $monto_asegurado= $row->monto_asegurado;
+    $numero_propuesta= $row->numero_propuesta;
+    $fecha_envio_propuesta= $row->fecha_envio_propuesta;
+    $endoso= $row->endoso;
+    $comision= $row->comision;
+    $porcentaje_comision= $row->porcentaje_comision;
+    $comision_bruta= $row->comision_bruta;
+    $comision_neta= $row->comision_neta;
+    $numero_boleta= $row->numero_boleta;
+    $moneda_comision_negativa= $row->moneda_comision_negativa;
+    $comision_negativa= $row->comision_negativa;
+    $boleta_negativa= $row->boleta_negativa;
+    $depositado_fecha= $row->depositado_fecha;
+    $vendedor= $row->vendedor;
+    $nombre_vendedor= $row->nombre_vendedor;
+    $forma_pago= $row->forma_pago;
+    $moneda_valor_cuota= $row->moneda_valor_cuota;
+    $valor_cuota= $row->valor_cuota;
+    $fecha_primera_cuota= $row->fecha_primera_cuota;
+    $nro_cuotas= $row->nro_cuotas;
+    $informacion_adicional= $row->informacion_adicional;
+    $id = $row->id;
+    $nombre_asegurado = $row->nombre_asegurado;
+    
+    
+      
+      
     }
-
     $template = str_replace( '_[NRO_POLIZA]_', $numero_poliza, $template );
-    $template = str_replace( '_[RAMO]_', $ramo, $template );
-    $template = str_replace( '_[COMPANIA]_', $compania, $template );
     $template = str_replace( '_[NOMBRE_CLIENTE]_', $nombre_asegurado, $template );
-    $template = str_replace( '_[VIGENCIA_INICIAL]_', $vigencia_inicial, $template );
-    $template = str_replace( '_[VIGENCIA_FINAL]_', $vigencia_final, $template );
-    $template = str_replace( '_[COBERTURA]_', $cobertura, $template );
-    $template = str_replace( '_[DEDUCIBLE]_', $deducible, $template );
-    $template = str_replace( '_[PRIMERA_CUOTA]_', $fecha_primera_cuota, $template );
-    $template = str_replace( '_[FORMA_PAGO]_', $forma_pago, $template );
-    $template = str_replace( '_[PRIMA_ANUAL]_', $prima_bruta_anual, $template );
-    $template = str_replace( '_[VEHICULO]_', $materia_asegurada, $template );
+    $template= str_replace( '_[ESTADO]_',$estado, $template );
+ $template= str_replace( '_[TIPO_POLIZA]_',$tipo_poliza, $template );
+ $template= str_replace( '_[RUT_PROP]_',$rut_proponente, $template );
+ $template= str_replace( '_[DV_PROP]_',$dv_proponente, $template );
+ $template= str_replace( '_[RUT_ASEG]_',$rut_asegurado, $template );
+ $template= str_replace( '_[DV_ASEG]_',$dv_asegurado, $template );
+ $template= str_replace( '_[GRUPO]_',$grupo, $template );
+ $template= str_replace( '_[COMPANIA]_',$compania, $template );
+ $template= str_replace( '_[VIGENCIA_INICIAL]_',$vigencia_inicial, $template );
+ $template= str_replace( '_[VIGENCIA_FINAL]_',$vigencia_final, $template );
+ $template= str_replace( '_[MES_VENCIMIENTO]_',$mes_vencimiento, $template );
+ $template= str_replace( '_[ANO_VENCIMIENTO]_',$ano_vencimiento, $template );
+ $template= str_replace( '_[POLIZA_RENOVADA]_',$poliza_renovada, $template );
+ $template= str_replace( '_[RAMO]_',$ramo, $template );
+ $template= str_replace( '_[NUMERO_POLIZA]_',$numero_poliza, $template );
+ $template= str_replace( '_[MATERIA_ASEGURADA]_',$materia_asegurada, $template );
+ $template= str_replace( '_[PATENTE_UBICACION]_',$patente_ubicacion, $template );
+ $template= str_replace( '_[COBERTURA]_',$cobertura, $template );
+ $template= str_replace( '_[DEDUCIBLE]_',$deducible, $template );
+ $template= str_replace( '_[MONEDA_POLIZA]_',$moneda_poliza, $template );
+ $template= str_replace( '_[PRIMA_AFECTA]_',$prima_afecta, $template );
+ $template= str_replace( '_[MONEDA_COMISION]_',$moneda_comision, $template );
+ $template= str_replace( '_[PRIMA_EXENTA]_',$prima_exenta, $template );
+ $template= str_replace( '_[PRIMA_NETA]_',$prima_neta, $template );
+  $template= str_replace( '_[PRIMA_ANUAL]_',$prima_bruta_anual, $template );
+ $template= str_replace( '_[PRIMA_BRUTA_ANUAL]_',$prima_bruta_anual, $template );
+ $template= str_replace( '_[MONTO_ASEGURADO]_',$monto_asegurado, $template );
+ $template= str_replace( '_[NUMERO_PROPUESTA]_',$numero_propuesta, $template );
+ $template= str_replace( '_[FECHA_ENVIO_PROPUESTA]_',$fecha_envio_propuesta, $template );
+ $template= str_replace( '_[ENDOSO]_',$endoso, $template );
+ $template= str_replace( '_[COMISION]_',$comision, $template );
+ $template= str_replace( '_[PORCENTAJE_COMISION]_',$porcentaje_comision, $template );
+ $template= str_replace( '_[COMISION_BRUTA]_',$comision_bruta, $template );
+ $template= str_replace( '_[COMISION_NETA]_',$comision_neta, $template );
+ $template= str_replace( '_[NUMERO_BOLETA]_',$numero_boleta, $template );
+ $template= str_replace( '_[MONEDA_COM_NEG]_',$moneda_comision_negativa, $template );
+ $template= str_replace( '_[COMISION_NEGATIVA]_',$comision_negativa, $template );
+ $template= str_replace( '_[BOLETA_NEGATIVA]_',$boleta_negativa, $template );
+ $template= str_replace( '_[DEPOSITADO_FECHA]_',$depositado_fecha, $template );
+ $template= str_replace( '_[VENDEDOR]_',$vendedor, $template );
+ $template= str_replace( '_[NOMBRE_VENDEDOR]_',$nombre_vendedor, $template );
+ $template= str_replace( '_[FORMA_PAGO]_',$forma_pago, $template );
+ $template= str_replace( '_[MONEDA_VALOR_CUOTA]_',$moneda_valor_cuota, $template );
+ $template= str_replace( '_[VALOR_CUOTA]_',$valor_cuota, $template );
+  $template= str_replace( '_[PRIMERA_CUOTA]_',$fecha_primera_cuota, $template );
+ $template= str_replace( '_[FECHA_PRIMERA_CUOTA]_',$fecha_primera_cuota, $template );
+ $template= str_replace( '_[NRO_CUOTAS]_',$nro_cuotas, $template );
+ $template= str_replace( '_[INFO_ADICIONAL]_',$informacion_adicional, $template );
+
 
 
     $template = str_replace( '_[SALTO_LINEA]_', '<br>', $template );
@@ -71,7 +186,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     $template = str_replace( '_[LINEA]_', '<hr>', $template );
 
 
-  }
+ }
 }
 
 
@@ -140,7 +255,11 @@ While( $row = mysqli_fetch_object( $resultado_correo_cliente ) ) {
 
 }
 
+
+
+
 mysqli_close( $link );
+
 $template = str_replace( '_[SU_ini]_', '', $template );
 $template = str_replace( '_[SU_fin]_', '', $template );
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destinatario&su=$subject&body=$body" );
@@ -157,22 +276,46 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 </head>
 
 <body>
+    <?php echo $busqueda ?>
+    <?php echo  $ramo_poliza ?>
+    
+<script>
+
+document.addEventListener("load", function() {
+
+document.getElementById("id").value = '<?php echo $busqueda ?>';
+document.getElementById("ramo").value = '<?php echo  $ramo_poliza ?>';
+
+alert("prueba")
+}
+
+</script>
+
+
 <div id="header">
 <?php include 'header2.php' ?>
 </div>
 <div class="container">
+  <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='eviar_template'>
+      <div id="auxiliar" diaplay:"none">
+      <input name="tipo" id="tipo">
+      <input name="id" id="id">
+      <input name="ramo" id="ramo">
+      
+    </div>
 <div class="row">
   <div class="col-4">
     <label><b>Instancia</b></label>
     <select class="form-control" name="instancia" id="instancia">
       <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
-      <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Renovación</option>
+      <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Envío Póliza Renovada</option>
+      <option value="solicitar_info" <?php if ($instancia == "solicitar_info ") echo "selected" ?> >Solicita Información</option>
       <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
     </select>
   </div>
-  <div class="col" style="align-self:flex-end">
-    <button class="btn" type="submit"
-                        style="background-color: #536656; color: white; height: 45; align-self: center">Buscar
+  <div class="col" style="align-self:flex-end" >
+    <button class="btn" type="submit" name="buscar"
+                        style="background-color: #536656; color: white; height: 45; align-self: center" onclick="envio_data(this.name)">Buscar
     template</button>
   </div>
   </form>
@@ -193,4 +336,26 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 <script src="/assets/js/jquery.redirect.js"></script>
 
 </body>
+
+<script>
+
+
+function envio_data(boton) {
+    document.getElementById("tipo").value = boton;
+}
+
+
+
+</script>
 </html>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+
+document.getElementById("id").value = '<?php echo $busqueda; ?>';
+document.getElementById("ramo").value = '<?php echo $ramo_poliza; ?>';
+
+});
+</script>
