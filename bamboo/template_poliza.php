@@ -296,7 +296,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
     <select class="form-control" name="instancia" id="instancia">
       <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
       <option value="renovacion" <?php if ($instancia == "renovacion") echo "selected" ?> >Envío Póliza Renovada</option>
-      <option value="solicitar_info" <?php if ($instancia == "solicitar_info ") echo "selected" ?> >Solicita Información</option>
+      <option value="solicitar_info" <?php if ($instancia == "solicitar_info") echo "selected" ?> >Solicita Información</option>
       <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
     </select>
   </div>
