@@ -15,7 +15,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num_cliente=$num_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
  $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza='';
-
+$origen=$aux_modificar=$id_tarea='';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 // Viene desde cliente
     if(!empty(trim($_POST["id_cliente"]))){
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
         //cliente
-        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        $resultado=mysqli_query($link, 'SELECT id, concat_ws(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
             {
                 $rut=$row->rut;
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza" checked disabled></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
                 }     
         //cliente
-        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        $resultado=mysqli_query($link, 'SELECT id, concat_ws(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
             {
                 $rut=$row->rut;
@@ -89,8 +89,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }       
         mysqli_close($link);
     } 
+// Viene desde modificar tarea
+    if(!empty(trim($_POST["id_tarea"]))){
+        $busqueda=$_POST["id_tarea"];
+        $origen='modifica tarea';
+        $aux_modificar='update';
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+            //poliza
+            $resultado_tarea=mysqli_query($link, 'SELECT a.id, a.tarea, a.estado, a.prioridad, a.fecha_vencimiento, recurrente, tarea_con_fecha_fin, fecha_fin, dia_recordatorio FROM tareas as a left join tareas_recurrentes as b on a.id_tarea_recurrente=b.id where a.id='.$busqueda);
 
+            While($row=mysqli_fetch_object($resultado_tarea))
+                {
+                    $id_tarea= $row->id;
+                    $tarea= $row->tarea;
+                    $estado = $row->estado;
+                    $prioridad= $row->prioridad;
+                    $fecha_vencimiento= $row->fecha_vencimiento;
+                    $recurrente= $row->recurrente;
+                    $tarea_con_fecha_fin= $row->tarea_con_fecha_fin;
+                    $fecha_fin= $row->fecha_fin;
+                    $dia_recordatorio= $row->dia_recordatorio;
+                }     
+         //poliza
+            $resultado_poliza=mysqli_query($link, "SELECT b.id, b.compania, b.vigencia_final, b.numero_poliza, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.rut_proponente, b.rut_asegurado FROM tareas_relaciones as a left join polizas as b on a.id_relacion=b.id where a.base='polizas' and a.id_tarea=".$busqueda);
 
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    $id= $row ->id;
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $poliza= $row->numero_poliza;
+                    $materia_asegurada= $row->materia_asegurada;
+                    $patente_ubicacion = $row->patente_ubicacion;
+                    $cobertura = $row->cobertura;
+                    $rut_proponente = $row->rut_proponente;
+                    $rut_asegurado = $row->rut_asegurado;
+                    $num_poliza=$num_poliza+1;
+                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza" checked disabled></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
+                }  
+        //cliente
+        $resultado=mysqli_query($link, "SELECT b.id, concat_ws(b.rut_sin_dv, '-',b.dv) as rut, concat_ws(b.nombre_cliente, ' ', b.apellido_paterno, ' ', b.apellido_materno) as nombre , b.telefono, b.correo  FROM tareas_relaciones as a left join clientes as b on a.id_relacion=b.id where a.base='clientes' and a.id_tarea=".$busqueda);
+        While($row=mysqli_fetch_object($resultado))
+            {
+                $rut=$row->rut;
+                $id=$row->id;
+                $nombre=$row->nombre;
+                $telefono=$row->telefono;
+                $correo=$row->correo;
+                $num_cliente=$num_cliente+1;
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
+            }
+}
 }
 else {    
 echo '<style>.info_clientes { display:none;}</style>';
@@ -222,37 +273,37 @@ echo '<style>.info_clientes { display:none;}</style>';
                 <label> Repetir todos los días</label>
                 <div class="col-1">
                 <select  class ="form-control" name="dia_mes" id="dia_mes">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
-                    <option>15</option>
-                    <option>16</option>
-                    <option>17</option>
-                    <option>18</option>
-                    <option>19</option>
-                    <option>20</option>
-                    <option>21</option>
-                    <option>22</option>
-                    <option>23</option>
-                    <option>24</option>
-                    <option>25</option>
-                    <option>26</option>
-                    <option>27</option>
-                    <option>28</option>
-                    <option>29</option>
-                    <option>30</option>
-                    <option>31</option>
+                    <option <?php if ($dia_recordatorio=="1") echo "selected" ?> >1</option>
+                    <option <?php if ($dia_recordatorio=="2") echo "selected" ?> >2</option>
+                    <option <?php if ($dia_recordatorio=="3") echo "selected" ?> >3</option>
+                    <option <?php if ($dia_recordatorio=="4") echo "selected" ?> >4</option>
+                    <option <?php if ($dia_recordatorio=="5") echo "selected" ?> >5</option>
+                    <option <?php if ($dia_recordatorio=="6") echo "selected" ?> >6</option>
+                    <option <?php if ($dia_recordatorio=="7") echo "selected" ?> >7</option>
+                    <option <?php if ($dia_recordatorio=="8") echo "selected" ?> >8</option>
+                    <option <?php if ($dia_recordatorio=="9") echo "selected" ?> >9</option>
+                    <option <?php if ($dia_recordatorio=="10") echo "selected" ?> >10</option>
+                    <option <?php if ($dia_recordatorio=="11") echo "selected" ?> >11</option>
+                    <option <?php if ($dia_recordatorio=="12") echo "selected" ?> >12</option>
+                    <option <?php if ($dia_recordatorio=="13") echo "selected" ?> >13</option>
+                    <option <?php if ($dia_recordatorio=="14") echo "selected" ?> >14</option>
+                    <option <?php if ($dia_recordatorio=="15") echo "selected" ?> >15</option>
+                    <option <?php if ($dia_recordatorio=="16") echo "selected" ?> >16</option>
+                    <option <?php if ($dia_recordatorio=="17") echo "selected" ?> >17</option>
+                    <option <?php if ($dia_recordatorio=="18") echo "selected" ?> >18</option>
+                    <option <?php if ($dia_recordatorio=="19") echo "selected" ?> >19</option>
+                    <option <?php if ($dia_recordatorio=="20") echo "selected" ?> >20</option>
+                    <option <?php if ($dia_recordatorio=="21") echo "selected" ?> >21</option>
+                    <option <?php if ($dia_recordatorio=="22") echo "selected" ?> >22</option>
+                    <option <?php if ($dia_recordatorio=="23") echo "selected" ?> >23</option>
+                    <option <?php if ($dia_recordatorio=="24") echo "selected" ?> >24</option>
+                    <option <?php if ($dia_recordatorio=="25") echo "selected" ?> >25</option>
+                    <option <?php if ($dia_recordatorio=="26") echo "selected" ?> >26</option>
+                    <option <?php if ($dia_recordatorio=="27") echo "selected" ?> >27</option>
+                    <option <?php if ($dia_recordatorio=="28") echo "selected" ?> >28</option>
+                    <option <?php if ($dia_recordatorio=="29") echo "selected" ?> >29</option>
+                    <option <?php if ($dia_recordatorio=="30") echo "selected" ?> >30</option>
+                    <option <?php if ($dia_recordatorio=="31") echo "selected" ?> >31</option>
                 </select>
                 </div>
                
@@ -291,10 +342,10 @@ echo '<style>.info_clientes { display:none;}</style>';
             <div class="col-md-2 mb-3">
                 <label for="sel1">Prioridad:&nbsp;</label>
                 <select class="form-control" name="prioridad" id="prioridad">
-                    <option style="color:darkred" value="0.- Urgente">Urgente</option>
-                    <option style="color:red" value="1.- Alto" selected>Alto</option>
-                    <option style="color:orange" value="2.- Medio">Medio</option>
-                    <option style="color:darkgreen" value="3.- Bajo">Bajo</option>
+                    <option style="color:darkred" value="0.- Urgente" <?php if ($origen == "modifica tarea" and $prioridad=="0.- Urgente") echo "selected" ?> >Urgente</option>
+                    <option style="color:red" value="1.- Alto" <?php if ($origen == "modifica tarea" and $prioridad=="1.- Alto") echo "selected" ?> >Alto</option>
+                    <option style="color:orange" value="2.- Medio" <?php if ($origen == "modifica tarea" and $prioridad=="2.- Medio") echo "selected" ?> >Medio</option>
+                    <option style="color:darkgreen" value="3.- Bajo" <?php if ($origen == "modifica tarea" and $prioridad=="3.- Bajo") echo "selected" ?> >Bajo</option>
                 </select>
             </div>
             <div class="col-md-4 mb-3" id="panel_fecha">
@@ -321,6 +372,7 @@ echo '<style>.info_clientes { display:none;}</style>';
 
         <br>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
@@ -332,7 +384,19 @@ echo '<style>.info_clientes { display:none;}</style>';
 </body>
 
 </html>
+
 <script>
+/*
+$tarea= $row->tarea;
+                    $estado = $row->estado;
+                    $prioridad= $row->prioridad;
+                    $fecha_vencimiento= $row->fecha_vencimiento;
+                    $recurrente= $row->recurrente;
+                    $tarea_con_fecha_fin= $row->tarea_con_fecha_fin;
+                    $fecha_fin= $row->fecha_fin;
+                    $dia_recordatorio= $row->dia_recordatorio;
+*/
+
 function post() {
     /*
     console.log('tarea_unica:'+document.getElementById('tarea_unica').checked);
@@ -381,7 +445,7 @@ function post() {
     }
     arreglo += ']';
     ///bamboo/backend/actividades/crea_tarea.php
-    $.redirect('bamboo/backend/actividades/crea_tarea.php', {
+    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
@@ -390,8 +454,12 @@ function post() {
         'tarea_recurrente': tarea_recurrente,
         'dia': dia,
         'tarea_con_fin': tarea_con_fin,
-        'fecha': fecha
+        'fecha': fecha,
         //fin tarea recurrente
+        //inicio aux modificar
+        'modificar': '<?php echo $aux_modificar; ?>',
+        'id_tarea': '<?php echo $id_tarea; ?>'
+        //fin aux modificar
     }, 'post');
     
 }
@@ -429,4 +497,33 @@ function checkTipoTarea(tipoTarea){
         }
     }
 }
+
+$(document).ready(function() {
+    var origen ='<?php echo $origen; ?>';
+    console.log(origen);
+        switch(origen){
+            case 'modifica tarea':{
+                var recurrente='<?php echo $recurrente; ?>';
+                var tarea_infinita='<?php echo $tarea_con_fecha_fin; ?>';
+                document.getElementById('tarea').value='<?php echo $tarea; ?>';
+                document.getElementById('fechavencimiento').value='<?php echo $fecha_vencimiento; ?>';
+                if (recurrente==1){
+                    checkTipoTarea('recurrente');
+                    if (tarea_infinita==1){
+                        checkTipoTarea('con_fecha');
+                        document.getElementById('fechavencimiento_recurrente').value='<?php echo $fecha_fin; ?>';    
+                    }
+                    else
+                    {
+                        checkTipoTarea('sin_fecha');
+                    }
+                }
+                break
+            }
+            default: {
+
+            }
+        }
+})
+
 </script>
