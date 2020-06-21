@@ -11,7 +11,7 @@ function estandariza_info( $data ) {
 }
 require_once "/home/gestio10/public_html/backend/config.php";
 
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
+//if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
@@ -271,26 +271,12 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 <head>
 <meta charset="utf-8">
 <title>Generador de correo - Informar póliza creada</title>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php echo $busqueda ?>
-    <?php echo  $ramo_poliza ?>
-    
-<script>
 
-document.addEventListener("load", function() {
-
-document.getElementById("id").value = '<?php echo $busqueda ?>';
-document.getElementById("ramo").value = '<?php echo  $ramo_poliza ?>';
-
-alert("prueba")
-}
-
-</script>
 
 
 <div id="header">
@@ -298,7 +284,7 @@ alert("prueba")
 </div>
 <div class="container">
   <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='eviar_template'>
-      <div id="auxiliar" >
+      <div id="auxiliar" style="display: none" >
       <input name="tipo" id="tipo">
       <input name="id" id="id">
       <input name="ramo" id="ramo">
