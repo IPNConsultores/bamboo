@@ -73,7 +73,7 @@ function valida_rut(){
 					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
 						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Otros</a>
 						<div class ="dropdown-menu" aria-labelledby="navbarDropdown"> 
-						
+						<a class="dropdown-item" href="/bamboo/solicitar_info.php">Mail Solicitud Información</a>
 							<a class="dropdown-item" href="/bamboo/creacion_template.php">Crear/Modificar template correos</a>						
 						</div>				
 					</li>
