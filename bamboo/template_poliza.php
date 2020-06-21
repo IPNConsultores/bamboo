@@ -63,7 +63,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   }
 
   // Viene desde póliza
-  if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
+  //if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
 
     $query =  "SELECT  a.id, estado, tipo_poliza, rut_proponente, dv_proponente, rut_asegurado, dv_asegurado, a.grupo, compania, vigencia_inicial, vigencia_final, mes_vencimiento, ano_vencimiento, poliza_renovada, ramo, numero_poliza, materia_asegurada, patente_ubicacion, cobertura, deducible, moneda_poliza, prima_afecta, moneda_comision, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, numero_propuesta, fecha_envio_propuesta, endoso, comision, porcentaje_comision, comision_bruta, comision_neta, numero_boleta, moneda_comision_negativa, comision_negativa, boleta_negativa, depositado_fecha, vendedor, nombre_vendedor, forma_pago, moneda_valor_cuota, valor_cuota, fecha_primera_cuota, nro_cuotas, informacion_adicional, concat_ws('',b.nombre_cliente, ' ', b.apellido_paterno) as nombre_asegurado FROM polizas as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;"; 
     $resultado_poliza = mysqli_query( $link,$query);
@@ -186,8 +186,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     $template = str_replace( '_[LINEA]_', '<hr>', $template );
 
 
- }
-}
+ // }
+//}
 
 
 $body = $template;
@@ -271,12 +271,14 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 <head>
 <meta charset="utf-8">
 <title>Generador de correo - Informar póliza creada</title>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-  
+    <?php echo $busqueda ?>
+    <?php echo  $ramo_poliza ?>
     
 <script>
 
@@ -296,7 +298,7 @@ alert("prueba")
 </div>
 <div class="container">
   <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='eviar_template'>
-      <div id="auxiliar" display:"none">
+      <div id="auxiliar" >
       <input name="tipo" id="tipo">
       <input name="id" id="id">
       <input name="ramo" id="ramo">
@@ -312,7 +314,7 @@ alert("prueba")
       <option value="otro" <?php if ($instancia == "otro") echo "selected" ?> >Otro</option>
     </select>
   </div>
-  <div class="col" style="align-self:flex-end" >
+  <div class="col" style="align-self:flex-end">
     <button class="btn" type="submit" name="buscar"
                         style="background-color: #536656; color: white; height: 45; align-self: center" onclick="envio_data(this.name)">Buscar
     template</button>
