@@ -154,7 +154,7 @@ function estandariza_info( $data ) {
   </div>
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
-  <form action="/bamboo/test2.php"  class="needs-validation" method="POST" novalidate id="formulario">
+  <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate id="formulario">
     <div id="auxiliar" style="display: none;">
       <input name="id_poliza" id="id_poliza">
     </div>
@@ -624,7 +624,7 @@ function estandariza_info( $data ) {
       </div>
     </div>
     <br>
-    <button class="btn" type="submit" style="background-color: #536656; color: white">Registrar</button>
+    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit'>Registrar</button>
   </form>
   <br>
   <br>
@@ -1077,7 +1077,7 @@ function renovar_poliza(poliza) {
                         document.getElementById("poliza_renovada").style.display = "block";
             }
             document.getElementById("radio_no").checked = false;
-        document.getElementById("radio_si").checked = true;
+            document.getElementById("radio_si").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
