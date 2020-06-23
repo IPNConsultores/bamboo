@@ -17,7 +17,7 @@ $num=0;
 mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-$sql = "SELECT *, concat(mes,'-',SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
+$sql = "SELECT *, concat_ws('-',mes,SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
     $resultado=mysqli_query($link, $sql);
 
     $leyendas = $stock=$salidas=$entradas=$ramo=$cantidad=array();
@@ -294,10 +294,10 @@ $(document).ready(function() {
 
     var buttons = new $.fn.dataTable.Buttons(table_tareas, {
         buttons: [{
-                sheetName: 'Clientes',
+                sheetName: 'Tareas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6]
                 }
@@ -305,7 +305,7 @@ $(document).ready(function() {
             {
                 orientation: 'landscape',
                 extend: 'pdfHtml5',
-                filename: 'Listado clientes al: ' + fecha,
+                filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6]
                 }
@@ -518,7 +518,7 @@ $(document).ready(function() {
                         case 'Activo':
                             estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
-                        case 'Cerrado':
+                        case 'Vencido':
                                 estado='<span class="badge badge-dark">'+data+'</span>';
                                 break;
                         case 'Atrasado':
@@ -661,9 +661,7 @@ function detalle_tareas(d) {
         '<td><button title="Busca toda la información asociada a esta tarea" type="button" id=' + d.id_tarea +
         ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Modifica la información de esta tarea"  type="button" id=' +
         d.id_tarea +
-        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Elimina esta tarea"  type="button" id=' +
-        d.id_tarea +
-        ' name="elimina" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-trash-alt"></i></button><a> </a><button title="Marca tarea como completada"  type="button" id=' +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Marca tarea como completada"  type="button" id=' +
         d.id_tarea +
         ' name="cerrar_tarea" id=' + d.id_tarea +
         ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +

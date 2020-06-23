@@ -349,7 +349,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                 </select>
             </div>
             <div class="col-md-4 mb-3" id="panel_fecha">
-                <label for="Nombre">Fecha de Vencimiento</label>
+                <label for="Nombre">Fecha de Vencimiento Tarea</label>
                 <div class="md-form">
                     <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
                         class="form-control" required>
