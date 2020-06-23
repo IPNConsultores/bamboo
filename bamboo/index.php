@@ -96,6 +96,7 @@ While($row2=mysqli_fetch_object($resultado2))
                                 <th>Fecha vencimiento</th>
                                 <th>Fecha creación tarea</th>
                                 <th>id tarea</th>
+                                <th>Tipo creación</th>
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>
@@ -233,7 +234,10 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
 
-        "columnDefs": [
+        "columnDefs": [{
+                "targets": [7],
+                "visible": false,
+            },
         {
         targets: 3,
         render: function (data, type, row, meta) {
