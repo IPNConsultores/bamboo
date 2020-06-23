@@ -7,6 +7,9 @@ if ( !isset( $_SESSION ) ) {
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8' );
     mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+ $contador_contactos=0;
+    $cant_contactos = 0;
+
 
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) == true ) {
 	
