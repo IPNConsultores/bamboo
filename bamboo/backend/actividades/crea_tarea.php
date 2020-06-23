@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $token = bin2hex(random_bytes($largo));
     
         //crea tarea
-        mysqli_query($link, 'insert into tareas(fecha_vencimiento, tarea, prioridad, token) values (\'' . $fechavencimiento . '\', \'' . $tarea . '\', \'' . $prioridad . '\', \'' . $token . '\');');
+        mysqli_query($link, 'insert into tareas(procedimiento,fecha_vencimiento, tarea, prioridad, token) values (\'Manual\' ,\'' . $fechavencimiento . '\', \'' . $tarea . '\', \'' . $prioridad . '\', \'' . $token . '\');');
     
         //rescata id
         $resultado = mysqli_query($link, 'select id from tareas where  token=\'' . $token . '\';');
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
     else
     {
-        mysqli_query($link, 'insert into tareas_recurrentes(estado,tarea, prioridad, fecha_ingreso,recurrente,tarea_con_fecha_fin,fecha_fin,dia_recordatorio) values (\'Activo\' , \'' . $tarea . '\', \'' . $prioridad . '\', current_date, '.$tarea_recurrente.' , '.$tarea_con_fin.' , ' .$fecha.' , '.$dia.');');
+        mysqli_query($link, 'insert into tareas_recurrentes( estado,tarea, prioridad, fecha_ingreso,recurrente,tarea_con_fecha_fin,fecha_fin,dia_recordatorio) values (\'Activo\' , \'' . $tarea . '\', \'' . $prioridad . '\', current_date, '.$tarea_recurrente.' , '.$tarea_con_fin.' , ' .$fecha.' , '.$dia.');');
        // echo 'insert into tareas_recurrentes(tarea, prioridad, fecha_ingreso,recurrente,tarea_con_fecha_fin,fecha_fin,dia_recordatorio) values (\'' . $tarea . '\', \'' . $prioridad . '\', current_date, '.$tarea_recurrente.' , '.$tarea_con_fin.' , ' .$fecha.' , '.$dia.');';
         
     }

@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
         //cliente
-        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        $resultado=mysqli_query($link, 'SELECT id, CONCAT_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \', nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
             {
                 $rut=$row->rut;
@@ -106,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
                 }     
         //cliente
-        $resultado=mysqli_query($link, 'SELECT id, CONCAT(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        $resultado=mysqli_query($link, 'SELECT id, CONCAT_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \',nombre_cliente,  apellido_paterno,  apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
             {
                 $rut=$row->rut;
@@ -190,7 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $tabla_tareas=$tabla_tareas.'<tr><td>'.$num_tareas.'</td><td>'.$prioridad.'</td><td>'.$estado.'</td><td>'.$tarea.'</td><td>'.$fecha_ingreso.'</td><td>'.$fecha_vencimiento.'</td></tr>'."<br>";        
             }   
         //cliente
-        $resultado=mysqli_query($link, 'SELECT a.id, CONCAT(rut_sin_dv, \'-\',dv) as rut, concat_ws(nombre_cliente, \' \', apellido_paterno, \' \', apellido_materno) as nombre , telefono, correo FROM clientes as a left join tareas_relaciones as b on a.id=b.id_relacion and b.base=\'clientes\' where b.id_tarea='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        $resultado=mysqli_query($link, 'SELECT a.id, CONCAT_WS(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \', nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes as a left join tareas_relaciones as b on a.id=b.id_relacion and b.base=\'clientes\' where b.id_tarea='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
             {
                 $rut=$row->rut;
