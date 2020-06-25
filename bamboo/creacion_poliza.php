@@ -13,7 +13,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 2, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision,  FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 2, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional from polizas where id=" . $id_poliza;
+  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 2, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision,  FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 2, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -26,6 +26,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $ramo = $row->ramo;
     $fechainicio = $row->vigencia_inicial;
     $fechavenc = $row->vigencia_final;
+    $fechavenc_ren = $row->vigencia_final_renovada;
     $nro_poliza = $row->numero_poliza;
     $cobertura = $row->cobertura;
     $materia = $row->materia_asegurada;
@@ -180,10 +181,10 @@ function estandariza_info( $data ) {
             <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
               persona?:&nbsp;&nbsp;</label>
             <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
-                                value="diferentes" onchange="checkRadio2(this.name)" checked="checked">
+                                value="diferentes" onchange="checkRadio2(this.name)">
             <label class="form-check-label">No&nbsp;</label>
             <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
-                                onclick="checkRadio2(this.name)" onchange="copiadatos()">
+                                onclick="checkRadio2(this.name)" checked="checked" onchange="copiadatos()">
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
           </div>
           <br>
@@ -1095,6 +1096,8 @@ function renovar_poliza(poliza) {
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
+            document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
+            document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             break;
