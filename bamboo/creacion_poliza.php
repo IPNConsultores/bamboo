@@ -1090,11 +1090,9 @@ function renovar_poliza(poliza) {
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
             document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
             document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
-            document.getElementById("boleta").value = '<?php echo $boleta; ?>';
             document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
-            document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';

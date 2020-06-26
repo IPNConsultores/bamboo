@@ -41,7 +41,6 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $con_vendedor=estandariza_info($_POST["con_vendedor"]);
  $nombre_vendedor=estandariza_info($_POST["nombre_vendedor"]);
  $poliza_renovada=estandariza_info($_POST["poliza_renovada"]);
-
  $fechadeposito=estandariza_info($_POST["fechadeposito"]);
  $comisionneg=cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
  $boletaneg=estandariza_info($_POST["boletaneg"]);
