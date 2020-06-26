@@ -77,7 +77,7 @@ return $data;
 <body>
 <script >
 
-var nro_poliza= <?php echo $nro_poliza; ?>;
+var nro_poliza= '<?php echo $nro_poliza; ?>';
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza
 }, 'post');
