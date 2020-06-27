@@ -331,26 +331,20 @@ function estandariza_info( $data ) {
         <div class="form-inline">
           <select class="form-control" name="selcompania" id="selcompania">
           <option value="null" >Selecciona una compañía</option>
-          <option value="Axa Assistance" <?php if ($selcompania == "Axa Assistance") echo "selected" ?> >Axa Assistance</option>
             <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
             <option value="Chilena Consolidada" <?php if ($selcompania == "Chilena Consolidada") echo "selected" ?> >Chilena Consolidada</option>
             <option value="CHUBB" <?php if ($selcompania == "CHUBB") echo "selected" ?> >CHUBB</option>
             <option value="Confuturo" <?php if ($selcompania == "Confuturo") echo "selected" ?> >Confuturo</option>
             <option value="Consorcio" <?php if ($selcompania == "Consorcio") echo "selected" ?> >Consorcio</option>
             <option value="Continental" <?php if ($selcompania == "Continental") echo "selected" ?> >Continental</option>
-            <option value="Contempora" <?php if ($selcompania == "Contempora") echo "selected" ?> >Contempora</option>
-            <option value="Coris" <?php if ($selcompania == "Coris") echo "selected" ?> >Coris</option>
             <option value="HDI Seguros" <?php if ($selcompania == "HDI Seguros") echo "selected" ?> >HDI Seguros</option>
-            <option value="Mapfre" <?php if ($selcompania == "Mapfre") echo "selected" ?> >Mapfre</option>
+            <option value="Mapfre" <?php if ($selcompania == "Maphre") echo "selected" ?> >Maphre</option>
             <option value="Ohio National Financial Group" <?php if ($selcompania == "Ohio National Financial Group") echo "selected" ?> >Ohio National</option>
             <option value="Orsan" <?php if ($selcompania == "Orsan") echo "selected" ?> >Orsan</option>
             <option value="Reale Seguros" <?php if ($selcompania == "Reale Seguros") echo "selected" ?> >Reale Seguros</option>
             <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
             <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
-            <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
             <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
-            <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
-            <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
             <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
           </select>
         </div>
@@ -363,17 +357,17 @@ function estandariza_info( $data ) {
           <label for="sel1">Ramo:&nbsp;</label>
           <select class="form-control" name="ramo" id="ramo">
           <option value="null">Selecciona un ramo</option>
-          <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
-          <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
-          <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
-          <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
-            <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
+            <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
             <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+			<option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
+            <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
+            <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
             <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
-			      <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
-           <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
-           <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
+            <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
+            <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
+            <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
             <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
+            <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
           </select>
         </div>
         <div class="col-md-4 mb-3">
@@ -1089,8 +1083,8 @@ function renovar_poliza(poliza) {
         }
             case 'renovar':{
              if ('<?php echo $rut_completo_prop; ?>'=='<?php echo $rut_completo_aseg; ?>'){
-                        document.getElementById("radio2_si").checked = false;
-                        document.getElementById("radio2_no").checked = true;
+                        document.getElementById("radio2_si").checked = true;
+                        document.getElementById("radio2_no").checked = false;
                         document.getElementById("busca_poliza").style.display = "block";
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
