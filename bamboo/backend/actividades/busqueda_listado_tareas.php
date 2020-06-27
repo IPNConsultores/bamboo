@@ -10,7 +10,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
     $codigo='{
       "data": [';
     $conta=0;
-    $resul_tareas=mysqli_query($link, "SELECT a.id, DATE_FORMAT(fecha_ingreso, '%Y-%m-%d') as fecha_ingreso ,fecha_vencimiento, tarea, estado, prioridad, procedimiento, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas as a left join tareas_relaciones as b on a.id=b.id_tarea WHERE estado not in ('Cerrado', 'Eliminado') group by a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad, procedimiento");
+    $resul_tareas=mysqli_query($link, "SELECT a.id, DATE_FORMAT(fecha_ingreso, '%d-%m-%Y') as fecha_ingreso ,DATE_FORMAT(fecha_vencimiento, '%d-%m-%Y') as fecha_vencimiento, tarea, estado, prioridad, procedimiento, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas as a left join tareas_relaciones as b on a.id=b.id_tarea WHERE estado not in ('Cerrado', 'Eliminado') group by a.id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad, procedimiento");
   While($tareas=mysqli_fetch_object($resul_tareas))
   {$conta=$conta+1;
     $relaciones=array("relaciones" =>& $tareas->relaciones, "clientes" =>& $tareas->clientes , "polizas" =>& $tareas->polizas);
@@ -23,7 +23,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         {
             switch($rel_tareas->base){
                 case "polizas":{
-                    $resul_rel=mysqli_query($link, "SELECT  estado , compania, ramo, vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno,  b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno, ' ', c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id='".$rel_tareas->id_relacion."' order by estado, vigencia_final asc;");
+                    $resul_rel=mysqli_query($link, "SELECT estado , compania, ramo, DATE_FORMAT(vigencia_inicial, '%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final, '%d-%m-%Y') as vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente, b.apellido_paterno, b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente, c.apellido_paterno, ' ', c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id='".$rel_tareas->id_relacion."' order by estado, vigencia_final asc;");
 
                     while($list_polizas=mysqli_fetch_object($resul_rel))
                     {
