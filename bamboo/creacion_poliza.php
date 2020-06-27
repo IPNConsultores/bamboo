@@ -13,7 +13,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 2, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision,  FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 2, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional from polizas where id=" . $id_poliza;
+  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 2, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision,  FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 2, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota,  fecha_primera_cuota,  vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -27,6 +27,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $fechainicio = $row->vigencia_inicial;
     $fechavenc = $row->vigencia_final;
     $fechavenc_ren = $row->vigencia_final_renovada;
+    $dif_dias=$row->dif_dias;
     $nro_poliza = $row->numero_poliza;
     $cobertura = $row->cobertura;
     $materia = $row->materia_asegurada;
@@ -331,20 +332,26 @@ function estandariza_info( $data ) {
         <div class="form-inline">
           <select class="form-control" name="selcompania" id="selcompania">
           <option value="null" >Selecciona una compañía</option>
+          <option value="Axa Assistance" <?php if ($selcompania == "Axa Assistance") echo "selected" ?> >Axa Assistance</option>
             <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
             <option value="Chilena Consolidada" <?php if ($selcompania == "Chilena Consolidada") echo "selected" ?> >Chilena Consolidada</option>
             <option value="CHUBB" <?php if ($selcompania == "CHUBB") echo "selected" ?> >CHUBB</option>
             <option value="Confuturo" <?php if ($selcompania == "Confuturo") echo "selected" ?> >Confuturo</option>
             <option value="Consorcio" <?php if ($selcompania == "Consorcio") echo "selected" ?> >Consorcio</option>
             <option value="Continental" <?php if ($selcompania == "Continental") echo "selected" ?> >Continental</option>
+            <option value="Contempora" <?php if ($selcompania == "Contempora") echo "selected" ?> >Contempora</option>
+            <option value="Coris" <?php if ($selcompania == "Coris") echo "selected" ?> >Coris</option>
             <option value="HDI Seguros" <?php if ($selcompania == "HDI Seguros") echo "selected" ?> >HDI Seguros</option>
-            <option value="Mapfre" <?php if ($selcompania == "Maphre") echo "selected" ?> >Maphre</option>
+            <option value="Mapfre" <?php if ($selcompania == "Mapfre") echo "selected" ?> >Mapfre</option>
             <option value="Ohio National Financial Group" <?php if ($selcompania == "Ohio National Financial Group") echo "selected" ?> >Ohio National</option>
             <option value="Orsan" <?php if ($selcompania == "Orsan") echo "selected" ?> >Orsan</option>
             <option value="Reale Seguros" <?php if ($selcompania == "Reale Seguros") echo "selected" ?> >Reale Seguros</option>
             <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
             <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
+            <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
+            <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
             <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
+            <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
             <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
           </select>
         </div>
@@ -357,17 +364,17 @@ function estandariza_info( $data ) {
           <label for="sel1">Ramo:&nbsp;</label>
           <select class="form-control" name="ramo" id="ramo">
           <option value="null">Selecciona un ramo</option>
-            <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
-            <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
-			<option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
-            <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
-            <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
-            <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
-            <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
-            <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
-            <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
-            <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
+          <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
+          <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
+          <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
+          <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
             <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
+            <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+            <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
+			      <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
+           <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
+           <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
+            <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
           </select>
         </div>
         <div class="col-md-4 mb-3">
@@ -1107,7 +1114,10 @@ function renovar_poliza(poliza) {
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
-            document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
+            dif_dias
+            if ('<?php echo $dif_dias; ?>'==365 or '<?php echo $dif_dias; ?>'==366){
+              document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
+            }
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             break;
