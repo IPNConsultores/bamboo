@@ -188,11 +188,12 @@ function estandariza_info( $data ) {
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
           </div>
           <br>
+          <br>
           <p><strong>Datos Proponente<br>
             </strong></p>
           <div class="form-row">
-            <div class="form-row">
-              <div class="col-md mb-3">
+           
+              <div class="col-md-3 mb-3">
                 <label for="RUT">RUT</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
@@ -237,73 +238,79 @@ function estandariza_info( $data ) {
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
+            <div class="col-1 ">
               <label for="prop">&nbsp;</label>
               <br>
             </div>
-            <div class="form-row">
-              <div class="col-md-4 mb-3">
+            
+            
+              <div class="col">
                 <label for="Nombre">Nombre</label>
                 <input type="text" id="nombre_prop" class="form-control" name="nombre"
-                                            onchange="copiadatos()" required disabled>
+                                            oninput="checkRut(this);copiadatos()"
+                                            onchange="valida_rut_duplicado_prop();copiadatos()" required disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoP">Apellido Paterno</label>
                 <input type="text" id="apellidop_prop" class="form-control"
-                                            onchange="copiadatos()" name="apellidop" disabled>
+                                            onchange="copiadatos()" name="apellidop"  disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-4 mb-3"style="display:none">
                 <label for="ApellidoM">Apellido Materno</label>
                 <input type="text" id="apellidom_prop" class="form-control" name="apellidom"
                                             onchange="copiadatos()" disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-            </div>
-          </div>
+           </div>
+            
+          <br>
+          
+         <br>
           <p><strong>Datos Asegurado<br>
             </strong></p>
-          <div class="form-row">
-            <div class="form-row">
-              <div class="col-md mb-3">
+          <div class="form-row" >
+           
+              <div class="col-md-3 mb-3">
                 <label for="RUT">RUT</label>
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
                                             placeholder="1111111-1" oninput="checkRut(this)"
-                                            onchange="valida_rut_duplicado_aseg()" required>
+                                             oninput="checkRut(this);copiadatos()"
+                                            onchange="valida_rut_duplicado_aseg();copiadatos()" required disbled>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
               </div>
               <button class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
                                         data-toggle="modal" data-target="#modal_cliente"
-                                        style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px">Buscar
+                                        style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; visibility:hidden">Buscar
               RUT</button>
-            </div>
-            <div class="col-md-2 mb-3 col-xl-3 col-lg-1 offset-lg-0">
+            
+            <div class="col-1 ">
               <label for="prop">&nbsp;</label>
               <br>
             </div>
-            <div class="form-row">
-              <div class="col-md-4 mb-3">
+            
+            
+              <div class="col">
                 <label for="Nombre">Nombre</label>
                 <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
                                             required disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoP">Apellido Paterno</label>
                 <input type="text" id="apellidop_seg" class="form-control" name="apellidopaseg"
                                             disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-              <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoM">Apellido Materno</label>
                 <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg"
                                             disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -728,7 +735,7 @@ function checkRadio(name) {
         document.getElementById("radio_si").checked = true;
         document.getElementById("busca_poliza").style.display = "block";
         document.getElementById("poliza_renovada").style.display = "block";
-        document.getElementById("poliza_renovada").disabled = "true"
+        document.getElementById("poliza_renovada").disabled = true
     }
 }
 
@@ -737,14 +744,14 @@ function checkRadio2(name) {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
         document.getElementById("rutaseg").disabled = false;
-        document.getElementById("busca_rut_aseg").style.display = "block";
+        document.getElementById("busca_rut_aseg").style.visibility = "visible";
 
 
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
         document.getElementById("rutaseg").disabled = true;
-        document.getElementById("busca_rut_aseg").style.display = "none";
+        document.getElementById("busca_rut_aseg").style.visibility = "hidden";
         document.getElementById("rutprop").value = document.getElementById("rutseg").value;
         
     }
@@ -1080,6 +1087,7 @@ function renovar_poliza(poliza) {
                         document.getElementById("radio2_no").checked = true;
                         document.getElementById("busca_poliza").style.display = "block";
                         document.getElementById("poliza_renovada").style.display = "block";
+                        document.getElementById("poliza_renovada").disabled = true;
             }
             document.getElementById("radio_no").checked = false;
             document.getElementById("radio_si").checked = true;

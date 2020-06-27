@@ -121,20 +121,23 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
     <div class="form-row">
-      <div class="col-md-4 mb-3">
+      <div class="col">
         <label for="Nombre"> Nombre</label><label style= "color: darkred">*</label>
         
         <input type="text" class="form-control" name="nombre"  id="nombre" required>
 		 <input type="text" class="form-control" name="id"  id="id" style="display: none">
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
-      <div class="col-md-4 mb-3">
+      
+       
+      
+      <div class="col-md-4 mb-3" style="display : none">
         <label for="ApellidoP">Apellido Paterno</label>
         <label style= "color: darkred">*</label>
         <input type="text" class="form-control" name="apellidop" id="apellidop" required>
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3" style="display : none">
         <label for="ApellidoM">Apellido Materno</label>
         <label style= "color: darkred">*</label>
         <input type="text" class="form-control" name="apellidom" id="apellidom" required>
@@ -152,6 +155,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
           </div>
         </div>
       </div>
+       </div>
+       <div class="form-row">
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">E-mail</label>
         <label style= "color: darkred">*</label>
@@ -181,18 +186,19 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
           
         </div>
       </div>
-      
+     
+      <div class="col-md-4 mb-3">
+          <label for="grupo">Grupo</label>
+          <input type="text" class="form-control" name="grupo" id="grupo">
+        </div>
         <div class="col-md-4 mb-3">
           <label for="referido">Referido</label>
           <input type="text" class="form-control" name="referido" id="referido">
         </div>
-        <div class="col-md-4 mb-3">
-          <label for="grupo">Grupo</label>
-          <input type="text" class="form-control" name="grupo" id="grupo">
-        </div>
+        
+       </div>
       
-      
-    </div>
+   
 	  <br>
       <br>
     <div class="form-row"></div>
