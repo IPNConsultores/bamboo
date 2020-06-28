@@ -1115,7 +1115,8 @@ function renovar_poliza(poliza) {
             document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
-            if ('<?php echo $dif_dias; ?>'==365 or '<?php echo $dif_dias; ?>'==366){
+            var dias_vig_pol='<?php echo $dif_dias; ?>';
+            if (dias_vig_pol=='365' || dias_vig_pol=='366'){
               document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
               document.getElementById("fechaprimer").value = '<?php echo $fecha_primera_cuota_ren; ?>';
             }
