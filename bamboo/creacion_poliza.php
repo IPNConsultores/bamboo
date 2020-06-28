@@ -1090,7 +1090,9 @@ function renovar_poliza(poliza) {
             break;
         }
             case 'renovar':{
-             if ('<?php echo $rut_completo_prop; ?>'=='<?php echo $rut_completo_aseg; ?>'){
+                var rut_prop = '<?php echo $rut_completo_prop; ?>';
+                var rut_aseg ='<?php echo $rut_completo_aseg; ?>';
+             if (rut_prop == rut_aseg){
                         document.getElementById("radio2_si").checked = true;
                         document.getElementById("radio2_no").checked = false;
                         document.getElementById("busca_poliza").style.display = "block";
