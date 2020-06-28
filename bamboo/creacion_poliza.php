@@ -1099,8 +1099,9 @@ function renovar_poliza(poliza) {
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
             }
-            document.getElementById("radio_no").checked = false;
-            document.getElementById("radio_si").checked = true;
+            document.getElementById("radio_no").checked = true;
+            document.getElementById("radio_si").checked = false;
+            document.getElementById("poliza_renovada").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
