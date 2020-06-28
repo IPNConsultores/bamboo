@@ -889,7 +889,7 @@ var table = $('#listado_polizas').DataTable({
     //          "search": {
     //          "search": "abarca"
     //          },
-    "columnDefs": [{
+    "columnDefs": [
         {
             "targets": [5,6],
             "searchable": false
