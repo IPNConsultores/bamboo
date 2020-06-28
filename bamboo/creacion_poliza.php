@@ -426,7 +426,7 @@ function estandariza_info( $data ) {
       <div class="form-row; form-inline">
         <label for="moneda_poliza">Moneda Prima</label>
         <div class="col-1">
-          <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = cambio_moneda()>
+          <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = "cambio_moneda()">
             <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
             <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
             <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
@@ -446,14 +446,14 @@ function estandariza_info( $data ) {
           <label for="prima_afecta">Prima Neta Afecta</label>
           <div class = "form-inline">
             <div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>
-            <input type="text" class="form-control" name="prima_afecta" id="prima_afecta">
+            <input type="text" class="form-control" name="prima_afecta" id="prima_afecta" onChange="calculaprimabruta()">
           </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="prima_exenta">Prima Neta Exenta</label>
           <div class = "form-inline">
             <div class="input-group-prepend"><span class="input-group-text" id="moneda3">UF</span></div>
-            <input type="text" class="form-control" id="prima_exenta" name="prima_exenta">
+            <input type="text" class="form-control" id="prima_exenta" name="prima_exenta" onChange="calculaprimabruta()">
           </div>
         </div>
       </div>
@@ -790,7 +790,17 @@ function cambio_moneda(){
     
 }
 
-
+function calculaprimabruta()
+{
+    var primaafecta =document.getElementById("prima_afecta").value;
+    var primaexenta = document.getElementById("prima_exenta").value;
+    var primabruta;
+    var primaneta;
+    primabruta =  parseFloat(primaafecta.replace(",","."),10)*(1.19) + parseFloat(primaexenta.replace(",","."))
+    primaneta = parseFloat(primaafecta.replace(",","."),10) + parseFloat(primaexenta.replace(",","."))
+   document.getElementById("prima_bruta").value = primabruta.toFixed(2).replace(".",",")
+   document.getElementById("prima_neta").value =primaneta.toFixed(2).replace(".",",")
+}
 
 function modopago() {
     if (document.getElementById("modo_pago").value == "PAT") {
@@ -1095,12 +1105,16 @@ function renovar_poliza(poliza) {
              if (rut_prop == rut_aseg){
                         document.getElementById("radio2_si").checked = true;
                         document.getElementById("radio2_no").checked = false;
-                        document.getElementById("busca_poliza").style.display = "block";
+                     
+            }
+            else {
+            document.getElementById("radio2_no").checked = true;
+            document.getElementById("radio2_si").checked = false;
+            }
+               document.getElementById("busca_poliza").style.display = "block";
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
-            }
-            document.getElementById("radio_no").checked = true;
-            document.getElementById("radio_si").checked = false;
+            
             document.getElementById("poliza_renovada").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
