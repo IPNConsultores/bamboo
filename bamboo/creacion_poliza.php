@@ -432,13 +432,6 @@ function estandariza_info( $data ) {
       <br>
       <div class="form-row; form-inline">
         <label for="moneda_poliza">Moneda Prima</label>
-        <div class="col-1">
-          <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = "cambio_moneda()">
-            <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
-            <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
-            <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
-          </select>
-        </div>
       </div>
       <br>
       <div class="form-row">
@@ -469,15 +462,15 @@ function estandariza_info( $data ) {
           </div>
            <div class = "form" id="deducible_rc" style="display: none; align-items: center;">
             <div class="col-3">
-            <input type="text" class="form-control" name="deducible" id="deducible" value ="%">
+            <input type="text" class="form-control" name="deducible" id="deducible" placeholder ="%">
             </div>
             
-            <label>% Pérdida de</label>
+            <label>% pérdida de</label>
             
             <div class ="col-md-5" style="display: flex; align-items: center;">
             <div class="input-group-prepend"><span class="input-group-text" id="moneda6">UF</span></div>
             
-            <input type="text" class="form-control" name="deducible" id="deducible" value ="Valor">
+            <input type="text" class="form-control" name="deducible" id="deducible" placeholder ="Valor">
             </div>
             
           </div>
