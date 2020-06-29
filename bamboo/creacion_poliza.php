@@ -4,8 +4,13 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino = '';
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
+  require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
+    mysqli_set_charset( $link, 'utf8' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+  $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
+  $resultado = mysqli_query( $link, $query );
   } else {
     $camino = 'modificar';
   }
@@ -609,32 +614,32 @@ function estandariza_info( $data ) {
                       <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
                     </select>
                   
-                                      <select class="form-control" name="cuotas" id="cuotas">
+                    <select class="form-control" name="cuotas" id="cuotas">
                      <option value="null">Selecciona Cantidad de Cuotas</option>
-                     <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Sin Cuotas</option>
-                     <option value="2" <?php if ($modo_pago == "2") echo "selected" ?> >2 Cuotas</option>
-                     <option value="3" <?php if ($modo_pago == "3") echo "selected" ?> >3 Cuotas</option>
-                     <option value="4" <?php if ($modo_pago == "4") echo "selected" ?> >4 Cuotas</option>
-                     <option value="5" <?php if ($modo_pago == "5") echo "selected" ?> >5 Cuotas</option>
-                     <option value="6" <?php if ($modo_pago == "6") echo "selected" ?> >6 Cuotas</option>
-                     <option value="7" <?php if ($modo_pago == "7") echo "selected" ?> >7 Cuotas</option>
-                     <option value="8" <?php if ($modo_pago == "8") echo "selected" ?> >8 Cuotas</option>
-                     <option value="9" <?php if ($modo_pago == "9") echo "selected" ?> >9 Cuotas</option>
-                     <option value="10" <?php if ($modo_pago == "10") echo "selected" ?> >10 Cuotas</option>
-                     <option value="11" <?php if ($modo_pago == "11") echo "selected" ?> >11 Cuotas</option>
-                     <option value="12" <?php if ($modo_pago == "12") echo "selected" ?> >12 Cuotas</option>
-                     <option value="13" <?php if ($modo_pago == "13") echo "selected" ?> >13 Cuotas</option>
-                     <option value="14" <?php if ($modo_pago == "14") echo "selected" ?> >14 Cuotas</option>
-                     <option value="15" <?php if ($modo_pago == "15") echo "selected" ?> >15 Cuotas</option>
-                     <option value="16" <?php if ($modo_pago == "16") echo "selected" ?> >16 Cuotas</option>
-                     <option value="17" <?php if ($modo_pago == "17") echo "selected" ?> >17 Cuotas</option>
-                     <option value="18" <?php if ($modo_pago == "18") echo "selected" ?> >18 Cuotas</option>
-                     <option value="19" <?php if ($modo_pago == "19") echo "selected" ?> >19 Cuotas</option>
-                     <option value="20" <?php if ($modo_pago == "20") echo "selected" ?> >21 Cuotas</option>
-                     <option value="21" <?php if ($modo_pago == "21") echo "selected" ?> >21 Cuotas</option>
-                     <option value="22" <?php if ($modo_pago == "22") echo "selected" ?> >22 Cuotas</option>
-                     <option value="23" <?php if ($modo_pago == "23") echo "selected" ?> >23 Cuotas</option>
-                     <option value="24" <?php if ($modo_pago == "24") echo "selected" ?> >24 Cuotas</option>
+                     <option value="Sin cuotas" <?php if ($cuotas == "Contado") echo "selected" ?> >Sin Cuotas</option>
+                     <option value="2 Cuotas" <?php if ($cuotas == "2 Cuotas") echo "selected" ?> >2 Cuotas</option>
+                     <option value="3 Cuotas" <?php if ($cuotas == "3 Cuotas") echo "selected" ?> >3 Cuotas</option>
+                     <option value="4 Cuotas" <?php if ($cuotas == "4 Cuotas") echo "selected" ?> >4 Cuotas</option>
+                     <option value="5 Cuotas" <?php if ($cuotas == "5 Cuotas") echo "selected" ?> >5 Cuotas</option>
+                     <option value="6 Cuotas" <?php if ($cuotas == "6 Cuotas") echo "selected" ?> >6 Cuotas</option>
+                     <option value="7 Cuotas" <?php if ($cuotas == "7 Cuotas") echo "selected" ?> >7 Cuotas</option>
+                     <option value="8 Cuotas" <?php if ($cuotas == "8 Cuotas") echo "selected" ?> >8 Cuotas</option>
+                     <option value="9 Cuotas" <?php if ($cuotas == "9 Cuotas") echo "selected" ?> >9 Cuotas</option>
+                     <option value="10 Cuotas" <?php if ($cuotas == "10 Cuotas") echo "selected" ?> >10 Cuotas</option>
+                     <option value="11 Cuotas" <?php if ($cuotas == "11 Cuotas") echo "selected" ?> >11 Cuotas</option>
+                     <option value="12 Cuotas" <?php if ($cuotas == "12 Cuotas") echo "selected" ?> >12 Cuotas</option>
+                     <option value="13 Cuotas" <?php if ($cuotas == "13 Cuotas") echo "selected" ?> >13 Cuotas</option>
+                     <option value="14 Cuotas" <?php if ($cuotas == "14 Cuotas") echo "selected" ?> >14 Cuotas</option>
+                     <option value="15 Cuotas" <?php if ($cuotas == "15 Cuotas") echo "selected" ?> >15 Cuotas</option>
+                     <option value="16 Cuotas" <?php if ($cuotas == "16 Cuotas") echo "selected" ?> >16 Cuotas</option>
+                     <option value="17 Cuotas" <?php if ($cuotas == "17 Cuotas") echo "selected" ?> >17 Cuotas</option>
+                     <option value="18 Cuotas" <?php if ($cuotas == "18 Cuotas") echo "selected" ?> >18 Cuotas</option>
+                     <option value="19 Cuotas" <?php if ($cuotas == "19 Cuotas") echo "selected" ?> >19 Cuotas</option>
+                     <option value="20 Cuotas" <?php if ($cuotas == "20 Cuotas") echo "selected" ?> >21 Cuotas</option>
+                     <option value="21 Cuotas" <?php if ($cuotas == "21 Cuotas") echo "selected" ?> >21 Cuotas</option>
+                     <option value="22 Cuotas" <?php if ($cuotas == "22 Cuotas") echo "selected" ?> >22 Cuotas</option>
+                     <option value="23 Cuotas" <?php if ($cuotas == "23 Cuotas") echo "selected" ?> >23 Cuotas</option>
+                     <option value="24 Cuotas" <?php if ($cuotas == "24 Cuotas") echo "selected" ?> >24 Cuotas</option>
                      
                     </select>
                   
