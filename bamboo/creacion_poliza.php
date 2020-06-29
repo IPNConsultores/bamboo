@@ -111,7 +111,7 @@ function estandariza_info( $data ) {
   <br>
   <br>
   <div class="form-check form-check-inline">
- <div class= "form" id="pregunta_renovar">
+ <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;>
   <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
   <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                 onclick="checkRadio(this.name)" checked="checked">
@@ -747,18 +747,6 @@ function estandariza_info( $data ) {
 </html>
 <script>
 
-function validacampos(){
-    var ramo = document.getElementById("ramo").value
-    var compañia = document.getElementById("selcompania").value
-    var forma_pago = document.getElementById("modo_pago").value
-    
-    
-    if(ramo =="null"|| compañia =="null" || forma_pago =="null"){
-        
-         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        
-    }
-}
 
 function valida_rut_duplicado_prop() {
     var dato = $('#rutprop').val();
@@ -1253,10 +1241,7 @@ function renovar_poliza(poliza, ti) {
                document.getElementById("busca_poliza").style.display = "block";
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
-            
-  
-ramo =="null
-Success!
+
             document.getElementById("poliza_renovada").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
