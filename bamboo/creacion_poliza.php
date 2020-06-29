@@ -111,6 +111,7 @@ function estandariza_info( $data ) {
   <br>
   <br>
   <div class="form-check form-check-inline">
+ <div class= "form" id="pregunta_renovar">
   <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
   <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                 onclick="checkRadio(this.name)" checked="checked">
@@ -154,6 +155,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
+  </div>
   </div>
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
@@ -363,7 +365,7 @@ function estandariza_info( $data ) {
       <div class="form-row">
         <div class="col-md-2 mb-3">
           <label for="sel1">Ramo:&nbsp;</label>
-          <select class="form-control" name="ramo" id="ramo">
+          <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible()">
           <option value="null">Selecciona un ramo</option>
           <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
           <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
@@ -437,9 +439,40 @@ function estandariza_info( $data ) {
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="deducible">Deducible</label>
-          <div class = "form-inline">
+          <div class = "form-inline" id="deducible_defecto" >
             <div class="input-group-prepend"><span class="input-group-text" id="moneda">UF</span></div>
             <input type="text" class="form-control" name="deducible" id="deducible">
+          </div>
+          <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
+            <div class="input-group-prepend"><span class="input-group-text">UF</span></div>
+            
+            <select class="form-control" id="deducible" name="deducible">
+            <option value="1" <?php if ($moneda_poliza == "1") echo "selected" ?> >1</option>
+            <option value="3" <?php if ($moneda_poliza == "3") echo "selected" ?> >3</option>
+            <option value="5" <?php if ($moneda_poliza == "5") echo "selected" ?> >5</option>
+            <option value="10" <?php if ($moneda_poliza == "10") echo "selected" ?> >10</option>
+            <option value="20" <?php if ($moneda_poliza == "20") echo "selected" ?> >20</option>
+          </select>
+          </div>
+          <div class = "form-inline" id="deducible_viaje"  style="display:none" >
+            <input type="text" class="form-control" name="deducible" id="deducible" value ="No Aplica">
+          </div>
+           <div class = "form-inline" id="deducible_inc"  style="display:none">
+            <input type="text" class="form-control" name="deducible" id="deducible" value ="Varios">
+          </div>
+           <div class = "form" id="deducible_rc" style="display: none; align-items: center;">
+            <div class="col-3">
+            <input type="text" class="form-control" name="deducible" id="deducible" value ="%">
+            </div>
+            
+            <label>% Pérdida de</label>
+            
+            <div class ="col-md-5" style="display: flex; align-items: center;">
+            <div class="input-group-prepend"><span class="input-group-text" id="moneda6">UF</span></div>
+            
+            <input type="text" class="form-control" name="deducible" id="deducible" value ="Valor">
+            </div>
+            
           </div>
         </div>
         <div class="col-md-4 mb-3">
@@ -508,6 +541,14 @@ function estandariza_info( $data ) {
             <label for="materia"><b>Comisión</b></label>
             <br>
             <div class="form-row">
+              
+              <div class="col-md-4 mb-3">
+                <label>Porcentaje Comisión del Corredor</label>
+                <div class="form-inline">
+                <input type="text" class="form-control" id="porcentaje_comsion" name="porcentaje_comsion" onChange="calculacomision()">
+                <div class="input-group-prepend"><span class="input-group-text" id="porcentaje_comi">%</span></div>
+              </div>
+              </div>
               <div class="col-md-4 mb-3">
                 <label for="comision">Comisión Correspondiente</label>
                 <div class="form-inline">
@@ -515,13 +556,6 @@ function estandariza_info( $data ) {
                     <input type="text" class="form-control" id="comision" name="comision">
                  
                 </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label>Porcentaje Comisión del Corredor</label>
-                <div class="form-inline">
-                <input type="text" class="form-control" id="porcentaje_comsion" name="porcentaje_comsion">
-                <div class="input-group-prepend"><span class="input-group-text" id="porcentaje_comi">%</span></div>
-              </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Comisión Bruta a Pago</label>
@@ -787,6 +821,7 @@ function cambio_moneda(){
     document.getElementById("moneda3").innerHTML = moneda;
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
+     document.getElementById("moneda6").innerHTML = moneda;
     
 }
 
@@ -802,6 +837,17 @@ function calculaprimabruta()
    document.getElementById("prima_neta").value =primaneta.toFixed(2).replace(".",",")
 }
 
+function calculacomision()
+{
+    var porcentajecomision =document.getElementById("porcentaje_comsion").value;
+    var primaneta = document.getElementById("prima_neta").value;
+    var comision;
+    
+    comision =  parseFloat(porcentajecomision.replace(",","."),10)/(100)*parseFloat(primaneta.replace(",","."))
+    
+   document.getElementById("comision").value =comision.toFixed(2).replace(".",",")
+}
+
 function modopago() {
     if (document.getElementById("modo_pago").value == "PAT") {
         document.getElementById("cuotas").disabled = false;
@@ -809,6 +855,56 @@ function modopago() {
     } else {
         document.getElementById("cuotas").disabled = true;
 
+    }
+}
+
+function cambia_deducible(){
+    
+    ramo = document.getElementById("ramo").value;
+    
+    if (ramo == "VEH"){
+        
+         document.getElementById("deducible_veh").style.display = "flex";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+        
+    } 
+    
+    
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "flex";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+        
+    }
+    
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "flex";
+         document.getElementById("deducible_rc").style.display = "none";
+        
+    }
+    else if (ramo == "RC" || ramo =="D&O" ){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "flex";
+        
+    }
+    
+    else {
+           document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "flex";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
     }
 }
 
@@ -1059,6 +1155,7 @@ function renovar_poliza(poliza) {
                         document.getElementById("radio2_si").checked = true;
                         document.getElementById("radio2_no").checked = false;
             }
+            document.getElementById("pregunta_renovar").style.display = "none"
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
