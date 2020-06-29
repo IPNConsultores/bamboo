@@ -159,7 +159,7 @@ function estandariza_info( $data ) {
   </div>
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
-  <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST" novalidate id="formulario">
+  <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST"  id="formulario" novalidate>
     <div id="auxiliar" style="display: none;">
       <input name="id_poliza" id="id_poliza">
     </div>
@@ -253,7 +253,7 @@ function estandariza_info( $data ) {
                 <input type="text" id="nombre_prop" class="form-control" name="nombre"
                                             oninput="checkRut(this);copiadatos()"
                                             onchange="valida_rut_duplicado_prop();copiadatos()" required disabled>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador1">No puedes dejar este campo en blanco</div>
               </div>
               <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoP">Apellido Paterno</label>
@@ -300,7 +300,7 @@ function estandariza_info( $data ) {
                 <label for="Nombre">Nombre</label>
                 <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
                                             required disabled>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador2">No puedes dejar este campo en blanco</div>
               </div>
               <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoP">Apellido Paterno</label>
@@ -384,14 +384,14 @@ function estandariza_info( $data ) {
           <label for="Nombre">Vigencia Inicial</label>
           <div class="md-form">
             <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
-                                        class="form-control">
+                                        class="form-control" required>
           </div>
           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="Nombre">Vigencia Final</label>
           <div class="md-form">
-            <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control">
+            <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" required>
           </div>
           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
         </div>
@@ -599,7 +599,7 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
                 <label for="formapago">Forma de Pago</label>
                 
-                  <div class="form-inline">
+                  <div class="form" style="display: flex; align-items: center;">
                    
                     <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
                     <option value="null">Selecciona forma de pago</option>
@@ -609,8 +609,34 @@ function estandariza_info( $data ) {
                       <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
                     </select>
                   
-                  
-                    <input type="text" class="form-control" id="cuotas" name="cuotas"  placeholder="Número de Cuotas">
+                                      <select class="form-control" name="cuotas" id="cuotas">
+                     <option value="null">Selecciona Cantidad de Cuotas</option>
+                     <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Sin Cuotas</option>
+                     <option value="2" <?php if ($modo_pago == "2") echo "selected" ?> >2 Cuotas</option>
+                     <option value="3" <?php if ($modo_pago == "3") echo "selected" ?> >3 Cuotas</option>
+                     <option value="4" <?php if ($modo_pago == "4") echo "selected" ?> >4 Cuotas</option>
+                     <option value="5" <?php if ($modo_pago == "5") echo "selected" ?> >5 Cuotas</option>
+                     <option value="6" <?php if ($modo_pago == "6") echo "selected" ?> >6 Cuotas</option>
+                     <option value="7" <?php if ($modo_pago == "7") echo "selected" ?> >7 Cuotas</option>
+                     <option value="8" <?php if ($modo_pago == "8") echo "selected" ?> >8 Cuotas</option>
+                     <option value="9" <?php if ($modo_pago == "9") echo "selected" ?> >9 Cuotas</option>
+                     <option value="10" <?php if ($modo_pago == "10") echo "selected" ?> >10 Cuotas</option>
+                     <option value="11" <?php if ($modo_pago == "11") echo "selected" ?> >11 Cuotas</option>
+                     <option value="12" <?php if ($modo_pago == "12") echo "selected" ?> >12 Cuotas</option>
+                     <option value="13" <?php if ($modo_pago == "13") echo "selected" ?> >13 Cuotas</option>
+                     <option value="14" <?php if ($modo_pago == "14") echo "selected" ?> >14 Cuotas</option>
+                     <option value="15" <?php if ($modo_pago == "15") echo "selected" ?> >15 Cuotas</option>
+                     <option value="16" <?php if ($modo_pago == "16") echo "selected" ?> >16 Cuotas</option>
+                     <option value="17" <?php if ($modo_pago == "17") echo "selected" ?> >17 Cuotas</option>
+                     <option value="18" <?php if ($modo_pago == "18") echo "selected" ?> >18 Cuotas</option>
+                     <option value="19" <?php if ($modo_pago == "19") echo "selected" ?> >19 Cuotas</option>
+                     <option value="20" <?php if ($modo_pago == "20") echo "selected" ?> >21 Cuotas</option>
+                     <option value="21" <?php if ($modo_pago == "21") echo "selected" ?> >21 Cuotas</option>
+                     <option value="22" <?php if ($modo_pago == "22") echo "selected" ?> >22 Cuotas</option>
+                     <option value="23" <?php if ($modo_pago == "23") echo "selected" ?> >23 Cuotas</option>
+                     <option value="24" <?php if ($modo_pago == "24") echo "selected" ?> >24 Cuotas</option>
+                     
+                    </select>
                   
                 
               </div>
@@ -680,7 +706,7 @@ function estandariza_info( $data ) {
       </div>
     </div>
     <br>
-    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit'>Registrar</button>
+    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit' onclick="validacampos()">Registrar</button>
   </form>
   <br>
   <br>
@@ -720,6 +746,20 @@ function estandariza_info( $data ) {
 </body>
 </html>
 <script>
+
+function validacampos(){
+    var ramo = document.getElementById("ramo").value
+    var compañia = document.getElementById("selcompania").value
+    var forma_pago = document.getElementById("modo_pago").value
+    
+    
+    if(ramo =="null"|| compañia =="null" || forma_pago =="null"){
+        
+         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+        
+    }
+}
+
 function valida_rut_duplicado_prop() {
     var dato = $('#rutprop').val();
     var rut_sin_dv = dato.replace('-', '');
@@ -851,11 +891,13 @@ function calculacomision()
 }
 
 function modopago() {
-    if (document.getElementById("modo_pago").value == "PAT") {
-        document.getElementById("cuotas").disabled = false;
+    if (document.getElementById("modo_pago").value == "Contado") {
+        document.getElementById("cuotas").disabled = true;
+        document.getElementById("cuotas").value = "Contado";
 
     } else {
-        document.getElementById("cuotas").disabled = true;
+        document.getElementById("cuotas").disabled = false;
+        document.getElementById("cuotas").value = "null";
 
     }
 }
@@ -1212,6 +1254,9 @@ function renovar_poliza(poliza, ti) {
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
             
+  
+ramo =="null
+Success!
             document.getElementById("poliza_renovada").checked = true;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
@@ -1243,3 +1288,5 @@ function renovar_poliza(poliza, ti) {
 
 
 </script>
+
+
