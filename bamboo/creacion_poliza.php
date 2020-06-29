@@ -447,11 +447,13 @@ function estandariza_info( $data ) {
             <div class="input-group-prepend"><span class="input-group-text">UF</span></div>
             
             <select class="form-control" id="deducible" name="deducible">
-            <option value="1" <?php if ($moneda_poliza == "1") echo "selected" ?> >1</option>
-            <option value="3" <?php if ($moneda_poliza == "3") echo "selected" ?> >3</option>
-            <option value="5" <?php if ($moneda_poliza == "5") echo "selected" ?> >5</option>
-            <option value="10" <?php if ($moneda_poliza == "10") echo "selected" ?> >10</option>
-            <option value="20" <?php if ($moneda_poliza == "20") echo "selected" ?> >20</option>
+            <option value="null"?> >Selecciona el deducible</option>
+            <option value="UF 1" <?php if ($moneda_poliza == "UF 1") echo "selected" ?> >UF 1</option>
+            <option value="UF 3" <?php if ($moneda_poliza == "UF 3") echo "selected" ?> >UF 3</option>
+            <option value="UF 5" <?php if ($moneda_poliza == "UF 5") echo "selected" ?> >UF 5</option>
+            <option value="UF 10" <?php if ($moneda_poliza == "UF 10") echo "selected" ?> >UF 10</option>
+            <option value="UF 20" <?php if ($moneda_poliza == "UF 20") echo "selected" ?> >UF 20</option>
+            <option value="Sin deducible" <?php if ($moneda_poliza == "Sin deducible") echo "selected" ?> >Sin deducible</option>
           </select>
           </div>
           <div class = "form-inline" id="deducible_viaje"  style="display:none" >
@@ -1136,7 +1138,8 @@ function seleccion_rut(rut) {
     $('.modal-backdrop').remove();
 }
 
-function renovar_poliza(poliza) {
+function renovar_poliza(poliza, ti) {
+  //acá se debe hacer la validación
     console.log(poliza);
     $('#modal_poliza').modal('hide');
     $('body').removeClass('modal-open');
