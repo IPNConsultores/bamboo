@@ -656,7 +656,7 @@ function detalle_tareas(d) {
                     '</td><td>' + d.materia_asegurada[j] +
                     '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
                     .id_poliza[j] +
-                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
+                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
         }
@@ -837,11 +837,16 @@ var myDoughnutChart = new Chart(ctx2, {
     data: {
         datasets: [{
             data: <?php echo json_encode($cantidad);?> ,
-            backgroundColor : ["rgb(255, 99, 132)",
-                "rgb(54, 162, 235)",
+            backgroundColor : ["rgb(54, 162, 235)",
+                "rgb(255, 99, 132)",
                 "rgb(255, 205, 86)",
-                "rgb(200, 205, 86)", "rgb(155, 205, 86)", "rgb(105, 205, 86)", "rgb(55, 205, 86)",
-                "rgb(0, 205, 86)", "rgb(0, 155, 86)", "rgb(0, 105, 86)"
+                "rgb(200, 205, 86)", 
+                "rgb(155, 205, 86)", 
+                "rgb(105, 205, 86)", 
+                "rgb(55, 205, 86)",
+                "rgb(0, 205, 86)", 
+                "rgb(0, 155, 86)", 
+                "rgb(0, 105, 86)"
             ],
 
             label: 'Ramo'
