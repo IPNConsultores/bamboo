@@ -972,10 +972,11 @@ var table = $('#listado_polizas').DataTable({
     "columns": [{
             "className": 'details-control',
             "orderable": false,
-            "data": "id_poliza",
-            "render": function(data, type, full, meta) {
-                return '<button type="button" id="' + data +
-                    '" onclick="renovar_poliza(this.id)" class="btn btn-outline-primary">Renovar</button>';
+            "data": null,
+            "render": function(data, type, row, meta) {
+                return '<button type="button" id="' + row.id_poliza +
+                    '" name="' + row.tipo_poliza +
+                    '" onclick="renovar_poliza(this.id, this.name)" class="btn btn-outline-primary">Renovar</button>';
             }
         },
         {
@@ -1019,9 +1020,6 @@ var table = $('#listado_polizas').DataTable({
             title: "Nombre asegurado"
         }    
     ],
-    //          "search": {
-    //          "search": "abarca"
-    //          },
     "columnDefs": [
         {
             "targets": [5,6],
@@ -1173,16 +1171,56 @@ function seleccion_rut(rut) {
     $('.modal-backdrop').remove();
 }
 
-function renovar_poliza(poliza, ti) {
+function renovar_poliza(poliza, tipo_poliza) {
   //acá se debe hacer la validación
-    console.log(poliza);
+      console.log(poliza);
+    console.log(tipo_poliza);
+  if (tipo_poliza=='Renovada'){
+  console.log('Alerta de renovación');
+  var r = confirm("La póliza seleccionada ya se encuentra renovada por otra póliza. ¿Deseas continuar?");
+    if (r == true) {
+    console.log('Continúa renovandola');
+    var r2 = confirm("¿Deseas editar la póliza que renovó la póliza seleccionada?");
+        if (r2 == true) {
+        console.log('Edita póliza');
+        
+        $('#modal_poliza').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            $.redirect('/bamboo/creacion_poliza.php');
+        }
+        else
+        {
+        console.log('Renovación nueva');
+            $('#modal_poliza').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            $.redirect('/bamboo/creacion_poliza.php', {
+            'id_poliza': poliza,
+            'renovar':true
+            }, 'post');
+        }
+    }
+    else
+    {
+    console.log('No continúa');
+        $('#modal_poliza').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+$.redirect('/bamboo/creacion_poliza.php');
+    }
+    
+  } else
+  {
+    console.log('continúa normal');
     $('#modal_poliza').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
-      $.redirect('/bamboo/creacion_poliza.php', {
-  'id_poliza': poliza,
-  'renovar':true
-}, 'post');
+    $.redirect('/bamboo/creacion_poliza.php', {
+    'id_poliza': poliza,
+    'renovar':true
+    }, 'post');
+  }
 }
 
   document.addEventListener("DOMContentLoaded", function(event) {
