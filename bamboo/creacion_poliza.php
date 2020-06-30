@@ -1263,17 +1263,20 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
             
-      var ramo = document.getElementById("ramo").value;        
+            var ramo = document.getElementById("ramo").value;        
             
          if (ramo == "VEH"){
-          document.getElementById("deducible_veh_1").value = document.getElementById("deducible").value;
+             var deducible =document.getElementById("deducible").value;
+             
+          document.getElementById("deducible_veh_1").value = deducible;
            } 
           else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
-            document.getElementById("deducible_inc_1").value =  document.getElementById("deducible").value;
+              var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_inc_1").value =  deducible;
             }
     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
-
-            document.getElementById("deducible_viaje_1").value = document.getElementById("deducible").value ;
+         var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_viaje_1").value = deducible ;
         
     }
      else if (ramo == "RC" || ramo =="D&O" ){
