@@ -72,6 +72,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
 
 }
 
+
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -116,7 +117,7 @@ function estandariza_info( $data ) {
   <br>
   <br>
   <div class="form-check form-check-inline">
- <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;>
+ <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
   <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
   <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                 onclick="checkRadio(this.name)" checked="checked">
@@ -432,45 +433,59 @@ function estandariza_info( $data ) {
       <br>
       <div class="form-row; form-inline">
         <label for="moneda_poliza">Moneda Prima</label>
+                <div class="col-1">
+          <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = "cambio_moneda()">
+            <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
+            <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
+            <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
+          </select>
+        </div>
+
       </div>
       <br>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
+        
+   <div class="col-md-4 mb-3">
           <label for="deducible">Deducible</label>
+          
+          <div class = "form-inline"  style="display: none" >
+          <input type="text" class="form-control" name="deducible" id="deducible">
+          </div>
           <div class = "form-inline" id="deducible_defecto" >
             <div class="input-group-prepend"><span class="input-group-text" id="moneda">UF</span></div>
-            <input type="text" class="form-control" name="deducible" id="deducible">
+            <input type="text" class="form-control" name="deducible" id="deducible_defecto_1" onChange = "pobladeducible()">
           </div>
           <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
-            <div class="input-group-prepend"><span class="input-group-text">UF</span></div>
-            
-            <select class="form-control" id="deducible" name="deducible">
-            <option value="null"?> >Selecciona el deducible</option>
-            <option value="UF 1" <?php if ($moneda_poliza == "UF 1") echo "selected" ?> >UF 1</option>
-            <option value="UF 3" <?php if ($moneda_poliza == "UF 3") echo "selected" ?> >UF 3</option>
-            <option value="UF 5" <?php if ($moneda_poliza == "UF 5") echo "selected" ?> >UF 5</option>
-            <option value="UF 10" <?php if ($moneda_poliza == "UF 10") echo "selected" ?> >UF 10</option>
-            <option value="UF 20" <?php if ($moneda_poliza == "UF 20") echo "selected" ?> >UF 20</option>
+           
+            <div class="input-group-prepend"><span class="input-group-text" id="moneda6">UF</span></div>
+            <select class="form-control" id="deducible_veh_1" name="deducible_veh_1" onChange = "pobladeducible()">
+               
+            <option value="null"?>Selecciona el deducible</option>
+            <option value="1" <?php if ($moneda_poliza == "1") echo "selected" ?> >1</option>
+            <option value="3" <?php if ($moneda_poliza == "3") echo "selected" ?> >3</option>
+            <option value="5" <?php if ($moneda_poliza == "5") echo "selected" ?> >5</option>
+            <option value="10" <?php if ($moneda_poliza == "10") echo "selected" ?> >10</option>
+            <option value="20" <?php if ($moneda_poliza == "20") echo "selected" ?> >20</option>
             <option value="Sin deducible" <?php if ($moneda_poliza == "Sin deducible") echo "selected" ?> >Sin deducible</option>
           </select>
           </div>
           <div class = "form-inline" id="deducible_viaje"  style="display:none" >
-            <input type="text" class="form-control" name="deducible" id="deducible" value ="No Aplica">
+            <input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value ="No Aplica" onChange = "pobladeducible()">
           </div>
            <div class = "form-inline" id="deducible_inc"  style="display:none">
-            <input type="text" class="form-control" name="deducible" id="deducible" value ="Varios">
+            <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value ="Varios" onChange = "pobladeducible()">
           </div>
            <div class = "form" id="deducible_rc" style="display: none; align-items: center;">
             <div class="col-3">
-            <input type="text" class="form-control" name="deducible" id="deducible" placeholder ="%">
+            <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder ="%">
             </div>
             
-            <label>% pérdida de</label>
+            <label>% Pérdida de</label>
             
             <div class ="col-md-5" style="display: flex; align-items: center;">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda6">UF</span></div>
+            <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
             
-            <input type="text" class="form-control" name="deducible" id="deducible" placeholder ="Valor">
+            <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder ="Valor" onChange = "pobladeducible()">
             </div>
             
           </div>
@@ -820,6 +835,7 @@ function checkRadio2(name) {
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
+
         document.getElementById("rutaseg").disabled = true;
         document.getElementById("busca_rut_aseg").style.visibility = "hidden";
         document.getElementById("rutprop").value = document.getElementById("rutseg").value;
@@ -850,7 +866,7 @@ function cambio_moneda(){
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
      document.getElementById("moneda6").innerHTML = moneda;
-    
+     document.getElementById("moneda7").innerHTML = moneda;
 }
 
 function calculaprimabruta()
@@ -888,6 +904,41 @@ function modopago() {
     }
 }
 
+function pobladeducible(){
+    
+    ramo = document.getElementById("ramo").value;
+    
+    if (ramo == "VEH"){
+         document.getElementById("deducible").value =  document.getElementById("deducible_veh_1").value;
+       
+    } 
+    
+      else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+        
+         document.getElementById("deducible").value =  document.getElementById("deducible_inc_1").value;
+        
+    }
+    else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+
+          document.getElementById("deducible").value =  document.getElementById("deducible_viaje_1").value;
+        
+    }
+     else if (ramo == "RC" || ramo =="D&O" ){
+      
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% pérdida de " + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
+        
+    }
+    
+        else {
+           
+         document.getElementById("deducible").value =  document.getElementById("deducible_defecto_1").value
+         
+    }
+    
+    
+    
+}
+
 function cambia_deducible(){
     
     ramo = document.getElementById("ramo").value;
@@ -899,6 +950,7 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "none";
+         document.getElementById("deducible").value =  document.getElementById("deducible_veh_1").value;
         
     } 
     
@@ -909,15 +961,17 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "flex";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "none";
+         document.getElementById("deducible").value =  document.getElementById("deducible_inc_1").value;
         
     }
     
-     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
         document.getElementById("deducible_veh").style.display = "none";
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "flex";
          document.getElementById("deducible_rc").style.display = "none";
+         document.getElementById("deducible").value =  document.getElementById("deducible_viaje_1").value;
         
     }
     else if (ramo == "RC" || ramo =="D&O" ){
@@ -926,6 +980,7 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "flex";
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + " % pérdida de " + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -935,8 +990,11 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "none";
+         document.getElementById("deducible").value =  document.getElementById("deducible_defecto_1").value
     }
 }
+
+
 
 function validavendedor() {
     if (document.getElementById("con_vendedor").value == "Si") {
