@@ -696,7 +696,7 @@ function estandariza_info( $data ) {
       <input name="id_poliza_renovada" id="id_poliza_renovada">
       <input name="nro_poliza_renovada" id="nro_poliza_renovada">
     </div>
-    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit' onclick="validacampos()">Registrar</button>
+    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit'>Registrar</button>
   </form>
   <br>
   <br>
