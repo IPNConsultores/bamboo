@@ -1263,40 +1263,6 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
             
-            var ramo = document.getElementById("ramo").value;        
-            
-         if (ramo == "VEH"){
-             var deducible =document.getElementById("deducible").value;
-             
-          document.getElementById("deducible_veh_1").value = deducible;
-           } 
-          else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
-              var deducible =document.getElementById("deducible").value;
-            document.getElementById("deducible_inc_1").value =  deducible;
-            }
-    else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
-         var deducible =document.getElementById("deducible").value;
-            document.getElementById("deducible_viaje_1").value = deducible ;
-        
-    }
-     else if (ramo == "RC" || ramo =="D&O" ){
-      
-      var deducible = document.getElementById("deducible").value
-      
-      var cadena = document.getElementById("deducible").value.split("%")
-      document.getElementById("deducible_porcentaje").value = cadena[0];
-      document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
-      
-    }
-    
-        else {
-           
-         document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
-         
-    }
-        
-        
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
             document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
@@ -1323,6 +1289,70 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
+            
+            
+            
+    var ramo = document.getElementById("ramo").value
+    if (ramo == "VEH"){
+        
+         document.getElementById("deducible_veh").style.display = "flex";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+           var deducible =document.getElementById("deducible").value;
+             
+          document.getElementById("deducible_veh_1").value = deducible;
+    } 
+    
+    
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "flex";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+          var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_inc_1").value =  deducible;
+        
+    }
+    
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "flex";
+         document.getElementById("deducible_rc").style.display = "none";
+         var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_viaje_1").value = deducible ;
+        
+    }
+    else if (ramo == "RC" || ramo =="D&O" ){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "flex";
+        var deducible = document.getElementById("deducible").value
+      
+      var cadena = document.getElementById("deducible").value.split("%")
+      document.getElementById("deducible_porcentaje").value = cadena[0];
+      document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+    }
+    
+    else {
+           document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "flex";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+        document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
+    }
+}
+
+
+            
             break;
         }
             case 'renovar':{
@@ -1349,28 +1379,7 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
             
-             var ramo = document.getElementById("ramo").value;        
-            
-                 if (ramo == "VEH"){
-                    document.getElementById("deducible_veh_1").value = document.getElementById("deducible").value;
-                                    } 
-                else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
-                    document.getElementById("deducible_inc_1").value =  document.getElementById("deducible").value;
-                                    }
-                else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
-
-                    document.getElementById("deducible_viaje_1").value = document.getElementById("deducible").value ;
-                                    }
-                else if (ramo == "RC" || ramo =="D&O" ){
-      
-                    var cadena = document.getElementById("deducible").value.split("%")
-                    document.getElementById("deducible_porcentaje").value = cadena[0];
-                    document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-                    document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
-    }
-                else {
-         document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
-    }
+             
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
             document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
@@ -1388,6 +1397,68 @@ $.redirect('/bamboo/creacion_poliza.php');
             }
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
+            
+            var ramo = document.getElementById("ramo").value
+    if (ramo == "VEH"){
+        
+         document.getElementById("deducible_veh").style.display = "flex";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+           var deducible =document.getElementById("deducible").value;
+             
+          document.getElementById("deducible_veh_1").value = deducible;
+    } 
+    
+    
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "flex";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+          var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_inc_1").value =  deducible;
+        
+    }
+    
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "flex";
+         document.getElementById("deducible_rc").style.display = "none";
+         var deducible =document.getElementById("deducible").value;
+            document.getElementById("deducible_viaje_1").value = deducible ;
+        
+    }
+    else if (ramo == "RC" || ramo =="D&O" ){
+        document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "none";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "flex";
+        var deducible = document.getElementById("deducible").value
+      
+      var cadena = document.getElementById("deducible").value.split("%")
+      document.getElementById("deducible_porcentaje").value = cadena[0];
+      document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+    }
+    
+    else {
+           document.getElementById("deducible_veh").style.display = "none";
+         document.getElementById("deducible_defecto").style.display = "flex";
+         document.getElementById("deducible_inc").style.display = "none";
+         document.getElementById("deducible_viaje").style.display = "none";
+         document.getElementById("deducible_rc").style.display = "none";
+        document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
+    }
+}
+
+
+            
             break;
         }
     }
