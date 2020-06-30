@@ -1205,10 +1205,21 @@ function renovar_poliza(poliza, tipo_poliza) {
         if (r2 == true) {
         console.log('Edita póliza');
         
-        $('#modal_poliza').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-            $.redirect('/bamboo/creacion_poliza.php');
+        $.ajax({
+            type: "POST",
+            url: "/bamboo/backend/polizas/busqueda_poliza_renovada.php",
+            data: {
+                id_a_renovar: poliza
+            },
+            dataType: 'JSON',
+            success: function(response) {
+
+                var datax = JSON.parse(response);
+                //console.log(datax);
+
+            }
+
+        });
         }
         else
         {
@@ -1362,7 +1373,8 @@ $.redirect('/bamboo/creacion_poliza.php');
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
 
-            document.getElementById("poliza_renovada").checked = true;
+            document.getElementById("radio_si").checked = true;
+            document.getElementById("radio_no").checked = false;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
