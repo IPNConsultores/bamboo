@@ -448,25 +448,25 @@ function estandariza_info( $data ) {
    <div class="col-md-4 mb-3">
           <label for="deducible">Deducible</label>
           
-          <div class = "form-inline"  style="display: none" >
+          <div class = "form-inline"  style="display:none" >
           <input type="text" class="form-control" name="deducible" id="deducible">
           </div>
           <div class = "form-inline" id="deducible_defecto" >
             <div class="input-group-prepend"><span class="input-group-text" id="moneda">UF</span></div>
-            <input type="text" class="form-control" name="deducible" id="deducible_defecto_1" onChange = "pobladeducible()">
+            <input type="text" class="form-control" name="deducible_defecto" id="deducible_defecto_1" onChange = "pobladeducible()">
           </div>
           <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
            
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda6">UF</span></div>
+            
             <select class="form-control" id="deducible_veh_1" name="deducible_veh_1" onChange = "pobladeducible()">
                
             <option value="null"?>Selecciona el deducible</option>
-            <option value="1" <?php if ($moneda_poliza == "1") echo "selected" ?> >1</option>
-            <option value="3" <?php if ($moneda_poliza == "3") echo "selected" ?> >3</option>
-            <option value="5" <?php if ($moneda_poliza == "5") echo "selected" ?> >5</option>
-            <option value="10" <?php if ($moneda_poliza == "10") echo "selected" ?> >10</option>
-            <option value="20" <?php if ($moneda_poliza == "20") echo "selected" ?> >20</option>
-            <option value="Sin deducible" <?php if ($moneda_poliza == "Sin deducible") echo "selected" ?> >Sin deducible</option>
+            <option value="UF 1" <?php if ($deducible == "UF 1") echo "selected" ?> >UF 1</option>
+            <option value="UF 3" <?php if ($deducible == "UF 3") echo "selected" ?> >UF 3</option>
+            <option value="UF 5" <?php if ($deducible == "UF 5") echo "selected" ?> >UF 5</option>
+            <option value="UF 10" <?php if ($deducible == "UF 10") echo "selected" ?> >UF 10</option>
+            <option value="UF 20" <?php if ($deducible == "UF 20") echo "selected" ?> >UF 20</option>
+            <option value="Sin deducible" <?php if ($deducible == "Sin deducible") echo "selected" ?> >Sin deducible</option>
           </select>
           </div>
           <div class = "form-inline" id="deducible_viaje"  style="display:none" >
@@ -835,7 +835,6 @@ function checkRadio2(name) {
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
-
         document.getElementById("rutaseg").disabled = true;
         document.getElementById("busca_rut_aseg").style.visibility = "hidden";
         document.getElementById("rutprop").value = document.getElementById("rutseg").value;
