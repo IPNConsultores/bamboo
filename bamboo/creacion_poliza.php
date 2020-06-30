@@ -692,6 +692,10 @@ function estandariza_info( $data ) {
       </div>
     </div>
     <br>
+    <div id="auxiliar2" style="display: none;">
+      <input name="id_poliza_renovada" id="id_poliza_renovada">
+      <input name="nro_poliza_renovada" id="nro_poliza_renovada">
+    </div>
     <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit' onclick="validacampos()">Registrar</button>
   </form>
   <br>
@@ -1390,9 +1394,11 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
             document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
-            document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("nro_poliza_renovada").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("id_poliza_renovada").value = '<?php echo $id_poliza; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
+            
             var dias_vig_pol='<?php echo $dif_dias; ?>';
             if (dias_vig_pol=='365' || dias_vig_pol=='366'){
               document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
