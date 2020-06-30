@@ -3,14 +3,15 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = '';
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
+  and isset( $_POST[ "id_poliza" ] ) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
     mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
-  $resultado = mysqli_query( $link, $query );
+    mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+    $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
+    $resultado = mysqli_query( $link, $query );
   } else {
     $camino = 'modificar';
   }
@@ -32,8 +33,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $fechainicio = $row->vigencia_inicial;
     $fechavenc = $row->vigencia_final;
     $fechavenc_ren = $row->vigencia_final_renovada;
-    $dif_dias=$row->dif_dias;
-    $fecha_primera_cuota_ren=$row->fecha_primera_cuota_ren;
+    $dif_dias = $row->dif_dias;
+    $fecha_primera_cuota_ren = $row->fecha_primera_cuota_ren;
     $nro_poliza = $row->numero_poliza;
     $cobertura = $row->cobertura;
     $materia = $row->materia_asegurada;
@@ -87,15 +88,13 @@ function estandariza_info( $data ) {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/bamboo/bamboo.png">
-<!-- Bootstrap -->
-
+<!-- Bootstrap --> 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="/assets/css/datatables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script> 
@@ -105,8 +104,8 @@ function estandariza_info( $data ) {
 <body>
 <!-- body code goes here -->
 
-
 <?php include 'header2.php' ?>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </div>
@@ -117,51 +116,51 @@ function estandariza_info( $data ) {
   <br>
   <br>
   <div class="form-check form-check-inline">
- <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
-  <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
-  <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
+  <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
+    <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
+    <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
                 onclick="checkRadio(this.name)" checked="checked">
-  <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-  <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
+    <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
+    <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
                 onclick="checkRadio(this.name)">
-  <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-  <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
+    <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+    <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
                 style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
-  <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text"
+    <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text"
                 aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div id="test1" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div id="test1" class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <table class="display" style="width:100%" id="listado_polizas">
-              <tr>
-                <th></th>
-                <th>Estado</th>
-                <th>Póliza</th>
-                <th>Compañia</th>
-                <th>Ramo</th>
-                <th>Inicio Vigencia</th>
-                <th>Fin Vigencia</th>
-                <th>Materia Asegurada</th>
-                <th>Observaciones</th>
-                <th>nom_clienteP</th>
-                <th>nom_clienteA</th>
-              </tr>
-            </table>
-            <div id="botones_poliza"></div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <table class="display" style="width:100%" id="listado_polizas">
+                <tr>
+                  <th></th>
+                  <th>Estado</th>
+                  <th>Póliza</th>
+                  <th>Compañia</th>
+                  <th>Ramo</th>
+                  <th>Inicio Vigencia</th>
+                  <th>Fin Vigencia</th>
+                  <th>Materia Asegurada</th>
+                  <th>Observaciones</th>
+                  <th>nom_clienteP</th>
+                  <th>nom_clienteA</th>
+                </tr>
+              </table>
+              <div id="botones_poliza"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
@@ -176,33 +175,32 @@ function estandariza_info( $data ) {
     <br>
     <br>
     <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne" style="background-color:whitesmoke">
-        <h5 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+      <div class="card">
+        <div class="card-header" id="headingOne" style="background-color:whitesmoke">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y
-          Proponente</button>
-        </h5>
-      </div>
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+            Proponente</button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
-        <div class="card-body">
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
-              persona?:&nbsp;&nbsp;</label>
-            <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
+          <div class="card-body">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
+                persona?:&nbsp;&nbsp;</label>
+              <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
                                 value="diferentes" onchange="checkRadio2(this.name)">
-            <label class="form-check-label">No&nbsp;</label>
-            <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
+              <label class="form-check-label">No&nbsp;</label>
+              <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
                                 onclick="checkRadio2(this.name)" checked="checked" onchange="copiadatos()">
-            <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-          </div>
-          <br>
-          <br>
-          <p><strong>Datos Proponente<br>
-            </strong></p>
-          <div class="form-row">
-           
+              <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+            </div>
+            <br>
+            <br>
+            <p><strong>Datos Proponente<br>
+              </strong></p>
+            <div class="form-row">
               <div class="col-md-3 mb-3">
                 <label for="RUT">RUT</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
@@ -248,12 +246,10 @@ function estandariza_info( $data ) {
                   </div>
                 </div>
               </div>
-            <div class="col-1 ">
-              <label for="prop">&nbsp;</label>
-              <br>
-            </div>
-            
-            
+              <div class="col-1 ">
+                <label for="prop">&nbsp;</label>
+                <br>
+              </div>
               <div class="col">
                 <label for="Nombre">Nombre</label>
                 <input type="text" id="nombre_prop" class="form-control" name="nombre"
@@ -273,15 +269,12 @@ function estandariza_info( $data ) {
                                             onchange="copiadatos()" disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-           </div>
-            
-          <br>
-          
-         <br>
-          <p><strong>Datos Asegurado<br>
-            </strong></p>
-          <div class="form-row" >
-           
+            </div>
+            <br>
+            <br>
+            <p><strong>Datos Asegurado<br>
+              </strong></p>
+            <div class="form-row" >
               <div class="col-md-3 mb-3">
                 <label for="RUT">RUT</label>
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
@@ -295,13 +288,10 @@ function estandariza_info( $data ) {
                                         data-toggle="modal" data-target="#modal_cliente"
                                         style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; visibility:hidden">Buscar
               RUT</button>
-            
-            <div class="col-1 ">
-              <label for="prop">&nbsp;</label>
-              <br>
-            </div>
-            
-            
+              <div class="col-1 ">
+                <label for="prop">&nbsp;</label>
+                <br>
+              </div>
               <div class="col">
                 <label for="Nombre">Nombre</label>
                 <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
@@ -314,220 +304,209 @@ function estandariza_info( $data ) {
                                             disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-            <div class="col-md-4 mb-3" style="display:none">
+              <div class="col-md-4 mb-3" style="display:none">
                 <label for="ApellidoM">Apellido Materno</label>
                 <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg"
                                             disabled>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
-            
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card">
-    <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+      <div class="card">
+        <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                             style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-    <div class="card-body">
-      <label for="compania"><b>Compañía</b></label>
-      <br>
-      <div class="form-row">
-        <div class="form-inline">
-          <select class="form-control" name="selcompania" id="selcompania">
-          <option value="null" >Selecciona una compañía</option>
-          <option value="Axa Assistance" <?php if ($selcompania == "Axa Assistance") echo "selected" ?> >Axa Assistance</option>
-            <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
-            <option value="Chilena Consolidada" <?php if ($selcompania == "Chilena Consolidada") echo "selected" ?> >Chilena Consolidada</option>
-            <option value="CHUBB" <?php if ($selcompania == "CHUBB") echo "selected" ?> >CHUBB</option>
-            <option value="Confuturo" <?php if ($selcompania == "Confuturo") echo "selected" ?> >Confuturo</option>
-            <option value="Consorcio" <?php if ($selcompania == "Consorcio") echo "selected" ?> >Consorcio</option>
-            <option value="Continental" <?php if ($selcompania == "Continental") echo "selected" ?> >Continental</option>
-            <option value="Contempora" <?php if ($selcompania == "Contempora") echo "selected" ?> >Contempora</option>
-            <option value="Coris" <?php if ($selcompania == "Coris") echo "selected" ?> >Coris</option>
-            <option value="HDI Seguros" <?php if ($selcompania == "HDI Seguros") echo "selected" ?> >HDI Seguros</option>
-            <option value="Mapfre" <?php if ($selcompania == "Mapfre") echo "selected" ?> >Mapfre</option>
-            <option value="Ohio National Financial Group" <?php if ($selcompania == "Ohio National Financial Group") echo "selected" ?> >Ohio National</option>
-            <option value="Orsan" <?php if ($selcompania == "Orsan") echo "selected" ?> >Orsan</option>
-            <option value="Reale Seguros" <?php if ($selcompania == "Reale Seguros") echo "selected" ?> >Reale Seguros</option>
-            <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
-            <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
-            <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
-            <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
-            <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
-            <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
-            <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
-          </select>
+          </h5>
         </div>
-      </div>
-      <br>
-      <label for="poliza"><b>Póliza</b></label>
-      <br>
-      <div class="form-row">
-        <div class="col-md-2 mb-3">
-          <label for="sel1">Ramo:&nbsp;</label>
-          <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible()">
-          <option value="null">Selecciona un ramo</option>
-          <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
-          <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
-          <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
-          <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
-            <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
-            <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
-            <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
-			      <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
-           <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
-           <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
-            <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="Nombre">Vigencia Inicial</label>
-          <div class="md-form">
-            <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+            <label for="compania"><b>Compañía</b></label>
+            <br>
+            <div class="form-row">
+              <div class="form-inline">
+                <select class="form-control" name="selcompania" id="selcompania">
+                  <option value="null" >Selecciona una compañía</option>
+                  <option value="Axa Assistance" <?php if ($selcompania == "Axa Assistance") echo "selected" ?> >Axa Assistance</option>
+                  <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
+                  <option value="Chilena Consolidada" <?php if ($selcompania == "Chilena Consolidada") echo "selected" ?> >Chilena Consolidada</option>
+                  <option value="CHUBB" <?php if ($selcompania == "CHUBB") echo "selected" ?> >CHUBB</option>
+                  <option value="Confuturo" <?php if ($selcompania == "Confuturo") echo "selected" ?> >Confuturo</option>
+                  <option value="Consorcio" <?php if ($selcompania == "Consorcio") echo "selected" ?> >Consorcio</option>
+                  <option value="Continental" <?php if ($selcompania == "Continental") echo "selected" ?> >Continental</option>
+                  <option value="Contempora" <?php if ($selcompania == "Contempora") echo "selected" ?> >Contempora</option>
+                  <option value="Coris" <?php if ($selcompania == "Coris") echo "selected" ?> >Coris</option>
+                  <option value="HDI Seguros" <?php if ($selcompania == "HDI Seguros") echo "selected" ?> >HDI Seguros</option>
+                  <option value="Mapfre" <?php if ($selcompania == "Mapfre") echo "selected" ?> >Mapfre</option>
+                  <option value="Ohio National Financial Group" <?php if ($selcompania == "Ohio National Financial Group") echo "selected" ?> >Ohio National</option>
+                  <option value="Orsan" <?php if ($selcompania == "Orsan") echo "selected" ?> >Orsan</option>
+                  <option value="Reale Seguros" <?php if ($selcompania == "Reale Seguros") echo "selected" ?> >Reale Seguros</option>
+                  <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
+                  <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
+                  <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
+                  <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
+                  <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
+                  <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
+                  <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <label for="poliza"><b>Póliza</b></label>
+            <br>
+            <div class="form-row">
+              <div class="col-md-2 mb-3">
+                <label for="sel1">Ramo:&nbsp;</label>
+                <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible()">
+                  <option value="null">Selecciona un ramo</option>
+                  <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
+                  <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
+                  <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
+                  <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
+                  <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
+                  <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+                  <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
+                  <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
+                  <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
+                  <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
+                  <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="Nombre">Vigencia Inicial</label>
+                <div class="md-form">
+                  <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
                                         class="form-control" required>
-          </div>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="Nombre">Vigencia Final</label>
-          <div class="md-form">
-            <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" required>
-          </div>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-4">
-          <label for="poliza">Número de Poliza</label>
-          <input type="text" class="form-control" id="nro_poliza" name="nro_poliza" required>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        </div>
-        <div class="col-4">
-          <label for="cobertura">Cobertura</label>
-          <input type="text" class="form-control" id="cobertura" name="cobertura">
-        </div>
-      </div>
-      <br>
-      <label for="materia"><b>Materia</b></label>
-      <br>
-      <div class="form-row">
-        <div class="col">
-          <label for="poliza">Materia Asegurada</label>
-          <input type="text" class="form-control" id="materia" name="materia" required>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        </div>
-        <div class="col">
-          <label for="poliza">Patente o Ubicación</label>
-          <input type="text" class="form-control"  id="detalle_materia" name="detalle_materia" required>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-        </div>
-      </div>
-      <br>
-      <label for="materia"><b>Deducible, Primas y Montos</b></label>
-      <br>
-      <div class="form-row; form-inline">
-        <label for="moneda_poliza">Moneda Prima</label>
-                <div class="col-1">
-          <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = "cambio_moneda()">
-            <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
-            <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
-            <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
-          </select>
-        </div>
-
-      </div>
-      <br>
-      <div class="form-row">
-        
-   <div class="col-md-4 mb-3">
-          <label for="deducible">Deducible</label>
-          
-          <div class = "form-inline"  style="display:none" >
-          <input type="text" class="form-control" name="deducible" id="deducible">
-          </div>
-          <div class = "form-inline" id="deducible_defecto" >
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda">UF</span></div>
-            <input type="text" class="form-control" name="deducible_defecto" id="deducible_defecto_1" onChange = "pobladeducible()">
-          </div>
-          <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
-           
-            
-            <select class="form-control" id="deducible_veh_1" name="deducible_veh_1" onChange = "pobladeducible()">
-               
-            <option value="null"?>Selecciona el deducible</option>
-            <option value="UF 1" <?php if ($deducible == "UF 1") echo "selected" ?> >UF 1</option>
-            <option value="UF 3" <?php if ($deducible == "UF 3") echo "selected" ?> >UF 3</option>
-            <option value="UF 5" <?php if ($deducible == "UF 5") echo "selected" ?> >UF 5</option>
-            <option value="UF 10" <?php if ($deducible == "UF 10") echo "selected" ?> >UF 10</option>
-            <option value="UF 20" <?php if ($deducible == "UF 20") echo "selected" ?> >UF 20</option>
-            <option value="Sin deducible" <?php if ($deducible == "Sin deducible") echo "selected" ?> >Sin deducible</option>
-          </select>
-          </div>
-          <div class = "form-inline" id="deducible_viaje"  style="display:none" >
-            <input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value ="No Aplica" onChange = "pobladeducible()">
-          </div>
-           <div class = "form-inline" id="deducible_inc"  style="display:none">
-            <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value ="Varios" onChange = "pobladeducible()">
-          </div>
-           <div class = "form" id="deducible_rc" style="display: none; align-items: center;">
-            <div class="col-3">
-            <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder ="%">
+                </div>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="Nombre">Vigencia Final</label>
+                <div class="md-form">
+                  <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" required>
+                </div>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+              </div>
             </div>
-            
-            <label>% Pérdida de</label>
-            
-            <div class ="col-md-5" style="display: flex; align-items: center;">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
-            
-            <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder ="Valor" onChange = "pobladeducible()">
+            <div class="form-row">
+              <div class="col-4">
+                <label for="poliza">Número de Poliza</label>
+                <input type="text" class="form-control" id="nro_poliza" name="nro_poliza" required>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+              </div>
+              <div class="col-4">
+                <label for="cobertura">Cobertura</label>
+                <input type="text" class="form-control" id="cobertura" name="cobertura">
+              </div>
             </div>
-            
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="prima_afecta">Prima Neta Afecta</label>
-          <div class = "form-inline">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>
-            <input type="text" class="form-control" name="prima_afecta" id="prima_afecta" onChange="calculaprimabruta()">
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="prima_exenta">Prima Neta Exenta</label>
-          <div class = "form-inline">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda3">UF</span></div>
-            <input type="text" class="form-control" id="prima_exenta" name="prima_exenta" onChange="calculaprimabruta()">
+            <br>
+            <label for="materia"><b>Materia</b></label>
+            <br>
+            <div class="form-row">
+              <div class="col">
+                <label for="poliza">Materia Asegurada</label>
+                <input type="text" class="form-control" id="materia" name="materia" required>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+              </div>
+              <div class="col">
+                <label for="poliza">Patente o Ubicación</label>
+                <input type="text" class="form-control"  id="detalle_materia" name="detalle_materia" required>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+              </div>
+            </div>
+            <br>
+            <label for="materia"><b>Deducible, Primas y Montos</b></label>
+            <br>
+            <div class="form-row; form-inline">
+              <label for="moneda_poliza">Moneda Prima</label>
+              <div class="col-1">
+                <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange = "cambio_moneda()">
+                  <option value="UF" <?php if ($moneda_poliza == "UF") echo "selected" ?> >UF</option>
+                  <option value="USD" <?php if ($moneda_poliza == "USD") echo "selected" ?> >USD</option>
+                  <option value="CLP" <?php if ($moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label for="deducible">Deducible</label>
+                <div class = "form-inline"  style="display:none" >
+                  <input type="text" class="form-control" name="deducible" id="deducible">
+                </div>
+                <div class = "form-inline" id="deducible_defecto" >
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda">UF</span></div>
+                  <input type="text" class="form-control" name="deducible_defecto" id="deducible_defecto_1" onChange = "pobladeducible()">
+                </div>
+                <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
+                  <select class="form-control" id="deducible_veh_1" name="deducible_veh_1" onChange = "pobladeducible()">
+                    <option value="null"?>Selecciona el deducible</option>
+                    <option value="UF 1" <?php if ($deducible == "UF 1") echo "selected" ?> >UF 1</option>
+                    <option value="UF 3" <?php if ($deducible == "UF 3") echo "selected" ?> >UF 3</option>
+                    <option value="UF 5" <?php if ($deducible == "UF 5") echo "selected" ?> >UF 5</option>
+                    <option value="UF 10" <?php if ($deducible == "UF 10") echo "selected" ?> >UF 10</option>
+                    <option value="UF 20" <?php if ($deducible == "UF 20") echo "selected" ?> >UF 20</option>
+                    <option value="Sin deducible" <?php if ($deducible == "Sin deducible") echo "selected" ?> >Sin deducible</option>
+                  </select>
+                </div>
+                <div class = "form-inline" id="deducible_viaje"  style="display:none" >
+                  <input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value ="No Aplica" onChange = "pobladeducible()">
+                </div>
+                <div class = "form-inline" id="deducible_inc"  style="display:none">
+                  <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value ="Varios" onChange = "pobladeducible()">
+                </div>
+                <div class = "form" id="deducible_rc" style="display: none; align-items: center;">
+                  <div class="col-3">
+                    <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder ="%">
+                  </div>
+                  <label>% Pérdida de</label>
+                  <div class ="col-md-5" style="display: flex; align-items: center;">
+                    <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
+                    <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder ="Valor" onChange = "pobladeducible()">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="prima_afecta">Prima Neta Afecta</label>
+                <div class = "form-inline">
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>
+                  <input type="text" class="form-control" name="prima_afecta" id="prima_afecta" onChange="calculaprimabruta()">
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="prima_exenta">Prima Neta Exenta</label>
+                <div class = "form-inline">
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda3">UF</span></div>
+                  <input type="text" class="form-control" id="prima_exenta" name="prima_exenta" onChange="calculaprimabruta()">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label for="prima_afecta">Prima Neta Total</label>
+                <div class = "form-inline">
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda4">UF</span></div>
+                  <input type="text" class="form-control" id="prima_neta" name="prima_neta">
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="prima_afecta">Prima Bruta Anual</label>
+                <div class = "form-inline">
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda5">UF</span></div>
+                  <input type="text" class="form-control" id="prima_bruta" name="prima_bruta">
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="monto_aseg">Monto Asegurado</label>
+                <input type="text" class="form-control" name="monto_aseg" id="monto_aseg">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="prima_afecta">Prima Neta Total</label>
-          <div class = "form-inline">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda4">UF</span></div>
-            <input type="text" class="form-control" id="prima_neta" name="prima_neta">
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="prima_afecta">Prima Bruta Anual</label>
-          <div class = "form-inline">
-            <div class="input-group-prepend"><span class="input-group-text" id="moneda5">UF</span></div>
-            <input type="text" class="form-control" id="prima_bruta" name="prima_bruta">
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="monto_aseg">Monto Asegurado</label>
-          <input type="text" class="form-control" name="monto_aseg" id="monto_aseg">
-        </div>
-      </div>
-		</div>
-		</div>
-		</div>
       <div class="card">
         <div class="card-header" id="headingThree" style="background-color:whitesmoke">
           <h5 class="mb-0">
@@ -556,20 +535,18 @@ function estandariza_info( $data ) {
             <label for="materia"><b>Comisión</b></label>
             <br>
             <div class="form-row">
-              
               <div class="col-md-4 mb-3">
                 <label>Porcentaje Comisión del Corredor</label>
                 <div class="form-inline">
-                <input type="text" class="form-control" id="porcentaje_comsion" name="porcentaje_comsion" onChange="calculacomision()">
-                <div class="input-group-prepend"><span class="input-group-text" id="porcentaje_comi">%</span></div>
-              </div>
+                  <input type="text" class="form-control" id="porcentaje_comsion" name="porcentaje_comsion" onChange="calculacomision()">
+                  <div class="input-group-prepend"><span class="input-group-text" id="porcentaje_comi">%</span></div>
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="comision">Comisión Correspondiente</label>
                 <div class="form-inline">
-                   <div class="input-group-prepend"><span class="input-group-text" id="moneda5">UF</span></div>
-                    <input type="text" class="form-control" id="comision" name="comision">
-                 
+                  <div class="input-group-prepend"><span class="input-group-text" id="moneda5">UF</span></div>
+                  <input type="text" class="form-control" id="comision" name="comision">
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -591,8 +568,8 @@ function estandariza_info( $data ) {
                                         class="form-control">
                 </div>
               </div>
-              </div>
-              <br>
+            </div>
+            <br>
             <label for="materia"><b>Comisión Negativa</b></label>
             <br>
             <div class="form-row">
@@ -611,60 +588,54 @@ function estandariza_info( $data ) {
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="formapago">Forma de Pago</label>
-                
-                  <div class="form" style="display: flex; align-items: center;">
-                   
-                    <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
+                <div class="form" style="display: flex; align-items: center;">
+                  <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
                     <option value="null">Selecciona forma de pago</option>
-                      <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
-                      <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
-                      <option value="Plan de pago" <?php if ($modo_pago == "Plan de pago") echo "selected" ?> >Plan de pago</option>
-                      <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
-                    </select>
-                  
-                    <select class="form-control" name="cuotas" id="cuotas">
-                     <option value="null">Selecciona Cantidad de Cuotas</option>
-                     <option value="Sin cuotas" <?php if ($cuotas == "Contado") echo "selected" ?> >Sin Cuotas</option>
-                     <option value="2 Cuotas" <?php if ($cuotas == "2 Cuotas") echo "selected" ?> >2 Cuotas</option>
-                     <option value="3 Cuotas" <?php if ($cuotas == "3 Cuotas") echo "selected" ?> >3 Cuotas</option>
-                     <option value="4 Cuotas" <?php if ($cuotas == "4 Cuotas") echo "selected" ?> >4 Cuotas</option>
-                     <option value="5 Cuotas" <?php if ($cuotas == "5 Cuotas") echo "selected" ?> >5 Cuotas</option>
-                     <option value="6 Cuotas" <?php if ($cuotas == "6 Cuotas") echo "selected" ?> >6 Cuotas</option>
-                     <option value="7 Cuotas" <?php if ($cuotas == "7 Cuotas") echo "selected" ?> >7 Cuotas</option>
-                     <option value="8 Cuotas" <?php if ($cuotas == "8 Cuotas") echo "selected" ?> >8 Cuotas</option>
-                     <option value="9 Cuotas" <?php if ($cuotas == "9 Cuotas") echo "selected" ?> >9 Cuotas</option>
-                     <option value="10 Cuotas" <?php if ($cuotas == "10 Cuotas") echo "selected" ?> >10 Cuotas</option>
-                     <option value="11 Cuotas" <?php if ($cuotas == "11 Cuotas") echo "selected" ?> >11 Cuotas</option>
-                     <option value="12 Cuotas" <?php if ($cuotas == "12 Cuotas") echo "selected" ?> >12 Cuotas</option>
-                     <option value="13 Cuotas" <?php if ($cuotas == "13 Cuotas") echo "selected" ?> >13 Cuotas</option>
-                     <option value="14 Cuotas" <?php if ($cuotas == "14 Cuotas") echo "selected" ?> >14 Cuotas</option>
-                     <option value="15 Cuotas" <?php if ($cuotas == "15 Cuotas") echo "selected" ?> >15 Cuotas</option>
-                     <option value="16 Cuotas" <?php if ($cuotas == "16 Cuotas") echo "selected" ?> >16 Cuotas</option>
-                     <option value="17 Cuotas" <?php if ($cuotas == "17 Cuotas") echo "selected" ?> >17 Cuotas</option>
-                     <option value="18 Cuotas" <?php if ($cuotas == "18 Cuotas") echo "selected" ?> >18 Cuotas</option>
-                     <option value="19 Cuotas" <?php if ($cuotas == "19 Cuotas") echo "selected" ?> >19 Cuotas</option>
-                     <option value="20 Cuotas" <?php if ($cuotas == "20 Cuotas") echo "selected" ?> >21 Cuotas</option>
-                     <option value="21 Cuotas" <?php if ($cuotas == "21 Cuotas") echo "selected" ?> >21 Cuotas</option>
-                     <option value="22 Cuotas" <?php if ($cuotas == "22 Cuotas") echo "selected" ?> >22 Cuotas</option>
-                     <option value="23 Cuotas" <?php if ($cuotas == "23 Cuotas") echo "selected" ?> >23 Cuotas</option>
-                     <option value="24 Cuotas" <?php if ($cuotas == "24 Cuotas") echo "selected" ?> >24 Cuotas</option>
-                     
-                    </select>
-                  
-                
-              </div>
+                    <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
+                    <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
+                    <option value="Plan de pago" <?php if ($modo_pago == "Plan de pago") echo "selected" ?> >Plan de pago</option>
+                    <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
+                  </select>
+                  <select class="form-control" name="cuotas" id="cuotas">
+                    <option value="null">Selecciona Cantidad de Cuotas</option>
+                    <option value="Sin cuotas" <?php if ($cuotas == "Contado") echo "selected" ?> >Sin Cuotas</option>
+                    <option value="2 Cuotas" <?php if ($cuotas == "2 Cuotas") echo "selected" ?> >2 Cuotas</option>
+                    <option value="3 Cuotas" <?php if ($cuotas == "3 Cuotas") echo "selected" ?> >3 Cuotas</option>
+                    <option value="4 Cuotas" <?php if ($cuotas == "4 Cuotas") echo "selected" ?> >4 Cuotas</option>
+                    <option value="5 Cuotas" <?php if ($cuotas == "5 Cuotas") echo "selected" ?> >5 Cuotas</option>
+                    <option value="6 Cuotas" <?php if ($cuotas == "6 Cuotas") echo "selected" ?> >6 Cuotas</option>
+                    <option value="7 Cuotas" <?php if ($cuotas == "7 Cuotas") echo "selected" ?> >7 Cuotas</option>
+                    <option value="8 Cuotas" <?php if ($cuotas == "8 Cuotas") echo "selected" ?> >8 Cuotas</option>
+                    <option value="9 Cuotas" <?php if ($cuotas == "9 Cuotas") echo "selected" ?> >9 Cuotas</option>
+                    <option value="10 Cuotas" <?php if ($cuotas == "10 Cuotas") echo "selected" ?> >10 Cuotas</option>
+                    <option value="11 Cuotas" <?php if ($cuotas == "11 Cuotas") echo "selected" ?> >11 Cuotas</option>
+                    <option value="12 Cuotas" <?php if ($cuotas == "12 Cuotas") echo "selected" ?> >12 Cuotas</option>
+                    <option value="13 Cuotas" <?php if ($cuotas == "13 Cuotas") echo "selected" ?> >13 Cuotas</option>
+                    <option value="14 Cuotas" <?php if ($cuotas == "14 Cuotas") echo "selected" ?> >14 Cuotas</option>
+                    <option value="15 Cuotas" <?php if ($cuotas == "15 Cuotas") echo "selected" ?> >15 Cuotas</option>
+                    <option value="16 Cuotas" <?php if ($cuotas == "16 Cuotas") echo "selected" ?> >16 Cuotas</option>
+                    <option value="17 Cuotas" <?php if ($cuotas == "17 Cuotas") echo "selected" ?> >17 Cuotas</option>
+                    <option value="18 Cuotas" <?php if ($cuotas == "18 Cuotas") echo "selected" ?> >18 Cuotas</option>
+                    <option value="19 Cuotas" <?php if ($cuotas == "19 Cuotas") echo "selected" ?> >19 Cuotas</option>
+                    <option value="20 Cuotas" <?php if ($cuotas == "20 Cuotas") echo "selected" ?> >21 Cuotas</option>
+                    <option value="21 Cuotas" <?php if ($cuotas == "21 Cuotas") echo "selected" ?> >21 Cuotas</option>
+                    <option value="22 Cuotas" <?php if ($cuotas == "22 Cuotas") echo "selected" ?> >22 Cuotas</option>
+                    <option value="23 Cuotas" <?php if ($cuotas == "23 Cuotas") echo "selected" ?> >23 Cuotas</option>
+                    <option value="24 Cuotas" <?php if ($cuotas == "24 Cuotas") echo "selected" ?> >24 Cuotas</option>
+                  </select>
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="valorcuota">Valor Cuota</label>
-				  <div class = "form-inline">
-				  <select class="form-control" name="moneda_cuota" id="moneda_cuota">
-                      <option value="UF" <?php if ($moneda_cuota == "UF") echo "selected" ?> >UF</option>
-                      <option value="USD" <?php if ($moneda_cuota == "USD") echo "selected" ?> >USD</option>
-                      <option value="CLP" <?php if ($moneda_cuota == "CLP") echo "selected" ?> >CLP</option>
-                    </select>
-                <input type="text" class="form-control"  name="valorcuota" id="valorcuota" oninput="concatenar(this.id)">
+                <div class = "form-inline">
+                  <select class="form-control" name="moneda_cuota" id="moneda_cuota">
+                    <option value="UF" <?php if ($moneda_cuota == "UF") echo "selected" ?> >UF</option>
+                    <option value="USD" <?php if ($moneda_cuota == "USD") echo "selected" ?> >USD</option>
+                    <option value="CLP" <?php if ($moneda_cuota == "CLP") echo "selected" ?> >CLP</option>
+                  </select>
+                  <input type="text" class="form-control"  name="valorcuota" id="valorcuota" oninput="concatenar(this.id)">
+                </div>
               </div>
-				  </div>
               <div class="col-md-4 mb-3">
                 <label for="fechaprimer">Fecha Primera Cuota</label>
                 <div class="md-form">
@@ -705,15 +676,17 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
           <div class="card-body">
-                <label for="comentario"><b>Comentarios</b></label>
+            <label for="comentario"><b>Comentarios</b></label>
             <br>
             <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
-                style="text-indent:0px";></textarea>
-                <br>
+                style="text-indent:0px";>
+            </textarea>
+            <br>
             <label for="endoso"><b>Endosos</b></label>
             <br>
             <textarea class="form-control" rows="2" style="height:100px" id='endoso' name='endoso'
-                style="text-indent:0px";></textarea>
+                style="text-indent:0px";>
+            </textarea>
           </div>
         </div>
       </div>
@@ -746,19 +719,17 @@ function estandariza_info( $data ) {
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script> 
+    </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </body>
-</html>
-<script>
+</html><script>
 
 
 function valida_rut_duplicado_prop() {
@@ -1291,6 +1262,38 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("materia").value = '<?php echo $materia; ?>';
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+            
+      var ramo = document.getElementById("ramo").value;        
+            
+         if (ramo == "VEH"){
+          document.getElementById("deducible_veh_1").value = document.getElementById("deducible").value;
+           } 
+          else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+            document.getElementById("deducible_inc_1").value =  document.getElementById("deducible").value;
+            }
+    else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+
+            document.getElementById("deducible_viaje_1").value = document.getElementById("deducible").value ;
+        
+    }
+     else if (ramo == "RC" || ramo =="D&O" ){
+      
+      var deducible = document.getElementById("deducible").value
+      
+      var cadena = document.getElementById("deducible").value.split("%")
+      document.getElementById("deducible_porcentaje").value = cadena[0];
+      document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+      
+    }
+    
+        else {
+           
+         document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
+         
+    }
+        
+        
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
             document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
@@ -1342,6 +1345,29 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("materia").value = '<?php echo $materia; ?>';
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+            
+             var ramo = document.getElementById("ramo").value;        
+            
+                 if (ramo == "VEH"){
+                    document.getElementById("deducible_veh_1").value = document.getElementById("deducible").value;
+                                    } 
+                else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+                    document.getElementById("deducible_inc_1").value =  document.getElementById("deducible").value;
+                                    }
+                else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+
+                    document.getElementById("deducible_viaje_1").value = document.getElementById("deducible").value ;
+                                    }
+                else if (ramo == "RC" || ramo =="D&O" ){
+      
+                    var cadena = document.getElementById("deducible").value.split("%")
+                    document.getElementById("deducible_porcentaje").value = cadena[0];
+                    document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
+                    document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+    }
+                else {
+         document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
+    }
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
             document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
@@ -1366,5 +1392,3 @@ $.redirect('/bamboo/creacion_poliza.php');
 
 
 </script>
-
-
