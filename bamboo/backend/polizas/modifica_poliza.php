@@ -58,8 +58,8 @@ moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_c
 comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
 vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."',  poliza_renovada='".$poliza_renovada."' WHERE id=".$id_poliza.";";
 
-mysqli_query($link, $query);
-//ECHO $query;
+//mysqli_query($link, $query);
+ECHO $query;
 
 
 function estandariza_info($data) {
@@ -83,12 +83,12 @@ function cambia_puntos_por_coma($data){
 </head>
 <body>
 <script >
-
+/*
 var nro_poliza= '<?php echo $nro_poliza; ?>';
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza
 }, 'post');
-
+*/
 </script>
 </body>
 </html>
