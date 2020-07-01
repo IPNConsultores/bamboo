@@ -9,12 +9,13 @@ if ( !isset( $_SESSION ) ) {
     mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
  $contador_contactos=0;
     $cant_contactos = 0;
-
+$contactos_array=array();
+$rut=$nombre_cliente=$correo=$direccionl=$id=$direccionp=$telefono=$fecha_ingreso=$referido=$grupo='';
 
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) == true ) {
 	
 	$idcliente=$_POST["id_cliente"];
-   $sql = "SELECT id,CONCAT_WS( '-',rut_sin_dv,dv) as rut, apellido_paterno, nombre_cliente , apellido_paterno, apellido_materno, concat_ws(' ',nombre_cliente , apellido_paterno,apellido_materno) as nombre, correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
+   $sql = "SELECT id,CONCAT_WS( '-',rut_sin_dv,dv) as rut, nombre_cliente , correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
 
     $resultado=mysqli_query($link, $sql);
     $codigo='{
@@ -24,24 +25,21 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
   {     $conta=$conta+1;
    		$id=$row->id;
         $rut= $row->rut;
-        $nombre_cliente= $row-> nombre_cliente;
-        $apellidop= $row->apellido_paterno;
-        $apellidom= $row->apellido_materno;
+        $nombre_cliente= $row->nombre_cliente;
         $correo = $row->correo;
         $direccionl = $row->direccion_laboral;
-        $direccionp = $row ->direccion_personal;
-        $id = $row -> id;
-        $telefono = $row-> telefono;
-        $fecha_ingreso = $row -> fecha_ingreso;
-        $referido = $row-> referido;
-        $grupo = $grupo -> grupo;
+        $direccionp = $row->direccion_personal;
+        $telefono = $row->telefono;
+        $fecha_ingreso = $row ->fecha_ingreso;
+        $referido = $row->referido;
+        $grupo = $grupo->grupo;
   
     $resultado_contador_contactos=mysqli_query($link, "SELECT count(*) as contador FROM clientes_contactos where id_cliente='".$row->id."';");
     while ($fila=mysqli_fetch_object($resultado_contador_contactos))
     {
         $contador_contactos=0;
       $cant_contactos=$fila->contador;
-      $resultado_contactos=mysqli_query($link, "SELECT  nombre,telefono, correo FROM clientes_contactos where id_cliente='".$row->id."';");
+      $resultado_contactos=mysqli_query($link, "SELECT  nombre, telefono, correo FROM clientes_contactos where id_cliente='".$row->id."';");
         $contactos_array=array("contactos"=>& $fila->contador);
         if (!$cant_contactos=="0"){
       while($indice=mysqli_fetch_object($resultado_contactos)){
@@ -57,8 +55,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
         if ($conta==1){
       $codigo.= json_encode(array_merge(array(
         "id" =>& $row->id,
-        "nombre"=>& $row->nombre,
-        "apellidop"=>& $row->apellido_paterno,
+        "nombre"=>& $row->nombre_cliente,
         "correo_electronico" =>& $row->correo,
         "direccionl" =>& $row->direccion_laboral,
         "direccionp" =>& $row->direccion_personal,
@@ -71,8 +68,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
     } else {
     $codigo.= ', '.json_encode(array_merge(array(
       "id" =>& $row->id,
-      "nombre"=>& $row->nombre,
-      "apellidop"=>& $row->apellido_paterno,
+      "nombre"=>& $row->nombre_cliente,
       "correo_electronico" =>& $row->correo,
       "direccionl" =>& $row->direccion_laboral,
       "direccionp" =>& $row->direccion_personal,
@@ -445,8 +441,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("rut").disabled ="true";
         
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
-         document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
-         document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';
@@ -489,8 +483,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("rut").readonly =false;
         
          document.getElementById("nombre").value = '<?php echo $nombre_cliente; ?>';
-         document.getElementById("apellidop").value = '<?php echo $apellidop; ?>';
-         document.getElementById("apellidom").value = '<?php echo $apellidom; ?>';
          document.getElementById("rut").value = '<?php echo $rut; ?>';
          document.getElementById("correo").value = '<?php echo $correo; ?>';
          document.getElementById("telefono").value = '<?php echo $telefono; ?>';

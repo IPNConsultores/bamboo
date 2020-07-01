@@ -6,8 +6,6 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $nombre=estandariza_info($_POST["nombre"]);
- $apellidop=estandariza_info($_POST["apellidop"]);
- $apellidom=estandariza_info($_POST["apellidom"]);
  $rut=estandariza_info(substr($rut_completo, 0, strlen($rut_completo)-1));
  $dv=estandariza_info(substr($rut_completo, -1,1));
  $correo_electronico=estandariza_info($_POST["correo_electronico"]);
@@ -17,16 +15,18 @@ $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $referido=estandariza_info($_POST["referido"]);
  $grupo=estandariza_info($_POST["grupo"]);
 
-
+/*
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 mysqli_query($link, 'insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');');
-
+*/
+echo 'insert into clientes(nombre_cliente, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');';
   foreach (array_keys($_POST['nombrecontact']) as $key) {
     $nombrecontact = $_POST['nombrecontact'][$key];
     $telefonocontact = $_POST['telefonocontact'][$key];
     $emailcontact = $_POST['emailcontact'][$key];
-    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
+    //mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
+    echo "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
   }
 
 
@@ -53,11 +53,12 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
+/*
 var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
   'busqueda': rut
 }, 'post');
-
+*/
 
 </script>
 </body>
