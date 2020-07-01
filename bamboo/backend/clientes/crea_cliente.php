@@ -25,8 +25,8 @@ echo 'insert into clientes(nombre_cliente, rut_sin_dv, dv, direccion_personal, c
     $nombrecontact = $_POST['nombrecontact'][$key];
     $telefonocontact = $_POST['telefonocontact'][$key];
     $emailcontact = $_POST['emailcontact'][$key];
-    //mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
-    echo "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
+    mysqli_query($link, "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';");
+    //echo "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
   }
 
 
@@ -53,12 +53,12 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-/*
+
 var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
   'busqueda': rut
 }, 'post');
-*/
+
 
 </script>
 </body>
