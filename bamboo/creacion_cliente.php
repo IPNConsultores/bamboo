@@ -9,11 +9,11 @@ if ( !isset( $_SESSION ) ) {
     mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
  $contador_contactos=0;
     $cant_contactos = 0;
-$contactos_array=array();
-$rut=$nombre_cliente=$correo=$direccionl=$id=$direccionp=$telefono=$fecha_ingreso=$referido=$grupo='';
-
+$camino='';
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) == true ) {
-	
+  $contactos_array=array();
+  $rut=$nombre_cliente=$correo=$direccionl=$id=$direccionp=$telefono=$fecha_ingreso=$referido=$grupo='';
+    $camino='modificar';
 	$idcliente=$_POST["id_cliente"];
    $sql = "SELECT id,CONCAT_WS( '-',rut_sin_dv,dv) as rut, nombre_cliente , correo, direccion_laboral, direccion_personal, id, telefono, fecha_ingreso, referido, grupo FROM clientes Where id =".$idcliente.";";
 
@@ -429,6 +429,8 @@ function checkRadio(name) {
 
 document.addEventListener("DOMContentLoaded", function() {
       
+  var cant_contact = '<?php echo $camino; ?>';
+  if ($camino=='modificar'){
       var cant_contact = <?php echo intval($cant_contactos); ?>;
       var info_contact = <?php echo json_encode($contactos_array);?>;
       
@@ -496,6 +498,6 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
           
       }
-      
+    }    
   });
 </script>

@@ -11,15 +11,13 @@ $id=estandariza_info($_POST["id"]);
 $rut=estandariza_info(substr($rut_completo, 0, strlen($rut_completo)-1));
 $dv=estandariza_info(substr($rut_completo, -1));
 $nombre=estandariza_info($_POST["nombre"]);
-$apellidop=estandariza_info($_POST["apellidop"]);
-$apellidom=estandariza_info($_POST["apellidom"]);
 $telefono=estandariza_info($_POST["telefono"]);
 $direccionp=estandariza_info($_POST["direccionp"]);
 $direccionl=estandariza_info($_POST["direccionl"]);
 $correo=estandariza_info($_POST["correo_electronico"]);
 mysqli_set_charset( $link, 'utf8');
-
-$query = 'UPDATE clientes SET nombre_cliente=\''.$nombre.'\' ,apellido_paterno=\''.$apellidop.'\' ,apellido_materno=\''.$apellidom.'\' ,rut_sin_dv=\''.$rut.'\' ,dv=\''.$dv.'\' ,telefono=\''.$telefono.'\' ,direccion_personal=\''.$direccionp.'\' ,direccion_laboral=\''.$direccionl.'\' ,correo=\''.$correo.'\'  WHERE id='.$id.';';
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+$query = 'UPDATE clientes SET nombre_cliente=\''.$nombre.'\' ,rut_sin_dv=\''.$rut.'\' ,dv=\''.$dv.'\' ,telefono=\''.$telefono.'\' ,direccion_personal=\''.$direccionp.'\' ,direccion_laboral=\''.$direccionl.'\' ,correo=\''.$correo.'\'  WHERE id='.$id.';';
 mysqli_query($link,$query);
 
 $borrar=  'DELETE from clientes_contactos  WHERE id_cliente='.$id.';';
@@ -40,7 +38,7 @@ foreach (array_keys($_POST['nombrecontact']) as $key) {
   $vacio = "";
   $borrar2=  "DELETE from clientes_contactos  WHERE id_cliente=".$id." and nombre='".$vacio."';";
 mysqli_query($link,$borrar2);
-
+/*
 ECHO "<br>".$borrar;
 ECHO "<br>".$borrar2;
 ECHO "<br>".$agregar_contacto;
@@ -54,7 +52,7 @@ echo "<br>".$nombre_contactos;
 echo "<br>RUT completo:".$rut_completo;
 echo "<br>RUT:".$rut;
 echo "<br>DV:".$dv;
-
+*/
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);
