@@ -429,8 +429,8 @@ function checkRadio(name) {
 
 document.addEventListener("DOMContentLoaded", function() {
       
-  var cant_contact = '<?php echo $camino; ?>';
-  if ($camino=='modificar'){
+  var camino = '<?php echo $camino; ?>';
+  if (camino=='modificar'){
       var cant_contact = <?php echo intval($cant_contactos); ?>;
       var info_contact = <?php echo json_encode($contactos_array);?>;
       
