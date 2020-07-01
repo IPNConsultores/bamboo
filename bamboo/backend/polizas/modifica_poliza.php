@@ -40,7 +40,6 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $fechaprimer=estandariza_info($_POST["fechaprimer"]);
  $con_vendedor=estandariza_info($_POST["con_vendedor"]);
  $nombre_vendedor=estandariza_info($_POST["nombre_vendedor"]);
- $poliza_renovada=estandariza_info($_POST["poliza_renovada"]);
  $fechadeposito=estandariza_info($_POST["fechadeposito"]);
  $comisionneg=cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
  $boletaneg=estandariza_info($_POST["boletaneg"]);
@@ -56,10 +55,10 @@ moneda_poliza='".$moneda_poliza."',  deducible='".$deducible."',  prima_afecta='
 prima_bruta_anual='".$prima_bruta."',  monto_asegurado='".$monto_aseg."',  numero_propuesta='".$nro_propuesta."',  fecha_envio_propuesta='".$fechaprop."',  
 moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_comision='".$porcentaje_comsion."',  comision_bruta='".$comisionbruta."',
 comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
-vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."',  poliza_renovada='".$poliza_renovada."' WHERE id=".$id_poliza.";";
+vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."' WHERE id=".$id_poliza.";";
 
-//mysqli_query($link, $query);
-ECHO $query;
+mysqli_query($link, $query);
+//ECHO $query;
 
 
 function estandariza_info($data) {
@@ -83,12 +82,12 @@ function cambia_puntos_por_coma($data){
 </head>
 <body>
 <script >
-/*
+
 var nro_poliza= '<?php echo $nro_poliza; ?>';
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza
 }, 'post');
-*/
+
 </script>
 </body>
 </html>

@@ -692,7 +692,11 @@ function estandariza_info( $data ) {
       </div>
     </div>
     <br>
-    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit' onclick="validacampos()">Registrar</button>
+    <div id="auxiliar2" style="display: none;">
+      <input name="id_poliza_renovada" id="id_poliza_renovada">
+      <input name="nro_poliza_renovada" id="nro_poliza_renovada">
+    </div>
+    <button class="btn" type="submit" style="background-color: #536656; color: white" id='boton_submit'>Registrar</button>
   </form>
   <br>
   <br>
@@ -1205,10 +1209,21 @@ function renovar_poliza(poliza, tipo_poliza) {
         if (r2 == true) {
         console.log('Edita póliza');
         
-        $('#modal_poliza').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-            $.redirect('/bamboo/creacion_poliza.php');
+        $.ajax({
+            type: "POST",
+            url: "/bamboo/backend/polizas/busqueda_poliza_renovada.php",
+            data: {
+                id_a_renovar: poliza
+            },
+            dataType: 'JSON',
+            success: function(response) {
+
+                var datax = JSON.parse(response);
+                //console.log(datax);
+
+            }
+
+        });
         }
         else
         {
@@ -1362,13 +1377,19 @@ $.redirect('/bamboo/creacion_poliza.php');
                         document.getElementById("poliza_renovada").style.display = "block";
                         document.getElementById("poliza_renovada").disabled = true;
 
-            document.getElementById("poliza_renovada").checked = true;
+            document.getElementById("radio_si").checked = true;
+            document.getElementById("radio_no").checked = false;
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
             document.getElementById("materia").value = '<?php echo $materia; ?>';
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+            
+            document.getElementById("comision").value = '<?php echo $comision; ?>';
+            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
+            document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
+            document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
             
              
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
@@ -1378,9 +1399,11 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
             document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
-            document.getElementById("poliza_renovada").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("nro_poliza_renovada").value = '<?php echo $nro_poliza; ?>';
+            document.getElementById("id_poliza_renovada").value = '<?php echo $id_poliza; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
+            
             var dias_vig_pol='<?php echo $dif_dias; ?>';
             if (dias_vig_pol=='365' || dias_vig_pol=='366'){
               document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
