@@ -61,5 +61,25 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-  header("Location:http://gestionipn.cl/bamboo/listado_clientes.php");
+ // header("Location:http://gestionipn.cl/bamboo/listado_clientes.php");
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+    </script>
+<script src="/assets/js/jquery.redirect.js">
+</script>
+</head>
+<body>
+<script >
+/*
+var rut='<?php echo $rut; ?>'
+  $.redirect('/bamboo/listado_clientes.php', {
+  'busqueda': rut
+}, 'post');
+*/
+
+</script>
+</body>
+</html>
