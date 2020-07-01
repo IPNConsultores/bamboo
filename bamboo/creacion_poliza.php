@@ -1464,6 +1464,25 @@ $.redirect('/bamboo/creacion_poliza.php');
             break;
         }
     }
+    
+    document.querySelectorAll('input[type=text]').forEach( node => node.addEventListener('keypress', e => {
+        if(e.keyCode == 13) {
+          e.preventDefault();
+        }
+      }))
+    
+    var acordeon = document.getElementById("collapseOne").classList
+    
+    if(acordeon == "collapse")
+    {
+    
+   
+    
+    $('#modal_cliente').modal('hide');
+        
+    }
+    
+    
   });
 
 
