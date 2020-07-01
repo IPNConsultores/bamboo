@@ -134,13 +134,13 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
       <div class="col-md-4 mb-3" style="display : none">
         <label for="ApellidoP">Apellido Paterno</label>
         <label style= "color: darkred">*</label>
-        <input type="text" class="form-control" name="apellidop" id="apellidop" required>
+        <input type="text" class="form-control" name="apellidop" id="apellidop">
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3" style="display : none">
         <label for="ApellidoM">Apellido Materno</label>
         <label style= "color: darkred">*</label>
-        <input type="text" class="form-control" name="apellidom" id="apellidom" required>
+        <input type="text" class="form-control" name="apellidom" id="apellidom">
         <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3">
