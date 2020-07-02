@@ -910,7 +910,7 @@ function pobladeducible(){
     }
      else if (ramo == "RC" || ramo =="D&O" ){
       
-         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la Pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -965,7 +965,7 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "flex";
-         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la pérdida con mínimo de " + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la Pérdida con mínimo de " + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -1362,9 +1362,9 @@ $.redirect('/bamboo/creacion_poliza.php');
       document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de UF","");
       document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de USD","");
       document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de CLP","");
-      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de UF ","");
-      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de USD ","");
-      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de CLP ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de UF ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de USD ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de CLP ","");
     }
     
     else {
