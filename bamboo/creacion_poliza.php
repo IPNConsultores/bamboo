@@ -444,12 +444,12 @@ function estandariza_info( $data ) {
                 <div class = "form-inline"id="deducible_veh"  style="display:none ;align-items: center;">
                   <select class="form-control" id="deducible_veh_1" name="deducible_veh_1" onChange = "pobladeducible()">
                     <option value="null"?>Selecciona el deducible</option>
-                    <option value="UF 1" <?php if ($deducible == "UF 1") echo "selected" ?> >UF 1</option>
+                    <option value="Sin deducible" <?php if ($deducible == "Sin deducible") echo "selected" ?> >Sin deducible</option>
                     <option value="UF 3" <?php if ($deducible == "UF 3") echo "selected" ?> >UF 3</option>
                     <option value="UF 5" <?php if ($deducible == "UF 5") echo "selected" ?> >UF 5</option>
                     <option value="UF 10" <?php if ($deducible == "UF 10") echo "selected" ?> >UF 10</option>
                     <option value="UF 20" <?php if ($deducible == "UF 20") echo "selected" ?> >UF 20</option>
-                    <option value="Sin deducible" <?php if ($deducible == "Sin deducible") echo "selected" ?> >Sin deducible</option>
+                    
                   </select>
                 </div>
                 <div class = "form-inline" id="deducible_viaje"  style="display:none" >
@@ -551,11 +551,18 @@ function estandariza_info( $data ) {
               </div>
               <div class="col-md-4 mb-3">
                 <label>Comisión Bruta a Pago</label>
+                <div class="form-inline">
+                    
+                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
                 <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
+              </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Comisión Neta a Pago</label>
+                <div class="form-inline">
+                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
                 <input type="text" class="form-control" id="comisionneta" name="comisionneta">
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Número de Boleta</label>
@@ -575,7 +582,10 @@ function estandariza_info( $data ) {
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="comision">Monto</label>
+                <div class="form-inline">
+                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
                 <input type="text" class="form-control" name="comisionneg" id="comisionneg">
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="comision">Boleta Comisión Negativa</label>
@@ -651,14 +661,15 @@ function estandariza_info( $data ) {
                 <div class="form-row">
                   <div class="col-4">
                     <select class="form-control" name="con_vendedor" id="con_vendedor" onChange="validavendedor()">
-                      <option value="Si" <?php if ($con_vendedor == "Si") echo "selected" ?> >Si</option>
+                      
                       <option value="No" <?php if ($con_vendedor == "No") echo "selected" ?> >No</option>
+                      <option value="Si" <?php if ($con_vendedor == "Si") echo "selected" ?> >Si</option>
                     </select>
                   </div>
                   &nbsp;
                   <div class="col">
                     <input type="text" class="form-control" id="nombre_vendedor" name="nombre_vendedor"
-                                            placeholder="Nombre Vendedor">
+                                            placeholder="Nombre Vendedor" disabled>
                   </div>
                 </div>
               </div>
@@ -899,7 +910,7 @@ function pobladeducible(){
     }
      else if (ramo == "RC" || ramo =="D&O" ){
       
-         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% pérdida de " + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -954,7 +965,7 @@ function cambia_deducible(){
          document.getElementById("deducible_inc").style.display = "none";
          document.getElementById("deducible_viaje").style.display = "none";
          document.getElementById("deducible_rc").style.display = "flex";
-         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + " % pérdida de " + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la pérdida con mínimo de " + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -1348,7 +1359,12 @@ $.redirect('/bamboo/creacion_poliza.php');
       var cadena = document.getElementById("deducible").value.split("%")
       document.getElementById("deducible_porcentaje").value = cadena[0];
       document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de UF","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de USD","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de CLP","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de UF ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de USD ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" de la pérdida con mínimo de CLP ","");
     }
     
     else {
