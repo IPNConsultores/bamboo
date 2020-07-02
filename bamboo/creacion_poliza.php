@@ -1368,7 +1368,14 @@ $.redirect('/bamboo/creacion_poliza.php');
         document.getElementById("deducible_defecto_1").value= document.getElementById("deducible").value ;
     }
 
-
+var moneda = document.getElementById("moneda_poliza").value;
+    document.getElementById("moneda").innerHTML = moneda;
+    document.getElementById("moneda2").innerHTML = moneda;
+    document.getElementById("moneda3").innerHTML = moneda;
+    document.getElementById("moneda4").innerHTML = moneda;
+    document.getElementById("moneda5").innerHTML = moneda;
+     document.getElementById("moneda6").innerHTML = moneda;
+     document.getElementById("moneda7").innerHTML = moneda;
 
             
             break;
@@ -1497,7 +1504,14 @@ $.redirect('/bamboo/creacion_poliza.php');
     $('#modal_cliente').modal('hide');
         
     }
-    
+    var moneda = document.getElementById("moneda_poliza").value;
+    document.getElementById("moneda").innerHTML = moneda;
+    document.getElementById("moneda2").innerHTML = moneda;
+    document.getElementById("moneda3").innerHTML = moneda;
+    document.getElementById("moneda4").innerHTML = moneda;
+    document.getElementById("moneda5").innerHTML = moneda;
+     document.getElementById("moneda6").innerHTML = moneda;
+     document.getElementById("moneda7").innerHTML = moneda;
     
   });
 
