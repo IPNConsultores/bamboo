@@ -910,7 +910,7 @@ function pobladeducible(){
     }
      else if (ramo == "RC" || ramo =="D&O" ){
       
-         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la Pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + document.getElementById("deducible_valor").value ;
+         document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la Pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
         
     }
     
@@ -1469,7 +1469,14 @@ $.redirect('/bamboo/creacion_poliza.php');
       var cadena = document.getElementById("deducible").value.split("%")
       document.getElementById("deducible_porcentaje").value = cadena[0];
       document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de ","");
+     
+ 
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de UF","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de USD","");
+      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de CLP","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de UF ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de USD ","");
+      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de CLP ","");
     }
     
     else {
