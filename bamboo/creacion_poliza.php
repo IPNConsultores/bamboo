@@ -1351,7 +1351,7 @@ $.redirect('/bamboo/creacion_poliza.php');
     }
     else if (ramo == "RC" || ramo =="D&O" ){
        
-         document.getElementById("deducible_defecto").style.display = "none";
+           document.getElementById("deducible_defecto").style.display = "none";
          
          document.getElementById("deducible_rc").style.display = "flex";
         var deducible = document.getElementById("deducible").value
@@ -1359,12 +1359,8 @@ $.redirect('/bamboo/creacion_poliza.php');
       var cadena = document.getElementById("deducible").value.split("%")
       document.getElementById("deducible_porcentaje").value = cadena[0];
       document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de UF","");
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de USD","");
-      document.getElementById("deducible_valor").value = cadena[1].replace(" pérdida de CLP","");
-      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de UF ","");
-      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de USD ","");
-      document.getElementById("deducible_valor").value = cadena[1].replace("de la pérdida con mínimo de CLP ","");
+     document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2, cadena[1].length);
+ 
     }
     
     else {
@@ -1469,7 +1465,7 @@ $.redirect('/bamboo/creacion_poliza.php');
       var cadena = document.getElementById("deducible").value.split("%")
       document.getElementById("deducible_porcentaje").value = cadena[0];
       document.getElementById("moneda7").innerHTML =  '<?php echo $moneda_poliza; ?>';
-     document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2, str.length);
+     document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2, cadena[1].length);
  
    
       
