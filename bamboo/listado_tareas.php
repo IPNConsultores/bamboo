@@ -62,10 +62,10 @@ $id_tarea= estandariza_info($_GET["tarea"]);
                                 <th>Prioridad</th>
                                 <th>Estado</th>
                                 <th>Tarea</th>
-                               <th>fecvencimiento</th>
-                                <th>fecvencimiento</th>
-                                <th>fecvencimiento</th>
-                                <th>fecvencimiento</th>
+                               <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>

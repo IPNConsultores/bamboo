@@ -89,14 +89,15 @@ While($row2=mysqli_fetch_object($resultado2))
                     <div class="card-body">
                         <table class="display" id="listado_tareas" style="width:100%">
                             <tr>
-                                <th></th>
+                            <th></th>
+                                <th>id</th>
                                 <th>Prioridad</th>
                                 <th>Estado</th>
                                 <th>Tarea</th>
-                                <th>Fecha vencimiento</th>
-                                <th>Fecha creación tarea</th>
-                                <th>id tarea</th>
-                                <th>Tipo creación</th>
+                               <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>
