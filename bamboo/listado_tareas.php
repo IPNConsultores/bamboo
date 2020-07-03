@@ -58,11 +58,14 @@ $id_tarea= estandariza_info($_GET["tarea"]);
   <table class="table" id="tareas_completas" style="width:100%">
                             <tr>
                                 <th></th>
+                                <th>id</th>
                                 <th>Prioridad</th>
                                 <th>Estado</th>
                                 <th>Tarea</th>
-                                <th>Fecha término</th>
-                                <th>id tarea</th>
+                               <th>fecvencimiento</th>
+                                <th>fecvencimiento</th>
+                                <th>fecvencimiento</th>
+                                <th>fecvencimiento</th>
                             </tr>
                         </table>
                         <div id="botones_tareas"></div>
@@ -131,11 +134,11 @@ $(document).ready(function() {
             },
             {
                 "data":"procedimiento",
-                tittle: "Tipo creación"
+                title: "Procedimiento"
             },
             {
                 "data":"feccierre",
-                tittle: "Fecha cierre"
+                title: "Fecha cierre"
             }
 
         ],
@@ -143,7 +146,10 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
 
-        "columnDefs": [
+        "columnDefs": [{
+                "targets": [6,8],
+                "visible": false,
+            },
         {
         targets: 3,
         render: function (data, type, row, meta) {

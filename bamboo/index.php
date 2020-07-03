@@ -226,11 +226,11 @@ $(document).ready(function() {
             },
             {
                 "data":"procedimiento",
-                tittle: "Tipo creación"
+                title: "Procedimiento"
             },
             {
                 "data":"feccierre",
-                tittle: "Fecha cierre"
+                title: "Fecha cierre"
             }
 
         ],
@@ -239,7 +239,7 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-                "targets": [7,8],
+                "targets": [6,8],
                 "visible": false,
             },
         {
