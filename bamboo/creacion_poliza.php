@@ -1434,13 +1434,9 @@ var moneda = document.getElementById("moneda_poliza").value;
             document.getElementById("materia").value = '<?php echo $materia; ?>';
             document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
             document.getElementById("deducible").value = '<?php echo $deducible; ?>';
-            
             document.getElementById("comision").value = '<?php echo $comision; ?>';
             document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
-            document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
-            document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-             
             document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
             document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
             document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
