@@ -362,39 +362,38 @@ function estandariza_info( $data ) {
                 <label for="sel1">Ramo:&nbsp;</label>
                 <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible()">
                   <option value="null">Selecciona un ramo</option>
-                   <option value="accidentes_personales_ap "<?php if ($producto =="accidentes_personales_ap") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
- <option value="accidentes_personales_protección "<?php if ($producto =="accidentes_personales_protección") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera </option>
- <option value="inc_condominio "<?php if ($producto =="inc_condominio") echo "selected" ?> >INCENDIO  - Condominio </option>
- <option value="inc_hogar "<?php if ($producto =="inc_hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
- <option value="inc_miscelaneo "<?php if ($producto =="inc_miscelaneo") echo "selected" ?> >INCENDIO  - Misceláneos</option>
- <option value="inc_perjuicio "<?php if ($producto =="inc_perjuicio") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
- <option value="inc_pyme "<?php if ($producto =="inc_pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
- <option value="inc_trbf "<?php if ($producto =="inc_trbf") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
- <option value="rc-do "<?php if ($producto =="rc-do") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio </option>
- <option value="rc-rc "<?php if ($producto =="rc-rc") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
- <option value="veh_comerciales "<?php if ($producto =="veh_comerciales") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
- <option value="veh_particular "<?php if ($producto =="veh_particular") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
- <option value="veh_pesados "<?php if ($producto =="veh_pesados") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados </option>
- <option value="viaje "<?php if ($producto =="viaje") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
-  <option value="null">--------------------------------------------------------------</option>
- <option value="averia_maquina "<?php if ($producto =="averia_maquina") echo "selected" ?> >AVERÍA DE MAQUINARIA </option>
- <option value="casco_aeroeo "<?php if ($producto =="casco_aeroeo") echo "selected" ?> >CASCO - Aéreo</option>
- <option value="casco_marítimo "<?php if ($producto =="casco_marítimo") echo "selected" ?> >CASCO - Marítimo </option>
- <option value="garantia "<?php if ($producto =="garantia") echo "selected" ?> >GARANTÍA</option>
- <option value="ing_contratístas "<?php if ($producto =="ing_contratístas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
- <option value="ing_equipo_movil "<?php if ($producto =="ing_equipo_movil") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
- <option value="ing_electronicos "<?php if ($producto =="ing_electronicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
- <option value="ing-trc "<?php if ($producto =="ing-trc") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
- <option value="remesa "<?php if ($producto =="remesa") echo "selected" ?> >REMESA DE VALORES</option>
- <option value="robo "<?php if ($producto =="robo") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
- <option value="cristales "<?php if ($producto =="cristales") echo "selected" ?> >ROTURA DE CRISTALES</option>
- <option value="seguro_arriendo "<?php if ($producto =="seguro_arriendo") echo "selected" ?> >SEGURO ARRIENDO </option>
- <option value="seguro_credito "<?php if ($producto =="seguro_credito") echo "selected" ?> >SEGURO DE CRÉDITO </option>
- <option value="transporte_cabotaje "<?php if ($producto =="transporte_cabotaje") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
- <option value="transporte_intern "<?php if ($producto =="transporte_intern") echo "selected" ?> >TRANSPORTE - INTERNACIONAL </option>
- <option value="vida_apv "<?php if ($producto =="vida_apv") echo "selected" ?> >VIDA - APV</option>
- <option value="vida_vida "<?php if ($producto =="vida_vida") echo "selected" ?> >VIDA - VIDA</option>
-
+                  <option value="accidentes_personales_ap"<?php if ($producto =="accidentes_personales_ap") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="accidentes_personales_protección"<?php if ($producto =="accidentes_personales_protección") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="inc_condominio"<?php if ($producto =="inc_condominio") echo "selected" ?> >INCENDIO  - Condominio</option>
+                  <option value="inc_hogar"<?php if ($producto =="inc_hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
+                  <option value="inc_miscelaneo"<?php if ($producto =="inc_miscelaneo") echo "selected" ?> >INCENDIO  - Misceláneos</option>
+                  <option value="inc_perjuicio"<?php if ($producto =="inc_perjuicio") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
+                  <option value="inc_pyme"<?php if ($producto =="inc_pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
+                  <option value="inc_trbf"<?php if ($producto =="inc_trbf") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
+                  <option value="rc-do"<?php if ($producto =="rc-do") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio</option>
+                  <option value="rc-rc"<?php if ($producto =="rc-rc") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
+                  <option value="veh_comerciales"<?php if ($producto =="veh_comerciales") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
+                  <option value="veh_particular"<?php if ($producto =="veh_particular") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
+                  <option value="veh_pesados"<?php if ($producto =="veh_pesados") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados</option>
+                  <option value="viaje"<?php if ($producto =="viaje") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
+                  <option value="null">--------------------------------------------------------------</option>
+                  <option value="averia_maquina"<?php if ($producto =="averia_maquina") echo "selected" ?> >AVERÍA DE MAQUINARIA</option>
+                  <option value="casco_aeroeo"<?php if ($producto =="casco_aeroeo") echo "selected" ?> >CASCO - Aéreo</option>
+                  <option value="casco_marítimo"<?php if ($producto =="casco_marítimo") echo "selected" ?> >CASCO - Marítimo</option>
+                  <option value="garantia"<?php if ($producto =="garantia") echo "selected" ?> >GARANTÍA</option>
+                  <option value="ing_contratístas"<?php if ($producto =="ing_contratístas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
+                  <option value="ing_equipo_movil"<?php if ($producto =="ing_equipo_movil") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
+                  <option value="ing_electronicos"<?php if ($producto =="ing_electronicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
+                  <option value="ing-trc"<?php if ($producto =="ing-trc") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
+                  <option value="remesa"<?php if ($producto =="remesa") echo "selected" ?> >REMESA DE VALORES</option>
+                  <option value="robo"<?php if ($producto =="robo") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
+                  <option value="cristales"<?php if ($producto =="cristales") echo "selected" ?> >ROTURA DE CRISTALES</option>
+                  <option value="seguro_arriendo"<?php if ($producto =="seguro_arriendo") echo "selected" ?> >SEGURO ARRIENDO</option>
+                  <option value="seguro_credito"<?php if ($producto =="seguro_credito") echo "selected" ?> >SEGURO DE CRÉDITO</option>
+                  <option value="transporte_cabotaje"<?php if ($producto =="transporte_cabotaje") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
+                  <option value="transporte_intern"<?php if ($producto =="transporte_intern") echo "selected" ?> >TRANSPORTE - INTERNACIONAL</option>
+                  <option value="vida_apv"<?php if ($producto =="vida_apv") echo "selected" ?> >VIDA - APV</option>
+                  <option value="vida_vida"<?php if ($producto =="vida_vida") echo "selected" ?> >VIDA - VIDA</option>
                   <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
                   <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
                   <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
@@ -483,7 +482,6 @@ function estandariza_info( $data ) {
                     <option value="UF 5" <?php if ($deducible == "UF 5") echo "selected" ?> >UF 5</option>
                     <option value="UF 10" <?php if ($deducible == "UF 10") echo "selected" ?> >UF 10</option>
                     <option value="UF 20" <?php if ($deducible == "UF 20") echo "selected" ?> >UF 20</option>
-                    
                   </select>
                 </div>
                 <div class = "form-inline" id="deducible_viaje"  style="display:none" >
@@ -586,16 +584,15 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
                 <label>Comisión Bruta a Pago</label>
                 <div class="form-inline">
-                    
-                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
-                <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
-              </div>
+                  <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
+                  <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Comisión Neta a Pago</label>
                 <div class="form-inline">
-                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
-                <input type="text" class="form-control" id="comisionneta" name="comisionneta">
+                  <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
+                  <input type="text" class="form-control" id="comisionneta" name="comisionneta">
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -617,8 +614,8 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
                 <label for="comision">Monto</label>
                 <div class="form-inline">
-                <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
-                <input type="text" class="form-control" name="comisionneg" id="comisionneg">
+                  <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
+                  <input type="text" class="form-control" name="comisionneg" id="comisionneg">
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -695,7 +692,6 @@ function estandariza_info( $data ) {
                 <div class="form-row">
                   <div class="col-4">
                     <select class="form-control" name="con_vendedor" id="con_vendedor" onChange="validavendedor()">
-                      
                       <option value="No" <?php if ($con_vendedor == "No") echo "selected" ?> >No</option>
                       <option value="Si" <?php if ($con_vendedor == "Si") echo "selected" ?> >Si</option>
                     </select>
