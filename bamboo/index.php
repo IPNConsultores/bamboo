@@ -228,10 +228,6 @@ $(document).ready(function() {
             {
                 "data":"procedimiento",
                 title: "Procedimiento"
-            },
-            {
-                "data":"feccierre",
-                title: "Fecha cierre"
             }
 
         ],
@@ -240,7 +236,7 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-                "targets": [6,8],
+                "targets": [6],
                 "visible": false,
             },
         {
