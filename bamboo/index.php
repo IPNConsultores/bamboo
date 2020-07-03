@@ -94,7 +94,7 @@ While($row2=mysqli_fetch_object($resultado2))
                                 <th>Prioridad</th>
                                 <th>Estado</th>
                                 <th>Tarea</th>
-                               <th></th>
+                               
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -191,7 +191,7 @@ While($row2=mysqli_fetch_object($resultado2))
 </html>
 <script>
 $(document).ready(function() {
-    table_tareas = $('#listado_tareas').DataTable({
+     table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
         "scrollX": true,
@@ -227,7 +227,7 @@ $(document).ready(function() {
             },
             {
                 "data":"procedimiento",
-                title: "Procedimiento"
+                title: "Tipo creación"
             }
 
         ],
@@ -301,7 +301,7 @@ $(document).ready(function() {
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
-    var buttons = new $.fn.dataTable.Buttons(table_tareas, {
+        var buttons = new $.fn.dataTable.Buttons(table_tareas, {
         buttons: [{
                 sheetName: 'Tareas',
                 orientation: 'landscape',
