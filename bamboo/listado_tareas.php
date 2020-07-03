@@ -122,8 +122,20 @@ $(document).ready(function() {
                 title: "Tarea o Actividad"
             },
             {
-                "data": "feccompletada",
-                title: "Fecha término"
+                "data": "fecvencimiento",
+                title: "Fecha vencimiento"
+            },
+            {
+                "data": "fecingreso",
+                title: "Fecha creación tarea"
+            },
+            {
+                "data":"procedimiento",
+                tittle: "Tipo creación"
+            },
+            {
+                "data":"feccierre",
+                tittle: "Fecha cierre"
             }
 
         ],
@@ -201,7 +213,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5]
+                    columns: [1, 2, 3, 4, 5, 6,7,8]
                 }
             },
             {
@@ -209,7 +221,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5]
+                    columns: [1, 2, 3, 4, 5, 6,7,8]
                 }
             }
         ]
@@ -235,7 +247,7 @@ function detalle_tareas(d) {
                 $cont_i=$cont_i+1;
                 $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
                     .telefono[i] + '</td><td>' + d.correo[i] +
-                    '</td><td><button title="Busca toda la información asociada a este cliente" type="button" id=' + d
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
                     .id_cliente[i] +
                     ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
             }
@@ -256,7 +268,7 @@ function detalle_tareas(d) {
                     '</td><td>' + d.vigencia_inicial[j] +
                     '</td><td>' + d.vigencia_final[j] +
                     '</td><td>' + d.materia_asegurada[j] +
-                    '</td><td><button title="Busca toda la información asociada a esta póliza" type="button" id=' + d
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
                     .id_poliza[j] +
                     ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
             }
@@ -268,8 +280,13 @@ function detalle_tareas(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Acciones:</td>' +
-        '<td><button title="Busca toda la información asociada a esta tarea" type="button" id=' + d.id_tarea +
-        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button></td>' +
+        '<td><button title="Buscar información asociada" type="button" id=' + d.id_tarea +
+        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
+        d.id_tarea +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +
+        d.id_tarea +
+        ' name="cerrar_tarea" id=' + d.id_tarea +
+        ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
         '<tr><td>Clientes:</td>'+
         '<td>'+ $tabla_clientes+'</td></tr>'+
