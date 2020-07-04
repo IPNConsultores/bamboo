@@ -1406,7 +1406,7 @@ document.getElementById("cancela").style.display = "none";
             document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
-            document.getElementById("edicion1").style.display = "flex"
+            document.getElementById("botones_edicion").style.display = "flex"
             
             
                var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
