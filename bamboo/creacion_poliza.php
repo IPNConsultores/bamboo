@@ -112,8 +112,13 @@ function estandariza_info( $data ) {
 <div class="container">
   <p>Póliza / Creación<br>
   </p>
-  <h5 class="form-row">&nbsp;Datos Póliza</h5>
+  <div class="form-check form-check-inline" style="display:flex ;align-items: center;" >
+<div class="col-lg" style="display:flex ;align-items: center;">
+  <h5>Datos Póliza</h5>
   <br>
+  </div>
+     
+     </div>
   <br>
   <div class="form-check form-check-inline">
   <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
@@ -161,7 +166,9 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
+    
   </div>
+  
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
   <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST"  id="formulario" novalidate>
@@ -171,7 +178,12 @@ function estandariza_info( $data ) {
     <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
                     id="poliza_renovada" style="display:none;">
     </div>
+    <div class="col align-self-end" >
+            <button class="btn" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; color: white; display: none">Editar</button>    
+     </div>
+
     </div>
+    
     <br>
     <br>
     <div class="accordion" id="accordionExample">
@@ -185,8 +197,12 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
-          <div class="card-body">
+             
+          <div class="card-body" id="card-body-one">
+               
+                <br>
             <div class="form-check form-check-inline">
+               
               <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
                 persona?:&nbsp;&nbsp;</label>
               <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
@@ -313,6 +329,7 @@ function estandariza_info( $data ) {
             </div>
           </div>
         </div>
+     
       </div>
       <div class="card">
         <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
@@ -323,7 +340,7 @@ function estandariza_info( $data ) {
           </h5>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-          <div class="card-body">
+          <div class="card-body" id="card-body-two">
             <label for="compania"><b>Compañía</b></label>
             <br>
             <div class="form-row">
@@ -347,6 +364,7 @@ function estandariza_info( $data ) {
                   <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
                   <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
                   <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
+
                   <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
                   <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
                   <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
@@ -441,12 +459,15 @@ function estandariza_info( $data ) {
             <div class="form-row">
               <div class="col">
                 <label for="poliza">Materia Asegurada</label>
-                <input type="text" class="form-control" id="materia" name="materia" required>
+                <textarea  type="text" class="form-control" id="materia" name="materia" rows="3" required></textarea>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
+              </div>
+              <br>
+              <div class="form-row">
               <div class="col">
                 <label for="poliza">Patente o Ubicación</label>
-                <input type="text" class="form-control"  id="detalle_materia" name="detalle_materia" required>
+                <textarea type="text" class="form-control"  id="detalle_materia" name="detalle_materia" rows= "3" required></textarea>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
             </div>
@@ -548,7 +569,7 @@ function estandariza_info( $data ) {
           </h5>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-          <div class="card-body">
+          <div class="card-body" id= "card-body-three">
             <label for="propuesta"><b>Propuesta</b></label>
             <br>
             <div class="form-row">
@@ -716,7 +737,7 @@ function estandariza_info( $data ) {
           </h5>
         </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
-          <div class="card-body">
+          <div class="card-body" id="card-body-four">
             <label for="comentario"><b>Comentarios</b></label>
             <br>
             <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
@@ -1106,6 +1127,7 @@ var table = $('#listado_polizas').DataTable({
                         estado = '<span class="badge badge-danger">' + data + '</span>';
                         break;
                     default:
+
                         estado = '<span class="badge badge-light">' + data + '</span>';
                         break;
                 }
@@ -1300,7 +1322,42 @@ $.redirect('/bamboo/creacion_poliza.php');
   }
 }
 
+function habilitaedicion1(){
+     var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+for(var i = 0; i < fields1.length; i++)
+{
+    fields1[i].disabled = false;
+}
+
+ var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+for(var i = 0; i < fields2.length; i++)
+{
+    fields2[i].disabled = false;
+}
+
+ var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+for(var i = 0; i < fields3.length; i++)
+{
+    fields3[i].disabled = false;
+}
+
+var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+for(var i = 0; i < fields4.length; i++)
+{
+    fields4[i].disabled = false;
+}
+
+document.getElementById("nombre_prop").disabled = true;
+document.getElementById("nombre_seg").disabled = true;
+
+
+    
+}
+
   document.addEventListener("DOMContentLoaded", function(event) {
+      
+
+      
     var orgn='<?php echo $camino; ?>';
     switch  (orgn){
         case 'modificar':{
@@ -1345,8 +1402,33 @@ $.redirect('/bamboo/creacion_poliza.php');
             document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
+            document.getElementById("edicion1").style.display = "flex"
             
             
+               var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+for(var i = 0; i < fields1.length; i++)
+{
+    fields1[i].disabled = true;
+}
+
+ var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+for(var i = 0; i < fields2.length; i++)
+{
+    fields2[i].disabled = true;
+}
+
+ var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+for(var i = 0; i < fields3.length; i++)
+{
+    fields3[i].disabled = true;
+}
+
+var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+for(var i = 0; i < fields4.length; i++)
+{
+    fields4[i].disabled = true;
+}
+      
             
     var ramo = document.getElementById("ramo").value;
     if (ramo == "VEH"){
@@ -1520,16 +1602,7 @@ var moneda = document.getElementById("moneda_poliza").value;
         }
       }))
     
-    var acordeon = document.getElementById("collapseOne").classList
     
-    if(acordeon == "collapse")
-    {
-    
-   
-    
-    $('#modal_cliente').modal('hide');
-        
-    }
     var moneda = document.getElementById("moneda_poliza").value;
     document.getElementById("moneda").innerHTML = moneda;
     document.getElementById("moneda2").innerHTML = moneda;
