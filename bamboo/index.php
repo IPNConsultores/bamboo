@@ -34,7 +34,7 @@ While($row=mysqli_fetch_object($resultado))
       array_push($salidas,$row->salidas );
   }
   
-$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM polizas where estado='Activo' group by ramo order by count(*) desc");
+$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM polizas where estado not in ('Cancelado','Anulado') group by ramo order by count(*) desc");
 While($row2=mysqli_fetch_object($resultado2))
   {
       array_push($ramo,$row2->ramo );
@@ -499,18 +499,21 @@ $(document).ready(function() {
                 "data": "prima_neta",
                 title: "Prima neta"
             }
-
-
+            ,
+            {
+                "data": "poliza_renovada",
+                title: "Póliza renovada"
+            }
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [8,10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
                 "visible": false,
             },
             {
-                "targets": [8,10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
                 "searchable": false
             },
             {
