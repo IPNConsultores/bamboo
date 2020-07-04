@@ -233,7 +233,8 @@ $(document).ready(function() {
         ]
     }).container().appendTo($('#botones_tareas'));
     var busqueda_tarea= '<?php echo $id_tarea;?>';
-    if (busqueda_tarea!=='')
+    if (busqueda_tarea==''){}
+    else{
      table_tareas.column(1).search(busqueda_tarea).draw();
     }
 });
@@ -328,6 +329,11 @@ function botones(id, accion, base) {
             if (base == 'poliza') {
                 $.redirect('/bamboo/creacion_poliza.php', {
                 'id_poliza': id,
+                }, 'post');
+            }
+            if (base == 'tarea') {
+                $.redirect('/bamboo/creacion_actividades.php', {
+                'id_tarea': id,
                 }, 'post');
             }
             break;

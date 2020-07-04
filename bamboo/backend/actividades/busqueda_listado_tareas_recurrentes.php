@@ -12,11 +12,12 @@ require_once "/home/gestio10/public_html/backend/config.php";
     $conta=0;
     $resul_tareas=mysqli_query($link, "SELECT a.id, DATE_FORMAT(fecha_ingreso, '%d-%m-%Y') as fecha_ingreso , DATE_FORMAT(fecha_fin, '%d-%m-%Y') as fecha_fin, tarea, estado, prioridad, dia_recordatorio, count(b.id) as relaciones, sum(CASE WHEN base ='polizas' THEN 1 ELSE 0 END) as polizas, sum(CASE WHEN base ='clientes' THEN 1 ELSE 0 END) as clientes FROM tareas_recurrentes as a left join tareas_relaciones as b on a.id=b.id_tarea_recurrente WHERE estado not in ('Cerrado', 'Eliminado') group by a.id, DATE_FORMAT(fecha_ingreso, '%d-%m-%Y') ,DATE_FORMAT(fecha_fin, '%d-%m-%Y'), tarea, estado, prioridad, dia_recordatorio");
   While($tareas=mysqli_fetch_object($resul_tareas))
-  {$conta=$conta+1;
+  {
+      $conta=$conta+1;
     $relaciones=array("relaciones" =>& $tareas->relaciones, "clientes" =>& $tareas->clientes , "polizas" =>& $tareas->polizas);
     if (!$tareas->relaciones=="0"){
                     $contador_clientes=$contador_polizas=0;
-        $result_relaciones=mysqli_query($link, "SELECT base, id_relacion FROM tareas_relaciones where id_tarea='".$tareas->id."';");
+        $result_relaciones=mysqli_query($link, "SELECT base, id_relacion FROM tareas_relaciones where id_tarea_recurrente='".$tareas->id."';");
         $ramo=$estado_alerta=$estado=$vigencia_inicial=$vigencia_final=$compania=$numero_poliza=$materia_asegurada=$patente_ubicacion=$cobertura=$nom_clienteP=$rut_clienteP=$telefonoP=$correoP=$nom_clienteA=$rut_clienteA=$telefonoA=$correoA=$id_proponente=$id_asegurado=$id_poliza=array();
  $id_cliente=$nombre=$telefono=$correo=array();
         while ($rel_tareas=mysqli_fetch_object($result_relaciones))
@@ -134,7 +135,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "tarea" =>& $tareas->tarea, 
         "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
-        "dia_recordatorio" =>& $dia_recordatorio,
+        "dia_recordatorio" =>& $tareas->dia_recordatorio,
         "prioridad" =>& $tareas->prioridad), 
         $relaciones));
     } else {
@@ -145,7 +146,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         "tarea" =>& $tareas->tarea, 
         "estado" =>& $tareas->estado, 
         "estado_alerta" =>& $estado_sw,
-        "dia_recordatorio" =>& $dia_recordatorio,
+        "dia_recordatorio" =>& $tareas->dia_recordatorio,
         "prioridad" =>& $tareas->prioridad), 
         $relaciones)
     );}
