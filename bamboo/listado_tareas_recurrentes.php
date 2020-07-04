@@ -14,13 +14,6 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err=$data=$id_tarea='';
  $rut=$nombre=$telefono=$correo=$lista='';
-
-if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET["tarea"])==true){
-    // Check if username is empty
-//$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
-$id_tarea= estandariza_info($_GET["tarea"]);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +93,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
 $(document).ready(function() {
     table_tareas = $('#tareas_completas').DataTable({
 
-        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_completas.php",
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_recurrentes.php",
         "scrollX": true,
         "columns": [{
                 "className": 'details-control',
@@ -125,20 +118,16 @@ $(document).ready(function() {
                 title: "Tarea o Actividad"
             },
             {
-                "data": "fecvencimiento",
-                title: "Fecha vencimiento"
+                "data":"dia_recordatorio",
+                title: "Día activación"
+            },
+            {
+                "data": "fecha_fin",
+                title: "Fecha fin"
             },
             {
                 "data": "fecingreso",
                 title: "Fecha creación tarea"
-            },
-            {
-                "data":"procedimiento",
-                title: "Procedimiento"
-            },
-            {
-                "data":"feccierre",
-                title: "Fecha cierre"
             }
 
         ],
@@ -146,10 +135,7 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
 
-        "columnDefs": [{
-                "targets": [6,8],
-                "visible": false,
-            },
+        "columnDefs": [
         {
         targets: 3,
         render: function (data, type, row, meta) {
@@ -182,7 +168,7 @@ $(document).ready(function() {
                 '<option value="50">50</option>' +
                 '<option value="-1">todos</option>' +
                 '</select> registros',
-            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+            "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
             "sLengthMenu": "Muestra _MENU_ registros por página",
             "sZeroRecords": "No hay registros asociados",
             "sInfo": "Mostrando página _PAGE_ de _PAGES_",
