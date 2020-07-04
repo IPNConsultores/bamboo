@@ -738,10 +738,13 @@ function botones(id, accion, base) {
                 }, 'post');
             }
             if (base == 'poliza') {
+                var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
+                if (r2 == true) {
                 $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
                     'id_poliza': id,
                     'accion':accion,
                 }, 'post');
+                }
             }
             break;
         }
