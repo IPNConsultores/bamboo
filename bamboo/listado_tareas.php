@@ -51,7 +51,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <p> Clientes / Listado de clientes <br>
+        <p> Tareas / Listado de tareas <br>
         </p>
         <br>
         <div class="container">

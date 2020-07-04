@@ -67,8 +67,9 @@ function valida_rut(){
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4"
 						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tareas</a>
 						<div class ="dropdown-menu" aria-labelledby="navbarDropdown"> 
-							<a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación tareas</a>
-							<a class="dropdown-item" href="/bamboo/listado_tareas.php">Listado de tareas</a>						
+							<a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación</a>
+							<a class="dropdown-item" href="/bamboo/listado_tareas.php">Listado de tareas</a>
+                            <a class="dropdown-item" href="/bamboo/listado_tareas_recurrentes.php">Listado de tareas recurrentes</a>						
 						</div>				
 					</li>
 					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"

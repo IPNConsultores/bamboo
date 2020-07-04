@@ -44,7 +44,7 @@ $num=0;
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <p> Clientes / Listado de clientes <br>
+        <p> Tareas / Listado de tareas recurrentes <br>
         </p>
         <br>
         <div class="container">
@@ -56,8 +56,6 @@ $num=0;
                                 <th>Estado</th>
                                 <th>Tarea</th>
                                <th></th>
-                                <th></th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </table>
