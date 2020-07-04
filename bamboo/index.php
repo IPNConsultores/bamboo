@@ -504,6 +504,11 @@ $(document).ready(function() {
                 "data": "poliza_renovada",
                 title: "Póliza renovada"
             }
+            ,
+            {
+                "data": "informacion_adicional",
+                title: "Información adicional"
+            }
         ],
         //          "search": {
         //          "search": "abarca"
@@ -604,7 +609,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43]
                 }
             },
             {
@@ -612,7 +617,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43]
                 }
             }
         ]
