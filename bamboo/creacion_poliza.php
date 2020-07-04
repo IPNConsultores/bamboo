@@ -120,9 +120,11 @@ function estandariza_info( $data ) {
      
      </div>
   <br>
-  <div class="form-check form-check-inline">
-      <div class="col align-self-end" >
-            <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; color: white; display: none">Editar</button>    
+  <div class="form-check form-check-inline" >
+      <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
+            <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button> 
+            <button class="btn btn-second" id="cancela" onclick="" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>    
+            <button class="btn btn-second" id="anula" onclick="" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>    
      </div>
   <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
     <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
@@ -148,6 +150,7 @@ function estandariza_info( $data ) {
               <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                   <th></th>
+
                   <th>Estado</th>
                   <th>Póliza</th>
                   <th>Compañia</th>
@@ -1348,7 +1351,9 @@ for(var i = 0; i < fields4.length; i++)
 
 document.getElementById("nombre_prop").disabled = true;
 document.getElementById("nombre_seg").disabled = true;
-
+document.getElementById("edicion1").style.display = "none";
+document.getElementById("anula").style.display = "none";
+document.getElementById("cancela").style.display = "none";
 
     
 }
