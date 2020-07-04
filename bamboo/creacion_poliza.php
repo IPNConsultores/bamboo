@@ -121,6 +121,9 @@ function estandariza_info( $data ) {
      </div>
   <br>
   <div class="form-check form-check-inline">
+      <div class="col align-self-end" >
+            <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; color: white; display: none">Editar</button>    
+     </div>
   <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
     <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
     <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
@@ -178,9 +181,7 @@ function estandariza_info( $data ) {
     <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
                     id="poliza_renovada" style="display:none;">
     </div>
-    <div class="col align-self-end" >
-            <button class="btn" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; color: white; display: none">Editar</button>    
-     </div>
+    
 
     </div>
     
@@ -364,7 +365,6 @@ function estandariza_info( $data ) {
                   <option value="Renta Nacional" <?php if ($selcompania == "Renta Nacional") echo "selected" ?> >Renta Nacional</option>
                   <option value="Southbridge" <?php if ($selcompania == "Southbridge") echo "selected" ?> >Southbridge</option>
                   <option value="Sur Asistencia" <?php if ($selcompania == "Sur Asistencia") echo "selected" ?> >Sur Asistencia</option>
-
                   <option value="Suaval" <?php if ($selcompania == "Suaval") echo "selected" ?> >Suaval</option>
                   <option value="Sura" <?php if ($selcompania == "Sura") echo "selected" ?> >Sura</option>
                   <option value="STARR" <?php if ($selcompania == "STARR") echo "selected" ?> >STARR</option>
@@ -1127,7 +1127,6 @@ var table = $('#listado_polizas').DataTable({
                         estado = '<span class="badge badge-danger">' + data + '</span>';
                         break;
                     default:
-
                         estado = '<span class="badge badge-light">' + data + '</span>';
                         break;
                 }
