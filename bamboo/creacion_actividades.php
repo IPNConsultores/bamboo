@@ -521,6 +521,9 @@ function checkTipoTarea(tipoTarea) {
 $(document).ready(function() {
     var tipo_tarea = '<?php echo $tipo_tarea; ?>';
     console.log(tipo_tarea);
+    document.getElementById('tarea').value = '<?php echo $tarea; ?>';
+    document.getElementById('fechavencimiento').value = '<?php echo $fecha_vencimiento; ?>';
+
     switch (tipo_tarea) {
         case 'individual': {
             document.getElementById("formulario_tareas_recurrentes").style.display = "none"
@@ -529,9 +532,7 @@ $(document).ready(function() {
         case 'recurrente': {
             var recurrente = '<?php echo $recurrente; ?>';
             var tarea_infinita = '<?php echo $tarea_con_fecha_fin; ?>';
-            document.getElementById('tarea').value = '<?php echo $tarea; ?>';
-            document.getElementById('fechavencimiento').value = '<?php echo $fecha_vencimiento; ?>';
-            if (recurrente == 1) {
+             if (recurrente == 1) {
                 checkTipoTarea('recurrente');
                 if (tarea_infinita == 1) {
                     checkTipoTarea('con_fecha');
