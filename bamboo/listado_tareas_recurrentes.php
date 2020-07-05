@@ -14,6 +14,12 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
  $busqueda=$busqueda_err=$data=$id_tarea='';
  $rut=$nombre=$telefono=$correo=$lista='';
+
+ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET["tarea"])==true){
+    // Check if username is empty
+//$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
+$id_tarea= estandariza_info($_GET["tarea"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -216,6 +222,11 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_tareas'));
+    var busqueda_tarea= '<?php echo $id_tarea;?>';
+    if (busqueda_tarea==''){}
+    else{
+     table_tareas.column(1).search(busqueda_tarea).draw();
+    }
 });
 function detalle_tareas(d) {
     $sin_rel=$tabla_clientes=$tabla_polizas='';

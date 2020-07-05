@@ -84,8 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 }
 }
-// vuelve al index
-header("location: /bamboo/index.php");
 
 function estandariza_info($data)
 {
@@ -95,3 +93,33 @@ function estandariza_info($data)
     return $data;
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+    </script>
+<script src="/assets/js/jquery.redirect.js">
+</script>
+</head>
+<body>
+<script >
+
+var tarea_recurrente= '<?php echo $tarea_recurrente; ?>';
+var id_tarea= '<?php echo $id_tarea; ?>';
+if (tarea_recurrente==true){
+    $.redirect('/bamboo/listado_tareas_recurrentes.php', {
+  'tarea': id_tarea
+}, 'GET');
+}
+else
+{
+    $.redirect('/bamboo/listado_tareas.php', {
+  'tarea': id_tarea
+}, 'GET');
+}
+
+
+</script>
+</body>
+</html>
