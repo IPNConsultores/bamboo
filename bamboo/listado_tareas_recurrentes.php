@@ -204,20 +204,20 @@ $(document).ready(function() {
 
     var buttons = new $.fn.dataTable.Buttons(table_tareas, {
         buttons: [{
-                sheetName: 'Tareas',
+                sheetName: 'Tareas recurrente',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
-                filename: 'Listado tareas al: ' + fecha,
+                filename: 'Listado tareas recurrentes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8]
+                    columns: [1, 2, 3, 4, 5, 6,7]
                 }
             },
             {
                 orientation: 'landscape',
                 extend: 'pdfHtml5',
-                filename: 'Listado tareas al: ' + fecha,
+                filename: 'Listado tareas recurrentes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8]
+                    columns: [1, 2, 3, 4, 5, 6,7]
                 }
             }
         ]
@@ -282,7 +282,9 @@ function detalle_tareas(d) {
         '<td></a><button title="Completar tarea"  type="button" id=' +
         d.id_tarea +
         ' name="cerrar_tarea_recurrente" id=' + d.id_tarea +
-        ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
+        ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td><a> </a><button title="Editar"  type="button" id=' +
+        d.id_tarea +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button>' +
         '</tr>' +
         '<tr><td>Clientes:</td>'+
         '<td>'+ $tabla_clientes+'</td></tr>'+
@@ -299,7 +301,7 @@ function botones(id, accion, base) {
             if (base == 'tarea') {
                 $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
-                    'accion':accion,
+                    'accion':accion
                 }, 'post');
             }
             break;
@@ -315,12 +317,13 @@ function botones(id, accion, base) {
             });
             if (base == 'poliza') {
                 $.redirect('/bamboo/creacion_poliza.php', {
-                'id_poliza': id,
+                'id_poliza': id
                 }, 'post');
             }
             if (base == 'tarea') {
                 $.redirect('/bamboo/creacion_actividades.php', {
                 'id_tarea': id,
+                'tipo_tarea':'recurrente'
                 }, 'post');
             }
             break;
@@ -368,7 +371,7 @@ function botones(id, accion, base) {
             if (base == 'tarea') {
                 $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
-                    'accion':accion,
+                    'accion':accion
                 }, 'post');
             }
             break;

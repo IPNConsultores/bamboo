@@ -759,12 +759,13 @@ function botones(id, accion, base) {
             });
             if (base == 'poliza') {
                 $.redirect('/bamboo/creacion_poliza.php', {
-                'id_poliza': id,
+                'id_poliza': id
                 }, 'post');
             }
             if (base == 'tarea') {
                 $.redirect('/bamboo/creacion_actividades.php', {
                 'id_tarea': id,
+                'tipo_tarea':'individual'
                 }, 'post');
             }
             break;

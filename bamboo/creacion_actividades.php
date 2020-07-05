@@ -93,6 +93,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_tarea"]))){
         $busqueda=$_POST["id_tarea"];
         $origen='modifica tarea';
+        $tipo_tarea=$_POST["tipo_tarea"];
+        echo $_POST["tipo_tarea"];
         $aux_modificar='update';
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo');
@@ -141,6 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }
+        
 }
 }
 else {    
