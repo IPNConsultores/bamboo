@@ -21,7 +21,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $id_tarea = $_POST["id_tarea"];
     if($modificar=='update')
     {
-        mysqli_query($link, "update tareas set fecha_vencimiento='".$fechavencimiento."', tarea='".$tarea."', prioridad='". $prioridad . "' where id=".$id_tarea);
+        if($tarea_con_fin==1)
+        {
+            $fecha='\''.$_POST["fecha"].'\'';
+        }
+        else
+        {
+            $fecha='null';
+        }
+
+        if ($tarea_recurrente==0){
+            mysqli_query($link, "update tareas set fecha_vencimiento='".$fechavencimiento."', tarea='".$tarea."', prioridad='". $prioridad . "' where id=".$id_tarea);
+        }
+        else
+        {
+            mysqli_query($link, "update tareas_recurrentes set tarea='".$tarea."', prioridad='". $prioridad . "', fecha_fin='".$fecha."' ,dia_recordatorio='".$dia."' where id=".$id_tarea);
+        }
+
     }
      else
      {
