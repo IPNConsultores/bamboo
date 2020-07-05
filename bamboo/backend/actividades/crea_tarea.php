@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
         else
         {
-            mysqli_query($link, "update tareas_recurrentes set tarea='".$tarea."', prioridad='". $prioridad . "', fecha_fin='".$fecha."' ,dia_recordatorio='".$dia."' where id=".$id_tarea);
+            mysqli_query($link, "update tareas_recurrentes set tarea='".$tarea."', prioridad='". $prioridad . "', fecha_fin=".$fecha." ,dia_recordatorio='".$dia."' where id=".$id_tarea);
         }
 
     }
