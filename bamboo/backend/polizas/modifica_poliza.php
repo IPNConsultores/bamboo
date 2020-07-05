@@ -46,23 +46,30 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $boleta=estandariza_info($_POST["boleta"]);
 $endoso=estandariza_info($_POST["endoso"]);
 $comentario=estandariza_info($_POST["comentario"]);
-
-if ($_POST["accion"]=='elimina'){
-  mysqli_query($link, "delete from polizas where id=".$_POST["id_poliza"]);
-}
-else {
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-$query="UPDATE polizas SET numero_boleta='".$boleta."', comision_negativa='".$comisionneg."', boleta_negativa='".$boletaneg."', depositado_fecha='".$fechadeposito."', moneda_valor_cuota='".$moenda_cuota."',  rut_proponente='".$rut_prop."',  dv_proponente='".$dv_prop."',  rut_asegurado='".$rut_aseg."',  dv_asegurado='".$dv_aseg."',  compania='".$selcompania."',  
-ramo='".$ramo."',  vigencia_inicial='".$fechainicio."',  vigencia_final='".$fechavenc."',  numero_poliza='".$nro_poliza."',  cobertura='".$cobertura."',  materia_asegurada='".$materia."',  patente_ubicacion='".$detalle_materia."', 
-moneda_poliza='".$moneda_poliza."',  deducible='".$deducible."',  prima_afecta='".$prima_afecta."',  prima_exenta='".$prima_exenta."',  prima_neta='".$prima_neta."',
-prima_bruta_anual='".$prima_bruta."',  monto_asegurado='".$monto_aseg."',  numero_propuesta='".$nro_propuesta."',  fecha_envio_propuesta='".$fechaprop."',  
-moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_comision='".$porcentaje_comsion."',  comision_bruta='".$comisionbruta."',
-comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
-vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."' WHERE id=".$id_poliza.";";
-mysqli_query($link, $query);
-//ECHO $query;
+switch ($_POST["accion"]) {
+    case 'elimina':
+        mysqli_query($link, "delete from polizas where id=".$_POST["id_poliza"]);
+        break;
+    case 'cancelar':
+        mysqli_query($link, "update polizas set estado='Cancelado' where id=".$_POST["id_poliza"]);
+        break;
+    case 'anular':
+        mysqli_query($link, "update polizas set estado='Anulado' where id=".$_POST["id_poliza"]);
+        break;
+    default:
+        $query="UPDATE polizas SET numero_boleta='".$boleta."', comision_negativa='".$comisionneg."', boleta_negativa='".$boletaneg."', depositado_fecha='".$fechadeposito."', moneda_valor_cuota='".$moenda_cuota."',  rut_proponente='".$rut_prop."',  dv_proponente='".$dv_prop."',  rut_asegurado='".$rut_aseg."',  dv_asegurado='".$dv_aseg."',  compania='".$selcompania."',  
+        ramo='".$ramo."',  vigencia_inicial='".$fechainicio."',  vigencia_final='".$fechavenc."',  numero_poliza='".$nro_poliza."',  cobertura='".$cobertura."',  materia_asegurada='".$materia."',  patente_ubicacion='".$detalle_materia."', 
+        moneda_poliza='".$moneda_poliza."',  deducible='".$deducible."',  prima_afecta='".$prima_afecta."',  prima_exenta='".$prima_exenta."',  prima_neta='".$prima_neta."',
+        prima_bruta_anual='".$prima_bruta."',  monto_asegurado='".$monto_aseg."',  numero_propuesta='".$nro_propuesta."',  fecha_envio_propuesta='".$fechaprop."',  
+        moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_comision='".$porcentaje_comsion."',  comision_bruta='".$comisionbruta."',
+        comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
+        vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."' WHERE id=".$id_poliza.";";
+        mysqli_query($link, $query);
+        break;
 }
+
 
 function estandariza_info($data) {
   $data = trim($data);

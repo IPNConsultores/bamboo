@@ -123,8 +123,8 @@ function estandariza_info( $data ) {
   <div class="form-check form-check-inline" >
       <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
             <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button> 
-            <button class="btn btn-second" id="cancela" onclick="" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>    
-            <button class="btn btn-second" id="anula" onclick="" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>    
+            <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>    
+            <button class="btn btn-second" id="anular" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>    
      </div>
   <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
     <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
@@ -1123,10 +1123,10 @@ var table = $('#listado_polizas').DataTable({
                     case 'Activo':
                         estado = '<span class="badge badge-primary">' + data + '</span>';
                         break;
-                    case 'Cerrado':
+                    case 'Renovado':
                         estado = '<span class="badge badge-dark">' + data + '</span>';
                         break;
-                    case 'Atrasado':
+                    case 'Vencido':
                         estado = '<span class="badge badge-danger">' + data + '</span>';
                         break;
                     default:
@@ -1352,8 +1352,8 @@ for(var i = 0; i < fields4.length; i++)
 document.getElementById("nombre_prop").disabled = true;
 document.getElementById("nombre_seg").disabled = true;
 document.getElementById("edicion1").style.display = "none";
-document.getElementById("anula").style.display = "none";
-document.getElementById("cancela").style.display = "none";
+document.getElementById("anular").style.display = "none";
+document.getElementById("cancelar").style.display = "none";
 
     
 }
@@ -1386,7 +1386,6 @@ document.getElementById("cancela").style.display = "none";
             document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
             document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
-            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("comision").value = '<?php echo $comision; ?>';
             document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
             document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
@@ -1618,5 +1617,15 @@ var moneda = document.getElementById("moneda_poliza").value;
     
   });
 
-
+function modifica_estado(estado){
+    var r2 = confirm("Estás a punto de "+estado+" está póliza ¿Deseas continuar?");
+                if (r2 == true) {
+                    
+                $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+                    'id_poliza': document.getElementById("id_poliza").value,
+                    'accion':estado,
+                }, 'post');
+                
+                }
+}
 </script>
