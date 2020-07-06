@@ -959,22 +959,23 @@ function pobladeducible(){
     
     ramo = document.getElementById("ramo").value;
     
-    if (ramo == "VEH"){
+    if (ramo == "VEH" || ramo == "veh_comerciales" || ramo== "veh_particular" || ramo =="veh_pesados"){
          document.getElementById("deducible").value =  document.getElementById("deducible_veh_1").value;
        
     } 
     
-      else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+      else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME" || ramo == "inc_condominio" || ramo =="inc_hogar" || ramo == "inc_miscelaneo" || ramo == "inc_perjuicio" || ramo == "inc_pyme" || ramo =="inc_trbf"){
         
          document.getElementById("deducible").value =  document.getElementById("deducible_inc_1").value;
         
     }
-    else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"){
+    else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"|| ramo == "accidentes_personales_ap" || ramo =="accidentes_personales_protección" || ramo == "viaje" || ramo == "garantia" || ramo =="vida_apv" || ramo =="vida_vida" ){
 
           document.getElementById("deducible").value =  document.getElementById("deducible_viaje_1").value;
+
         
     }
-     else if (ramo == "RC" || ramo =="D&O" ){
+     else if (ramo == "RC" || ramo =="D&O" || ramo == "rc-do" || ramo =="rc-rc"){
       
          document.getElementById("deducible").value =  document.getElementById("deducible_porcentaje").value + "% de la Pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + " " + document.getElementById("deducible_valor").value ;
         
@@ -994,7 +995,7 @@ function cambia_deducible(){
     
     ramo = document.getElementById("ramo").value;
     
-    if (ramo == "VEH"){
+    if (ramo == "VEH" || ramo == "veh_comerciales" || ramo== "veh_particular" || ramo =="veh_pesados"){
         
          document.getElementById("deducible_veh").style.display = "flex";
          document.getElementById("deducible_defecto").style.display = "none";
@@ -1006,7 +1007,7 @@ function cambia_deducible(){
     } 
     
     
-   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME" || ramo == "inc_condominio" || ramo =="inc_hogar" || ramo == "inc_miscelaneo" || ramo == "inc_perjuicio" || ramo == "inc_pyme" || ramo =="inc_trbf"){
         document.getElementById("deducible_veh").style.display = "none";
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "flex";
@@ -1016,7 +1017,7 @@ function cambia_deducible(){
         
     }
     
-     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"|| ramo == "accidentes_personales_ap" || ramo =="accidentes_personales_protección" || ramo == "viaje" || ramo == "garantia" || ramo =="vida_apv" || ramo =="vida_vida" ){
         document.getElementById("deducible_veh").style.display = "none";
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "none";
@@ -1025,7 +1026,7 @@ function cambia_deducible(){
          document.getElementById("deducible").value =  document.getElementById("deducible_viaje_1").value;
         
     }
-    else if (ramo == "RC" || ramo =="D&O" ){
+    else if (ramo == "RC" || ramo =="D&O" || ramo == "rc-do" || ramo =="rc-rc" ){
         document.getElementById("deducible_veh").style.display = "none";
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "none";
@@ -1447,7 +1448,7 @@ for(var i = 0; i < fields4.length; i++)
       
             
     var ramo = document.getElementById("ramo").value;
-    if (ramo == "VEH"){
+    if (ramo == "VEH" || ramo == "veh_comerciales" || ramo== "veh_particular" || ramo =="veh_pesados"){
         
          document.getElementById("deducible_veh").style.display = "flex";
          document.getElementById("deducible_defecto").style.display = "none";
@@ -1457,7 +1458,7 @@ for(var i = 0; i < fields4.length; i++)
     } 
     
     
-   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME" || ramo == "inc_condominio" || ramo =="inc_hogar" || ramo == "inc_miscelaneo" || ramo == "inc_perjuicio" || ramo == "inc_pyme" || ramo =="inc_trbf"){
        
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "flex";
@@ -1467,7 +1468,7 @@ for(var i = 0; i < fields4.length; i++)
         
     }
     
-     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"|| ramo == "accidentes_personales_ap" || ramo =="accidentes_personales_protección" || ramo == "viaje" || ramo == "garantia" || ramo =="vida_apv" || ramo =="vida_vida" ){
         
          document.getElementById("deducible_defecto").style.display = "none";
       
@@ -1477,7 +1478,7 @@ for(var i = 0; i < fields4.length; i++)
             document.getElementById("deducible_viaje_1").value = deducible ;
         
     }
-    else if (ramo == "RC" || ramo =="D&O" ){
+    else if (ramo == "RC" || ramo =="D&O" || ramo == "rc-do" || ramo =="rc-rc" ){
        
            document.getElementById("deducible_defecto").style.display = "none";
          
@@ -1556,7 +1557,7 @@ var moneda = document.getElementById("moneda_poliza").value;
             valida_rut_duplicado_aseg();
             
                 var ramo = document.getElementById("ramo").value;
-    if (ramo == "VEH"){
+    if (ramo == "VEH" || ramo == "veh_comerciales" || ramo== "veh_particular" || ramo =="veh_pesados"){
         
          document.getElementById("deducible_veh").style.display = "flex";
          document.getElementById("deducible_defecto").style.display = "none";
@@ -1566,7 +1567,7 @@ var moneda = document.getElementById("moneda_poliza").value;
     } 
     
     
-   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME"){
+   else if (ramo == "INC" || ramo =="Hogar" || ramo == "PyME" || ramo == "inc_condominio" || ramo =="inc_hogar" || ramo == "inc_miscelaneo" || ramo == "inc_perjuicio" || ramo == "inc_pyme" || ramo =="inc_trbf"){
        
          document.getElementById("deducible_defecto").style.display = "none";
          document.getElementById("deducible_inc").style.display = "flex";
@@ -1576,7 +1577,7 @@ var moneda = document.getElementById("moneda_poliza").value;
         
     }
     
-     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía_1"){
+     else if (ramo == "A. VIAJE" || ramo =="APV" || ramo == "AP" || ramo == "Vida" || ramo =="Garantía"|| ramo == "accidentes_personales_ap" || ramo =="accidentes_personales_protección" || ramo == "viaje" || ramo == "garantia" || ramo =="vida_apv" || ramo =="vida_vida" ){
         
          document.getElementById("deducible_defecto").style.display = "none";
       
@@ -1586,7 +1587,7 @@ var moneda = document.getElementById("moneda_poliza").value;
             document.getElementById("deducible_viaje_1").value = deducible ;
         
     }
-    else if (ramo == "RC" || ramo =="D&O" ){
+    else if (ramo == "RC" || ramo =="D&O" || ramo == "rc-do" || ramo =="rc-rc"){
        
          document.getElementById("deducible_defecto").style.display = "none";
          
