@@ -74,13 +74,66 @@ $buscar= estandariza_info($_POST["busqueda"]);
             </table>
             <div id="botones"></div>
         </div>
+        
     </div>
-
+    <div class="container">
+                <p><br><br> Pólizas / Listado de pólizas </p>
+        <div class="container">
+            <table class="display" style="width:100%" id="listado_polizas">
+                <tr>
+                    <th></th>
+                    <th>Estado</th>
+                    <th>Póliza</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Materia Asegurada</th>
+                    <th>Tipo póliza</th>
+                    <th>Observaciones</th>
+                    <th>Deducible</th>
+                    <th>Prima afecta</th>
+                    <th>Prima exenta</th>
+                    <th>Prima bruta anual</th>
+                    <th>Añomes final</th>
+                    <th>Añomes inicial</th>
+                    <th>Moneda póliza</th>
+                    <th>Cobertura</th>
+                    <th>Proponente</th>
+                    <th>Rut Proponente</th>
+                    <th>Asegurado</th>
+                    <th>Rut Asegurado</th>
+                    <th>grupo</th>
+                    <th>referido</th>
+                    <th>monto_asegurado</th>
+                    <th>numero_propuesta</th>
+                    <th>fecha_envio_propuesta</th>
+                    <th>comision</th>
+                    <th>porcentaje_comision</th>
+                    <th>comision_bruta</th>
+                    <th>comision_neta</th>
+                    <th>numero_boleta</th>
+                    <th>boleta_negativa</th>
+                    <th>comision_negativa</th>
+                    <th>depositado_fecha</th>
+                    <th>vendedor</th>
+                    <th>nombre_vendedor</th>
+                    <th>forma_pago</th>
+                    <th>nro_cuotas</th>
+                    <th>valor_cuota</th>
+                    <th>fecha_primera_cuota</th>
+                   <th>Prima neta</th>
+                </tr>
+            </table>
+            <div id="botones_poliza"></div>
+        </div>
+    </div>
 
     <div id="auxiliar" style="display: none;">
         <input id="var1" value="<?php 
         echo htmlspecialchars($buscar);?>">
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
@@ -167,7 +220,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     '<option value="50">50</option>' +
                     '<option value="-1">todos</option>' +
                     '</select> registros',
-                "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+                "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
                 "sLengthMenu": "Muestra _MENU_ registros por página",
                 "sZeroRecords": "No hay registros asociados",
                 "sInfo": "Mostrando página _PAGE_ de _PAGES_",
@@ -194,30 +247,290 @@ $buscar= estandariza_info($_POST["busqueda"]);
             }
         });
         $('#listado_clientes').dataTable().fnFilter(document.getElementById("var1").value);
-        var dd = new Date();
-        var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
-            .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
-        var buttons = new $.fn.dataTable.Buttons(table, {
-            buttons: [{
-                sheetName: 'Clientes',
-                orientation: 'landscape',
-                extend: 'excelHtml5',
-                filename: 'Listado clientes al: ' + fecha,
-                exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
-                }
+//fin clientes        
+//inicio pólizas
+        
+            table_polizas = $('#listado_polizas').DataTable({
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "scrollX": true,
+        "searchPanes":{
+            "columns":[2,3,13,14],
+        },
+        "dom": 'Pfrtip',
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
-                orientation: 'landscape',
-                extend: 'pdfHtml5',
-                filename: 'Listado clientes al: ' + fecha,
-                exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                "data": "estado",
+                title: "Estado"
+            },
+            {
+                "data": "numero_poliza",
+                title: "Nro Póliza"
+            },
+            {
+                "data": "compania",
+                title: "Compañía"
+            },
+            {
+                "data": "ramo",
+                title: "Ramo"
+            },
+            {
+                "data": "vigencia_inicial",
+                title: "Vigencia Inicio"
+            },
+            {
+                "data": "vigencia_final",
+                title: "Vigencia Término"
+            },
+            {
+                "data": "materia_asegurada",
+                title: "Materia asegurada"
+            },
+            {
+                "data": "tipo_poliza",
+                title: "Tipo póliza"
+            },
+            {
+                "data": "patente_ubicacion",
+                title: "Observaciones materia asegurada"
+            },
+            {
+                "data": "deducible",
+                title: "Deducible"
+            },
+            {
+                "data": "prima_afecta",
+                title: "Prima afecta"
+            },
+            {
+                "data": "prima_exenta",
+                title: "Prima exenta"
+            },
+            {
+                "data": "prima_bruta_anual",
+                title: "Prima bruta anual"
+            },
+            {
+                "data": "anomes_final",
+                title: "Añomes final"
+            },
+            {
+                "data": "anomes_inicial",
+                title: "Añomes inicial"
+            },
+            {
+                "data": "moneda_poliza",
+                title: "Moneda póliza"
+            },
+            {
+                "data": "cobertura",
+                title: "Cobertura"
+            },
+            {
+                "data": "nom_clienteP",
+                title: "Proponente"
+            },
+            {
+                "data": "rut_clienteP",
+                title: "Rut Proponente"
+            },
+            {
+                "data": "nom_clienteA",
+                title: "Asegurado"
+            },
+            {
+                "data": "rut_clienteA",
+                title: "Rut Asegurado"
+            },
+            {
+                "data": "grupo",
+                title: "Grupo"
+            },
+            {
+                "data": "referido",
+                title: "Referido"
+            },
+            {
+                "data": "monto_asegurado",
+                title: "Monto Asegurado"
+            },
+            {
+                "data": "numero_propuesta",
+                title: "Propuesta"
+            },
+            {
+                "data": "fecha_envio_propuesta",
+                title: "Fecha envío propuesto"
+            },
+            {
+                "data": "comision",
+                title: "Comisión"
+            },
+            {
+                "data": "porcentaje_comision",
+                title: "% Comisión"
+            },
+            {
+                "data": "comision_bruta",
+                title: "Comisión Bruta"
+            },
+            {
+                "data": "comision_neta",
+                title: "Comisión Neta"
+            },
+            {
+                "data": "numero_boleta",
+                title: "Número boleta"
+            },
+            {
+                "data": "boleta_negativa",
+                title: "Boleta negativa"
+            },
+            {
+                "data": "comision_negativa",
+                title: "Comisión negativa"
+            },
+            {
+                "data": "depositado_fecha",
+                title: "Fecha depósito"
+            },
+            {
+                "data": "vendedor",
+                title: "vendedor"
+            },
+            {
+                "data": "nombre_vendedor",
+                title: "Nombre vendedor"
+            },
+            {
+                "data": "forma_pago",
+                title: "Forma de pago"
+            },
+            {
+                "data": "nro_cuotas",
+                title: "Número de cuotas"
+            },
+            {
+                "data": "valor_cuota",
+                title: "Valor cuota"
+            },
+            {
+                "data": "fecha_primera_cuota",
+                title: "Fecha primera cuota"
+            },
+            {
+                "data": "prima_neta",
+                title: "Prima neta"
+            }
+            ,
+            {
+                "data": "poliza_renovada",
+                title: "Póliza renovada"
+            }
+            ,
+            {
+                "data": "informacion_adicional",
+                title: "Información adicional"
+            }
+
+        ],
+        //          "search": {
+        //          "search": "abarca"
+        //          },
+        "columnDefs": [{
+                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "visible": false,
+            },
+            {
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "searchable": false
+            },
+            {
+                "searchPanes": {
+                    "preSelect":['Activo'],
+                },
+                "targets":[1],
+            },
+            {
+        targets: 1,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Activo':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Renovado':
+                                estado='<span class="badge badge-dark">'+data+'</span>';
+                                break;
+                        case 'Vencido':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }}
+        ],
+        "order": [
+            [3, "asc"],
+            [4, "asc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+            "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
                 }
             }
-            ]
-        }).container().appendTo($('#botones'));
+        }
+    });
+    $('#listado_polizas tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table_polizas.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+    $('#listado_polizas').dataTable().fnFilter(document.getElementById("var1").value);
+
+    
+//fin pólizas
+        
+        
     });
 
     function format(d) {

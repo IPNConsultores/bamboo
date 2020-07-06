@@ -271,7 +271,7 @@ $(document).ready(function() {
                 '<option value="50">50</option>' +
                 '<option value="-1">todos</option>' +
                 '</select> registros',
-            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+                "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
             "sLengthMenu": "Muestra _MENU_ registros por página",
             "sZeroRecords": "No hay registros asociados",
             "sInfo": "Mostrando página _PAGE_ de _PAGES_",
@@ -560,7 +560,7 @@ $(document).ready(function() {
                 '<option value="50">50</option>' +
                 '<option value="-1">todos</option>' +
                 '</select> registros',
-            "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
+                "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
             "sLengthMenu": "Muestra _MENU_ registros por página",
             "sZeroRecords": "No hay registros asociados",
             "sInfo": "Mostrando página _PAGE_ de _PAGES_",
