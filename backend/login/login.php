@@ -11,8 +11,8 @@ function alerta(mensaje, tipo) {
 }
 </script>
 <?php
-echo $_COOKIE['DOMINIO'];
-echo $_COOKIE['URI'];
+echo "dominio: ".$_COOKIE['DOMINIO']."<br>";
+echo "uri: ".$_COOKIE['URI'];
 // Initialize the session
 session_start();
 
