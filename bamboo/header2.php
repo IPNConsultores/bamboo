@@ -1,17 +1,17 @@
 <?php
 // Initialize the session
-    if(!isset($_SESSION)) 
-    { 
-        setcookie('URI',$_SERVER['REQUEST_URI'],time() + (180));
-        setcookie('DOMINIO',$_SERVER['HTTP_HOST'],time() + (180));
-        session_start(); 
-    } 
-
-// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
-  header( "location: /backend/login/login.php" );
-  exit;
+    setcookie('URI',$_SERVER['REQUEST_URI'],time() + (180),"/");
+    setcookie('DOMINIO',$_SERVER['HTTP_HOST'],time() + (180),"/");
+//header( "location: /backend/login/login.php" );
+header( "location: /bamboo/test3.php" );
+exit;
 }
+
 function valida_rut(){
 
 }

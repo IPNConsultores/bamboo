@@ -11,14 +11,21 @@ function alerta(mensaje, tipo) {
 }
 </script>
 <?php
-echo "dominio: ".$_COOKIE['DOMINIO']."<br>";
-echo "uri: ".$_COOKIE['URI'];
+
 // Initialize the session
 session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: /bamboo/index.php");
+    if (isset($_COOKIE['DOMINIO'])){
+         header("location: ".$_COOKIE['URI']);
+     //echo "Ingresando a uri (desde arriba): ".$_COOKIE['URI']."<br>";
+     }
+     else
+     {
+         header("location: /bamboo/index.php");
+        // echo "Ingresando a index (desde arriba)<br>";
+}
     exit;
 }
  
@@ -78,8 +85,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             $_SESSION["auxiliar"]="";
                             // Redirect user to welcome page
-                            if ($_COOKIE['DOMINIO']=='gestionipn.cl'){
+                            if (isset($_COOKIE['DOMINIO'])){
                                 header("location: ".$_COOKIE['URI']);
+                                setcookie('URI','',time() -1,"/");
+                                setcookie('DOMINIO','',time() -1,"/");
                             }
                             else
                             {
