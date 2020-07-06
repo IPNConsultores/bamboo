@@ -521,7 +521,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format(row.data())).show();
+            row.child(format_poliza(row.data())).show();
             tr.addClass('shown');
         }
     });
@@ -595,20 +595,68 @@ $buscar= estandariza_info($_POST["busqueda"]);
             '<tr>' +
             '<td>Acciones</td>' +
             '<td><button title="Buscar información asociada" type="button" id=' + d.id +
-            ' name="info" onclick="botones(this.id, this.name)"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
+            ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
             d.id +
-            ' name="modifica" onclick="botones(this.id, this.name)"><i class="fas fa-edit"></i></button><a> </a><button title="Agregar tarea"  type="button" id=' +
+            ' name="modifica" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Agregar tarea"  type="button" id=' +
             d.id +
-            ' name="tarea" onclick="botones(this.id, this.name)"><i class="fas fa-clipboard-list"></i></button></td>' +
+            ' name="tarea" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-clipboard-list"></i></button></td>' +
             '</tr>' +
             '</table><br>' +
             $contactos + '<br>';
     }
+    function format_poliza(d) {
+    // `d` is the original data object for the row
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Deducible:</td>' +
+        '<td>' + d.deducible +'</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima afecta:</td>' +
+        '<td>' + d.prima_afecta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima exenta:</td>' +
+        '<td>' + d.prima_exenta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Prima bruta anual:</td>' +
+        '<td>' + d.prima_bruta_anual + '</td>' +
+        '</tr>' +
+        '</tr>' +
 
-    function botones(id, accion) {
-        console.log("ID:" + id + " => acción:" + accion);
-        switch (accion) {
-            case "elimina": {
+        '<tr>' +
+        '<td>Acciones</td>' +
+        '<td><button title="Buscar información asociada" type="button" id=' + d.id_poliza +
+        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
+        d.id_poliza +
+        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Asignar tarea"  type="button" id=' +
+        d.id_poliza +
+        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="Generar correo"  type="button"' +
+        'id='+ d.id_poliza +
+        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a><button style="background-color: #FF0000" title="Eliminar"  type="button" id=' +
+        d.id_poliza +
+        ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button></td>' +
+
+        '</tr>' +
+        '</table>';
+}
+
+    function botones(id, accion, base) {
+    console.log("ID:" + id + " => acción:" + accion);
+    switch (accion) {
+        case "elimina": {
+
+            if (base == 'poliza') {
+                var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
+                if (r2 == true) {
+                $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+                    'id_poliza': id,
+                    'accion':accion,
+                }, 'post');
+                }
+            }
+            if(base=='cliente'){
                 console.log("Cliente eliminado con ID:" + id);
                 var r = confirm(
                     "Estás a punto de eliminar los datos de un cliente. ¿Estás seguro de eliminarlo?"
@@ -643,24 +691,65 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     break;
                 }
             }
-            case "modifica": {
+            break;
+        }
+        case "modifica": {
+            if (base == 'poliza') {
+                $.redirect('/bamboo/creacion_poliza.php', {
+                'id_poliza': id,
+                }, 'post');
+            }
+            if (base == 'cliente') {
                 $.redirect('/bamboo/creacion_cliente.php', {
                     'id_cliente': id
                 }, 'post');
-                break;
             }
-            case "tarea": {
+            console.log(base + " modificado con ID:" + id);
+            $.notify({
+                // options
+                message: base + ' modificado'
+            }, {
+                // settings
+                type: 'success'
+            });
+
+            break;
+        }
+        case "tarea": {
+            if (base == 'cliente') {
                 $.redirect('/bamboo/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
-                break;
             }
-            case "info": {
+            if (base == 'poliza'){
+                $.redirect('/bamboo/creacion_actividades.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
+            break;
+        }
+        case "info": {
+            if (base == 'cliente') {
                 $.redirect('/bamboo/resumen.php', {
                     'id_cliente': id
                 }, 'post');
-                break;
             }
+            if (base == 'poliza'){
+                $.redirect('/bamboo/resumen.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
+            break;
+        }
+        case "correo": {
+            if (base == 'poliza'){
+                $.redirect('/bamboo/template_poliza.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
+            break;
         }
     }
+}
+
 </script>
