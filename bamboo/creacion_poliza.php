@@ -108,7 +108,7 @@ function estandariza_info( $data ) {
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</div>
+
 <div class="container">
   <p>Póliza / Creación<br>
   </p>
@@ -222,14 +222,15 @@ function estandariza_info( $data ) {
               </strong></p>
             <div class="form-row">
               <div class="col-md-3 mb-3">
-                <label for="RUT">RUT</label>
+                <label for="RUT">RUT</label><label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop();copiadatos()" required>
+                                            onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
+                  <div style= "color:red; visibility: hidden" id="validador10">No puedes dejar este campo en blanco</div>
               </div>
-              <button class="btn" id="busca_rut_prop" data-toggle="modal"
+              <button class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
                                         onclick="origen_busqueda(this.id)" data-target="#modal_cliente"
                                         style="background-color: #536656; color: white; margin-top: 30px;margin-left: 5px; height: 40px">Buscar
               RUT</button>
@@ -271,10 +272,10 @@ function estandariza_info( $data ) {
                 <br>
               </div>
               <div class="col">
-                <label for="Nombre">Nombre</label>
+                <label for="Nombre">Nombre</label><label style= "color: darkred">&nbsp; *</label>
                 <input type="text" id="nombre_prop" class="form-control" name="nombre"
                                             oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop();copiadatos()" required disabled>
+                                            onchange="valida_rut_duplicado_prop();copiadatos();nombre_prop_completo();" required disabled>
                 <div style= "color:red; visibility: hidden" id="validador1">No puedes dejar este campo en blanco</div>
               </div>
               <div class="col-md-4 mb-3" style="display:none">
@@ -296,13 +297,14 @@ function estandariza_info( $data ) {
               </strong></p>
             <div class="form-row" >
               <div class="col-md-3 mb-3">
-                <label for="RUT">RUT</label>
+                <label for="RUT">RUT</label><label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
-                                            placeholder="1111111-1" oninput="checkRut(this)"
+                                            placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"
                                              oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_aseg();copiadatos()" required disbled>
+                                            onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required disbled>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
+                  <div style= "color:red; visibility: hidden" id="validador11">No puedes dejar este campo en blanco</div>
               </div>
               <button class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
                                         data-toggle="modal" data-target="#modal_cliente"
@@ -313,8 +315,8 @@ function estandariza_info( $data ) {
                 <br>
               </div>
               <div class="col">
-                <label for="Nombre">Nombre</label>
-                <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
+                <label for="Nombre">Nombre</label><label style= "color: darkred">&nbsp; *</label>
+                <input type="text" id="nombre_seg" class="form-control" name="nombreaseg" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()"
                                             required disabled>
                 <div style= "color:red; visibility: hidden" id="validador2">No puedes dejar este campo en blanco</div>
               </div>
@@ -345,11 +347,11 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="card-body" id="card-body-two">
-            <label for="compania"><b>Compañía</b></label>
+            <label for="compania"><b>Compañía</b></label> <label style= "color: darkred">&nbsp; *</label>
             <br>
             <div class="form-row">
               <div class="form-inline">
-                <select class="form-control" name="selcompania" id="selcompania">
+                <select class="form-control" name="selcompania" id="selcompania" onChange ="selcompania_completo()">
                   <option value="null" >Selecciona una compañía</option>
                   <option value="Axa Assistance" <?php if ($selcompania == "Axa Assistance") echo "selected" ?> >Axa Assistance</option>
                   <option value="BCI Seguros" <?php if ($selcompania == "BCI Seguros") echo "selected" ?> >BCI Seguros</option>
@@ -374,14 +376,15 @@ function estandariza_info( $data ) {
                   <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
                 </select>
               </div>
+              
             </div>
             <br>
             <label for="poliza"><b>Póliza</b></label>
             <br>
             <div class="form-row">
               <div class="col-6">
-                <label for="sel1">Ramo:&nbsp;</label>
-                <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible()">
+                <label for="sel1">Ramo:&nbsp;</label><label style= "color: darkred">*</label>
+                <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible();ramo_completo();">
                   <option value="null">Selecciona un ramo</option>
                   <option value="accidentes_personales_ap"<?php if ($producto =="accidentes_personales_ap") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
                   <option value="accidentes_personales_protección"<?php if ($producto =="accidentes_personales_protección") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera</option>
@@ -428,28 +431,29 @@ function estandariza_info( $data ) {
                   <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
                 </select>
               </div>
+              
               <div class="col">
-                <label for="Nombre">Vigencia Inicial</label>
+                <label for="Nombre">Vigencia Inicial</label><label style= "color: darkred">&nbsp; *</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
-                                        class="form-control" required>
+                                        class="form-control" onchange="fechainicio_completo()" required>
                 </div>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de Inicio</div>
               </div>
               <div class="col">
-                <label for="Nombre">Vigencia Final</label>
+                <label for="Nombre">Vigencia Final</label><label style= "color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                  <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" required>
+                  <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" onchange="fechavenc_completo()" required>
                 </div>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
               </div>
             </div>
             <br>
             <div class="form-row">
               <div class="col-4">
-                <label for="poliza">Número de Poliza</label>
-                <input type="text" class="form-control" id="nro_poliza" name="nro_poliza" required>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <label for="poliza">Número de Poliza</label><label style= "color: darkred">&nbsp; *</label>
+                <input type="text" class="form-control" id="nro_poliza" name="nro_poliza" onchange="nro_poliza_completo()"required>
+                <div style= "color:red; visibility: hidden" id="validador7">Debes ingresar número de póliza</div>
               </div>
               <div class="col-4">
                 <label for="cobertura">Cobertura</label>
@@ -461,17 +465,17 @@ function estandariza_info( $data ) {
             <br>
             <div class="form-row">
               <div class="col">
-                <label for="poliza">Materia Asegurada</label>
-                <textarea  type="text" class="form-control" id="materia" name="materia" rows="3" required></textarea>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <label for="poliza">Materia Asegurada</label><label style= "color: darkred">&nbsp; *</label>
+                <textarea  type="text" class="form-control" id="materia" name="materia" rows="3" onchange="materia_completo();" required></textarea>
+                <div style= "color:red; visibility: hidden" id="validador8">Debes indicar materia</div>
               </div>
               </div>
               <br>
               <div class="form-row">
               <div class="col">
-                <label for="poliza">Patente o Ubicación</label>
-                <textarea type="text" class="form-control"  id="detalle_materia" name="detalle_materia" rows= "3" required></textarea>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <label for="poliza">Patente o Ubicación</label><label style= "color: darkred">&nbsp; *</label>
+                <textarea type="text" class="form-control"  id="detalle_materia" name="detalle_materia" rows= "3" onchange="detalle_materia_completo();" required></textarea>
+                <div style= "color:red; visibility: hidden" id="validador9">Debes indicar patente o ubicación</div>
               </div>
             </div>
             <br>
@@ -652,16 +656,17 @@ function estandariza_info( $data ) {
             <br>
             <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="formapago">Forma de Pago</label>
+                <label for="formapago">Forma de Pago</label><label style= "color: darkred">&nbsp; *</label>
                 <div class="form" style="display: flex; align-items: center;">
-                  <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago()">
+                  <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago();modopago_completo();">
                     <option value="null">Selecciona forma de pago</option>
                     <option value="PAT" <?php if ($modo_pago == "PAT") echo "selected" ?> >PAT</option>
                     <option value="PAC" <?php if ($modo_pago == "PAC") echo "selected" ?> >PAC</option>
                     <option value="Plan de pago" <?php if ($modo_pago == "Plan de pago") echo "selected" ?> >Plan de pago</option>
                     <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
                   </select>
-                  <select class="form-control" name="cuotas" id="cuotas">
+                  
+                  <select class="form-control" name="cuotas" id="cuotas" onchange="cuotas_completo();">
                     <option value="null">Selecciona Cantidad de Cuotas</option>
                     <option value="Sin cuotas" <?php if ($cuotas == "Contado") echo "selected" ?> >Sin Cuotas</option>
                     <option value="2 Cuotas" <?php if ($cuotas == "2 Cuotas") echo "selected" ?> >2 Cuotas</option>
@@ -690,6 +695,7 @@ function estandariza_info( $data ) {
                   </select>
                 </div>
               </div>
+            
               <div class="col-md-4 mb-3">
                 <label for="valorcuota">Valor Cuota</label>
                 <div class = "form-inline">
@@ -767,24 +773,26 @@ function estandariza_info( $data ) {
   <br>
 </div>
 <script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-    </script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
@@ -797,8 +805,12 @@ function estandariza_info( $data ) {
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
+
 </body>
-</html><script>
+</html>
+
+<script>
 
 
 function valida_rut_duplicado_prop() {
@@ -1220,7 +1232,7 @@ var tabla_clientes = $('#listado_clientes').DataTable({
             '<option value="50">50</option>' +
             '<option value="-1">todos</option>' +
             '</select> registros',
-        "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
+        "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
         "sLengthMenu": "Muestra _MENU_ registros por página",
         "sZeroRecords": "No hay registros asociados",
         "sInfo": "Mostrando página _PAGE_ de _PAGES_",
@@ -1360,6 +1372,7 @@ document.getElementById("cancelar").style.display = "none";
 
   document.addEventListener("DOMContentLoaded", function(event) {
       
+       
 
       
     var orgn='<?php echo $camino; ?>';
@@ -1628,4 +1641,208 @@ function modifica_estado(estado){
                 
                 }
 }
+
+
+
+document.getElementById("formulario").addEventListener('submit', function(event){
+    
+  if(document.getElementById("rutprop").value ==""){
+            
+            document.getElementById("validador10").style.visibility = "visible";
+            event.preventDefault();
+        }
+        
+          if(document.getElementById("rutaseg").value ==""){
+            
+            document.getElementById("validador11").style.visibility = "visible";
+            event.preventDefault();
+        }
+  
+  
+        if(document.getElementById("nombre_prop").value ==""){
+            
+            document.getElementById("validador1").style.visibility = "visible";
+            event.preventDefault();
+        }
+        
+        if (document.getElementById("nombre_seg").value ==""){
+            
+            document.getElementById("validador2").style.visibility = "visible";
+        event.preventDefault();
+        }
+        
+        if (document.getElementById("selcompania").value =="null"){
+            
+            document.getElementById("selcompania").style.color = "red";
+        event.preventDefault();
+        }
+        
+        if (document.getElementById("ramo").value =="null"){
+            
+            document.getElementById("ramo").style.color = "red";
+        event.preventDefault();
+        }
+        
+        
+         if (document.getElementById("fechainicio").value ==""){
+            
+            document.getElementById("validador5").style.visibility = "visible";
+        event.preventDefault();
+        }
+    
+      if (document.getElementById("fechavenc").value ==""){
+            
+            document.getElementById("validador6").style.visibility = "visible";
+        event.preventDefault();
+        }
+        
+        if (document.getElementById("nro_poliza").value ==""){
+            
+            document.getElementById("validador7").style.visibility = "visible";
+        event.preventDefault();
+        }
+        
+         if (document.getElementById("materia").value ==""){
+            
+            document.getElementById("validador8").style.visibility = "visible";
+        event.preventDefault();
+        }
+         if (document.getElementById("detalle_materia").value ==""){
+            
+            document.getElementById("validador9").style.visibility = "visible";
+        event.preventDefault();
+        }
+          if (document.getElementById("modo_pago").value =="null"){
+            
+            document.getElementById("modo_pago").style.color = "red";
+        event.preventDefault();
+        }
+         if (document.getElementById("cuotas").value =="null"){
+            
+            document.getElementById("cuotas").style.color = "red";
+        event.preventDefault();
+        }
+    
+    else
+    {
+        
+     alert("Poliza Registrada Correctamente")
+         
+    }
+    
+    
+    
+});
+
+ document.getElementById("busca_rut_prop").addEventListener("click", function(event){
+  event.preventDefault()
+});
+
+function rutprop_completo(){
+    
+
+if(document.getElementById("rutprop").value !=""){
+            
+            document.getElementById("validador10").style.visibility = "hidden";
+            
+        }
+}
+ 
+ function rutaseg_completo(){       
+          if(document.getElementById("rutaseg").value !=""){
+            
+            document.getElementById("validador11").style.visibility = "hidden";
+            
+        }
+  
+ }
+      
+      
+function nombre_prop_completo(){
+      if(document.getElementById("nombre_prop").value !=""){
+            
+            document.getElementById("validador1").style.visibility = "hidden";
+            document.getElementById("validador10").style.visibility = "hidden";
+        }
+}      
+
+function nombre_seg_completo(){
+  if (document.getElementById("nombre_seg").value !=""){
+            
+            document.getElementById("validador2").style.visibility = "hidden";
+       document.getElementById("validador11").style.visibility = "hidden";
+        }
+}
+
+ function selcompania_completo(){
+   if (document.getElementById("selcompania").value !="null"){
+            
+            document.getElementById("selcompania").style.color = "grey";
+        
+        }
+ }
+ 
+  function ramo_completo(){
+   if (document.getElementById("ramo").value !="null"){
+            
+            document.getElementById("ramo").style.color = "grey";
+        
+        }
+ }
+ 
+ function fechainicio_completo(){
+  if (document.getElementById("fechainicio").value != ""){
+            
+            document.getElementById("validador5").style.visibility = "hidden";
+       
+        }
+}
+
+ function fechavenc_completo(){
+ if (document.getElementById("fechavenc").value !=""){
+            
+            document.getElementById("validador6").style.visibility = "hidden";
+      
+        }
+}
+
+ function nro_poliza_completo(){
+ if (document.getElementById("nro_poliza").value !=""){
+            
+            document.getElementById("validador7").style.visibility = "hidden";
+        
+        }
+}
+ function materia_completo(){
+ if (document.getElementById("materia").value !=""){
+            
+            document.getElementById("validador8").style.visibility = "hidden";
+        
+        }
+}
+ 
+ function detalle_materia_completo(){
+ if (document.getElementById("detalle_materia").value !=""){
+            
+            document.getElementById("validador9").style.visibility = "hidden";
+        
+        }
+}
+
+ function modopago_completo(){
+ if (document.getElementById("modo_pago").value !="null"){
+            
+            document.getElementById("modo_pago").style.color = "grey";
+       
+        }
+ }
+        
+  function cuotas_completo(){
+if (document.getElementById("cuotas").value !="null"){
+            
+            document.getElementById("cuotas").style.color = "grey";
+        
+        }
+  }
+              
 </script>
