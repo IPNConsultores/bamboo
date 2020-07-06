@@ -75,7 +75,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             $_SESSION["auxiliar"]="";
                             // Redirect user to welcome page
-                            header("location: /bamboo/index.php");
+                            if ($_COOKIE['DOMINIO']=='gestionipn.cl'){
+                                header("location: ".$_COOKIE['URI']);
+                            }
+                            else
+                            {
+                                header("location: /bamboo/index.php");
+                            }
+                            
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "La contraseña ingresada no es válida.";

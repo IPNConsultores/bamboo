@@ -2,6 +2,8 @@
 // Initialize the session
     if(!isset($_SESSION)) 
     { 
+        setcookie('URI',$_SERVER['REQUEST_URI'],time() + (180));
+        setcookie('DOMINIO',$_SERVER['HTTP_HOST'],time() + (180));
         session_start(); 
     } 
 
