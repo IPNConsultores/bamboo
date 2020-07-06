@@ -1,4 +1,5 @@
 <script>
+
 function alerta(mensaje, tipo) {
     $.notify({
         // options
@@ -10,6 +11,8 @@ function alerta(mensaje, tipo) {
 }
 </script>
 <?php
+echo $_COOKIE['DOMINIO'];
+echo $_COOKIE['URI'];
 // Initialize the session
 session_start();
 
