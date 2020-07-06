@@ -7,8 +7,7 @@ if(!isset($_SESSION))
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     setcookie('URI',$_SERVER['REQUEST_URI'],time() + (180),"/");
     setcookie('DOMINIO',$_SERVER['HTTP_HOST'],time() + (180),"/");
-//header( "location: /backend/login/login.php" );
-header( "location: /bamboo/test3.php" );
+header( "location: /backend/login/login.php" );
 exit;
 }
 
