@@ -4,13 +4,9 @@
         session_start(); 
     } 
 $buscar='';
-function estandariza_info($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
+
 require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/gestio10/public_html/bamboo/backend/funciones.php";
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -18,7 +14,7 @@ $num=0;
 if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
     // Check if username is empty
 //$('#listado_clientes').dataTable().fnFilter(\"".estandariza_info($_POST["busqueda"])."\")
-$buscar= estandariza_info($_POST["busqueda"]);
+$buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
 }
 
 ?>
