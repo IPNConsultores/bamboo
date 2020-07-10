@@ -136,7 +136,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         <select class="form-control" name="instancia" id="instancia">
           <option value="info_cotizar" <?php if ($instancia == "info_cotizar") echo "selected" ?>>Información para Cotizar</option>
           <option value="envio_cotizacion" <?php if ($instancia == "envio_cotizacion") echo "selected" ?>>Envío de Cotización</option>
-          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Informar póliza</option>
+          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza</option>
           
         </select>
       </div>
