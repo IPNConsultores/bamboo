@@ -283,6 +283,14 @@ $(document).ready(function() {
             }
         }
     });
+        $("#listado_tareas_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto2=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+         table_tareas.search(texto2).draw();
+    }
+    });
     $('#listado_tareas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
         var row = table_tareas.row(tr);
@@ -580,6 +588,16 @@ $(document).ready(function() {
                 }
             }
         }
+    });
+    $("#listado_polizas_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+         table.search(texto1)
+            .draw();
+    }
+        
     });
     $('#listado_polizas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
@@ -915,20 +933,7 @@ function genera_data(data) {
     }
 }
 (function(){
- 
- function removeAccents ( data ) {
-     if ( data.normalize ) {
-         // Use I18n API if avaiable to split characters and accents, then remove
-         // the accents wholesale. Note that we use the original data as well as
-         // the new to allow for searching of either form.
-         return data +' '+ data
-             .normalize('NFD')
-             .replace(/[\u0300-\u036f]/g, '');
-     }
-  
-     return data;
- }
-  
+
  var searchType = jQuery.fn.DataTable.ext.type.search;
   
  searchType.string = function ( data ) {
@@ -948,4 +953,18 @@ function genera_data(data) {
  };
   
  }());
+ 
+ function removeAccents ( data ) {
+     if ( data.normalize ) {
+         // Use I18n API if avaiable to split characters and accents, then remove
+         // the accents wholesale. Note that we use the original data as well as
+         // the new to allow for searching of either form.
+         return data +' '+ data
+             .normalize('NFD')
+             .replace(/[\u0300-\u036f]/g, '');
+     }
+  
+     return data;
+ }
+  
 </script>

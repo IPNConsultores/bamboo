@@ -184,6 +184,14 @@ $(document).ready(function() {
             }
         }
     });
+    $("#tareas_completas_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto2=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+         table_tareas.search(texto2).draw();
+    }
+    });
     $('#tareas_completas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
         var row = table_tareas.row(tr);

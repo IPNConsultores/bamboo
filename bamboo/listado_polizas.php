@@ -395,6 +395,16 @@ $(document).ready(function() {
             }
         }
     });
+    $("#listado_polizas_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+         table.search(texto1)
+            .draw();
+    }
+        
+    });
     $('#listado_polizas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
