@@ -308,7 +308,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8]
+                    columns: [1, 2, 3, 4, 5, 6,7]
                 }
             },
             {
@@ -316,7 +316,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8]
+                    columns: [1, 2, 3, 4, 5, 6,7]
                 }
             }
         ]
