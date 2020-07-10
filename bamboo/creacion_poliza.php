@@ -118,7 +118,7 @@ function estandariza_info( $data ) {
   </p>
   </div>
      
-     </div>
+     
   <br>
   <div class="form-check form-check-inline" >
       <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
