@@ -110,12 +110,12 @@ function estandariza_info( $data ) {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <div class="container">
-  <p>Póliza / Creación<br>
+  <div id=titulo1 style="display:flex">
+  <p>Póliza / Creación<br></p>
+  </div>
+  <div id=titulo2 style="display:none">
+      <p >Póliza / Modificación / <?php  echo $id_poliza; ?> <br>
   </p>
-  <div class="form-check form-check-inline" style="display:flex ;align-items: center;" >
-<div class="col-lg" style="display:flex ;align-items: center;">
-  <h5>Datos Póliza</h5>
-  <br>
   </div>
      
      </div>
@@ -1383,7 +1383,9 @@ document.getElementById("cancelar").style.display = "none";
                         document.getElementById("radio2_si").checked = true;
                         document.getElementById("radio2_no").checked = false;
             }
-            document.getElementById("pregunta_renovar").style.display = "none"
+               document.getElementById("titulo1").style.display = "none";
+            document.getElementById("titulo2").style.display = "flex";
+            document.getElementById("pregunta_renovar").style.display = "none";
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
