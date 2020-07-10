@@ -114,7 +114,7 @@ function estandariza_info( $data ) {
   <p>Póliza / Creación<br></p>
   </div>
   <div id=titulo2 style="display:none">
-      <p >Póliza / Modificación / <?php  echo $id_poliza; ?> <br>
+      <p>Póliza / Modificación / N° Póliza : <?php  echo $nro_poliza; ?>  - <?php  echo $selcompania; ?><br>
   </p>
   </div>
      
