@@ -181,7 +181,7 @@ echo '<style>.info_clientes { display:none;}</style>';
         <?php include 'header2.php' ?>
     </div>
     <div class="container">
-        <p> Actividad / Creación <br>
+        <p> Tareas / Creación <br>
         </p>
         <h5 class="form-row">&nbsp;Datos Actividad</h5>
         <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
