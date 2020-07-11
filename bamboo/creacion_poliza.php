@@ -1183,6 +1183,15 @@ var table = $('#listado_polizas').DataTable({
         }
     }
 });
+$("#listado_polizas_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+        table.search(texto1)
+            .draw();
+    }
+    });
 var tabla_clientes = $('#listado_clientes').DataTable({
 
     "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
@@ -1245,6 +1254,15 @@ var tabla_clientes = $('#listado_clientes').DataTable({
         }
     }
 });
+$("#listado_clientes_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+        tabla_clientes.search(texto1)
+            .draw();
+    }
+    });
 var origen = '';
 
 function origen_busqueda(origen_boton) {
