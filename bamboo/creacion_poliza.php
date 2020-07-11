@@ -108,24 +108,26 @@ function estandariza_info( $data ) {
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 <div class="container">
   <div id=titulo1 style="display:flex">
-  <p>Póliza / Creación<br></p>
+    <p>Póliza / Creación<br>
+    </p>
   </div>
   <div id=titulo2 style="display:none">
-      <p>Póliza / Modificación / N° Póliza : <?php  echo $nro_poliza; ?>  - <?php  echo $selcompania; ?><br>
-  </p>
+    <p>Póliza / Modificación / N° Póliza :
+      <?php  echo $nro_poliza; ?>
+      -
+      <?php  echo $selcompania; ?>
+      <br>
+    </p>
   </div>
-     
-     
   <br>
   <div class="form-check form-check-inline" >
-      <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
-            <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button> 
-            <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>    
-            <button class="btn btn-second" id="anular" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>    
-     </div>
+  <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
+    <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()" style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
+    <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
+    <button class="btn btn-second" id="anular" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
+  </div>
   <div class= "form" id="pregunta_renovar"  style="display:flex ;align-items: center;">
     <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
     <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
@@ -150,7 +152,6 @@ function estandariza_info( $data ) {
               <table class="display" style="width:100%" id="listado_polizas">
                 <tr>
                   <th></th>
-
                   <th>Estado</th>
                   <th>Póliza</th>
                   <th>Compañia</th>
@@ -172,9 +173,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
-    
   </div>
-  
   <div class="col">
   <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
   <form action="/bamboo/backend/polizas/crea_poliza.php"  class="needs-validation" method="POST"  id="formulario" novalidate>
@@ -184,10 +183,7 @@ function estandariza_info( $data ) {
     <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
                     id="poliza_renovada" style="display:none;">
     </div>
-    
-
     </div>
-    
     <br>
     <br>
     <div class="accordion" id="accordionExample">
@@ -201,12 +197,8 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
-             
-          <div class="card-body" id="card-body-one">
-               
-                <br>
+          <div class="card-body" id="card-body-one"><br>
             <div class="form-check form-check-inline">
-               
               <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
                 persona?:&nbsp;&nbsp;</label>
               <input class="form-check-input" type="radio" name="diferentes" id="radio2_no"
@@ -222,13 +214,14 @@ function estandariza_info( $data ) {
               </strong></p>
             <div class="form-row">
               <div class="col-md-3 mb-3">
-                <label for="RUT">RUT</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="RUT">RUT</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
                                             onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
-                  <div style= "color:red; visibility: hidden" id="validador10">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador10">No puedes dejar este campo en blanco</div>
               </div>
               <button class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
                                         onclick="origen_busqueda(this.id)" data-target="#modal_cliente"
@@ -272,7 +265,8 @@ function estandariza_info( $data ) {
                 <br>
               </div>
               <div class="col">
-                <label for="Nombre">Nombre</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="Nombre">Nombre</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" id="nombre_prop" class="form-control" name="nombre"
                                             oninput="checkRut(this);copiadatos()"
                                             onchange="valida_rut_duplicado_prop();copiadatos();nombre_prop_completo();" required disabled>
@@ -297,14 +291,15 @@ function estandariza_info( $data ) {
               </strong></p>
             <div class="form-row" >
               <div class="col-md-3 mb-3">
-                <label for="RUT">RUT</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="RUT">RUT</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
                                             placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"
                                              oninput="checkRut(this);copiadatos()"
                                             onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required disbled>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
-                  <div style= "color:red; visibility: hidden" id="validador11">No puedes dejar este campo en blanco</div>
+                <div style= "color:red; visibility: hidden" id="validador11">No puedes dejar este campo en blanco</div>
               </div>
               <button class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
                                         data-toggle="modal" data-target="#modal_cliente"
@@ -315,7 +310,8 @@ function estandariza_info( $data ) {
                 <br>
               </div>
               <div class="col">
-                <label for="Nombre">Nombre</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="Nombre">Nombre</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" id="nombre_seg" class="form-control" name="nombreaseg" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()"
                                             required disabled>
                 <div style= "color:red; visibility: hidden" id="validador2">No puedes dejar este campo en blanco</div>
@@ -335,7 +331,6 @@ function estandariza_info( $data ) {
             </div>
           </div>
         </div>
-     
       </div>
       <div class="card">
         <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
@@ -347,7 +342,8 @@ function estandariza_info( $data ) {
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="card-body" id="card-body-two">
-            <label for="compania"><b>Compañía</b></label> <label style= "color: darkred">&nbsp; *</label>
+            <label for="compania"><b>Compañía</b></label>
+            <label style= "color: darkred">&nbsp; *</label>
             <br>
             <div class="form-row">
               <div class="form-inline">
@@ -376,48 +372,48 @@ function estandariza_info( $data ) {
                   <option value="Unnio" <?php if ($selcompania == "Unnio") echo "selected" ?> >Unnio</option>
                 </select>
               </div>
-              
             </div>
             <br>
             <label for="poliza"><b>Póliza</b></label>
             <br>
             <div class="form-row">
               <div class="col-6">
-                <label for="sel1">Ramo:&nbsp;</label><label style= "color: darkred">*</label>
+                <label for="sel1">Ramo:&nbsp;</label>
+                <label style= "color: darkred">*</label>
                 <select class="form-control" name="ramo" id="ramo" onChange = "cambia_deducible();ramo_completo();">
                   <option value="null">Selecciona un ramo</option>
- <option value="AC - Accidentes Personales "<?php if ($producto =="AC - Accidentes Personales") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
- <option value="AC - Protección Financiera  "<?php if ($producto =="AC - Protección Financiera ") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera </option>
-  <option value="ASISTENCIA EN VIAJE "<?php if ($producto =="ASISTENCIA EN VIAJE") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
- <option value="INC - Condominio  "<?php if ($producto =="INC - Condominio ") echo "selected" ?> >INCENDIO  - Condominio </option>
- <option value="INC - Hogar "<?php if ($producto =="INC - Hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
- <option value="INC - Misceláneos "<?php if ($producto =="INC - Misceláneos") echo "selected" ?> >INCENDIO  - Misceláneos</option>
- <option value="INC - Perjuicio por Paralización "<?php if ($producto =="INC - Perjuicio por Paralización") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
- <option value="INC - Pyme "<?php if ($producto =="INC - Pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
- <option value="INC - TRBF (Todo Riesgo Bienes Físicos) "<?php if ($producto =="INC - TRBF (Todo Riesgo Bienes Físicos)") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
- <option value="D&O Condominio  "<?php if ($producto =="D&O Condominio ") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio </option>
- <option value="RC General "<?php if ($producto =="RC General") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
- <option value="VEH - Vehículos Comerciales Livianos "<?php if ($producto =="VEH - Vehículos Comerciales Livianos") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
- <option value="VEH - Vehículos Particulares "<?php if ($producto =="VEH - Vehículos Particulares") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
- <option value="VEH - Vehículos Pesados  "<?php if ($producto =="VEH - Vehículos Pesados ") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados </option>
+                  <option value="AC - Accidentes Personales"<?php if ($producto =="AC - Accidentes Personales") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="AC - Protección Financiera "<?php if ($producto =="AC - Protección Financiera ") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="ASISTENCIA EN VIAJE"<?php if ($producto =="ASISTENCIA EN VIAJE") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
+                  <option value="INC - Condominio"<?php if ($producto =="INC - Condominio ") echo "selected" ?> >INCENDIO  - Condominio</option>
+                  <option value="INC - Hogar"<?php if ($producto =="INC - Hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
+                  <option value="INC - Misceláneos"<?php if ($producto =="INC - Misceláneos") echo "selected" ?> >INCENDIO  - Misceláneos</option>
+                  <option value="INC - Perjuicio por Paralización"<?php if ($producto =="INC - Perjuicio por Paralización") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
+                  <option value="INC - Pyme"<?php if ($producto =="INC - Pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
+                  <option value="INC - TRBF (Todo Riesgo Bienes Físicos)"<?php if ($producto =="INC - TRBF (Todo Riesgo Bienes Físicos)") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
+                  <option value="D&O Condominio"<?php if ($producto =="D&O Condominio ") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio</option>
+                  <option value="RC General"<?php if ($producto =="RC General") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
+                  <option value="VEH - Vehículos Comerciales Livianos"<?php if ($producto =="VEH - Vehículos Comerciales Livianos") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
+                  <option value="VEH - Vehículos Particulares"<?php if ($producto =="VEH - Vehículos Particulares") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
+                  <option value="VEH - Vehículos Pesados"<?php if ($producto =="VEH - Vehículos Pesados ") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados</option>
                   <option value="null">--------------------------------------------------------------</option>
-                  <option value="AVERÍA DE MAQUINARIA  "<?php if ($producto =="AVERÍA DE MAQUINARIA ") echo "selected" ?> >AVERÍA DE MAQUINARIA </option>
- <option value="CASCO - Aéreo "<?php if ($producto =="CASCO - Aéreo") echo "selected" ?> >CASCO - Aéreo</option>
- <option value="CASCO - Marítimo  "<?php if ($producto =="CASCO - Marítimo ") echo "selected" ?> >CASCO - Marítimo </option>
- <option value="Garantía "<?php if ($producto =="Garantía") echo "selected" ?> >GARANTÍA</option>
- <option value="ING - Equipo Contratistas "<?php if ($producto =="ING - Equipo Contratistas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
- <option value="ING - Equipo Móvil Agrícola "<?php if ($producto =="ING - Equipo Móvil Agrícola") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
- <option value="ING - Equipos Electrónicos "<?php if ($producto =="ING - Equipos Electrónicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
- <option value="ING- TRC (Todo Riesgo Construcción) "<?php if ($producto =="ING- TRC (Todo Riesgo Construcción)") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
- <option value="REMESA DE VALORES "<?php if ($producto =="REMESA DE VALORES") echo "selected" ?> >REMESA DE VALORES</option>
- <option value="ROBO CON FUERZA  "<?php if ($producto =="ROBO CON FUERZA ") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
- <option value="ROTURA DE CRISTALES "<?php if ($producto =="ROTURA DE CRISTALES") echo "selected" ?> >ROTURA DE CRISTALES</option>
- <option value="SEGURO ARRIENDO  "<?php if ($producto =="SEGURO ARRIENDO ") echo "selected" ?> >SEGURO ARRIENDO </option>
- <option value="SEGURO DE CRÉDITO  "<?php if ($producto =="SEGURO DE CRÉDITO ") echo "selected" ?> >SEGURO DE CRÉDITO </option>
- <option value="CABOTAJE "<?php if ($producto =="CABOTAJE") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
- <option value="INTERNACIONAL  "<?php if ($producto =="INTERNACIONAL ") echo "selected" ?> >TRANSPORTE - INTERNACIONAL </option>
- <option value="APV "<?php if ($producto =="APV") echo "selected" ?> >VIDA - APV</option>
- <option value="VIDA "<?php if ($producto =="VIDA") echo "selected" ?> >VIDA - VIDA</option>
+                  <option value="AVERÍA DE MAQUINARIA"<?php if ($producto =="AVERÍA DE MAQUINARIA ") echo "selected" ?> >AVERÍA DE MAQUINARIA</option>
+                  <option value="CASCO - Aéreo"<?php if ($producto =="CASCO - Aéreo") echo "selected" ?> >CASCO - Aéreo</option>
+                  <option value="CASCO - Marítimo"<?php if ($producto =="CASCO - Marítimo ") echo "selected" ?> >CASCO - Marítimo</option>
+                  <option value="Garantía"<?php if ($producto =="Garantía") echo "selected" ?> >GARANTÍA</option>
+                  <option value="ING - Equipo Contratistas"<?php if ($producto =="ING - Equipo Contratistas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
+                  <option value="ING - Equipo Móvil Agrícola"<?php if ($producto =="ING - Equipo Móvil Agrícola") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
+                  <option value="ING - Equipos Electrónicos"<?php if ($producto =="ING - Equipos Electrónicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
+                  <option value="ING- TRC (Todo Riesgo Construcción)"<?php if ($producto =="ING- TRC (Todo Riesgo Construcción)") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
+                  <option value="REMESA DE VALORES"<?php if ($producto =="REMESA DE VALORES") echo "selected" ?> >REMESA DE VALORES</option>
+                  <option value="ROBO CON FUERZA"<?php if ($producto =="ROBO CON FUERZA ") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
+                  <option value="ROTURA DE CRISTALES"<?php if ($producto =="ROTURA DE CRISTALES") echo "selected" ?> >ROTURA DE CRISTALES</option>
+                  <option value="SEGURO ARRIENDO"<?php if ($producto =="SEGURO ARRIENDO ") echo "selected" ?> >SEGURO ARRIENDO</option>
+                  <option value="SEGURO DE CRÉDITO"<?php if ($producto =="SEGURO DE CRÉDITO ") echo "selected" ?> >SEGURO DE CRÉDITO</option>
+                  <option value="CABOTAJE"<?php if ($producto =="CABOTAJE") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
+                  <option value="INTERNACIONAL"<?php if ($producto =="INTERNACIONAL ") echo "selected" ?> >TRANSPORTE - INTERNACIONAL</option>
+                  <option value="APV"<?php if ($producto =="APV") echo "selected" ?> >VIDA - APV</option>
+                  <option value="VIDA"<?php if ($producto =="VIDA") echo "selected" ?> >VIDA - VIDA</option>
                   <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
                   <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
                   <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
@@ -431,9 +427,9 @@ function estandariza_info( $data ) {
                   <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
                 </select>
               </div>
-              
               <div class="col">
-                <label for="Nombre">Vigencia Inicial</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="Nombre">Vigencia Inicial</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
                                         class="form-control" onchange="fechainicio_completo()" required>
@@ -441,7 +437,8 @@ function estandariza_info( $data ) {
                 <div style= "color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de Inicio</div>
               </div>
               <div class="col">
-                <label for="Nombre">Vigencia Final</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="Nombre">Vigencia Final</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc" class="form-control" onchange="fechavenc_completo()" required>
                 </div>
@@ -451,7 +448,8 @@ function estandariza_info( $data ) {
             <br>
             <div class="form-row">
               <div class="col-4">
-                <label for="poliza">Número de Poliza</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="poliza">Número de Poliza</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="nro_poliza" name="nro_poliza" onchange="nro_poliza_completo()"required>
                 <div style= "color:red; visibility: hidden" id="validador7">Debes ingresar número de póliza</div>
               </div>
@@ -465,15 +463,17 @@ function estandariza_info( $data ) {
             <br>
             <div class="form-row">
               <div class="col">
-                <label for="poliza">Materia Asegurada</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="poliza">Materia Asegurada</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <textarea  type="text" class="form-control" id="materia" name="materia" rows="3" onchange="materia_completo();" required></textarea>
                 <div style= "color:red; visibility: hidden" id="validador8">Debes indicar materia</div>
               </div>
-              </div>
-              <br>
-              <div class="form-row">
+            </div>
+            <br>
+            <div class="form-row">
               <div class="col">
-                <label for="poliza">Patente o Ubicación</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="poliza">Patente o Ubicación</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <textarea type="text" class="form-control"  id="detalle_materia" name="detalle_materia" rows= "3" onchange="detalle_materia_completo();" required></textarea>
                 <div style= "color:red; visibility: hidden" id="validador9">Debes indicar patente o ubicación</div>
               </div>
@@ -656,7 +656,8 @@ function estandariza_info( $data ) {
             <br>
             <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="formapago">Forma de Pago</label><label style= "color: darkred">&nbsp; *</label>
+                <label for="formapago">Forma de Pago</label>
+                <label style= "color: darkred">&nbsp; *</label>
                 <div class="form" style="display: flex; align-items: center;">
                   <select class="form-control" name="modo_pago" id="modo_pago" onChange="modopago();modopago_completo();">
                     <option value="null">Selecciona forma de pago</option>
@@ -665,7 +666,6 @@ function estandariza_info( $data ) {
                     <option value="Plan de pago" <?php if ($modo_pago == "Plan de pago") echo "selected" ?> >Plan de pago</option>
                     <option value="Contado" <?php if ($modo_pago == "Contado") echo "selected" ?> >Contado</option>
                   </select>
-                  
                   <select class="form-control" name="cuotas" id="cuotas" onchange="cuotas_completo();">
                     <option value="null">Selecciona Cantidad de Cuotas</option>
                     <option value="Sin cuotas" <?php if ($cuotas == "Contado") echo "selected" ?> >Sin Cuotas</option>
@@ -695,7 +695,6 @@ function estandariza_info( $data ) {
                   </select>
                 </div>
               </div>
-            
               <div class="col-md-4 mb-3">
                 <label for="valorcuota">Valor Cuota</label>
                 <div class = "form-inline">
@@ -805,12 +804,8 @@ function estandariza_info( $data ) {
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-
-
 </body>
-</html>
-
-<script>
+</html><script>
 
 
 function valida_rut_duplicado_prop() {
