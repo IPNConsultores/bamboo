@@ -37,14 +37,19 @@ require_once "/home/gestio10/public_html/backend/config.php";
   
   
   $ramo_poliza = str_replace('VEH','vehiculo',$ramo_poliza);
+  $ramo_poliza = str_replace('vehiculo -','VEH -',$ramo_poliza);
   $ramo_poliza = str_replace('Hogar','hogar_persona',$ramo_poliza);
-    $ramo_poliza = str_replace('Hogar_Persona','hogar_persona',$ramo_poliza);
-        $ramo_poliza = str_replace('Hogar_pyme','hogar_pyme',$ramo_poliza);
+  $ramo_poliza = str_replace('- hogar_persona','- Hogar',$ramo_poliza);
+  $ramo_poliza = str_replace('Hogar_Persona','hogar_persona',$ramo_poliza);
+  $ramo_poliza = str_replace('Hogar_pyme','hogar_pyme',$ramo_poliza);
   $ramo_poliza = str_replace('A. VIAJE','viaje',$ramo_poliza);
   $ramo_poliza = str_replace('RC','rc_do',$ramo_poliza);
+$ramo_poliza = str_replace('rc_do General','RC General',$ramo_poliza);
   $ramo_poliza = str_replace('INC','inc',$ramo_poliza);
+$ramo_poliza = str_replace('inc -','INC -',$ramo_poliza);
   $ramo_poliza = str_replace('APV','apv',$ramo_poliza);
   $ramo_poliza = str_replace('D&O','rc_do',$ramo_poliza);
+ $ramo_poliza = str_replace('rc_do Condominio','D&O Condominio',$ramo_poliza);
   $ramo_poliza = str_replace('AP','ap',$ramo_poliza);
   $ramo_poliza = str_replace('Vida','vida',$ramo_poliza);
   $ramo_poliza = str_replace('Garantia','garantia',$ramo_poliza);

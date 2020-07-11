@@ -988,11 +988,9 @@ function pobladeducible(){
 
 function cambia_deducible(){
     
-    ramo = document.getElementById("ramo").value;
+    var ramo = document.getElementById("ramo").value;
     
-    if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos
-" || ramo== "VEH - Vehículos Particulares
-" || ramo =="VEH - Vehículos Pesados 
+    if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo== "VEH - Vehículos Particulares" || ramo =="VEH - Vehículos Pesados 
 "){
         
          document.getElementById("deducible_veh").style.display = "flex";
