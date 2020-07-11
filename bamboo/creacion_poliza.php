@@ -911,7 +911,7 @@ function cambio_moneda(){
     document.getElementById("moneda3").innerHTML = moneda;
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
-     document.getElementById("moneda6").innerHTML = moneda;
+     
      document.getElementById("moneda7").innerHTML = moneda;
 }
 
@@ -1381,6 +1381,7 @@ document.getElementById("cancelar").style.display = "none";
                document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "flex";
             document.getElementById("pregunta_renovar").style.display = "none";
+			document.getElementById("ramo").value = '<?php echo $ramo; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
@@ -1500,7 +1501,7 @@ var moneda = document.getElementById("moneda_poliza").value;
     document.getElementById("moneda3").innerHTML = moneda;
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
-     document.getElementById("moneda6").innerHTML = moneda;
+    
      document.getElementById("moneda7").innerHTML = moneda;
 
             
@@ -1623,7 +1624,7 @@ var moneda = document.getElementById("moneda_poliza").value;
     document.getElementById("moneda3").innerHTML = moneda;
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
-     document.getElementById("moneda6").innerHTML = moneda;
+     
      document.getElementById("moneda7").innerHTML = moneda;
     
   });
