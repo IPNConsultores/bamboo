@@ -143,50 +143,51 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       <div class="col-6">
         <label><b>Ramo</b></label>
         <select class="form-control" name="seguro" id="seguro">
- <option value="accidentes_personales_ap"<?php if ($producto =="accidentes_personales_ap") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
- <option value="accidentes_personales_protección"<?php if ($producto =="accidentes_personales_protección") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera </option>
- <option value="inc_condominio"<?php if ($producto =="inc_condominio") echo "selected" ?> >INCENDIO  - Condominio </option>
- <option value="inc_hogar"<?php if ($producto =="inc_hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
- <option value="inc_miscelaneo"<?php if ($producto =="inc_miscelaneo") echo "selected" ?> >INCENDIO  - Misceláneos</option>
- <option value="inc_perjuicio"<?php if ($producto =="inc_perjuicio") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
- <option value="inc_pyme"<?php if ($producto =="inc_pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
- <option value="inc_trbf"<?php if ($producto =="inc_trbf") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
- <option value="rc-do"<?php if ($producto =="rc-do") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio </option>
- <option value="rc-rc"<?php if ($producto =="rc-rc") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
- <option value="veh_comerciales"<?php if ($producto =="veh_comerciales") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
- <option value="veh_particular"<?php if ($producto =="veh_particular") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
- <option value="veh_pesados"<?php if ($producto =="veh_pesados") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados </option>
- <option value="viaje"<?php if ($producto =="viaje") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
- <option value="averia_maquina"<?php if ($producto =="averia_maquina") echo "selected" ?> >AVERÍA DE MAQUINARIA </option>
- <option value="casco_aeroeo"<?php if ($producto =="casco_aeroeo") echo "selected" ?> >CASCO - Aéreo</option>
- <option value="casco_marítimo"<?php if ($producto =="casco_marítimo") echo "selected" ?> >CASCO - Marítimo </option>
- <option value="garantia"<?php if ($producto =="garantia") echo "selected" ?> >GARANTÍA</option>
- <option value="ing_contratístas"<?php if ($producto =="ing_contratístas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
- <option value="ing_equipo_movil"<?php if ($producto =="ing_equipo_movil") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
- <option value="ing_electronicos"<?php if ($producto =="ing_electronicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
- <option value="ing-trc"<?php if ($producto =="ing-trc") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
- <option value="remesa"<?php if ($producto =="remesa") echo "selected" ?> >REMESA DE VALORES</option>
- <option value="robo"<?php if ($producto =="robo") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
- <option value="cristales"<?php if ($producto =="cristales") echo "selected" ?> >ROTURA DE CRISTALES</option>
- <option value="seguro_arriendo"<?php if ($producto =="seguro_arriendo") echo "selected" ?> >SEGURO ARRIENDO </option>
- <option value="seguro_credito"<?php if ($producto =="seguro_credito") echo "selected" ?> >SEGURO DE CRÉDITO </option>
- <option value="transporte_cabotaje"<?php if ($producto =="transporte_cabotaje") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
- <option value="transporte_intern"<?php if ($producto =="transporte_intern") echo "selected" ?> >TRANSPORTE - INTERNACIONAL </option>
- <option value="vida_apv"<?php if ($producto =="vida_apv") echo "selected" ?> >VIDA - APV</option>
- <option value="vida_vida"<?php if ($producto =="vida_vida") echo "selected" ?> >VIDA - VIDA</option>
-<option value="ap" <?php if ($producto == "ap") echo "selected" ?> >AP</option>
-<option value="apv" <?php if ($producto == "apv") echo "selected" ?> >APV</option>
-<option value="garantia" <?php if ($producto == "garantia") echo "selected" ?> >Garantía</option>
-<option value="hogar_persona" <?php if ($producto == "hogar_persona") echo "selected" ?> >Hogar</option>
-<option value="inc" <?php if ($producto == "inc") echo "selected" ?> >INC</option>
-<option value="otro" <?php if ($producto == "otro") echo "selected" ?> >Otro</option>
-<option value="hogar_pyme" <?php if ($producto == "hogar_pyme") echo "selected" ?> >PyME</option>
-<option value="rc_do" <?php if ($producto == "rc_do") echo "selected" ?> >RC - D&O</option>
- <option value="vehiculo" <?php if ($producto == "vehiculo") echo "selected" ?> >Vehiculo</option>
-<option value="viaje" <?php if ($producto == "viaje") echo "selected" ?> >A. VIAJE</option>
-<option value="vida" <?php if ($producto == "vida") echo "selected" ?> >Vida</option>
-
-
+ <option value="null">Selecciona un ramo</option>
+ <option value="AC - Accidentes Personales "<?php if ($producto =="AC - Accidentes Personales") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
+ <option value="AC - Protección Financiera  "<?php if ($producto =="AC - Protección Financiera ") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera </option>
+  <option value="ASISTENCIA EN VIAJE "<?php if ($producto =="ASISTENCIA EN VIAJE") echo "selected" ?> >ASISTENCIA EN VIAJE</option>
+ <option value="INC - Condominio  "<?php if ($producto =="INC - Condominio ") echo "selected" ?> >INCENDIO  - Condominio </option>
+ <option value="INC - Hogar "<?php if ($producto =="INC - Hogar") echo "selected" ?> >INCENDIO  - Hogar</option>
+ <option value="INC - Misceláneos "<?php if ($producto =="INC - Misceláneos") echo "selected" ?> >INCENDIO  - Misceláneos</option>
+ <option value="INC - Perjuicio por Paralización "<?php if ($producto =="INC - Perjuicio por Paralización") echo "selected" ?> >INCENDIO  - Perjuicio por Paralización</option>
+ <option value="INC - Pyme "<?php if ($producto =="INC - Pyme") echo "selected" ?> >INCENDIO  - Pyme</option>
+ <option value="INC - TRBF (Todo Riesgo Bienes Físicos) "<?php if ($producto =="INC - TRBF (Todo Riesgo Bienes Físicos)") echo "selected" ?> >INCENDIO  - TRBF (Todo Riesgo Bienes Físicos)</option>
+ <option value="D&O Condominio  "<?php if ($producto =="D&O Condominio ") echo "selected" ?> >RESPONSABILIDAD CIVIL  - D&O Condominio </option>
+ <option value="RC General "<?php if ($producto =="RC General") echo "selected" ?> >RESPONSABILIDAD CIVIL  - RC General</option>
+ <option value="VEH - Vehículos Comerciales Livianos "<?php if ($producto =="VEH - Vehículos Comerciales Livianos") echo "selected" ?> >VEHÍCULOS  - Vehículos Comerciales Livianos</option>
+ <option value="VEH - Vehículos Particulares "<?php if ($producto =="VEH - Vehículos Particulares") echo "selected" ?> >VEHÍCULOS  - Vehículos Particulares</option>
+ <option value="VEH - Vehículos Pesados  "<?php if ($producto =="VEH - Vehículos Pesados ") echo "selected" ?> >VEHÍCULOS  - Vehículos Pesados </option>
+ <option value="null">--------------------------------------------------------------</option>
+ <option value="AVERÍA DE MAQUINARIA  "<?php if ($producto =="AVERÍA DE MAQUINARIA ") echo "selected" ?> >AVERÍA DE MAQUINARIA </option>
+ <option value="CASCO - Aéreo "<?php if ($producto =="CASCO - Aéreo") echo "selected" ?> >CASCO - Aéreo</option>
+ <option value="CASCO - Marítimo  "<?php if ($producto =="CASCO - Marítimo ") echo "selected" ?> >CASCO - Marítimo </option>
+ <option value="Garantía "<?php if ($producto =="Garantía") echo "selected" ?> >GARANTÍA</option>
+ <option value="ING - Equipo Contratistas "<?php if ($producto =="ING - Equipo Contratistas") echo "selected" ?> >INGENIERÍA - Equipo Contratistas</option>
+ <option value="ING - Equipo Móvil Agrícola "<?php if ($producto =="ING - Equipo Móvil Agrícola") echo "selected" ?> >INGENIERÍA - Equipo Móvil Agrícola</option>
+ <option value="ING - Equipos Electrónicos "<?php if ($producto =="ING - Equipos Electrónicos") echo "selected" ?> >INGENIERÍA - Equipos Electrónicos</option>
+ <option value="ING- TRC (Todo Riesgo Construcción) "<?php if ($producto =="ING- TRC (Todo Riesgo Construcción)") echo "selected" ?> >INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
+ <option value="REMESA DE VALORES "<?php if ($producto =="REMESA DE VALORES") echo "selected" ?> >REMESA DE VALORES</option>
+ <option value="ROBO CON FUERZA  "<?php if ($producto =="ROBO CON FUERZA ") echo "selected" ?> >ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
+ <option value="ROTURA DE CRISTALES "<?php if ($producto =="ROTURA DE CRISTALES") echo "selected" ?> >ROTURA DE CRISTALES</option>
+ <option value="SEGURO ARRIENDO  "<?php if ($producto =="SEGURO ARRIENDO ") echo "selected" ?> >SEGURO ARRIENDO </option>
+ <option value="SEGURO DE CRÉDITO  "<?php if ($producto =="SEGURO DE CRÉDITO ") echo "selected" ?> >SEGURO DE CRÉDITO </option>
+ <option value="CABOTAJE "<?php if ($producto =="CABOTAJE") echo "selected" ?> >TRANSPORTE - CABOTAJE</option>
+ <option value="INTERNACIONAL  "<?php if ($producto =="INTERNACIONAL ") echo "selected" ?> >TRANSPORTE - INTERNACIONAL </option>
+ <option value="APV "<?php if ($producto =="APV") echo "selected" ?> >VIDA - APV</option>
+ <option value="VIDA "<?php if ($producto =="VIDA") echo "selected" ?> >VIDA - VIDA</option>
+                  <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
+                  <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
+                  <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
+                  <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
+                  <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
+                  <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
+                  <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
+                  <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
+                  <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
+                  <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
+                  <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
+           
 
 
         </select>
