@@ -274,7 +274,7 @@ function detalle_tareas(d) {
                     .telefono[i] + '</td><td>' + d.correo[i] +
                     '</td><td><button title="Buscar información asociada" type="button" id=' + d
                     .id_cliente[i] +
-                    ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-edit"></i></button></td></tr>';
+                    ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_clientes = $tabla_clientes + '</table>';
         }
@@ -295,7 +295,7 @@ function detalle_tareas(d) {
                     '</td><td>' + d.materia_asegurada[j] +
                     '</td><td><button title="Buscar información asociada" type="button" id=' + d
                     .id_poliza[j] +
-                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
+                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
         }
