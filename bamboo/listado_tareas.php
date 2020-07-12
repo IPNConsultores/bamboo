@@ -92,6 +92,9 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+
 </body>
 
 </html>
@@ -177,7 +180,16 @@ $(document).ready(function() {
                             break;
                     }
           return estado;  //render link in cell
-        }}],
+        }},
+        {
+        targets: [5,6,8],
+         render: function(data, type, full)
+         {
+             if (type == 'display')
+                 return moment(data).format('DD/MM/YYYY');
+             else
+                 return moment(data).format('YYYY/MM/DD');
+         }}],
         "order": [
             [2, "asc"],
             [5, "asc"]

@@ -169,7 +169,6 @@ While($row2=mysqli_fetch_object($resultado2))
 
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
@@ -184,6 +183,10 @@ While($row2=mysqli_fetch_object($resultado2))
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+
+        <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+ 
     <br>
     <br>
 </body>
@@ -245,28 +248,39 @@ $(document).ready(function() {
 
         "columnDefs": [{
                 "targets": [6],
-                "visible": false,
+                "visible": false
             },
         {
-        targets: 3,
-        render: function (data, type, row, meta) {
-             var estado='';
-            switch (data) {
-                        case 'Activo':
-                            estado='<span class="badge badge-warning">'+data+'</span>';
-                            break;
-                        case 'Completado':
-                                estado='<span class="badge badge-dark">'+data+'</span>';
+            targets: 3,
+            render: function (data, type, row, meta) {
+                 var estado='';
+                switch (data) {
+                            case 'Activo':
+                                estado='<span class="badge badge-warning">'+data+'</span>';
                                 break;
-                        case 'Atrasado':
-                            estado='<span class="badge badge-danger">'+data+'</span>';
-                            break;
-                        default:
-                            estado='<span class="badge badge-light">'+data+'</span>';
-                            break;
-                    }
-          return estado;  //render link in cell
-        }}],
+                            case 'Completado':
+                                    estado='<span class="badge badge-dark">'+data+'</span>';
+                                    break;
+                            case 'Atrasado':
+                                estado='<span class="badge badge-danger">'+data+'</span>';
+                                break;
+                            default:
+                                estado='<span class="badge badge-light">'+data+'</span>';
+                                break;
+            }
+              return estado;  //render link in cell
+            }
+        },
+        {
+        targets: [5,6],
+         render: function(data, type, full)
+         {
+             if (type == 'display')
+                 return moment(data).format('DD/MM/YYYY');
+             else
+                 return moment(data).format('YYYY/MM/DD');
+         }}
+        ],
         "order": [
             [2, "asc"],
             [5, "asc"]
@@ -562,7 +576,16 @@ $(document).ready(function() {
                             break;
                     }
           return estado;  //render link in cell
-        }}
+        }},
+                {
+        targets: [5,6],
+         render: function(data, type, full)
+         {
+             if (type == 'display')
+                 return moment(data).format('DD/MM/YYYY');
+             else
+                 return moment(data).format('YYYY/MM/DD');
+         }}
         ],
         "order": [
             [3, "asc"],
