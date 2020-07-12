@@ -84,6 +84,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
                             $_SESSION["auxiliar"]="";
+                            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Inicia sesión', null,'usuario',null, '".$_SERVER['PHP_SELF']."')");
+
                             // Redirect user to welcome page
                             if (isset($_COOKIE['DOMINIO'])){
                                 header("location: ".$_COOKIE['URI']);
