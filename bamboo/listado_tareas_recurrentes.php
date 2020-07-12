@@ -132,6 +132,14 @@ $(document).ready(function() {
             {
                 "data": "fecingreso",
                 title: "Fecha creación tarea"
+            },
+            {
+                "data":"nombre[]",
+                title: "Clientes asociados"
+            },
+                        {
+                "data":"numero_poliza[]",
+                title: "Pólizas asociados"
             }
 
         ],
@@ -217,7 +225,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado tareas recurrentes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7]
+                    columns: [1, 2, 3, 4, 5, 6,7,8,9]
                 }
             },
             {
@@ -225,7 +233,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado tareas recurrentes al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7]
+                    columns: [1, 2, 3, 4, 5, 6,7,8,9]
                 }
             }
         ]
