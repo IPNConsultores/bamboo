@@ -50,13 +50,19 @@ mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
     case 'elimina':
-        mysqli_query($link, "delete from polizas where id=".$_POST["id_poliza"]);
+        $query="delete from polizas where id=".$_POST["id_poliza"];
+        mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina póliza', '".$query."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
         break;
     case 'cancelar':
-        mysqli_query($link, "update polizas set estado='Cancelado' where id=".$_POST["id_poliza"]);
+        $query= "update polizas set estado='Cancelado' where id=".$_POST["id_poliza"];
+        mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".$query."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
         break;
     case 'anular':
-        mysqli_query($link, "update polizas set estado='Anulado' where id=".$_POST["id_poliza"]);
+        $query= "update polizas set estado='Anulado' where id=".$_POST["id_poliza"];
+        mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Anula póliza', '".$query."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
         break;
     default:
         $query="UPDATE polizas SET numero_boleta='".$boleta."', comision_negativa='".$comisionneg."', boleta_negativa='".$boletaneg."', depositado_fecha='".$fechadeposito."', moneda_valor_cuota='".$moenda_cuota."',  rut_proponente='".$rut_prop."',  dv_proponente='".$dv_prop."',  rut_asegurado='".$rut_aseg."',  dv_asegurado='".$dv_aseg."',  compania='".$selcompania."',  
@@ -67,6 +73,8 @@ switch ($_POST["accion"]) {
         comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
         vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."' WHERE id=".$id_poliza.";";
         mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".$query."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
+
         break;
 }
 

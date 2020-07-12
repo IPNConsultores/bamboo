@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
-            
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega usuario', '".$param_username."','usuario',null, '".$_SERVER['PHP_SELF']."')");
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash

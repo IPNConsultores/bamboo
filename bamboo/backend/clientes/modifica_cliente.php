@@ -24,9 +24,6 @@ mysqli_query($link,$query);
 
 $borrar=  'DELETE from clientes_contactos  WHERE id_cliente='.$id.';';
 mysqli_query($link,$borrar);
-
-
-
 foreach (array_keys($_POST['nombrecontact']) as $key) {
    
     $nombrecontact = $_POST['nombrecontact'][$key];
