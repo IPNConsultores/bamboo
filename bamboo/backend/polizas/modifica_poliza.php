@@ -99,12 +99,12 @@ function cambia_puntos_por_coma($data){
 </head>
 <body>
 <script >
-/*
+
 var nro_poliza= '<?php echo $nro_poliza; ?>';
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza
 }, 'post');
-*/
+
 </script>
 </body>
 </html>
