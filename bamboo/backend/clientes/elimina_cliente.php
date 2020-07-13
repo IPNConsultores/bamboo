@@ -8,7 +8,7 @@ $id=$_POST["cliente"];
 mysqli_set_charset( $link, 'utf8');
 $query='delete from clientes WHERE id='.$id.';';
 mysqli_query($link, $query);
-mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Eliminar cliente', '".$query."','cliente',".$id.", '".$_SERVER['PHP_SELF']."')");
+mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Eliminar cliente', '".str_replace("'","**",$query)."','cliente',".$id.", '".$_SERVER['PHP_SELF']."')");
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);

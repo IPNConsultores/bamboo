@@ -10,17 +10,17 @@ mysqli_set_charset( $link, 'utf8');
 if ($_POST["accion"]=='cerrar_tarea'){
   $query='update tareas set estado="Cerrado", fecha_completada=current_date WHERE id='.$id.';';
   mysqli_query($link, $query);
-  mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cierra tarea', '".$query."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
+  mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cierra tarea', '".str_replace("'","**",$query)."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
 }
 elseif($_POST["accion"]=='cerrar_tarea_recurrente'){
   $query='update tareas_recurrentes set estado="Cerrado", fecha_cierre=current_date WHERE id='.$id.';';
   mysqli_query($link, $query);
-  mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cierra tarea recurrente', '".$query."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
+  mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cierra tarea recurrente', '".str_replace("'","**",$query)."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
 }
 else {
   $query='update tareas set estado="Eliminado", fecha_completada=current_date WHERE id='.$id.';';
 mysqli_query($link, $query);
-mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina tarea', '".$query."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
+mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina tarea', '".str_replace("'","**",$query)."','tarea',".$id.", '".$_SERVER['PHP_SELF']."')");
 }
 function estandariza_info($data) {
     $data = trim($data);

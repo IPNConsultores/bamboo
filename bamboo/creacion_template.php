@@ -33,11 +33,11 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       if ( !$verif == 0 ) {
         $query_template_update='UPDATE template_correos SET template="' . $template . '" where producto="' . $producto . '" and instancia="' . $instancia . '"' ;
         mysqli_query( $link, $query_template_update);
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza template', '".$query_template_update."','template',null, '".$_SERVER['PHP_SELF']."')");
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza template', '".str_replace("'","**",$query_template_update)."','template',null, '".$_SERVER['PHP_SELF']."')");
       } else {
         $query_template='INSERT INTO template_correos(template, producto, instancia) values ("' . $template . '","' . $producto . '", "' . $instancia . '");';
         mysqli_query( $link, $query_template );
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega template', '".$query_template."','template',null, '".$_SERVER['PHP_SELF']."')");
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega template', '".str_replace("'","**",$query_template)."','template',null, '".$_SERVER['PHP_SELF']."')");
       }
       break;
     case "buscar":
