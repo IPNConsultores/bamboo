@@ -110,7 +110,7 @@ While($row2=mysqli_fetch_object($resultado2))
                     <h5 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                            style="color:#536656">Pólizas próximas a vencer</button>
+                            style="color:#536656">Pólizas con vencimiento dentro de los próximos 45 días</button>
                     </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -604,8 +604,7 @@ $(document).ready(function() {
          }}
         ],
         "order": [
-            [3, "asc"],
-            [4, "asc"]
+            [6, "asc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
