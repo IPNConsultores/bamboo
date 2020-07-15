@@ -166,7 +166,12 @@ While($row2=mysqli_fetch_object($resultado2))
                 </div>
             </div>
         </div>
-
+    <!-- <div id="auxiliar" style="display:none" > 
+    -->
+    <div id="auxiliar" style="display:none" >
+      <input name="fec_min" id="fec_min" >
+      <input name="fec_max" id="fec_max">
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -193,7 +198,24 @@ While($row2=mysqli_fetch_object($resultado2))
 
 </html>
 <script>
+function formateoFechas(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year,month,day].join('-');
+}
 $(document).ready(function() {
+    var inicio=new Date();
+    var fin=inicio.setDate(inicio.getDate() + 45);
+    document.getElementById("fec_min").value=formateoFechas(new Date());
+    document.getElementById("fec_max").value=formateoFechas(fin);
      table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
@@ -552,12 +574,6 @@ $(document).ready(function() {
                 "searchable": false
             },
             {
-                "searchPanes": {
-                    "preSelect":['Activo'],
-                },
-                "targets":[1],
-            },
-            {
         targets: 1,
         render: function (data, type, row, meta) {
              var estado='';
@@ -645,7 +661,6 @@ $(document).ready(function() {
         }
     });
     //$('#listado_polizas').dataTable().fnFilter('Activo');
-    table.search( 'Activo').draw();
     
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
@@ -671,6 +686,10 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_poliza'));
+    $('#fec_min, #fec_max').change(function () {
+        console.log('cambio');
+        table.draw();
+    });
 });
 
 function detalle_tareas(d) {
@@ -997,5 +1016,38 @@ function genera_data(data) {
   
      return data;
  }
-  
+ $.fn.dataTableExt.afnFiltering.push(
+    function( oSettings, aData, iDataIndex ) {
+        var iFini = document.getElementById('fec_min').value;
+        var iFfin = document.getElementById('fec_max').value;
+        var iStartDateCol = 6;
+        var iEndDateCol = 6;
+ 
+        iFini=iFini.substring(0,4) + iFini.substring(6,7)+ iFini.substring(9,10);
+        iFfin=iFfin.substring(0,4) + iFfin.substring(6,7)+ iFfin.substring(9,10);
+ //2020-20-20
+ //1234-67-90
+//        var datofini=aData[iStartDateCol].substring(6,10) + aData[iStartDateCol].substring(3,5)+ aData[iStartDateCol].substring(0,2);
+//        var datoffin=aData[iEndDateCol].substring(6,10) + aData[iEndDateCol].substring(3,5)+ aData[iEndDateCol].substring(0,2);
+//        var datofini=aData[iStartDateCol].substring(0,4) + aData[iStartDateCol].substring(6,7)+ aData[iStartDateCol].substring(9,10);
+        var datoffin=datofini=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(6,7)+ aData[iEndDateCol].substring(9,10); 
+        if ( iFini === "" && iFfin === "" )
+        {
+            return true;
+        }
+        else if ( iFini <= datofini && iFfin === "")
+        {
+            return true;
+        }
+        else if ( iFfin >= datoffin && iFini === "")
+        {
+            return true;
+        }
+        else if (iFini <= datofini && iFfin >= datoffin)
+        {
+            return true;
+        }
+        return false;
+    }
+);
 </script>
