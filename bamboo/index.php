@@ -82,7 +82,7 @@ While($row2=mysqli_fetch_object($resultado2))
                     <h5 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Tareas y
-                            compromisos</button>
+                            compromisos activos</button>
                     </h5>
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -110,11 +110,26 @@ While($row2=mysqli_fetch_object($resultado2))
                     <h5 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"
-                            style="color:#536656">Pólizas con vencimiento dentro de los próximos 45 días</button>
+                            style="color:#536656">Pólizas con pronto vencimiento</button>
                     </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
+                        <div class="form-inline">
+                            <label> Revisar vencimientos de los próximos</label>
+                            <div class="col-1">
+                                <select class="form-control" name="busqueda_dias" id="busqueda_dias">
+                                    <option value=5>5 días</option>
+                                    <option value=10>10 días</option>
+                                    <option value=20>20 días</option>
+                                    <option value=30>30 días</option>
+                                    <option value=45 selected>45 días</option>
+                                    <option value=60>60 días</option>
+                                    <option value=90>90 días</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
                         <table class="display" style="width:100%" id="listado_polizas">
                             <tr>
                     <th></th>
@@ -168,7 +183,7 @@ While($row2=mysqli_fetch_object($resultado2))
         </div>
     <!-- <div id="auxiliar" style="display:none" > 
     -->
-    <div id="auxiliar" style="display:none" >
+    <div id="auxiliar"  style="display:none" >
       <input name="fec_min" id="fec_min" >
       <input name="fec_max" id="fec_max">
     </div>
@@ -212,8 +227,10 @@ function formateoFechas(date) {
     return [year,month,day].join('-');
 }
 $(document).ready(function() {
+    var dias =parseInt(document.getElementById("busqueda_dias").value);
+    console.log(dias);
     var inicio=new Date();
-    var fin=inicio.setDate(inicio.getDate() + 45);
+    var fin=inicio.setDate(inicio.getDate() + dias);
     document.getElementById("fec_min").value=formateoFechas(new Date());
     document.getElementById("fec_max").value=formateoFechas(fin);
      table_tareas = $('#listado_tareas').DataTable({
@@ -685,8 +702,16 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_poliza'));
-    $('#fec_min, #fec_max').change(function () {
+    $('#fec_min, #fec_max', '#busqueda_dias').change(function () {
         console.log('cambio');
+        table.draw();
+    });
+    $('#busqueda_dias').change(function () {
+    var dias =parseInt(document.getElementById("busqueda_dias").value);
+    console.log(dias);
+    var inicio=new Date();
+    var fin=inicio.setDate(inicio.getDate() + dias);
+    document.getElementById("fec_max").value=formateoFechas(fin);
         table.draw();
     });
 });
@@ -1021,32 +1046,34 @@ function genera_data(data) {
         var iFfin = document.getElementById('fec_max').value;
         var iStartDateCol = 6;
         var iEndDateCol = 6;
- 
-        iFini=iFini.substring(0,4) + iFini.substring(6,7)+ iFini.substring(9,10);
-        iFfin=iFfin.substring(0,4) + iFfin.substring(6,7)+ iFfin.substring(9,10);
+
+        iFini=iFini.substring(0,4) + iFini.substring(5,7)+ iFini.substring(8,10);
+        iFfin=iFfin.substring(0,4) + iFfin.substring(5,7)+ iFfin.substring(8,10);
+
  //2020-20-20
  //1234-67-90
 //        var datofini=aData[iStartDateCol].substring(6,10) + aData[iStartDateCol].substring(3,5)+ aData[iStartDateCol].substring(0,2);
 //        var datoffin=aData[iEndDateCol].substring(6,10) + aData[iEndDateCol].substring(3,5)+ aData[iEndDateCol].substring(0,2);
 //        var datofini=aData[iStartDateCol].substring(0,4) + aData[iStartDateCol].substring(6,7)+ aData[iStartDateCol].substring(9,10);
-        var datoffin=datofini=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(6,7)+ aData[iEndDateCol].substring(9,10); 
+        var dato=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10); 
         if ( iFini === "" && iFfin === "" )
         {
             return true;
         }
-        else if ( iFini <= datofini && iFfin === "")
+        else if ( iFini <= dato && iFfin === "")
         {
             return true;
         }
-        else if ( iFfin >= datoffin && iFini === "")
+        else if ( iFfin >= dato && iFini === "")
         {
             return true;
         }
-        else if (iFini <= datofini && iFfin >= datoffin)
+        else if (iFini <= dato && iFfin >= dato)
         {
             return true;
         }
         return false;
     }
 );
+
 </script>
