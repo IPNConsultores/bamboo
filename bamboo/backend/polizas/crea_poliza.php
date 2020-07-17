@@ -17,8 +17,8 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $fechavenc=estandariza_info($_POST["fechavenc"]);
  $nro_poliza=estandariza_info($_POST["nro_poliza"]);
  $cobertura=estandariza_info($_POST["cobertura"]);
-$materia1 = str_replace(chr(10), "_[enter]_",$_POST["cobertura"]);
-$materia1 = str_replace(chr(13), "_[enter]_",$_POST["cobertura"]);
+$materia1 = str_replace("\n", "_[enter]_",$_POST["cobertura"]);
+$materia1 = str_replace("\r", "_[enter]_",$_POST["cobertura"]);
 
  $materia=estandariza_info($materia1);
  $detalle_materia=estandariza_info($_POST["detalle_materia"]);
