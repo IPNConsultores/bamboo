@@ -91,7 +91,7 @@ return $data;
 </head>
 <body>
 <script >
-
+alert("Póliza Registrada Correctamente");
 var nro_poliza= '<?php echo $nro_poliza; ?>';
   $.redirect('/bamboo/listado_polizas.php', {
   'busqueda': nro_poliza

@@ -1725,7 +1725,7 @@ document.getElementById("formulario").addEventListener('submit', function(event)
     else
     {
         
-     alert("Poliza Registrada Correctamente")
+     
          
     }
     
