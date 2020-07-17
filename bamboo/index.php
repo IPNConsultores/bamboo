@@ -183,8 +183,8 @@ While($row2=mysqli_fetch_object($resultado2))
         </div>
     <!-- <div id="auxiliar" style="display:none" > 
     -->
-    <div id="auxiliar"  style="display:none" >
-      <input name="fec_min" id="fec_min" >
+    <div id="auxiliar" style="display:none">
+      <input name="fec_min" id="fec_min"  >
       <input name="fec_max" id="fec_max">
     </div>
     </div>
@@ -226,9 +226,13 @@ function formateoFechas(date) {
 
     return [year,month,day].join('-');
 }
-$(document).ready(function() {
 
-     table_tareas = $('#listado_tareas').DataTable({
+$(document).ready(function() {
+    var inicio=new Date();
+    var fin=inicio.setDate(inicio.getDate() + 45);
+    document.getElementById("fec_min").value=formateoFechas(new Date());
+    document.getElementById("fec_max").value=formateoFechas(fin);
+  var   table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
         "scrollX": true,
@@ -347,6 +351,7 @@ $(document).ready(function() {
          table_tareas.search(texto2).draw();
     }
     });
+    
     $('#listado_tareas tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
         var row = table_tareas.row(tr);
@@ -697,18 +702,9 @@ $(document).ready(function() {
             }
         ]
     }).container().appendTo($('#botones_poliza'));
-    $('#fec_min, #fec_max', '#busqueda_dias').change(function () {
-        console.log('cambio');
-        table.draw();
-    });
-    $('#busqueda_dias').change(function () {
-    var dias =parseInt(document.getElementById("busqueda_dias").value);
-    console.log(dias);
-    var inicio=new Date();
-    var fin=inicio.setDate(inicio.getDate() + dias);
-    document.getElementById("fec_max").value=formateoFechas(fin);
-        table.draw();
-    });
+
+
+
 });
 
 function detalle_tareas(d) {
@@ -1037,19 +1033,16 @@ function genera_data(data) {
  }
  $.fn.dataTableExt.afnFiltering.push(
     function( oSettings, aData, iDataIndex ) {
-        var iFini = document.getElementById('fec_min').value;
+        if(oSettings.nTable.id!=='listado_polizas'){
+        return true;
+        }
+        var iFini = document.getElementById("fec_min").value;
         var iFfin = document.getElementById('fec_max').value;
         var iStartDateCol = 6;
         var iEndDateCol = 6;
-
         iFini=iFini.substring(0,4) + iFini.substring(5,7)+ iFini.substring(8,10);
         iFfin=iFfin.substring(0,4) + iFfin.substring(5,7)+ iFfin.substring(8,10);
 
- //2020-20-20
- //1234-67-90
-//        var datofini=aData[iStartDateCol].substring(6,10) + aData[iStartDateCol].substring(3,5)+ aData[iStartDateCol].substring(0,2);
-//        var datoffin=aData[iEndDateCol].substring(6,10) + aData[iEndDateCol].substring(3,5)+ aData[iEndDateCol].substring(0,2);
-//        var datofini=aData[iStartDateCol].substring(0,4) + aData[iStartDateCol].substring(6,7)+ aData[iStartDateCol].substring(9,10);
         var dato=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10); 
         if ( iFini === "" && iFfin === "" )
         {
@@ -1070,5 +1063,14 @@ function genera_data(data) {
         return false;
     }
 );
-
+    $('#busqueda_dias').change(function () {
+    var dias =parseInt(document.getElementById("busqueda_dias").value);
+    console.log(dias);
+    var inicio=new Date();
+    var fin=inicio.setDate(inicio.getDate() + dias);
+    document.getElementById("fec_min").value=formateoFechas(new Date());
+    document.getElementById("fec_max").value=formateoFechas(fin);
+    table.draw();
+    });
+    
 </script>
