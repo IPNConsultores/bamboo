@@ -131,6 +131,8 @@ function estandariza_info($data)
 <body>
 <script >
 
+alert("Tarea Creada Correctamente");
+	
 var tarea_recurrente= '<?php echo $tarea_recurrente; ?>';
 var id_tarea= '<?php echo $id_tarea; ?>';
 if (tarea_recurrente==true){
