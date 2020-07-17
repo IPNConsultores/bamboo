@@ -59,7 +59,7 @@ function estandariza_info($data) {
 </head>
 <body>
 <script >
-
+alert("Cliente Creado correctamente")
 var rut='<?php echo $rut; ?>'
   $.redirect('/bamboo/listado_clientes.php', {
   'busqueda': rut
