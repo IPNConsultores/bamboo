@@ -218,7 +218,7 @@ function estandariza_info( $data ) {
                 <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required>
+                                            onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required disabled>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
                 <div style= "color:red; visibility: hidden" id="validador10">No puedes dejar este campo en blanco</div>
@@ -296,8 +296,9 @@ function estandariza_info( $data ) {
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
                                             placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"
                                              oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required disbled>
+                                            onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required disabled>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
+
                   ingresado</div>
                 <div style= "color:red; visibility: hidden" id="validador11">No puedes dejar este campo en blanco</div>
               </div>
@@ -875,7 +876,7 @@ function checkRadio2(name) {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
-        document.getElementById("rutaseg").disabled = false;
+    
         document.getElementById("busca_rut_aseg").style.visibility = "visible";
 
 
@@ -1362,6 +1363,7 @@ document.getElementById("nombre_seg").disabled = true;
 document.getElementById("edicion1").style.display = "none";
 document.getElementById("anular").style.display = "none";
 document.getElementById("cancelar").style.display = "none";
+document.getElementById("boton_submit").style.display = "flex";
 
     
 }
@@ -1415,6 +1417,7 @@ document.getElementById("cancelar").style.display = "none";
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
+            document.getElementById("boton_submit").style.display = "none";
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             document.getElementById("botones_edicion").style.display = "flex"
@@ -1630,6 +1633,7 @@ var moneda = document.getElementById("moneda_poliza").value;
   });
 
 function modifica_estado(estado){
+
     var r2 = confirm("Estás a punto de "+estado+" está póliza ¿Deseas continuar?");
                 if (r2 == true) {
                     
