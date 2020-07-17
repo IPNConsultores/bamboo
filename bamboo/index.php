@@ -227,12 +227,7 @@ function formateoFechas(date) {
     return [year,month,day].join('-');
 }
 $(document).ready(function() {
-    var dias =parseInt(document.getElementById("busqueda_dias").value);
-    console.log(dias);
-    var inicio=new Date();
-    var fin=inicio.setDate(inicio.getDate() + dias);
-    document.getElementById("fec_min").value=formateoFechas(new Date());
-    document.getElementById("fec_max").value=formateoFechas(fin);
+
      table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
