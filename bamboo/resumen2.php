@@ -37,10 +37,10 @@ if ( !isset( $_SESSION ) ) {
  <p> Resumen / Busqueda:  <br>
  <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="clientes" data-toggle="tab" href="#nav-cliente" role="tab" aria-controls="nav-cliente" aria-selected="true" style="color: white;background-color:#536656 " onclick="cambiacolor(this.id)">Cliente</a>
-    <a class="nav-item nav-link" id="poliza" data-toggle="tab" href="#nav-poliza" role="tab" aria-controls="nav-poliza" aria-selected="false" style="color: grey" onclick="cambiacolor(this.id)">Póliza</a>
-    <a class="nav-item nav-link" id="tarea" data-toggle="tab" href="#nav-tarea" role="tab" aria-controls="nav-tarea" aria-selected="false" style="color: grey" onclick="cambiacolor(this.id)">Tarea</a>
-     <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab" aria-controls="nav-tarea_rec" aria-selected="false"style="color: grey" onclick="cambiacolor(this.id)">Tarea Recurrente</a>
+    <a class="nav-item nav-link active" id="clientes" data-toggle="tab" href="#nav-cliente" role="tab" aria-controls="nav-cliente" aria-selected="true" style="color: white;background-color:#536656;border-color:#dee2e6" onclick="cambiacolor(this.id)">Cliente</a>
+    <a class="nav-item nav-link" id="poliza" data-toggle="tab" href="#nav-poliza" role="tab" aria-controls="nav-poliza" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Póliza</a>
+    <a class="nav-item nav-link" id="tarea" data-toggle="tab" href="#nav-tarea" role="tab" aria-controls="nav-tarea" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Tarea</a>
+     <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab" aria-controls="nav-tarea_rec" aria-selected="false"style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Tarea Recurrente</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -161,12 +161,16 @@ if ( !isset( $_SESSION ) ) {
          
          document.getElementById("clientes").style.backgroundColor = "white"
          document.getElementById("clientes").style.color = "grey"
+         document.getElementById("clientes").style.borderColor = "#dee2e6"
          document.getElementById("poliza").style.backgroundColor = "white"
          document.getElementById("poliza").style.color = "grey"
+         document.getElementById("poliza").style.borderColor = "#dee2e6"
           document.getElementById("tarea").style.backgroundColor = "white"
          document.getElementById("tarea").style.color = "grey"
+         document.getElementById("tarea").style.borderColor = "#dee2e6"
            document.getElementById("tarea_rec").style.backgroundColor = "white"
          document.getElementById("tarea_rec").style.color = "grey"
+         document.getElementById("tarea_rec").style.borderColor = "#dee2e6"
          
          
         document.getElementById(id).style.backgroundColor = "#536656"
