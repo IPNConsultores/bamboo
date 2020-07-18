@@ -222,7 +222,7 @@ function estandariza_info( $data ) {
                 <label style= "color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                                             placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required disabled>
+                                            onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();" required readonly>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
                   ingresado</div>
                 <div style= "color:red; visibility: hidden" id="validador10">No puedes dejar este campo en blanco</div>
@@ -300,7 +300,7 @@ function estandariza_info( $data ) {
                 <input type="text" class="form-control" id="rutaseg" name="rutaseg"
                                             placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"
                                              oninput="checkRut(this);copiadatos()"
-                                            onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required disabled>
+                                            onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required readonly>
                 <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
 
                   ingresado</div>
@@ -889,7 +889,7 @@ function checkRadio2(name) {
         document.getElementById("radio2_si").checked = true;
         document.getElementById("rutaseg").disabled = true;
         document.getElementById("busca_rut_aseg").style.visibility = "hidden";
-        document.getElementById("rutprop").value = document.getElementById("rutseg").value;
+        document.getElementById("rutprop").value = document.getElementById("rutaseg").value;
         
     }
 }
@@ -1362,6 +1362,9 @@ for(var i = 0; i < fields4.length; i++)
     fields4[i].disabled = false;
 }
 
+	document.getElementById("rutprop").readonly = true;
+document.getElementById("rutaseg").readonly = true;
+	
 document.getElementById("nombre_prop").disabled = true;
 document.getElementById("nombre_seg").disabled = true;
 document.getElementById("edicion1").style.display = "none";
