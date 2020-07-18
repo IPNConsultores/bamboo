@@ -38,7 +38,9 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
     $nro_poliza = $row->numero_poliza;
     $cobertura = $row->cobertura;
     $materia = $row->materia_asegurada;
+	  $materia = str_replace("\r\n", "\\n",$materia);
     $detalle_materia = $row->patente_ubicacion;
+	  $detalle_materia = str_replace("\r\n", "\\n",$detalle_materia);
     $moneda_poliza = $row->moneda_poliza;
     $deducible = $row->deducible;
     $prima_afecta = $row->prima_afecta;
@@ -66,7 +68,9 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
     $boleta_negativa = $row->boleta_negativa;
     $depositado_fecha = $row->depositado_fecha;
     $endoso = $row->endoso;
+	  $endoso = str_replace("\r\n", "\\n",$endoso);
     $comentario = $row->informacion_adicional;
+	  $comentario = str_replace("\r\n", "\\n",$comentario);
 
   }
 
