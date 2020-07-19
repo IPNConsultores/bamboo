@@ -97,7 +97,7 @@ function valida_rut(){
                         </li>
                     </ul>
                 </form>
-                    <form class="form-inline" action="/bamboo/busqueda.php" method="POST">
+                    <form class="form-inline" action="/bamboo/resumen2.php" method="POST">
                         <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
                             aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
