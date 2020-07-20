@@ -36,7 +36,6 @@ switch ($base) {
                         $id_clientes= "^".$row->idA."$"."|"."^".$row->idP."$";
                     }
                         $nombre_base= $row->numero_poliza;
-                        echo $nombre_base;
                 } 
         break;
     case 'cliente':
