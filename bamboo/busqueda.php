@@ -743,16 +743,10 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
             break;
         }
         case "info": {
-            if (base == 'cliente') {
-                $.redirect('/bamboo/resumen.php', {
-                    'id_cliente': id
-                }, 'post');
-            }
-            if (base == 'poliza'){
-                $.redirect('/bamboo/resumen.php', {
-                    'id_poliza': id
-                }, 'post');
-            }
+            $.redirect('/bamboo/resumen2.php', {
+                'id': id,
+                'base': base
+            }, 'post');
             break;
         }
         case "correo": {

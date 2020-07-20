@@ -353,11 +353,12 @@ $buscar= estandariza_info($_POST["busqueda"]);
                 break;
             }
             case "info": {
-                $.redirect('/bamboo/resumen.php', {
-                    'id_cliente': id
-                }, 'post');
-                break;
-            }
+            $.redirect('/bamboo/resumen2.php', {
+                'id': id,
+                'base': base
+            }, 'post');
+            break;
+        }
         }
     }
     (function(){

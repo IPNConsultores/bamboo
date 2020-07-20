@@ -3,16 +3,95 @@
     { 
         session_start(); 
     } 
-$buscar='';
+$buscar=$base=$id=$nombre_base='';
+$id_clientes=$id_polizas='busqueda dummy';
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bamboo/backend/funciones.php";
+mysqli_set_charset( $link, 'utf8');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true){
+ 
+ 
+
+ $query = "SELECT a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
+$resultado_poliza=mysqli_query($link, $query);
+
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true and isset($_POST["id"])!==true){
 $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
+$base="header";
+}
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])!==true and isset($_POST["id"])==true){
+$id= estandariza_info($_POST["id"]);
+$base= estandariza_info($_POST["base"]);
+switch ($base) {
+    case 'poliza':
+            $query = "SELECT numero_poliza, a.id as id_poliza, b.id as idP, c.id as idA  FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
+            $resultado_poliza=mysqli_query($link, $query);
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    if($row->idA==$row->idP){
+                        $id_clientes="^".$row->idA."$";   
+                    }else{
+                        $id_clientes= "^".$row->idA."$"."|"."^".$row->idP."$";
+                    }
+                        $nombre_base= $row->numero_poliza;
+                        echo $nombre_base;
+                } 
+        break;
+    case 'cliente':
+            $query = "SELECT nombre_cliente FROM clientes where id=".$id;
+            $resultado_poliza=mysqli_query($link, $query);
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                        $nombre_base= $row->nombre_cliente;
+                } 
+        break;
+    case 'tarea':
+        $nombre_base=$id;
+         $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea=".$id;
+         $resultado_poliza=mysqli_query($link, $query);
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    if($id_clientes=='busqueda dummy'){
+                        $id_clientes='';
+                    }
+                        $id_clientes=$id_clientes."^".$row->id_relacion."$ | ";   
+                } 
+         $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea=".$id;
+         $resultado_poliza2=mysqli_query($link, $query2);
+            While($row=mysqli_fetch_object($resultado_poliza2))
+                {
+                    if($id_polizas=='busqueda dummy'){
+                        $id_polizas='';
+                    }
+                        $id_polizas=$id_polizas."^".$row->id_relacion."$ | ";   
+                } 
+        break;
+    case 'tarea recurrente':
+        $nombre_base=$id;
+         $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea_recurrente=".$id;
+         $resultado_poliza=mysqli_query($link, $query);
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                   if($id_clientes=='busqueda dummy'){
+                        $id_clientes='';
+                    }
+                        $id_clientes=$id_clientes."^".$row->id_relacion."$ | ";   
+                } 
+         $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea_recurrente=".$id;
+         $resultado_poliza2=mysqli_query($link, $query2);
+            While($row=mysqli_fetch_object($resultado_poliza2))
+                {
+                    if($id_polizas=='busqueda dummy'){
+                        $id_polizas='';
+                    }
+                        $id_polizas=$id_polizas."^".$row->id_relacion."$ | ";   
+                } 
+        break;
 }
 
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,158 +124,161 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <div class="container">
 
-        <p> Resumen / Búsqueda: <br>
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="clientes" data-toggle="tab" href="#nav-cliente" role="tab"
-                        aria-controls="nav-cliente" aria-selected="true"
-                        style="color: white;background-color:#536656;border-color:#dee2e6"
-                        onclick="cambiacolor(this.id)">Cliente</a>
-                    <a class="nav-item nav-link" id="poliza" data-toggle="tab" href="#nav-poliza" role="tab"
-                        aria-controls="nav-poliza" aria-selected="false" style="color: grey;border-color:#dee2e6"
-                        onclick="cambiacolor(this.id)">Póliza</a>
-                    <a class="nav-item nav-link" id="tarea" data-toggle="tab" href="#nav-tarea" role="tab"
-                        aria-controls="nav-tarea" aria-selected="false" style="color: grey;border-color:#dee2e6"
-                        onclick="cambiacolor(this.id)">Tarea</a>
-                    <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab"
-                        aria-controls="nav-tarea_rec" aria-selected="false" style="color: grey;border-color:#dee2e6"
-                        onclick="cambiacolor(this.id)">Tarea Recurrente</a>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-cliente" role="tabpanel"
-                    aria-labelledby="nav-cliente-tab">
-                    <div class="card">
-                        <div class="card-body">
-                            <br>
-                            <br>
-                            <table id="listado_clientes" width="100%" class="table table-striped">
-                                <tr>
-                                    <thead>
-                                        <th></th>
-                                        <th>Rut</th>
-                                        <th>Nombre</th>
-                                        <th>Referido por</th>
-                                        <th>Grupo</th>
-                                        <th>Teléfono</th>
-                                        <th>e-mail</th>
-                                        <th>Dirección Privada</th>
-                                        <th>Dirección Laboral</th>
-                                        <th>id</th>
-                                        <th>apellidop</th>
-                                    </thead>
-                                </tr>
-                            </table>
-                            <div id="botones"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-poliza" role="tabpanel" aria-labelledby="nav-poliza-tab">
-                    <div class="card">
-                        <div class="card-body">
-                            <br>
-                            <br>
-                            <table class="display" style="width:100%" id="listado_polizas">
-                                <tr>
+        <p id="titulo"> Resumen / Búsqueda:</p> <br>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="clientes" data-toggle="tab" href="#nav-cliente" role="tab"
+                    aria-controls="nav-cliente" aria-selected="true"
+                    style="color: white;background-color:#536656;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Cliente</a>
+                <a class="nav-item nav-link" id="poliza" data-toggle="tab" href="#nav-poliza" role="tab"
+                    aria-controls="nav-poliza" aria-selected="false" style="color: grey;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Póliza</a>
+                <a class="nav-item nav-link" id="tarea" data-toggle="tab" href="#nav-tarea" role="tab"
+                    aria-controls="nav-tarea" aria-selected="false" style="color: grey;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Tarea</a>
+                <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab"
+                    aria-controls="nav-tarea_rec" aria-selected="false" style="color: grey;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Tarea Recurrente</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-cliente" role="tabpanel" aria-labelledby="nav-cliente-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table id="listado_clientes" width="100%" class="table table-striped">
+                            <tr>
+                                <thead>
                                     <th></th>
-                                    <th>Estado</th>
-                                    <th>Póliza</th>
-                                    <th>Compañia</th>
-                                    <th>Ramo</th>
-                                    <th>Inicio Vigencia</th>
-                                    <th>Fin Vigencia</th>
-                                    <th>Materia Asegurada</th>
-                                    <th>Tipo póliza</th>
-                                    <th>Observaciones</th>
-                                    <th>Deducible</th>
-                                    <th>Prima afecta</th>
-                                    <th>Prima exenta</th>
-                                    <th>Prima bruta anual</th>
-                                    <th>Añomes final</th>
-                                    <th>Añomes inicial</th>
-                                    <th>Moneda póliza</th>
-                                    <th>Cobertura</th>
-                                    <th>Proponente</th>
-                                    <th>Rut Proponente</th>
-                                    <th>Asegurado</th>
-                                    <th>Rut Asegurado</th>
-                                    <th>grupo</th>
-                                    <th>referido</th>
-                                    <th>monto_asegurado</th>
-                                    <th>numero_propuesta</th>
-                                    <th>fecha_envio_propuesta</th>
-                                    <th>comision</th>
-                                    <th>porcentaje_comision</th>
-                                    <th>comision_bruta</th>
-                                    <th>comision_neta</th>
-                                    <th>numero_boleta</th>
-                                    <th>boleta_negativa</th>
-                                    <th>comision_negativa</th>
-                                    <th>depositado_fecha</th>
-                                    <th>vendedor</th>
-                                    <th>nombre_vendedor</th>
-                                    <th>forma_pago</th>
-                                    <th>nro_cuotas</th>
-                                    <th>valor_cuota</th>
-                                    <th>fecha_primera_cuota</th>
-                                    <th>Prima neta</th>
-                                </tr>
-                            </table>
-                            <div id="botones_poliza"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-tarea" role="tabpanel" aria-labelledby="nav-tarea-tab">
-                    <div class="card">
-                        <div class="card-body">
-                            <br>
-                            <br>
-                            <table class="table" id="listado_tareas" style="width:100%">
-                                <tr>
-                                    <th></th>
+                                    <th>Rut</th>
+                                    <th>Nombre</th>
+                                    <th>Referido por</th>
+                                    <th>Grupo</th>
+                                    <th>Teléfono</th>
+                                    <th>e-mail</th>
+                                    <th>Dirección Privada</th>
+                                    <th>Dirección Laboral</th>
                                     <th>id</th>
-                                    <th>Prioridad</th>
-                                    <th>Estado</th>
-                                    <th>Tarea</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </table>
-                            <div id="botones_tareas"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-tarea_rec" role="tabpanel" aria-labelledby="nav-tarea_rec-tab">
-                    <div class="card">
-                        <div class="card-body">
-                            <br>
-                            <br>
-                            <table class="table" id="listado_tareas_recurrentes" style="width:100%">
-                                <tr>
-                                    <th></th>
-                                    <th>id</th>
-                                    <th>Prioridad</th>
-                                    <th>Estado</th>
-                                    <th>Tarea</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </table>
-                            <div id="botones_tareas_recurrentes"></div>
-                        </div>
+                                    <th>apellidop</th>
+                                </thead>
+                            </tr>
+                        </table>
+                        <div id="botones"></div>
                     </div>
                 </div>
             </div>
-            <div>
-                <br>
+            <div class="tab-pane fade" id="nav-poliza" role="tabpanel" aria-labelledby="nav-poliza-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table class="display" style="width:100%" id="listado_polizas">
+                            <tr>
+                                <th></th>
+                                <th>Estado</th>
+                                <th>Póliza</th>
+                                <th>Compañia</th>
+                                <th>Ramo</th>
+                                <th>Inicio Vigencia</th>
+                                <th>Fin Vigencia</th>
+                                <th>Materia Asegurada</th>
+                                <th>Tipo póliza</th>
+                                <th>Observaciones</th>
+                                <th>Deducible</th>
+                                <th>Prima afecta</th>
+                                <th>Prima exenta</th>
+                                <th>Prima bruta anual</th>
+                                <th>Añomes final</th>
+                                <th>Añomes inicial</th>
+                                <th>Moneda póliza</th>
+                                <th>Cobertura</th>
+                                <th>Proponente</th>
+                                <th>Rut Proponente</th>
+                                <th>Asegurado</th>
+                                <th>Rut Asegurado</th>
+                                <th>grupo</th>
+                                <th>referido</th>
+                                <th>monto_asegurado</th>
+                                <th>numero_propuesta</th>
+                                <th>fecha_envio_propuesta</th>
+                                <th>comision</th>
+                                <th>porcentaje_comision</th>
+                                <th>comision_bruta</th>
+                                <th>comision_neta</th>
+                                <th>numero_boleta</th>
+                                <th>boleta_negativa</th>
+                                <th>comision_negativa</th>
+                                <th>depositado_fecha</th>
+                                <th>vendedor</th>
+                                <th>nombre_vendedor</th>
+                                <th>forma_pago</th>
+                                <th>nro_cuotas</th>
+                                <th>valor_cuota</th>
+                                <th>fecha_primera_cuota</th>
+                                <th>Prima neta</th>
+                            </tr>
+                        </table>
+                        <div id="botones_poliza"></div>
+                    </div>
+                </div>
             </div>
-            <!--<div id="auxiliar" style="display: none;">-->
-            <div id="auxiliar" style="display: none;">
-                <input id="var1" value="<?php 
-        echo htmlspecialchars($buscar);?>">
+            <div class="tab-pane fade" id="nav-tarea" role="tabpanel" aria-labelledby="nav-tarea-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table class="table" id="listado_tareas" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>id</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Tarea</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <div id="botones_tareas"></div>
+                    </div>
+                </div>
             </div>
+            <div class="tab-pane fade" id="nav-tarea_rec" role="tabpanel" aria-labelledby="nav-tarea_rec-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table class="table" id="listado_tareas_recurrentes" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>id</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Tarea</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <div id="botones_tareas_recurrentes"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <br>
+        </div>
+        <!--<div id="auxiliar" style="display: none;">-->
+        <div id="auxiliar" style="display: none;">
+            <input id="var1" value="<?php echo htmlspecialchars($buscar);?>">
+            <input id="aux_id" value="<?php echo htmlspecialchars("^".$id."$");?>">
+            <input id="aux_base" value="<?php echo htmlspecialchars($base);?>">
+            <input id="var2_cliente" value="<?php echo htmlspecialchars($id_clientes);?>">
+            <input id="var3_poliza" value="<?php echo htmlspecialchars($id_polizas);?>">
+            <input id="var4_titulo" value="<?php echo $nombre_base;?>">
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -248,6 +330,7 @@ $(document).ready(function() {
         },
         "columns": [{
                 "className": 'details-control',
+
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
@@ -292,7 +375,7 @@ $(document).ready(function() {
                 "visible": false,
             },
             {
-                "targets": [6, 7, 8, 9, 10],
+                "targets": [6, 7, 8, 10],
                 "searchable": false
             }
         ],
@@ -535,15 +618,26 @@ $(document).ready(function() {
             {
                 "data": "informacion_adicional",
                 title: "Información adicional"
+            },
+            {
+                "data": "idA",
+                title: "id asegurado"
+            },
+            {
+                "data": "idP",
+                title: "id proponente"
+            },
+            {
+                "data": "id_poliza",
+                title: "id poliza"
             }
-
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
                 "targets": [10, 11, 12, 13, 14, 15, 16, 17, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
+                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 46
                 ],
                 "visible": false,
             },
@@ -552,12 +646,6 @@ $(document).ready(function() {
                     34, 35, 36, 37, 38, 39, 40, 41
                 ],
                 "searchable": false
-            },
-            {
-                "searchPanes": {
-                    "preSelect": ['Activo'],
-                },
-                "targets": [1],
             },
             {
                 targets: 1,
@@ -654,6 +742,7 @@ $(document).ready(function() {
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
+
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
@@ -696,6 +785,18 @@ $(document).ready(function() {
             {
                 "data": "numero_poliza[]",
                 title: "Pólizas asociados"
+            },
+            {
+                "data": "id_proponente[]",
+                title: "id proponente"
+            },
+            {
+                "data": "id_asegurado[]",
+                title: "id asegurado"
+            },
+            {
+                "data": "id_poliza[]",
+                title: "id poliza"
             }
 
         ],
@@ -704,7 +805,7 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-                "targets": [6, 8],
+                "targets": [6, 8, 11, 12, 13],
                 "visible": false,
             },
             {
@@ -800,6 +901,7 @@ $(document).ready(function() {
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
+
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             },
             {
@@ -837,6 +939,14 @@ $(document).ready(function() {
             {
                 "data": "numero_poliza[]",
                 title: "Pólizas asociados"
+            },
+            {
+                "data": "id_cliente[]",
+                title: "id cliente"
+            },
+            {
+                "data": "id_poliza[]",
+                title: "id poliza"
             }
 
         ],
@@ -845,26 +955,31 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-            targets: 3,
-            render: function(data, type, row, meta) {
-                var estado = '';
-                switch (data) {
-                    case 'Activo':
-                        estado = '<span class="badge badge-warning">' + data + '</span>';
-                        break;
-                    case 'Completado':
-                        estado = '<span class="badge badge-dark">' + data + '</span>';
-                        break;
-                    case 'Atrasado':
-                        estado = '<span class="badge badge-danger">' + data + '</span>';
-                        break;
-                    default:
-                        estado = '<span class="badge badge-light">' + data + '</span>';
-                        break;
+                "targets": [10, 11],
+                "visible": false,
+            },
+            {
+                targets: 3,
+                render: function(data, type, row, meta) {
+                    var estado = '';
+                    switch (data) {
+                        case 'Activo':
+                            estado = '<span class="badge badge-warning">' + data + '</span>';
+                            break;
+                        case 'Completado':
+                            estado = '<span class="badge badge-dark">' + data + '</span>';
+                            break;
+                        case 'Atrasado':
+                            estado = '<span class="badge badge-danger">' + data + '</span>';
+                            break;
+                        default:
+                            estado = '<span class="badge badge-light">' + data + '</span>';
+                            break;
+                    }
+                    return estado; //render link in cell
                 }
-                return estado; //render link in cell
             }
-        }],
+        ],
         "order": [
             [2, "asc"],
             [5, "asc"]
@@ -912,7 +1027,71 @@ $(document).ready(function() {
         }
     });
     $('#listado_tareas_recurrentes').dataTable().fnFilter(document.getElementById("var1").value);
+    switch (document.getElementById("aux_base").value) {
+        case 'cliente': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat(
+                "<b>" + document.getElementById("var4_titulo").value + "</b>");
+            cambiacolor("clientes");
+            //cliente
+            table.column(9).search(document.getElementById("aux_id").value, true).draw();
+            //poliza
+            table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
+            //tarea
+            table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(10).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'poliza': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a póliza número: "
+                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            cambiacolor("poliza");
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(46).search(document.getElementById("aux_id").value, true).draw();
+            //tarea
+            table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'tarea': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a tarea número: "
+                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            cambiacolor("tarea");
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(46).search(document.getElementById("var3_poliza").value, true).draw();
+            //tarea
+            table_tareas.column(1).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(9).search("busqueda dummy").draw();
+            break;
+        }
+        case 'tarea recurrente': {
+            document.getElementById("titulo").innerHTML =
+                " Resumen / Búsqueda asociada a tarea recurrente número: ".concat("<b>" + document
+                    .getElementById("var4_titulo").value + "</b>");
+            cambiacolor("tarea_rec");
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(46).search(document.getElementById("var3_poliza").value, true).draw();
+            //tarea
+            table_tareas.column(1).search("busqueda dummy").draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(1).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'header': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a: ".concat("<b>" +
+                document.getElementById("var1").value + "</b>");
 
+            break;
+        }
+    }
     //fin tareas recurrents
 });
 
@@ -1276,21 +1455,10 @@ function botones(id, accion, base) {
             break;
         }
         case "info": {
-            if (base == 'cliente') {
-                $.redirect('/bamboo/resumen.php', {
-                    'id_cliente': id
-                }, 'post');
-            }
-            if (base == 'poliza') {
-                $.redirect('/bamboo/resumen.php', {
-                    'id_poliza': id
-                }, 'post');
-            }
-            if (base == 'tarea' || base == 'tarea recurrente') {
-                $.redirect('/bamboo/resumen.php', {
-                    'id_tarea': id
-                }, 'post');
-            }
+            $.redirect('/bamboo/resumen2.php', {
+                'id': id,
+                'base': base
+            }, 'post');
             break;
         }
         case "correo": {

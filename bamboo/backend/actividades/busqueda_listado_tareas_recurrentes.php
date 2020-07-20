@@ -96,10 +96,10 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 
                   while($list_clientes=mysqli_fetch_object($resul_clientes)){
-                                                array_push($id_cliente, $list_clientes->id);
-                          array_push($nombre, $list_clientes->nombre);
-                          array_push($telefono, $list_clientes->telefono);
-                          array_push($correo, $list_clientes->correo );
+                        array_push($id_cliente, $list_clientes->id);
+                        array_push($nombre, $list_clientes->nombre);
+                        array_push($telefono, $list_clientes->telefono);
+                        array_push($correo, $list_clientes->correo );
                   }
                         $relaciones=array_merge($relaciones, array(
                         "id_cliente" =>& $id_cliente,
