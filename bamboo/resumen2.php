@@ -1031,7 +1031,7 @@ $(document).ready(function() {
         case 'cliente': {
             document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat(
                 "<b>" + document.getElementById("var4_titulo").value + "</b>");
-            cambiacolor("clientes");
+            document.getElementById("clientes").click();
             //cliente
             table.column(9).search(document.getElementById("aux_id").value, true).draw();
             //poliza
@@ -1045,7 +1045,7 @@ $(document).ready(function() {
         case 'poliza': {
             document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a póliza número: "
                 .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
-            cambiacolor("poliza");
+            document.getElementById("poliza").click();
             //cliente
             table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
             //poliza
@@ -1059,7 +1059,7 @@ $(document).ready(function() {
         case 'tarea': {
             document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a tarea número: "
                 .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
-            cambiacolor("tarea");
+            document.getElementById("tarea").click();
             //cliente
             table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
             //poliza
@@ -1074,7 +1074,7 @@ $(document).ready(function() {
             document.getElementById("titulo").innerHTML =
                 " Resumen / Búsqueda asociada a tarea recurrente número: ".concat("<b>" + document
                     .getElementById("var4_titulo").value + "</b>");
-            cambiacolor("tarea_rec");
+            document.getElementById("tarea_rec").click();
             //cliente
             table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
             //poliza
