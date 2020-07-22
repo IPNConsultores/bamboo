@@ -355,7 +355,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
             case "info": {
             $.redirect('/bamboo/resumen2.php', {
                 'id': id,
-                'base': base
+                'base': 'cliente'
             }, 'post');
             break;
         }
