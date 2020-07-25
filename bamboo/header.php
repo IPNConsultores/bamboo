@@ -30,7 +30,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <div class="container">
         <div class="card-header-tabs-p10" style="overflow:auto;  background-color: #536656;vertical-align: middle;">
             <div class="form-inline">
-                <p><img href="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
+                <p><img src="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
                         style="float: left;vertical-align: middle "></p>
                 <p class="h2"
                     style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;">
