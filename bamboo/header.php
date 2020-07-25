@@ -17,7 +17,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -30,7 +30,7 @@ if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     <div class="container">
         <div class="card-header-tabs-p10" style="overflow:auto;  background-color: #536656;vertical-align: middle;">
             <div class="form-inline">
-                <p><img src="http://www.bambooseguros.cl/img/logo-2.png" width="100" class="img-fluid"
+                <p><img href="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
                         style="float: left;vertical-align: middle "></p>
                 <p class="h2"
                     style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;">

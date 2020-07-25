@@ -274,7 +274,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <body>
     <div class="container" style="overflow:auto;  background-color: #536656; ">
-        <p class="h6" style=" color:white; text-align: center"><img src="http://www.bambooseguros.cl/img/logo-2.png"
+        <p class="h6" style=" color:white; text-align: center"><img href="/bamboo/images/logo_bamboo.png"
                 width="80" class="img-fluid" style="float: left; margin-bottom: 10px"></p>
         <p class="h2" style=" color:white; text-align: center">&nbsp; </p>
     </div>
