@@ -35,12 +35,26 @@ function valida_rut(){
     <div class="container">
         <div class="card-header-tabs-p10" style="background-color:#536656;vertical-align: middle;">
             <div class="form-inline">
+                <div class="col-2">
                 <p><img src="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
                         style="float: left;vertical-align: middle "></p>
+                        </div>
+                        <div class="col-8">
                 <p class="h2"
                     style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;">
                     &nbsp;Gestión Bamboo</p>
+                    </div>
+                     
+                            
+                            <div class="col-2" style="color : white; font-size:80%">
+                                <div class= "row">Fecha : dd/mm/yyyy</div>
+                                <div class= "row">UF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: $xx.xxx</div>
+                                <div class= "row">Dolar&nbsp; : $yyy</div>
+                                    
+                            </div>
+                     
             </div>
+            
         </div>
         <nav class="navbar navbar-expand-lg navbar-light shadow p1" style="background-color: #A5CCAB">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
