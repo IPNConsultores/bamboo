@@ -23,48 +23,42 @@ function valida_rut(){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestión IPN - Bamboo Seguros</title>
-	<link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
 </head>
-
 <body>
     <!-- body code goes here -->
     <div class="container">
         <div class="card-header-tabs-p10" style="background-color:#536656;vertical-align: middle;">
             <div class="form-inline">
                 <div class="col-2">
-                <p><img src="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
-                        style="float: left;vertical-align: middle "></p>
-                        </div>
-                        <div class="col-8">
-                <p class="h2"
-                    style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;">
-                    &nbsp;Gestión Bamboo</p>
-                    </div>
-                     
-                            
-                            <div class="col-2" style="color : white; font-size:80%">
-                            <table id="ind_ec">
-                                    <tr>
-        <td width="100">Fecha :</td>
-        <td>dd/mm/yyyy</td>
-    </tr>
-    <tr>
-        <td>UF:</td>
-        <td>$xx.xxx</td>
-    </tr>
-        <tr>
-        <td>Dólar:</td>
-        <td>$yyy</td>
-    </tr>
-                            </table>        
-                            </div>
-                     
+                    <p><img src="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
+                            style="float: left;vertical-align: middle "></p>
+                </div>
+                <div class="col-8">
+                    <p class="h2"
+                        style="color:white; text-align: left;vertical-align: middle; font-family:'Varela Round', sans-serif;margin-left: 10px;">
+                        &nbsp;Gestión Bamboo</p>
+                </div>
+                <div class="col-2" style="color : white; font-size:80%">
+                    <table id="ind_ec">
+                        <tr>
+                            <td width="100">Fecha :</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>UF:</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dólar:</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            
         </div>
         <nav class="navbar navbar-expand-lg navbar-light shadow p1" style="background-color: #A5CCAB">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -82,28 +76,29 @@ function valida_rut(){
                                 onclick="<?php $_SESSION["auxiliar"]="header";?>">Listado de clientes</a> </div>
                     </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas </a>
-                        
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-                        <a class="dropdown-item" href="/bamboo/creacion_poliza.php">Creación</a>
-                        <a class="dropdown-item" href="/bamboo/listado_polizas.php">Listado de pólizas</a> 
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/bamboo/creacion_poliza.php">Creación</a>
+                            <a class="dropdown-item" href="/bamboo/listado_polizas.php">Listado de pólizas</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4"
-						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tareas</a>
-						<div class ="dropdown-menu" aria-labelledby="navbarDropdown"> 
-							<a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación</a>
-							<a class="dropdown-item" href="/bamboo/listado_tareas.php">Listado de tareas</a>
-                            <a class="dropdown-item" href="/bamboo/listado_tareas_recurrentes.php">Listado de tareas recurrentes</a>						
-						</div>				
-					</li>
-					<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
-						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Correos</a>
-						<div class ="dropdown-menu" aria-labelledby="navbarDropdown"> 
-						<a class="dropdown-item" href="/bamboo/solicitar_info.php">Ver Tipos de Correos</a>
-							<a class="dropdown-item" href="/bamboo/creacion_template.php">Editar Templates</a>						
-						</div>				
-					</li>
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tareas</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/bamboo/creacion_actividades.php">Creación</a>
+                            <a class="dropdown-item" href="/bamboo/listado_tareas.php">Listado de tareas</a>
+                            <a class="dropdown-item" href="/bamboo/listado_tareas_recurrentes.php">Listado de tareas
+                                recurrentes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Correos</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/bamboo/solicitar_info.php">Ver Tipos de Correos</a>
+                            <a class="dropdown-item" href="/bamboo/creacion_template.php">Editar Templates</a>
+                        </div>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto">
@@ -121,13 +116,14 @@ function valida_rut(){
                         </li>
                     </ul>
                 </form>
-                    <form class="form-inline" action="/bamboo/resumen2.php" method="POST">
-                        <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
-                            aria-label="Buscar">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                            style="background-color:#536656;color:#A5CCAB" onclick="<?php $_SESSION["auxiliar"]="buscador_header";?>" >Buscar</button>
-                    </form>
-                
+                <form class="form-inline" action="/bamboo/resumen2.php" method="POST">
+                    <input class="form-control mr-sm-2" name="busqueda" type="text" placeholder="Buscar"
+                        aria-label="Buscar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        style="background-color:#536656;color:#A5CCAB"
+                        onclick="<?php $_SESSION["auxiliar"]="buscador_header";?>">Buscar</button>
+                </form>
+
             </div>
         </nav>
     </div>
@@ -160,31 +156,27 @@ function valida_rut(){
 </html>
 <script>
 function formateo_numeros(x) {
-    return x.toString().replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 var request = new XMLHttpRequest()
 request.open('GET', 'https://mindicador.cl/api', true)
-request.onload = function () {
-  // Begin accessing JSON data here
-  var data = JSON.parse(this.response)
-  if (request.status >= 200 && request.status < 400) {
-      let date = new Date(data.fecha)
-
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
-
-if(month < 10){
-  var fecha=`${day}/0${month}/${year}`
-}else{
-  var fecha=`${day}/${month}/${year}`
+request.onload = function() {
+    // Begin accessing JSON data here
+    var data = JSON.parse(this.response)
+    if (request.status >= 200 && request.status < 400) {
+        let date = new Date(data.fecha)
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        if (month < 10) {
+            var fecha = `${day}/0${month}/${year}`
+        } else {
+            var fecha = `${day}/${month}/${year}`
+        }
+        document.getElementById('ind_ec').rows[0].cells[1].innerHTML = fecha;
+        document.getElementById('ind_ec').rows[1].cells[1].innerHTML = "$" + formateo_numeros(data.uf.valor);
+        document.getElementById('ind_ec').rows[2].cells[1].innerHTML = "$" + formateo_numeros(data.dolar.valor);
+    } else {}
 }
-        document.getElementById('ind_ec').rows[0].cells[1].innerHTML=fecha;
-        document.getElementById('ind_ec').rows[1].cells[1].innerHTML="$"+formateo_numeros(data.uf.valor);
-        document.getElementById('ind_ec').rows[2].cells[1].innerHTML="$"+formateo_numeros(data.dolar.valor);
-      } else {
-  }
-}
-
 request.send()
 </script>
