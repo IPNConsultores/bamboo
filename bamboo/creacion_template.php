@@ -16,6 +16,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
 
+$camino =  $_POST[ "tipo" ];
+
   switch ( $_POST[ "tipo" ] ) {
     case "probar":
       $template = estandariza_info( $_POST[ "template" ] );
@@ -71,7 +73,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   $template_ejemplo = str_replace( '_[MATERIA_ASEGURADA]_', 'Mercedez', $template_ejemplo );
   $template_ejemplo = str_replace( '_[PATENTE_UBICACION]_', 'AABB 00', $template_ejemplo );
   $template_ejemplo = str_replace( '_[COBERTURA]_', 'Premium', $template_ejemplo );
-  $template_ejemplo = str_replace( '_[DEDUCIBLE]_', '5', $template_ejemplo );
+  $template_ejemplo = str_replace( '_[DEDUCIBLE]_', 'UF 5', $template_ejemplo );
   $template_ejemplo = str_replace( '_[MONEDA_POLIZA]_', 'UF ', $template_ejemplo );
   $template_ejemplo = str_replace( '_[PRIMA_AFECTA]_', '16.19', $template_ejemplo );
   $template_ejemplo = str_replace( '_[MONEDA_COMISION]_', 'UF ', $template_ejemplo );
@@ -114,6 +116,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 }
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -137,7 +140,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
     <div class="row">
       <div class="col">
         <label><b>Instancia</b></label>
-        <select class="form-control" name="instancia" id="instancia">
+        <select class="form-control" name="instancia" id="instancia" onchange="vaciatemplate()">
+            <option value="null">Selecciona una instancia</option>
           <option value="info_cotizar" <?php if ($instancia == "info_cotizar") echo "selected" ?>>Información para Cotizar</option>
           <option value="envio_cotizacion" <?php if ($instancia == "envio_cotizacion") echo "selected" ?>>Envío de Cotización</option>
           <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza</option>
@@ -145,7 +149,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       </div>
       <div class="col-6">
         <label><b>Ramo</b></label>
-        <select class="form-control" name="seguro" id="seguro">
+        <select class="form-control" name="seguro" id="seguro" onchange="vaciatemplate()">
           <option value="null">Selecciona un ramo</option>
           <option value="AC - Accidentes Personales"<?php if ($producto =="AC - Accidentes Personales") echo "selected" ?> >ACCIDENTES PERSONALES - Accidentes Personales</option>
           <option value="AC - Protección Financiera"<?php if ($producto =="AC - Protección Financiera") echo "selected" ?> >ACCIDENTES PERSONALES - Protección Financiera</option>
@@ -470,9 +474,9 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
         </div>
       </div>
       <br>
-      <button class="btn" name="probar" type="submit" style="background-color: #536656; color: white"
+      <button class="btn" name="probar"id="probar" type="submit" style="background-color: #536656; color: white"
                     onclick="envio_data(this.name)">Probar</button>
-      <button class="btn" name="guardar" type="submit" style="background-color: #536656; color: white"
+      <button class="btn" name="guardar" id="guardar" type="submit" style="background-color: #536656; color: white"
                     onclick="envio_data(this.name)">Guardar</button>
     </div>
     <br>
@@ -484,7 +488,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
       </textarea>
       <br>
       <h6>Resultado</h6>
-      <div class="form-control bg-light text-dark" rows="10"
+      <div class="form-control bg-light text-dark" id="resultado" rows="10"
                 style="height: 200px; border-style: solid;overflow-y: scroll"><?php echo $template_ejemplo; ?></div>
       <br>
     </div>
@@ -497,8 +501,43 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 </body>
 </html>
 <script>
+
 function envio_data(boton) {
     document.getElementById("tipo").value = boton;
 }
 
+document.addEventListener("DOMContentLoaded", function(event) {
+   
+   var instancia = document.getElementById("instancia").value 
+   var seguro = document.getElementById("seguro").value
+   
+if (instancia == "null" && seguro == "null")
+{
+    document.getElementById("template").value ="Para continuar favor selecciona un Ramo e Instancia y luego haz clic en el botón \"Buscar Template\"";
+    document.getElementById("probar").disabled = true;
+     document.getElementById("guardar").disabled = true;
+}
+else if(instancia == "null")
+{
+ document.getElementById("template").value = "No seleccionaste \"Instancia\", favor escoge una y luego haz clic en botón \"Buscar Template\"";
+     document.getElementById("probar").disabled = true;
+     document.getElementById("guardar").disabled = true;
+}
+else if(seguro == "null")
+{
+ document.getElementById("template").value = "No seleccionaste \"Ramo\", favor escoge uno y luego haz clic en botón \"Buscar Template\"";
+     document.getElementById("probar").disabled = true;
+     document.getElementById("guardar").disabled = true;
+}
+  
+
+    
+}
+);
+
+function vaciatemplate(){
+    document.getElementById("template").value ="";
+    document.getElementById("resultado").innerHTML ="";
+    
+}
 </script>
