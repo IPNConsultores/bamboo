@@ -510,6 +510,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
    
    var instancia = document.getElementById("instancia").value 
    var seguro = document.getElementById("seguro").value
+   var template = document.getElementById("template").value
    
 if (instancia == "null" && seguro == "null")
 {
@@ -530,6 +531,11 @@ else if(seguro == "null")
      document.getElementById("guardar").disabled = true;
 }
   
+else if (template =="            ")
+{
+    document.getElementById("template").value = "El Template aún no ha sido creado";
+}
+
 
     
 }
