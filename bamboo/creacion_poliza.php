@@ -419,17 +419,12 @@ function estandariza_info( $data ) {
                   <option value="INTERNACIONAL"<?php if ($producto =="INTERNACIONAL") echo "selected" ?> >TRANSPORTE - INTERNACIONAL</option>
                   <option value="APV"<?php if ($producto =="APV") echo "selected" ?> >VIDA - APV</option>
                   <option value="VIDA"<?php if ($producto =="VIDA") echo "selected" ?> >VIDA - VIDA</option>
-                  <option value="A. VIAJE" <?php if ($ramo == "A. VIAJE") echo "selected" ?> >A. VIAJE</option>
                   <option value="AP" <?php if ($ramo == "AP") echo "selected" ?> >AP</option>
-                  <option value="APV" <?php if ($ramo == "APV") echo "selected" ?> >APV</option>
                   <option value="D&O" <?php if ($ramo == "D&O") echo "selected" ?> >D&O</option>
-                  <option value="Garantía" <?php if ($ramo == "Garantía") echo "selected" ?> >Garantía</option>
-                  <option value="Hogar" <?php if ($ramo == "Hogar") echo "selected" ?> >Hogar</option>
                   <option value="INC" <?php if ($ramo == "INC") echo "selected" ?> >INC</option>
                   <option value="PyME" <?php if ($ramo == "PyME") echo "selected" ?> >PyME</option>
                   <option value="RC" <?php if ($ramo == "RC") echo "selected" ?> >RC</option>
                   <option value="VEH" <?php if ($ramo == "VEH") echo "selected" ?> >VEH</option>
-                  <option value="Vida" <?php if ($ramo == "Vida") echo "selected" ?> >Vida</option>
                 </select>
               </div>
               <div class="col">

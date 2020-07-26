@@ -47,10 +47,20 @@ function valida_rut(){
                      
                             
                             <div class="col-2" style="color : white; font-size:80%">
-                                <div class= "row">Fecha : dd/mm/yyyy</div>
-                                <div class= "row">UF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: $xx.xxx</div>
-                                <div class= "row">Dolar&nbsp; : $yyy</div>
-                                    
+                            <table id="ind_ec">
+                                    <tr>
+        <td width="100">Fecha :</td>
+        <td>dd/mm/yyyy</td>
+    </tr>
+    <tr>
+        <td>UF:</td>
+        <td>$xx.xxx</td>
+    </tr>
+        <tr>
+        <td>Dólar:</td>
+        <td>$yyy</td>
+    </tr>
+                            </table>        
                             </div>
                      
             </div>
@@ -148,3 +158,33 @@ function valida_rut(){
 </body>
 
 </html>
+<script>
+function formateo_numeros(x) {
+    return x.toString().replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+var request = new XMLHttpRequest()
+request.open('GET', 'https://mindicador.cl/api', true)
+request.onload = function () {
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response)
+  if (request.status >= 200 && request.status < 400) {
+      let date = new Date(data.fecha)
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+if(month < 10){
+  var fecha=`${day}/0${month}/${year}`
+}else{
+  var fecha=`${day}/${month}/${year}`
+}
+        document.getElementById('ind_ec').rows[0].cells[1].innerHTML=fecha;
+        document.getElementById('ind_ec').rows[1].cells[1].innerHTML="$"+formateo_numeros(data.uf.valor);
+        document.getElementById('ind_ec').rows[2].cells[1].innerHTML="$"+formateo_numeros(data.dolar.valor);
+      } else {
+  }
+}
+
+request.send()
+</script>
