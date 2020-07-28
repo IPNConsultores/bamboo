@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         if ($tarea_recurrente==0){
             $query_actualiza="update tareas set fecha_vencimiento='".$fechavencimiento."', tarea='".$tarea."', prioridad='". $prioridad . "' where id=".$id_tarea;
             mysqli_query($link, $query_actualiza);
+            mysqli_query($link, "update tareas set estado='Activo' where estado='atrasado' and fecha_vencimiento>=CURRENT_DATE and id=".$id_tarea );
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza tarea', '".str_replace("'","**",$query_actualiza)."','tarea',".$id_tarea.", '".$_SERVER['PHP_SELF']."')");
         //echo "select trazabilidad('".$_SESSION["username"]."', 'Actualiza tarea', '".str_replace("'","**",$query_actualiza)."','tarea',".$id_tarea.", '".$_SERVER['PHP_SELF']."')";
         }
