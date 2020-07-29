@@ -3,8 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza=$selcompania='';
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
-  and isset( $_POST[ "id_poliza" ] ) == true ) {
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
@@ -1719,6 +1718,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     .value;
             }
             break;
+        }
+        default:{
+        break;
         }
     }
     document.querySelectorAll('input[type=text]').forEach(node => node.addEventListener('keypress', e => {
