@@ -29,9 +29,18 @@ function valida_rut(){
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    
+   
     <!-- body code goes here -->
-    <div class="container">
-        <div class="card-header-tabs-p10" style="background-color:#536656;vertical-align: middle;">
+
+         
+      
+        <div class="container" style="margin-right: auto; margin-left:auto; position:relative"  >
+            
+            <img class="btn" src="/bamboo/images/Volver_atras.png" width="80px" 
+                            style="position: absolute; margin-top:80px; left:-80px; ;z-index: 100" Onclick="volveratras()">
+      
+        <div class="card-header-tabs-p10" style="background-color:#536656;vertical-align: middle; padding:0px ;">
             <div class="form-inline">
                 <div class="col-2">
                     <p><img src="/bamboo/images/logo_bamboo.png" width="100" class="img-fluid"
@@ -60,6 +69,7 @@ function valida_rut(){
                 </div>
             </div>
         </div>
+        
         <nav class="navbar navbar-expand-lg navbar-light shadow p1" style="background-color: #A5CCAB">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span
@@ -134,22 +144,20 @@ function valida_rut(){
     <div class="col">
       
     </div>
-    <div class="col ml-auto align-self-end" style="text-align: right">
-        
-      <button class="btn" style="vertical-align: right; background-color: transparent" ><img class="button" src="/bamboo/images/flecha_atras.png" width="30" class="img-fluid"
-                            style="float: right;vertical-align: right; margin-top:20px; margin-right:20px; " Onclick="volveratras()"></button>
-    </div>
+  
                 
             </div>
             
             
         </div>
     </div>
+    
     <br>
     <div class="needs-validation" novalidate>
         <form id="load" class="needs-validation" novalidate>
         </form>
     </div>
+    
     <script>
     
     function volveratras() {
