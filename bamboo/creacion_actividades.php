@@ -391,7 +391,7 @@ echo '<style>.info_clientes { display:none;}</style>';
         </div>
         <br>
         <div  onclick="bPreguntar = false;">
-        <button class="btn" type="button" onclick="post();bPreguntar = false;" name="registra" id="registra"
+        <button class="btn" type="button" onclick="post();" onchange="bPreguntar = false;" name="registra" id="registra"
             style="background-color: #536656; color: white" value="No preguntar">Registrar</button>
 </div>
         <br>

@@ -166,7 +166,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
         <label for="validationCustomUsername">Telefono</label>
         <label style= "color: darkred">*</label>
         <div class="input-group">
-          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="56 9 XXXX XXXX" required>
+          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="56 9 XXXX XXXX" onchange="bPreguntar=false" required>
           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
         </div>
       </div>
@@ -500,4 +500,25 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }    
   });
+  
+  	var bPreguntar = true;
+ 
+	window.onbeforeunload = preguntarAntesDeSalir;
+ 
+	function preguntarAntesDeSalir () {
+		var respuesta;
+ 
+		if ( bPreguntar ) {
+			respuesta = confirm ( '¿Seguro que quieres salir?' );
+ 
+			if ( respuesta ) {
+				window.onunload = function () {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+
 </script>

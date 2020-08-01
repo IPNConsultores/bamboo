@@ -849,7 +849,7 @@ function estandariza_info( $data ) {
                                             Contado</option>
                                     </select>
                                     <select class="form-control" name="cuotas" id="cuotas"
-                                        onchange="cuotas_completo();">
+                                        onchange="cuotas_completo(); bPreguntar =false">
                                         <option value="null">Selecciona Cantidad de Cuotas</option>
                                         <option value="Sin cuotas"
                                             <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>
@@ -1870,4 +1870,25 @@ function cuotas_completo() {
         document.getElementById("cuotas").style.color = "grey";
     }
 }
+
+	var bPreguntar = true;
+ 
+	window.onbeforeunload = preguntarAntesDeSalir;
+ 
+	function preguntarAntesDeSalir () {
+		var respuesta;
+ 
+		if ( bPreguntar ) {
+			respuesta = confirm ( '¿Seguro que quieres salir?' );
+ 
+			if ( respuesta ) {
+				window.onunload = function () {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+
 </script>
