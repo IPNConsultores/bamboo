@@ -163,26 +163,12 @@ alert("Tarea Creada Correctamente");
 		}
 	
 if (tarea_recurrente==true){
-	if(modificar =="update"){
-	
-	alert("Tarea Modificada Correctamente");
-}
-	else{
-alert("Tarea Creada Correctamente");
-		}
     $.redirect('/bamboo/listado_tareas_recurrentes.php', {
   'tarea': id_tarea
 }, 'GET');
 }
 else
 {
-	if(modificar =="update"){
-	
-	alert("Tarea Modificada Correctamente");
-}
-	else{
-alert("Tarea Creada Correctamente");
-		}
     $.redirect('/bamboo/listado_tareas.php', {
   'tarea': id_tarea
 }, 'GET');
