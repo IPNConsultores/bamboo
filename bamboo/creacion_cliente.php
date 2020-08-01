@@ -108,7 +108,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
 
 <!-- body code goes here "/bamboo/backend/clientes/crea_cliente.php"-->
 <div id="header">
-<?php include 'header2.php' ?>
+<?php include 'header.php' ?>
 </div>
 <div class="container">
   <p>Clientes / Creación<br>

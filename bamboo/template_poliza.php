@@ -285,7 +285,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 
 
 <div id="header">
-<?php include 'header2.php' ?>
+<?php include 'header.php' ?>
 </div>
 <div class="container">
   <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='eviar_template'>

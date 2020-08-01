@@ -52,7 +52,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include 'header2.php' ?></div>
+    <div id="header"><?php include 'header.php' ?></div>
     <div class="container">
         <p> Pólizas / Listado de pólizas <br>
         </p>

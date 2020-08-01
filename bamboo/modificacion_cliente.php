@@ -43,7 +43,7 @@ While($row=mysqli_fetch_object($resultado))
 
 <body>
     <!-- body code goes here -->
-    <div id="header"><?php include 'header2.php' ?></div>
+    <div id="header"><?php include 'header.php' ?></div>
     <div class="container">
         <p> Clientes / Modificar cliente <br>
         </p>

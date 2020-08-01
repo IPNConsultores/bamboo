@@ -178,7 +178,7 @@ echo '<style>.info_clientes { display:none;}</style>';
 
 <body>
     <div id="header">
-        <?php include 'header2.php' ?>
+        <?php include 'header.php' ?>
     </div>
     <div class="container">
         <p> Tareas / Creación <br>
