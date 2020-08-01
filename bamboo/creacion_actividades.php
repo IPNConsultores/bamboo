@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 {
                     $id_tarea= $row->id;
                     $tarea= $row->tarea;
-				$tarea = str_replace("\r\n", "\\n",$tarea);
+                    $tarea = str_replace("\r\n", "\\n",$tarea);
                     $estado = $row->estado;
                     $prioridad= $row->prioridad;
                     $fecha_vencimiento= $row->fecha_vencimiento;
@@ -386,14 +386,14 @@ echo '<style>.info_clientes { display:none;}</style>';
         <div class="form-row">
             <div class="col">
                 <label for="poliza">Tarea a Realizar</label>
-                <textarea class="form-control" name="tarea" id="tarea" rows="3"></textarea>
+                <textarea class="form-control" name="tarea" id="tarea" rows="3" onclick="bPreguntar = false;"></textarea>
             </div>
         </div>
         <br>
-
-        <button class="btn" type="button" onclick="post()"
-            style="background-color: #536656; color: white">Registrar</button>
-
+        <div  onclick="bPreguntar = false;">
+        <button class="btn" type="button" onclick="post();bPreguntar = false;" name="registra" id="registra"
+            style="background-color: #536656; color: white" value="No preguntar">Registrar</button>
+</div>
         <br>
     </div>
 
@@ -575,4 +575,25 @@ $(document).ready(function() {
     
     
 })
+	var bPreguntar = true;
+ 
+	window.onbeforeunload = preguntarAntesDeSalir;
+ 
+	function preguntarAntesDeSalir () {
+		var respuesta;
+ 
+		if ( bPreguntar ) {
+			respuesta = confirm ( '¿Seguro que quieres salir?' );
+ 
+			if ( respuesta ) {
+				window.onunload = function () {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+
+
 </script>
