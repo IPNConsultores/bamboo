@@ -184,8 +184,9 @@ echo '<style>.info_clientes { display:none;}</style>';
         <p> Tareas / Creación <br>
         </p>
         <h5 class="form-row">&nbsp;Datos Actividad</h5>
+        <div id="cuadro_cliente">
         <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
-        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Cliente
+        <label id="titulo_cliente" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Cliente
             Asociado <em>(Opcional)</em></label><br>
         <!--
             <div class="form-row">
@@ -211,7 +212,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                 </div>
             </div>
             -->
-        <div class="form-row" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
+        <div class="form-row"  style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
             <table name="tabla_clientes" id="info_clientes" class="table table-striped">
                 <tr>
                     <thead>
@@ -228,9 +229,10 @@ echo '<style>.info_clientes { display:none;}</style>';
                 </tbody>
             </table>
         </div>
-
+  </div>
         <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
-        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Póliza
+      <div id="cuadro_poliza">
+        <label id = "titulo_poliza" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos Póliza
             Asociada <em>(Opcional)</em></label>
         <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
         <!--
@@ -246,7 +248,7 @@ echo '<style>.info_clientes { display:none;}</style>';
             </div>
             -->
         <div class="form-row" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
-            <table name="tabla_polizas" class="table table-striped">
+            <table name="tabla_polizas" id="tabla_poliza" class="table table-striped">
                 <tr>
                     <thead>
                         <th>#</th>
@@ -265,7 +267,8 @@ echo '<style>.info_clientes { display:none;}</style>';
             </table>
         </div>
         <br>
-        <label style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos
+        </div>
+        <label  id = "titulo_actividad" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos
             Actividad</label>
         <!-- -->
         <div id="formulario_tareas_recurrentes">
@@ -547,5 +550,28 @@ $(document).ready(function() {
 
         }
     }
+    
+    var num_cliente ='<?php echo $num_cliente; ?>';
+    var num_poliza ='<?php echo $num_poliza; ?>';
+    
+    if(num_cliente == "0"){
+        
+       document.getElementById('cuadro_cliente').style.display = "none";
+       document.getElementById('titulo_cliente').style.display = "none";
+    }
+    
+     if(num_poliza == "0"){
+        
+       document.getElementById('cuadro_poliza').style.display = "none";
+       document.getElementById('titulo_poliza').style.display = "none";
+    }
+    
+        if(num_poliza == "0" && num_cliente == "0" ){
+        
+       document.getElementById('titulo_actividad').style.display = "none";
+     
+    }
+    
+    
 })
 </script>
