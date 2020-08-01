@@ -148,10 +148,20 @@ function estandariza_info($data)
 <body>
 <script >
 
-alert("Tarea Creada Correctamente");
+
 	
 var tarea_recurrente= '<?php echo $tarea_recurrente; ?>';
 var id_tarea= '<?php echo $id_tarea; ?>';
+var modificar = '<?php echo $modificar; ?>'
+	
+if(modificar =="update"){
+	
+	alert("Tarea Modificada Correctamente");
+}
+	else{
+alert("Tarea Creada Correctamente");
+		}
+	$modificar=='update'
 if (tarea_recurrente==true){
     $.redirect('/bamboo/listado_tareas_recurrentes.php', {
   'tarea': id_tarea
