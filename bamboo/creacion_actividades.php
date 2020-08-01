@@ -114,6 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 {
                     $id_tarea= $row->id;
                     $tarea= $row->tarea;
+				$tarea = str_replace("\r\n", "\\n",$tarea);
                     $estado = $row->estado;
                     $prioridad= $row->prioridad;
                     $fecha_vencimiento= $row->fecha_vencimiento;
