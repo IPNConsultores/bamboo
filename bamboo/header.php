@@ -4,17 +4,57 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
+
 if ( !isset( $_SESSION[ "loggedin" ] ) || $_SESSION[ "loggedin" ] !== true ) {
     setcookie('URI',$_SERVER['REQUEST_URI'],time() + (180),"/");
     setcookie('DOMINIO',$_SERVER['HTTP_HOST'],time() + (180),"/");
 header( "location: /backend/login/login.php" );
 exit;
 }
-
-function valida_rut(){
-
+if ($_COOKIE['valida_arreglo']==1){
+    //setcookie('valida_arreglo',"",time() - (10),"/");
+    $arreglo=json_decode(html_entity_decode($_COOKIE['arreglo']),true);
+    $arreglo=stripslashes($_COOKIE['arreglo']);
+$cookie_url=$cookie_id=$cookie_acordeon='-';
+    $codigo='{
+      "data": [';
+    if ($_COOKIE['historial']==null || $_COOKIE['historial']=="" || str_replace( "]}","",mb_substr($_COOKIE['historial'], 17))==""){
+        setcookie('historial',$codigo.$arreglo.']}' ,time() + (60*30),"/"); 
+        setcookie('arreglo',$codigo.$arreglo.']}' ,time() - (1),"/");
+        //echo $codigo.$arreglo.']}';
+    }
+    else
+    {
+        $historial=mb_substr($_COOKIE['historial'], 17);
+        $historial=str_replace( "]}","",$historial);
+        $historial= stripslashes ($historial);
+        $codigo.=' '.$historial.', '.$arreglo.']}';
+        setcookie('historial',$codigo,time() + (60*30),"/");
+        setcookie('arreglo',$codigo.$arreglo.']}' ,time() - (1),"/");
+        //print_r(retrocede());
+        //echo "<br>url: ->".$cookie_url."<-<br>";
+    }
 }
+else
+{
+    setcookie('historial',"",time() - (10),"/");    
+}
+function retrocede()
+{
+    $historial=json_decode($_COOKIE['historial'],true);
+    $contador=count($historial['data'])-1;
+    $cookie_url=$historial['data'][$contador]['url'];
+    $cookie_id=$historial['data'][$contador]['id'];
+    $cookie_acordeon=$historial['data'][$contador]['acordeon'];
+    unset($historial['data'][$contador]);
+    setcookie('historial',json_encode($historial),time() + (180),"/");
+   // echo $cookie_url;
+    return stripslashes(json_encode(array($cookie_url,$cookie_id,$cookie_acordeon)));
+}
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -158,13 +198,7 @@ function valida_rut(){
         </form>
     </div>
     
-    <script>
-    
-    function volveratras() {
-    window.history.back();
-    }
-    
-    </script>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!--    <script src="js/jquery-3.3.1.min.js"></script>-->
     <!-- onclick="?php $_SESSION["auxiliar"]='buscador';?" -->
@@ -173,6 +207,7 @@ function valida_rut(){
 <script src="js/popper.min.js"></script> 
 <script src="js/bootstrap-4.3.1.js"></script>
 -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -182,6 +217,8 @@ function valida_rut(){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
+    <script src="/assets/js/jquery.redirect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 </body>
 
 </html>
@@ -210,4 +247,19 @@ request.onload = function() {
     } else {}
 }
 request.send()
+function volveratras() {
+    var funcion=JSON.parse('<?php echo retrocede();?>');
+    var url=funcion[0];  
+    var id=funcion[1]; 
+    var acordeon=funcion[2]; 
+    console.log(funcion);
+   alert('url:' + url + '; id:' + id + '; acordeon:' + acordeon);
+    Cookies.set('retrocede', '1', { expires: 1, path: '/' });
+   $.redirect( url , {
+                    'id': id,
+                    'acordeon':acordeon
+                }, 'post');
+   // window.history.back();
+
+}
 </script>
