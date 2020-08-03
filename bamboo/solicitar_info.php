@@ -80,7 +80,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 
 <body>
     <div id="header">
-        <?php include 'header.php' ?>
+        <?php include 'header2.php' ?>
     </div>
     <div class="container">
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" name='enviar_template'>

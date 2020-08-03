@@ -48,7 +48,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
 <body>
 
     <!-- body code goes here -->
-    <div id="header"><?php include 'header.php' ?></div>
+    <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <p> Tareas / Listado de tareas recurrentes <br>
         </p>

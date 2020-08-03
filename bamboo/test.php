@@ -26,7 +26,7 @@
 <body>
 <!-- body code goes here -->
 <div id="header">
-<?php include 'header.php' ?>
+<?php include 'header2.php' ?>
 </div>
 <div class="container">
   <p>Póliza / Creación<br>
