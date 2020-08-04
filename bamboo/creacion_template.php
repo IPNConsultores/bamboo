@@ -2,7 +2,7 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-$template = $resultado_template = $instancia = $ramo = '';
+$template = $resultado_template = $instancia = $ramo = $template_ejemplo='';
 
 function estandariza_info( $data ) {
   $data = trim( $data );
@@ -18,7 +18,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
 $camino =  $_POST[ "tipo" ];
 
-  switch ( $_POST[ "tipo" ] ) {
+  switch ($camino) {
     case "probar":
       $template = estandariza_info( $_POST[ "template" ] );
       $instancia = $_POST[ "instancia" ];
