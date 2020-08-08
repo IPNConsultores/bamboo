@@ -1718,6 +1718,7 @@ function modifica_estado(estado) {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'fech_cancela': document.getElementById("datofecha_cancelacion").value,
+            'nro_poliza': document.getElementById("nro_poliza").value,
             'motivo_cancela': document.getElementById("datomotivo_cancela").value
             
         }, 'post');
