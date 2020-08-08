@@ -467,14 +467,17 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
-                        case 'Activo':
+                case 'Activo':
                             estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
                         case 'Renovado':
-                                estado='<span class="badge badge-dark">'+data+'</span>';
+                                estado='<span class="badge badge-warning">'+data+'</span>';
                                 break;
                         case 'Vencido':
                             estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        case 'Cancelado':
+                            estado='<span class="badge badge-dark">'+data+'</span>';
                             break;
                         default:
                             estado='<span class="badge badge-light">'+data+'</span>';
