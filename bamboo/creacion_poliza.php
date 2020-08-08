@@ -3,6 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza=$selcompania='';
+
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
@@ -18,7 +19,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional from polizas where id=" . $id_poliza;
+  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -70,6 +71,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
 	  $endoso = str_replace("\r\n", "\\n",$endoso);
     $comentario = $row->informacion_adicional;
 	  $comentario = str_replace("\r\n", "\\n",$comentario);
+	  $estado = $row ->estado;
 
   }
 
@@ -130,11 +132,13 @@ function estandariza_info( $data ) {
             <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
                 <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
                     style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
-                <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)"
+                <button class="btn btn-second" id="cancelar1" onclick="cancela()"
                     style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
                 <button class="btn btn-second" id="anular" onclick="modifica_estado(this.id)"
                     style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
             </div>
+         
+            
             <div class="form" id="pregunta_renovar" style="display:flex ;align-items: center;">
                 <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
                 <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
@@ -192,6 +196,76 @@ function estandariza_info( $data ) {
                         id="poliza_renovada" style="display:none;">
             </div>
         </div>
+        
+        <div class ="col" id="datos_cancelacion"  style = "display:none">
+            <br>
+            
+        <div class ="row" >
+            <div class="col"style="display:flex ;align-items: center;">
+                <p>Complete información de</p> &nbsp; <p style="color:red"> CANCELACIÓN</p>
+                </div>
+                </div>
+                 <div class ="row" >
+                   <div class="col-4" style="display:flex ;align-items: center;">
+                                <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
+                                
+                                <div class="md-form">
+                                    <input placeholder="Selected date" type="date" id="fecha_cancelacion" name="fecha_cancelacion"
+                                        class="form-control">
+                                </div>
+                                
+                            </div>
+                            <div class="col" style="display:flex ;align-items: center;">
+                                <label for="datomotivo_cancelacion">Motivo &nbsp;&nbsp;</label>
+                               
+                                <div class = "col-9">
+                               <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="motivo_cancela">
+                                    </div>
+                                    <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)"
+                    style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
+                                    
+                                    
+                            </div>
+            
+               
+                
+                </div>
+            </div>
+            
+             <div class ="col" id="informacion_cancelacion"  style = "display:none">
+            <br>
+            
+        <div class ="row" >
+            <div class="col"style="display:flex ;align-items: center;">
+                <p>Información</p> &nbsp; <p style="color:red"> CANCELACIÓN</p>
+                </div>
+                </div>
+                 <div class ="row" >
+                   <div class="col-4" style="display:flex ;align-items: center;">
+                                <label for="infofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
+                                
+                                <div class="md-form">
+                                    <input placeholder="Selected date" type="date" id="fecha_cancelacion" name="fecha_cancelacion"
+                                        class="form-control">
+                                </div>
+                                
+                            </div>
+                            <div class="col" style="display:flex ;align-items: center;">
+                                <label for="motivo">Motivo &nbsp;&nbsp;</label>
+                               
+                                <div class = "col-9">
+                               <input  type="text" id="infomotivo_cancela" class="form-control" name="motivo_cancela">
+                                    </div>
+                                   
+                                    
+                                    
+                            </div>
+            
+               
+                
+                </div>
+            </div>
+        
         <br>
         <br>
         <div class="accordion" id="accordionExample">
@@ -1523,11 +1597,14 @@ function habilitaedicion1() {
     document.getElementById("rutprop").readonly = true;
     document.getElementById("rutaseg").readonly = true;
     document.getElementById("nombre_prop").disabled = true;
+    document.getElementById("nombre_prop").readonly = true;
     document.getElementById("nombre_seg").disabled = true;
     document.getElementById("edicion1").style.display = "none";
     document.getElementById("anular").style.display = "none";
-    document.getElementById("cancelar").style.display = "none";
+    document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
+      document.getElementById("datos_cancelacion").style.display = "none";
+      bPreguntar = true;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
     var orgn = '<?php echo $camino; ?>';
@@ -1537,6 +1614,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            if ('<?php echo $estado; ?>' == "cancelado") {
+                document.getElementById("informacion_cancelacion").style.display = -"block";
+            
+            }
+            
+            
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "flex";
             document.getElementById("pregunta_renovar").style.display = "none";
@@ -1637,6 +1720,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("moneda5").innerHTML = moneda;
             document.getElementById("moneda7").innerHTML = moneda;
             break;
+            bPreguntar = false;
         }
         case 'renovar': {
             var rut_prop = '<?php echo $rut_completo_prop; ?>';
@@ -1736,6 +1820,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("moneda5").innerHTML = moneda;
     document.getElementById("moneda7").innerHTML = moneda;
 });
+
+function cancela () {
+    
+    
+      document.getElementById("datos_cancelacion").style.display = "block";
+}
+
 function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
@@ -1871,8 +1962,11 @@ function cuotas_completo() {
     }
 }
 
+var orgn = '<?php echo $camino; ?>';
 	var bPreguntar = true;
- 
+ if (org = "modificar") {
+     bPreguntar = false;
+ }
 	window.onbeforeunload = preguntarAntesDeSalir;
  
 	function preguntarAntesDeSalir () {
