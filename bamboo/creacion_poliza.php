@@ -1783,6 +1783,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("id_poliza_renovada").value = '<?php echo $id_poliza; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
+			document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
+			document.getElementById("infofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
+			document.getElementById("infomotivo_cancela").value = '<?php echo $motiv_canela; ?>';
             var dias_vig_pol = '<?php echo $dif_dias; ?>';
             if (dias_vig_pol == '365' || dias_vig_pol == '366') {
                 document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
