@@ -226,8 +226,7 @@ function estandariza_info( $data ) {
                                 <div class = "col-9">
                                <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="motivo_cancela">
                                     </div>
-                                    <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)"
-                    style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
+                                    <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
                                     
                                     
                             </div>
