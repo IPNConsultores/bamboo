@@ -1614,7 +1614,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
-            if ('<?php echo $estado; ?>' == "cancelado") {
+            if ('<?php echo $estado; ?>' == "Cancelado") {
                 document.getElementById("informacion_cancelacion").style.display = -"block";
             
             }
