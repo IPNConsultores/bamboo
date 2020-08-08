@@ -55,13 +55,13 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
     case 'elimina':
         $query="delete from polizas where id=".$_POST["id_poliza"];
-        mysqli_query($link, $query);
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
+       mysqli_query($link, $query);
+       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
     break;
     case 'cancelar':
-        $query= "update polizas set estado='Cancelado' where id=".$_POST["id_poliza"];
+        $query= "update polizas set estado='Cancelado', fech_cancela=".$_POST["fech_cancela"].",motivo_cancela =".$_POST["motivo_cancela"]." where id=".$_POST["id_poliza"];
         mysqli_query($link, $query);
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
+       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
         break;
     case 'anular':
         $query= "update polizas set estado='Anulado' where id=".$_POST["id_poliza"];
@@ -79,6 +79,7 @@ switch ($_POST["accion"]) {
         mysqli_query($link, $query);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
          break;
+         echo $query;
 }
 
 
@@ -102,12 +103,14 @@ function cambia_puntos_por_coma($data){
 </script>
 </head>
 <body>
+    
+   <?php echo $query; ?> 
 <script >
-alert("Póliza Modificada Correctamente");
-var nro_poliza= '<?php echo $nro_poliza; ?>';
-  $.redirect('/bamboo/listado_polizas.php', {
-  'busqueda': nro_poliza
-}, 'post');
+//alert("Póliza Modificada Correctamente");
+//var nro_poliza= '<?php echo $nro_poliza; ?>';
+//  $.redirect('/bamboo/listado_polizas.php', {
+//  'busqueda': nro_poliza
+//}, 'post');
 
 </script>
 </body>

@@ -1671,7 +1671,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
+            document.getElementById("formulario").action = "/bamboo/TEST_CESAR.php";
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
@@ -1857,9 +1857,12 @@ function cancela () {
 function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
-        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+        $.redirect('/bamboo/TEST_CESAR.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
+            'fech_cancela': document.getElementById("datofecha_cancelacion").value,
+            'motivo_cancela': document.getElementById("datomotivo_cancela").value
+            
         }, 'post');
     }
 }
