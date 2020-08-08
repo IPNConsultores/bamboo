@@ -135,11 +135,11 @@ function estandariza_info( $data ) {
 <br>
 <div class="form-check form-check-inline">
 <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
-  <button class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
+  <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
                     style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
-  <button class="btn btn-second" id="cancelar1" onclick="cancela()"
+  <button ctype="button" lass="btn btn-second" id="cancelar1" onclick="cancela()"
                     style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
-  <button class="btn btn-second" id="anular" onclick="modifica_estado(this.id)"
+  <button type="button" class="btn btn-second" id="anular" onclick="modifica_estado(this.id)"
                     style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
 </div>
 <div class="form" id="pregunta_renovar" style="display:flex ;align-items: center;">
@@ -150,7 +150,7 @@ function estandariza_info( $data ) {
   <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
                     onclick="checkRadio(this.name)">
   <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-  <button class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
+  <button type="button" class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
                     style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
   <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text"
                     aria-hidden="true">
@@ -220,7 +220,7 @@ function estandariza_info( $data ) {
         <div class = "col-9">
           <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="motivo_cancela">
         </div>
-        <button class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
+        <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
       </div>
     </div>
   </div>
@@ -289,7 +289,7 @@ function estandariza_info( $data ) {
               <div style="color:red; visibility: hidden" id="validador10">No puedes dejar este campo
                 en blanco</div>
             </div>
-            <button class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
+            <button type="button" class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
                                 onclick="origen_busqueda(this.id)" data-target="#modal_cliente"
                                 style="background-color: #536656; color: white; margin-top: 30px;margin-left: 5px; height: 40px">Buscar
             RUT</button>
@@ -319,8 +319,7 @@ function estandariza_info( $data ) {
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
@@ -371,7 +370,7 @@ function estandariza_info( $data ) {
               <div style="color:red; visibility: hidden" id="validador11">No puedes dejar este campo
                 en blanco</div>
             </div>
-            <button class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
+            <button type="button" class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
                                 data-toggle="modal" data-target="#modal_cliente"
                                 style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; visibility:hidden">Buscar
             RUT</button>
@@ -1530,7 +1529,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bamboo/index.php";
+            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
@@ -1715,7 +1714,7 @@ function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
       //        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
-        $.redirect('/bamboo/test4.php', {
+        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'fech_cancela': document.getElementById("datofecha_cancelacion").value,
