@@ -3,7 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza=$selcompania='';
-$camino = "modificar";
+
 
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
@@ -17,11 +17,11 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $camino = 'modificar';
   }
   $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
-  $id_poliza = 123;
+
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado from polizas where id=" . $id_poliza;
+  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -73,7 +73,10 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
 	  $endoso = str_replace("\r\n", "\\n",$endoso);
     $comentario = $row->informacion_adicional;
 	  $comentario = str_replace("\r\n", "\\n",$comentario);
-	  $estado = $row ->estado;
+	  $estado = $row->estado;
+	  $venc_gtia = $row->venc_gtia;
+	  $fech_cancela = $row->fech_cancela;
+	  $motivo_cancela = $row->motivo_cancela;
 
   }
 
@@ -516,7 +519,7 @@ function estandariza_info( $data ) {
                                 <label for="sel1">Ramo:&nbsp;</label>
                                 <label style="color: darkred">*</label>
                                 <select class="form-control" name="ramo" id="ramo"
-                                    onChange="cambia_deducible();ramo_completo();">
+                                    onChange="cambia_deducible();ramo_completo();vencimientogarantia()">
                                     <option value="null">Selecciona un ramo</option>
                                     <option value="AC - Accidentes Personales"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Accidentes Personales") echo "selected" ?>>
@@ -672,6 +675,7 @@ function estandariza_info( $data ) {
                         <br>
                         <label for="materia"><b>Materia</b></label>
                         <br>
+                        
                         <div class="form-row">
                             <div class="col">
                                 <label for="poliza">Materia Asegurada</label>
@@ -692,7 +696,20 @@ function estandariza_info( $data ) {
                                     ubicación</div>
                             </div>
                         </div>
+                        
                         <br>
+                        <div class="form-row" id="vencimiento_gtia" style = "display:none">
+                         <div class="col-3" 
+                                <label for="venc_garantia">Vencimiento Garantía</label>
+                                   <div class="md-form">
+                                    <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia"
+                                        class="form-control" >
+                                        <br>
+                                        <br>
+                                </div>
+                              </div> 
+                              
+                            </div>
                         <label for="materia"><b>Deducible, Primas y Montos</b></label>
                         <br>
                         <div class="form-row; form-inline">
@@ -1660,6 +1677,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("boton_submit").childNodes[0].nodeValue = "Guardar cambios";
             document.getElementById("boton_submit").style.display = "none";
+            document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
+			document.getElementById("infofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
+			document.getElementById("infomotivo_cancela").value = '<?php echo $motiv_canela; ?>';
+            
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
             document.getElementById("botones_edicion").style.display = "flex"
@@ -1964,6 +1985,24 @@ function cuotas_completo() {
     }
 }
 
+function vencimientogarantia(){
+    
+    
+
+  var ramo = document.getElementById("ramo").value;
+            if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
+                "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
+                    
+                    document.getElementById("vencimiento_gtia").style.display ="block";
+                }
+                
+                else {
+                    
+                     document.getElementById("vencimiento_gtia").style.display ="none";
+                }
+    
+    
+}
 var orgn = '<?php echo $camino; ?>';
 	var bPreguntar = true;
  if (org = "modificar") {
