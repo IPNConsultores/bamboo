@@ -3,6 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza=$selcompania='';
+$camino = "modificar";
 
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
@@ -16,6 +17,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ] ) =
     $camino = 'modificar';
   }
   $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
+  $id_poliza = 123;
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
@@ -202,7 +204,7 @@ function estandariza_info( $data ) {
             
         <div class ="row" >
             <div class="col"style="display:flex ;align-items: center;">
-                <p>Complete información de</p> &nbsp; <p style="color:red"> CANCELACIÓN</p>
+                <p><b>Complete información de</p> &nbsp; <p style="color:red"> CANCELACIÓN</b></p>
                 </div>
                 </div>
                  <div class ="row" >
@@ -237,7 +239,7 @@ function estandariza_info( $data ) {
             
         <div class ="row" >
             <div class="col"style="display:flex ;align-items: center;">
-                <p>Información</p> &nbsp; <p style="color:red"> CANCELACIÓN</p>
+                <p><b>Información</p> &nbsp; <p style="color:red"> CANCELACIÓN</b></p>
                 </div>
                 </div>
                  <div class ="row" >
@@ -1615,7 +1617,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("radio2_no").checked = false;
             }
             if ('<?php echo $estado; ?>' == "Cancelado") {
-                document.getElementById("informacion_cancelacion").style.display = -"block";
+                document.getElementById("informacion_cancelacion").style.display = "block";
             
             }
             
