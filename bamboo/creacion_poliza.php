@@ -1530,7 +1530,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza";
+            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
