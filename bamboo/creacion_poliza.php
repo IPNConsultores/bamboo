@@ -613,12 +613,11 @@ function estandariza_info( $data ) {
             </div>
           </div>
           <br>
-          <div class="form-row" id="vencimiento_gtia" style = "display:none"><div class="col-3" 
-                                
-            <label for="venc_garantia">Vencimiento Garantía</label>
+          <div class="form-row" id="vencimiento_gtia" style = "display:none">
+          <div class="col-3">             
+            <label for="venc_garantia">Vencimiento Garantía del automóvil</label>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia"
-                                        class="form-control" >
+              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" >
               <br>
               <br>
             </div>
@@ -629,14 +628,10 @@ function estandariza_info( $data ) {
         <div class="form-row; form-inline">
           <label for="moneda_poliza">Moneda Prima</label>
           <div class="col-1">
-            <select class="form-control" id="moneda_poliza" name="moneda_poliza"
-                                    onChange="cambio_moneda()">
-              <option value="UF"
-                                        <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
-              <option value="USD"
-                                        <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
-              <option value="CLP"
-                                        <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
+            <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange="cambio_moneda()">
+              <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
+              <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
+              <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
             </select>
           </div>
         </div>
@@ -657,37 +652,27 @@ function estandariza_info( $data ) {
               <select class="form-control" id="deducible_veh_1" name="deducible_veh_1"
                                         onChange="pobladeducible()">
                 <option value="null" ?>Selecciona el deducible</option>
-                <option value="Sin deducible"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>
-                <option value="UF 3"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 3") echo "selected" ?>>UF 3</option>
-                <option value="UF 5"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 5") echo "selected" ?>>UF 5</option>
-                <option value="UF 10"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 10") echo "selected" ?>>UF 10</option>
-                <option value="UF 20"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 20") echo "selected" ?>>UF 20</option>
+                <option value="Sin deducible" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>
+                <option value="UF 3" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 3") echo "selected" ?>>UF 3</option>
+                <option value="UF 5" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 5") echo "selected" ?>>UF 5</option>
+                <option value="UF 10" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 10") echo "selected" ?>>UF 10</option>
+                <option value="UF 20" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 20") echo "selected" ?>>UF 20</option>
               </select>
             </div>
             <div class="form-inline" id="deducible_viaje" style="display:none">
-              <input type="text" class="form-control" name="deducible_viaje_1"
-                                        id="deducible_viaje_1" value="No Aplica" onChange="pobladeducible()">
+              <input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value="No Aplica" onChange="pobladeducible()">
             </div>
             <div class="form-inline" id="deducible_inc" style="display:none">
-              <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1"
-                                        value="Varios" onChange="pobladeducible()">
+              <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value="Varios" onChange="pobladeducible()">
             </div>
             <div class="form" id="deducible_rc" style="display: none; align-items: center;">
               <div class="col-3">
-                <input type="text" class="form-control" name="deducible_porcentaje"
-                                            id="deducible_porcentaje" placeholder="%">
+                <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder="%">
               </div>
               <label>% Pérdida de</label>
               <div class="col-md-5" style="display: flex; align-items: center;">
-                <div class="input-group-prepend"><span class="input-group-text"
-                                                id="moneda7">UF</span></div>
-                <input type="text" class="form-control" name="deducible_valor"
-                                            id="deducible_valor" placeholder="Valor" onChange="pobladeducible()">
+                <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
+                <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder="Valor" onChange="pobladeducible()">
               </div>
             </div>
           </div>
@@ -1722,16 +1707,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("moneda7").innerHTML = moneda;
 });
 
-function cancela () {
-    
-    
+function cancela() {
       document.getElementById("datos_cancelacion").style.display = "block";
 }
 
 function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
-        $.redirect('/bamboo/TEST_CESAR.php', {
+        $.redirect('/bamboo/backend/polizas/modifica_poliza', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'fech_cancela': document.getElementById("datofecha_cancelacion").value,
@@ -1867,22 +1850,14 @@ function cuotas_completo() {
 }
 
 function vencimientogarantia(){
-    
-    
-
   var ramo = document.getElementById("ramo").value;
             if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
                 "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
-                    
-                    document.getElementById("vencimiento_gtia").style.display ="block";
+                document.getElementById("vencimiento_gtia").style.display ="block";
                 }
-                
-                else {
-                    
-                     document.getElementById("vencimiento_gtia").style.display ="none";
+                else {      
+              document.getElementById("vencimiento_gtia").style.display ="none";
                 }
-    
-    
 }
 var orgn = '<?php echo $camino; ?>';
 	var bPreguntar = true;
