@@ -75,7 +75,7 @@ switch ($_POST["accion"]) {
         prima_bruta_anual='".$prima_bruta."',  monto_asegurado='".$monto_aseg."',  numero_propuesta='".$nro_propuesta."',  fecha_envio_propuesta='".$fechaprop."',  
         moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_comision='".$porcentaje_comsion."',  comision_bruta='".$comisionbruta."',
         comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', 
-        vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."', venc_gtia ='".$venc_gtia."',fech_cancela = '".$fech_cancela."',motivo_cancela = '".$motivo_cancela."',  WHERE id=".$id_poliza.";";
+        vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."', venc_gtia ='".$venc_gtia."',fech_cancela = '".$fech_cancela."',motivo_cancela = '".$motivo_cancela."'  WHERE id=".$id_poliza.";";
         mysqli_query($link, $query);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
          break;
