@@ -210,7 +210,7 @@ function estandariza_info( $data ) {
                                 <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
                                 
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" id="fecha_cancelacion" name="fecha_cancelacion"
+                                    <input placeholder="Selected date" type="date" id="datofecha_cancelacion" name="datofecha_cancelacion"
                                         class="form-control">
                                 </div>
                                 
@@ -245,7 +245,7 @@ function estandariza_info( $data ) {
                                 <label for="infofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
                                 
                                 <div class="md-form">
-                                    <input placeholder="Selected date" type="date" id="fecha_cancelacion" name="fecha_cancelacion"
+                                    <input placeholder="Selected date" type="date" id="infofecha_cancelacion" name="infofecha_cancelacion"
                                         class="form-control">
                                 </div>
                                 
