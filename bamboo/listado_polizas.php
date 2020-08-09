@@ -140,6 +140,7 @@ $(document).ready(function() {
     table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
+        "fixedHeader": true,
         "searchPanes":{
             "columns":[2,3,13,14],
         },
@@ -324,24 +325,33 @@ $(document).ready(function() {
                 "data": "informacion_adicional",
                 title: "Información adicional"
             }
+            ,
+            {
+                "data": "venc_gtia",
+                title: "Fecha Vencimiento Garantía"
+            }
+            ,
+            {
+                "data": "fech_cancela",
+                title: "Fecha Cancelación"
+            }
+            ,
+            {
+                "data": "motivo_cancela",
+                title: "Motivo Cancelación"
+            }
 
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46],
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41],
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46,44],
                 "searchable": false
-            },
-            {
-                "searchPanes": {
-                    "preSelect":['Activo'],
-                },
-                "targets":[1],
             },
             {
         targets: 1,
@@ -367,7 +377,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6],
+        targets: [5,6,45,44],
          render: function(data, type, full)
          {
              if (type == 'display')
@@ -445,7 +455,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
                 }
             },
             {
@@ -453,7 +463,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
                 }
             }
         ]
@@ -463,6 +473,17 @@ $(document).ready(function() {
 
 function format(d) {
     // `d` is the original data object for the row
+    var ext_cancelado='';
+    if (d.estado=='Cancelado'){
+        ext_cancelado='<tr>' +
+        '<td>Fecha CANCELACIÓN:</td>' +
+        '<td>' + d.fech_cancela + '</td>' +
+        '</tr>'+
+        '<tr>' +
+        '<td>motivo CANCELACIÓN:</td>' +
+        '<td>' + d.motivo_cancela + '</td>' +
+        '</tr>';
+    }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Deducible:</td>' +
@@ -476,6 +497,7 @@ function format(d) {
         '<td>Prima exenta:</td>' +
         '<td>' + d.prima_exenta + '</td>' +
         '</tr>' +
+        ext_cancelado + 
         '<tr>' +
         '<td>Prima bruta anual:</td>' +
         '<td>' + d.prima_bruta_anual + '</td>' +
