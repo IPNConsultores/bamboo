@@ -140,7 +140,6 @@ $(document).ready(function() {
     table = $('#listado_polizas').DataTable({
         "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
-        "fixedHeader": true,
         "searchPanes":{
             "columns":[2,3,13,14],
         },
@@ -502,8 +501,6 @@ function format(d) {
         '<td>Prima bruta anual:</td>' +
         '<td>' + d.prima_bruta_anual + '</td>' +
         '</tr>' +
-        '</tr>' +
-
         '<tr>' +
         '<td>Acciones</td>' +
         '<td><button title="Buscar información asociada" type="button" id=' + d.id_poliza +
