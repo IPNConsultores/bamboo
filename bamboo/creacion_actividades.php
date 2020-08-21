@@ -465,6 +465,7 @@ function post() {
             coma = ',';
         }
     }
+    
     arreglo += ']';
     ///bamboo/backend/actividades/crea_tarea.php
     $.redirect('/bamboo/test4.php', {
