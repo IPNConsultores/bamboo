@@ -455,11 +455,13 @@ function post() {
             arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
             coma = ',';
         if (num == 0) {
-            num = 1;
-            
+            num = 1;  
         }
     }
     var polizas = document.getElementsByName('check_poliza');
+    if (num=1 && coma=','){
+        coma2=','
+    }
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
         {
