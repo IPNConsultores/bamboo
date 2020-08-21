@@ -452,25 +452,25 @@ function post() {
     var clientes = document.getElementsByName('check_cliente');
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
-
             arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
+            coma = ',';
         if (num == 0) {
             num = 1;
-            coma = ',';
+            
         }
     }
     var polizas = document.getElementsByName('check_poliza');
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
             arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
+            coma = ',';
         if (num == 0) {
             num = 1;
-            coma = ',';
         }
     }
     arreglo += ']';
     ///bamboo/backend/actividades/crea_tarea.php
-    $.redirect('/bamboo/test4.php', {
+    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
