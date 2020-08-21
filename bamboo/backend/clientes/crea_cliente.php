@@ -28,7 +28,7 @@ mysqli_query($link, $query);
     $nombrecontact = $_POST['nombrecontact'][$key];
     $telefonocontact = $_POST['telefonocontact'][$key];
     $emailcontact = $_POST['emailcontact'][$key];
-    $query_contactos="INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
+    $query_contactos="INSERT INTO clientes_contactos (id_cliente, nombre, telefono, correo) select id , '".$nombrecontact."', '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
     mysqli_query($link, $query_contactos);
     mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega contactos', '".str_replace("'","**",$query_contactos)."','contacto',null, '".$_SERVER['PHP_SELF']."')");
    
