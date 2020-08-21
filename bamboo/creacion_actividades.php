@@ -448,7 +448,7 @@ function post() {
     //console.log("tarea : "+document.getElementById('tarea').value);
     var arreglo = '[';
     var num = 0;
-    var coma = '';
+    var coma =coma2= '';
     var clientes = document.getElementsByName('check_cliente');
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
@@ -462,8 +462,10 @@ function post() {
     var polizas = document.getElementsByName('check_poliza');
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
-            arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
-            coma = ',';
+        {
+            arreglo += coma2 + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
+            coma2 = ',';
+        }
         if (num == 0) {
             num = 1;
         }
