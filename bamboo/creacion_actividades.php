@@ -465,10 +465,10 @@ function post() {
             coma = ',';
         }
     }
-    
+
     arreglo += ']';
     ///bamboo/backend/actividades/crea_tarea.php
-    $.redirect('/bamboo/test4.php', {
+    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
         'prioridad': document.getElementById('prioridad').value,
         'fechavencimiento': document.getElementById('fechavencimiento').value,
         'tarea': document.getElementById('tarea').value,
