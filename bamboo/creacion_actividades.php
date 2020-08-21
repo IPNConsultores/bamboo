@@ -448,25 +448,21 @@ function post() {
     //console.log("tarea : "+document.getElementById('tarea').value);
     var arreglo = '[';
     var num = 0;
-    var coma =coma2= '';
+    var coma = '';
     var clientes = document.getElementsByName('check_cliente');
     for (var i = 0; i < clientes.length; i++) {
         if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
+        {
             arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
             coma = ',';
-        if (num == 0) {
-            num = 1;  
         }
     }
     var polizas = document.getElementsByName('check_poliza');
-    if (num==1 && coma==','){
-        coma2=','
-    }
     for (var j = 0; j < polizas.length; j++) {
         if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
         {
-            arreglo += coma2 + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
-            coma2 = ',';
+            arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
+            coma = ',';
         }
     }
     arreglo += ']';
