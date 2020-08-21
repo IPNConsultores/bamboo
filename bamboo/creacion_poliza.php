@@ -5,8 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino = $nro_poliza = $selcompania = '';
 
 
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST"
-  and isset( $_POST[ "id_poliza" ] ) == true ) {
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
@@ -1484,6 +1483,8 @@ function habilitaedicion1() {
       bPreguntar = true;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
+    var consulta= '<?php if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
+    if (consulta=='True'){
     var orgn = '<?php echo $camino; ?>';
     switch (orgn) {
         case 'modificar': {
@@ -1704,6 +1705,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("moneda4").innerHTML = moneda;
     document.getElementById("moneda5").innerHTML = moneda;
     document.getElementById("moneda7").innerHTML = moneda;
+}
 });
 
 function cancela() {
