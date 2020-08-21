@@ -14,7 +14,8 @@ function estandariza_info($data) {
 require_once "/home/gestio10/public_html/backend/config.php";
 $num_cliente=$num_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
- $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza='';
+ $tarea=$fecha_vencimiento=$recurrente=$tarea_con_fecha_fin=$fecha_fin='';
+ $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza=$dia_recordatorio=$prioridad=$tipo_tarea='';
 $aux_modificar=$id_tarea='';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 // Viene desde cliente
@@ -32,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $telefono=$row->telefono;
                 $correo=$row->correo;
                 $num_cliente=$num_cliente+1;
-                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(str_replace("-", "", $rut))-1));
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }
             //poliza
@@ -84,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $telefono=$row->telefono;
                 $correo=$row->correo;
                 $num_cliente=$num_cliente+1;
-                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(substr(str_replace("-", "", $rut)))-1));    
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(str_replace("-", "", $rut))-1));
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente"></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }       
         mysqli_close($link);
@@ -292,37 +293,37 @@ echo '<style>.info_clientes { display:none;}</style>';
                             <label> Repetir todos los días</label>
                             <div class="col-1">
                                 <select class="form-control" name="dia_mes" id="dia_mes">
-                                    <option <?php if ($dia_recordatorio=="1" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>1</option>
-                                    <option <?php if ($dia_recordatorio=="2" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>2</option>
-                                    <option <?php if ($dia_recordatorio=="3" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>3</option>
-                                    <option <?php if ($dia_recordatorio=="4" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>4</option>
-                                    <option <?php if ($dia_recordatorio=="5" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>5</option>
-                                    <option <?php if ($dia_recordatorio=="6" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>6</option>
-                                    <option <?php if ($dia_recordatorio=="7" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>7</option>
-                                    <option <?php if ($dia_recordatorio=="8" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>8</option>
-                                    <option <?php if ($dia_recordatorio=="9" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>9</option>
-                                    <option <?php if ($dia_recordatorio=="10" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>10</option>
-                                    <option <?php if ($dia_recordatorio=="11" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>11</option>
-                                    <option <?php if ($dia_recordatorio=="12" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>12</option>
-                                    <option <?php if ($dia_recordatorio=="13" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>13</option>
-                                    <option <?php if ($dia_recordatorio=="14" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>14</option>
-                                    <option <?php if ($dia_recordatorio=="15" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>15</option>
-                                    <option <?php if ($dia_recordatorio=="16" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>16</option>
-                                    <option <?php if ($dia_recordatorio=="17" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>17</option>
-                                    <option <?php if ($dia_recordatorio=="18" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>18</option>
-                                    <option <?php if ($dia_recordatorio=="19" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>19</option>
-                                    <option <?php if ($dia_recordatorio=="20" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>20</option>
-                                    <option <?php if ($dia_recordatorio=="21" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>21</option>
-                                    <option <?php if ($dia_recordatorio=="22" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>22</option>
-                                    <option <?php if ($dia_recordatorio=="23" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>23</option>
-                                    <option <?php if ($dia_recordatorio=="24" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>24</option>
-                                    <option <?php if ($dia_recordatorio=="25" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>25</option>
-                                    <option <?php if ($dia_recordatorio=="26" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>26</option>
-                                    <option <?php if ($dia_recordatorio=="27" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>27</option>
-                                    <option <?php if ($dia_recordatorio=="28" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>28</option>
-                                    <option <?php if ($dia_recordatorio=="29" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>29</option>
-                                    <option <?php if ($dia_recordatorio=="30" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>30</option>
-                                    <option <?php if ($dia_recordatorio=="31" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>31</option>
+                                    <option <?php if ($dia_recordatorio=="1" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>1</option>
+                                    <option <?php if ($dia_recordatorio=="2" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>2</option>
+                                    <option <?php if ($dia_recordatorio=="3" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>3</option>
+                                    <option <?php if ($dia_recordatorio=="4" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>4</option>
+                                    <option <?php if ($dia_recordatorio=="5" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>5</option>
+                                    <option <?php if ($dia_recordatorio=="6" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>6</option>
+                                    <option <?php if ($dia_recordatorio=="7" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>7</option>
+                                    <option <?php if ($dia_recordatorio=="8" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>8</option>
+                                    <option <?php if ($dia_recordatorio=="9" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>9</option>
+                                    <option <?php if ($dia_recordatorio=="10" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>10</option>
+                                    <option <?php if ($dia_recordatorio=="11" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>11</option>
+                                    <option <?php if ($dia_recordatorio=="12" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>12</option>
+                                    <option <?php if ($dia_recordatorio=="13" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>13</option>
+                                    <option <?php if ($dia_recordatorio=="14" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>14</option>
+                                    <option <?php if ($dia_recordatorio=="15" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>15</option>
+                                    <option <?php if ($dia_recordatorio=="16" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>16</option>
+                                    <option <?php if ($dia_recordatorio=="17" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>17</option>
+                                    <option <?php if ($dia_recordatorio=="18" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>18</option>
+                                    <option <?php if ($dia_recordatorio=="19" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>19</option>
+                                    <option <?php if ($dia_recordatorio=="20" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>20</option>
+                                    <option <?php if ($dia_recordatorio=="21" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>21</option>
+                                    <option <?php if ($dia_recordatorio=="22" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>22</option>
+                                    <option <?php if ($dia_recordatorio=="23" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>23</option>
+                                    <option <?php if ($dia_recordatorio=="24" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>24</option>
+                                    <option <?php if ($dia_recordatorio=="25" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>25</option>
+                                    <option <?php if ($dia_recordatorio=="26" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>26</option>
+                                    <option <?php if ($dia_recordatorio=="27" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>27</option>
+                                    <option <?php if ($dia_recordatorio=="28" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>28</option>
+                                    <option <?php if ($dia_recordatorio=="29" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>29</option>
+                                    <option <?php if ($dia_recordatorio=="30" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>30</option>
+                                    <option <?php if ($dia_recordatorio=="31" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>31</option>
                                 </select>
                             </div>
 
@@ -363,13 +364,13 @@ echo '<style>.info_clientes { display:none;}</style>';
                 <label for="sel1">Prioridad:&nbsp;</label>
                 <select class="form-control" name="prioridad" id="prioridad">
                     <option style="color:darkred" value="0.- Urgente"
-                        <?php if ($prioridad=="0.- Urgente" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Urgente</option>
-                    <option style="color:red" value="1.- Alto" <?php if ($prioridad=="1.- Alto" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Alto
+                        <?php if ($prioridad=="0.- Urgente" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Urgente</option>
+                    <option style="color:red" value="1.- Alto" <?php if ($prioridad=="1.- Alto" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Alto
                     </option>
                     <option style="color:orange" value="2.- Medio"
-                        <?php if ($prioridad=="2.- Medio" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Medio</option>
+                        <?php if ($prioridad=="2.- Medio" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Medio</option>
                     <option style="color:darkgreen" value="3.- Bajo"
-                        <?php if ($prioridad=="3.- Bajo" && !empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Bajo</option>
+                        <?php if ($prioridad=="3.- Bajo" && $_SERVER["REQUEST_METHOD"] == "POST") echo "selected" ?>>Bajo</option>
                 </select>
             </div>
             <div class="col-md-4 mb-3" id="panel_fecha">
@@ -523,7 +524,7 @@ function checkTipoTarea(tipoTarea) {
 }
 
 $(document).ready(function() {
-    var consulta='<?php if (!empty(trim($_POST["id_tarea"])) && $_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
+    var consulta='<?php if ($_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
     if (consulta=='True'){
     var tipo_tarea = '<?php echo $tipo_tarea; ?>';
     console.log(tipo_tarea);

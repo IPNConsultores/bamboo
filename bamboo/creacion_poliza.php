@@ -829,12 +829,9 @@ function estandariza_info( $data ) {
               <select class="form-control" name="cuotas" id="cuotas"
                                         onchange="cuotas_completo(); bPreguntar =false">
                 <option value="null">Selecciona Cantidad de Cuotas</option>
-                <option value="Sin cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
-                <option value="2 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
-                <option value="3 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
+                <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
+                <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
+                <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
                 <option value="4 Cuotas"
                                             <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
                 <option value="5 Cuotas"
@@ -1483,7 +1480,7 @@ function habilitaedicion1() {
       bPreguntar = true;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
-    var consulta= '<?php if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
+    var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
     if (consulta=='True'){
     var orgn = '<?php echo $camino; ?>';
     switch (orgn) {
