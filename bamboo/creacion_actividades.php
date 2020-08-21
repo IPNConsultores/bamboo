@@ -459,7 +459,7 @@ function post() {
         }
     }
     var polizas = document.getElementsByName('check_poliza');
-    if (num=1 && coma=','){
+    if (num==1 && coma==','){
         coma2=','
     }
     for (var j = 0; j < polizas.length; j++) {
@@ -467,9 +467,6 @@ function post() {
         {
             arreglo += coma2 + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
             coma2 = ',';
-        }
-        if (num == 0) {
-            num = 1;
         }
     }
     arreglo += ']';
