@@ -838,7 +838,7 @@ function estandariza_info( $data ) {
                                             <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
               </select>
               <select class="form-control" name="cuotas" id="cuotas"
-                                        onchange="cuotas_completo(); bPreguntar =false">
+                                        onchange="cuotas_completo();">
                 <option value="null">Selecciona Cantidad de Cuotas</option>
                 <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
                 <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
@@ -967,7 +967,7 @@ function estandariza_info( $data ) {
     <input name="nro_poliza_renovada" id="nro_poliza_renovada">
   </div>
   <button class="btn" type="submit" style="background-color: #536656; color: white"
-            id='boton_submit'>Registrar</button>
+            id='boton_submit' onclick = "bPreguntar = false">Registrar</button>
 </form>
 <br>
 <br>
@@ -1491,6 +1491,29 @@ function habilitaedicion1() {
       bPreguntar = false;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
+    var bPreguntar = true;
+    
+
+	//window.onbeforeunload = preguntarAntesDeSalir;
+ 
+	function preguntarAntesDeSalir () {
+	    
+	
+		var respuesta;
+ 
+		if ( bPreguntar ) {
+			respuesta = confirm ( '¿Seguro que quieres salir?' );
+ 
+			if ( respuesta ) {
+				window.onunload = function () {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+	
     var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
     if (consulta=='True'){
     var orgn = '<?php echo $camino; ?>';
@@ -1900,33 +1923,11 @@ function vencimiento_garantía(){
    else  if (document.getElementById("pregunta_gtia").checked == false){
         
          document.getElementById("venc_gtia").readOnly = true;
-	    document.getElementById("venc_gtia").value = '';
-         
+         document.getElementById("venc_gtia").value = '';
     }
 }
 
 
-var orgn = '<?php echo $camino; ?>';
-	var bPreguntar = true;
- if (org = "modificar") {
-     bPreguntar = false;
- }
-	// window.onbeforeunload = preguntarAntesDeSalir;
- 
-	function preguntarAntesDeSalir () {
-		var respuesta;
- 
-		if ( bPreguntar ) {
-			respuesta = confirm ( '¿Seguro que quieres salir?' );
- 
-			if ( respuesta ) {
-				window.onunload = function () {
-					return true;
-				}
-			} else {
-				return false;
-			}
-		}
-	}
+
 
 </script>
