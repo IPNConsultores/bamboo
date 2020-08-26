@@ -72,8 +72,8 @@ switch ($_POST["accion"]) {
     default:
     //edición de campos
         $query="UPDATE polizas SET numero_boleta='".$boleta."', comision_negativa='".$comisionneg."', boleta_negativa='".$boletaneg."', depositado_fecha='".$fechadeposito."', moneda_valor_cuota='".$moenda_cuota."',  rut_proponente='".$rut_prop."',  dv_proponente='".$dv_prop."',  rut_asegurado='".$rut_aseg."',  dv_asegurado='".$dv_aseg."',  compania='".$selcompania."', ramo='".$ramo."',  vigencia_inicial='".$fechainicio."',  vigencia_final='".$fechavenc."',  numero_poliza='".$nro_poliza."',  cobertura='".$cobertura."',  materia_asegurada='".$materia."',  patente_ubicacion='".$detalle_materia."', moneda_poliza='".$moneda_poliza."',  deducible='".$deducible."',  prima_afecta='".$prima_afecta."',  prima_exenta='".$prima_exenta."',  prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."',  monto_asegurado='".$monto_aseg."',  numero_propuesta='".$nro_propuesta."',  fecha_envio_propuesta='".$fechaprop."', moneda_comision='".$moneda_comision."',  comision='".$comision."',  porcentaje_comision='".$porcentaje_comsion."',  comision_bruta='".$comisionbruta."', comision_neta='".$comisionneta."',  forma_pago='".$modo_pago."', nro_cuotas='".$cuotas."',  valor_cuota='".$valorcuota."',  fecha_primera_cuota='".$fechaprimer."', vendedor='".$con_vendedor."', nombre_vendedor='".$nombre_vendedor."', endoso='".$endoso."' , informacion_adicional='".$comentario."', venc_gtia ='".$venc_gtia."',fech_cancela = '".$fech_cancela."',motivo_cancela = '".$motivo_cancela."',item = '".$item."'   WHERE id=".$id_poliza.";";
-       // mysqli_query($link, $query);
-        //mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
+       mysqli_query($link, $query);
+       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
          break;
  echo $query;
 }
