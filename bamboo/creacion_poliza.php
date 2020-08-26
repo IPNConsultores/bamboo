@@ -1911,7 +1911,7 @@ var orgn = '<?php echo $camino; ?>';
  if (org = "modificar") {
      bPreguntar = false;
  }
-	window.onbeforeunload = preguntarAntesDeSalir;
+	// window.onbeforeunload = preguntarAntesDeSalir;
  
 	function preguntarAntesDeSalir () {
 		var respuesta;
