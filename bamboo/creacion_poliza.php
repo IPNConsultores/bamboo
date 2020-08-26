@@ -1900,6 +1900,7 @@ function vencimiento_garantía(){
    else  if (document.getElementById("pregunta_gtia").checked == false){
         
          document.getElementById("venc_gtia").readOnly = true;
+	    document.getElementById("venc_gtia").value = '';
          
     }
 }
