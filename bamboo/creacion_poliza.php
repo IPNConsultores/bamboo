@@ -16,12 +16,13 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
   } else {
     $camino = 'modificar';
   }
-  $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
+  
+ $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
 
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela from polizas where id=" . $id_poliza;
+  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela,item from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -77,9 +78,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
     $venc_gtia = $row->venc_gtia;
     $fech_cancela = $row->fech_cancela;
     $motivo_cancela = $row->motivo_cancela;
-
+    $item = $row->item;
   }
-
 
 }
 
@@ -190,6 +190,7 @@ function estandariza_info( $data ) {
 <div class="col">
 <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
 <form action="/bamboo/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
+
                     id="formulario" novalidate>
   <div id="auxiliar" style="display: none;">
     <input name="id_poliza" id="id_poliza">
@@ -582,6 +583,11 @@ function estandariza_info( $data ) {
               <div style="color:red; visibility: hidden" id="validador7">Debes ingresar número de
                 póliza</div>
             </div>
+            <div class="col-2">
+              <label for="item">Ítem</label>
+              <input type="text" class="form-control" id="item" name="item">
+             
+            </div>
             <div class="col-4">
               <label for="cobertura">Cobertura</label>
               <input type="text" class="form-control" id="cobertura" name="cobertura">
@@ -614,8 +620,13 @@ function estandariza_info( $data ) {
           <div class="form-row" id="vencimiento_gtia" style = "display:none">
           <div class="col-3">             
             <label for="venc_garantia">Vencimiento Garantía del automóvil</label>
+              <div class="form-check">
+                 <input type="checkbox" class="form-check-input" id="pregunta_gtia" Onclick =vencimiento_garantía()>
+                 <label class="form-check-label" for="pregunta_gtia">Garantía Vigente</label>
+             </div>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" >
+              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" readonly>
+              
               <br>
               <br>
             </div>
@@ -1477,7 +1488,7 @@ function habilitaedicion1() {
     document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
       document.getElementById("datos_cancelacion").style.display = "none";
-      bPreguntar = true;
+      bPreguntar = false;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
     var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
@@ -1492,6 +1503,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             if ('<?php echo $estado; ?>' == "Cancelado") {
                 document.getElementById("informacion_cancelacion").style.display = "block";
             
+            }
+            if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
+                document.getElementById("pregunta_gtia").checked = true;
+                document.getElementById("venc_gtia").readOnly = false;
+                
+                
             }
             
             
@@ -1528,6 +1545,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
             document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
+            
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
@@ -1536,6 +1554,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
 			document.getElementById("infofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
 			document.getElementById("infomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
+			document.getElementById("item").value = '<?php echo $item; ?>';
             
             valida_rut_duplicado_prop();
             valida_rut_duplicado_aseg();
@@ -1613,6 +1632,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             {
                 document.getElementById("radio2_no").checked = true;
                 document.getElementById("radio2_si").checked = false;
+            }
+             if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
+                document.getElementById("pregunta_gtia").checked = true;
+                document.getElementById("venc_gtia").readOnly = false;
+                
+                
             }
             document.getElementById("busca_poliza").style.display = "block";
             document.getElementById("poliza_renovada").style.display = "block";
@@ -1709,11 +1734,13 @@ function cancela() {
       document.getElementById("datos_cancelacion").style.display = "block";
 }
 
+
+
 function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
       //        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
-        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+       $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'fech_cancela': document.getElementById("datofecha_cancelacion").value,
@@ -1853,12 +1880,31 @@ function vencimientogarantia(){
   var ramo = document.getElementById("ramo").value;
             if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
                 "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
-                document.getElementById("vencimiento_gtia").style.display ="block";
+                document.getElementById("vencimiento_gtia").style.display ="flex";
                 }
                 else {      
               document.getElementById("vencimiento_gtia").style.display ="none";
                 }
 }
+
+function vencimiento_garantía(){
+    
+    if (document.getElementById("pregunta_gtia").checked == true)
+    {
+         document.getElementById("venc_gtia").readOnly = false;
+         
+        
+        
+    }
+    
+   else  if (document.getElementById("pregunta_gtia").checked == false){
+        
+         document.getElementById("venc_gtia").readOnly = true;
+         
+    }
+}
+
+
 var orgn = '<?php echo $camino; ?>';
 	var bPreguntar = true;
  if (org = "modificar") {
