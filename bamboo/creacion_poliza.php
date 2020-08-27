@@ -622,7 +622,7 @@ function estandariza_info( $data ) {
             <label for="venc_garantia">Vencimiento Garantía del automóvil</label>
               <div class="form-check">
                  <input type="checkbox" class="form-check-input" id="pregunta_gtia" Onclick =vencimiento_garantía()>
-                 <label class="form-check-label" for="pregunta_gtia">Garantía Vigente</label>
+                 <label class="form-check-label" for="pregunta_gtia">Vencimiento Garantía</label>
              </div>
             <div class="md-form">
               <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" readonly>
