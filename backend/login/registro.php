@@ -12,7 +12,8 @@ function alerta(mensaje, tipo) {
 </script>
 <?php
 // Include config file
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";

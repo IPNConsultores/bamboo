@@ -3,7 +3,8 @@
     { 
         session_start(); 
     } 
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $resultado=$resultado1 =$busqueda= '';
     $busqueda=$_POST["rut"];
 

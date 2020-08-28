@@ -3,7 +3,8 @@
     { 
         session_start(); 
     } 
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
  $nombre=estandariza_info($_POST["nombre"]);
  $rut=estandariza_info(substr($rut_completo, 0, strlen($rut_completo)-1));

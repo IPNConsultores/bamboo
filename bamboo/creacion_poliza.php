@@ -6,7 +6,8 @@ $camino = $nro_poliza = $selcompania = '';
 
 
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
-  require_once "/home/gestio10/public_html/backend/config.php";
+  //require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
     mysqli_set_charset( $link, 'utf8' );
@@ -18,7 +19,8 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
   }
   $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
 
-  require_once "/home/gestio10/public_html/backend/config.php";
+  //require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
   $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'de_DE') as prima_afecta,  FORMAT(prima_exenta, 4, 'de_DE') as prima_exenta,  FORMAT(prima_neta, 4, 'de_DE') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'de_DE') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'de_DE') as comision,  FORMAT(porcentaje_comision, 4, 'de_DE') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'de_DE') as comision_bruta,  FORMAT(comision_neta, 4, 'de_DE') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'de_DE') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'de_DE') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela from polizas where id=" . $id_poliza;

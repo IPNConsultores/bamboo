@@ -10,7 +10,8 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $num=0;
  $busqueda=$busqueda_err=$data=$id_tarea='';
  $rut=$nombre=$telefono=$correo=$lista='';

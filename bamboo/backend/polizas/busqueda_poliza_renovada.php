@@ -3,7 +3,8 @@
     { 
         session_start(); 
     } 
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $id_renovada=$_GET[ "id_a_renovar" ];
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');

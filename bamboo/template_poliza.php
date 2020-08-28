@@ -9,7 +9,8 @@ function estandariza_info( $data ) {
   $data = htmlspecialchars( $data );
   return $data;
 }
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 
 //if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 

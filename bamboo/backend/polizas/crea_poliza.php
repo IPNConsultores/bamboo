@@ -4,7 +4,8 @@
         session_start(); 
     } 
 
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
 $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $rut_prop=estandariza_info(substr($rut_completo_prop, 0, strlen($rut_completo_prop)-1));

@@ -3,7 +3,8 @@
     { 
         session_start(); 
     } 
-require_once "/home/gestio10/public_html/backend/config.php";
+//require_once "/home/gestio10/public_html/backend/config.php";
+require_once "/home/asesori1/config/config.php";
 $rut_completo = preg_replace('/[^k0-9]/i', '', $_POST["rut2"]);
 
 $id=estandariza_info($_POST["id"]);
