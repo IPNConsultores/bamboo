@@ -911,10 +911,16 @@ function botones(id, accion, base) {
         }
         case "cerrar_tarea": {
             if (base == 'tarea') {
-                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
-                    'id_tarea': id,
-                    'accion':accion,
-                }, 'post');
+                $.ajax({
+                    type: "POST",
+                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    data: {
+                        id_tarea: id,
+                        accion:accion,
+                    },
+                });
+                $('#listado_tareas').DataTable().ajax.reload(null, false );
+                alert('Tarea cerrada correctamente');
             }
             break;
         }
