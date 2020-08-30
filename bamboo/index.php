@@ -701,7 +701,7 @@ $(document).ready(function() {
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
     var buttons2 = new $.fn.dataTable.Buttons(table, {
-        buttons2: [{
+        buttons: [{
                 sheetName: 'Pólizas',
                 orientation: 'landscape',
                 extend: 'excelHtml5',
