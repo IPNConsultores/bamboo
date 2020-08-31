@@ -451,10 +451,12 @@ $(document).ready(function() {
                 "data": "estado",
                 title: "Estado"
             },
-            {
-                "data": "numero_poliza",
-                title: "Nro Póliza"
-            },
+            { 
+                data: null, 
+                title: "Nro Póliza",
+                render: function ( data, type, row ) {
+                    return data.numero_poliza + ' (' + data.item + ')';
+            } },
             {
                 "data": "compania",
                 title: "Compañía"
@@ -645,6 +647,11 @@ $(document).ready(function() {
             {
                 "data": "motivo_cancela",
                 title: "Motivo Cancelación"
+            }
+            ,
+            {
+                "data": "item",
+                title: "Ítem"
             }
         ],
         //          "search": {

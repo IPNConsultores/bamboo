@@ -273,10 +273,12 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
                 "data": "estado",
                 title: "Estado"
             },
-            {
-                "data": "numero_poliza",
-                title: "Nro Póliza"
-            },
+            { 
+                data: null, 
+                title: "Nro Póliza",
+                render: function ( data, type, row ) {
+                    return data.numero_poliza + ' (' + data.item + ')';
+            } },
             {
                 "data": "compania",
                 title: "Compañía"
