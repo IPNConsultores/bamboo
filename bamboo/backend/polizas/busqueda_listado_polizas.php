@@ -93,6 +93,7 @@ $resultado=mysqli_query($link, $sql);
       "vigencia_final"=>& $row->vigencia_final,
       "compania" =>& $row->compania,
       "numero_poliza"=>& $row->numero_poliza,
+      "item"=>& $row->item,
       "materia_asegurada"=>& $row->materia_asegurada,
       "patente_ubicacion" =>& $row->patente_ubicacion,
       "cobertura" =>& $row->cobertura,
