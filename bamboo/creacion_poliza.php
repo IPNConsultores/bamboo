@@ -1604,7 +1604,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
                 "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
                 document.getElementById("deducible_veh").style.display = "flex";
-				document.getElementById("vencimiento_gtia").style.display = "flex";
+				        document.getElementById("vencimiento_gtia").style.display = "flex";
                 document.getElementById("deducible_defecto").style.display = "none";
                 var deducible = document.getElementById("deducible").value;
                 document.getElementById("deducible_veh_1").value = deducible;
@@ -1706,6 +1706,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("deducible_defecto").style.display = "none";
                 var deducible = document.getElementById("deducible").value;
                 document.getElementById("deducible_veh_1").value = deducible;
+                document.getElementById("vencimiento_gtia").style.display = "flex";
             } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" ||
                 ramo == "INC - Hogar" || ramo == "INC - Misceláneos" || ramo ==
                 "INC - Perjuicio por Paralización" || ramo == "INC - Pyme" || ramo ==
