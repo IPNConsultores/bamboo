@@ -678,7 +678,7 @@ function estandariza_info( $data ) {
               <div class="col-3">
                 <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder="%">
               </div>
-              <label>% Pérdida de</label>
+              <label style="font-size: 10px;">% Pérdida con mínimo de</label>
               <div class="col-md-5" style="display: flex; align-items: center;">
                 <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
                 <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder="Valor" onChange="pobladeducible()">
