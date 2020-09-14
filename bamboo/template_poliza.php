@@ -18,11 +18,13 @@ require_once "/home/gestio10/public_html/backend/config.php";
   //poliza
   
   $instancia = "envio_poliza";
-  if ( $_POST[ "tipo" ] == "buscar"){
+ if ( $_POST[ "tipo" ] == "buscar"){
       
-      $instancia = $_POST[ "instancia" ];
-      $busqueda = $_POST["id"];
-      $ramo = $POST["ramo"];
+     $instancia = $_POST[ "instancia" ];
+     $busqueda = $_POST["id"];
+     $ramo = $POST["ramo"];
+      
+
   }
   else
   {
@@ -206,22 +208,26 @@ $body = $array[ 2 ];
 
 $subject = str_replace( 'ASUNTO:', '', $subject );
 $subject = str_replace( '<br>', '%0A', $subject );
+$subject = str_replace( '% ', '%25', $subject );
 $subject = str_replace( '<b>', '', $subject );
 $subject = str_replace( '</b>', '', $subject );
 $subject = str_replace( '<hr>', '%0A%0A', $subject );
 $subject = str_replace( '<u>', '', $subject );
 $subject = str_replace( '</u>', '', $subject );
 $subject = str_replace( '•', '• ', $subject );
+
 $subject = urlencode( $subject );
 
 $body = str_replace( '<br>', '%0A', $body );
 $body = str_replace( '<b>', '', $body );
 $body = str_replace( '</b>', '', $body );
 $body = str_replace( '<hr>', '%0A%0A', $body );
+$body = str_replace( '% ', '%25 ', $body );
 $body = str_replace( '%0A%0AEstimado(a)', 'Estimado(a)', $body );
 $body = str_replace( '<u>', '', $body );
 $body = str_replace( '</u>', '', $body );
 $body = str_replace( '•', '• ', $body );
+
 $body = urlencode( $body );
 
 
