@@ -1132,7 +1132,7 @@ function pobladeducible() {
         document.getElementById("deducible").value = document.getElementById("deducible_viaje_1").value;
     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
         document.getElementById("deducible").value = document.getElementById("deducible_porcentaje").value +
-            "% de la Pérdida con mínimo de" + document.getElementById("moneda7").innerHTML + " " + document
+            "% de la Pérdida con mínimo de " + document.getElementById("moneda7").innerHTML + " " + document
             .getElementById("deducible_valor").value;
     } else {
         document.getElementById("deducible").value = document.getElementById("deducible_defecto_1").value

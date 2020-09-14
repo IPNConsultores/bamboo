@@ -1118,6 +1118,7 @@ $(document).ready(function() {
         }
     }
     //fin tareas recurrents
+    
 });
 
 function detalle_tareas_recurrentes(d) {
