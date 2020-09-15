@@ -216,9 +216,9 @@ function estandariza_info( $data ) {
         </div>
       </div>
       <div class="col" style="display:flex ;align-items: center;">
-        <label for="datomotivo_cancelacion">Motivo &nbsp;&nbsp;</label>
+        <label for="datomotivo_cancela">Motivo &nbsp;&nbsp;</label>
         <div class = "col-9">
-          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="motivo_cancela">
+          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="datomotivo_cancela">
         </div>
         <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Cancelación</button>
       </div>
@@ -1753,9 +1753,9 @@ function modifica_estado(estado) {
        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
-            'fech_cancela': document.getElementById("datofecha_cancelacion").value,
+            'datofecha_cancelacion': document.getElementById("datofecha_cancelacion").value,
             'nro_poliza': document.getElementById("nro_poliza").value,
-            'motivo_cancela': document.getElementById("datomotivo_cancela").value
+            'datomotivo_cancela': document.getElementById("datomotivo_cancela").value
             
         }, 'post');
     }
