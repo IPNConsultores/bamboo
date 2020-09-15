@@ -4,7 +4,6 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino = $nro_poliza = $selcompania = '';
 
-
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
@@ -199,6 +198,7 @@ function estandariza_info( $data ) {
                         id="poliza_renovada" style="display:none;">
   </div>
   </div>
+<!-- --------------------------------------------                -->
   <div class ="col" id="datos_cancelacion"  style = "display:none"><br>
     <div class ="row" >
       <div class="col"style="display:flex ;align-items: center;">
@@ -220,31 +220,7 @@ function estandariza_info( $data ) {
         <div class = "col-9">
           <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="motivo_cancela">
         </div>
-        <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar</button>
-      </div>
-    </div>
-  </div>
-  <div class ="col" id="informacion_cancelacion"  style = "display:none"><br>
-    <div class ="row" >
-      <div class="col"style="display:flex ;align-items: center;">
-        <p><b>Información</p>
-        &nbsp;
-        <p style="color:red">CANCELACIÓN</b></p>
-      </div>
-    </div>
-    <div class ="row" >
-      <div class="col-4" style="display:flex ;align-items: center;">
-        <label for="infofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
-        <div class="md-form">
-          <input placeholder="Selected date" type="date" id="infofecha_cancelacion" name="infofecha_cancelacion"
-                                        class="form-control">
-        </div>
-      </div>
-      <div class="col" style="display:flex ;align-items: center;">
-        <label for="motivo">Motivo &nbsp;&nbsp;</label>
-        <div class = "col-9">
-          <input  type="text" id="infomotivo_cancela" class="form-control" name="motivo_cancela">
-        </div>
+        <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Cancelación</button>
       </div>
     </div>
   </div>
@@ -1489,7 +1465,7 @@ function habilitaedicion1() {
     document.getElementById("anular").style.display = "none";
     document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
-      document.getElementById("datos_cancelacion").style.display = "none";
+  //    document.getElementById("datos_cancelacion").style.display = "none";
       bPreguntar = false;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -1526,8 +1502,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("radio2_no").checked = false;
             }
             if ('<?php echo $estado; ?>' == "Cancelado") {
-                document.getElementById("informacion_cancelacion").style.display = "block";
-            
+                document.getElementById("datos_cancelacion").style.display = "block";
+                document.getElementById("cancelar").style.display = "none";
+                document.getElementById("cancelar1").style.display = "none";
             }
             if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
                 document.getElementById("pregunta_gtia").checked = true;
@@ -1577,8 +1554,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("boton_submit").childNodes[0].nodeValue = "Guardar cambios";
             document.getElementById("boton_submit").style.display = "none";
             document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
-			document.getElementById("infofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
-			document.getElementById("infomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
+            
+			document.getElementById("datofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
+			document.getElementById("datomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
+
 			document.getElementById("item").value = '<?php echo $item; ?>';
             
             valida_rut_duplicado_prop();
@@ -1690,8 +1669,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("comentario").value = '<?php echo $comentario; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
 			document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
-			document.getElementById("infofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
-			document.getElementById("infomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
+			document.getElementById("datofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
+			document.getElementById("datomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
             var dias_vig_pol = '<?php echo $dif_dias; ?>';
             if (dias_vig_pol == '365' || dias_vig_pol == '366') {
                 document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
@@ -1758,6 +1737,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function cancela() {
       document.getElementById("datos_cancelacion").style.display = "block";
+      document.getElementById("cancelar").style.display = "block";
+     document.getElementById("edicion1").style.display = "none";
+    document.getElementById("anular").style.display = "none";
+    document.getElementById("cancelar1").style.display = "none";
+      
 }
 
 

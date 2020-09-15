@@ -46,8 +46,8 @@ $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $boleta=estandariza_info($_POST["boleta"]);
 $endoso=estandariza_info($_POST["endoso"]);
 $comentario=estandariza_info($_POST["comentario"]);
-$fech_cancela = (estandariza_info($_POST["datofecha_cancelacion"])!=='')? estandariza_info($_POST["datofecha_cancelacion"]): estandariza_info($_POST["infofecha_cancelacion"]);
-$motivo_cancela = (estandariza_info($_POST["datomotivo_cancela"])!=='')? estandariza_info($_POST["datomotivo_cancela"]): estandariza_info($_POST["infomotivo_cancela"]);
+$fech_cancela = estandariza_info($_POST["datofecha_cancelacion"]);
+$motivo_cancela = estandariza_info($_POST["datomotivo_cancela"]);
 $venc_gtia  = estandariza_info($_POST["venc_gtia"]);
 $item  = estandariza_info($_POST["item"]);
 
