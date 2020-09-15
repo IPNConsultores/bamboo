@@ -3,7 +3,6 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza = $selcompania = '';
-
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
   if ( isset( $_POST[ "renovar" ] ) == true ) {
@@ -224,6 +223,7 @@ function estandariza_info( $data ) {
       </div>
     </div>
   </div>
+<!-- --------------------------------------------                -->
   <br>
   <br>
   <div class="accordion" id="accordionExample">
@@ -1465,6 +1465,8 @@ function habilitaedicion1() {
     document.getElementById("anular").style.display = "none";
     document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
+                document.getElementById("datofecha_cancelacion").readOnly = false;
+                document.getElementById("datomotivo_cancela").readOnly = false;
   //    document.getElementById("datos_cancelacion").style.display = "none";
       bPreguntar = false;
 }
@@ -1505,6 +1507,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("datos_cancelacion").style.display = "block";
                 document.getElementById("cancelar").style.display = "none";
                 document.getElementById("cancelar1").style.display = "none";
+                document.getElementById("datofecha_cancelacion").readOnly = true;
+                document.getElementById("datomotivo_cancela").readOnly = true;
             }
             if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
                 document.getElementById("pregunta_gtia").checked = true;
