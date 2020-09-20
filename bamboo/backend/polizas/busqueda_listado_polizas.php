@@ -19,7 +19,6 @@ $resultado=mysqli_query($link, $sql);
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
   {$conta=$conta+1;
-    $asegurado= $row->idA!==$row->idP?$row->idA:"-";
     if ($conta==1){
       $codigo.= json_encode(array(
         "ramo" =>& $row->ramo,
@@ -50,7 +49,7 @@ $resultado=mysqli_query($link, $sql);
         "telefonoA" =>& $row->telefonoA,
         "correoA" =>& $row->correoA,
         "idP" =>& $row->idP,
-        "idA" =>& $asegurado,
+        "idA" =>& $row->idA,
         "grupo" =>& $row->grupo,
         "referido" =>& $row->referido,
         "id_poliza"=>& $row->id_poliza,
@@ -107,7 +106,7 @@ $resultado=mysqli_query($link, $sql);
       "telefonoA" =>& $row->telefonoA,
       "correoA" =>& $row->correoA,
       "idP" =>& $row->idP,
-      "idA" =>& $asegurado,
+      "idA" =>& $row->idA,
       "grupo" =>& $row->grupo,
       "referido" =>& $row->referido,
       "id_poliza"=>& $row->id_poliza,
