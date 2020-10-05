@@ -642,6 +642,7 @@ function estandariza_info( $data ) {
                 <option value="UF 5" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 5") echo "selected" ?>>UF 5</option>
                 <option value="UF 10" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 10") echo "selected" ?>>UF 10</option>
                 <option value="UF 20" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 20") echo "selected" ?>>UF 20</option>
+                 <option value="UF 50" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 50") echo "selected" ?>>UF 50</option>
               </select>
             </div>
             <div class="form-inline" id="deducible_viaje" style="display:none">
