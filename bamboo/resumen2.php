@@ -1521,14 +1521,20 @@ function botones(id, accion, base) {
                         accion:accion,
                     },
                 });
+                //table_tareas.clear();
+                //table_tareas.ajax.reload(null, false );
+                //table_tareas.draw();
+                //table_tareas_recurrentes.clear();
+                //table_tareas_recurrentes.ajax.reload(null, false );
+               // table_tareas_recurrentes.draw();
+                //$('#tareas_completas').DataTable().ajax.reload(null, false );
+                alert('Tarea cerrada correctamente');
                 table_tareas.clear();
                 table_tareas.ajax.reload(null, false );
                 table_tareas.draw();
                 table_tareas_recurrentes.clear();
                 table_tareas_recurrentes.ajax.reload(null, false );
                 table_tareas_recurrentes.draw();
-                //$('#tareas_completas').DataTable().ajax.reload(null, false );
-                alert('Tarea cerrada correctamente');
             }
             break;
         }
