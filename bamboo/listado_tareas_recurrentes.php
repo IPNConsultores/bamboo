@@ -389,7 +389,7 @@ function botones(id, accion, base) {
                 //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
                 $('#tareas_completas').DataTable().clear();
-                $('#tareas_completas').DataTable().reload(null, false );
+                $('#tareas_completas').DataTable().ajax.reload(null, false );
                 $('#tareas_completas').DataTable().draw();
             }
             break;
