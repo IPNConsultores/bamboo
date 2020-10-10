@@ -894,7 +894,7 @@ $(document).ready(function() {
         //          },
 
         "columnDefs": [{
-                "targets": [6, 8, 11, 12, 13],
+                "targets": [6, 8, 11, 12, 13, 14],
                 "visible": false,
             },
             {
