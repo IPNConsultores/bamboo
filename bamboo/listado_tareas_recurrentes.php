@@ -388,9 +388,9 @@ function botones(id, accion, base) {
                 //table_tareas.draw();
                 //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
-                $('#listado_tareas_recurrentes').DataTable().clear();
-                $('#listado_tareas_recurrentes').DataTable().reload(null, false );
-                $('#listado_tareas_recurrentes').DataTable().draw();
+                $('#tareas_completas').DataTable().clear();
+                $('#tareas_completas').DataTable().reload(null, false );
+                $('#tareas_completas').DataTable().draw();
             }
             break;
         }
