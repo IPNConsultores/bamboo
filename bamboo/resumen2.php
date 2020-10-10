@@ -657,7 +657,7 @@ $(document).ready(function() {
                 data: null, 
                 title: "AllID",
                 render: function ( data, type, row ) {
-                    return data.idA + ' - ' + data.idP +;
+                    return data.idA + ' - ' + data.idP;
             } }
         ],
         //          "search": {
