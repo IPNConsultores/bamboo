@@ -300,7 +300,7 @@ function detalle_tareas(d) {
         d.id_tarea +
         ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +
         d.id_tarea +
-        ' name="cerrar_tarea" id=' + d.id_tarea +
+        ' name="cerrar_tarea_recurrente" id=' + d.id_tarea +
         ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
         '<tr><td>Clientes:</td>'+
@@ -373,7 +373,7 @@ function botones(id, accion, base) {
             }
             break;
         }
-        case "cerrar_tarea": {
+        case "cerrar_tarea_recurrente": {
             if (base == 'tarea') {
                 $.ajax({
                     type: "POST",
