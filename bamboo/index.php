@@ -926,9 +926,9 @@ function botones(id, accion, base) {
                // table_tareas.draw();
                 //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
-                table_tareas.clear();
-                table_tareas.ajax.reload(null, false );
-                table_tareas.draw();
+                $('#listado_tareas').DataTable().clear();
+                $('#listado_tareas').DataTable().ajax.reload(null, false );
+                $('#listado_tareas').DataTable().draw();
             }
             break;
         }
