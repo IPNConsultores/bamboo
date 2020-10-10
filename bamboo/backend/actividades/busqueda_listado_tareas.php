@@ -92,10 +92,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
                 }
                 case "clientes":{
                     $resul_clientes=mysqli_query($link, "SELECT id, concat_WS(' ',nombre_cliente, apellido_paterno, apellido_materno) as nombre, telefono, correo  FROM clientes where id='".$rel_tareas->id_relacion."';");
-
-
                   while($list_clientes=mysqli_fetch_object($resul_clientes)){
-                                                array_push($id_cliente, $list_clientes->id);
+                          array_push($id_cliente, $list_clientes->id);
                           array_push($nombre, $list_clientes->nombre);
                           array_push($telefono, $list_clientes->telefono);
                           array_push($correo, $list_clientes->correo );

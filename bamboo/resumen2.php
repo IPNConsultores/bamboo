@@ -11,9 +11,6 @@ mysqli_set_charset( $link, 'utf8');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
- 
- 
-
  $query = "SELECT a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
 $resultado_poliza=mysqli_query($link, $query);
 
@@ -446,226 +443,280 @@ $(document).ready(function() {
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
+                // columna 0
             },
             {
                 "data": "estado",
                 title: "Estado"
+                // columna 1
             },
             { 
                 data: null, 
                 title: "Nro Póliza",
                 render: function ( data, type, row ) {
                     return data.numero_poliza + ' (' + data.item + ')';
-            } },
+            } 
+                // columna 2
+            },
             {
                 "data": "compania",
                 title: "Compañía"
+                // columna 3
             },
             {
                 "data": "ramo",
                 title: "Ramo"
+                // columna 4
             },
             {
                 "data": "vigencia_inicial",
                 title: "Vigencia Inicio"
+                // columna 5
             },
             {
                 "data": "vigencia_final",
                 title: "Vigencia Término"
+                // columna 6
             },
             {
                 "data": "materia_asegurada",
                 title: "Materia asegurada"
+                // columna 7
             },
             {
                 "data": "tipo_poliza",
                 title: "Tipo póliza"
+                // columna 8
             },
             {
                 "data": "patente_ubicacion",
                 title: "Observaciones materia asegurada"
+            // columna 9
             },
             {
                 "data": "deducible",
                 title: "Deducible"
+                // columna 10
             },
             {
                 "data": "prima_afecta",
                 title: "Prima afecta"
+                // columna 11
             },
             {
                 "data": "prima_exenta",
                 title: "Prima exenta"
+                // columna 12
             },
             {
                 "data": "prima_bruta_anual",
                 title: "Prima bruta anual"
+                // columna 13
             },
             {
                 "data": "anomes_final",
                 title: "Añomes final"
+                // columna 14
             },
             {
                 "data": "anomes_inicial",
                 title: "Añomes inicial"
+                // columna 15
             },
             {
                 "data": "moneda_poliza",
                 title: "Moneda póliza"
+                // columna 16
             },
             {
                 "data": "cobertura",
                 title: "Cobertura"
+                // columna 17
             },
             {
                 "data": "nom_clienteP",
                 title: "Proponente"
+                // columna 18
             },
             {
                 "data": "rut_clienteP",
                 title: "Rut Proponente"
+                // columna 19
             },
             {
                 "data": "nom_clienteA",
                 title: "Asegurado"
+                // columna 20
             },
             {
                 "data": "rut_clienteA",
                 title: "Rut Asegurado"
+                // columna 21
             },
             {
                 "data": "grupo",
                 title: "Grupo"
+                // columna 22
             },
             {
                 "data": "referido",
                 title: "Referido"
+                // columna 23
             },
             {
                 "data": "monto_asegurado",
                 title: "Monto Asegurado"
+                // columna 24
             },
             {
                 "data": "numero_propuesta",
                 title: "Propuesta"
+                // columna 25
             },
             {
                 "data": "fecha_envio_propuesta",
                 title: "Fecha envío propuesto"
+                // columna 26
             },
             {
                 "data": "comision",
                 title: "Comisión"
+                // columna 27
             },
             {
                 "data": "porcentaje_comision",
                 title: "% Comisión"
+                // columna 28
             },
             {
                 "data": "comision_bruta",
                 title: "Comisión Bruta"
+                // columna 29
             },
             {
                 "data": "comision_neta",
                 title: "Comisión Neta"
+                // columna 30
             },
             {
                 "data": "numero_boleta",
                 title: "Número boleta"
+                // columna 31
             },
             {
                 "data": "boleta_negativa",
                 title: "Boleta negativa"
+                // columna 32
             },
             {
                 "data": "comision_negativa",
                 title: "Comisión negativa"
+                // columna 33
             },
             {
                 "data": "depositado_fecha",
                 title: "Fecha depósito"
+                // columna 34
             },
             {
                 "data": "vendedor",
                 title: "vendedor"
+                // columna 35
             },
             {
                 "data": "nombre_vendedor",
                 title: "Nombre vendedor"
+                // columna 36
             },
             {
                 "data": "forma_pago",
                 title: "Forma de pago"
+                // columna 37
             },
             {
                 "data": "nro_cuotas",
                 title: "Número de cuotas"
+                // columna 38
             },
             {
                 "data": "valor_cuota",
                 title: "Valor cuota"
+                // columna 39
             },
             {
                 "data": "fecha_primera_cuota",
                 title: "Fecha primera cuota"
+                // columna 40
             },
             {
                 "data": "prima_neta",
                 title: "Prima neta"
+                // columna 41
             },
             {
                 "data": "poliza_renovada",
                 title: "Póliza renovada"
+                // columna 42
             },
             {
                 "data": "informacion_adicional",
                 title: "Información adicional"
+                // columna 43
             },
             {
                 "data": "idA",
                 title: "id asegurado"
+                // columna 44
             },
             {
                 "data": "idP",
                 title: "id proponente"
+                // columna 45
             },
             {
                 "data": "id_poliza",
                 title: "id poliza"
+                // columna 46
             }
             ,
             {
                 "data": "venc_gtia",
                 title: "Fecha Vencimiento Garantía"
+                // columna 47
             }
             ,
             {
                 "data": "fech_cancela",
                 title: "Fecha Cancelación"
+                // columna 48
             }
             ,
             {
                 "data": "motivo_cancela",
                 title: "Motivo Cancelación"
+                // columna 49
             }
             ,
             {
                 "data": "item",
                 title: "Ítem"
+                // columna 50
             },
             { 
                 data: null, 
                 title: "AllID",
                 render: function ( data, type, row ) {
-                    return data.idA + ' - ' + data.idP;
-            } }
+                    return '_' + data.idA + '_ , _' + data.idP +'_' ;
+            } 
+                // columna 51
+            }
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
                 "targets": [10, 11, 12, 13, 14, 15, 16, 17, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 46,48,49,50
+                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 46,48,49, 51
                 ],
                 "visible": false,
             },
@@ -828,6 +879,13 @@ $(document).ready(function() {
             {
                 "data": "id_poliza[]",
                 title: "id poliza"
+            },
+            {
+                data: null, 
+                title: "AllID",
+                render: function ( data, type, row ) {
+                    return '_' + data.id_proponente + '_ , _' + data.id_asegurado + '_' ;
+            } 
             }
 
         ],
@@ -979,7 +1037,6 @@ $(document).ready(function() {
                 "data": "id_poliza[]",
                 title: "id poliza"
             }
-
         ],
         //          "search": {
         //          "search": "abarca"
@@ -1066,9 +1123,14 @@ $(document).ready(function() {
             //cliente
             table.column(9).search(document.getElementById("aux_id").value, true).draw();
             //poliza
-            table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
+            //console.log(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'))
+             //table_polizas.column(50).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
+            table_polizas.column(51).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
+            //table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
             //tarea
-            table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
+            //table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
+            table_tareas.column(14).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
+
             //tarea recurrente
             table_tareas_recurrentes.column(10).search(document.getElementById("aux_id").value, true).draw();
             break;
@@ -1521,20 +1583,14 @@ function botones(id, accion, base) {
                         accion:accion,
                     },
                 });
-                //table_tareas.clear();
-                //table_tareas.ajax.reload(null, false );
-                //table_tareas.draw();
-                //table_tareas_recurrentes.clear();
-                //table_tareas_recurrentes.ajax.reload(null, false );
-               // table_tareas_recurrentes.draw();
+                table_tareas.clear();
+                table_tareas.ajax.reload(null, false );
+                table_tareas.draw();
+                table_tareas_recurrentes.clear();
+                table_tareas_recurrentes.ajax.reload(null, false );
+                table_tareas_recurrentes.draw();
                 //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
-                $('#listado_tareas').DataTable().clear();
-                $('#listado_tareas').DataTable().ajax.reload(null, false );
-                $('#listado_tareas').DataTable().draw();
-                $('#listado_tareas_recurrentes').DataTable().clear();
-                $('#listado_tareas_recurrentes').DataTable().ajax.reload(null, false );
-                $('#listado_tareas_recurrentes').DataTable().draw();
             }
             break;
         }
