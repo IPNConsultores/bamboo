@@ -652,14 +652,20 @@ $(document).ready(function() {
             {
                 "data": "item",
                 title: "Ítem"
-            }
+            },
+            { 
+                data: null, 
+                title: "AllID",
+                render: function ( data, type, row ) {
+                    return data.idA + ' - ' + data.idP +;
+            } }
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
                 "targets": [10, 11, 12, 13, 14, 15, 16, 17, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 46,48,49
+                    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 44, 45, 46,48,49,50
                 ],
                 "visible": false,
             },
@@ -1515,7 +1521,13 @@ function botones(id, accion, base) {
                         accion:accion,
                     },
                 });
-                $('#listado_tareas').DataTable().ajax.reload(null, false );
+                table_tareas.clear();
+                table_tareas.ajax.reload(null, false );
+                table_tareas.draw();
+                table_tareas_recurrentes.clear();
+                table_tareas_recurrentes.ajax.reload(null, false );
+                table_tareas_recurrentes.draw();
+                //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
             }
             break;

@@ -405,7 +405,10 @@ function botones(id, accion, base) {
                         accion:accion,
                     },
                 });
-                $('#listado_tareas').DataTable().ajax.reload(null, false );
+                table_tareas.clear();
+                table_tareas.ajax.reload(null, false );
+                table_tareas.draw();
+                //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
             }
             break;
