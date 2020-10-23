@@ -182,7 +182,9 @@ echo '<style>.info_clientes { display:none;}</style>';
     <div id="header">
         <?php include 'header2.php' ?>
     </div>
-    <div class="container">
+    <div class="container" >
+        <form action="/bamboo/backend/polizas/crea_poliza.php" class="needs-validation" method="POST" id="formulario" novalidate>
+        
         <p> Tareas / Creación <br>
         </p>
         <h5 class="form-row">&nbsp;Datos Actividad</h5>
@@ -375,11 +377,13 @@ echo '<style>.info_clientes { display:none;}</style>';
             </div>
             <div class="col-md-4 mb-3" id="panel_fecha">
                 <label for="Nombre">Fecha de Vencimiento Tarea</label>
+                <label style="color: darkred">*</label>
                 <div class="md-form">
                     <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
-                        class="form-control" required>
+                        class="form-control" onchange ="check_fecha()" required>
                 </div>
-                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                <div style="color:red; visibility: hidden" id="validador1">No puedes dejar este campo en
+                blanco</div>
             </div>
 
         </div>
@@ -387,14 +391,18 @@ echo '<style>.info_clientes { display:none;}</style>';
         <div class="form-row">
             <div class="col">
                 <label for="poliza">Tarea a Realizar</label>
-                <textarea class="form-control" name="tarea" id="tarea" rows="3" onclick="bPreguntar = false;"></textarea>
+                <textarea class="form-control" name="tarea" id="tarea" rows="3" onclick="bPreguntar = false;" onchange="check_tarea()"></textarea>
             </div>
+         
         </div>
+        <div style="color:red; visibility: hidden" id="validador2">No puedes dejar este campo en
+                blanco</div>
         <br>
         <div  onclick="bPreguntar = false;">
-        <button class="btn" type="button" onclick="post();" onchange="bPreguntar = false;" name="registra" id="registra"
+               <button class="btn" type="button" onclick="post();" onchange="bPreguntar = false;" name="registra" id="registra"
             style="background-color: #536656; color: white" value="No preguntar">Registrar</button>
 </div>
+</form>
         <br>
     </div>
 
@@ -435,6 +443,23 @@ function post() {
     var tarea_con_fin = 0;
     var dia = 0;
     var fecha;
+    
+      if (document.getElementById("fechavencimiento").value == "") {
+        document.getElementById("validador1").style.visibility = "visible";
+    
+          
+      } 
+      
+      if (document.getElementById("tarea").value == "") {
+        document.getElementById("validador2").style.visibility = "visible";
+    
+          
+      } 
+    
+    
+    else if( document.getElementById("fechavencimiento").value != "" && document.getElementById("tarea").value != "" )
+        {
+    
     if (document.getElementById('tarea_recurrente').checked) {
         tarea_recurrente = 1;
         dia = document.getElementById('dia_mes').value;
@@ -484,8 +509,31 @@ function post() {
         'id_tarea': '<?php echo $id_tarea; ?>'
         //fin aux modificar
     }, 'post');
+}
+}
+ 
+function check_fecha(){
+
+    if (document.getElementById("fechavencimiento").value != "") {
+        document.getElementById("validador1").style.visibility = "hidden";
+    }
 
 }
+
+function check_tarea(){
+
+    if (document.getElementById("tarea").value != "") {
+        document.getElementById("validador2").style.visibility = "hidden";
+    }
+
+}
+   
+document.getElementById("formulario").addEventListener('submit', function(event) {
+    if (document.getElementById("fechavencimiento").value == "") {
+        document.getElementById("validador1").style.visibility = "visible";
+        event.preventDefault();} else {
+    }
+});
 
 function checkTipoTarea(tipoTarea) {
     console.log(tipoTarea);
