@@ -700,7 +700,10 @@ function estandariza_info( $data ) {
           </div>
           <div class="col-md-4 mb-3">
             <label for="monto_aseg">Monto Asegurado</label>
-            <input type="text" class="form-control" name="monto_aseg" id="monto_aseg">
+             <label style="color: darkred">&nbsp; *</label>
+          
+            <input type="text" class="form-control" name="monto_aseg" id="monto_aseg" onchange = "monto_aseg_completo()">
+              <div style="color:red; visibility: hidden" id="validador13">Debes indicar materia</div>
           </div>
         </div>
       </div>
@@ -1810,6 +1813,10 @@ document.getElementById("formulario").addEventListener('submit', function(event)
         document.getElementById("validador9").style.visibility = "visible";
         event.preventDefault();
     }
+     if (document.getElementById("monto_aseg").value == "") {
+        document.getElementById("validador13").style.visibility = "visible";
+        event.preventDefault();
+    }
     if (document.getElementById("modo_pago").value == "null") {
         document.getElementById("modo_pago").style.color = "red";
         event.preventDefault();
@@ -1878,6 +1885,11 @@ function materia_completo() {
 function detalle_materia_completo() {
     if (document.getElementById("detalle_materia").value != "") {
         document.getElementById("validador9").style.visibility = "hidden";
+    }
+}
+function monto_aseg_completo() {
+    if (document.getElementById("monto_aseg").value != "") {
+        document.getElementById("validador13").style.visibility = "hidden";
     }
 }
 function modopago_completo() {
