@@ -703,7 +703,7 @@ function estandariza_info( $data ) {
              <label style="color: darkred">&nbsp; *</label>
           
             <input type="text" class="form-control" name="monto_aseg" id="monto_aseg" onchange = "monto_aseg_completo()">
-              <div style="color:red; visibility: hidden" id="validador13">Debes indicar materia</div>
+              <div style="color:red; visibility: hidden" id="validador13">Debes indicar monto</div>
           </div>
         </div>
       </div>
