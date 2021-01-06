@@ -1,3 +1,4 @@
+
 <?php
 if ( !isset( $_SESSION ) ) {
   session_start();
@@ -416,6 +417,8 @@ function estandariza_info( $data ) {
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Coris") echo "selected" ?>>Coris</option>
                 <option value="HDI Seguros"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "HDI Seguros") echo "selected" ?>>HDI Seguros</option>
+                <option value="Liberty"
+                                        <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Liberty") echo "selected" ?>>Liberty</option>                                              
                 <option value="Mapfre"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Mapfre") echo "selected" ?>>Mapfre</option>
                 <option value="Ohio National Financial Group"
