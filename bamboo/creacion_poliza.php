@@ -211,7 +211,7 @@ function estandariza_info( $data ) {
       <div class="col-4" style="display:flex ;align-items: center;">
         <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
         <div class="md-form">
-          <input placeholder="Selected date" type="date" id="datofecha_cancelacion" name="datofecha_cancelacion"
+          <input placeholder="Selected date" type="date" max="2121-12-31" id="datofecha_cancelacion" name="datofecha_cancelacion"
                                         class="form-control">
         </div>
       </div>
@@ -535,7 +535,7 @@ function estandariza_info( $data ) {
               <label for="Nombre">Vigencia Inicial</label>
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechainicio" name="fechainicio"
                                         class="form-control" onchange="fechainicio_completo()" required>
               </div>
               <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
@@ -545,7 +545,7 @@ function estandariza_info( $data ) {
               <label for="Nombre">Vigencia Final</label>
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
+                <input placeholder="Selected date" type="date" max="2121-12-31" name="fechavenc" id="fechavenc"
                                         class="form-control" onchange="fechavenc_completo()" required>
               </div>
               <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
@@ -604,7 +604,7 @@ function estandariza_info( $data ) {
                  <label class="form-check-label" for="pregunta_gtia">Vencimiento Garantía</label>
              </div>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" readonly>
+              <input placeholder="Selected date" type="date" max="2121-12-31" name="venc_gtia" id="venc_gtia" class="form-control" readonly>
               
               <br>
               <br>
@@ -732,7 +732,7 @@ function estandariza_info( $data ) {
           <div class="col-md-4 mb-3">
             <label for="fechaprop">Fecha Envío Propuesta</label>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop"
+              <input placeholder="Selected date" type="date" max="2121-12-31" name="fechaprop" id="fechaprop"
                                         class="form-control">
             </div>
           </div>
@@ -779,7 +779,7 @@ function estandariza_info( $data ) {
           <div class="col-md-4 mb-3">
             <label for="fechadeposito">Fecha Depósito</label>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="fechadeposito"
+              <input placeholder="Selected date" type="date" max="2121-12-31" name="fechadeposito"
                                         id="fechadeposito" class="form-control">
             </div>
           </div>
@@ -889,7 +889,7 @@ function estandariza_info( $data ) {
           <div class="col-md-4 mb-3">
             <label for="fechaprimer">Fecha Primera Cuota</label>
             <div class="md-form">
-              <input type="date" class="form-control" id="fechaprimer" name="fechaprimer">
+              <input type="date" max="2121-12-31" class="form-control" id="fechaprimer" name="fechaprimer">
             </div>
           </div>
         </div>

@@ -353,7 +353,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                         <input class="form-check-input" type="radio" name="con_fecha" id="con_fecha" value="con_fecha"
                             onclick="checkTipoTarea(this.name)">
                         <label class="form-check-label">Definir fecha de término</label>
-                        <input style="display: none" placeholder="Selecciona una fecha" type="date"
+                        <input style="display: none" placeholder="Selecciona una fecha" type="date" max="2121-12-31"
                             id="fechavencimiento_recurrente" name="fechavencimiento_recurrente" class="form-control"
                             required>
                     </div>
@@ -379,7 +379,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                 <label for="Nombre">Fecha de Vencimiento Tarea</label>
                 <label style="color: darkred">*</label>
                 <div class="md-form">
-                    <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
+                    <input placeholder="Selected date" type="date" max="2121-12-31" id="fechavencimiento" name="fechavencimiento"
                         class="form-control" onchange ="check_fecha()" required>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador1">No puedes dejar este campo en

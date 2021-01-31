@@ -257,7 +257,7 @@
             <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Inicial</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechainicio"
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechainicio"
                                         class="form-control">
               </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
@@ -265,7 +265,7 @@
             <div class="col-md-4 mb-3">
               <label for="Nombre">Vigencia Final</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechavenc" class="form-control">
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechavenc" class="form-control">
               </div>
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
@@ -361,7 +361,7 @@
             <div class="col-md-4 mb-3">
               <label for="monto_aseg">Fecha Envío Propuesta</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechaprop" class="form-control">
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechaprop" class="form-control">
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@
             <div class="col-md-4 mb-3">
               <label for="fechadeposito">Fecha Depósito</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechadeposito"
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechadeposito"
                                         class="form-control">
               </div>
             </div>
@@ -439,7 +439,7 @@
             <div class="col-md-4 mb-3">
               <label for="fechaprimer">Fecha Primera Cuota</label>
               <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechaprimer"
+                <input placeholder="Selected date" type="date" max="2121-12-31" id="fechaprimer"
                                         class="form-control">
               </div>
             </div>
