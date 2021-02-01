@@ -568,8 +568,16 @@ function checkTipoTarea(tipoTarea) {
         }
     }
 }
-
+function fecha_cliente(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    document.getElementById("fechavencimiento").min = today;
+    document.getElementById("fechavencimiento_recurrente").min = today;
+}
 $(document).ready(function() {
+    fecha_cliente();
     var consulta='<?php if ($_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
     if (consulta=='True'){
     var tipo_tarea = '<?php echo $tipo_tarea; ?>';
