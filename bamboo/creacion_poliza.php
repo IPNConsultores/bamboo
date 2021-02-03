@@ -883,7 +883,7 @@ function estandariza_info( $data ) {
                                             <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
               </select>
               <input type="text" class="form-control" name="valorcuota" id="valorcuota"
-                                        oninput="concatenar(this.id)">
+                                        >
             </div>
           </div>
           <div class="col-md-4 mb-3">
