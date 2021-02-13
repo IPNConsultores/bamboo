@@ -353,8 +353,8 @@ echo '<style>.info_clientes { display:none;}</style>';
                         <input class="form-check-input" type="radio" name="con_fecha" id="con_fecha" value="con_fecha"
                             onclick="checkTipoTarea(this.name)">
                         <label class="form-check-label">Definir fecha de término</label>
-                        <input style="display: none" placeholder="Selecciona una fecha" type="date"
-                            id="fechavencimiento_recurrente" name="fechavencimiento_recurrente" class="form-control" onchange="validadorfecha(this.id)"
+                        <input style="display: none" placeholder="Selecciona una fecha" type="date" max="2121-12-31"
+                            id="fechavencimiento_recurrente" name="fechavencimiento_recurrente" class="form-control"
                             required>
                     </div>
                 </div>
@@ -379,8 +379,8 @@ echo '<style>.info_clientes { display:none;}</style>';
                 <label for="Nombre">Fecha de Vencimiento Tarea</label>
                 <label style="color: darkred">*</label>
                 <div class="md-form">
-                    <input placeholder="Selected date" type="date" id="fechavencimiento" name="fechavencimiento"
-                        class="form-control" onchange ="check_fecha(); validadorfecha(this.id)" required>
+                    <input placeholder="Selected date" type="date" max="2121-12-31" id="fechavencimiento" name="fechavencimiento"
+                        class="form-control" onchange ="check_fecha()" required>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador1">No puedes dejar este campo en
                 blanco</div>
@@ -568,16 +568,16 @@ function checkTipoTarea(tipoTarea) {
         }
     }
 }
-function validadorfecha(id){
-    
-    var fechainicial = document.getElementById(id).value;
-    fechafinal = new Date(9999,12,31)
-   
-    if( Date.parse(fechafinal) < Date.parse(fechainicial) ){
-        alert("La fecha tiene un año de más de 4 dígitos");
-    }
+function fecha_cliente(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    document.getElementById("fechavencimiento").min = today;
+    document.getElementById("fechavencimiento_recurrente").min = today;
 }
 $(document).ready(function() {
+    fecha_cliente();
     var consulta='<?php if ($_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
     if (consulta=='True'){
     var tipo_tarea = '<?php echo $tipo_tarea; ?>';

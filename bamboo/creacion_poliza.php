@@ -1843,7 +1843,7 @@ function validadorfecha(id){
     fechafinal = new Date(9999,12,31)
    
     if( Date.parse(fechafinal) < Date.parse(fechainicial) ){
-        alert("La fecha tiene un año de más de 4 dígitos");
+        alert("La fecha tiene un año de más de 6 dígitos");
     }
 }
 
