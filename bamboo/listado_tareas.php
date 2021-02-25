@@ -32,31 +32,70 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
     <script src="https://kit.fontawesome.com/7011384382.js" crossorigin="anonymous"></script>
 </head>
 
 
 <body>
 
-    <!-- body code goes here -->
+    <!-- body code goes here  -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
         <p> Tareas / Listado de tareas <br>
         </p>
         <br>
+    <div id="acciones_multiples" style="background-color:#E9D6EC; display:none;">
+    <table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">
+    <tr><td>Selección múltiple de tareas / Acciones:</td>
+        <td>
+<!-- Button trigger modal -->
+<button id="boton_finaliza_tareas_multiples" title="Completar tarea" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizar_tareas_multiples" onclick="listado_tareas_multiples()">
+  <i class="fas fa-check-circle"> Finalizar Tareas</i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="finalizar_tareas_multiples" tabindex="-1" role="dialog" aria-labelledby="ModalOpcionesMultiples" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"  id="exampleModalLabel" >Finalizar múltiples tareas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <table class="table" id="tabla_tareas_multiples" style="width:100%">
+            <tr><th>#</th><th>Tarea</th><th>Estado</th></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </td>
+    </tr>
+        </table>
+        </div>
+        
+
+        
+        <br>
         <div class="container">
   <table class="table" id="tareas_completas" style="width:100%">
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th>id</th>
                                 <th>Prioridad</th>
@@ -73,11 +112,18 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     </div>
 
 
-    <div id="auxiliar" style="display: none;">
+
+    <!-- <div id="auxiliar" style="display: none;"> -->
+        <div id="auxiliar" style="display: none;">
         <input id="var1" value="<?php 
         echo htmlspecialchars($buscar);?>">
+        <input id="id_tareas_multiples" onchange="listado_tareas_multiples()">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
         </script>
@@ -94,6 +140,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 
 </body>
 
@@ -101,11 +148,28 @@ $id_tarea= estandariza_info($_GET["tarea"]);
 <script>
 
 $(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+    $('#finalizar_tareas_multiples').on('shown.bs.modal', function () {console.log('APERTURA');actualiza_multitarea()});
+    $('#finalizar_tareas_multiples').on('hide.bs.modal', function () {
+        table_tareas.column(0).checkboxes.deselectAll();
+        document.getElementById("acciones_multiples").style.display = "none";
+    });
     table_tareas = $('#tareas_completas').DataTable({
 
         "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_completas.php",
         "scrollX": true,
+
+//        "columns": [{
+//            "className": 'checkbox_multiples',
+//            "data": "id_tarea",
+//            'checkboxes': {
+//            'selectRow': true
+//         }
+//         },{
         "columns": [{
+            "className": 'checkbox_multiples',
+            "data": "id_tarea"
+         },{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
@@ -153,23 +217,41 @@ $(document).ready(function() {
             }
 
         ],
-        //          "search": {
-        //          "search": "abarca"
-        //          },
+
 
         "columnDefs": [{
-                "targets": [6,8],
+                "targets": [7,9],
                 "visible": false,
             },
         {
-        targets: 3,
+            targets: 0,
+            render: function(data, type, row, meta){
+            data = '<input type="checkbox" class="dt-checkboxes">'
+            if(row.estado === 'Cerrado'){
+            
+              data = '';
+            }
+            return data;
+        },
+            createdCell:  function (td, cellData, rowData, row, col){
+             if(row.estado === 'Cerrado'){
+                  this.api().cell(td).checkboxes.disable();
+               }
+            }, 
+            checkboxes: {
+               'selectRow': true,
+               'selectAll': false
+            }
+        },
+        {
+        targets: 4,
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
                         case 'Activo':
                             estado='<span class="badge badge-warning">'+data+'</span>';
                             break;
-                        case 'Completado':
+                        case 'Cerrado':
                                 estado='<span class="badge badge-dark">'+data+'</span>';
                                 break;
                         case 'Atrasado':
@@ -182,7 +264,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,8],
+        targets: [6,7,9],
          render: function(data, type, full)
          {
              if (type == 'display')
@@ -191,9 +273,12 @@ $(document).ready(function() {
                  return moment(data).format('YYYY/MM/DD');
          }}],
         "order": [
-            [2, "asc"],
-            [5, "asc"]
+            [4, "asc"],
+            [6, "asc"]
         ],
+        'select': {
+         'style': 'multi'
+      },
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
             "sLengthMenu": 'Mostrar <select>' +
@@ -236,6 +321,23 @@ $(document).ready(function() {
             tr.addClass('shown');
         }
     });
+        $('#tareas_completas tbody').on('change', 'td.checkbox_multiples', function() {
+        var rows_seleccionadas = table_tareas.column(0).checkboxes.selected();
+        var tareas_seleccionadas=[];
+        $.each(rows_seleccionadas, function(index, rowId){
+        tareas_seleccionadas.push(rowId);
+      });
+      console.log(tareas_seleccionadas.length + " -> " + tareas_seleccionadas);
+      if (tareas_seleccionadas.length==0){ 
+      document.getElementById("acciones_multiples").style.display = "none";
+      document.getElementById("id_tareas_multiples").value ="";
+      }
+      else {
+      document.getElementById("acciones_multiples").style.display = "block";
+      document.getElementById("id_tareas_multiples").value = tareas_seleccionadas;
+      }
+      
+    });
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
@@ -247,7 +349,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8,9,10]
+                    columns: [ 2, 3, 4, 5, 6,7,8,9,10,11]
                 }
             },
             {
@@ -255,7 +357,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado tareas al: ' + fecha,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6,7,8,9,10]
+                    columns: [ 2, 3, 4, 5, 6,7,8,9,10,11]
                 }
             }
         ]
@@ -416,6 +518,19 @@ function botones(id, accion, base) {
             }
             break;
         }
+        case "cerrar_tarea_multiple": {
+            if (base == 'tarea') {
+                $.ajax({
+                    type: "POST",
+                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    data: {
+                        id_tarea: id,
+                        accion:'cerrar_tarea',
+                    },
+                });
+            }
+            break;
+        }
     }
 }
 (function(){
@@ -452,4 +567,48 @@ function botones(id, accion, base) {
  };
   
  }());
+ 
+ function listado_tareas_multiples(){
+     for(var i = 1;i<tabla_tareas_multiples.rows.length;){
+            tabla_tareas_multiples.deleteRow(i);
+        }
+     var contador =0;
+     var listado_tareas_multiples = document.getElementById("id_tareas_multiples").value;
+    var arreglo_tareas = listado_tareas_multiples.split(",");
+    var contador =arreglo_tareas.length;
+  var fila = '';
+  arreglo_tareas.forEach(agrega_fila);
+function agrega_fila(item, index) {
+    var fila = '<tr id="row' + index + '"><td>' + contador + '</td><td>' + item + '</td><td><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></td></tr>'; //esto seria lo que contendria la fila
+$('#tabla_tareas_multiples tr:first').after(fila);
+contador=contador-1;}
+}
+
+function actualiza_multitarea(){
+    console.log('inicia el ok redireccionado');
+         var listado_tareas_multiples = document.getElementById("id_tareas_multiples").value;
+    var arreglo_tareas = listado_tareas_multiples.split(",");
+    arreglo_tareas.forEach(actualiza);
+        async function actualiza(item, index) {
+        botones(item, 'cerrar_tarea_multiple', 'tarea');
+        tabla_tareas_multiples.rows[index+1].cells[2].innerHTML = '<i class="fas fa-check-circle"> Tarea Finalizada</i>';
+        console.log('cerrando tarea ' + item);
+        wait(500);
+        }
+    
+    table_tareas.clear();
+    table_tareas.ajax.reload(null, false );
+    table_tareas.draw();
+}
+ 
+ function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+
+
 </script>
