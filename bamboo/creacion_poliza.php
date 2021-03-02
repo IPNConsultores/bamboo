@@ -547,7 +547,7 @@ function estandariza_info( $data ) {
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
                 <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
-                                        class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" required>
+                                        class="form-control" onchange="fechavenc_completo();validadorfecha(this.id)" required>
               </div>
               <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
                 Vencimiento</div>
@@ -1843,8 +1843,7 @@ function validadorfecha(id){
     fechafinal = new Date(9999,12,31)
    
     if( Date.parse(fechafinal) < Date.parse(fechainicial) ){
-        alert("El año ingresado tiene mas de 4 dígitos");
-        
+        alert("La fecha tiene un año de más de 6 dígitos");
     }
 }
 
@@ -1948,28 +1947,6 @@ function vencimiento_garantía(){
          document.getElementById("venc_gtia").value = '';
     }
 }
-
- function valida_vencimiento(){
-     
-     
-     var fecha_venc = new Date (document.getElementById("fechavenc").value);
-     var fecha_inicio = new Date( document.getElementById("fechainicio").value);
-     
-     console.log(fecha_venc);
-     console.log(fecha_inicio);
-     console.log((fecha_venc - fecha_inicio)/(1000*60*60*24));
-     
-     if  ((fecha_venc - fecha_inicio)/(1000*60*60*24) >= 0) 
-     {
-     if ((fecha_venc - fecha_inicio)/(1000*60*60*24) !=  365 && (fecha_venc - fecha_inicio)/(1000*60*60*24) !=  366 ) 
-     {
-         
-         alert("La fecha de Vigencia Final es distinta de un año");
-         
-     }
-     
- }
- }
 
 (function(){
 

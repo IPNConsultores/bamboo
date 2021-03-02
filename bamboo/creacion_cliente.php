@@ -499,8 +499,6 @@ document.addEventListener("DOMContentLoaded", function() {
           
       }
     }    
-    bPreguntar=false
-    
   });
   
   	var bPreguntar = true;
