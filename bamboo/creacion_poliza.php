@@ -1964,7 +1964,7 @@ function vencimiento_garantía(){
      if ((fecha_venc - fecha_inicio)/(1000*60*60*24) !=  365 && (fecha_venc - fecha_inicio)/(1000*60*60*24) !=  366 ) 
      {
          
-         alert("La fecha de Vigencia Final es distinta de un año");
+         alert("La Vigencia de la póliza es distinta de un año");
          
      }
      
