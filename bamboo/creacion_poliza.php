@@ -1954,21 +1954,44 @@ function vencimiento_garantía(){
      
      var fecha_venc = new Date (document.getElementById("fechavenc").value);
      var fecha_inicio = new Date( document.getElementById("fechainicio").value);
+     var day_venc = fecha_venc.getDate()+1;
+     var month_venc = fecha_venc.getMonth()+1;
+     var year_venc = fecha_venc.getFullYear();
+     var day_ini = fecha_inicio.getDate()+1;
+     var month_ini = fecha_inicio.getMonth()+1;
+     var year_ini = fecha_inicio.getFullYear();
+     
+     
+     if(year_venc > 1000)
+     {
+         if (day_ini != day_venc || month_ini != month_venc || year_venc != year_ini+1 ){
+             
+             alert("La fecha de Vigencia Final es distinta de un año \nFecha Vigencia Final: "+ day_venc +"-" + month_venc + "-" + year_venc);
+         }
+         
+         
+     }
+     
+     var fecha = document.getElementById("fechavenc").value;
+     
+     
+     console.log(document.getElementById("fechavenc").value);
+     console.log(fecha.length);
      
      console.log(fecha_venc);
      console.log(fecha_inicio);
      console.log((fecha_venc - fecha_inicio)/(1000*60*60*24));
      
-     if  ((fecha_venc - fecha_inicio)/(1000*60*60*24) >= 0) 
-     {
-     if ((fecha_venc - fecha_inicio)/(1000*60*60*24) !=  365 && (fecha_venc - fecha_inicio)/(1000*60*60*24) !=  366 ) 
-     {
+     //if  ((fecha_venc - fecha_inicio)/(1000*60*60*24) >= -44138) 
+     //{
+     //if ((fecha_venc - fecha_inicio)/(1000*60*60*24) !=  365 && (fecha_venc - fecha_inicio)/(1000*60*60*24) !=  366 ) 
+     //{
          
-         alert("La Vigencia de la póliza es distinta de un año");
+      //   alert("La fecha de Vigencia Final es distinta de un año \nFecha Vigencia Final: "+ day +"-" + month + "-" + year);
          
-     }
+    // }
      
- }
+ //}
  }
 
 (function(){
