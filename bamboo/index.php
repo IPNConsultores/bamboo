@@ -392,7 +392,7 @@ $(document).ready(function() {
     }).container().appendTo($('#botones_tareas'));
 
      table = $('#listado_polizas').DataTable({
-        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas_filtrada.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],
