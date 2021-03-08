@@ -115,8 +115,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
 
     <!-- <div id="auxiliar" style="display: none;"> -->
         <div id="auxiliar" style="display: none;">
-        <input id="var1" value="<?php 
-        echo htmlspecialchars($buscar);?>">
+        <input id="var1" value="<?php echo htmlspecialchars($buscar);?>">
         <input id="id_tareas_multiples" onchange="listado_tareas_multiples()">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -363,9 +362,10 @@ $(document).ready(function() {
         ]
     }).container().appendTo($('#botones_tareas'));
     var busqueda_tarea= '<?php echo $id_tarea;?>';
+    console.log(busqueda_tarea);
     if (busqueda_tarea==''){}
     else{
-     table_tareas.column(1).search(busqueda_tarea).draw();
+     table_tareas.column(2).search(busqueda_tarea).draw();
     }
 });
 function detalle_tareas(d) {
