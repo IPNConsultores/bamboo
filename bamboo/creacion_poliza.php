@@ -212,7 +212,7 @@ function estandariza_info( $data ) {
         <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
         <div class="md-form">
           <input placeholder="Selected date" type="date" id="datofecha_cancelacion" name="datofecha_cancelacion"
-                                        class="form-control">
+                                        class="form-control"  max= "9999-12-31">
         </div>
       </div>
       <div class="col" style="display:flex ;align-items: center;">
@@ -537,7 +537,7 @@ function estandariza_info( $data ) {
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
                 <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
-                                        class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" required>
+                                        class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" max= "9999-12-31" required>
               </div>
               <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
                 Inicio</div>
@@ -547,7 +547,7 @@ function estandariza_info( $data ) {
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
                 <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
-                                        class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" required>
+                                        class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
               </div>
               <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
                 Vencimiento</div>
@@ -734,7 +734,7 @@ function estandariza_info( $data ) {
             <label for="fechaprop">Fecha Envío Propuesta</label>
             <div class="md-form">
               <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop"
-                                        class="form-control">
+                                        class="form-control" max= "9999-12-31">
             </div>
           </div>
         </div>
@@ -781,7 +781,7 @@ function estandariza_info( $data ) {
             <label for="fechadeposito">Fecha Depósito</label>
             <div class="md-form">
               <input placeholder="Selected date" type="date" name="fechadeposito"
-                                        id="fechadeposito" class="form-control" onchange="validadorfecha(this.id)">
+                                        id="fechadeposito" class="form-control" onchange="validadorfecha(this.id)" max= "9999-12-31">
             </div>
           </div>
         </div>
@@ -890,7 +890,7 @@ function estandariza_info( $data ) {
           <div class="col-md-4 mb-3">
             <label for="fechaprimer">Fecha Primera Cuota</label>
             <div class="md-form">
-              <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id)">
+              <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31">
             </div>
           </div>
         </div>
@@ -1994,6 +1994,32 @@ function vencimiento_garantía(){
  //}
  }
 
+
+ function valida_primerpago(){
+     
+     
+     var fecha_primer = new Date (document.getElementById("fechaprimer").value);
+     var day_venc = fecha_primer.getDate()+1;
+     var month_venc = fecha_primer.getMonth()+1;
+     var year_venc = fecha_primer.getFullYear();
+     var hoy = new Date();
+     
+
+     
+     
+     if(year_venc > 1000)
+     {
+         if (fecha_primer < hoy){
+             
+             alert("La fecha del primer pago es retroactiva");
+         }
+         
+         
+     }
+     
+    
+ }
+ 
 (function(){
 
  var searchType = jQuery.fn.DataTable.ext.type.search;
