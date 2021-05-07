@@ -23,6 +23,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
      $instancia = $_POST[ "instancia" ];
      $busqueda = $_POST["id"];
      $ramo = $POST["ramo"];
+ 
       
 
   }
@@ -307,6 +308,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
     <select class="form-control" name="instancia" id="instancia">
       
           <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza</option>
+          <option value="reenvio_poliza" <?php if ($instancia == "reenvio_poliza") echo "selected" ?>>Reenviar póliza</option>
           
     </select>
   </div>
