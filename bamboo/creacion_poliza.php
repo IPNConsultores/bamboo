@@ -1761,7 +1761,7 @@ function cancela() {
 function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
-      //        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+      // acá se debe cerrar todas las tareas asociadas a una tarea cancelada
        $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,

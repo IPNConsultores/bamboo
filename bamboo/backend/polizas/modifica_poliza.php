@@ -63,7 +63,13 @@ switch ($_POST["accion"]) {
         $query= "update polizas set estado='Cancelado', fech_cancela='".$_POST["datofecha_cancelacion"]."',motivo_cancela ='".$_POST["datomotivo_cancela"]."' where id=".$_POST["id_poliza"];
         mysqli_query($link, $query);
        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
-        break;
+        //acá se deben cerrar las tareas asociadas a la póliza cancelada
+        $query="";
+        $query= "update tareas as a left join tareas_relaciones as c on a.id=c.id_tarea left join polizas as b on c.id_relacion=b.id set a.estado='Cerrado' where c.base='polizas' and a.estado in('Activo','Atrasado') and b.id=".$_POST["id_poliza"];
+        mysqli_query($link, $query);
+       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
+
+       break;
     case 'anular':
         $query= "update polizas set estado='Anulado' where id=".$_POST["id_poliza"];
         mysqli_query($link, $query);
