@@ -1546,6 +1546,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
             document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("comision").value = '<?php echo $comision; ?>';
             document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
             document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
