@@ -18,7 +18,7 @@ $correo=estandariza_info($_POST["correo_electronico"]);
 $referido=estandariza_info($_POST["referido"]);
 $grupo=estandariza_info($_POST["grupo"]);
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 $query = 'UPDATE clientes SET referido=\''.$referido.'\' , grupo=\''.$grupo.'\' , nombre_cliente=\''.$nombre.'\' ,rut_sin_dv=\''.$rut.'\' ,dv=\''.$dv.'\' ,telefono=\''.$telefono.'\' ,direccion_personal=\''.$direccionp.'\' ,direccion_laboral=\''.$direccionl.'\' ,correo=\''.$correo.'\'  WHERE id='.$id.';';
 mysqli_query($link,$query);
 mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Modifica cliente', '".str_replace("'","**",$query)."','cliente',".$id.", '".$_SERVER['PHP_SELF']."')");
@@ -58,7 +58,7 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
- // header("Location:http://gestionipn.cl/bamboo/listado_clientes.php");
+ // header("Location:http://gestionipn.cl/bambooQA/listado_clientes.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +73,7 @@ function estandariza_info($data) {
 	
 alert("Cliente Modificado Correctamente")
 var rut='<?php echo $rut; ?>'
-  $.redirect('/bamboo/listado_clientes.php', {
+  $.redirect('/bambooQA/listado_clientes.php', {
   'busqueda': rut
 }, 'post');
 

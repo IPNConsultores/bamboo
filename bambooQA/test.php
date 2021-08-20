@@ -525,7 +525,7 @@ function valida_rut_duplicado_prop() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -550,7 +550,7 @@ function valida_rut_duplicado_aseg() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -649,7 +649,7 @@ function valida_rut_duplicado_aseg() {
 $('#modal_poliza').on('shown.bs.modal', function () {
   console.log("test");
 var table = $('#listado_polizas').DataTable({
-        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],

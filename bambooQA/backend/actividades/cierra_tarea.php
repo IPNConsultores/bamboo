@@ -28,7 +28,7 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-//  header("location: /bamboo/index.php");
+//  header("location: /bambooQA/index.php");
 //$message = "Tarea Finalizada";
 //echo "<script type='text/javascript'>alert('$message');</script>";
 

@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_cliente"]))){
         $busqueda=$_POST["id_cliente"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
         //cliente
         $resultado=mysqli_query($link, 'SELECT id, CONCAT_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \', nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_poliza"]))){
         $busqueda=$_POST["id_poliza"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
             //poliza
             $resultado_poliza=mysqli_query($link, 'SELECT id, compania, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where id='.$busqueda.' order by compania, numero_poliza;');
 
@@ -156,7 +156,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_tarea"]))){
         $busqueda=$_POST["id_tarea"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
         //tareas
         $resultado_tareas=mysqli_query($link, 'select id, fecha_ingreso, fecha_vencimiento, tarea, estado, prioridad from tareas where id="'.$busqueda.'";');
         
@@ -228,7 +228,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bambooQA/images/bamboo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>

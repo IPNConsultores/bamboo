@@ -9,7 +9,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
   if ( isset( $_POST[ "renovar" ] ) == true ) {
     $camino = 'renovar';
     mysqli_set_charset( $link, 'utf8' );
-    mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+    mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
     $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
     $resultado = mysqli_query( $link, $query );
   } else {
@@ -20,7 +20,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
 
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
   $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'es_CL') as prima_afecta,  FORMAT(prima_exenta, 4, 'es_CL') as prima_exenta,  FORMAT(prima_neta, 4, 'es_CL') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'es_CL') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'es_CL') as comision,  FORMAT(porcentaje_comision, 4, 'es_CL') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'es_CL') as comision_bruta,  FORMAT(comision_neta, 4, 'es_CL') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'es_CL') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'es_CL') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela,item from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -96,7 +96,7 @@ function estandariza_info( $data ) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo/images/bamboo.png">
+<link rel="icon" href="/bambooQA/images/bamboo.png">
 <!-- Bootstrap --> 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -187,8 +187,8 @@ function estandariza_info( $data ) {
   </div>
 </div>
 <div class="col">
-<!-- "/bamboo/backend/polizas/crea_poliza.php" -->
-<form action="/bamboo/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
+<!-- "/bambooQA/backend/polizas/crea_poliza.php" -->
+<form action="/bambooQA/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
 
                     id="formulario" novalidate>
   <div id="auxiliar" style="display: none;">
@@ -996,7 +996,7 @@ function valida_rut_duplicado_prop() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1016,7 +1016,7 @@ function valida_rut_duplicado_aseg() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1185,7 +1185,7 @@ $('#test1').on('shown.bs.modal', function() {
     //$('#modal_text').trigger('focus')
 })
 var table = $('#listado_polizas').DataTable({
-    "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+    "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
     "scrollX": true,
     "searchPanes": {
         "columns": [2, 3, 8, 9],
@@ -1308,7 +1308,7 @@ var table = $('#listado_polizas').DataTable({
 });
 var tabla_clientes = $('#listado_clientes').DataTable({
 
-    "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+    "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
     "scrollX": true,
     "columns": [{
             "className": 'details-control',
@@ -1409,7 +1409,7 @@ function renovar_poliza(poliza, tipo_poliza) {
 
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/polizas/busqueda_poliza_renovada.php",
+                    url: "/bambooQA/backend/polizas/busqueda_poliza_renovada.php",
                     data: {
                         id_a_renovar: poliza
                     },
@@ -1424,7 +1424,7 @@ function renovar_poliza(poliza, tipo_poliza) {
                 $('#modal_poliza').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
-                $.redirect('/bamboo/creacion_poliza.php', {
+                $.redirect('/bambooQA/creacion_poliza.php', {
                     'id_poliza': poliza,
                     'renovar': true
                 }, 'post');
@@ -1434,14 +1434,14 @@ function renovar_poliza(poliza, tipo_poliza) {
             $('#modal_poliza').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            $.redirect('/bamboo/creacion_poliza.php');
+            $.redirect('/bambooQA/creacion_poliza.php');
         }
     } else {
         console.log('continúa normal');
         $('#modal_poliza').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-        $.redirect('/bamboo/creacion_poliza.php', {
+        $.redirect('/bambooQA/creacion_poliza.php', {
             'id_poliza': poliza,
             'renovar': true
         }, 'post');
@@ -1559,7 +1559,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
+            document.getElementById("formulario").action = "/bambooQA/backend/polizas/modifica_poliza.php";
             
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
@@ -1763,7 +1763,7 @@ function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
       // acá se debe cerrar todas las tareas asociadas a una tarea cancelada
-       $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+       $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'datofecha_cancelacion': document.getElementById("datofecha_cancelacion").value,

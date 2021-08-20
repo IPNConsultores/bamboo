@@ -6,7 +6,7 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $idcliente=$_POST["cliente"];
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 $resultado=mysqli_query($link, 'SELECT * from clientes where id='.$idcliente.';');
 While($row=mysqli_fetch_object($resultado))
     {
@@ -30,7 +30,7 @@ While($row=mysqli_fetch_object($resultado))
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bambooQA/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -47,7 +47,7 @@ While($row=mysqli_fetch_object($resultado))
     <div class="container">
         <p> Clientes / Modificar cliente <br>
         </p>
-        <form action="/bamboo/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
+        <form action="/bambooQA/backend/clientes/modifica_cliente.php" class="needs-validation" method="POST" novalidate>
             <input type="hidden" id="idcliente" name="idcliente" value="<?php echo $id; ?>">
             <h5 class="form-row">&nbsp;Datos personales</h5>
             <br>

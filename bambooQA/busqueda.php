@@ -6,7 +6,7 @@
 $buscar='';
 
 require_once "/home/gestio10/public_html/backend/config.php";
-require_once "/home/gestio10/public_html/bamboo/backend/funciones.php";
+require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -26,7 +26,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bambooQA/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -153,7 +153,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
     $(document).ready(function () {
         table = $('#listado_clientes').DataTable({
 
-            "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+            "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
             "scrollX": true,
             "columns": [{
                 "className": 'details-control',
@@ -257,7 +257,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
 //inicio pólizas
         
             table_polizas = $('#listado_polizas').DataTable({
-        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],
@@ -669,7 +669,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
             if (base == 'poliza') {
                 var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+                $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
                     'id_poliza': id,
                     'accion':accion,
                 }, 'post');
@@ -683,7 +683,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
                 if (r == true) {
                     $.ajax({
                         type: "POST",
-                        url: "/bamboo/backend/clientes/elimina_cliente.php",
+                        url: "/bambooQA/backend/clientes/elimina_cliente.php",
                         data: {
                             cliente: id
                         },
@@ -714,12 +714,12 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
         }
         case "modifica": {
             if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_poliza.php', {
+                $.redirect('/bambooQA/creacion_poliza.php', {
                 'id_poliza': id,
                 }, 'post');
             }
             if (base == 'cliente') {
-                $.redirect('/bamboo/creacion_cliente.php', {
+                $.redirect('/bambooQA/creacion_cliente.php', {
                     'id_cliente': id
                 }, 'post');
             }
@@ -736,19 +736,19 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
         }
         case "tarea": {
             if (base == 'cliente') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza'){
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "info": {
-            $.redirect('/bamboo/resumen2.php', {
+            $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
@@ -756,7 +756,7 @@ $buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
         }
         case "correo": {
             if (base == 'poliza'){
-                $.redirect('/bamboo/template_poliza.php', {
+                $.redirect('/bambooQA/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }

@@ -15,5 +15,5 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-  header("Location:http://gestionipn.cl/bamboo/listado_clientes.php");
+  header("Location:http://gestionipn.cl/bambooQA/listado_clientes.php");
 ?>

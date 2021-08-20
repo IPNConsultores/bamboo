@@ -6,7 +6,7 @@
 $resultado =$codigo=$conta='';
 require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
     $codigo='{
       "data": [';
     $conta=0;

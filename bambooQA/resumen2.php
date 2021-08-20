@@ -6,7 +6,7 @@
 $buscar=$base=$id=$nombre_base='';
 $id_clientes=$id_polizas='busqueda dummy';
 require_once "/home/gestio10/public_html/backend/config.php";
-require_once "/home/gestio10/public_html/bamboo/backend/funciones.php";
+require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
 mysqli_set_charset( $link, 'utf8');
 $num=0;
  $busqueda=$busqueda_err=$data='';
@@ -96,7 +96,7 @@ switch ($base) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bambooQA/images/bamboo.png">
     <!-- Bootstrap -->
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -319,7 +319,7 @@ function cambiacolor(id) {
 $(document).ready(function() {
     var table = $('#listado_clientes').DataTable({
 
-        "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+        "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
         "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("clientes").innerHTML = "Clientes (" + $('#listado_clientes')
@@ -428,7 +428,7 @@ $(document).ready(function() {
     //inicio pólizas
 
     var table_polizas = $('#listado_polizas').DataTable({
-        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+        "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("poliza").innerHTML = "Pólizas (" + $('#listado_polizas')
@@ -815,7 +815,7 @@ $(document).ready(function() {
     // inicio tareas
     var table_tareas = $('#listado_tareas').DataTable({
 
-        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_completas.php",
+        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_completas.php",
         "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("tarea").innerHTML = "Tareas (" + $('#listado_tareas')
@@ -980,7 +980,7 @@ $(document).ready(function() {
     // inicio tareas_recurrentes
     var table_tareas_recurrentes = $('#listado_tareas_recurrentes').DataTable({
 
-        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_recurrentes.php",
+        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_recurrentes.php",
         "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("tarea_rec").innerHTML = "Tareas recurrentes (" + $(
@@ -1460,7 +1460,7 @@ function botones(id, accion, base) {
     switch (accion) {
         case "elimina": {
             if (base == 'tarea' || base == 'tarea recurrente') {
-                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
+                $.redirect('/bambooQA/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
                     'accion': accion,
                 }, 'post');
@@ -1468,7 +1468,7 @@ function botones(id, accion, base) {
             if (base == 'poliza') {
                 var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                    $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+                    $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
                         'id_poliza': id,
                         'accion': accion,
                     }, 'post');
@@ -1482,7 +1482,7 @@ function botones(id, accion, base) {
                 if (r == true) {
                     $.ajax({
                         type: "POST",
-                        url: "/bamboo/backend/clientes/elimina_cliente.php",
+                        url: "/bambooQA/backend/clientes/elimina_cliente.php",
                         data: {
                             cliente: id
                         },
@@ -1513,24 +1513,24 @@ function botones(id, accion, base) {
         }
         case "modifica": {
             if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_poliza.php', {
+                $.redirect('/bambooQA/creacion_poliza.php', {
                     'id_poliza': id,
                 }, 'post');
             }
             if (base == 'tarea recurrente') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_tarea': id,
                     'tipo_tarea': 'recurrente'
                 }, 'post');
             }
             if (base == 'tarea') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_tarea': id,
                     'tipo_tarea': 'individual'
                 }, 'post');
             }
             if (base == 'cliente') {
-                $.redirect('/bamboo/creacion_cliente.php', {
+                $.redirect('/bambooQA/creacion_cliente.php', {
                     'id_cliente': id
                 }, 'post');
             }
@@ -1547,19 +1547,19 @@ function botones(id, accion, base) {
         }
         case "tarea": {
             if (base == 'cliente') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "info": {
-            $.redirect('/bamboo/resumen2.php', {
+            $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
@@ -1567,7 +1567,7 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'poliza') {
-                $.redirect('/bamboo/template_poliza.php', {
+                $.redirect('/bambooQA/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
@@ -1577,7 +1577,7 @@ function botones(id, accion, base) {
             if (base == 'tarea' || base == 'tarea recurrente') {
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:accion,

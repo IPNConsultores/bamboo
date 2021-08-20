@@ -30,7 +30,7 @@ $id_tarea= estandariza_info($_GET["tarea"]);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo/images/bamboo.png">
+    <link rel="icon" href="/bambooQA/images/bamboo.png">
     <!-- Bootstrap -->
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -155,7 +155,7 @@ $(document).ready(function() {
     });
     table_tareas = $('#tareas_completas').DataTable({
 
-        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_completas.php",
+        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_completas.php",
         "scrollX": true,
 
 //        "columns": [{
@@ -440,7 +440,7 @@ function botones(id, accion, base) {
     switch (accion) {
         case "elimina": {            
             if (base == 'tarea') {
-                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
+                $.redirect('/bambooQA/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
                     'accion':accion,
                 }, 'post');
@@ -457,12 +457,12 @@ function botones(id, accion, base) {
                 type: 'success'
             });
             if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_poliza.php', {
+                $.redirect('/bambooQA/creacion_poliza.php', {
                 'id_poliza': id
                 }, 'post');
             }
             if (base == 'tarea') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                 'id_tarea': id,
                 'tipo_tarea':'individual'
                 }, 'post');
@@ -471,19 +471,19 @@ function botones(id, accion, base) {
         }
         case "tarea": {
             if (base == 'cliente') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza') {
-                $.redirect('/bamboo/creacion_actividades.php', {
+                $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "info": {
-            $.redirect('/bamboo/resumen2.php', {
+            $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
@@ -491,7 +491,7 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'poliza') {
-                $.redirect('/bamboo/template_poliza.php', {
+                $.redirect('/bambooQA/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
@@ -501,7 +501,7 @@ function botones(id, accion, base) {
             if (base == 'tarea') {
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:accion,
@@ -522,7 +522,7 @@ function botones(id, accion, base) {
             if (base == 'tarea') {
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:'cerrar_tarea',

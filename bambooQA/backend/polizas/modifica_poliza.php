@@ -52,7 +52,7 @@ $venc_gtia  = estandariza_info($_POST["venc_gtia"]);
 $item  = estandariza_info($_POST["item"]);
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 switch ($_POST["accion"]) {
     case 'elimina':
         $query="delete from polizas where id=".$_POST["id_poliza"];
@@ -109,7 +109,7 @@ function cambia_puntos_por_coma($data){
 <script >
 alert("Póliza Modificada Correctamente");
 var nro_poliza= '<?php echo $nro_poliza; ?>';
- $.redirect('/bamboo/listado_polizas.php', {
+ $.redirect('/bambooQA/listado_polizas.php', {
  'busqueda': nro_poliza
 }, 'post');
 

@@ -6,7 +6,7 @@ if ( !isset( $_SESSION ) ) {
       
     require_once "/home/gestio10/public_html/backend/config.php";
     mysqli_set_charset( $link, 'utf8' );
-    mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+    mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
  $contador_contactos=0;
     $cant_contactos = 0;
 $camino='';
@@ -93,7 +93,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo/images/bamboo.png">
+<link rel="icon" href="/bambooQA/images/bamboo.png">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -106,14 +106,14 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
 <body>
 
 
-<!-- body code goes here "/bamboo/backend/clientes/crea_cliente.php"-->
+<!-- body code goes here "/bambooQA/backend/clientes/crea_cliente.php"-->
 <div id="header">
 <?php include 'header2.php' ?>
 </div>
 <div class="container">
   <p>Clientes / Creación<br>
   </p>
-  <form action="/bamboo/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" id="formulario"novalidate>
+  <form action="/bambooQA/backend/clientes/crea_cliente.php" class="needs-validation" method="POST" id="formulario"novalidate>
     <h5 class="form-row">&nbsp;Datos personales</h5>
     <br>
     <div class="form-row">
@@ -284,7 +284,7 @@ function valida_rut_duplicado() {
         rut_sin_dv = rut_sin_dv.slice(0, -1);
         $.ajax({
             type: "POST",
-            url: "/bamboo/backend/clientes/clientes_duplicados.php",
+            url: "/bambooQA/backend/clientes/clientes_duplicados.php",
             data: {
                 rut: rut_sin_dv
             },
@@ -296,13 +296,13 @@ function valida_rut_duplicado() {
                         "El rut que acabas de ingresar ya se encuentra en la base de datos. ¿Deseas ver la información asociada al rut?"
                     );
                     if (r == true) {
-                        $.redirect('/bamboo/listado_clientes.php', {
+                        $.redirect('/bambooQA/listado_clientes.php', {
                             'busqueda': rut_sin_dv
                         }, 'post');
 
                     } else {
                         location.href =
-                            "http://gestionipn.cl/bamboo/creacion_cliente.php";
+                            "http://gestionipn.cl/bambooQA/creacion_cliente.php";
                         $.notify({
                             // options
                             message: 'Se han limpiado los valores del formulario'
@@ -450,7 +450,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
+		 document.getElementById("formulario").action="/bambooQA/backend/clientes/modifica_cliente.php";
          document.getElementById("rut2").value = '<?php echo $rut; ?>';
 		 document.getElementById("id").value = '<?php echo $id; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function() {
          document.getElementById("direccionl").value = '<?php echo $direccionl; ?>';
          document.getElementById("referido").value = '<?php echo $referido; ?>';
          document.getElementById("grupo").value = '<?php echo $grupo; ?>';
-		 document.getElementById("formulario").action="/bamboo/backend/clientes/modifica_cliente.php";
+		 document.getElementById("formulario").action="/bambooQA/backend/clientes/modifica_cliente.php";
          document.getElementById("rut2").value = '<?php echo $rut; ?>';
 		  document.getElementById("id").value = '<?php echo $id; ?>';
          document.getElementById("boton_submit").childNodes[0].nodeValue="Guardar cambios";
