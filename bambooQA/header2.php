@@ -128,9 +128,18 @@ function retrocede()
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pólizas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Creación Propuesta Póliza</a>
+                            <a class="dropdown-item" href="/bambooQA/creacion_propuesta_poliza.php">Creación Propuesta Póliza</a>
                             <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Listado Propuesta Póliza</a>
                             <a class="dropdown-item" href="/bambooQA/listado_polizas.php">Listado de pólizas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Endosos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Creación Propuesta Endosos</a>
+                            <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Listado Propuesta Endosos</a>
+                            <a class="dropdown-item" href="/bambooQA/listado_polizas.php">Listado de Endosos</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4"

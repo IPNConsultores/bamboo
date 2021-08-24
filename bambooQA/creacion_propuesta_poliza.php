@@ -119,11 +119,11 @@ function estandariza_info( $data ) {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <div class="container">
 <div id=titulo1 style="display:flex">
-  <p>Póliza / Creación<br>
+  <p>Propuesta de Póliza / Creación<br>
   </p>
 </div>
 <div id=titulo2 style="display:none">
-  <p>Póliza / Modificación / N° Póliza :
+  <p>Propuesta de Póliza / Modificación / N° Póliza :
     <?php  echo $nro_poliza; ?>
     -
     <?php  echo $selcompania; ?>
@@ -135,98 +135,14 @@ function estandariza_info( $data ) {
 <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
   <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
                     style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
-  <button ctype="button" lass="btn btn-second" id="cancelar1" onclick="cancela()"
-                    style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
-  <button type="button" class="btn btn-second" id="anular" onclick="modifica_estado(this.id)"
-                    style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
+  
 </div>
-<div class="form" id="pregunta_renovar" style="display:flex ;align-items: center;">
-  <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
-  <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
-                    onclick="checkRadio(this.name)" checked="checked">
-  <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-  <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
-                    onclick="checkRadio(this.name)">
-  <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-  <button type="button" class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
-                    style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
-  <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text"
-                    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div id="test1" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <table class="display" style="width:100%" id="listado_polizas">
-              <tr>
-                <th></th>
-                <th>Estado</th>
-                <th>Póliza</th>
-                <th>Compañia</th>
-                <th>Ramo</th>
-                <th>Inicio Vigencia</th>
-                <th>Fin Vigencia</th>
-                <th>Materia Asegurada</th>
-                <th>Observaciones</th>
-                <th>nom_clienteP</th>
-                <th>nom_clienteA</th>
-              </tr>
-            </table>
-            <div id="botones_poliza"></div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="col">
-<!-- "/bambooQA/backend/polizas/crea_poliza.php" -->
-<form action="/bambooQA/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
 
-                    id="formulario" novalidate>
-  <div id="auxiliar" style="display: none;">
-    <input name="id_poliza" id="id_poliza">
-  </div>
-  <input type="text" class="form-control" name="poliza_renovada" placeholder="Póliza Anterior"
-                        id="poliza_renovada" style="display:none;">
-  </div>
-  </div>
+</div>
 <!-- --------------------------------------------                -->
-  <div class ="col" id="datos_cancelacion"  style = "display:none"><br>
-    <div class ="row" >
-      <div class="col"style="display:flex ;align-items: center;">
-        <p><b>Complete información de</p>
-        &nbsp;
-        <p style="color:red">CANCELACIÓN</b></p>
-      </div>
-    </div>
-    <div class ="row" >
-      <div class="col-4" style="display:flex ;align-items: center;">
-        <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
-        <div class="md-form">
-          <input placeholder="Selected date" type="date" id="datofecha_cancelacion" name="datofecha_cancelacion"
-                                        class="form-control"  max= "9999-12-31">
-        </div>
-      </div>
-      <div class="col" style="display:flex ;align-items: center;">
-        <label for="datomotivo_cancela">Motivo &nbsp;&nbsp;</label>
-        <div class = "col-9">
-          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="datomotivo_cancela">
-        </div>
-        <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Cancelación</button>
-      </div>
-    </div>
-  </div>
+ 
 <!-- --------------------------------------------                -->
-  <br>
-  <br>
+
   <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne" style="background-color:whitesmoke">
@@ -389,6 +305,24 @@ function estandariza_info( $data ) {
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body" id="card-body-two">
+        <label for = "id_propuesta"><b>Datos Propuesta</b></label><br>
+        <div class="form-row">
+            <div class="col-4">
+              <label for="seguimiento">N° de Seguimiento:&nbsp;</label>
+              <label style="color: darkred">*</label>
+              <input type="text" class="form-control" id="item" name="item">
+            </div>
+        
+        <div class="col-4">
+              <label for="seguimiento">Fecha Ingreso Propuesta:&nbsp;</label>
+              <label style="color: darkred">*</label>
+              <div class="md-form">
+                <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
+                    class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+              </div>
+         </div>
+        </div>
+        <br>
           <label for="compania"><b>Compañía</b></label>
           <label style="color: darkred">&nbsp; *</label>
           <br>
@@ -555,14 +489,7 @@ function estandariza_info( $data ) {
           </div>
           <br>
           <div class="form-row">
-            <div class="col-4">
-              <label for="poliza">Número de Poliza</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <input type="text" class="form-control" id="nro_poliza" name="nro_poliza"
-                                    onchange="nro_poliza_completo()" required>
-              <div style="color:red; visibility: hidden" id="validador7">Debes ingresar número de
-                póliza</div>
-            </div>
+         
             <div class="col-2">
               <label for="item">Ítem</label>
               <input type="text" class="form-control" id="item" name="item">
@@ -713,237 +640,8 @@ function estandariza_info( $data ) {
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header" id="headingThree" style="background-color:whitesmoke">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
-                            style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body" id="card-body-three">
-        <label for="propuesta"><b>Propuesta</b></label>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="nro_propuesta">Número de Propuesta</label>
-            <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta">
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="fechaprop">Fecha Envío Propuesta</label>
-            <div class="md-form">
-              <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop"
-                                        class="form-control" max= "9999-12-31">
-            </div>
-          </div>
-        </div>
-        <br>
-        <label for="materia"><b>Comisión</b></label>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label>Porcentaje Comisión del Corredor</label>
-            <div class="form-inline">
-              <input type="text" class="form-control" id="porcentaje_comsion"
-                                        name="porcentaje_comsion" onChange="calculacomision()">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="porcentaje_comi">%</span></div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="comision">Comisión Correspondiente</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda5">UF</span></div>
-              <input type="text" class="form-control" id="comision" name="comision">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label>Comisión Bruta a Pago</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-              <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label>Comisión Neta a Pago</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-              <input type="text" class="form-control" id="comisionneta" name="comisionneta">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label>Número de Boleta</label>
-            <input type="text" class="form-control" name="boleta" id="boleta">
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="fechadeposito">Fecha Depósito</label>
-            <div class="md-form">
-              <input placeholder="Selected date" type="date" name="fechadeposito"
-                                        id="fechadeposito" class="form-control" onchange="validadorfecha(this.id)" max= "9999-12-31">
-            </div>
-          </div>
-        </div>
-        <br>
-        <label for="materia"><b>Comisión Negativa</b></label>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="comision">Monto</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-              <input type="text" class="form-control" name="comisionneg" id="comisionneg">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="comision">Boleta Comisión Negativa</label>
-            <input type="text" class="form-control" name="boletaneg" id="boletaneg">
-          </div>
-        </div>
-        <br>
-        <label for="pago"><b>Pago</b></label>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="formapago">Forma de Pago</label>
-            <label style="color: darkred">&nbsp; *</label>
-            <div class="form" style="display: flex; align-items: center;">
-              <select class="form-control" name="modo_pago" id="modo_pago"
-                                        onChange="modopago();modopago_completo();">
-                <option value="null">Selecciona forma de pago</option>
-                <option value="PAT"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
-                <option value="PAC"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
-                <option value="Plan de pago"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
-                <option value="Contado"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
-              </select>
-              <select class="form-control" name="cuotas" id="cuotas"
-                                        onchange="cuotas_completo();">
-                <option value="null">Selecciona Cantidad de Cuotas</option>
-                <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
-                <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
-                <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
-                <option value="4 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
-                <option value="5 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
-                <option value="6 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
-                <option value="7 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
-                <option value="8 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
-                <option value="9 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
-                <option value="10 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
-                <option value="11 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
-                <option value="12 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
-                <option value="13 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
-                <option value="14 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
-                <option value="15 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
-                <option value="16 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
-                <option value="17 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
-                <option value="18 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
-                <option value="19 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
-                <option value="20 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                <option value="21 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                <option value="22 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
-                <option value="23 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
-                <option value="24 Cuotas"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="valorcuota">Valor Cuota</label>
-            <div class="form-inline">
-              <select class="form-control" name="moneda_cuota" id="moneda_cuota">
-                <option value="UF"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
-                <option value="USD"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
-                <option value="CLP"
-                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
-              </select>
-              <input type="text" class="form-control" name="valorcuota" id="valorcuota"
-                                        oninput="concatenar(this.id)">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="fechaprimer">Fecha Primera Cuota</label>
-            <div class="md-form">
-              <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31">
-            </div>
-          </div>
-        </div>
-        <br>
-        <label for="pago"><b>Vendedor</b></label>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <div class="form-row">
-              <div class="col-4">
-                <select class="form-control" name="con_vendedor" id="con_vendedor"
-                                            onChange="validavendedor()">
-                  <option value="No"
-                                                <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $con_vendedor == "No") echo "selected" ?>>No</option>
-                  <option value="Si"
-                                                <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $con_vendedor == "Si") echo "selected" ?>>Si</option>
-                </select>
-              </div>
-              &nbsp;
-              <div class="col">
-                <input type="text" class="form-control" id="nombre_vendedor"
-                                            name="nombre_vendedor" placeholder="Nombre Vendedor" disabled>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingfour" style="background-color:whitesmoke">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                            style="color:#536656">Comentarios y Endosos</button>
-      </h5>
-    </div>
-    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
-      <div class="card-body" id="card-body-four">
-        <label for="comentario"><b>Comentarios</b></label>
-        <br>
-        <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
-                            style="text-indent:0px" ;>
-        </textarea>
-        <br>
-        <label for="endoso"><b>Endosos</b></label>
-        <br>
-        <textarea class="form-control" rows="2" style="height:100px" id='endoso' name='endoso'
-                            style="text-indent:0px" ;>
-        </textarea>
-      </div>
-    </div>
-  </div>
+  
+
   </div>
   <br>
   <div id="auxiliar2" style="display: none;">
