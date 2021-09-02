@@ -137,7 +137,7 @@ function retrocede()
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Endosos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Creación Propuesta Endosos</a>
+                            
                             <a class="dropdown-item" href="/bambooQA/creacion_poliza.php">Listado Propuesta Endosos</a>
                             <a class="dropdown-item" href="/bambooQA/listado_polizas.php">Listado de Endosos</a>
                         </div>
