@@ -4,24 +4,17 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino = $nro_poliza = $selcompania = '';
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_propuesta" ]) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
-  if ( isset( $_POST[ "renovar" ] ) == true ) {
-    $camino = 'renovar';
-    mysqli_set_charset( $link, 'utf8' );
-    mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-    $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
-    $resultado = mysqli_query( $link, $query );
-  } else {
-    $camino = 'modificar';
-  }
+  if ( isset( $_POST[ "modificar" ] ) == true ) {
+    $camino = 'modificar';  }
   
- $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
+ $id_propuesta = estandariza_info( $_POST[ "id_propuesta" ] );
 
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-  $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'es_CL') as prima_afecta,  FORMAT(prima_exenta, 4, 'es_CL') as prima_exenta,  FORMAT(prima_neta, 4, 'es_CL') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'es_CL') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'es_CL') as comision,  FORMAT(porcentaje_comision, 4, 'es_CL') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'es_CL') as comision_bruta,  FORMAT(comision_neta, 4, 'es_CL') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'es_CL') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'es_CL') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela,item from polizas where id=" . $id_poliza;
+  $query = "select rut_proponente, dv_proponente, rut_asegurado, dv_asegurado, compania, ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial, vigencia_final, numero_propuesta, cobertura, materia_asegurada, patente_ubicacion, moneda_poliza, deducible, FORMAT(prima_afecta, 4, 'es_CL') as prima_afecta, FORMAT(prima_exenta, 4, 'es_CL') as prima_exenta, FORMAT(prima_neta, 4, 'es_CL') as prima_neta, FORMAT(prima_bruta_anual, 4, 'es_CL') as prima_bruta_anual, monto_asegurado, fecha_propuesta, estado, item from propuesta_polizas where id=" . $id_propuesta;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
     $rut_prop = $row->rut_proponente;
@@ -34,10 +27,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
     $ramo = $row->ramo;
     $fechainicio = $row->vigencia_inicial;
     $fechavenc = $row->vigencia_final;
-    $fechavenc_ren = $row->vigencia_final_renovada;
     $dif_dias = $row->dif_dias;
-    $fecha_primera_cuota_ren = $row->fecha_primera_cuota_ren;
-    $nro_poliza = $row->numero_poliza;
     $cobertura = $row->cobertura;
     $materia = $row->materia_asegurada;
     $materia = str_replace( "\r\n", "\\n", $materia );
@@ -50,33 +40,10 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
     $prima_neta = $row->prima_neta;
     $prima_bruta = $row->prima_bruta_anual;
     $monto_aseg = $row->monto_asegurado;
+    $id_propuesta = $row->id_propuesta;
     $nro_propuesta = $row->numero_propuesta;
     $fechaprop = $row->fecha_envio_propuesta;
-    $moneda_comision = $row->moneda_comision;
-    $comision = $row->comision;
-    $porcentaje_comsion = $row->porcentaje_comision;
-    $comisionbruta = $row->comision_bruta;
-    $comisionneta = $row->comision_neta;
-    $modo_pago = $row->forma_pago;
-    $cuotas = $row->nro_cuotas;
-    $moneda_cuota = $row->moneda_valor_cuota;
-    $valorcuota = $row->valor_cuota;
-    $fechaprimer = $row->fecha_primera_cuota;
-    $con_vendedor = $row->vendedor;
-    $nombre_vendedor = $row->nombre_vendedor;
-    $poliza_renovada = $row->poliza_renovada;
-    $boleta = $row->numero_boleta;
-    $comision_negativa = $row->comision_negativa;
-    $boleta_negativa = $row->boleta_negativa;
-    $depositado_fecha = $row->depositado_fecha;
-    $endoso = $row->endoso;
-    $endoso = str_replace( "\r\n", "\\n", $endoso );
-    $comentario = $row->informacion_adicional;
-    $comentario = str_replace( "\r\n", "\\n", $comentario );
     $estado = $row->estado;
-    $venc_gtia = $row->venc_gtia;
-    $fech_cancela = $row->fech_cancela;
-    $motivo_cancela = $row->motivo_cancela;
     $item = $row->item;
   }
 
@@ -645,8 +612,6 @@ function estandariza_info( $data ) {
   </div>
   <br>
   <div id="auxiliar2" style="display: none;">
-    <input name="id_poliza_renovada" id="id_poliza_renovada">
-    <input name="nro_poliza_renovada" id="nro_poliza_renovada">
   </div>
   <button class="btn" type="submit" style="background-color: #536656; color: white"
             id='boton_submit' onclick = "bPreguntar = false">Registrar</button>
@@ -783,22 +748,7 @@ function calculaprimabruta() {
     document.getElementById("prima_bruta").value = primabruta.toFixed(2).replace(".", ",")
     document.getElementById("prima_neta").value = primaneta.toFixed(2).replace(".", ",")
 }
-function calculacomision() {
-    var porcentajecomision = document.getElementById("porcentaje_comsion").value;
-    var primaneta = document.getElementById("prima_neta").value;
-    var comision;
-    comision = parseFloat(porcentajecomision.replace(",", "."), 10) / (100) * parseFloat(primaneta.replace(",", "."))
-    document.getElementById("comision").value = comision.toFixed(2).replace(".", ",")
-}
-function modopago() {
-    if (document.getElementById("modo_pago").value == "Contado") {
-        document.getElementById("cuotas").disabled = true;
-        document.getElementById("cuotas").value = "Contado";
-    } else {
-        document.getElementById("cuotas").disabled = false;
-        document.getElementById("cuotas").value = "null";
-    }
-}
+
 function pobladeducible() {
     ramo = document.getElementById("ramo").value;
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
@@ -882,128 +832,6 @@ $('#test1').on('shown.bs.modal', function() {
     */
     //$('#modal_text').trigger('focus')
 })
-var table = $('#listado_polizas').DataTable({
-    "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
-    "scrollX": true,
-    "searchPanes": {
-        "columns": [2, 3, 8, 9],
-    },
-    "dom": 'Pfrtip',
-    "columns": [{
-            "className": 'details-control',
-            "orderable": false,
-            "data": null,
-            "render": function(data, type, row, meta) {
-                return '<button type="button" id="' + row.id_poliza +
-                    '" name="' + row.tipo_poliza +
-                    '" onclick="renovar_poliza(this.id, this.name)" class="btn btn-outline-primary">Renovar</button>';
-            }
-        },
-        {
-            "data": "estado",
-            title: "Estado"
-        },
-        { 
-                data: null, 
-                title: "Nro Póliza",
-                render: function ( data, type, row ) {
-                    return data.numero_poliza + ' (' + data.item + ')';
-            } },
-        {
-            "data": "compania",
-            title: "Compañía"
-        },
-        {
-            "data": "ramo",
-            title: "Ramo"
-        },
-        {
-            "data": "vigencia_inicial",
-            title: "Vigencia Inicio"
-        },
-        {
-            "data": "vigencia_final",
-            title: "Vigencia Término"
-        },
-        {
-            "data": "materia_asegurada",
-            title: "Materia asegurada"
-        },
-        {
-            "data": "patente_ubicacion",
-            title: "Observaciones materia asegurada"
-        },
-        {
-            "data": "nom_clienteP",
-            title: "Nombre proponente"
-        },
-        {
-            "data": "nom_clienteA",
-            title: "Nombre asegurado"
-        }
-    ],
-    "columnDefs": [{
-            "targets": [5, 6],
-            "searchable": false
-        },
-        {
-            targets: 1,
-            render: function(data, type, row, meta) {
-                var estado = '';
-                switch (data) {
-                  case 'Activo':
-                            estado='<span class="badge badge-primary">'+data+'</span>';
-                            break;
-                        case 'Renovado':
-                                estado='<span class="badge badge-warning">'+data+'</span>';
-                                break;
-                        case 'Vencido':
-                            estado='<span class="badge badge-danger">'+data+'</span>';
-                            break;
-                        case 'Cancelado':
-                            estado='<span class="badge badge-dark">'+data+'</span>';
-                            break;
-                        default:
-                            estado='<span class="badge badge-light">'+data+'</span>';
-                            break;
-                }
-                return estado; //render link in cell
-            }
-        }
-    ],
-    "order": [
-        [3, "asc"],
-        [4, "asc"]
-    ],
-    "oLanguage": {
-        "sSearch": "Búsqueda rápida",
-        "sLengthMenu": 'Mostrar <select>' +
-            '<option value="10">10</option>' +
-            '<option value="25">30</option>' +
-            '<option value="50">50</option>' +
-            '<option value="-1">todos</option>' +
-            '</select> registros',
-        "sInfoFiltered": "(_TOTAL_ registros de _MAX_ registros totales)",
-        "sLengthMenu": "Muestra _MENU_ registros por página",
-        "sZeroRecords": "No hay registros asociados",
-        "sInfo": "Mostrando página _PAGE_ de _PAGES_",
-        "sInfoEmpty": "No hay registros disponibles",
-        "oPaginate": {
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior",
-            "sLast": "Última"
-        }
-    },
-    "language": {
-        "searchPanes": {
-            "title": {
-                _: 'Filtros seleccionados - %d',
-                0: 'Sin Filtros Seleccionados',
-                1: '1 Filtro Seleccionado',
-            }
-        }
-    }
-});
 var tabla_clientes = $('#listado_clientes').DataTable({
 
     "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
@@ -1092,59 +920,7 @@ function seleccion_rut(rut) {
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
 }
-function renovar_poliza(poliza, tipo_poliza) {
-    //acá se debe hacer la validación
-    console.log(poliza);
-    console.log(tipo_poliza);
-    if (tipo_poliza == 'Renovada') {
-        console.log('Alerta de renovación');
-        var r = confirm("La póliza seleccionada ya se encuentra renovada por otra póliza. ¿Deseas continuar?");
-        if (r == true) {
-            console.log('Continúa renovandola');
-            var r2 = confirm("¿Deseas editar la póliza que renovó la póliza seleccionada?");
-            if (r2 == true) {
-                console.log('Edita póliza');
 
-                $.ajax({
-                    type: "POST",
-                    url: "/bambooQA/backend/polizas/busqueda_poliza_renovada.php",
-                    data: {
-                        id_a_renovar: poliza
-                    },
-                    dataType: 'JSON',
-                    success: function(response) {
-                        var datax = JSON.parse(response);
-                        //console.log(datax);
-                    }
-                });
-            } else {
-                console.log('Renovación nueva');
-                $('#modal_poliza').modal('hide');
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-                $.redirect('/bambooQA/creacion_poliza.php', {
-                    'id_poliza': poliza,
-                    'renovar': true
-                }, 'post');
-            }
-        } else {
-            console.log('No continúa');
-            $('#modal_poliza').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-            $.redirect('/bambooQA/creacion_poliza.php');
-        }
-    } else {
-        console.log('continúa normal');
-        $('#modal_poliza').modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-        $.redirect('/bambooQA/creacion_poliza.php', {
-            'id_poliza': poliza,
-            'renovar': true
-        }, 'post');
-    }
-}
 function habilitaedicion1() {
     var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
     for (var i = 0; i < fields1.length; i++) {
@@ -1171,9 +947,6 @@ function habilitaedicion1() {
     document.getElementById("anular").style.display = "none";
     document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
-                document.getElementById("datofecha_cancelacion").readOnly = false;
-                document.getElementById("datomotivo_cancela").readOnly = false;
-  //    document.getElementById("datos_cancelacion").style.display = "none";
       bPreguntar = false;
 }
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -1200,232 +973,141 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 	
-    var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_poliza" ]) == true ) echo "True"; ?>'
+    var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_propuesta" ]) == true ) echo "True"; ?>'
     if (consulta=='True'){
     var orgn = '<?php echo $camino; ?>';
     switch (orgn) {
         case 'modificar': {
-            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') {
-                document.getElementById("radio2_si").checked = true;
-                document.getElementById("radio2_no").checked = false;
-            }
-            if ('<?php echo $estado; ?>' == "Cancelado") {
-                document.getElementById("datos_cancelacion").style.display = "block";
-                document.getElementById("cancelar").style.display = "none";
-                document.getElementById("cancelar1").style.display = "none";
-                document.getElementById("datofecha_cancelacion").readOnly = true;
-                document.getElementById("datomotivo_cancela").readOnly = true;
-            }
-            if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
-                document.getElementById("pregunta_gtia").checked = true;
-                document.getElementById("venc_gtia").readOnly = false;
+                if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') {
+                    document.getElementById("radio2_si").checked = true;
+                    document.getElementById("radio2_no").checked = false;
+                }
+                if ('<?php echo $estado; ?>' == "Cancelado") {
+                    document.getElementById("datos_cancelacion").style.display = "block";
+                    document.getElementById("cancelar").style.display = "none";
+                    document.getElementById("cancelar1").style.display = "none";
+                    document.getElementById("datofecha_cancelacion").readOnly = true;
+                    document.getElementById("datomotivo_cancela").readOnly = true;
+                }
+                if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
+                    document.getElementById("pregunta_gtia").checked = true;
+                    document.getElementById("venc_gtia").readOnly = false;
+                    
+                    
+                }
                 
                 
-            }
-            
-            
-            document.getElementById("titulo1").style.display = "none";
-            document.getElementById("titulo2").style.display = "flex";
-            document.getElementById("pregunta_renovar").style.display = "none";
-            document.getElementById("ramo").value = '<?php echo $ramo; ?>';
-            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
-            document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
-            document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
-            document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
-            document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
-            document.getElementById("materia").value = '<?php echo $materia; ?>';
-            document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
-            document.getElementById("deducible").value = '<?php echo $deducible; ?>';
-            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-            document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
-            document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
-            document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
-            document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
-            document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
-            document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
-            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
-            document.getElementById("comision").value = '<?php echo $comision; ?>';
-            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
-            document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
-            document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
-            document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
-            document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
-            document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
-            document.getElementById("boleta").value = '<?php echo $boleta; ?>';
-            document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
-            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
-            document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
-            document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bambooQA/backend/polizas/modifica_poliza.php";
-            
-            document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
-            document.getElementById("endoso").value = '<?php echo $endoso; ?>';
-            document.getElementById("comentario").value = '<?php echo $comentario; ?>';
-            document.getElementById("boton_submit").childNodes[0].nodeValue = "Guardar cambios";
-            document.getElementById("boton_submit").style.display = "none";
-            document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
-            
-			document.getElementById("datofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
-			document.getElementById("datomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
+                document.getElementById("titulo1").style.display = "none";
+                document.getElementById("titulo2").style.display = "flex";
+                document.getElementById("pregunta_renovar").style.display = "none";
+                document.getElementById("ramo").value = '<?php echo $ramo; ?>';
+                document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+                document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
+                document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+                document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+                document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
+                document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
+                document.getElementById("materia").value = '<?php echo $materia; ?>';
+                document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
+                document.getElementById("deducible").value = '<?php echo $deducible; ?>';
+                document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+                document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
+                document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
+                document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
+                document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
+                document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
+                document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+                document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+                document.getElementById("comision").value = '<?php echo $comision; ?>';
+                document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
+                document.getElementById("comisionbruta").value = '<?php echo $comisionbruta; ?>';
+                document.getElementById("comisionneta").value = '<?php echo $comisionneta; ?>';
+                document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
+                document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';;
+                document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
+                document.getElementById("boleta").value = '<?php echo $boleta; ?>';
+                document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
+                document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+                document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+                document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+                document.getElementById("formulario").action = "/bambooQA/backend/propuesta_polizas/modifica_propuesta_polizas.php";
+                
+                document.getElementById("id_propuesta").value = '<?php echo $id_propuesta; ?>';
+                document.getElementById("endoso").value = '<?php echo $endoso; ?>';
+                document.getElementById("comentario").value = '<?php echo $comentario; ?>';
+                document.getElementById("boton_submit").childNodes[0].nodeValue = "Guardar cambios";
+                document.getElementById("boton_submit").style.display = "none";
+                document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
+                
+                document.getElementById("datofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
+                document.getElementById("datomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
 
-			document.getElementById("item").value = '<?php echo $item; ?>';
-            
-            valida_rut_duplicado_prop();
-            valida_rut_duplicado_aseg();
-            document.getElementById("botones_edicion").style.display = "flex"
-            var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
-            for (var i = 0; i < fields1.length; i++) {
-                fields1[i].disabled = true;
-            }
-            var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
-            for (var i = 0; i < fields2.length; i++) {
-                fields2[i].disabled = true;
-            }
-            var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
-            for (var i = 0; i < fields3.length; i++) {
-                fields3[i].disabled = true;
-            }
-            var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
-            for (var i = 0; i < fields4.length; i++) {
-                fields4[i].disabled = true;
-            }
-            var ramo = document.getElementById("ramo").value;
-            if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
-                "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
-                document.getElementById("deducible_veh").style.display = "flex";
-				        document.getElementById("vencimiento_gtia").style.display = "flex";
-                document.getElementById("deducible_defecto").style.display = "none";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_veh_1").value = deducible;
-            } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" ||
-                ramo == "INC - Hogar" || ramo == "INC - Misceláneos" || ramo ==
-                "INC - Perjuicio por Paralización" || ramo == "INC - Pyme" || ramo ==
-                "INC - TRBF (Todo Riesgo Bienes Físicos)") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_inc").style.display = "flex";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_inc_1").value = deducible;
-            } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo ==
-                "Garantía" || ramo == "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" ||
-                ramo == "ASISTENCIA EN VIAJE" || ramo == "APV" || ramo == "VIDA") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_viaje").style.display = "flex";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_viaje_1").value = deducible;
-            } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_rc").style.display = "flex";
-                var deducible = document.getElementById("deducible").value
-                var cadena = document.getElementById("deducible").value.split("%")
-                document.getElementById("deducible_porcentaje").value = cadena[0];
-                document.getElementById("moneda7").innerHTML = '<?php echo $moneda_poliza; ?>';
-                document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2,
-                    cadena[1].length);
-            } else {
-                document.getElementById("deducible_defecto_1").value = document.getElementById("deducible")
-                    .value;
-            }
-            var moneda = document.getElementById("moneda_poliza").value;
-            document.getElementById("moneda").innerHTML = moneda;
-            document.getElementById("moneda2").innerHTML = moneda;
-            document.getElementById("moneda3").innerHTML = moneda;
-            document.getElementById("moneda4").innerHTML = moneda;
-            document.getElementById("moneda5").innerHTML = moneda;
-            document.getElementById("moneda7").innerHTML = moneda;
-            break;
-            bPreguntar = false;
-        }
-        case 'renovar': {
-            var rut_prop = '<?php echo $rut_completo_prop; ?>';
-            var rut_aseg = '<?php echo $rut_completo_aseg; ?>';
-            if (rut_prop == rut_aseg) {
-                document.getElementById("radio2_si").checked = true;
-                document.getElementById("radio2_no").checked = false;
-            } 
-            else 
-            {
-                document.getElementById("radio2_no").checked = true;
-                document.getElementById("radio2_si").checked = false;
-            }
-             if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
-                document.getElementById("pregunta_gtia").checked = true;
-                document.getElementById("venc_gtia").readOnly = false;
+                document.getElementById("item").value = '<?php echo $item; ?>';
                 
-                
-            }
-            document.getElementById("busca_poliza").style.display = "block";
-            document.getElementById("poliza_renovada").style.display = "block";
-            document.getElementById("poliza_renovada").disabled = true;
-            document.getElementById("radio_si").checked = true;
-            document.getElementById("radio_no").checked = false;
-            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
-            document.getElementById("cobertura").value = '<?php echo $cobertura; ?>';
-            document.getElementById("materia").value = '<?php echo $materia; ?>';
-            document.getElementById("detalle_materia").value = '<?php echo $detalle_materia; ?>';
-            document.getElementById("deducible").value = '<?php echo $deducible; ?>';
-            document.getElementById("comision").value = '<?php echo $comision; ?>';
-            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comsion; ?>';
-            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-            document.getElementById("prima_afecta").value = '<?php echo $prima_afecta; ?>';
-            document.getElementById("prima_exenta").value = '<?php echo $prima_exenta; ?>';
-            document.getElementById("prima_neta").value = '<?php echo $prima_neta; ?>';
-            document.getElementById("prima_bruta").value = '<?php echo $prima_bruta; ?>';
-            document.getElementById("monto_aseg").value = '<?php echo $monto_aseg; ?>';
-            document.getElementById("cuotas").value = '<?php echo $cuotas; ?>';
-            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
-            document.getElementById("nro_poliza_renovada").value = '<?php echo $nro_poliza; ?>';
-            document.getElementById("id_poliza_renovada").value = '<?php echo $id_poliza; ?>';
-            document.getElementById("comentario").value = '<?php echo $comentario; ?>';
-            document.getElementById("fechainicio").value = '<?php echo $fechavenc; ?>';
-			document.getElementById("venc_gtia").value = '<?php echo $venc_gtia; ?>';
-			document.getElementById("datofecha_cancelacion").value = '<?php echo $fech_cancela; ?>';
-			document.getElementById("datomotivo_cancela").value = '<?php echo $motivo_cancela; ?>';
-            var dias_vig_pol = '<?php echo $dif_dias; ?>';
-            if (dias_vig_pol == '365' || dias_vig_pol == '366') {
-                document.getElementById("fechavenc").value = '<?php echo $fechavenc_ren; ?>';
-                document.getElementById("fechaprimer").value = '<?php echo $fecha_primera_cuota_ren; ?>';
-            }
-            valida_rut_duplicado_prop();
-            valida_rut_duplicado_aseg();
-            var ramo = document.getElementById("ramo").value;
-            if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
-                "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
-                document.getElementById("deducible_veh").style.display = "flex";
-                document.getElementById("deducible_defecto").style.display = "none";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_veh_1").value = deducible;
-                document.getElementById("vencimiento_gtia").style.display = "flex";
-            } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" ||
-                ramo == "INC - Hogar" || ramo == "INC - Misceláneos" || ramo ==
-                "INC - Perjuicio por Paralización" || ramo == "INC - Pyme" || ramo ==
-                "INC - TRBF (Todo Riesgo Bienes Físicos)") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_inc").style.display = "flex";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_inc_1").value = deducible;
-            } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo ==
-                "Garantía" || ramo == "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" ||
-                ramo == "ASISTENCIA EN VIAJE" || ramo == "APV" || ramo == "VIDA") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_viaje").style.display = "flex";
-                var deducible = document.getElementById("deducible").value;
-                document.getElementById("deducible_viaje_1").value = deducible;
-            } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
-                document.getElementById("deducible_defecto").style.display = "none";
-                document.getElementById("deducible_rc").style.display = "flex";
-                var deducible = document.getElementById("deducible").value
-                var cadena = document.getElementById("deducible").value.split("%")
-                document.getElementById("deducible_porcentaje").value = cadena[0];
-                document.getElementById("moneda7").innerHTML = '<?php echo $moneda_poliza; ?>';
-                document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2,
-                    cadena[1].length);
-            } else {
-                document.getElementById("deducible_defecto_1").value = document.getElementById("deducible")
-                    .value;
-            }
-            break;
+                valida_rut_duplicado_prop();
+                valida_rut_duplicado_aseg();
+                document.getElementById("botones_edicion").style.display = "flex"
+                var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+                for (var i = 0; i < fields1.length; i++) {
+                    fields1[i].disabled = true;
+                }
+                var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+                for (var i = 0; i < fields2.length; i++) {
+                    fields2[i].disabled = true;
+                }
+                var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+                for (var i = 0; i < fields3.length; i++) {
+                    fields3[i].disabled = true;
+                }
+                var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+                for (var i = 0; i < fields4.length; i++) {
+                    fields4[i].disabled = true;
+                }
+                var ramo = document.getElementById("ramo").value;
+                if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo ==
+                    "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
+                    document.getElementById("deducible_veh").style.display = "flex";
+                            document.getElementById("vencimiento_gtia").style.display = "flex";
+                    document.getElementById("deducible_defecto").style.display = "none";
+                    var deducible = document.getElementById("deducible").value;
+                    document.getElementById("deducible_veh_1").value = deducible;
+                } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" ||
+                    ramo == "INC - Hogar" || ramo == "INC - Misceláneos" || ramo ==
+                    "INC - Perjuicio por Paralización" || ramo == "INC - Pyme" || ramo ==
+                    "INC - TRBF (Todo Riesgo Bienes Físicos)") {
+                    document.getElementById("deducible_defecto").style.display = "none";
+                    document.getElementById("deducible_inc").style.display = "flex";
+                    var deducible = document.getElementById("deducible").value;
+                    document.getElementById("deducible_inc_1").value = deducible;
+                } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo ==
+                    "Garantía" || ramo == "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" ||
+                    ramo == "ASISTENCIA EN VIAJE" || ramo == "APV" || ramo == "VIDA") {
+                    document.getElementById("deducible_defecto").style.display = "none";
+                    document.getElementById("deducible_viaje").style.display = "flex";
+                    var deducible = document.getElementById("deducible").value;
+                    document.getElementById("deducible_viaje_1").value = deducible;
+                } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
+                    document.getElementById("deducible_defecto").style.display = "none";
+                    document.getElementById("deducible_rc").style.display = "flex";
+                    var deducible = document.getElementById("deducible").value
+                    var cadena = document.getElementById("deducible").value.split("%")
+                    document.getElementById("deducible_porcentaje").value = cadena[0];
+                    document.getElementById("moneda7").innerHTML = '<?php echo $moneda_poliza; ?>';
+                    document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2,
+                        cadena[1].length);
+                } else {
+                    document.getElementById("deducible_defecto_1").value = document.getElementById("deducible")
+                        .value;
+                }
+                var moneda = document.getElementById("moneda_poliza").value;
+                document.getElementById("moneda").innerHTML = moneda;
+                document.getElementById("moneda2").innerHTML = moneda;
+                document.getElementById("moneda3").innerHTML = moneda;
+                document.getElementById("moneda4").innerHTML = moneda;
+                document.getElementById("moneda5").innerHTML = moneda;
+                document.getElementById("moneda7").innerHTML = moneda;
+                break;
+                bPreguntar = false;
         }
         default:{
         break;
@@ -1446,31 +1128,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 }
 });
 
-function cancela() {
-      document.getElementById("datos_cancelacion").style.display = "block";
-      document.getElementById("cancelar").style.display = "block";
-     document.getElementById("edicion1").style.display = "none";
-    document.getElementById("anular").style.display = "none";
-    document.getElementById("cancelar1").style.display = "none";
-      
-}
-
-
-
-function modifica_estado(estado) {
-    var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
-    if (r2 == true) {
-      // acá se debe cerrar todas las tareas asociadas a una tarea cancelada
-       $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
-            'id_poliza': document.getElementById("id_poliza").value,
-            'accion': estado,
-            'datofecha_cancelacion': document.getElementById("datofecha_cancelacion").value,
-            'nro_poliza': document.getElementById("nro_poliza").value,
-            'datomotivo_cancela': document.getElementById("datomotivo_cancela").value
-            
-        }, 'post');
-    }
-}
 document.getElementById("formulario").addEventListener('submit', function(event) {
     if (document.getElementById("rutprop").value == "") {
         document.getElementById("validador10").style.visibility = "visible";
@@ -1520,14 +1177,7 @@ document.getElementById("formulario").addEventListener('submit', function(event)
         document.getElementById("validador13").style.visibility = "visible";
         event.preventDefault();
     }
-    if (document.getElementById("modo_pago").value == "null") {
-        document.getElementById("modo_pago").style.color = "red";
-        event.preventDefault();
-    }
-    if (document.getElementById("cuotas").value == "null") {
-        document.getElementById("cuotas").style.color = "red";
-        event.preventDefault();
-    } else {
+     else {
     }
     
     
@@ -1546,7 +1196,6 @@ function validadorfecha(id){
         
     }
 }
-
 function rutprop_completo() {
     if (document.getElementById("rutprop").value != "") {
         document.getElementById("validador10").style.visibility = "hidden";
@@ -1589,11 +1238,7 @@ function fechavenc_completo() {
         document.getElementById("validador6").style.visibility = "hidden";
     }
 }
-function nro_poliza_completo() {
-    if (document.getElementById("nro_poliza").value != "") {
-        document.getElementById("validador7").style.visibility = "hidden";
-    }
-}
+
 function materia_completo() {
     if (document.getElementById("materia").value != "") {
         document.getElementById("validador8").style.visibility = "hidden";
@@ -1609,16 +1254,8 @@ function monto_aseg_completo() {
         document.getElementById("validador13").style.visibility = "hidden";
     }
 }
-function modopago_completo() {
-    if (document.getElementById("modo_pago").value != "null") {
-        document.getElementById("modo_pago").style.color = "grey";
-    }
-}
-function cuotas_completo() {
-    if (document.getElementById("cuotas").value != "null") {
-        document.getElementById("cuotas").style.color = "grey";
-    }
-}
+
+
 
 function vencimientogarantia(){
   var ramo = document.getElementById("ramo").value;
@@ -1693,31 +1330,6 @@ function vencimiento_garantía(){
  //}
  }
 
-
- function valida_primerpago(){
-     
-     
-     var fecha_primer = new Date (document.getElementById("fechaprimer").value);
-     var day_venc = fecha_primer.getDate()+1;
-     var month_venc = fecha_primer.getMonth()+1;
-     var year_venc = fecha_primer.getFullYear();
-     var hoy = new Date();
-     
-
-     
-     
-     if(year_venc > 1000)
-     {
-         if (fecha_primer < hoy){
-             
-             alert("La fecha del primer pago es retroactiva");
-         }
-         
-         
-     }
-     
-    
- }
  
 (function(){
 
