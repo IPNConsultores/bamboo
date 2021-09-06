@@ -109,7 +109,7 @@ function estandariza_info( $data ) {
 <!-- --------------------------------------------                -->
  
 <!-- --------------------------------------------                -->
-
+<form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario" novalidate>
   <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne" style="background-color:whitesmoke">
