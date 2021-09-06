@@ -858,7 +858,7 @@ function estandariza_info( $data ) {
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                            style="color:#536656">Comentarios y Endosos</button>
+                            style="color:#536656">Comentarios</button>
       </h5>
     </div>
     <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
