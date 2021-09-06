@@ -188,9 +188,7 @@ function estandariza_info( $data ) {
 </div>
 <div class="col">
 <!-- "/bambooQA/backend/polizas/crea_poliza.php" -->
-<form action="/bambooQA/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
-
-                    id="formulario" novalidate>
+<form action="/bambooQA/backend/polizas/crea_poliza.php" class="needs-validation" method="POST" id="formulario" novalidate>
   <div id="auxiliar" style="display: none;">
     <input name="id_poliza" id="id_poliza">
   </div>
