@@ -69,6 +69,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
                     <th>Materia Asegurada</th>
+                    <th>Tipo propuesta</th>
                     <th>Observaciones / Materia Asegurada</th>
                     <th>Deducible</th>
                     <th>Prima afecta</th>
@@ -169,8 +170,8 @@ $(document).ready(function() {
                 title: "Materia asegurada"
             },
             {
-                "data": "tipo_poliza",
-                title: "Tipo póliza"
+                "data": "tipo_propuesta",
+                title: "Tipo propuesta"
             },
             {
                 "data": "patente_ubicacion",
