@@ -138,119 +138,119 @@ $(document).ready(function() {
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
-            },
+            },//0
             {
                 "data": "estado",
                 title: "Estado"
-            },
+            },//1
             { 
                 data: null, 
                 title: "Nro Propuesta",
                 render: function ( data, type, row ) {
                     return data.numero_propuesta + ' (' + data.item + ')';
-            } },
+            } }, //2
             {
                 "data": "compania",
                 title: "Compañía"
-            },
+            }, //3
             {
                 "data": "ramo",
                 title: "Ramo"
-            },
+            }, //4
             {
                 "data": "vigencia_inicial",
                 title: "Vigencia Inicio"
-            },
+            }, //5
             {
                 "data": "vigencia_final",
                 title: "Vigencia Término"
-            },
+            }, //6
             {
                 "data": "materia_asegurada",
                 title: "Materia asegurada"
-            },
+            }, //7
             {
                 "data": "tipo_propuesta",
                 title: "Tipo propuesta"
-            },
+            }, //8
             {
                 "data": "patente_ubicacion",
                 title: "Observaciones materia asegurada"
-            },
+            }, //9
             {
                 "data": "deducible",
                 title: "Deducible"
-            },
+            }, //10
             {
                 "data": "prima_afecta",
                 title: "Prima afecta"
-            },
+            }, //11
             {
                 "data": "prima_exenta",
                 title: "Prima exenta"
-            },
+            }, //12
             {
                 "data": "prima_bruta_anual",
                 title: "Prima bruta anual"
-            },
+            }, //13
             {
                 "data": "anomes_final",
                 title: "Añomes final"
-            },
+            }, //14
             {
                 "data": "anomes_inicial",
                 title: "Añomes inicial"
-            },
+            }, //15
             {
                 "data": "moneda_poliza",
                 title: "Moneda póliza"
-            },
+            }, //16
             {
                 "data": "cobertura",
                 title: "Cobertura"
-            },
+            }, //17
             {
                 "data": "nom_clienteP",
                 title: "Proponente"
-            },
+            }, //18
             {
                 "data": "rut_clienteP",
                 title: "Rut Proponente"
-            },
+            }, //19
             {
                 "data": "nom_clienteA",
                 title: "Asegurado"
-            },
+            }, //20
             {
                 "data": "rut_clienteA",
                 title: "Rut Asegurado"
-            },
+            }, //21
             {
                 "data": "grupo",
                 title: "Grupo"
-            },
+            }, //22
             {
                 "data": "referido",
                 title: "Referido"
-            },
+            }, //23
             {
                 "data": "monto_asegurado",
                 title: "Monto Asegurado"
-            },
+            }, //24
             {
                 "data": "fecha_envio_propuesta",
                 title: "Fecha envío propuesto"
-            }
+            }  //25                
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46],
+                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26],
                 "visible": false,
             },
             {
-                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46,44],
+                "targets": [10, 11, 12,13,14,15,16,17,24,25,26],
                 "searchable": false
             },
             {
@@ -277,7 +277,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,45,44],
+        targets: [5,6,25],
          render: function(data, type, full)
          {
              if (type == 'display')
@@ -355,7 +355,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Propuestas de Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,23]
                 }
             },
             {
@@ -363,7 +363,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Propuestas de Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,23]
                 }
             }
         ]
