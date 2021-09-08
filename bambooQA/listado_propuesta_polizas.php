@@ -58,8 +58,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
         </p>
         <br>
         <div class="container">
-            <table class="table table-hover table-sm table-responsive" style="width:100%" id="listado_propuesta_polizas">
-                <thead>
+            <table class="display" style="width:100%" id="listado_propuesta_polizas">
                    <tr>
                     <th></th>
                     <th>Estado</th>
@@ -72,11 +71,27 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Materia Asegurada</th>
                     <th>Tipo póliza</th>
                     <th>Observaciones / Materia Asegurada</th>
+                    <th>Deducible</th>
+                    <th>Prima afecta</th>
+                    <th>Prima exenta</th>
+                    <th>Prima bruta anual</th>
+                    <th>Añomes final</th>
+                    <th>Añomes inicial</th>
+                    <th>Moneda póliza</th>
+                    <th>Cobertura</th>
                     <th>Proponente</th>
+                    <th>Rut Proponente</th>
                     <th>Asegurado</th>
+                    <th>Rut Asegurado</th>
+                    <th>grupo</th>
+                    <th>referido</th>
+                    <th>monto_asegurado</th>
+                    <th>numero_propuesta</th>
+                    <th>fecha_envio_propuesta</th>
+                    <th>Prima neta</th>
                    
                     </tr>
-                </thead>
+
             </table>
             <div id="botones_poliza"></div>
         </div>
@@ -409,11 +424,11 @@ function botones(id, accion, base) {
     switch (accion) {
         case "elimina": {
 
-            if (base == 'poliza') {
+            if (base == 'propuesta') {
                 var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
                 if (r2 == true) {
                 $.redirect('/bambooQA/backend/propuesta_polizas/modifica_propuesta_poliza.php', {
-                    'id_poliza': id,
+                    'id_propuesta': id,
                     'accion':accion,
                 }, 'post');
                 }
@@ -421,7 +436,7 @@ function botones(id, accion, base) {
             break;
         }
         case "modifica": {
-            if (base == 'poliza') {
+            if (base == 'propuesta') {
                 $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
                 'id_propuesta': id,
                 }, 'post');
