@@ -69,7 +69,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
                     <th>Materia Asegurada</th>
-                    <th>Tipo póliza</th>
                     <th>Observaciones / Materia Asegurada</th>
                     <th>Deducible</th>
                     <th>Prima afecta</th>
