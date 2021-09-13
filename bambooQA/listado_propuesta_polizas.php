@@ -138,109 +138,109 @@ $(document).ready(function() {
                 "orderable": false,
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
-            },
+            }, //0
             {
                 "data": "estado",
                 title: "Estado"
-            },
+            }, //1
             { 
                 data: null, 
                 title: "Nro Propuesta",
                 render: function ( data, type, row ) {
                     return data.numero_propuesta + ' (' + data.item + ')';
-            } },
+            } }, //2
             {
                 "data": "compania",
                 title: "Compañía"
-            },
+            }, //3
             {
                 "data": "ramo",
                 title: "Ramo"
-            },
+            }, //4
             {
                 "data": "vigencia_inicial",
                 title: "Vigencia Inicio"
-            },
+            }, //5
             {
                 "data": "vigencia_final",
                 title: "Vigencia Término"
-            },
+            }, //6
             {
                 "data": "materia_asegurada",
                 title: "Materia asegurada"
-            },
+            }, //7
             {
                 "data": "tipo_propuesta",
                 title: "Tipo propuesta"
-            },
+            }, //8
             {
                 "data": "patente_ubicacion",
                 title: "Observaciones materia asegurada"
-            },
+            }, //9
             {
                 "data": "deducible",
                 title: "Deducible"
-            },
+            }, //10
             {
                 "data": "prima_afecta",
                 title: "Prima afecta"
-            },
+            }, //11
             {
                 "data": "prima_exenta",
                 title: "Prima exenta"
-            },
+            }, //12
             {
                 "data": "prima_bruta_anual",
                 title: "Prima bruta anual"
-            },
+            }, //13
             {
                 "data": "anomes_final",
                 title: "Añomes final"
-            },
+            }, //14
             {
                 "data": "anomes_inicial",
                 title: "Añomes inicial"
-            },
+            }, //15
             {
                 "data": "moneda_poliza",
                 title: "Moneda póliza"
-            },
+            }, //16
             {
                 "data": "cobertura",
                 title: "Cobertura"
-            },
+            }, //17
             {
                 "data": "nom_clienteP",
                 title: "Proponente"
-            },
+            }, //18
             {
                 "data": "rut_clienteP",
                 title: "Rut Proponente"
-            },
+            }, //19
             {
                 "data": "nom_clienteA",
                 title: "Asegurado"
-            },
+            }, //20
             {
                 "data": "rut_clienteA",
                 title: "Rut Asegurado"
-            },
+            }, //21
             {
                 "data": "grupo",
                 title: "Grupo"
-            },
+            }, //22
             {
                 "data": "referido",
                 title: "Referido"
-            },
+            }, //23
             {
                 "data": "monto_asegurado",
                 title: "Monto Asegurado"
-            },
+            }, //24
             {
                 "data": "fecha_envio_propuesta",
                 title: "Fecha envío propuesto"
-            }
+            } //25
         ],
         //          "search": {
         //          "search": "abarca"
