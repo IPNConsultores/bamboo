@@ -54,7 +54,7 @@ $resultado=mysqli_query($link, $sql);
         "id_propuesta"=>& $row->id_propuesta,                   //30
         "monto_asegurado" =>& $row->monto_asegurado,            //31
         "numero_propuesta" =>& $row->numero_propuesta,          //32
-        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,//33
+        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta//33
       ));
     } else {
     $codigo.= ', '.json_encode(array(
@@ -91,7 +91,7 @@ $resultado=mysqli_query($link, $sql);
       "id_propuesta"=>& $row->id_propuesta,
       "monto_asegurado" =>& $row->monto_asegurado,
       "numero_propuesta" =>& $row->numero_propuesta,
-      "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,
+      "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta
     ));}
   }
   $codigo.=']}';
