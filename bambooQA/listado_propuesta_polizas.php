@@ -86,10 +86,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>grupo</th>
                     <th>referido</th>
                     <th>monto_asegurado</th>
-                    <th>numero_propuesta</th>
-                    <th>fecha_envio_propuesta</th>
-                    <th>Prima neta</th>
-                   
+
                     </tr>
 
             </table>
@@ -245,15 +242,9 @@ $(document).ready(function() {
         //          "search": {
         //          "search": "abarca"
         //          },
-        "columnDefs": [{
-                "targets": [10, 11, 12,13,14,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46],
-                "visible": false,
-            },
-            {
-                "targets": [10, 11, 12,13,14,15,16,17,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,45,46,44],
-                "searchable": false
-            },
-            {
+        "columnDefs": 
+        [
+         {
         targets: 1,
         render: function (data, type, row, meta) {
              var estado='';
@@ -277,7 +268,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,45,44],
+        targets: [5,6,25],
          render: function(data, type, full)
          {
              if (type == 'display')
@@ -355,7 +346,7 @@ $(document).ready(function() {
                 extend: 'excelHtml5',
                 filename: 'Listado Propuestas de Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
                 }
             },
             {
@@ -363,7 +354,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 filename: 'Listado Propuestas de Pólizas al: ' + fecha,
                 exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,41,13,24,25,26,27,28,29,30,31,33,32,34,35,23,37,38,39,40,42,43,44,45,46]
+                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
                 }
             }
         ]
@@ -386,35 +377,16 @@ function format(d) {
     }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Deducible:</td>' +
-        '<td>' + d.deducible +'</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Prima afecta:</td>' +
-        '<td>' + d.prima_afecta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Prima exenta:</td>' +
-        '<td>' + d.prima_exenta + '</td>' +
-        '</tr>' +
-        ext_cancelado + 
-        '<tr>' +
-        '<td>Prima bruta anual:</td>' +
-        '<td>' + d.prima_bruta_anual + '</td>' +
-        '</tr>' +
-        '<tr>' +
         '<td>Acciones</td>' +
-        '<td><button title="Buscar información asociada" type="button" id=' + d.id_poliza +
-        ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
-        d.id_poliza +
-        ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a><button title="Asignar tarea"  type="button" id=' +
-        d.id_poliza +
-        ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a><button title="Generar correo"  type="button"' +
-        'id='+ d.id_poliza +
-        ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a><button style="background-color: #FF0000" title="Eliminar"  type="button" id=' +
-        d.id_poliza +
-        ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button></td>' +
-
+        '<td>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.id_poliza + ' name="aprobar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
+        '<button title="Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar"  type="button" id=' + d.id_poliza + ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Eliminar"  type="button" id=' + d.id_poliza + ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '</td>' +
         '</tr>' +
         '</table>';
 }
@@ -466,6 +438,20 @@ function botones(id, accion, base) {
             break;
         }
         case "info": {
+            $.redirect('/bambooQA/resumen2.php', {
+                'id': id,
+                'base': base
+            }, 'post');
+            break;
+        }
+        case "aprobar": {
+            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                'id': id,
+                'base': base
+            }, 'post');
+            break;
+        }
+        case "generar": {
             $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
                 'base': base
