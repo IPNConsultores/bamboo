@@ -223,6 +223,7 @@ function estandariza_info( $data ) {
     </div>
   </div>
 <!-- --------------------------------------------                -->
+
   <br>
   <br>
   <div class="accordion" id="accordionExample">

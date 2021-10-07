@@ -18,6 +18,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
   
  $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
 
+ 
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
   mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
@@ -137,8 +138,7 @@ function estandariza_info( $data ) {
                     style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
   <button ctype="button" lass="btn btn-second" id="cancelar1" onclick="cancela()"
                     style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
-  <button type="button" class="btn btn-second" id="anular" onclick="modifica_estado(this.id)"
-                    style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
+  <button type="button" class="btn btn-second" id="anular1" onclick="anular()" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
 </div>
 <div class="form" id="pregunta_renovar" style="display:flex ;align-items: center;">
   <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
@@ -221,6 +221,33 @@ function estandariza_info( $data ) {
           <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="datomotivo_cancela">
         </div>
         <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Cancelación</button>
+      </div>
+    </div>
+  </div>
+<!-- --------------------------------------------                -->
+<!-- --------------------------------------------                -->
+  <div class ="col" id="datos_anulacion"  style = "display:none"><br>
+    <div class ="row" >
+      <div class="col"style="display:flex ;align-items: center;">
+        <p><b>Complete información de</p>
+        &nbsp;
+        <p style="color:red">ANULACIÓN</b></p>
+      </div>
+    </div>
+    <div class ="row" >
+      <div class="col-4" style="display:flex ;align-items: center;">
+        <label for="datofecha_anulacion">Fecha Anulación &nbsp;&nbsp;</label>
+        <div class="md-form">
+          <input placeholder="Selected date" type="date" id="datofecha_anulacion" name="datofecha_anulacion"
+                                        class="form-control"  max= "9999-12-31">
+        </div>
+      </div>
+      <div class="col" style="display:flex ;align-items: center;">
+        <label for="datomotivo_anulacion">Motivo &nbsp;&nbsp;</label>
+        <div class = "col-9">
+          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_anulacion" class="form-control" name="datomotivo_anulacion">
+        </div>
+        <button type="button" class="btn btn-second" id="anular" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Anulación</button>
       </div>
     </div>
   </div>
@@ -1470,7 +1497,7 @@ function habilitaedicion1() {
     document.getElementById("nombre_prop").readonly = true;
     document.getElementById("nombre_seg").disabled = true;
     document.getElementById("edicion1").style.display = "none";
-    document.getElementById("anular").style.display = "none";
+    document.getElementById("anular1").style.display = "none";
     document.getElementById("cancelar1").style.display = "none";
     document.getElementById("boton_submit").style.display = "flex";
                 document.getElementById("datofecha_cancelacion").readOnly = false;
@@ -1752,11 +1779,20 @@ function cancela() {
       document.getElementById("datos_cancelacion").style.display = "block";
       document.getElementById("cancelar").style.display = "block";
      document.getElementById("edicion1").style.display = "none";
-    document.getElementById("anular").style.display = "none";
+    document.getElementById("anular1").style.display = "none";
     document.getElementById("cancelar1").style.display = "none";
       
 }
 
+function anular() {
+      document.getElementById("datos_anulacion").style.display = "block";
+      document.getElementById("cancelar").style.display = "none";
+     document.getElementById("edicion1").style.display = "none";
+    document.getElementById("anular1").style.display = "none";
+    document.getElementById("cancelar1").style.display = "none";
+    document.getElementById("anular").style.display = "block";
+      
+}
 
 
 function modifica_estado(estado) {
@@ -1768,7 +1804,9 @@ function modifica_estado(estado) {
             'accion': estado,
             'datofecha_cancelacion': document.getElementById("datofecha_cancelacion").value,
             'nro_poliza': document.getElementById("nro_poliza").value,
-            'datomotivo_cancela': document.getElementById("datomotivo_cancela").value
+            'datomotivo_cancela': document.getElementById("datomotivo_cancela").value,
+            'datofecha_anulacion': document.getElementById("datofecha_anulacion").value,
+            'datomotivo_anulacion': document.getElementById("datomotivo_anulacion").value
             
         }, 'post');
     }
