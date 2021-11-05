@@ -1,62 +1,4 @@
 
-<?php
-if ( !isset( $_SESSION ) ) {
-  session_start();
-}
-$camino = $nro_poliza = $selcompania = '';
-if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_propuesta" ]) == true ) {
-  require_once "/home/gestio10/public_html/backend/config.php";
-  if ( isset( $_POST[ "modificar" ] ) == true ) {
-    $camino = 'modificar';  }
-  
- $id_propuesta = estandariza_info( $_POST[ "id_propuesta" ] );
-
-  require_once "/home/gestio10/public_html/backend/config.php";
-  mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-  $query = "select rut_proponente, dv_proponente, rut_asegurado, dv_asegurado, compania, ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial, vigencia_final, numero_propuesta, cobertura, materia_asegurada, patente_ubicacion, moneda_poliza, deducible, FORMAT(prima_afecta, 4, 'es_CL') as prima_afecta, FORMAT(prima_exenta, 4, 'es_CL') as prima_exenta, FORMAT(prima_neta, 4, 'es_CL') as prima_neta, FORMAT(prima_bruta_anual, 4, 'es_CL') as prima_bruta_anual, monto_asegurado, fecha_propuesta, estado, item from propuesta_polizas where id=" . $id_propuesta;
-  $resultado = mysqli_query( $link, $query );
-  While( $row = mysqli_fetch_object( $resultado ) ) {
-    $rut_prop = $row->rut_proponente;
-    $dv_prop = $row->dv_proponente;
-    $rut_aseg = $row->rut_asegurado;
-    $dv_aseg = $row->dv_asegurado;
-    $rut_completo_prop = $rut_prop . '-' . $dv_prop;
-    $rut_completo_aseg = $rut_aseg . '-' . $dv_aseg;
-    $selcompania = $row->compania;
-    $ramo = $row->ramo;
-    $fechainicio = $row->vigencia_inicial;
-    $fechavenc = $row->vigencia_final;
-    $dif_dias = $row->dif_dias;
-    $cobertura = $row->cobertura;
-    $materia = $row->materia_asegurada;
-    $materia = str_replace( "\r\n", "\\n", $materia );
-    $detalle_materia = $row->patente_ubicacion;
-    $detalle_materia = str_replace( "\r\n", "\\n", $detalle_materia );
-    $moneda_poliza = $row->moneda_poliza;
-    $deducible = $row->deducible;
-    $prima_afecta = $row->prima_afecta;
-    $prima_exenta = $row->prima_exenta;
-    $prima_neta = $row->prima_neta;
-    $prima_bruta = $row->prima_bruta_anual;
-    $monto_aseg = $row->monto_asegurado;
-    $id_propuesta = $row->id_propuesta;
-    $nro_propuesta = $row->numero_propuesta;
-    $fechaprop = $row->fecha_envio_propuesta;
-    $estado = $row->estado;
-    $item = $row->item;
-  }
-
-}
-
-
-function estandariza_info( $data ) {
-  $data = trim( $data );
-  $data = stripslashes( $data );
-  $data = htmlspecialchars( $data );
-  return $data;
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -65,7 +7,8 @@ function estandariza_info( $data ) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/bambooQA/images/bamboo.png">
 <!-- Bootstrap --> 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
@@ -97,7 +40,6 @@ function estandariza_info( $data ) {
     <br>
   </p>
 </div>
-<br>
 <div class="form-check form-check-inline">
 <div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
   <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
@@ -110,18 +52,7 @@ function estandariza_info( $data ) {
  
 <!-- --------------------------------------------                -->
 <form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario" novalidate>
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne" style="background-color:whitesmoke">
-        <h5 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y
-          Proponente</button>
-        </h5>
-      </div>
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                    data-parent="#accordionExample">
-        <div class="card-body" id="card-body-one"><br>
+
           <div class="form-check form-check-inline">
             <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
               persona?:&nbsp;&nbsp;</label>
@@ -132,6 +63,9 @@ function estandariza_info( $data ) {
                                 onclick="checkRadio2(this.name)" checked="checked" onchange="copiadatos()">
             <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
           </div>
+        
+        <!-- Datos Cliente -->
+        
           <br>
           <br>
           <p><strong>Datos Proponente<br>
@@ -211,73 +145,25 @@ function estandariza_info( $data ) {
               <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
           </div>
-          <br>
-          <br>
-          <p><strong>Datos Asegurado<br>
-            </strong></p>
-          <div class="form-row">
-            <div class="col-md-3 mb-3">
-              <label for="RUT">RUT</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <input type="text" class="form-control" id="rutaseg" name="rutaseg"
-                                    placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"
-                                    oninput="checkRut(this);copiadatos()"
-                                    onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();"
-                                    required readonly>
-              <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
-                
-                ingresado</div>
-              <div style="color:red; visibility: hidden" id="validador11">No puedes dejar este campo
-                en blanco</div>
-            </div>
-            <button type="button" class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
-                                data-toggle="modal" data-target="#modal_cliente"
-                                style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; visibility:hidden">Buscar
-            RUT</button>
-            <div class="col-1 ">
-              <label for="prop">&nbsp;</label>
-              <br>
-            </div>
-            <div class="col">
-              <label for="Nombre">Nombre</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <input type="text" id="nombre_seg" class="form-control" name="nombreaseg"
-                                    onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required disabled>
-              <div style="color:red; visibility: hidden" id="validador2">No puedes dejar este campo en
-                blanco</div>
-            </div>
-            <div class="col-md-4 mb-3" style="display:none">
-              <label for="ApellidoP">Apellido Paterno</label>
-              <input type="text" id="apellidop_seg" class="form-control" name="apellidopaseg"
-                                    disabled>
-              <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-            </div>
-            <div class="col-md-4 mb-3" style="display:none">
-              <label for="ApellidoM">Apellido Materno</label>
-              <input type="text" id="apellidom_seg" class="form-control" name="apellidomaseg"
-                                    disabled>
-              <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
+
+  <div class="accordion" id="accordionExample">
     <div class="card">
-      <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
+      <div class="card-header" id="headingOne" style="background-color:whitesmoke">
         <h5 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                            style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Datos Propuesta de Póliza</button>
         </h5>
       </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body" id="card-body-two">
-        <label for = "id_propuesta"><b>Datos Propuesta</b></label><br>
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body" id="card-body-one">
+          <label for = "id_propuesta"><b>Datos Propuesta</b></label>
+          <br>
         <div class="form-row">
             <div class="col-4">
               <label for="seguimiento">N° de Seguimiento:&nbsp;</label>
               <label style="color: darkred">*</label>
-              <input type="text" class="form-control" id="numero_propuesta" name="numero_propuesta">
+              <input type="text" class="form-control" id="numero_propuesta" name="numero_propuesta" required>
             </div>
         
         <div class="col-4">
@@ -290,14 +176,51 @@ function estandariza_info( $data ) {
          </div>
         </div>
         <br>
-          <label for="compania"><b>Compañía</b></label>
-          <label style="color: darkred">&nbsp; *</label>
+        <br>
+        <label for = "datos_poliza"><b>Datos Póliza</b></label>
           <br>
-          <div class="form-row">
-            <div class="form-inline">
-              <select class="form-control" name="selcompania" id="selcompania"
-                                    onChange="selcompania_completo()">
-                <option value="null">Selecciona una compañía</option>
+        <div class ="form-row">
+            <div class="col-3">
+              <label for="Nombre">Vigencia Inicial</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <div class="md-form">
+                <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
+                                        class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" max= "9999-12-31" required>
+              </div>
+              <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
+                Inicio</div>
+            </div>
+            <div class="col-3">
+              <label for="Nombre">Vigencia Final</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <div class="md-form">
+                <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
+                                        class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+              </div>
+              <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
+                Vencimiento</div>
+            </div>
+            <div class="col-inline">
+          <label for="moneda_poliza">Moneda Póliza</label>
+          
+            <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange="cambio_moneda()">
+              <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
+              <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
+              <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
+            </select>
+          
+        </div>
+            
+        </div>
+        
+        <div class ="form-row">
+            <div class="col">
+          
+          <label for="compania">Compañía</label>
+          <label style="color: darkred">&nbsp; *</label>
+          <select class="form-control" name="selcompania" id="selcompania"
+                                    onChange="selcompania_completo()" required>
+                <option value="">Selecciona una compañía</option>
                 <option value="Axa Assistance"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Axa Assistance") echo "selected" ?>>Axa Assistance</option>
                 <option value="BCI Seguros"
@@ -344,18 +267,15 @@ function estandariza_info( $data ) {
                 <option value="Unnio"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Unnio") echo "selected" ?>>Unnio</option>
               </select>
-            </div>
-          </div>
-          <br>
-          <label for="poliza"><b>Póliza</b></label>
-          <br>
-          <div class="form-row">
-            <div class="col-6">
+            
+            
+        </div>
+        <div class="col-6">
               <label for="sel1">Ramo:&nbsp;</label>
               <label style="color: darkred">*</label>
               <select class="form-control" name="ramo" id="ramo"
-                                    onChange="cambia_deducible();ramo_completo();vencimientogarantia()">
-                <option value="null">Selecciona un ramo</option>
+                                    onChange="cambia_deducible();ramo_completo();vencimientogarantia()" required>
+                <option value="">Selecciona un ramo</option>
                 <option value="AC - Accidentes Personales"
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Accidentes Personales") echo "selected" ?>>ACCIDENTES PERSONALES - Accidentes Personales</option>
                 <option value="AC - Protección Financiera"
@@ -433,182 +353,85 @@ function estandariza_info( $data ) {
                                         <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "VEH") echo "selected" ?>>VEH</option>
               </select>
             </div>
-            <div class="col">
-              <label for="Nombre">Vigencia Inicial</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <div class="md-form">
-                <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
-                                        class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" max= "9999-12-31" required>
-              </div>
-              <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
-                Inicio</div>
-            </div>
-            <div class="col">
-              <label for="Nombre">Vigencia Final</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <div class="md-form">
-                <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
-                                        class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
-              </div>
-              <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
-                Vencimiento</div>
-            </div>
-          </div>
-          <br>
-          <div class="form-row">
-         
-            <div class="col-2">
-              <label for="item">Ítem</label>
-              <input type="text" class="form-control" id="item" name="item">
-             
-            </div>
-            <div class="col-4">
-              <label for="cobertura">Cobertura</label>
-              <input type="text" class="form-control" id="cobertura" name="cobertura">
-            </div>
-          </div>
-          <br>
-          <label for="materia"><b>Materia</b></label>
-          <br>
-          <div class="form-row">
-            <div class="col">
-              <label for="poliza">Materia Asegurada</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <textarea type="text" class="form-control" id="materia" name="materia" rows="3"
-                                    onchange="materia_completo();" required></textarea>
-              <div style="color:red; visibility: hidden" id="validador8">Debes indicar materia</div>
-            </div>
-          </div>
-          <br>
-          <div class="form-row">
-            <div class="col">
-              <label for="poliza">Patente o Ubicación</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <textarea type="text" class="form-control" id="detalle_materia" name="detalle_materia"
-                                    rows="3" onchange="detalle_materia_completo();" required></textarea>
-              <div style="color:red; visibility: hidden" id="validador9">Debes indicar patente o
-                ubicación</div>
-            </div>
-          </div>
-          <br>
-          <div class="form-row" id="vencimiento_gtia" style = "display:none">
-          <div class="col-3">             
-            <label for="venc_garantia">Vencimiento Garantía del automóvil</label>
-              <div class="form-check">
-                 <input type="checkbox" class="form-check-input" id="pregunta_gtia" Onclick =vencimiento_garantía()>
-                 <label class="form-check-label" for="pregunta_gtia">Vencimiento Garantía</label>
-             </div>
-            <div class="md-form">
-              <input placeholder="Selected date" type="date" name="venc_gtia" id="venc_gtia" class="form-control" readonly>
-              
-              <br>
-              <br>
-            </div>
-          </div>
-        </div>
-        <label for="materia"><b>Deducible, Primas y Montos</b></label>
-        <br>
-        <div class="form-row; form-inline">
-          <label for="moneda_poliza">Moneda Prima</label>
-          <div class="col-1">
-            <select class="form-control" id="moneda_poliza" name="moneda_poliza" onChange="cambio_moneda()">
-              <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
-              <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
-              <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="deducible">Deducible</label>
-            <div class="form-inline" style="display:none">
-              <input type="text" class="form-control" name="deducible" id="deducible">
-            </div>
-            <div class="form-inline" id="deducible_defecto">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda">UF</span></div>
-              <input type="text" class="form-control" name="deducible_defecto"
-                                        id="deducible_defecto_1" onChange="pobladeducible()">
-            </div>
-            <div class="form-inline" id="deducible_veh" style="display:none ;align-items: center;">
-              <select class="form-control" id="deducible_veh_1" name="deducible_veh_1"
-                                        onChange="pobladeducible()">
-                <option value="null" ?>Selecciona el deducible</option>
-                <option value="Sin deducible" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>
-                <option value="UF 3" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 3") echo "selected" ?>>UF 3</option>
-                <option value="UF 5" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 5") echo "selected" ?>>UF 5</option>
-                <option value="UF 10" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 10") echo "selected" ?>>UF 10</option>
-                <option value="UF 20" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 20") echo "selected" ?>>UF 20</option>
-                 <option value="UF 50" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 50") echo "selected" ?>>UF 50</option>
-              </select>
-            </div>
-            <div class="form-inline" id="deducible_viaje" style="display:none">
-              <input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value="No Aplica" onChange="pobladeducible()">
-            </div>
-            <div class="form-inline" id="deducible_inc" style="display:none">
-              <input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value="Varios" onChange="pobladeducible()">
-            </div>
-            <div class="form" id="deducible_rc" style="display: none; align-items: center;">
-              <div class="col-3">
-                <input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje" placeholder="%">
-              </div>
-              <label style="font-size: 10px;">% Pérdida con mínimo de</label>
-              <div class="col-md-5" style="display: flex; align-items: center;">
-                <div class="input-group-prepend"><span class="input-group-text" id="moneda7">UF</span></div>
-                <input type="text" class="form-control" name="deducible_valor" id="deducible_valor" placeholder="Valor" onChange="pobladeducible()">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="prima_afecta">Prima Neta Afecta</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda2">UF</span></div>
-              <input type="text" class="form-control" name="prima_afecta" id="prima_afecta"
-                                        onChange="calculaprimabruta()">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="prima_exenta">Prima Neta Exenta</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda3">UF</span></div>
-              <input type="text" class="form-control" id="prima_exenta" name="prima_exenta"
-                                        onChange="calculaprimabruta()">
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-md-4 mb-3">
-            <label for="prima_afecta">Prima Neta Total</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda4">UF</span></div>
-              <input type="text" class="form-control" id="prima_neta" name="prima_neta">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="prima_afecta">Prima Bruta Anual</label>
-            <div class="form-inline">
-              <div class="input-group-prepend"><span class="input-group-text"
-                                            id="moneda5">UF</span></div>
-              <input type="text" class="form-control" id="prima_bruta" name="prima_bruta">
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="monto_aseg">Monto Asegurado</label>
-             <label style="color: darkred">&nbsp; *</label>
-          
-            <input type="text" class="form-control" name="monto_aseg" id="monto_aseg" onchange = "monto_aseg_completo()">
-              <div style="color:red; visibility: hidden" id="validador13">Debes indicar monto</div>
-          </div>
+            
+</div>
         </div>
       </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo" style="background-color:whitesmoke">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                            style="color:#536656">Datos Item</button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body" id="card-body-two">
+        <label for = "id_item"><b>Información de Ítem</b></label><br><button type="button" class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
+                                data-toggle="modal" data-target="#modal_cliente"
+                                style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; display:none">Buscar
+            RUT</button><br>
+        
+        <div class="form-row">
+  
+        <div class="container" id="main" >
+          
+          
+          <div class="container" style="overflow-x:auto;width:100%;height: auto">
+            <table class="table"  id="mytable"  style="width:3500px">
+              <tr>
+                <th style="width:20px">N°Item</th>
+                <th style="width:200px" >RUT Asegurado</th>
+                <th style="width:300px">Nombre Asegurado</th>
+                <th style="width:300px">Materia Asegurada</th>
+                <th style="width:300px">Patente o Ubicación</th>
+                <th style="width:200px">Cobertura</th>
+                <th style="width:100px">Deducible</th>
+                <th style="width:50px">Prima Afecta</th>
+                <th style="width:50px">Prima Exenta</th>
+                <th style="width:50px">Prima Bruta</th>
+                <th style="width:150px">Monto Asegurado</th>
+                <th style="width:100px">Vencimiento Garantía</th>
+                
+              </tr>
+            </table>
+            <br>
+          </div>
+          <br>
+          <br>
+          <input type="button" id="btAdd" value="Añadir" class="btn"
+                            style="background-color: #536656; color: white" />
+          <input type="button" id="btRemove" value="Eliminar" class="btn"
+                            style="background-color: #536656; color: white" />
+        </div>
+      </div>
+
+
+      
     </div>
   </div>
   
 
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingfour" style="background-color:whitesmoke">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
+                            style="color:#536656">Comentarios </button>
+      </h5>
+    </div>
+    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+      <div class="card-body" id="card-body-four">
+        <label for="comentario"><b>Comentarios</b></label>
+        <br>
+        <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
+                            style="text-indent:0px" ;>
+        </textarea>
+       
+      </div>
+    </div>
   </div>
   <br>
   <div id="auxiliar2" style="display: none;">
@@ -643,9 +466,7 @@ function estandariza_info( $data ) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
+
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -711,12 +532,12 @@ function checkRadio2(name) {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
-        document.getElementById("busca_rut_aseg").style.visibility = "visible";
+        document.getElementById("busca_rut_aseg").style.display = "flex";
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
         document.getElementById("rutaseg").disabled = true;
-        document.getElementById("busca_rut_aseg").style.visibility = "hidden";
+        document.getElementById("busca_rut_aseg").style.display = "none";
         document.getElementById("rutprop").value = document.getElementById("rutaseg").value;
     }
 }
@@ -1365,5 +1186,95 @@ function vencimiento_garantía(){
   
      return data;
  }
+ 
+ $(document).ready(function() {
+      
+    var iCnt = 0;
+   
+    // Crear un elemento div añadiendo estilos CSS
+    var container = $(document.createElement('div')).css({
+        padding: '10px',
+        margin: '20px',
+        width: '340px',
+    });
+   $('#btAdd').click(function() {
+        if (iCnt <= 100) {
+
+            iCnt = iCnt + 1;
+
+            // Añadir caja de texto.
+
+            if (iCnt == 1) {
+                var divSubmit = $(document.createElement('div'));
+                //                    $(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()"' + 
+                //                            'id=btSubmit value=Enviar />');
+
+            }
+            var newElement = '<tr id =item' + iCnt + ' style="width:80%;">'+
+                
+                '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
+                '<td><div class="input-group-prepend"><button><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
+                    'id="rutaseg[]" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"'+
+                    'oninput="checkRut(this);copiadatos()" onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required/></div></td>' +
+                '<td><input type="text" id="nombre_seg[]" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
+                '<td><input type="text" class="form-control" id="materia_asegurada[]" name="materia_asegurada[]"></td>'+
+                '<td><input type="text" class="form-control" id="detalle_materia[]" name="detalle_materia[]"></td>'+
+                '<td><input type="text" class="form-control" id="cobertura[]" name="cobertura[]"></td>'+
+                '<td><div class="form-inline" ><div class="input-group-prepend"><span class="input-group-text" id="moneda[]">UF</span></div> '+
+                    '<input type="text" class="form-control" name="deducible_defecto"'+
+                     'id="deducible_defecto_1[]" onChange="pobladeducible()"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[]" onChange="calculaprimabruta()"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[]" onChange="calculaprimabruta()"></div></td>'+ 
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[]"></div></td>'+
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[]" onchange = "monto_aseg_completo()" required>' +    
+                 '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[]" class="form-control"></td>'+
+               '</tr>';
+            $("#mytable").append($(newElement));
+
+            $('#main').after(container, divSubmit);
+        } else { //se establece un limite para añadir elementos, 5 es el limite
+            iCnt = iCnt + 1;
+
+            $("#mytable").append('<label id=label>Limite Alcanzado</label> ');
+            $('#btAdd').attr('class', 'btn');
+            $('#btAdd').attr('disabled', 'disabled');
+
+        }
+    });
+    
+
+
+ $('#btRemove').click(function() { // Elimina un elemento por click
+
+        if (iCnt != 1) {
+           
+            $('#btAdd').removeAttr('disabled');
+            $('#item' + iCnt).remove();
+             iCnt = iCnt - 1;
+             
+        if (iCnt == 100) {
+            $('#label').remove();
+            
+        }
+        }
+        if (iCnt == 1) {
+            
+            
+            //$('#mytable').remove();
+            //$(container).remove();
+            //                $('#btSubmit').remove(); 
+            $('#btAdd').removeAttr('disabled');
+            $('#btAdd').attr('class', 'btn')
+
+            //var newElement2 =
+              //  '<table class="table" id="mytable"><tr><th>Nombre Contacto</th><th>Telefono</th><th>E-mail</th></tr></table>';
+           // $("#main").append($(newElement2));
+            //$("#mytable").append($(newElement));
+        }
+    });
+ });
 
 </script>
