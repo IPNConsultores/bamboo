@@ -71,7 +71,7 @@ switch ($_POST["accion"]) {
 
        break;
     case 'anular':
-        $query= "update polizas set estado='Anulado' where id=".$_POST["id_poliza"];
+        $query= "update polizas set estado='Anulado', fech_cancela='".$_POST["datofecha_anulacion"]."',motivo_cancela ='".$_POST["datomotivo_anulacion"]."'  where id=".$_POST["id_poliza"];
         mysqli_query($link, $query);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Anula póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
          break;

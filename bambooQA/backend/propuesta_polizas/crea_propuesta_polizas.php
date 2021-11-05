@@ -26,15 +26,15 @@ $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"]));
 $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"]));
 $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"]));
 $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"]));
-$nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
+//$nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
 $fechaprop=estandariza_info($_POST["fechaprop"]);
 $item=estandariza_info($_POST["item"]);
 
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-$query='INSERT INTO propuesta_polizas (estado, tipo_propuesta, rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  numero_propuesta,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,item)                     
-VALUES ("Activo", "WEB", "'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$nro_propuesta.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$fechaprop.'","'.$item.'");';
+$query='INSERT INTO propuesta_polizas (estado, tipo_propuesta, rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo,  vigencia_inicial,  vigencia_final,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  prima_afecta,  prima_exenta,  prima_neta,  prima_bruta_anual,  monto_asegurado,item)                     
+VALUES ("Activo", "WEB", "'.$rut_prop.'","'.$dv_prop.'","'.$rut_aseg.'","'.$dv_aseg.'","'.$selcompania.'","'.$ramo.'","'.$fechainicio.'","'.$fechavenc.'","'.$cobertura.'","'.$materia.'","'.$detalle_materia.'","'.$moneda_poliza.'","'.$deducible.'","'.$prima_afecta.'","'.$prima_exenta.'","'.$prima_neta.'","'.$prima_bruta.'","'.$monto_aseg.'","'.$item.'");';
 mysqli_query($link, $query);
 mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega propuesta póliza', '".str_replace("'","**",$query)."','propuesta poliza',null, '".$_SERVER['PHP_SELF']."')");
 

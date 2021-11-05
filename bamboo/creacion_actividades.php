@@ -444,72 +444,72 @@ function post() {
     var dia = 0;
     var fecha;
     
-      if (document.getElementById("fechavencimiento").value == "") {
+    if (document.getElementById("fechavencimiento").value == "") 
+    {
         document.getElementById("validador1").style.visibility = "visible";
-    
-          
-      } 
+    } 
       
-      if (document.getElementById("tarea").value == "") {
-        document.getElementById("validador2").style.visibility = "visible";
-    
-          
-      } 
-    
-    
+    if (document.getElementById("tarea").value == "") 
+    {
+        document.getElementById("validador2").style.visibility = "visible";   
+    } 
     else if( document.getElementById("fechavencimiento").value != "" && document.getElementById("tarea").value != "" )
         {
-    
-    if (document.getElementById('tarea_recurrente').checked) {
-        tarea_recurrente = 1;
-        dia = document.getElementById('dia_mes').value;
-        if (document.getElementById('con_fecha').checked) {
-            tarea_con_fin = 1;
-            fecha = document.getElementById('fechavencimiento_recurrente').value;
-        }
-    }
+        if (document.getElementById('tarea_recurrente').checked) 
+            {
+                tarea_recurrente = 1;
+                dia = document.getElementById('dia_mes').value;
+                if (document.getElementById('con_fecha').checked) 
+                {
+                    tarea_con_fin = 1;
+                    fecha = document.getElementById('fechavencimiento_recurrente').value;
+                }
+            }
 
-    //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
-    //console.log("tarea : "+document.getElementById('tarea').value);
-    var arreglo = '[';
-    var num = 0;
-    var coma = '';
-    var clientes = document.getElementsByName('check_cliente');
-    for (var i = 0; i < clientes.length; i++) {
-        if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
+        //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
+        //console.log("tarea : "+document.getElementById('tarea').value);
+        var arreglo = '[';
+        var num = 0;
+        var coma = '';
+        var clientes = document.getElementsByName('check_cliente');
+        for (var i = 0; i < clientes.length; i++) 
         {
-            arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
-            coma = ',';
+            if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
+            {
+                arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
+                coma = ',';
+            }
         }
-    }
-    var polizas = document.getElementsByName('check_poliza');
-    for (var j = 0; j < polizas.length; j++) {
-        if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
+        var polizas = document.getElementsByName('check_poliza');
+        for (var j = 0; j < polizas.length; j++) 
         {
-            arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
-            coma = ',';
+            if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
+            {
+                arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
+                coma = ',';
+            }
         }
-    }
 
-    arreglo += ']';
-    ///bamboo/backend/actividades/crea_tarea.php
-    $.redirect('/bamboo/backend/actividades/crea_tarea.php', {
-        'prioridad': document.getElementById('prioridad').value,
-        'fechavencimiento': document.getElementById('fechavencimiento').value,
-        'tarea': document.getElementById('tarea').value,
-        'relaciones': arreglo,
-        //tarea recurrente
-        'tarea_recurrente': tarea_recurrente,
-        'dia': dia,
-        'tarea_con_fin': tarea_con_fin,
-        'fecha': fecha,
-        //fin tarea recurrente
-        //inicio aux modificar
-        'modificar': '<?php echo $aux_modificar; ?>',
-        'id_tarea': '<?php echo $id_tarea; ?>'
-        //fin aux modificar
-    }, 'post');
-}
+        arreglo += ']';
+        ///bamboo/backend/actividades/crea_tarea.php
+        $.redirect('/bamboo/backend/actividades/crea_tarea.php', 
+            {
+                'prioridad': document.getElementById('prioridad').value,
+                'fechavencimiento': document.getElementById('fechavencimiento').value,
+                'tarea': document.getElementById('tarea').value,
+                'relaciones': arreglo,
+                //tarea recurrente
+                'tarea_recurrente': tarea_recurrente,
+                'dia': dia,
+                'tarea_con_fin': tarea_con_fin,
+                'fecha': fecha,
+                //fin tarea recurrente
+                //inicio aux modificar
+                'modificar': '<?php echo $aux_modificar; ?>',
+                'id_tarea': '<?php echo $id_tarea; ?>'
+                //fin aux modificar
+            }, 'post');
+        }
 }
  
 function check_fecha(){
