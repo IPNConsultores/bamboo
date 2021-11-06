@@ -415,20 +415,220 @@
 
   </div>
   <div class="card">
-    <div class="card-header" id="headingfour" style="background-color:whitesmoke">
+    <div class="card-header" id="headingthree" style="background-color:whitesmoke">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
+                            data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree"
                             style="color:#536656">Comentarios </button>
       </h5>
     </div>
-    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
-      <div class="card-body" id="card-body-four">
+    <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+      <div class="card-body" id="card-body-three">
         <label for="comentario"><b>Comentarios</b></label>
         <br>
         <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
                             style="text-indent:0px" ;>
         </textarea>
+       
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingfour" style="background-color:whitesmoke">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
+                            style="color:#536656">Información de Póliza </button>
+      </h5>
+    </div>
+    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+      <div class="card-body" id="card-body-four">
+       
+         <label for = "datos_poliza"><b>Datos Póliza</b></label>
+          <br>
+        <div class ="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="poliza">Número de Poliza</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <input type="text" class="form-control" id="nro_poliza" name="nro_poliza"
+                                    onchange="nro_poliza_completo()" style="width:72%;" required>
+              </div>
+        <div class="col-md-4 mb-3">
+        <label for="fecha_emision_poliza">Fecha Emisión Póliza &nbsp;&nbsp;</label>
+        <div class="md-form">
+          <input placeholder="Selected date" type="date" id="fecha_emision_poliza" name="fecha_emision_poliza"
+                                        class="form-control"  max= "9999-12-31" style="width:72%;">
+        </div>
+      </div>
+     </div>
+        <br> 
+        <label for = "datos_poliza"><b>Comisión</b></label>
+        <br>
+       <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Porcentaje Comisión del Corredor</label>
+            <div class="form-inline">
+              <input type="text" class="form-control" id="porcentaje_comsion"
+                                        name="porcentaje_comsion" onChange="calculacomision()">
+              <div class="input-group-prepend"><span class="input-group-text"
+                                            id="porcentaje_comi">%</span></div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="comision">Comisión Correspondiente</label>
+            <div class="form-inline">
+              <div class="input-group-prepend"><span class="input-group-text"
+                                            id="moneda5">UF</span></div>
+              <input type="text" class="form-control" id="comision" name="comision">
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Comisión Bruta a Pago</label>
+            <div class="form-inline">
+              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+              <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Comisión Neta a Pago</label>
+            <div class="form-inline">
+              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+              <input type="text" class="form-control" id="comisionneta" name="comisionneta">
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Número de Boleta</label>
+            
+            <input type="text" class="form-control" name="boleta" id="boleta" style="width:72%;">
+            
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="fechadeposito">Fecha Depósito</label>
+            <div class="md-form">
+              <input placeholder="Selected date" type="date" name="fechadeposito"
+                                        id="fechadeposito" class="form-control" onchange="validadorfecha(this.id)" max= "9999-12-31" style="width:72%;">
+            </div>
+          </div>
+        </div>
+        <br>
+            <label for="comisionnegativa"><b>Comisión Negativa</b></label>
+        <br>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="comision">Monto</label>
+            <div class="form-inline">
+              <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+              <input type="text" class="form-control" name="comisionneg" id="comisionneg">
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="comision">Boleta Comisión Negativa</label>
+            <input type="text" class="form-control" name="boletaneg" id="boletaneg" style="width:72%;">
+          </div>
+        </div>
+        <br>
+          <label for="infopago"><b>Información de Pago</b></label>
+        <br>
+         <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="formapago">Forma de Pago</label>
+            <label style="color: darkred">&nbsp; *</label>
+            <div class="form" style="display: flex; align-items: center;">
+              <select class="form-control" name="modo_pago" id="modo_pago"
+                                        onChange="modopago();modopago_completo();" style="width:30%;" required>
+                <option value="">-</option>
+                <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
+                <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
+                <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
+                <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
+              </select>
+              <select class="form-control" name="cuotas" id="cuotas"
+                                        onchange="cuotas_completo();" style="width:42%;">
+                <option value="">Número Cuotas</option>
+                <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
+                <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
+                <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
+                <option value="4 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
+                <option value="5 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
+                <option value="6 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
+                <option value="7 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
+                <option value="8 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
+                <option value="9 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
+                <option value="10 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
+                <option value="11 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
+                <option value="12 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
+                <option value="13 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
+                <option value="14 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
+                <option value="15 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
+                <option value="16 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
+                <option value="17 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
+                <option value="18 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
+                <option value="19 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
+                <option value="20 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                <option value="21 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                <option value="22 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
+                <option value="23 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
+                <option value="24 Cuotas"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="valorcuota">Valor Cuota</label>
+            <div class="form-inline">
+              <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:20%;">
+                <option value="UF"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
+                <option value="USD"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
+                <option value="CLP"
+                                            <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
+              </select>
+              <input type="text" class="form-control" name="valorcuota" id="valorcuota"
+                                        oninput="concatenar(this.id)" style="width:52%;">
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="fechaprimer">Fecha Primera Cuota</label>
+            <div class="md-form">
+              <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
+            </div>
+          </div>
+        </div>
+        <br>
+        <label for="pago"><b>Vendedor</b></label>
+        <br>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <div class="form-row">
+               <div class="col" style="width:72%;" >
+                <input type="text" class="form-control" id="nombre_vendedor"
+                                            name="nombre_vendedor" placeholder="Nombre Vendedor" style="width:72%;" >
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
        
       </div>
     </div>
@@ -1217,7 +1417,7 @@ function vencimiento_garantía(){
                     'id="rutaseg[]" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"'+
                     'oninput="checkRut(this);copiadatos()" onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[]" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
-                '<td><input type="text" class="form-control" id="materia_asegurada[]" name="materia_asegurada[]"></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[]" name="materia[]" rows="1" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[]" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[]" name="cobertura[]"></td>'+
                 '<td><div class="form-inline" ><div class="input-group-prepend"><span class="input-group-text" id="moneda[]">UF</span></div> '+
