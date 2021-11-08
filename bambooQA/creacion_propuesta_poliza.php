@@ -84,7 +84,7 @@
           en blanco</div>
       </div>
       <button type="button" class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
-                          onclick="origen_busqueda(this.id)" data-target="#modal_cliente"
+                          onclick="origen_busqueda(this.id,0)" data-target="#modal_cliente"
                           style="background-color: #536656; color: white; margin-top: 30px;margin-left: 5px; height: 40px">Buscar
       RUT</button>
       <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog"
@@ -371,11 +371,7 @@
   
 
 
-          <label for = "id_item"><b>Información de Ítem</b></label><br><button type="button" class="btn" id="busca_rut_aseg" onclick="origen_busqueda(this.id)"
-                                  data-toggle="modal" data-target="#modal_cliente"
-                                  style="background-color: #536656; color: white;margin-top: 30px;margin-left: 5px; height: 40px; display:none">Buscar
-              RUT</button><br>
-          
+          <label for = "id_item"><b>Información de Ítem</b></label><br>
           <div class="form-row">
     
           <div class="container" id="main" >
@@ -737,24 +733,27 @@ function checkRadio2(name) {
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
-        document.getElementById("busca_rut_aseg").style.display = "flex";
+        //document.getElementById("busca_rut_aseg").style.display = "flex";
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
-        document.getElementById("rutaseg").disabled = true;
-        document.getElementById("busca_rut_aseg").style.display = "none";
-        document.getElementById("rutprop").value = document.getElementById("rutaseg").value;
+        //document.getElementById("rutaseg").disabled = true;
+        //document.getElementById("busca_rut_aseg").style.display = "none";
+        //document.getElementById("rutprop").value = document.getElementById("rutaseg").value;
     }
 }
+
 function copiadatos() {
     if (document.getElementById("radio2_si").checked) {
-        document.getElementById("rutaseg").value = document.getElementById("rutprop").value;
-        document.getElementById("nombre_seg").value = document.getElementById("nombre_prop").value;
-        document.getElementById("apellidop_seg").value = document.getElementById("apellidop_prop").value;
-        document.getElementById("apellidom_seg").value = document.getElementById("apellidom_prop").value;
+        //document.getElementById("rutaseg").value = document.getElementById("rutprop").value;
+        //document.getElementById("nombre_seg").value = document.getElementById("nombre_prop").value;
+        //document.getElementById("apellidop_seg").value = document.getElementById("apellidop_prop").value;
+        //document.getElementById("apellidom_seg").value = document.getElementById("apellidom_prop").value;
     } else {
     }
 }
+
+
 function cambio_moneda() {
     var moneda = document.getElementById("moneda_poliza").value;
     document.getElementById("moneda").innerHTML = moneda;
@@ -921,8 +920,11 @@ var tabla_clientes = $('#listado_clientes').DataTable({
     }
 });
 var origen = '';
-function origen_busqueda(origen_boton) {
+var item='';
+function origen_busqueda(origen_boton, indice_item) {
+    console.log('origen: <' +origen_boton +'> - nro_item: <'+ indice_item +'>')
     origen = origen_boton;
+    item=indice_item
 }
 function seleccion_rut(rut) {
 
@@ -930,12 +932,13 @@ function seleccion_rut(rut) {
         case 'busca_rut_prop': {
             document.getElementById("rutprop").value = rut;
             document.getElementById("rutprop").onchange()
-            document.getElementById("rutaseg").onchange()
+            //document.getElementById("rutaseg").onchange()
             break;
         }
         case 'busca_rut_aseg': {
-            document.getElementById("rutaseg").value = rut;
-            document.getElementById("rutaseg").onchange()
+            console.log("rutaseg[" + item + "]")
+            document.getElementById("rutaseg[" + item + "]").value = rut;
+            document.getElementById("rutaseg[" + item + "]").onchange()
             break;
         }
         default: {
@@ -965,7 +968,7 @@ function habilitaedicion1() {
         fields4[i].disabled = false;
     }
     document.getElementById("rutprop").readonly = true;
-    document.getElementById("rutaseg").readonly = true;
+    //document.getElementById("rutaseg").readonly = true;
     document.getElementById("nombre_prop").disabled = true;
     document.getElementById("nombre_prop").readonly = true;
     document.getElementById("nombre_seg").disabled = true;
@@ -1028,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     document.getElementById("pregunta_renovar").style.display = "none";
                     document.getElementById("ramo").value = '<?php echo $ramo; ?>';
                     document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-                    document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
+                    //document.getElementById("rutaseg").value = '<?php echo $rut_completo_aseg; ?>';
                     document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
                     document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
                     document.getElementById("nro_poliza").value = '<?php echo $nro_poliza; ?>';
@@ -1160,10 +1163,10 @@ document.getElementById("formulario").addEventListener('submit', function(event)
         document.getElementById("validador10").style.visibility = "visible";
         event.preventDefault();
     }
-    if (document.getElementById("rutaseg").value == "") {
-        document.getElementById("validador11").style.visibility = "visible";
-        event.preventDefault();
-    }
+    //if (document.getElementById("rutaseg").value == "") {
+    //    document.getElementById("validador11").style.visibility = "visible";
+    //    event.preventDefault();
+    //}
     if (document.getElementById("nombre_prop").value == "") {
         document.getElementById("validador1").style.visibility = "visible";
         event.preventDefault();
@@ -1228,11 +1231,11 @@ function rutprop_completo() {
         document.getElementById("validador10").style.visibility = "hidden";
     }
 }
-function rutaseg_completo() {
-    if (document.getElementById("rutaseg").value != "") {
-        document.getElementById("validador11").style.visibility = "hidden";
-    }
-}
+//function rutaseg_completo() {
+//    if (document.getElementById("rutaseg").value != "") {
+//        document.getElementById("validador11").style.visibility = "hidden";
+//    }
+//}
 function nombre_prop_completo() {
     if (document.getElementById("nombre_prop").value != "") {
         document.getElementById("validador1").style.visibility = "hidden";
@@ -1409,33 +1412,33 @@ function vencimiento_garantía(){
 
             // Añadir caja de texto.
 
-            if (iCnt == 1) {
+            if (iCnt == 0) {
                 var divSubmit = $(document.createElement('div'));
                 //                    $(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()"' + 
                 //                            'id=btSubmit value=Enviar />');
 
             }
-            var newElement = '<tr id =item' + iCnt + ' style="width:80%;">'+
+            var newElement = '<tr id =item' + iCnt+1 + ' style="width:80%;">'+
                 
                 '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
-                '<td><div class="input-group-prepend"><button type="button"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
-                    'id="rutaseg[]" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);rutaseg_completo();"'+
-                    'oninput="checkRut(this);copiadatos()" onchange="valida_rut_duplicado_aseg();copiadatos();rutaseg_completo(); nombre_seg_completo();" required/></div></td>' +
-                '<td><input type="text" id="nombre_seg[]" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
-                '<td><textarea type="text" class="form-control" id="materia[]" name="materia[]" rows="1" required></textarea></td>'+
-                '<td><input type="text" class="form-control" id="detalle_materia[]" name="detalle_materia[]"></td>'+
-                '<td><input type="text" class="form-control" id="cobertura[]" name="cobertura[]"></td>'+
-                '<td><div class="form-inline" ><div class="input-group-prepend"><span class="input-group-text" id="moneda[]">UF</span></div> '+
+                '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
+                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);"'+
+                    '  required/></div></td>' +
+                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
+                '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
+                '<td><div class="form-inline" ><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
                     '<input type="text" class="form-control" name="deducible_defecto"'+
-                     'id="deducible_defecto_1[]" onChange="pobladeducible()"></div></td>'+
+                     'id="deducible_defecto_1[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[]" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[]" onChange="calculaprimabruta()"></div></td>'+ 
+                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[]"></div></td>'+
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[]" onchange = "monto_aseg_completo()" required>' +    
-                 '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[]" class="form-control"></td>'+
+                      '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange = "monto_aseg_completo()" required>' +    
+                 '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
             $("#mytable").append($(newElement));
 
