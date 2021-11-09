@@ -165,7 +165,7 @@
               <div class="col-4">
                 <label for="seguimiento">N° de Seguimiento:&nbsp;</label>
                 <label style="color: darkred">*</label>
-                <input type="text" class="form-control" id="numero_propuesta" name="numero_propuesta" required>
+                <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta" required>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
           
@@ -649,8 +649,8 @@
     <br>
     <div id="auxiliar2" style="display: none;">
     </div>
-    <button class="btn" type="submit" style="background-color: #536656; color: white"
-              id='boton_submit' onclick = "bPreguntar = false">Registrar</button>
+    <button class="btn" type="button" style="background-color: #536656; color: white"
+              id='boton_submit' onclick = "bPreguntar = false; crea_poliza()">Registrar</button>
 </form>
 
 
@@ -1016,7 +1016,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 	
-    var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "id_propuesta" ]) == true ) echo "True"; ?>'
+    var consulta= '<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && isset( $_POST[ "numero_propuesta" ]) == true ) echo "True"; ?>'
     if (consulta=='True'){
         var orgn = '<?php echo $camino; ?>';
         switch (orgn) {
@@ -1075,7 +1075,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
                     document.getElementById("formulario").action = "/bambooQA/backend/propuesta_polizas/modifica_propuesta_polizas.php";
                     
-                    document.getElementById("id_propuesta").value = '<?php echo $id_propuesta; ?>';
+                    document.getElementById("numero_propuesta").value = '<?php echo $numero_propuesta; ?>';
                     document.getElementById("endoso").value = '<?php echo $endoso; ?>';
                     document.getElementById("comentario").value = '<?php echo $comentario; ?>';
                     document.getElementById("boton_submit").childNodes[0].nodeValue = "Guardar cambios";
@@ -1328,7 +1328,53 @@ function vencimiento_garantía(){
          document.getElementById("venc_gtia").value = '';
     }
 }
+ function crea_poliza(){
+     $.redirect('/bambooQA/test.php', {
 
+'accion': 'crear'
+//Propuesta
+
+'rutprop':  document.getElementById("rutprop").value,
+'fechaprop': document.getElementById("fechaprop").value,
+'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+'fechainicio': document.getElementById("fechainicio").value,
+'fechavenc': document.getElementById("fechavenc").value,
+'moneda_poliza': document.getElementById("moneda_poliza").value,
+'selcompania':  document.getElementById("selcompania").value, 
+'ramo':  document.getElementById("ramo").value, 
+'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+
+
+//Ítem
+'rutaseg':  document.getElementById("rutaseg").value,
+'materia': document.getElementById("materia").value,
+'detalle_materia': document.getElementById("detalle_materia").value,
+'cobertura': document.getElementById("cobertura").value,
+'deducible': document.getElementById("deducible").value,
+'prima_afecta': document.getElementById("prima_afecta").value,
+'prima_exenta': document.getElementById("prima_exenta").value,
+'prima_neta': document.getElementById("prima_neta").value,
+'prima_bruta': document.getElementById("prima_bruta").value,
+'monto_aseg': document.getElementById("monto_aseg").value,
+'venc_gtia': document.getElementById("venc_gtia").value,
+
+
+//Póliza
+'nro_poliza': document.getElementById("nro_poliza").value, //automático
+'comision': document.getElementById("comision").value,
+'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
+'comisionbruta': document.getElementById("comisionbruta").value,
+'comisionneta': document.getElementById("comisionneta").value,
+'fechadeposito': document.getElementById("fechadeposito").value,
+'comisionneg': document.getElementById("comisionneg").value,
+'boletaneg': document.getElementById("boletaneg").value,
+'boleta': document.getElementById("boleta").value,
+'cuotas': document.getElementById("cuotas").value,
+'valorcuota': document.getElementById("valorcuota").value,
+'fechaprimer': document.getElementById("fechaprimer").value,
+
+}, 'post');
+ }
  function valida_vencimiento(){
      
      
