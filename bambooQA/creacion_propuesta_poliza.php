@@ -82,6 +82,7 @@
           ingresado</div>
         <div style="color:red; visibility: hidden" id="validador10">No puedes dejar este campo
           en blanco</div>
+          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <button type="button" class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
                           onclick="origen_busqueda(this.id,0)" data-target="#modal_cliente"
@@ -131,6 +132,7 @@
                               disabled>
         <div style="color:red; visibility: hidden" id="validador1">No puedes dejar este campo en
           blanco</div>
+          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
       </div>
       <div class="col-md-4 mb-3" style="display:none">
         <label for="ApellidoP">Apellido Paterno</label>
@@ -164,6 +166,7 @@
                 <label for="seguimiento">N° de Seguimiento:&nbsp;</label>
                 <label style="color: darkred">*</label>
                 <input type="text" class="form-control" id="numero_propuesta" name="numero_propuesta" required>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
           
           <div class="col-4">
@@ -172,6 +175,7 @@
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
                       class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
           </div>
@@ -186,6 +190,7 @@
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
                                           class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" max= "9999-12-31" required>
+                                          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
                   Inicio</div>
@@ -196,6 +201,7 @@
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
                                           class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+                                          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
                   Vencimiento</div>
@@ -267,6 +273,7 @@
                   <option value="Unnio"
                                           <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Unnio") echo "selected" ?>>Unnio</option>
                 </select>
+                <div class="invalid-feedback">Debes seleccionar una Compañía</div>
               
               
           </div>
@@ -352,9 +359,28 @@
                   <option value="VEH"
                                           <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "VEH") echo "selected" ?>>VEH</option>
                 </select>
-              </div>
+                <div class="invalid-feedback">Debes seleccionar un Ramo</div>
+                
+           
+            </div>
+            
               
   </div>
+  
+                <br>
+                <br>
+             <label for="pago"><b>Vendedor</b></label>
+              <br>
+               <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <div class="form-row">
+                    <div class="col" style="width:72%;" >
+                      <input type="text" class="form-control" id="nombre_vendedor"
+                                              name="nombre_vendedor" placeholder="Nombre Vendedor" style="width:72%;" >
+                    </div>
+                   </div>
+                </div>
+                </div>
           </div>
         </div>
       </div>
@@ -614,19 +640,7 @@
               </div>
             </div>
           </div>
-          <br>
-          <label for="pago"><b>Vendedor</b></label>
-          <br>
-          <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <div class="form-row">
-                <div class="col" style="width:72%;" >
-                  <input type="text" class="form-control" id="nombre_vendedor"
-                                              name="nombre_vendedor" placeholder="Nombre Vendedor" style="width:72%;" >
-                </div>
-              </div>
-            </div>
-          </div>
+         
           </div>
         
         </div>
@@ -1405,6 +1419,7 @@ function vencimiento_garantía(){
         margin: '20px',
         width: '340px',
     });
+    
    $('#btAdd').click(function() {
         if (iCnt <= 100) {
 
@@ -1418,11 +1433,13 @@ function vencimiento_garantía(){
                 //                            'id=btSubmit value=Enviar />');
 
             }
-            var newElement = '<tr id =item' + iCnt+1 + ' style="width:80%;">'+
+            
+            else if (document.getElementById("radio2_si").checked) {
                 
+                var newElement = '<tr id =item' + iCnt+ ' style="width:80%;">'+
                 '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
-                '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
-                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);"'+
+                '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
+                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]"  oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
@@ -1441,9 +1458,48 @@ function vencimiento_garantía(){
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
             $("#mytable").append($(newElement));
+                document.getElementById("rutaseg["+iCnt+"]").value = document.getElementById("rutprop").value;
+                document.getElementById("nombre_seg["+iCnt+"]").value = document.getElementById("nombre_prop").value;
+                document.getElementById("rutaseg["+iCnt+"]").disabled = true;
+                document.getElementById("nombre_seg["+iCnt+"]").disabled = true;
+                document.getElementById("busca_rut_aseg["+iCnt+"]").style.display = "none";
 
             $('#main').after(container, divSubmit);
-        } else { //se establece un limite para añadir elementos, 5 es el limite
+                
+                
+            }
+            
+            else 
+            {
+            var newElement = '<tr id =item' + iCnt + ' style="width:80%;">'+
+                '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
+                '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
+                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);"'+
+                    '  required/></div></td>' +
+                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
+                '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
+                '<td><div class="form-inline" ><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
+                    '<input type="text" class="form-control" name="deducible_defecto"'+
+                     'id="deducible_defecto_1[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+ 
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange = "monto_aseg_completo()" required>' +    
+                 '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
+               '</tr>';
+               
+            $("#mytable").append($(newElement));
+            $('#main').after(container, divSubmit);
+         }
+        }
+        
+        
+        else { //se establece un limite para añadir elementos, 5 es el limite
             iCnt = iCnt + 1;
 
             $("#mytable").append('<label id=label>Limite Alcanzado</label> ');
@@ -1455,7 +1511,7 @@ function vencimiento_garantía(){
     
 
 
- $('#btRemove').click(function() { // Elimina un elemento por click
+  $('#btRemove').click(function() { // Elimina un elemento por click
 
         if (iCnt != 1) {
            
@@ -1476,7 +1532,7 @@ function vencimiento_garantía(){
             //                $('#btSubmit').remove(); 
             $('#btAdd').removeAttr('disabled');
             $('#btAdd').attr('class', 'btn')
-
+            iCnt = 1;
             //var newElement2 =
               //  '<table class="table" id="mytable"><tr><th>Nombre Contacto</th><th>Telefono</th><th>E-mail</th></tr></table>';
            // $("#main").append($(newElement2));
