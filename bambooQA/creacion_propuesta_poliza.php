@@ -62,6 +62,8 @@
     <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
                         onclick="checkRadio2(this.name)" checked="checked" onchange="copiadatos()">
     <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
+    <input type="text" class="form-control" id="contador" name="contador" value ="0" style="visibility: hidden">
+    
   </div>
           
   <!-- Datos Cliente -->
@@ -691,6 +693,7 @@
 </html><script>
 function valida_rut_duplicado_prop() {
     var dato = $('#rutprop').val();
+    console.log(dato);
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
@@ -703,14 +706,16 @@ function valida_rut_duplicado_prop() {
         success: function(response) {
             if (response.resultado == 'antiguo') {
                 document.getElementById("nombre_prop").value = response.nombre;
-                document.getElementById("apellidop_prop").value = response.apellidop;
-                document.getElementById("apellidom_prop").value = response.apellidom;
+                console.log(response.nombre)
+                
             }
         }
     });
 }
-function valida_rut_duplicado_aseg() {
-    var dato = $('#rutaseg').val();
+function valida_rut_duplicado_aseg(item) {
+    var item2 = item;
+    var dato =  document.getElementById("rutaseg[" + item2 + "]").value;
+    console.log(dato);
     var rut_sin_dv = dato.replace('-', '');
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
@@ -722,9 +727,9 @@ function valida_rut_duplicado_aseg() {
         dataType: 'JSON',
         success: function(response) {
             if (response.resultado == 'antiguo') {
-                document.getElementById("nombre_seg").value = response.nombre;
-                document.getElementById("apellidop_seg").value = response.apellidop;
-                document.getElementById("apellidom_seg").value = response.apellidom;
+                document.getElementById("nombre_seg[" + item + "]").value = response.nombre;
+                console.log(response.nombre)
+             
             }
         }
     });
@@ -744,16 +749,56 @@ function checkRadio(name) {
     }
 }
 function checkRadio2(name) {
+    
+    var contador =  document.getElementById("contador").value;
+   
+    console.log(contador);
     if (name == "diferentes") {
         document.getElementById("radio2_si").checked = false;
         document.getElementById("radio2_no").checked = true;
         //document.getElementById("busca_rut_aseg").style.display = "flex";
+        
+        
+        for (var i = 1; i <= contador; i++){
+            
+            document.getElementById("rutaseg[" + i + "]").value = ""
+            document.getElementById("rutaseg[" + i + "]").disabled = false;
+            document.getElementById("nombre_seg[" + i + "]").value = "";
+            document.getElementById("nombre_seg[" + i + "]").disabled = false;
+            document.getElementById("busca_rut_aseg[" + i + "]").style.display = "block";
+            
+            
+             console.log(i);
+             
+             console.log(document.getElementById("rutaseg[" + i + "]").value);
+            
+        }
+        
     } else if (name == "iguales") {
         document.getElementById("radio2_no").checked = false;
         document.getElementById("radio2_si").checked = true;
         //document.getElementById("rutaseg").disabled = true;
         //document.getElementById("busca_rut_aseg").style.display = "none";
         //document.getElementById("rutprop").value = document.getElementById("rutaseg").value;
+        
+        
+        for (var i = 1; i <= contador; i++){
+            
+            document.getElementById("rutaseg[" + i + "]").value = document.getElementById("rutprop").value;
+            document.getElementById("rutaseg[" + i + "]").disabled = true;
+            document.getElementById("nombre_seg[" + i + "]").value = document.getElementById("nombre_prop").value;
+            document.getElementById("nombre_seg[" + i + "]").disabled = true;
+            document.getElementById("busca_rut_aseg[" + i + "]").style.display = "none";
+            
+            
+             console.log(i);
+             
+             console.log(document.getElementById("rutaseg[" + i + "]").value);
+            
+        }
+        
+        console.log(document.getElementById("rutprop").value);
+        
     }
 }
 
@@ -942,17 +987,18 @@ function origen_busqueda(origen_boton, indice_item) {
 }
 function seleccion_rut(rut) {
 
-    switch (origen) {
+    switch (origen.substring(0,14)) {
         case 'busca_rut_prop': {
             document.getElementById("rutprop").value = rut;
-            document.getElementById("rutprop").onchange()
+            document.getElementById("rutprop").onchange();
             //document.getElementById("rutaseg").onchange()
             break;
         }
         case 'busca_rut_aseg': {
             console.log("rutaseg[" + item + "]")
             document.getElementById("rutaseg[" + item + "]").value = rut;
-            document.getElementById("rutaseg[" + item + "]").onchange()
+           
+            document.getElementById("rutaseg[" + item + "]").onchange();
             break;
         }
         default: {
@@ -963,6 +1009,9 @@ function seleccion_rut(rut) {
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
 }
+
+
+
 
 function habilitaedicion1() {
     var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
@@ -1331,7 +1380,7 @@ function vencimiento_garantía(){
  function crea_poliza(){
      $.redirect('/bambooQA/test.php', {
 
-'accion': 'crear'
+'accion': 'crear',
 //Propuesta
 
 'rutprop':  document.getElementById("rutprop").value,
@@ -1485,7 +1534,7 @@ function vencimiento_garantía(){
                 var newElement = '<tr id =item' + iCnt+ ' style="width:80%;">'+
                 '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
                 '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
-                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]"  oninput="checkRut(this);"'+
+                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
@@ -1511,6 +1560,7 @@ function vencimiento_garantía(){
                 document.getElementById("busca_rut_aseg["+iCnt+"]").style.display = "none";
 
             $('#main').after(container, divSubmit);
+             document.getElementById("contador").value = iCnt;
                 
                 
             }
@@ -1520,7 +1570,7 @@ function vencimiento_garantía(){
             var newElement = '<tr id =item' + iCnt + ' style="width:80%;">'+
                 '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[]" name="numero_item[]" required/></td>'+
                 '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
-                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" oninput="checkRut(this);"'+
+                    'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
@@ -1541,6 +1591,7 @@ function vencimiento_garantía(){
                
             $("#mytable").append($(newElement));
             $('#main').after(container, divSubmit);
+             document.getElementById("contador").value = iCnt;
          }
         }
         
@@ -1551,6 +1602,7 @@ function vencimiento_garantía(){
             $("#mytable").append('<label id=label>Limite Alcanzado</label> ');
             $('#btAdd').attr('class', 'btn');
             $('#btAdd').attr('disabled', 'disabled');
+             document.getElementById("contador").value = iCnt;
 
         }
     });
@@ -1564,6 +1616,8 @@ function vencimiento_garantía(){
             $('#btAdd').removeAttr('disabled');
             $('#item' + iCnt).remove();
              iCnt = iCnt - 1;
+              document.getElementById("contador").value = iCnt;
+             
              
         if (iCnt == 100) {
             $('#label').remove();
