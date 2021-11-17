@@ -652,7 +652,7 @@
     <div id="auxiliar2" style="display: none;">
     </div>
     <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_submit' onclick = "bPreguntar = false; crea_poliza()">Registrar</button>
+              id='boton_submit' onclick = "bPreguntar = false; genera_propuesta()">Registrar</button>
 </form>
 
 
@@ -1377,53 +1377,73 @@ function vencimiento_garantía(){
          document.getElementById("venc_gtia").value = '';
     }
 }
- function crea_poliza(){
-     $.redirect('/bambooQA/test.php', {
+ function genera_propuesta(){
+   //genera arrays por items
+    var contador =  document.getElementById("contador").value;
 
-'accion': 'crear',
-//Propuesta
+    var rutaseg = materia = detalle_materia = cobertura = deducible = prima_afecta = prima_exenta = prima_neta = prima_bruta = monto_aseg = monto_aseg = venc_gtia =[]
+    for (var i = 1; i <= contador; i++){
 
-'rutprop':  document.getElementById("rutprop").value,
-'fechaprop': document.getElementById("fechaprop").value,
-'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
-'fechainicio': document.getElementById("fechainicio").value,
-'fechavenc': document.getElementById("fechavenc").value,
-'moneda_poliza': document.getElementById("moneda_poliza").value,
-'selcompania':  document.getElementById("selcompania").value, 
-'ramo':  document.getElementById("ramo").value, 
-'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+      rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
+      materia.push(document.getElementById("materia["+i+"]").value);
+      detalle_materia.push(document.getElementById("detalle_materia["+i+"]").value);
+      cobertura.push(document.getElementById("cobertura["+i+"]").value);
+      deducible.push(document.getElementById("deducible["+i+"]").value);
+      prima_afecta.push(document.getElementById("prima_afecta["+i+"]").value);
+      prima_exenta.push(document.getElementById("prima_exenta["+i+"]").value);
+      prima_neta.push(document.getElementById("prima_neta["+i+"]").value);
+      prima_bruta.push(document.getElementById("prima_bruta["+i+"]").value);
+      monto_aseg.push(document.getElementById("monto_aseg["+i+"]").value);
+      venc_gtia.push(document.getElementById("venc_gtia["+i+"]").value);
+      
+    }
+    console.log(rutaseg)
+   //envía información a
 
-
-//Ítem
-'rutaseg':  document.getElementById("rutaseg").value,
-'materia': document.getElementById("materia").value,
-'detalle_materia': document.getElementById("detalle_materia").value,
-'cobertura': document.getElementById("cobertura").value,
-'deducible': document.getElementById("deducible").value,
-'prima_afecta': document.getElementById("prima_afecta").value,
-'prima_exenta': document.getElementById("prima_exenta").value,
-'prima_neta': document.getElementById("prima_neta").value,
-'prima_bruta': document.getElementById("prima_bruta").value,
-'monto_aseg': document.getElementById("monto_aseg").value,
-'venc_gtia': document.getElementById("venc_gtia").value,
-
-
-//Póliza
-'nro_poliza': document.getElementById("nro_poliza").value, //automático
-'comision': document.getElementById("comision").value,
-'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
-'comisionbruta': document.getElementById("comisionbruta").value,
-'comisionneta': document.getElementById("comisionneta").value,
-'fechadeposito': document.getElementById("fechadeposito").value,
-'comisionneg': document.getElementById("comisionneg").value,
-'boletaneg': document.getElementById("boletaneg").value,
-'boleta': document.getElementById("boleta").value,
-'cuotas': document.getElementById("cuotas").value,
-'valorcuota': document.getElementById("valorcuota").value,
-'fechaprimer': document.getElementById("fechaprimer").value,
-
-}, 'post');
- }
+    
+    $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      'accion': 'crear',
+      //Propuesta
+      'rutprop':  document.getElementById("rutprop").value,
+      'fechaprop': document.getElementById("fechaprop").value,
+      'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+      'fechainicio': document.getElementById("fechainicio").value,
+      'fechavenc': document.getElementById("fechavenc").value,
+      'moneda_poliza': document.getElementById("moneda_poliza").value,
+      'selcompania':  document.getElementById("selcompania").value, 
+      'ramo':  document.getElementById("ramo").value, 
+      'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+      //Ítem
+      'rutaseg':  document.getElementById("rutaseg").value,
+      'materia': document.getElementById("materia").value,
+      'detalle_materia': document.getElementById("detalle_materia").value,
+      'cobertura': document.getElementById("cobertura").value,
+      'deducible': document.getElementById("deducible").value,
+      'prima_afecta': document.getElementById("prima_afecta").value,
+      'prima_exenta': document.getElementById("prima_exenta").value,
+      'prima_neta': document.getElementById("prima_neta").value,
+      'prima_bruta': document.getElementById("prima_bruta").value,
+      'monto_aseg': document.getElementById("monto_aseg").value,
+      'venc_gtia': document.getElementById("venc_gtia").value
+      /*
+      //Póliza
+      'nro_poliza': document.getElementById("nro_poliza").value, //automático
+      'comision': document.getElementById("comision").value,
+      'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
+      'comisionbruta': document.getElementById("comisionbruta").value,
+      'comisionneta': document.getElementById("comisionneta").value,
+      'fechadeposito': document.getElementById("fechadeposito").value,
+      'comisionneg': document.getElementById("comisionneg").value,
+      'boletaneg': document.getElementById("boletaneg").value,
+      'boleta': document.getElementById("boleta").value,
+      'cuotas': document.getElementById("cuotas").value,
+      'valorcuota': document.getElementById("valorcuota").value,
+      'fechaprimer': document.getElementById("fechaprimer").value,
+      */
+      }, 'post');
+      
+    }
+    
  function valida_vencimiento(){
      
      
