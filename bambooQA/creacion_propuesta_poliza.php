@@ -1381,7 +1381,6 @@ function vencimiento_garantía(){
  function genera_propuesta(){
    //genera arrays por items
     var contador =  document.getElementById("contador").value;
-
     var rutaseg = materia = detalle_materia = cobertura = deducible = prima_afecta = prima_exenta = prima_neta = prima_bruta = monto_aseg = monto_aseg = venc_gtia =[]
     for (var i = 1; i <= contador; i++){
 
@@ -1400,20 +1399,21 @@ function vencimiento_garantía(){
     }
     console.log(rutaseg)
    //envía información a
-
-    
-    $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-      'accion': 'crear',
+    if (document.getElementById("headingfour").style.display =="none"){
+      $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      'accion': 'crear_propuesta',
+      
       //Propuesta
-      'rutprop':  rutprop,
-      'fechaprop': fechaprop,
-      'nro_propuesta': nro_propuesta, //automàtica
-      'fechainicio': fechainicio,
-      'fechavenc': fechavenc,
-      'moneda_poliza': moneda_poliza,
-      'selcompania':  selcompania, 
-      'ramo':  ramo, 
-      'nombre_vendedor': nombre_vendedor,
+      'rutprop': document.getElementById("rutprop").value,
+      'fechaprop': document.getElementById("fechaprop").value,
+      'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+      'fechainicio': document.getElementById("fechainicio").value,
+      'fechavenc': document.getElementById("fechavenc").value,
+      'moneda_poliza': document.getElementById("moneda_poliza").value,
+      'selcompania': document.getElementById("selcompania").value, 
+      'ramo': document.getElementById("ramo").value, 
+      'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+
       //Ítem
       'rutaseg':  rutaseg,
       'materia': materia,
@@ -1426,7 +1426,37 @@ function vencimiento_garantía(){
       'prima_bruta': prima_bruta,
       'monto_aseg': monto_aseg,
       'venc_gtia': venc_gtia
-      /*
+
+      }, 'post');
+    }
+    else {
+      $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      'accion': 'crear_poliza',
+
+      //Propuesta
+      'rutprop': document.getElementById("rutprop").value,
+      'fechaprop': document.getElementById("fechaprop").value,
+      'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+      'fechainicio': document.getElementById("fechainicio").value,
+      'fechavenc': document.getElementById("fechavenc").value,
+      'moneda_poliza': document.getElementById("moneda_poliza").value,
+      'selcompania': document.getElementById("selcompania").value, 
+      'ramo': document.getElementById("ramo").value, 
+      'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+
+      //Ítem
+      'rutaseg':  rutaseg,
+      'materia': materia,
+      'detalle_materia': detalle_materia,
+      'cobertura': cobertura,
+      'deducible': deducible,
+      'prima_afecta': prima_afecta,
+      'prima_exenta': prima_exenta,
+      'prima_neta': prima_neta,
+      'prima_bruta': prima_bruta,
+      'monto_aseg': monto_aseg,
+      'venc_gtia': venc_gtia
+      
       //Póliza
       'nro_poliza': document.getElementById("nro_poliza").value, //automático
       'comision': document.getElementById("comision").value,
@@ -1439,10 +1469,9 @@ function vencimiento_garantía(){
       'boleta': document.getElementById("boleta").value,
       'cuotas': document.getElementById("cuotas").value,
       'valorcuota': document.getElementById("valorcuota").value,
-      'fechaprimer': document.getElementById("fechaprimer").value,
-      */
+      'fechaprimer': document.getElementById("fechaprimer").value
       }, 'post');
-      
+    }      
     }
     
  function valida_vencimiento(){

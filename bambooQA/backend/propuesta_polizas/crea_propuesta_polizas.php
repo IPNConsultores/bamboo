@@ -36,6 +36,20 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"]));
   $venc_gtia=estandariza_info($_POST["venc_gtia"]);
 
+  //poliza
+  $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+  $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
+  $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
+  $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
+  $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
+  $fechadeposito= estandariza_info($_POST["fechadeposito"]);
+  $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
+  $boletaneg= estandariza_info($_POST["boletaneg"]);
+  $boleta= estandariza_info($_POST["boleta"]);
+  $cuotas= estandariza_info($_POST["cuotas"]);
+  $valorcuota= cambia_puntos_por_coma(estandariza_info($_POST["valorcuota"]));
+  $fechaprimer= estandariza_info($_POST["fechaprimer"]);
+
 //Modificar
   $nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
 
@@ -53,7 +67,7 @@ switch ($_POST["accion"]) {
   case 'modificar': 
       //pendiente update
       break;
-  case 'crear':
+  case 'crear_propuesta':
     // creación propuesta
         
         //crea token
@@ -94,6 +108,8 @@ switch ($_POST["accion"]) {
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', '".$nro_propuesta."(".$key.")' , '".$_SERVER['PHP_SELF']."')");
       }
         break;
+  case 'crea_poliza':
+    break;
 //echo $query;
 }
 function estandariza_info($data) {
