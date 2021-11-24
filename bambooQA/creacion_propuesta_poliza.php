@@ -52,7 +52,7 @@
  
 <!-- --------------------------------------------                -->
 
-<form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario" novalidate>
+<form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario"  novalidate>
   <div class="form-check form-check-inline">
     <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
       persona?:&nbsp;&nbsp;</label>
@@ -62,7 +62,7 @@
     <input class="form-check-input" type="radio" name="iguales" id="radio2_si" value="iguales"
                         onclick="checkRadio2(this.name)" checked="checked" onchange="copiadatos()">
     <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-    <input type="text" class="form-control" id="contador" name="contador" value ="0" style="visibility: hidden">
+    <input type="text" class="form-control" id="contador" name="contador" value ="0" style="display:none">
     
   </div>
           
@@ -78,13 +78,9 @@
         <label style="color: darkred">&nbsp; *</label>
         <input type="text" class="form-control" id="rutprop" name="rutprop"
                               placeholder="1111111-1" oninput="checkRut(this);copiadatos()"
-                              onchange="valida_rut_duplicado_prop();copiadatos();rutprop_completo();nombre_prop_completo();"
-                              required readonly>
-        <div class="invalid-feedback">Dígito verificador no válido. Verifica rut
-          ingresado</div>
-        <div style="color:red; visibility: hidden" id="validador10">No puedes dejar este campo
-          en blanco</div>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                              onchange="valida_rut_duplicado_prop();copiadatos();"
+                               readonly required>
+        <div class="invalid-feedback">Dígito verificador no válido. Verifica rut </div>
       </div>
       <button type="button" class="btn btn-secondary" id="busca_rut_prop" data-toggle="modal"
                           onclick="origen_busqueda(this.id,0)" data-target="#modal_cliente"
@@ -130,11 +126,11 @@
         <label style="color: darkred">&nbsp; *</label>
         <input type="text" id="nombre_prop" class="form-control" name="nombre"
                               oninput="checkRut(this);copiadatos()"
-                              onchange="valida_rut_duplicado_prop();copiadatos();nombre_prop_completo();" required
-                              disabled>
-        <div style="color:red; visibility: hidden" id="validador1">No puedes dejar este campo en
-          blanco</div>
-          <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
+                              onchange="valida_rut_duplicado_prop();copiadatos();"  disabled required>
+                              
+        <div   style="color:red; font-size: 12px ; visibility: hidden" id="validador10">No puedes dejar este campo
+          en blanco</div>
+             <br>
       </div>
       <div class="col-md-4 mb-3" style="display:none">
         <label for="ApellidoP">Apellido Paterno</label>
@@ -176,7 +172,7 @@
                 <label style="color: darkred">*</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
-                      class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+                      class="form-control"  oninput="valida_vencimiento()" max= "9999-12-31" required>
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -191,7 +187,7 @@
                 <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" id="fechainicio" name="fechainicio"
-                                          class="form-control" onchange="fechainicio_completo(); validadorfecha(this.id)" max= "9999-12-31" required>
+                                          class="form-control" onchange="validadorfecha(this.id)" max= "9999-12-31" required>
                                           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador5">Debes seleccionar Fecha de
@@ -202,7 +198,7 @@
                 <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
                   <input placeholder="Selected date" type="date" name="fechavenc" id="fechavenc"
-                                          class="form-control" onchange="fechavenc_completo();" oninput="valida_vencimiento()" max= "9999-12-31" required>
+                                          class="form-control"  oninput="valida_vencimiento()" max= "9999-12-31" required>
                                           <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de
@@ -226,8 +222,7 @@
             
             <label for="compania">Compañía</label>
             <label style="color: darkred">&nbsp; *</label>
-            <select class="form-control" name="selcompania" id="selcompania"
-                                      onChange="selcompania_completo()" required>
+            <select class="form-control" name="selcompania" id="selcompania" required>
                   <option value="">Selecciona una compañía</option>
                   <option value="Axa Assistance"
                                           <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Axa Assistance") echo "selected" ?>>Axa Assistance</option>
@@ -283,7 +278,7 @@
                 <label for="sel1">Ramo:&nbsp;</label>
                 <label style="color: darkred">*</label>
                 <select class="form-control" name="ramo" id="ramo"
-                                      onChange="cambia_deducible();ramo_completo();vencimientogarantia()" required>
+                                      onChange="cambia_deducible();vencimientogarantia()" required>
                   <option value="">Selecciona un ramo</option>
                   <option value="AC - Accidentes Personales"
                                           <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Accidentes Personales") echo "selected" ?>>ACCIDENTES PERSONALES - Accidentes Personales</option>
@@ -479,7 +474,7 @@
                 <label for="poliza">Número de Poliza</label>
                 <label style="color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="nro_poliza" name="nro_poliza"
-                                      onchange="nro_poliza_completo()" style="width:72%;" required>
+                                       style="width:72%;" required>
                 </div>
           <div class="col-md-4 mb-3">
           <label for="fecha_emision_poliza">Fecha Emisión Póliza &nbsp;&nbsp;</label>
@@ -563,15 +558,14 @@
               <label style="color: darkred">&nbsp; *</label>
               <div class="form" style="display: flex; align-items: center;">
                 <select class="form-control" name="modo_pago" id="modo_pago"
-                                          onChange="modopago();modopago_completo();" style="width:30%;" required>
+                                          onChange="modopago();" style="width:30%;" required>
                   <option value="">-</option>
                   <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
                   <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
                   <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
                   <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
                 </select>
-                <select class="form-control" name="cuotas" id="cuotas"
-                                          onchange="cuotas_completo();" style="width:42%;">
+                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;">
                   <option value="">Número Cuotas</option>
                   <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
                   <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
@@ -650,35 +644,82 @@
       </div>
     </div>
     <br>
-    <div id="auxiliar2" style="display: none;">
-    </div>
+    <div id="auxiliar2" style="display: none;"></div>
+    <input id="auxiliar3" placeholder="false" style="display: none;" />
+    
     <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_submit' onclick = "bPreguntar = false; genera_propuesta()">Registrar</button>
+              id='boton_submit' >Registrar</button>
 </form>
 
 
 <br>
 <br>
-</div>
+</div>/
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
+
+//function validadatos() {
+            //// Fetch all the forms we want to apply custom Bootstrap validation styles to
+//            var forms = document.getElementsByClassName('needs-validation');
+            ////var form =document.getElementById('formulario');
+            
+            //var button = document.getElementById('boton_submit');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+            //var validation = 
+        //Array.prototype.slice.call(forms).forEach(function(form) {
+          //      form.addEventListener('click', function(event) {
+                   // if (form.checkValidity() === false) {
+            //       console.log(form.checkValidity())
+              //       if (!form.checkValidity() ) {
+                         
+                         
+                //        event.preventDefault();
+                  //      event.stopPropagation();
+                      
+                        
+                //    }
+                 //   form.classList.add('was-validated');
+                //}, false);
+            //});
+        //};
+
+
+$("#boton_submit").click(function(e){
+
+    blnFormValidity= $('#formulario')[0].checkValidity()
+    console.log(blnFormValidity)
+   document.getElementById('formulario').classList.add('was-validated');
+    if(blnFormValidity==false){
+        e.preventDefault();
+        return false
+    }
+    document.getElementById('auxiliar3').value = blnFormValidity;
+    
+    genera_propuesta();
+})
+ 
+ 
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+  //  (function() {
+     //   'use strict';
+    //    window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+     //       var forms = document.getElementsByClassName('needs-validation');
+            //var form =document.getElementById('formulario');
+            
+        //    var button = document.getElementById('boton_submit');
+            // Loop over them and prevent submission
+      //      var validation = Array.prototype.filter.call(forms, function(form) {
+        //        form.addEventListener('submit', function(event) {
+          //          if (form.checkValidity() === false) {
+            //            event.preventDefault();
+              //          event.stopPropagation();
+                        
+            //        }
+              //      form.classList.add('was-validated');
+        //        }, false);
+         //   });
+        //}, false);
+    //})();
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -903,13 +944,8 @@ function cambia_deducible() {
         document.getElementById("deducible").value = document.getElementById("deducible_defecto_1").value
     }
 }
-function validavendedor() {
-    if (document.getElementById("con_vendedor").value == "Si") {
-        document.getElementById("nombre_vendedor").disabled = false;
-    } else {
-        document.getElementById("nombre_vendedor").disabled = true;
-    }
-}
+
+
 $('#test1').on('shown.bs.modal', function() {
     console.log("test");
     /*
@@ -1221,63 +1257,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 });
 
+
+document.getElementById("busca_rut_prop").addEventListener("click", function(event) {
+    event.preventDefault()
+});
+
 document.getElementById("formulario").addEventListener('submit', function(event) {
 
-    if (document.getElementById("rutprop").value == "") {
+    if (document.getElementById("nombre_prop").value == "") {
         document.getElementById("validador10").style.visibility = "visible";
         event.preventDefault();
     }
-    //if (document.getElementById("rutaseg").value == "") {
-    //    document.getElementById("validador11").style.visibility = "visible";
-    //    event.preventDefault();
-    //}
-    if (document.getElementById("nombre_prop").value == "") {
-        document.getElementById("validador1").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("nombre_seg").value == "") {
-        document.getElementById("validador2").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("selcompania").value == "null") {
-        document.getElementById("selcompania").style.color = "red";
-        event.preventDefault();
-    }
-    if (document.getElementById("ramo").value == "null") {
-        document.getElementById("ramo").style.color = "red";
-        event.preventDefault();
-    }
-    if (document.getElementById("fechainicio").value == "") {
-        document.getElementById("validador5").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("fechavenc").value == "") {
-        document.getElementById("validador6").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("nro_poliza").value == "") {
-        document.getElementById("validador7").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("materia").value == "") {
-        document.getElementById("validador8").style.visibility = "visible";
-        event.preventDefault();
-    }
-    if (document.getElementById("detalle_materia").value == "") {
-        document.getElementById("validador9").style.visibility = "visible";
-        event.preventDefault();
-    }
-     if (document.getElementById("monto_aseg").value == "") {
-        document.getElementById("validador13").style.visibility = "visible";
-        event.preventDefault();
-    }
-     else {
-    }
-    
-    
-});
-document.getElementById("busca_rut_prop").addEventListener("click", function(event) {
-    event.preventDefault()
 });
 
 function validadorfecha(id){
@@ -1290,64 +1280,7 @@ function validadorfecha(id){
         
     }
 }
-function rutprop_completo() {
-    if (document.getElementById("rutprop").value != "") {
-        document.getElementById("validador10").style.visibility = "hidden";
-    }
-}
-//function rutaseg_completo() {
-//    if (document.getElementById("rutaseg").value != "") {
-//        document.getElementById("validador11").style.visibility = "hidden";
-//    }
-//}
-function nombre_prop_completo() {
-    if (document.getElementById("nombre_prop").value != "") {
-        document.getElementById("validador1").style.visibility = "hidden";
-        document.getElementById("validador10").style.visibility = "hidden";
-    }
-}
-function nombre_seg_completo() {
-    if (document.getElementById("nombre_seg").value != "") {
-        document.getElementById("validador2").style.visibility = "hidden";
-        document.getElementById("validador11").style.visibility = "hidden";
-    }
-}
-function selcompania_completo() {
-    if (document.getElementById("selcompania").value != "null") {
-        document.getElementById("selcompania").style.color = "grey";
-    }
-}
-function ramo_completo() {
-    if (document.getElementById("ramo").value != "null") {
-        document.getElementById("ramo").style.color = "grey";
-    }
-}
-function fechainicio_completo() {
-    if (document.getElementById("fechainicio").value != "") {
-        document.getElementById("validador5").style.visibility = "hidden";
-    }
-}
-function fechavenc_completo() {
-    if (document.getElementById("fechavenc").value != "") {
-        document.getElementById("validador6").style.visibility = "hidden";
-    }
-}
 
-function materia_completo() {
-    if (document.getElementById("materia").value != "") {
-        document.getElementById("validador8").style.visibility = "hidden";
-    }
-}
-function detalle_materia_completo() {
-    if (document.getElementById("detalle_materia").value != "") {
-        document.getElementById("validador9").style.visibility = "hidden";
-    }
-}
-function monto_aseg_completo() {
-    if (document.getElementById("monto_aseg").value != "") {
-        document.getElementById("validador13").style.visibility = "hidden";
-    }
-}
 
 
 
@@ -1378,8 +1311,12 @@ function vencimiento_garantía(){
          document.getElementById("venc_gtia").value = '';
     }
 }
+
  function genera_propuesta(){
    //genera arrays por items
+   
+   if(document.getElementById("auxiliar3").value == "true")
+   {
     var contador =  document.getElementById("contador").value;
     var rutaseg = materia = detalle_materia = cobertura = deducible = prima_afecta = prima_exenta = prima_neta = prima_bruta = monto_aseg = monto_aseg = venc_gtia =[]
     for (var i = 1; i <= contador; i++){
@@ -1455,7 +1392,7 @@ function vencimiento_garantía(){
       'prima_neta': prima_neta,
       'prima_bruta': prima_bruta,
       'monto_aseg': monto_aseg,
-      'venc_gtia': venc_gtia
+      'venc_gtia': venc_gtia,
       
       //Póliza
       'nro_poliza': document.getElementById("nro_poliza").value, //automático
@@ -1471,7 +1408,13 @@ function vencimiento_garantía(){
       'valorcuota': document.getElementById("valorcuota").value,
       'fechaprimer': document.getElementById("fechaprimer").value
       }, 'post');
-    }      
+    }
+   }
+   
+   else{
+       
+        // alert("Existen Elementos OBLIGATORIOS que no han sido completados");
+   }
     }
     
  function valida_vencimiento(){
@@ -1586,7 +1529,7 @@ function vencimiento_garantía(){
                 '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
-                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
+                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
@@ -1601,7 +1544,7 @@ function vencimiento_garantía(){
                       '<input type="text" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
                 '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange = "monto_aseg_completo()" required>' +    
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +    
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
             $("#mytable").append($(newElement));
@@ -1624,7 +1567,7 @@ function vencimiento_garantía(){
                 '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
-                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" onchange="nombre_seg_completo()" Oninput="nombre_seg_completo()" required></td>'+
+                '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]"  required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
@@ -1637,7 +1580,7 @@ function vencimiento_garantía(){
                       '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
                       '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange = "monto_aseg_completo()" required>' +    
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +    
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
                
