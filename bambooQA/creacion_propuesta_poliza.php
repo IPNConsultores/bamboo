@@ -1434,7 +1434,8 @@ function vencimientogarantia(){
       }, 'post');
     }
     else {
-      $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      $.redirect('/bambooQA/test_felipe.php', {  
       'accion': 'crear_poliza',
 
       //Propuesta
