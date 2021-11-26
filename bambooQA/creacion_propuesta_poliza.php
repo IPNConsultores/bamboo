@@ -163,7 +163,7 @@
               <div class="col-4" style= "display:none">
                 <label for="seguimiento">N° de Seguimiento:&nbsp;</label>
                 <label style="color: darkred">*</label>
-                <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta" required>
+                <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta" >
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
               </div>
           
@@ -1264,26 +1264,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados") {
                         document.getElementById("deducible_veh").style.display = "flex";
                                 document.getElementById("vencimiento_gtia").style.display = "flex";
-                        document.getElementById("deducible_defecto_1").style.display = "none";
+                        document.getElementById("deducible_defecto").style.display = "none";
                         var deducible = document.getElementById("deducible").value;
                         document.getElementById("deducible_veh_1").value = deducible;
                     } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" ||
                         ramo == "INC - Hogar" || ramo == "INC - Misceláneos" || ramo ==
                         "INC - Perjuicio por Paralización" || ramo == "INC - Pyme" || ramo ==
                         "INC - TRBF (Todo Riesgo Bienes Físicos)") {
-                        document.getElementById("deducible_defecto_1").style.display = "none";
+                        document.getElementById("deducible_defecto").style.display = "none";
                         document.getElementById("deducible_inc").style.display = "flex";
                         var deducible = document.getElementById("deducible").value;
                         document.getElementById("deducible_inc_1").value = deducible;
                     } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo ==
                         "Garantía" || ramo == "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" ||
                         ramo == "ASISTENCIA EN VIAJE" || ramo == "APV" || ramo == "VIDA") {
-                        document.getElementById("deducible_defecto_1").style.display = "none";
+                        document.getElementById("deducible_defecto").style.display = "none";
                         document.getElementById("deducible_viaje").style.display = "flex";
                         var deducible = document.getElementById("deducible").value;
                         document.getElementById("deducible_viaje_1").value = deducible;
                     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
-                        document.getElementById("deducible_defecto_1").style.display = "none";
+                        document.getElementById("deducible_defecto").style.display = "none";
                         document.getElementById("deducible_rc").style.display = "flex";
                         var deducible = document.getElementById("deducible").value
                         var cadena = document.getElementById("deducible").value.split("%")
@@ -1292,7 +1292,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         document.getElementById("deducible_valor").value = cadena[1].substring(cadena[1].length - 2,
                             cadena[1].length);
                     } else {
-                        document.getElementById("deducible_defecto_1").value = document.getElementById("deducible")
+                        document.getElementById("deducible_defecto").value = document.getElementById("deducible")
                             .value;
                     }
                     var moneda = document.getElementById("moneda_poliza").value;
@@ -1390,7 +1390,7 @@ function vencimientogarantia(){
       materia.push(document.getElementById("materia["+i+"]").value);
       detalle_materia.push(document.getElementById("detalle_materia["+i+"]").value);
       cobertura.push(document.getElementById("cobertura["+i+"]").value);
-      deducible.push(document.getElementById("deducible_defecto_1["+i+"]").value);
+      deducible.push(document.getElementById("deducible_defecto["+i+"]").value);
       prima_afecta.push(document.getElementById("prima_afecta["+i+"]").value);
       prima_exenta.push(document.getElementById("prima_exenta["+i+"]").value);
       prima_neta.push(document.getElementById("prima_neta["+i+"]").value);
@@ -1401,7 +1401,9 @@ function vencimientogarantia(){
     }
     console.log(rutaseg)
    //envía información a
-    if (document.getElementById("headingfour").style.display =="none"){
+    //if (document.getElementById("headingfour").style.display =="none"){ Pendiente ocular datos póliza
+      var a="bypass";
+    if(a=="bypass"){
       $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
       'accion': 'crear_propuesta',
       
@@ -1600,7 +1602,7 @@ function vencimientogarantia(){
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']"><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
                     '<input type="text" class="form-control" name="deducible_defecto"'+
-                     'id="deducible_defecto_1[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
+                     'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
                       '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
@@ -1638,7 +1640,7 @@ function vencimientogarantia(){
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']"  ><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
                     '<input type="text" class="form-control" name="deducible_defecto"'+
-                     'id="deducible_defecto_1[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
+                     'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
                       '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+

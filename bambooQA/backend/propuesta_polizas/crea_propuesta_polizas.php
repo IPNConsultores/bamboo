@@ -36,19 +36,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"]));
   $venc_gtia=estandariza_info($_POST["venc_gtia"]);
 
-  //poliza
-  $nro_poliza= estandariza_info($_POST["nro_poliza"]);
-  $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
-  $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
-  $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
-  $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
-  $fechadeposito= estandariza_info($_POST["fechadeposito"]);
-  $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
-  $boletaneg= estandariza_info($_POST["boletaneg"]);
-  $boleta= estandariza_info($_POST["boleta"]);
-  $cuotas= estandariza_info($_POST["cuotas"]);
-  $valorcuota= cambia_puntos_por_coma(estandariza_info($_POST["valorcuota"]));
-  $fechaprimer= estandariza_info($_POST["fechaprimer"]);
+
 
 //Modificar
   $nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
@@ -73,8 +61,9 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios, vendedor) VALUES ('Pendiente', '.$token.', '.$rut_prop.', '.$dv_prop.', '.$fechaprop.', '.$fechainicio.', '.$moneda_poliza.', '.$selcompania.', '.$ramo.', '.$comentario.', '.$vendedor.' )";
+        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios, vendedor) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentario."', '".$vendedor."' )";
         mysqli_query($link, $query);
+        echo $query;
         $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
         while ($fila = mysqli_fetch_object($resultado))
         {
@@ -84,6 +73,7 @@ switch ($_POST["accion"]) {
         }
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza', '".$nro_propuesta."' , '".$_SERVER['PHP_SELF']."')");
     // Incorporar ítems
+    
       foreach (array_keys($rut_completo_aseg) as $key) 
       {
         $nombrecontact = $_POST['nombrecontact'][$key];
@@ -105,10 +95,45 @@ switch ($_POST["accion"]) {
 
         $query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".$key."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."',)";
         mysqli_query($link, $query_items);
+        echo $query_items;
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', '".$nro_propuesta."(".$key.")' , '".$_SERVER['PHP_SELF']."')");
       }
         break;
   case 'crea_poliza':
+        // creación poliza
+          //poliza
+          $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+          $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
+          $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
+          $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
+          $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
+          $fechadeposito= estandariza_info($_POST["fechadeposito"]);
+          $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
+          $boletaneg= estandariza_info($_POST["boletaneg"]);
+          $boleta= estandariza_info($_POST["boleta"]);
+          $cuotas= estandariza_info($_POST["cuotas"]);
+          $valorcuota= cambia_puntos_por_coma(estandariza_info($_POST["valorcuota"]));
+          $fechaprimer= estandariza_info($_POST["fechaprimer"]);
+
+          //Aprueba propuesta póliza
+          $query= "update propuesta_polizas_2 set estado='Aprobada', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta=".$nro_propuesta;
+          mysqli_query($link, $query);
+          mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Aprueba propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
+  
+        //crea token
+        $largo = 6;
+        $token = bin2hex(random_bytes($largo));
+        $query= "INSERT INTO polizas_2(rut_proponente, dv_proponente, numero_propuesta, vigencia_inicial,vigencia_final, moneda_poliza, compania, ramo, nombre_vendedor, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta, nro_cuotas, valor_cuota, fecha_primera_cuota) VALUES (,,,,,,,,,,,,,,,,,,,,)";
+        mysqli_query($link, $query);
+        $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
+        while ($fila = mysqli_fetch_object($resultado))
+        {
+            // printf ("%s (%s)\n", $fila->id);
+            $id_propuesta = $fila->id;
+            $nro_propuesta = $fila->numero_propuesta;
+        }
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza', '".$nro_propuesta."' , '".$_SERVER['PHP_SELF']."')");
+    // Incorporar ítems
     break;
 //echo $query;
 }
@@ -135,12 +160,13 @@ return $data;
 </head>
 <body>
 <script >
+/*
 alert("Póliza Registrada Correctamente");
 var nro_propuesta= '<?php echo $nro_propuesta; ?>';
   $.redirect('/bambooQA/listado_propuesta_polizas.php', {
  'busqueda': nro_propuesta
 }, 'post');
-
+*/
 </script>
 </body>
 </html>
