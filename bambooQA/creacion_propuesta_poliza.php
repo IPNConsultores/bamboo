@@ -1383,7 +1383,17 @@ function vencimientogarantia(){
    if(document.getElementById("auxiliar3").value == "true")
    {
     var contador =  document.getElementById("contador").value;
-    var rutaseg = materia = detalle_materia = cobertura = deducible = prima_afecta = prima_exenta = prima_neta = prima_bruta = monto_aseg = monto_aseg = venc_gtia =[]
+    var materia = [];
+    var detalle_materia = [];
+    var cobertura = [];
+    var deducible = [];
+    var prima_afecta = [];
+    var prima_exenta = [];
+    var prima_neta = [];
+    var prima_bruta = [];
+    var monto_aseg = [];
+    var monto_aseg = [];
+    var venc_gtia =[]
     for (var i = 1; i <= contador; i++){
 
       rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
