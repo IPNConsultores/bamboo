@@ -1383,6 +1383,7 @@ function vencimientogarantia(){
    if(document.getElementById("auxiliar3").value == "true")
    {
     var contador =  document.getElementById("contador").value;
+    var rutaseg = [];
     var materia = [];
     var detalle_materia = [];
     var cobertura = [];
@@ -1391,7 +1392,6 @@ function vencimientogarantia(){
     var prima_exenta = [];
     var prima_neta = [];
     var prima_bruta = [];
-    var monto_aseg = [];
     var monto_aseg = [];
     var venc_gtia =[]
     for (var i = 1; i <= contador; i++){
@@ -1409,10 +1409,10 @@ function vencimientogarantia(){
       venc_gtia.push(document.getElementById("venc_gtia["+i+"]").value);
       
     }
-    console.log(rutaseg)
+    console.log(rutaseg);
    //envía información a
     //if (document.getElementById("headingfour").style.display =="none"){ Pendiente ocular datos póliza
-      var a="bypass";
+    var a="bypass";
     if(a=="bypass"){
     //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
       $.redirect('/bambooQA/test_felipe.php', { 
