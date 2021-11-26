@@ -1404,8 +1404,8 @@ function vencimientogarantia(){
     //if (document.getElementById("headingfour").style.display =="none"){ Pendiente ocular datos póliza
       var a="bypass";
     if(a=="bypass"){
-      $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-      'accion': 'crear_propuesta',
+    //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+      $.redirect('/bambooQA/test_felipe.php', { 
       
       //Propuesta
       'rutprop': document.getElementById("rutprop").value,
@@ -1416,6 +1416,7 @@ function vencimientogarantia(){
       'moneda_poliza': document.getElementById("moneda_poliza").value,
       'selcompania': document.getElementById("selcompania").value, 
       'ramo': document.getElementById("ramo").value, 
+      'comentario': document.getElementById("comentario").value, 
       'nombre_vendedor': document.getElementById("nombre_vendedor").value,
 
       //Ítem
@@ -1447,6 +1448,7 @@ function vencimientogarantia(){
       'moneda_poliza': document.getElementById("moneda_poliza").value,
       'selcompania': document.getElementById("selcompania").value, 
       'ramo': document.getElementById("ramo").value, 
+      'comentario': document.getElementById("comentario").value,
       'nombre_vendedor': document.getElementById("nombre_vendedor").value,
 
       //Ítem
