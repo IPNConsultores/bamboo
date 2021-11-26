@@ -1406,7 +1406,7 @@ function vencimientogarantia(){
     if(a=="bypass"){
     //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
       $.redirect('/bambooQA/test_felipe.php', { 
-      
+        'accion': 'crear_propuesta',
       //Propuesta
       'rutprop': document.getElementById("rutprop").value,
       'fechaprop': document.getElementById("fechaprop").value,
