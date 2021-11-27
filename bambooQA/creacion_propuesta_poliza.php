@@ -1392,7 +1392,7 @@ function vencimientogarantia(){
 
 
 
- function genera_propuesta(){
+  function genera_propuesta(){
    //genera arrays por items
    
    if(document.getElementById("auxiliar3").value == "true")
@@ -1408,7 +1408,7 @@ function vencimientogarantia(){
       var prima_neta = [];
       var prima_bruta = [];
       var monto_aseg = [];
-      var venc_gtia =[]
+      var venc_gtia =[];
       for (var i = 1; i <= contador; i++){
 
         rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
@@ -1460,6 +1460,7 @@ function vencimientogarantia(){
 
           }, 'post');
       }
+      break;
       case 'crear_poliza': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
           //$.redirect('/bambooQA/test_felipe.php', {  
@@ -1505,6 +1506,7 @@ function vencimientogarantia(){
           'fechaprimer': document.getElementById("fechaprimer").value
           }, 'post');
         }
+        break;
       }
     }
   }
