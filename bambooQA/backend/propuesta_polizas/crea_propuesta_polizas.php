@@ -3,7 +3,6 @@
     { 
         session_start(); 
     } 
-
 require_once "/home/gestio10/public_html/backend/config.php";
 
 //Ingresar
@@ -21,8 +20,9 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
 
 
-  //item
-  $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
+  /*item
+  $rut_completo_aseg = $_POST["rutaseg"];
+  echo $_POST["rutaseg"]."<br>";
   $rut_aseg=estandariza_info(substr($rut_completo_aseg, 0, strlen($rut_completo_aseg)-1));
   $dv_aseg=estandariza_info(substr($rut_completo_aseg, -1,1));
   $materia=estandariza_info($_POST["materia"]);
@@ -35,7 +35,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"]));
   $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"]));
   $venc_gtia=estandariza_info($_POST["venc_gtia"]);
-
+    */
 
 
 //Modificar
@@ -44,11 +44,11 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-
+echo "Acción: ->".$_POST["accion"]."<-<br>";
 switch ($_POST["accion"]) {
 
   case 'rechazar':
-      $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta=".$nro_propuesta;
+      $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
       break;
@@ -57,14 +57,16 @@ switch ($_POST["accion"]) {
       break;
   case 'crear_propuesta':
     // creación propuesta
-        
+        $id_propuesta='';
+        $nro_propuesta='';
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
         $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios, vendedor) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentario."', '".$vendedor."' )";
         mysqli_query($link, $query);
-        echo $query;
+        mysqli_query($link, 'update propuesta_polizas_2 set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
         $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
+        
         while ($fila = mysqli_fetch_object($resultado))
         {
             // printf ("%s (%s)\n", $fila->id);
@@ -74,9 +76,10 @@ switch ($_POST["accion"]) {
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza', '".$nro_propuesta."' , '".$_SERVER['PHP_SELF']."')");
     // Incorporar ítems
     
-      foreach (array_keys($rut_completo_aseg) as $key) 
+      foreach ($_POST["rutaseg"] as $key => $valor) 
       {
-        $nombrecontact = $_POST['nombrecontact'][$key];
+        $nombrecontact = str_replace("-", "", estandariza_info($_POST['nombrecontact'][$key]));
+
         //item
         $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"][$key]));
         $rut_aseg=estandariza_info(substr($rut_completo_aseg, 0, strlen($rut_completo_aseg)-1));
@@ -91,12 +94,9 @@ switch ($_POST["accion"]) {
         $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"][$key]));
         $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
         $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
-
-
-        $query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".$key."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."',)";
+        $query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."')";
         mysqli_query($link, $query_items);
-        echo $query_items;
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', '".$nro_propuesta."(".$key.")' , '".$_SERVER['PHP_SELF']."')");
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']') , '".$_SERVER['PHP_SELF']."')");
       }
         break;
   case 'crea_poliza':

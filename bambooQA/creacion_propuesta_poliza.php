@@ -1,4 +1,19 @@
+<?php
+if ( !isset( $_SESSION ) ) {
+  session_start();
+}
+$camino = 'crear_propuesta';
+if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "numero_propuesta" ]) == true ) {
+  $camino = $_POST["accion"];
+}
 
+function estandariza_info( $data ) {
+  $data = trim( $data );
+  $data = stripslashes( $data );
+  $data = htmlspecialchars( $data );
+  return $data;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1382,120 +1397,117 @@ function vencimientogarantia(){
    
    if(document.getElementById("auxiliar3").value == "true")
    {
-    var contador =  document.getElementById("contador").value;
-    var rutaseg = [];
-    var materia = [];
-    var detalle_materia = [];
-    var cobertura = [];
-    var deducible = [];
-    var prima_afecta = [];
-    var prima_exenta = [];
-    var prima_neta = [];
-    var prima_bruta = [];
-    var monto_aseg = [];
-    var venc_gtia =[]
-    for (var i = 1; i <= contador; i++){
+      var contador =  document.getElementById("contador").value;
+      var rutaseg = [];
+      var materia = [];
+      var detalle_materia = [];
+      var cobertura = [];
+      var deducible = [];
+      var prima_afecta = [];
+      var prima_exenta = [];
+      var prima_neta = [];
+      var prima_bruta = [];
+      var monto_aseg = [];
+      var venc_gtia =[]
+      for (var i = 1; i <= contador; i++){
 
-      rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
-      materia.push(document.getElementById("materia["+i+"]").value);
-      detalle_materia.push(document.getElementById("detalle_materia["+i+"]").value);
-      cobertura.push(document.getElementById("cobertura["+i+"]").value);
-      deducible.push(document.getElementById("deducible_defecto["+i+"]").value);
-      prima_afecta.push(document.getElementById("prima_afecta["+i+"]").value);
-      prima_exenta.push(document.getElementById("prima_exenta["+i+"]").value);
-      prima_neta.push(document.getElementById("prima_neta["+i+"]").value);
-      prima_bruta.push(document.getElementById("prima_bruta["+i+"]").value);
-      monto_aseg.push(document.getElementById("monto_aseg["+i+"]").value);
-      venc_gtia.push(document.getElementById("venc_gtia["+i+"]").value);
+        rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
+        materia.push(document.getElementById("materia["+i+"]").value);
+        detalle_materia.push(document.getElementById("detalle_materia["+i+"]").value);
+        cobertura.push(document.getElementById("cobertura["+i+"]").value);
+        deducible.push(document.getElementById("deducible_defecto["+i+"]").value);
+        prima_afecta.push(document.getElementById("prima_afecta["+i+"]").value);
+        prima_exenta.push(document.getElementById("prima_exenta["+i+"]").value);
+        prima_neta.push(document.getElementById("prima_neta["+i+"]").value);
+        prima_bruta.push(document.getElementById("prima_bruta["+i+"]").value);
+        monto_aseg.push(document.getElementById("monto_aseg["+i+"]").value);
+        venc_gtia.push(document.getElementById("venc_gtia["+i+"]").value);
       
-    }
-    console.log(rutaseg);
+      }
+    //console.log(rutaseg);
    //envía información a
     //if (document.getElementById("headingfour").style.display =="none"){ Pendiente ocular datos póliza
-    var a="bypass";
-    if(a=="bypass"){
-    //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-      $.redirect('/bambooQA/test_felipe.php', { 
-        'accion': 'crear_propuesta',
-      //Propuesta
-      'rutprop': document.getElementById("rutprop").value,
-      'fechaprop': document.getElementById("fechaprop").value,
-      'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
-      'fechainicio': document.getElementById("fechainicio").value,
-      'fechavenc': document.getElementById("fechavenc").value,
-      'moneda_poliza': document.getElementById("moneda_poliza").value,
-      'selcompania': document.getElementById("selcompania").value, 
-      'ramo': document.getElementById("ramo").value, 
-      'comentario': document.getElementById("comentario").value, 
-      'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+    var camino='<?php echo $camino; ?>';
+    switch (camino) {
+        case 'crear_propuesta': {
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe.php', { 
+            'accion': 'crear_propuesta',
+          //Propuesta
+          'rutprop': document.getElementById("rutprop").value,
+          'fechaprop': document.getElementById("fechaprop").value,
+          'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'fechainicio': document.getElementById("fechainicio").value,
+          'fechavenc': document.getElementById("fechavenc").value,
+          'moneda_poliza': document.getElementById("moneda_poliza").value,
+          'selcompania': document.getElementById("selcompania").value, 
+          'ramo': document.getElementById("ramo").value, 
+          'comentario': document.getElementById("comentario").value, 
+          'nombre_vendedor': document.getElementById("nombre_vendedor").value,
 
-      //Ítem
-      'rutaseg':  rutaseg,
-      'materia': materia,
-      'detalle_materia': detalle_materia,
-      'cobertura': cobertura,
-      'deducible': deducible,
-      'prima_afecta': prima_afecta,
-      'prima_exenta': prima_exenta,
-      'prima_neta': prima_neta,
-      'prima_bruta': prima_bruta,
-      'monto_aseg': monto_aseg,
-      'venc_gtia': venc_gtia
+          //Ítem
+          'rutaseg':  rutaseg,
+          'materia': materia,
+          'detalle_materia': detalle_materia,
+          'cobertura': cobertura,
+          'deducible': deducible,
+          'prima_afecta': prima_afecta,
+          'prima_exenta': prima_exenta,
+          'prima_neta': prima_neta,
+          'prima_bruta': prima_bruta,
+          'monto_aseg': monto_aseg,
+          'venc_gtia': venc_gtia
 
-      }, 'post');
+          }, 'post');
+      }
+      case 'crear_poliza': {
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe.php', {  
+          'accion': 'crear_poliza',
+
+          //Propuesta
+          'rutprop': document.getElementById("rutprop").value,
+          'fechaprop': document.getElementById("fechaprop").value,
+          'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'fechainicio': document.getElementById("fechainicio").value,
+          'fechavenc': document.getElementById("fechavenc").value,
+          'moneda_poliza': document.getElementById("moneda_poliza").value,
+          'selcompania': document.getElementById("selcompania").value, 
+          'ramo': document.getElementById("ramo").value, 
+          'comentario': document.getElementById("comentario").value,
+          'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+
+          //Ítem
+          'rutaseg':  rutaseg,
+          'materia': materia,
+          'detalle_materia': detalle_materia,
+          'cobertura': cobertura,
+          'deducible': deducible,
+          'prima_afecta': prima_afecta,
+          'prima_exenta': prima_exenta,
+          'prima_neta': prima_neta,
+          'prima_bruta': prima_bruta,
+          'monto_aseg': monto_aseg,
+          'venc_gtia': venc_gtia,
+          
+          //Póliza
+          'nro_poliza': document.getElementById("nro_poliza").value, //automático
+          'comision': document.getElementById("comision").value,
+          'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
+          'comisionbruta': document.getElementById("comisionbruta").value,
+          'comisionneta': document.getElementById("comisionneta").value,
+          'fechadeposito': document.getElementById("fechadeposito").value,
+          'comisionneg': document.getElementById("comisionneg").value,
+          'boletaneg': document.getElementById("boletaneg").value,
+          'boleta': document.getElementById("boleta").value,
+          'cuotas': document.getElementById("cuotas").value,
+          'valorcuota': document.getElementById("valorcuota").value,
+          'fechaprimer': document.getElementById("fechaprimer").value
+          }, 'post');
+        }
+      }
     }
-    else {
-      //$.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-      $.redirect('/bambooQA/test_felipe.php', {  
-      'accion': 'crear_poliza',
-
-      //Propuesta
-      'rutprop': document.getElementById("rutprop").value,
-      'fechaprop': document.getElementById("fechaprop").value,
-      'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
-      'fechainicio': document.getElementById("fechainicio").value,
-      'fechavenc': document.getElementById("fechavenc").value,
-      'moneda_poliza': document.getElementById("moneda_poliza").value,
-      'selcompania': document.getElementById("selcompania").value, 
-      'ramo': document.getElementById("ramo").value, 
-      'comentario': document.getElementById("comentario").value,
-      'nombre_vendedor': document.getElementById("nombre_vendedor").value,
-
-      //Ítem
-      'rutaseg':  rutaseg,
-      'materia': materia,
-      'detalle_materia': detalle_materia,
-      'cobertura': cobertura,
-      'deducible': deducible,
-      'prima_afecta': prima_afecta,
-      'prima_exenta': prima_exenta,
-      'prima_neta': prima_neta,
-      'prima_bruta': prima_bruta,
-      'monto_aseg': monto_aseg,
-      'venc_gtia': venc_gtia,
-      
-      //Póliza
-      'nro_poliza': document.getElementById("nro_poliza").value, //automático
-      'comision': document.getElementById("comision").value,
-      'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
-      'comisionbruta': document.getElementById("comisionbruta").value,
-      'comisionneta': document.getElementById("comisionneta").value,
-      'fechadeposito': document.getElementById("fechadeposito").value,
-      'comisionneg': document.getElementById("comisionneg").value,
-      'boletaneg': document.getElementById("boletaneg").value,
-      'boleta': document.getElementById("boleta").value,
-      'cuotas': document.getElementById("cuotas").value,
-      'valorcuota': document.getElementById("valorcuota").value,
-      'fechaprimer': document.getElementById("fechaprimer").value
-      }, 'post');
-    }
-   }
-   
-   else{
-       
-        // alert("Existen Elementos OBLIGATORIOS que no han sido completados");
-   }
-    }
+  }
     
  function valida_vencimiento(){
      

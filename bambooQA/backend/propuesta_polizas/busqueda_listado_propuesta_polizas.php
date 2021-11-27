@@ -9,9 +9,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-    //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-//    $sql = "SELECT informacion_adicional, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_poliza,poliza_renovada, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, compania, ramo, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial,DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, CONCAT_WS(' ',moneda_comision,FORMAT(comision, 4, 'de_DE')) AS comision, CONCAT(FORMAT(porcentaje_comision, 4, 'de_DE'),'%') as porcentaje_comision, CONCAT_WS(' ',moneda_comision,FORMAT(comision_bruta, 4, 'de_DE')) AS comision_bruta , CONCAT_WS(' ',moneda_comision,FORMAT(comision_neta, 4, 'de_DE')) AS comision_neta, numero_boleta, boleta_negativa, CONCAT_WS(' ',moneda_comision_negativa,FORMAT(comision_negativa, 4, 'de_DE')) AS comision_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, nombre_vendedor, forma_pago, nro_cuotas, CONCAT_WS(' ',moneda_valor_cuota,FORMAT(valor_cuota, 4, 'de_DE')) AS valor_cuota , DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota , if(a.rut_proponente=a.rut_asegurado, c.grupo, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo))) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido, a.nombre_vendedor FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null";
-    $sql = "SELECT item, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_propuesta, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo)) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido FROM propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null";
+    $sql = "SELECT estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta,  CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, a.id as id_propuesta, b.id as idP, fecha_envio_propuesta, b.grupo, b.referido FROM propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null ";
+    //"SELECT item, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_propuesta, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo)) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido FROM propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null";
 
 $resultado=mysqli_query($link, $sql);
     $codigo='{
@@ -19,43 +18,67 @@ $resultado=mysqli_query($link, $sql);
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
   {$conta=$conta+1;
+    //$resultado contiene propuestas, a cada una de estas líneas hay que asignar un array con los ítem asociados
+
+        $resultado_contador_contactos=mysqli_query($link, "SELECT count(numero_item) as contador FROM items where numero_propuesta='".$row->numero_propuesta."';");
+        while ($fila=mysqli_fetch_object($resultado_contador_contactos))
+        {
+        $contador_contactos=$total_prima_afecta=$total_prima_exenta=$total_prima_neta=$total_prima_bruta=0;
+        $cant_items=$fila->contador;
+        $resultado_items=mysqli_query($link, "select a.numero_propuesta, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, a.monto_asegurado, a.venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='".$row->numero_propuesta."';");
+            $items_array=array("contactos"=>& $fila->contador);
+            if (!$cant_items=="0"){
+        while($indice=mysqli_fetch_object($resultado_items)){
+            $contador_contactos=$contador_contactos+1;
+            $total_prima_afecta=$indice->prima_afecta;
+            $total_prima_exenta=$indice->prima_exenta;
+            $total_prima_neta=$indice->prima_neta;
+            $total_prima_bruta=$indice->prima_bruta;
+            $items_array=array_merge($items_array, array(
+                "numero_item".$contador_contactos =>& $indice->numero_item,
+                "materia_asegurada".$contador_contactos =>& $indice->materia_asegurada,
+                "patente_ubicacion".$contador_contactos =>& $indice->patente_ubicacion,
+                "cobertura".$contador_contactos =>& $indice->cobertura,
+                "deducible".$contador_contactos =>& $indice->deducible,
+                "prima_afecta".$contador_contactos =>& $indice->prima_afecta,
+                "prima_exenta".$contador_contactos =>& $indice->prima_exenta,
+                "prima_neta".$contador_contactos =>& $indice->prima_neta,
+                "prima_bruta_anual".$contador_contactos =>& $indice->prima_bruta_anual,
+                "nom_clienteA".$contador_contactos =>& $indice->nom_clienteA,
+                "rut_clienteA".$contador_contactos =>& $indice->rut_clienteA,
+                "telefonoA".$contador_contactos =>& $indice->telefonoA,
+                "correoA".$contador_contactos =>& $indice->correoA
+                ));
+        }}
+        
+        }
     if ($conta==1){
-      $codigo.= json_encode(array(
-        "ramo" =>& $row->ramo,                                  //0
+      $codigo.= json_encode(array_merge(array(
+        "numero_propuesta" =>& $row->numero_propuesta,          //32
         "estado" =>& $row->estado,                              //1
-        "anomes_final" =>& $row->anomes_final,                  //2
-        "anomes_inicial" =>& $row->anomes_inicial,              //3
         "tipo_propuesta" =>& $row->tipo_propuesta,              //4
         "moneda_poliza" =>& $row->moneda_poliza,                //5
+        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,//33
         "vigencia_inicial" =>& $row->vigencia_inicial,          //6
-        "deducible" =>& $row->deducible,                        //7
-        "prima_afecta" =>& $row->prima_afecta,                  //8
-        "prima_exenta" =>& $row->prima_exenta,                  //9
-        "prima_neta" =>& $row->prima_neta,                      //10
-        "prima_bruta_anual" =>& $row->prima_bruta_anual,        //11
         "vigencia_final"=>& $row->vigencia_final,               //12
         "compania" =>& $row->compania,                          //13
-        "item"=>& $row->item,                                   //14
-        "materia_asegurada"=>& $row->materia_asegurada,         //15
-        "patente_ubicacion" =>& $row->patente_ubicacion,        //16
-        "cobertura" =>& $row->cobertura,                        //17
+        "ramo" =>& $row->ramo,                                  //0
+        "total_prima_afecta" =>& $total_prima_afecta,           //0
+        "total_prima_exenta" =>& $total_prima_exenta,           //0
+        "total_prima_neta" =>& $total_prima_neta,               //0
+        "total_prima_bruta" =>& $total_prima_bruta,             //0        
         "nom_clienteP" =>& $row->nom_clienteP,                  //18
         "rut_clienteP" =>& $row->rut_clienteP,                  //19
         "telefonoP" =>& $row->telefonoP,                        //20
         "correoP" =>& $row->correoP,                            //21
-        "nom_clienteA" =>& $row->nom_clienteA,                  //22
-        "rut_clienteA" =>& $row->rut_clienteA,                  //23
-        "telefonoA" =>& $row->telefonoA,                        //24
-        "correoA" =>& $row->correoA,                            //25
         "idP" =>& $row->idP,                                    //26
-        "idA" =>& $row->idA,                                    //27
         "grupo" =>& $row->grupo,                                //28
         "referido" =>& $row->referido,                          //29
         "id_propuesta"=>& $row->id_propuesta,                   //30
-        "monto_asegurado" =>& $row->monto_asegurado,            //31
-        "numero_propuesta" =>& $row->numero_propuesta,          //32
-        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta//33
-      ));
+        "anomes_final" =>& $row->anomes_final,                  //2
+        "anomes_inicial" =>& $row->anomes_inicial               //3
+
+      )),$items_array);
     } else {
     $codigo.= ', '.json_encode(array(
       "ramo" =>& $row->ramo, 
