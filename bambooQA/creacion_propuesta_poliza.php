@@ -5,6 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino = 'crear_propuesta';
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "numero_propuesta" ]) == true ) {
   $camino = $_POST["accion"];
+  //aceptar_poliza -> deriva en creación de propuesta
 }
 
 function estandariza_info( $data ) {
@@ -935,7 +936,7 @@ function cambia_deducible() {
                console.log("si2");
                
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']" style="display:flex ;align-items: center;">'+
-               '<select class="form-control" id="deducible_veh_1" name="deducible_veh_1">'+
+               '<select class="form-control" id="deducible_defecto[' +i+ ']" name="deducible_defecto[' +i+ ']">'+
                '<option value="null" ?>Selecciona el deducible </option>'+
                '<option value="Sin deducible" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>'+
                '<option value="UF 3" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 3") echo "selected" ?>>UF 3</option>'+
@@ -960,7 +961,7 @@ function cambia_deducible() {
             
                
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
-              '<input type="text" class="form-control" name="deducible_inc_1" id="deducible_inc_1" value="Varios" onChange="pobladeducible()"></div>';
+              '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="Varios" onChange="pobladeducible()"></div>';
                           
                       }
         
@@ -977,7 +978,7 @@ function cambia_deducible() {
             
                
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
-              '<input type="text" class="form-control" name="deducible_viaje_1" id="deducible_viaje_1" value="No Aplica" onChange="pobladeducible()"></div>';
+              '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="No Aplica" onChange="pobladeducible()"></div>';
                           
          }
         
@@ -992,7 +993,7 @@ function cambia_deducible() {
                
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-row" id="deducible_rc['+i+']"  align-items: center;">'+
                '<div class="col-2">'+
-                '<input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px">'+
+                '<input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px" onChange="pobladeducible()>'+
               '</div>'+
               '<label style="font-size:75%;">% Pérdida con mínimo de</label><br>'+
               '<div class="col" style="display: flex; align-items: center;">'+
