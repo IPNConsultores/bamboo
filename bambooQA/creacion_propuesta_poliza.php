@@ -935,7 +935,7 @@ function cambia_deducible() {
             
                console.log("si2");
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']" style="display:flex ;align-items: center;">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']" style="display:flex ;align-items: center;">'+
                '<select class="form-control" id="deducible_defecto[' +i+ ']" name="deducible_defecto[' +i+ ']">'+
                '<option value="null" ?>Selecciona el deducible </option>'+
                '<option value="Sin deducible" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>'+
@@ -960,7 +960,7 @@ function cambia_deducible() {
             
             
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="Varios" onChange="pobladeducible()"></div>';
                           
                       }
@@ -977,7 +977,7 @@ function cambia_deducible() {
             
             
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="No Aplica" onChange="pobladeducible()"></div>';
                           
          }
