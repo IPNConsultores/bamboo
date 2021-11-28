@@ -9,7 +9,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-    $sql = "SELECT estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta,  CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, a.id as id_propuesta, b.id as idP, fecha_envio_propuesta, b.grupo, b.referido FROM propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null ";
+    $sql = "SELECT estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta,  CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, a.id as id_propuesta, b.id as idP, fecha_envio_propuesta, b.grupo, b.referido FROM propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null WHERE  a.numero_propuesta='P000683'";
     //"SELECT item, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_propuesta, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, compania, ramo,  vigencia_inicial, vigencia_final, numero_propuesta, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_propuesta, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo)) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido FROM propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null";
 
 $resultado=mysqli_query($link, $sql);
@@ -19,16 +19,18 @@ $resultado=mysqli_query($link, $sql);
   While($row=mysqli_fetch_object($resultado))
   {$conta=$conta+1;
     //$resultado contiene propuestas, a cada una de estas líneas hay que asignar un array con los ítem asociados
-
+        echo "primera query -> nro_propuesta: ".$row->numero_propuesta."<br>";
         $resultado_contador_contactos=mysqli_query($link, "SELECT count(numero_item) as contador FROM items where numero_propuesta='".$row->numero_propuesta."';");
         while ($fila=mysqli_fetch_object($resultado_contador_contactos))
         {
+        echo "segunda query -> contador: ".$fila->contador."<br>";
         $contador_contactos=$total_prima_afecta=$total_prima_exenta=$total_prima_neta=$total_prima_bruta=0;
         $cant_items=$fila->contador;
-        $resultado_items=mysqli_query($link, "select a.numero_propuesta, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, a.monto_asegurado, a.venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='".$row->numero_propuesta."';");
-            $items_array=array("contactos"=>& $fila->contador);
+        $resultado_items=mysqli_query($link, "select a.numero_propuesta, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, a.monto_asegurado, a.venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='".$row->numero_propuesta."';");
+            $items_array=array("total_items"=>& $fila->contador);
             if (!$cant_items=="0"){
         while($indice=mysqli_fetch_object($resultado_items)){
+            echo "tercera query -> nropropuesta: ".$row->numero_propuesta."- ítem nro: ".$indice->id_item."<br>";
             $contador_contactos=$contador_contactos+1;
             $total_prima_afecta=$indice->prima_afecta;
             $total_prima_exenta=$indice->prima_exenta;
@@ -49,6 +51,7 @@ $resultado=mysqli_query($link, $sql);
                 "telefonoA".$contador_contactos =>& $indice->telefonoA,
                 "correoA".$contador_contactos =>& $indice->correoA
                 ));
+            echo $items_array;
         }}
         
         }
