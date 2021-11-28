@@ -104,6 +104,7 @@ function estandariza_info( $data ) {
       RUT</button>
       <div class="modal fade" id="modal_cliente" tabindex="-1" role="dialog"
                           aria-labelledby="modal_text_cliente" aria-hidden="true">
+          
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -472,7 +473,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
-      <div class="card">
+      <div  id="informacion_poliza" class="card" style="display:none" disabled>
       <div class="card-header" id="headingfour" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -481,7 +482,7 @@ function estandariza_info( $data ) {
         </h5>
       </div>
       <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
-        <div class="card-body" id="card-body-four">
+        <div class="card-body" id="card-body-four" 
         
           <label for = "datos_poliza"><b>Datos Póliza</b></label>
             <br>
@@ -490,7 +491,7 @@ function estandariza_info( $data ) {
                 <label for="poliza">Número de Poliza</label>
                 <label style="color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="nro_poliza" name="nro_poliza"
-                                       style="width:72%;" required>
+                                       style="width:72%;">
                 </div>
           <div class="col-md-4 mb-3">
           <label for="fecha_emision_poliza">Fecha Emisión Póliza &nbsp;&nbsp;</label>
@@ -574,7 +575,7 @@ function estandariza_info( $data ) {
               <label style="color: darkred">&nbsp; *</label>
               <div class="form" style="display: flex; align-items: center;">
                 <select class="form-control" name="modo_pago" id="modo_pago"
-                                          onChange="modopago();" style="width:30%;" required>
+                                          onChange="modopago();" style="width:30%;" >
                   <option value="">-</option>
                   <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
                   <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
@@ -935,7 +936,7 @@ function cambia_deducible() {
             
                console.log("si2");
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']" style="display:flex ;align-items: center;">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']" style="display:flex ;align-items: center;">'+
                '<select class="form-control" id="deducible_defecto[' +i+ ']" name="deducible_defecto[' +i+ ']">'+
                '<option value="null" ?>Selecciona el deducible </option>'+
                '<option value="Sin deducible" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "Sin deducible") echo "selected" ?>>Sin deducible</option>'+
@@ -960,7 +961,7 @@ function cambia_deducible() {
             
             
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="Varios" onChange="pobladeducible()"></div>';
                           
                       }
@@ -977,7 +978,7 @@ function cambia_deducible() {
             
             
                
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto[' +i+ ']">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="No Aplica" onChange="pobladeducible()"></div>';
                           
          }
@@ -1164,6 +1165,23 @@ function habilitaedicion1() {
 document.addEventListener("DOMContentLoaded", function(event) {
     var bPreguntar = true;
     
+var orgn = '<?php echo $camino; ?>';
+        switch (orgn) {
+
+     case 'aceptar_poliza': {
+            
+            document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("informacion_poliza").disabled = false;
+            document.getElementById("nro_poliza").required = true;
+            document.getElementById("modo_pago").required = true;
+            
+            break;
+            
+        }
+        default:{
+            break;
+            }
+        }
 
 	//window.onbeforeunload = preguntarAntesDeSalir;
  
@@ -1509,6 +1527,7 @@ function vencimientogarantia(){
         }
         break;
       }
+   
     }
   }
     
