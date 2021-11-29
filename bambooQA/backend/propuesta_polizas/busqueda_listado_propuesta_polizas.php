@@ -16,7 +16,8 @@ $resultado=mysqli_query($link, $sql);
       "data": [';
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
-  {$conta=$conta+1;
+    {   
+        $conta=$conta+1;
     //$resultado contiene propuestas, a cada una de estas líneas hay que asignar un array con los ítem asociados
         //echo "primera query -> nro_propuesta: ".$row->numero_propuesta."<br>";
         $resultado_contador_contactos=mysqli_query($link, "SELECT count(numero_item) as contador FROM items where numero_propuesta='".$row->numero_propuesta."';");
@@ -80,43 +81,35 @@ $resultado=mysqli_query($link, $sql);
         ),
         $items_array));
     } else {
-    $codigo.= ', '.json_encode(array(
-      "ramo" =>& $row->ramo, 
-      "estado" =>& $row->estado,
-      "anomes_final" =>& $row->anomes_final,
-      "anomes_inicial" =>& $row->anomes_inicial,
-      "tipo_propuesta" =>& $row->tipo_propuesta,
-      "moneda_poliza" =>& $row->moneda_poliza,
-      "vigencia_inicial" =>& $row->vigencia_inicial,
-      "deducible" =>& $row->deducible,
-      "prima_afecta" =>& $row->prima_afecta,
-      "prima_exenta" =>& $row->prima_exenta,
-      "prima_neta" =>& $row->prima_neta,
-      "prima_bruta" =>& $row->prima_bruta_anual,
-      "vigencia_final"=>& $row->vigencia_final,
-      "compania" =>& $row->compania,
-      "item"=>& $row->item,
-      "materia_asegurada"=>& $row->materia_asegurada,
-      "patente_ubicacion" =>& $row->patente_ubicacion,
-      "cobertura" =>& $row->cobertura,
-      "nom_clienteP" =>& $row->nom_clienteP,
-      "rut_clienteP" =>& $row->rut_clienteP,
-      "telefonoP" =>& $row->telefonoP,
-      "correoP" =>& $row->correoP,
-      "nom_clienteA" =>& $row->nom_clienteA,
-      "rut_clienteA" =>& $row->rut_clienteA,
-      "telefonoA" =>& $row->telefonoA,
-      "correoA" =>& $row->correoA,
-      "idP" =>& $row->idP,
-      "idA" =>& $row->idA,
-      "grupo" =>& $row->grupo,
-      "referido" =>& $row->referido,
-      "id_propuesta"=>& $row->id_propuesta,
-      "monto_asegurado" =>& $row->monto_asegurado,
-      "numero_propuesta" =>& $row->numero_propuesta,
-      "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta
-    ));}
-  }
+        $codigo.= ', '.json_encode(array_merge(array(
+        "numero_propuesta" =>& $row->numero_propuesta,          //1
+        "estado" =>& $row->estado,                              //2
+        "tipo_propuesta" =>& $row->tipo_propuesta,              //3
+        "moneda_poliza" =>& $row->moneda_poliza,                //4
+        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,//5
+        "vigencia_inicial" =>& $row->vigencia_inicial,          //6
+        "vigencia_final"=>& $row->vigencia_final,               //7
+        "compania" =>& $row->compania,                          //8
+        "ramo" =>& $row->ramo,                                  //9
+        "total_prima_afecta" =>& $row->total_prima_afecta,      //10
+        "total_prima_exenta" =>& $row->total_prima_exenta,      //11
+        "total_prima_neta" =>& $row->total_prima_neta,          //12
+        "total_prima_bruta" =>& $row->total_prima_bruta,        //13       
+        "nom_clienteP" =>& $row->nom_clienteP,                  //14
+        "rut_clienteP" =>& $row->rut_clienteP,                  //15
+        "telefonoP" =>& $row->telefonoP,                        //16
+        "correoP" =>& $row->correoP,                            //17
+        "idP" =>& $row->idP,                                    //18
+        "grupo" =>& $row->grupo,                                //19
+        "referido" =>& $row->referido,                          //20
+        "id_propuesta"=>& $row->id_propuesta,                   //21
+        "anomes_final" =>& $row->anomes_final,                  //22
+        "anomes_inicial" =>& $row->anomes_inicial               //23
+        ),
+        $items_array))
+        ;
+        }
+    }
   $codigo.=']}';
   echo $codigo;
 

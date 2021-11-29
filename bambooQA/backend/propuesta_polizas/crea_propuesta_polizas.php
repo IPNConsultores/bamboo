@@ -160,13 +160,13 @@ return $data;
 </head>
 <body>
 <script >
-/*
+
 alert("Póliza Registrada Correctamente");
 var nro_propuesta= '<?php echo $nro_propuesta; ?>';
   $.redirect('/bambooQA/listado_propuesta_polizas.php', {
  'busqueda': nro_propuesta
 }, 'post');
-*/
+
 </script>
 </body>
 </html>

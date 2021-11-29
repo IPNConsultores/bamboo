@@ -62,30 +62,20 @@ $buscar= estandariza_info($_POST["busqueda"]);
                    <tr>
                     <th></th>
                     <th>Estado</th>
-                    <th>N° Propuesta de Póliza</th>
-                    <th>Compañia</th>
-                    <th>Ramo</th>
-                    <th>Fecha de Emisión</th>
+                    <th>N° Propuesta</th>
+                    <th>Tipo propuesta</th>
+                    <th>Fecha Envío Propuesta</th>
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
-                    <th>Materia Asegurada</th>
-                    <th>Tipo propuesta</th>
-                    <th>Observaciones / Materia Asegurada</th>
-                    <th>Deducible</th>
-                    <th>Prima afecta</th>
-                    <th>Prima exenta</th>
-                    <th>Prima bruta anual</th>
+                    <th>Compañia</th>
+                    <th>Ramo</th>
                     <th>Añomes final</th>
                     <th>Añomes inicial</th>
                     <th>Moneda póliza</th>
-                    <th>Cobertura</th>
                     <th>Proponente</th>
                     <th>Rut Proponente</th>
-                    <th>Asegurado</th>
-                    <th>Rut Asegurado</th>
                     <th>grupo</th>
                     <th>referido</th>
-                    <th>monto_asegurado</th>
 
                     </tr>
 
@@ -124,7 +114,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table = ''
 $(document).ready(function() {
     table = $('#listado_propuesta_polizas').DataTable({
-        "ajax": "/bambooQA/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
+        "ajax": "/bambooQA/test_felipe2.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],
@@ -141,103 +131,61 @@ $(document).ready(function() {
                 title: "Estado"
             }, //1
             { 
-                data: null, 
+                data: "numero_propuesta", 
                 title: "Nro Propuesta",
-                render: function ( data, type, row ) {
-                    return data.numero_propuesta + ' (' + data.item + ')';
-            } }, //2
-            {
-                "data": "compania",
-                title: "Compañía"
-            }, //3
-            {
-                "data": "ramo",
-                title: "Ramo"
-            }, //4
-            {
-                "data": "vigencia_inicial",
-                title: "Vigencia Inicio"
-            }, //5
-            {
-                "data": "vigencia_final",
-                title: "Vigencia Término"
-            }, //6
-            {
-                "data": "materia_asegurada",
-                title: "Materia asegurada"
-            }, //7
+            }, //2
             {
                 "data": "tipo_propuesta",
                 title: "Tipo propuesta"
-            }, //8
+            }, //3
             {
-                "data": "patente_ubicacion",
-                title: "Observaciones materia asegurada"
-            }, //9
+                "data": "fecha_envio_propuesta",
+                title: "Fecha Envío Propuesta"
+            }, //3
             {
-                "data": "deducible",
-                title: "Deducible"
-            }, //10
+                "data": "vigencia_inicial",
+                title: "Vigencia Inicio"
+            }, //4
             {
-                "data": "prima_afecta",
-                title: "Prima afecta"
-            }, //11
+                "data": "vigencia_final",
+                title: "Vigencia Término"
+            }, //5
+                        {
+                "data": "compania",
+                title: "Tipo Propuesta"
+            }, //6
             {
-                "data": "prima_exenta",
-                title: "Prima exenta"
-            }, //12
-            {
-                "data": "prima_bruta_anual",
-                title: "Prima bruta anual"
-            }, //13
+                "data": "ramo",
+                title: "Ramo"
+            }, //7
             {
                 "data": "anomes_final",
                 title: "Añomes final"
-            }, //14
+            }, //8
             {
                 "data": "anomes_inicial",
                 title: "Añomes inicial"
-            }, //15
+            }, //9
             {
                 "data": "moneda_poliza",
                 title: "Moneda póliza"
-            }, //16
-            {
-                "data": "cobertura",
-                title: "Cobertura"
-            }, //17
+            }, //10
             {
                 "data": "nom_clienteP",
                 title: "Proponente"
-            }, //18
+            }, //11
             {
                 "data": "rut_clienteP",
                 title: "Rut Proponente"
-            }, //19
-            {
-                "data": "nom_clienteA",
-                title: "Asegurado"
-            }, //20
-            {
-                "data": "rut_clienteA",
-                title: "Rut Asegurado"
-            }, //21
+            }, //12
             {
                 "data": "grupo",
                 title: "Grupo"
-            }, //22
+            }, //13
             {
                 "data": "referido",
                 title: "Referido"
-            }, //23
-            {
-                "data": "monto_asegurado",
-                title: "Monto Asegurado"
-            }, //24
-            {
-                "data": "fecha_envio_propuesta",
-                title: "Fecha envío propuesto"
-            } //25
+            } // 14
         ],
         //          "search": {
         //          "search": "abarca"
@@ -268,18 +216,25 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,25],
+        targets: [4,5,6],
          render: function(data, type, full)
          {
-             if (type == 'display')
-                 return moment(data).format('DD/MM/YYYY');
-             else
-                 return moment(data).format('YYYY/MM/DD');
+            if (data==null || data=="0000-00-00")
+            {
+                return '';
+            }
+            else
+            {
+                 if (type == 'display')
+                     return moment(data).format('DD/MM/YYYY');
+                 else
+                     return moment(data).format('YYYY/MM/DD');
+            }
          }}
         ],
         "order": [
-            [3, "asc"],
-            [4, "asc"]
+            [1, "asc"],
+            [3, "desc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
