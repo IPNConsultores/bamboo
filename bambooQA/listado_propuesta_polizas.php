@@ -192,6 +192,10 @@ $(document).ready(function() {
         //          },
         "columnDefs": 
         [
+            {
+                "targets": [8, 9 , 10],
+                "visible": false,
+            },
          {
         targets: 1,
         render: function (data, type, row, meta) {
@@ -331,6 +335,23 @@ function format(d) {
         '</tr>';
     }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+            ext_cancelado + 
+            '<td>Prima afecta:</td>' +
+            '<td>' + d.total_prima_afecta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Prima exenta:</td>' +
+            '<td>' + d.total_prima_exenta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Prima neta anual:</td>' +
+            '<td>' + d.total_prima_neta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Prima bruta anual:</td>' +
+            '<td>' + d.total_prima_bruta + '</td>' +
+        '</tr>' +
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +
