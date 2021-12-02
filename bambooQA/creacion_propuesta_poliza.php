@@ -1540,7 +1540,7 @@ function vencimientogarantia(){
           'prima_neta': prima_neta,
           'prima_bruta': prima_bruta,
           'monto_aseg': monto_aseg,
-          'venc_gtia': venc_gtia
+          'venc_gtia': venc_gtia,
           
           //Póliza
           'nro_poliza': document.getElementById("nro_poliza").value, //automático
