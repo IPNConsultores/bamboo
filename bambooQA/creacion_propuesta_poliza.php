@@ -379,10 +379,100 @@ function estandariza_info( $data ) {
             </div>
             
               
-  </div>
+        </div>
   
                 <br>
                 <br>
+                    <label for="infopago"><b>Información de Pago</b></label>
+          <br>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="formapago">Forma de Pago</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <div class="form" style="display: flex; align-items: center;">
+                <select class="form-control" name="modo_pago" id="modo_pago"
+                                          onChange="modopago();" style="width:30%;" required>
+                  <option value="">-</option>
+                  <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
+                  <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
+                  <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
+                  <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
+                </select>
+                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;" required>
+                  <option value="">Nro Cuotas</option>
+                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
+                  <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
+                  <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
+                  <option value="4 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
+                  <option value="5 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
+                  <option value="6 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
+                  <option value="7 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
+                  <option value="8 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
+                  <option value="9 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
+                  <option value="10 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
+                  <option value="11 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
+                  <option value="12 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
+                  <option value="13 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
+                  <option value="14 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
+                  <option value="15 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
+                  <option value="16 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
+                  <option value="17 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
+                  <option value="18 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
+                  <option value="19 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
+                  <option value="20 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                  <option value="21 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                  <option value="22 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
+                  <option value="23 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
+                  <option value="24 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="valorcuota">Valor Cuota</label>
+              <div class="form-inline">
+                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:20%;">
+                  <option value="UF"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
+                  <option value="USD"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
+                  <option value="CLP"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
+                </select>
+                <input type="text" class="form-control" name="valorcuota" id="valorcuota"
+                                          oninput="concatenar(this.id)" style="width:52%;">
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="fechaprimer">Fecha Primera Cuota</label>
+              <div class="md-form">
+                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
+              </div>
+            </div>
+          </div>
+          
+          <br>
+          <br>
              <label for="pago"><b>Vendedor</b></label>
               <br>
                <div class="form-row">
@@ -418,7 +508,7 @@ function estandariza_info( $data ) {
             
             
             <div class="container" style="overflow-x:auto;width:100%;height: auto">
-              <table class="table"  id="mytable"  style="width:3500px">
+              <table class="table"  id="mytable"  style="width:4000px">
                 <tr>
                   <th style="width:20px">N° Ítem</th>
                   <th style="width:200px" >RUT Asegurado</th>
@@ -427,11 +517,14 @@ function estandariza_info( $data ) {
                   <th style="width:300px">Patente o Ubicación</th>
                   <th style="width:200px">Cobertura</th>
                   <th style="width:100px">Deducible</th>
+                  <th style="width:150px">Monto Asegurado <label style="color: darkred">*</label></th>
+                   <th style="width:50px">Tasa Afecta</th>
+                    <th style="width:50px">Tasa Exenta</th>
                   <th style="width:50px">Prima Afecta</th>
                   <th style="width:50px">Prima Exenta</th>
                   <th style="width:50px">Prima Neta</th>
                   <th style="width:50px">Prima Bruta</th>
-                  <th style="width:150px">Monto Asegurado <label style="color: darkred">*</label></th>
+                  
                   <th style="width:100px" id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
@@ -464,7 +557,13 @@ function estandariza_info( $data ) {
       </div>
       <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
         <div class="card-body" id="card-body-three">
-          <label for="comentario"><b>Comentarios</b></label>
+          <label for="comentario_interno"><b>Comentarios Internos</b></label>
+          <br>
+          <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
+                              style="text-indent:0px" ;>
+          </textarea>
+          <br>
+           <label for="comentario_externo"><b>Comentarios Externos</b></label>
           <br>
           <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
                               style="text-indent:0px" ;>
@@ -567,93 +666,7 @@ function estandariza_info( $data ) {
             </div>
           </div>
           <br>
-            <label for="infopago"><b>Información de Pago</b></label>
-          <br>
-          <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <label for="formapago">Forma de Pago</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <div class="form" style="display: flex; align-items: center;">
-                <select class="form-control" name="modo_pago" id="modo_pago"
-                                          onChange="modopago();" style="width:30%;" >
-                  <option value="">-</option>
-                  <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
-                  <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
-                  <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
-                  <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
-                </select>
-                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;">
-                  <option value="">Número Cuotas</option>
-                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
-                  <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
-                  <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
-                  <option value="4 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
-                  <option value="5 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
-                  <option value="6 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
-                  <option value="7 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
-                  <option value="8 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
-                  <option value="9 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
-                  <option value="10 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
-                  <option value="11 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
-                  <option value="12 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
-                  <option value="13 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
-                  <option value="14 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
-                  <option value="15 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
-                  <option value="16 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
-                  <option value="17 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
-                  <option value="18 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
-                  <option value="19 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
-                  <option value="20 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                  <option value="21 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                  <option value="22 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
-                  <option value="23 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
-                  <option value="24 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="valorcuota">Valor Cuota</label>
-              <div class="form-inline">
-                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:20%;">
-                  <option value="UF"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
-                  <option value="USD"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
-                  <option value="CLP"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
-                </select>
-                <input type="text" class="form-control" name="valorcuota" id="valorcuota"
-                                          oninput="concatenar(this.id)" style="width:52%;">
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="fechaprimer">Fecha Primera Cuota</label>
-              <div class="md-form">
-                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
-              </div>
-            </div>
-          </div>
+
          
           </div>
         
@@ -886,6 +899,7 @@ function cambio_moneda() {
     document.getElementById("moneda4["+i+"]").innerHTML = moneda;
     document.getElementById("moneda5["+i+"]").innerHTML = moneda;
     document.getElementById("moneda7["+i+"]").innerHTML = moneda;
+
      }
      
      }
@@ -899,7 +913,7 @@ function cambio_moneda() {
                 document.getElementById("moneda3["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda4["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda5["+i+"]").innerHTML = moneda;
-    
+
             }          
          }
 }
@@ -1650,6 +1664,11 @@ function vencimientogarantia(){
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']"><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
                     '<input type="text" class="form-control" name="deducible_defecto"'+
                      'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">‰</span></div>'+
+                      '<input type="text" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">‰</span></div>'+
+                      '<input type="text" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
                       '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
@@ -1658,7 +1677,7 @@ function vencimientogarantia(){
                       '<input type="text" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
                 '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +    
+                  
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
             $("#mytable").append($(newElement));
@@ -1688,13 +1707,22 @@ function vencimientogarantia(){
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']"  ><div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
                     '<input type="text" class="form-control" name="deducible_defecto"'+
                      'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
+                '<input type="text" class="form-control" name="deducible_defecto"'+
+                     'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
+                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">‰</span></div>'+
+                      '<input type="text" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">‰</span></div>'+
+                      '<input type="text" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
                       '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+ 
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +    
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="text" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
+                '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                  
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
                
