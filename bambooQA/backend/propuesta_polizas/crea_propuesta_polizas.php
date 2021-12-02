@@ -44,7 +44,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-echo "Acción: ->".$_POST["accion"]."<-<br>";
+//echo "Acción: ->".$_POST["accion"]."<-<br>";
 switch ($_POST["accion"]) {
 
   case 'rechazar':
@@ -161,7 +161,7 @@ return $data;
 <body>
 <script >
 
-alert("Póliza Registrada Correctamente");
+alert("Propuesta Póliza registrada correctamente");
 var nro_propuesta= '<?php echo $nro_propuesta; ?>';
   $.redirect('/bambooQA/listado_propuesta_polizas.php', {
  'busqueda': nro_propuesta

@@ -337,21 +337,58 @@ function format(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
             ext_cancelado + 
-            '<td>Prima afecta:</td>' +
+            '<td>Total Prima afecta:</td>' +
             '<td>' + d.total_prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Prima exenta:</td>' +
+            '<td>Total Prima exenta:</td>' +
             '<td>' + d.total_prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Prima neta anual:</td>' +
+            '<td>Total Prima neta anual:</td>' +
             '<td>' + d.total_prima_neta + '</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Prima bruta anual:</td>' +
+            '<td>Total Prima bruta anual:</td>' +
             '<td>' + d.total_prima_bruta + '</td>' +
         '</tr>' +
+        '<table class="display" style="width:100%" id="listado_propuesta_polizas">'+
+        <tr>
+        <th></th>
+        <th>Rut Asegurado</th>
+        <th>Nombre Asegurado</th>
+        <th>Materia Asegurada</th>
+        <th>Patente o Ubicación</th>
+        <th>Cobertura</th>
+        <th>Deducible</th>
+        <th>Prima Afecta</th>
+        <th>Prima Exenta</th>
+        <th>Prima Neta</th>
+        <th>Prima Bruta</th>
+        <th>Monto asegurado</th>
+        <th>Vencimiento Garantía</th>
+
+        </tr>
+
+        for (int iCnt=1; iCnt<=d.total_items; iCnt++)
+        {
+        '<tr>'+
+                '<td>' + iCnt[iCnt] + '</td>'+
+                '<td>' + d.rut_clienteA[iCnt] + '</td>'+
+                '<td>' + d.nom_clienteA[iCnt] + '</td>'+
+                '<td>' + d.materia_asegurada[iCnt] + '</td>'+
+                '<td>' + d.patente_ubicacion[iCnt] + '</td>'+
+                '<td>' + d.cobertura[iCnt] + '</td>'+
+                '<td>' + d.deducible[iCnt] + '</td>'+
+                '<td>' + d.prima_afecta[iCnt] + '</td>'+
+                '<td>' + d.prima_exenta[iCnt] + '</td>'+
+                '<td>' + d.prima_neta[iCnt] + '</td>'+
+                '<td>' + d.prima_bruta[iCnt] + '</td>'+
+                '<td>' + d.monto_asegurado[iCnt] + '</td>'+
+                '<td>' + d.venc_gtia[iCnt] + '</td>'+
+                '</tr>' +
+            }
+        '</table>' +
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +

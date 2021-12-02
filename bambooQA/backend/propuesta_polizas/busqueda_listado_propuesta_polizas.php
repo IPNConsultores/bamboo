@@ -42,11 +42,13 @@ $resultado=mysqli_query($link, $sql);
                 "prima_afecta[".$contador_contactos."]" =>& $indice->prima_afecta,
                 "prima_exenta[".$contador_contactos."]" =>& $indice->prima_exenta,
                 "prima_neta[".$contador_contactos."]" =>& $indice->prima_neta,
-                "prima_bruta_anual[".$contador_contactos."]" =>& $indice->prima_bruta,
+                "prima_bruta[".$contador_contactos."]" =>& $indice->prima_bruta,
                 "nom_clienteA[".$contador_contactos."]" =>& $indice->nom_clienteA,
                 "rut_clienteA[".$contador_contactos."]" =>& $indice->rut_clienteA,
                 "telefonoA[".$contador_contactos."]" =>& $indice->telefonoA,
-                "correoA[".$contador_contactos."]" =>& $indice->correoA
+                "correoA[".$contador_contactos."]" =>& $indice->correoA,
+                "venc_gtia[".$contador_contactos."]" =>& $indice->venc_gtia,
+                "monto_asegurado[".$contador_contactos."]" =>& $indice->monto_asegurado
                 ));
         }
                 //echo var_dump($items_array);
