@@ -16,8 +16,14 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $moneda_poliza=estandariza_info($_POST["moneda_poliza"]);
   $selcompania=estandariza_info($_POST["selcompania"]);
   $ramo=estandariza_info($_POST["ramo"]);
-  $comentario=estandariza_info($_POST["comentario"]);
+  $comentarios_ext=estandariza_info($_POST["comentarios_ext"]);
+  $comentarios_int=estandariza_info($_POST["comentarios_int"]);
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
+  $forma_pago=estandariza_info($_POST["forma_pago"]);
+  $valor_cuota=estandariza_info($_POST["valor_cuota"]);
+  $cuotas=estandariza_info($_POST["cuotas"]);
+  $moneda_cuota=estandariza_info($_POST["moneda_cuota"]);
+  $fechaprimer=estandariza_info($_POST["fechaprimer"]);
 
 
   /*item
@@ -62,7 +68,7 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios, vendedor, tipo_propuesta) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentario."', '".$vendedor."' , 'Estándar')";
+        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, cuotas, moneda_cuota, fechaprimer) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."')";
         mysqli_query($link, $query);
         mysqli_query($link, 'update propuesta_polizas_2 set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
         $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
@@ -88,13 +94,15 @@ switch ($_POST["accion"]) {
         $detalle_materia=estandariza_info($_POST["detalle_materia"][$key]);
         $cobertura=estandariza_info($_POST["cobertura"][$key]);
         $deducible=cambia_puntos_por_coma(estandariza_info($_POST["deducible"][$key]));
+        $tasa_afecta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_afecta"][$key]));
+        $tasa_exenta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_exenta"][$key]));
         $prima_afecta=cambia_puntos_por_coma(estandariza_info($_POST["prima_afecta"][$key]));
         $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"][$key]));
         $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"][$key]));
         $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"][$key]));
         $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
         $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
-        $query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."')";
+        $query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."')";
         mysqli_query($link, $query_items);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']') , '".$_SERVER['PHP_SELF']."')");
       }

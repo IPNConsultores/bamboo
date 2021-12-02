@@ -559,13 +559,13 @@ function estandariza_info( $data ) {
         <div class="card-body" id="card-body-three">
           <label for="comentario_interno"><b>Comentarios Internos</b></label>
           <br>
-          <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
+          <textarea class="form-control" rows="2" style="height:100px" id='comentarios_int' name='comentario'
                               style="text-indent:0px" ;>
           </textarea>
           <br>
            <label for="comentario_externo"><b>Comentarios Externos</b></label>
           <br>
-          <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
+          <textarea class="form-control" rows="2" style="height:100px" id='comentarios_ext' name='comentario'
                               style="text-indent:0px" ;>
           </textarea>
         
@@ -581,7 +581,7 @@ function estandariza_info( $data ) {
         </h5>
       </div>
       <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
-        <div class="card-body" id="card-body-four" 
+        <div class="card-body" id="card-body-four">
         
           <label for = "datos_poliza"><b>Datos Póliza</b></label>
             <br>
@@ -1449,6 +1449,8 @@ function vencimientogarantia(){
         detalle_materia.push(document.getElementById("detalle_materia["+i+"]").value);
         cobertura.push(document.getElementById("cobertura["+i+"]").value);
         deducible.push(document.getElementById("deducible_defecto["+i+"]").value);
+        tasa_afecta.push(document.getElementById("tasa_afecta["+i+"]").value);
+        tasa_exenta.push(document.getElementById("tasa_exenta["+i+"]").value);
         prima_afecta.push(document.getElementById("prima_afecta["+i+"]").value);
         prima_exenta.push(document.getElementById("prima_exenta["+i+"]").value);
         prima_neta.push(document.getElementById("prima_neta["+i+"]").value);
@@ -1475,8 +1477,14 @@ function vencimientogarantia(){
           'moneda_poliza': document.getElementById("moneda_poliza").value,
           'selcompania': document.getElementById("selcompania").value, 
           'ramo': document.getElementById("ramo").value, 
-          'comentario': document.getElementById("comentario").value, 
+          'comentarios_int': document.getElementById("comentarios_int").value,
+          'comentarios_ext': document.getElementById("comentarios_ext").value,  
           'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+          'forma_pago': document.getElementById("modo_pago").value,
+          'valor_cuota': document.getElementById("valorcuota").value,
+          'nro_cuotas': document.getElementById("cuotas").value,
+          'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
+          'fecha_primera_cuota': document.getElementById("fechaprimer").value,
 
           //Ítem
           'rutaseg':  rutaseg,
@@ -1484,6 +1492,8 @@ function vencimientogarantia(){
           'detalle_materia': detalle_materia,
           'cobertura': cobertura,
           'deducible': deducible,
+          'tasa_afecta': tasa_afecta,
+          'tasa_exenta': tasa_exenta,
           'prima_afecta': prima_afecta,
           'prima_exenta': prima_exenta,
           'prima_neta': prima_neta,
@@ -1508,8 +1518,14 @@ function vencimientogarantia(){
           'moneda_poliza': document.getElementById("moneda_poliza").value,
           'selcompania': document.getElementById("selcompania").value, 
           'ramo': document.getElementById("ramo").value, 
-          'comentario': document.getElementById("comentario").value,
+          'comentarios_int': document.getElementById("comentarios_int").value,
+          'comentarios_ext': document.getElementById("comentarios_ext").value,  
           'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+          'forma_pago': document.getElementById("modo_pago").value,
+          'valor_cuota': document.getElementById("valorcuota").value,
+          'nro_cuotas': document.getElementById("cuotas").value,
+          'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
+          'fecha_primera_cuota': document.getElementById("fechaprimer").value,
 
           //Ítem
           'rutaseg':  rutaseg,
@@ -1517,12 +1533,14 @@ function vencimientogarantia(){
           'detalle_materia': detalle_materia,
           'cobertura': cobertura,
           'deducible': deducible,
+          'tasa_afecta': tasa_afecta,
+          'tasa_exenta': tasa_exenta,
           'prima_afecta': prima_afecta,
           'prima_exenta': prima_exenta,
           'prima_neta': prima_neta,
           'prima_bruta': prima_bruta,
           'monto_aseg': monto_aseg,
-          'venc_gtia': venc_gtia,
+          'venc_gtia': venc_gtia
           
           //Póliza
           'nro_poliza': document.getElementById("nro_poliza").value, //automático
@@ -1533,10 +1551,7 @@ function vencimientogarantia(){
           'fechadeposito': document.getElementById("fechadeposito").value,
           'comisionneg': document.getElementById("comisionneg").value,
           'boletaneg': document.getElementById("boletaneg").value,
-          'boleta': document.getElementById("boleta").value,
-          'cuotas': document.getElementById("cuotas").value,
-          'valorcuota': document.getElementById("valorcuota").value,
-          'fechaprimer': document.getElementById("fechaprimer").value
+          'boleta': document.getElementById("boleta").value
           }, 'post');
         }
         break;

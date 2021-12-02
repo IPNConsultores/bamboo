@@ -26,7 +26,7 @@ $resultado=mysqli_query($link, $sql);
         //echo "segunda query -> contador: ".$fila->contador."<br>";
         $contador_contactos=0;
         $cant_items=$fila->contador;
-        $resultado_items=mysqli_query($link, "select a.numero_propuesta, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, a.monto_asegurado, a.venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='".$row->numero_propuesta."';");
+        $resultado_items=mysqli_query($link, "select a.numero_propuesta, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ','%',FORMAT(tasa_afecta, 4, 'de_DE')) AS tasa_afecta, CONCAT_WS(' ','%',FORMAT(tasa_exenta, 4, 'de_DE')) AS tasa_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 4, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 4, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 4, 'de_DE')) AS prima_bruta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 4, 'de_DE')) AS prima_neta, a.monto_asegurado, a.venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='".$row->numero_propuesta."';");
             $items_array=array("total_items"=>& $fila->contador);
             if (!$cant_items=="0"){
         while($indice=mysqli_fetch_object($resultado_items)){
@@ -39,6 +39,8 @@ $resultado=mysqli_query($link, $sql);
                 "patente_ubicacion[".$contador_contactos."]" =>& $indice->patente_ubicacion,
                 "cobertura[".$contador_contactos."]" =>& $indice->cobertura,
                 "deducible[".$contador_contactos."]" =>& $indice->deducible,
+                "tasa_afecta[".$contador_contactos."]" =>& $indice->tasa_afecta,
+                "tasa_exenta[".$contador_contactos."]" =>& $indice->tasa_exenta,
                 "prima_afecta[".$contador_contactos."]" =>& $indice->prima_afecta,
                 "prima_exenta[".$contador_contactos."]" =>& $indice->prima_exenta,
                 "prima_neta[".$contador_contactos."]" =>& $indice->prima_neta,
