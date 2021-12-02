@@ -201,13 +201,10 @@ $(document).ready(function() {
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
-                        case 'Activo':
+                        case 'Aceptado':
                             estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
-                        case 'Renovado':
-                                estado='<span class="badge badge-warning">'+data+'</span>';
-                                break;
-                        case 'Vencido':
+                        case 'Rechazado':
                             estado='<span class="badge badge-danger">'+data+'</span>';
                             break;
                         case 'Cancelado':
