@@ -460,7 +460,7 @@ function estandariza_info( $data ) {
                                               <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
                 </select>
                 <input type="text" class="form-control" name="valorcuota" id="valorcuota"
-                                          oninput="concatenar(this.id)" style="width:52%;">
+                                           style="width:52%;">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -780,6 +780,15 @@ function valida_rut_duplicado_prop() {
                 document.getElementById("nombre_prop").value = response.nombre;
                 console.log(response.nombre)
                 
+                var contador =  document.getElementById("contador").value;
+                 for (var i = 1; i <= contador; i++){
+                     
+                    document.getElementById("nombre_seg[" + i + "]").value =response.nombre;
+                        
+                     
+                 }
+            
+                
             }
         }
     });
@@ -1061,7 +1070,7 @@ var tabla_clientes = $('#listado_clientes').DataTable({
             "data": "rut",
             "render": function(data, type, full, meta) {
                 return '<button type="button" id="' + data +
-                    '" onclick="seleccion_rut(this.id)" class="btn btn-outline-primary">Seleccionar</button>';
+                    '" onclick="seleccion_rut(this.id); " class="btn btn-outline-primary">Seleccionar</button>';
             }
         },
         {
@@ -1126,6 +1135,15 @@ function seleccion_rut(rut) {
         case 'busca_rut_prop': {
             document.getElementById("rutprop").value = rut;
             document.getElementById("rutprop").onchange();
+             var contador =  document.getElementById("contador").value;
+                 for (var i = 1; i <= contador; i++){
+                     
+                    document.getElementById("rutaseg[" + i + "]").value = document.getElementById("rutprop").value;
+                        
+                     
+                 }
+            
+            
             //document.getElementById("rutaseg").onchange()
             break;
         }
@@ -1143,6 +1161,7 @@ function seleccion_rut(rut) {
     $('#modal_cliente').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
+    
 }
 
 
@@ -1442,6 +1461,16 @@ function vencimientogarantia(){
       var prima_bruta = [];
       var monto_aseg = [];
       var venc_gtia =[];
+      var tasa_afecta =[];
+      var tasa_exenta =[];
+      var prima_afecta =[];
+      var prima_exenta =[];
+      var prima_neta =[];
+      var prima_bruta =[];
+      var monto_aseg =[];
+      var venc_gtia =[];
+      
+      
       for (var i = 1; i <= contador; i++){
 
         rutaseg.push(document.getElementById("rutaseg["+i+"]").value);
@@ -1639,6 +1668,41 @@ function vencimientogarantia(){
   
      return data;
  }
+ 
+  function valida_primerpago(){
+     
+     
+     var fecha_primer = new Date (document.getElementById("fechaprimer").value);
+     var day_venc = fecha_primer.getDate()+1;
+     var month_venc = fecha_primer.getMonth()+1;
+     var year_venc = fecha_primer.getFullYear();
+     var hoy = new Date();
+     
+
+     
+     
+     if(year_venc > 1000)
+     {
+         if (fecha_primer < hoy){
+             
+             alert("La fecha del primer pago es retroactiva");
+         }
+         
+         
+     }
+     
+    
+ }
+ function modopago() {
+    if (document.getElementById("modo_pago").value == "Contado") {
+        document.getElementById("cuotas").disabled = true;
+        document.getElementById("cuotas").value = "Contado";
+        
+    } else {
+        document.getElementById("cuotas").disabled = false;
+        document.getElementById("cuotas").value = "";
+    }
+}
  
  $(document).ready(function() {
       
