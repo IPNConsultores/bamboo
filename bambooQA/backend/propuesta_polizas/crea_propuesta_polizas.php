@@ -21,9 +21,9 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
   $forma_pago=estandariza_info($_POST["forma_pago"]);
   $valor_cuota=estandariza_info($_POST["valor_cuota"]);
-  $cuotas=estandariza_info($_POST["cuotas"]);
-  $moneda_cuota=estandariza_info($_POST["moneda_cuota"]);
-  $fechaprimer=estandariza_info($_POST["fechaprimer"]);
+  $cuotas=estandariza_info($_POST["nro_cuotas"]);
+  $moneda_cuota=estandariza_info($_POST["moneda_valor_cuota"]);
+  $fechaprimer=estandariza_info($_POST["fecha_primera_cuota"]);
 
 
   /*item
@@ -68,7 +68,7 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, cuotas, moneda_cuota, fechaprimer) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."')";
+        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."')";
         mysqli_query($link, $query);
         mysqli_query($link, 'update propuesta_polizas_2 set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
         $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
