@@ -6,6 +6,50 @@ $camino = 'crear_propuesta';
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "numero_propuesta" ]) == true ) {
   $camino = $_POST["accion"];
   //aceptar_poliza -> deriva en creación de propuesta
+  require_once "/home/gestio10/public_html/backend/config.php";
+  mysqli_set_charset( $link, 'utf8' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+  $query = "select rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='". $_POST[ "numero_propuesta" ]."'";
+  $resultado = mysqli_query( $link, $query );
+  While( $row = mysqli_fetch_object( $resultado ) ) {
+    $rut_prop = $row->rut_proponente;
+    $dv_prop = $row->dv_proponente;
+    $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+    $selcompania = $row->compania;
+    $ramo = $row->ramo;
+    $fechainicio = $row->vigencia_inicial;
+    $fechavenc = $row->vigencia_final;
+    $moneda_poliza = $row->moneda_poliza;
+    $nro_propuesta = $row->numero_propuesta;
+    $fechaprop = $row->fecha_propuesta;    
+    $modo_pago = $row->forma_pago;
+    $cuotas = $row->nro_cuotas;
+    $moneda_cuota = $row->moneda_valor_cuota;
+    $valorcuota = $row->valor_cuota;
+    $fechaprimer = $row->fecha_primera_cuota;
+    $nombre_vendedor = $row->vendedor;
+    $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
+    $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
+    
+/*
+    $item = $row->item;
+    $rut_aseg = $row->rut_asegurado;
+    $dv_aseg = $row->dv_asegurado;
+    $rut_completo_aseg = $rut_aseg . '-' . $dv_aseg;
+    $cobertura = $row->cobertura;
+    $materia = $row->materia_asegurada;
+    $materia = str_replace( "\r\n", "\\n", $materia );
+    $detalle_materia = $row->patente_ubicacion;
+    $detalle_materia = str_replace( "\r\n", "\\n", $detalle_materia );
+    $deducible = $row->deducible;
+    $prima_afecta = $row->prima_afecta;
+    $prima_exenta = $row->prima_exenta;
+    $prima_neta = $row->prima_neta;
+    $prima_bruta = $row->prima_bruta_anual;
+    $monto_aseg = $row->monto_asegurado;
+    $venc_gtia = $row->venc_gtia;
+*/
+  }
 }
 
 function estandariza_info( $data ) {
@@ -1200,20 +1244,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 var orgn = '<?php echo $camino; ?>';
         switch (orgn) {
-
-     case 'aceptar_poliza': {
-            
+          case 'aceptar_poliza': {
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("informacion_poliza").disabled = false;
             document.getElementById("nro_poliza").required = true;
             document.getElementById("modo_pago").required = true;
-            
-            break;
-            
-        }
-        default:{
-            break;
+            break;  
+          }
+          case 'actualiza_propuesta':{
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            {
+                document.getElementById("radio2_si").checked = true;
+                document.getElementById("radio2_no").checked = false;
             }
+            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            valida_rut_duplicado_prop();
+            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+            document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+            document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+            document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+            document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
+            document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
+          }
+          default:{
+            break;
+          }
         }
 
 	//window.onbeforeunload = preguntarAntesDeSalir;
@@ -1255,8 +1313,6 @@ var orgn = '<?php echo $camino; ?>';
                     if ('<?php echo $venc_gtia; ?>' !== "0000-00-00"){
                         document.getElementById("pregunta_gtia").checked = true;
                         document.getElementById("venc_gtia").readOnly = false;
-                        
-                        
                     }
                     
                     
