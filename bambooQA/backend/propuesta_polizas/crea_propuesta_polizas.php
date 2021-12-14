@@ -59,14 +59,36 @@ switch ($_POST["accion"]) {
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
       break;
       
-  case 'modificar': 
+  case 'actualiza_propuesta': 
       //pendiente update
       $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
-      $query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' WHERE numero_propuesta="\'' . $nro_propuesta . '\';';
-      mysqli_query($link, $query);
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
+
+
+      foreach ($_POST["rutaseg"] as $key => $valor) 
+      {
+        $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"][$key]));
+        $rut_aseg=estandariza_info(substr($rut_completo_aseg, 0, strlen($rut_completo_aseg)-1));
+        $dv_aseg=estandariza_info(substr($rut_completo_aseg, -1,1));
+        $materia=estandariza_info($_POST["materia"][$key]);
+        $detalle_materia=estandariza_info($_POST["detalle_materia"][$key]);
+        $cobertura=estandariza_info($_POST["cobertura"][$key]);
+        $deducible=cambia_puntos_por_coma(estandariza_info($_POST["deducible"][$key]));
+        $tasa_afecta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_afecta"][$key]));
+        $tasa_exenta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_exenta"][$key]));
+        $prima_afecta=cambia_puntos_por_coma(estandariza_info($_POST["prima_afecta"][$key]));
+        $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"][$key]));
+        $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"][$key]));
+        $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"][$key]));
+        $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
+        $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
+        $numero_item=estandariza_info($_POST["numero_item"][$key]);
+
+        $query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
+        mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',".$nro_propuesta.", '".$_SERVER['PHP_SELF']."')");
+      }
       break;
 
   case 'crear_propuesta':
