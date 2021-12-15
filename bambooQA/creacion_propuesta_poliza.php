@@ -2,65 +2,65 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-$_SERVER[ "REQUEST_METHOD" ] = "POST";
-$_POST["accion"] = 'actualiza_propuesta';
-$_POST["numero_propuesta"]='P000693';
-    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_propuesta')
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'crear_poliza';
+//$_POST["numero_propuesta"]='P000693';
+if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza'))
+{
+  $camino = $_POST["accion"];
+  require_once "/home/gestio10/public_html/backend/config.php";
+  mysqli_set_charset( $link, 'utf8' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+  $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+  $resultado = mysqli_query( $link, $query );
+  While( $row = mysqli_fetch_object( $resultado ) ) 
+  {
+    $rut_prop = $row->rut_proponente;
+    $dv_prop = $row->dv_proponente;
+    $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+    $selcompania = $row->compania;
+    $ramo = $row->ramo;
+    $fechainicio = $row->vigencia_inicial;
+    $fechavenc = $row->vigencia_final;
+    $moneda_poliza = $row->moneda_poliza;
+    $nro_propuesta = $row->numero_propuesta;
+    $fechaprop = $row->fecha_propuesta;    
+    $modo_pago = $row->forma_pago;
+    $cuotas = $row->nro_cuotas;
+    $moneda_cuota = $row->moneda_valor_cuota;
+    $valorcuota = $row->valor_cuota;
+    $fechaprimer = $row->fecha_primera_cuota;
+    $nombre_vendedor = $row->vendedor;
+    $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
+    $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
+    $nro_items=0;
+    
+    $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='P000693'order by numero_item asc";
+    $resultado_item = mysqli_query( $link, $query_item );
+    While( $row_item = mysqli_fetch_object( $resultado_item ) ) 
     {
-      $camino = $_POST["accion"];
-    
-      require_once "/home/gestio10/public_html/backend/config.php";
-      mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
-      $resultado = mysqli_query( $link, $query );
-      While( $row = mysqli_fetch_object( $resultado ) ) {
-    
-        $rut_prop = $row->rut_proponente;
-        $dv_prop = $row->dv_proponente;
-        $rut_completo_prop = $rut_prop . '-' . $dv_prop;
-        $selcompania = $row->compania;
-        $ramo = $row->ramo;
-        $fechainicio = $row->vigencia_inicial;
-        $fechavenc = $row->vigencia_final;
-        $moneda_poliza = $row->moneda_poliza;
-        $nro_propuesta = $row->numero_propuesta;
-        $fechaprop = $row->fecha_propuesta;    
-        $modo_pago = $row->forma_pago;
-        $cuotas = $row->nro_cuotas;
-        $moneda_cuota = $row->moneda_valor_cuota;
-        $valorcuota = $row->valor_cuota;
-        $fechaprimer = $row->fecha_primera_cuota;
-        $nombre_vendedor = $row->vendedor;
-        $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
-        $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
-        $nro_items=0;
-        
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='P000693'order by numero_item asc";
-        $resultado_item = mysqli_query( $link, $query_item );
-            While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
-                $nro_items+=1;
-                $item[]=$row_item->numero_item;
-                $rut_aseg = $row_item->rut_asegurado;
-                $dv_aseg = $row_item->dv_asegurado;
-                $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
-                $cobertura[] = $row_item->cobertura;
-                $materia_i = $row_item->materia_asegurada;
-                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
-                $detalle_materia_i = $row_item->patente_ubicacion;
-                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
-                $deducible[] = $row_item->deducible;
-                $tasa_afecta[] = $row_item->tasa_afecta;
-                $tasa_exenta[] = $row_item->tasa_exenta;
-                $prima_afecta[] = $row_item->prima_afecta;
-                $prima_exenta[] = $row_item->prima_exenta;
-                $prima_neta[] = $row_item->prima_neta;
-                $prima_bruta[] = $row_item->prima_bruta_anual;
-                $monto_aseg[] = $row_item->monto_asegurado;
-                $venc_gtia[] = $row_item->venc_gtia;
-            }
-        }
+      $nro_items+=1;
+      $item[]=$row_item->numero_item;
+      $rut_aseg = $row_item->rut_asegurado;
+      $dv_aseg = $row_item->dv_asegurado;
+      $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+      $cobertura[] = $row_item->cobertura;
+      $materia_i = $row_item->materia_asegurada;
+      $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+      $detalle_materia_i = $row_item->patente_ubicacion;
+      $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+      $deducible[] = $row_item->deducible;
+      $tasa_afecta[] = $row_item->tasa_afecta;
+      $tasa_exenta[] = $row_item->tasa_exenta;
+      $prima_afecta[] = $row_item->prima_afecta;
+      $prima_exenta[] = $row_item->prima_exenta;
+      $prima_neta[] = $row_item->prima_neta;
+      $prima_bruta[] = $row_item->prima_bruta_anual;
+      $monto_aseg[] = $row_item->monto_asegurado;
+      $venc_gtia[] = $row_item->venc_gtia;
     }
+  }
+}
 
 function estandariza_info( $data ) {
   $data = trim( $data );
@@ -1253,7 +1253,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 var orgn = '<?php echo $camino; ?>';
 console.log('Cargando información');
 console.log(orgn);
-        switch (orgn) {
+        switch (orgn) 
+        {
           case 'aceptar_poliza': {
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("informacion_poliza").disabled = false;
@@ -1318,6 +1319,69 @@ console.log(orgn);
                 document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 contador+=1;
             }
+            break;
+          }
+          case 'crear_poliza':{
+            console.log('Cargando información');
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            {
+                document.getElementById("radio2_si").checked = true;
+                document.getElementById("radio2_no").checked = false;
+            }
+            document.getElementById("contenedor_nro_propuesta").style.display = "flex";
+            document.getElementById("titulo1").style.display = "none";
+            document.getElementById("titulo2").style.display = "flex";
+            document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("nro_poliza").required = true;
+            
+            document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            valida_rut_duplicado_prop();
+            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+            document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+            document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+            document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+            document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
+            document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
+            //agregar ítems
+            var contador=1;
+            var item= <?php echo json_encode($item); ?>;
+            var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var cobertura=<?php echo json_encode($cobertura); ?>;
+            var materia=<?php echo json_encode($materia); ?>;
+            var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
+            var deducible=<?php echo json_encode($deducible); ?>;
+            var tasa_afecta=<?php echo json_encode($tasa_afecta); ?>;
+            var tasa_exenta=<?php echo json_encode($tasa_exenta); ?>;
+            var prima_afecta=<?php echo json_encode($prima_afecta); ?>;
+            var prima_exenta=<?php echo json_encode($prima_exenta); ?>;
+            var prima_neta=<?php echo json_encode($prima_neta); ?>;
+            var prima_bruta=<?php echo json_encode($prima_bruta); ?>;
+            var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
+            var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
+
+            console.log(contador + 'total items: ' +'<?php echo $nro_items; ?>' )
+            while (contador<='<?php echo $nro_items; ?>'){
+                document.getElementById("btAdd").click();
+                document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
+                document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
+                document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
+                document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
+                document.getElementById("tasa_afecta["+contador.toString()+"]").value = tasa_afecta[(contador-1).toString()];
+                document.getElementById("tasa_exenta["+contador.toString()+"]").value = tasa_exenta[(contador-1).toString()];
+                document.getElementById("prima_afecta["+contador.toString()+"]").value = prima_afecta[(contador-1).toString()];
+                document.getElementById("prima_exenta["+contador.toString()+"]").value = prima_exenta[(contador-1).toString()];
+                document.getElementById("monto_aseg["+contador.toString()+"]").value = monto_aseg[(contador-1).toString()];
+                document.getElementById("prima_bruta["+contador.toString()+"]").value = prima_bruta[(contador-1).toString()];
+                document.getElementById("prima_neta["+contador.toString()+"]").value = prima_neta[(contador-1).toString()];
+                document.getElementById("venc_gtia["+contador.toString()+"]").value = venc_gtia[(contador-1).toString()];
+                document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
+                contador+=1;
+            }
+            break;
           }
           default:{
             break;
@@ -1681,9 +1745,8 @@ function vencimientogarantia(){
       }
       case 'crear_poliza': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe.php', {  
-          'accion': 'crear_poliza',
-
+          //$.redirect('/bambooQA/test_felipe2.php', { 
+            'accion': 'crear_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
@@ -1716,9 +1779,11 @@ function vencimientogarantia(){
           'prima_bruta': prima_bruta,
           'monto_aseg': monto_aseg,
           'venc_gtia': venc_gtia,
+          'numero_item':numero_item
+
           
           //Póliza
-          'nro_poliza': document.getElementById("nro_poliza").value, //automático
+          'nro_poliza': document.getElementById("nro_poliza").value,
           'comision': document.getElementById("comision").value,
           'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
           'comisionbruta': document.getElementById("comisionbruta").value,
@@ -1728,7 +1793,7 @@ function vencimientogarantia(){
           'boletaneg': document.getElementById("boletaneg").value,
           'boleta': document.getElementById("boleta").value
           }, 'post');
-                break;
+          break;
       }
 
       }
