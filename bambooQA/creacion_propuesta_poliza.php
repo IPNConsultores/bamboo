@@ -1779,7 +1779,7 @@ function vencimientogarantia(){
           'prima_bruta': prima_bruta,
           'monto_aseg': monto_aseg,
           'venc_gtia': venc_gtia,
-          'numero_item':numero_item
+          'numero_item':numero_item,
 
           
           //Póliza
