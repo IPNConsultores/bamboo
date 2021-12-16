@@ -2,6 +2,7 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
+$camino='crear_propuesta';
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'crear_poliza';
 //$_POST["numero_propuesta"]='P000693';

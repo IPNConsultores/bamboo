@@ -407,7 +407,7 @@ function format(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crea_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
         '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
@@ -423,16 +423,13 @@ function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "rechazar_propuesta": {
-
-            if (base == 'propuesta') {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 if (r2 == true) {
                 $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_poliza.php', {
-                    'nro_propuesta': id,
+                    'numero_propuesta': id,
                     'accion':accion
                 }, 'post');
                 }
-            }
             break;
         }
         case "actualiza_propuesta": {
@@ -462,7 +459,7 @@ function botones(id, accion, base) {
             }, 'post');
             break;
         }
-        case "crea_poliza": {
+        case "crear_poliza": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion

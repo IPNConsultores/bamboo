@@ -45,7 +45,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 
 //Modificar
-  $nro_propuesta=estandariza_info($_POST["nro_propuesta"]);
+  $nro_propuesta=estandariza_info($_POST["numero_propuesta"]);
 
 
 mysqli_set_charset( $link, 'utf8');
