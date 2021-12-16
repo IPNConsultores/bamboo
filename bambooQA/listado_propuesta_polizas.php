@@ -407,13 +407,13 @@ function format(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.id_poliza + ' name="aprobar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
-        '<button title="Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar"  type="button" id=' + d.id_poliza + ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
-        '<button title="Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Eliminar"  type="button" id=' + d.id_poliza + ' name="elimina" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crea_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
+        '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -422,34 +422,24 @@ function format(d) {
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
-        case "elimina": {
+        case "rechazar_propuesta": {
 
             if (base == 'propuesta') {
-                var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
+                var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bambooQA/backend/propuesta_polizas/modifica_propuesta_poliza.php', {
-                    'id_propuesta': id,
-                    'accion':accion,
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_poliza.php', {
+                    'nro_propuesta': id,
+                    'accion':accion
                 }, 'post');
                 }
             }
             break;
         }
-        case "modifica": {
-            if (base == 'propuesta') {
-                $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
-                'id_propuesta': id,
-                }, 'post');
-            }
-            console.log(base + " modificado con ID:" + id);
-            $.notify({
-                // options
-                message: base + ' modificado'
-            }, {
-                // settings
-                type: 'success'
-            });
-
+        case "actualiza_propuesta": {
+            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                'numero_propuesta': id,
+                'accion': accion
+            }, 'post');
             break;
         }
         case "tarea": {
@@ -472,10 +462,10 @@ function botones(id, accion, base) {
             }, 'post');
             break;
         }
-        case "aprobar": {
+        case "crea_poliza": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
-                'id': id,
-                'base': base
+                'numero_propuesta': id,
+                'accion': accion
             }, 'post');
             break;
         }

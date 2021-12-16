@@ -5,62 +5,62 @@ if ( !isset( $_SESSION ) ) {
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'crear_poliza';
 //$_POST["numero_propuesta"]='P000693';
-if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza'))
-{
-  $camino = $_POST["accion"];
-  require_once "/home/gestio10/public_html/backend/config.php";
-  mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-  $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
-  $resultado = mysqli_query( $link, $query );
-  While( $row = mysqli_fetch_object( $resultado ) ) 
-  {
-    $rut_prop = $row->rut_proponente;
-    $dv_prop = $row->dv_proponente;
-    $rut_completo_prop = $rut_prop . '-' . $dv_prop;
-    $selcompania = $row->compania;
-    $ramo = $row->ramo;
-    $fechainicio = $row->vigencia_inicial;
-    $fechavenc = $row->vigencia_final;
-    $moneda_poliza = $row->moneda_poliza;
-    $nro_propuesta = $row->numero_propuesta;
-    $fechaprop = $row->fecha_propuesta;    
-    $modo_pago = $row->forma_pago;
-    $cuotas = $row->nro_cuotas;
-    $moneda_cuota = $row->moneda_valor_cuota;
-    $valorcuota = $row->valor_cuota;
-    $fechaprimer = $row->fecha_primera_cuota;
-    $nombre_vendedor = $row->vendedor;
-    $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
-    $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
-    $nro_items=0;
-    
-    $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='P000693'order by numero_item asc";
-    $resultado_item = mysqli_query( $link, $query_item );
-    While( $row_item = mysqli_fetch_object( $resultado_item ) ) 
+    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza'))
     {
-      $nro_items+=1;
-      $item[]=$row_item->numero_item;
-      $rut_aseg = $row_item->rut_asegurado;
-      $dv_aseg = $row_item->dv_asegurado;
-      $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
-      $cobertura[] = $row_item->cobertura;
-      $materia_i = $row_item->materia_asegurada;
-      $materia[] = str_replace( "\r\n", "\\n", $materia_i );
-      $detalle_materia_i = $row_item->patente_ubicacion;
-      $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
-      $deducible[] = $row_item->deducible;
-      $tasa_afecta[] = $row_item->tasa_afecta;
-      $tasa_exenta[] = $row_item->tasa_exenta;
-      $prima_afecta[] = $row_item->prima_afecta;
-      $prima_exenta[] = $row_item->prima_exenta;
-      $prima_neta[] = $row_item->prima_neta;
-      $prima_bruta[] = $row_item->prima_bruta_anual;
-      $monto_aseg[] = $row_item->monto_asegurado;
-      $venc_gtia[] = $row_item->venc_gtia;
+      $camino = $_POST["accion"];
+    
+      require_once "/home/gestio10/public_html/backend/config.php";
+      mysqli_set_charset( $link, 'utf8' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $resultado = mysqli_query( $link, $query );
+      While( $row = mysqli_fetch_object( $resultado ) ) {
+    
+        $rut_prop = $row->rut_proponente;
+        $dv_prop = $row->dv_proponente;
+        $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $selcompania = $row->compania;
+        $ramo = $row->ramo;
+        $fechainicio = $row->vigencia_inicial;
+        $fechavenc = $row->vigencia_final;
+        $moneda_poliza = $row->moneda_poliza;
+        $nro_propuesta = $row->numero_propuesta;
+        $fechaprop = $row->fecha_propuesta;    
+        $modo_pago = $row->forma_pago;
+        $cuotas = $row->nro_cuotas;
+        $moneda_cuota = $row->moneda_valor_cuota;
+        $valorcuota = $row->valor_cuota;
+        $fechaprimer = $row->fecha_primera_cuota;
+        $nombre_vendedor = $row->vendedor;
+        $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
+        $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
+        $nro_items=0;
+        
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='P000693'order by numero_item asc";
+        $resultado_item = mysqli_query( $link, $query_item );
+            While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
+                $nro_items+=1;
+                $item[]=$row_item->numero_item;
+                $rut_aseg = $row_item->rut_asegurado;
+                $dv_aseg = $row_item->dv_asegurado;
+                $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $cobertura[] = $row_item->cobertura;
+                $materia_i = $row_item->materia_asegurada;
+                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+                $detalle_materia_i = $row_item->patente_ubicacion;
+                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                $deducible[] = $row_item->deducible;
+                $tasa_afecta[] = $row_item->tasa_afecta;
+                $tasa_exenta[] = $row_item->tasa_exenta;
+                $prima_afecta[] = $row_item->prima_afecta;
+                $prima_exenta[] = $row_item->prima_exenta;
+                $prima_neta[] = $row_item->prima_neta;
+                $prima_bruta[] = $row_item->prima_bruta_anual;
+                $monto_aseg[] = $row_item->monto_asegurado;
+                $venc_gtia[] = $row_item->venc_gtia;
+            }
+        }
     }
-  }
-}
 
 function estandariza_info( $data ) {
   $data = trim( $data );
