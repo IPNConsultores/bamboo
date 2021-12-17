@@ -3,6 +3,7 @@ if ( !isset( $_SESSION ) ) {
   session_start();
 }
 $camino='crear_propuesta';
+
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'crear_poliza';
 //$_POST["numero_propuesta"]='P000693';
@@ -1671,7 +1672,7 @@ function vencimientogarantia(){
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
-          'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
           'fechainicio': document.getElementById("fechainicio").value,
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
@@ -1711,7 +1712,7 @@ function vencimientogarantia(){
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
-          'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
           'fechainicio': document.getElementById("fechainicio").value,
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
@@ -1751,7 +1752,7 @@ function vencimientogarantia(){
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
-          'nro_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
           'fechainicio': document.getElementById("fechainicio").value,
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
