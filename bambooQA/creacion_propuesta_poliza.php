@@ -38,7 +38,7 @@ $camino='crear_propuesta';
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='P000693'order by numero_item asc";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
