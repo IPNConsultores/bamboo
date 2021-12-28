@@ -226,10 +226,7 @@ $(document).ready(function() {
             }
             else
             {
-                 if (type == 'display')
-                     return moment(data).format('DD/MM/YYYY');
-                 else
-                     return moment(data).format('YYYY/MM/DD');
+                return moment(data).format('YYYY/MM/DD');
             }
          }}
         ],
