@@ -5,6 +5,8 @@
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
 
+    $listado='/bambooQA/listado_propuesta_polizas.php';
+    $mensaje='';
 //Ingresar
   //Propuesta
   $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
@@ -54,6 +56,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 switch ($_POST["accion"]) {
 
   case 'rechazar_propuesta':
+    $mensaje='Propuesta Póliza rechazada correctamente';
       $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
@@ -61,6 +64,7 @@ switch ($_POST["accion"]) {
       
   case 'actualiza_propuesta': 
       //pendiente update
+      $mensaje='Propuesta Póliza actualizada correctamente';
       $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
@@ -93,6 +97,7 @@ switch ($_POST["accion"]) {
 
   case 'crear_propuesta':
     // creación propuesta
+    $mensaje='Propuesta Póliza registrada correctamente';
         $id_propuesta='';
         $nro_propuesta='';
         //crea token
@@ -139,6 +144,9 @@ switch ($_POST["accion"]) {
         break;
   case 'crear_poliza':
         //poliza
+        $mensaje='Póliza registrada correctamente';
+        $listado='/bambooQA/listado_polizas.php';
+
               $nro_poliza= estandariza_info($_POST["nro_poliza"]);
               $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
               $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
@@ -186,13 +194,14 @@ switch ($_POST["accion"]) {
         $token = bin2hex(random_bytes($largo));
         $query= "INSERT INTO polizas_2(estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, numero_propuesta, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."' , '".$nro_propuesta."', '".$nro_poliza."', '".$comision."', '".$porcentaje_comsion."', '".$comisionbruta."', '".$comisionneta."', '".$fechadeposito."', '".$comisionneg."', '".$boletaneg."', '".$boleta."');";
         mysqli_query($link, $query);
-        $resultado = mysqli_query($link, 'select id from polizas_2 where token=\'' . $token . '\';');
+        $resultado = mysqli_query($link, 'select id, numero_poliza from polizas_2 where token=\'' . $token . '\';');
         while ($fila = mysqli_fetch_object($resultado))
         {
             // printf ("%s (%s)\n", $fila->id);
-            $id_propuesta = $fila->id;
+            $id_poliza = $fila->id;
+            $nro_propuesta = $fila->numero_poliza;
         }
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación póliza', '".str_replace("'","**",$query)."','poliza', '".$id_propuesta."' , '".$_SERVER['PHP_SELF']."')");
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación póliza', '".str_replace("'","**",$query)."','poliza', '".$id_poliza."' , '".$_SERVER['PHP_SELF']."')");
     // Incorporar ítems
     break;
 //echo $query;
@@ -221,9 +230,11 @@ return $data;
 <body>
 <script >
 
-alert("Propuesta Póliza registrada correctamente");
+var mensaje= '<?php echo $mensaje; ?>';
+alert(mensaje);
 var nro_propuesta= '<?php echo $nro_propuesta; ?>';
-  $.redirect('/bambooQA/listado_propuesta_polizas.php', {
+var listado= '<?php echo $listado; ?>';
+  $.redirect(listado, {
  'busqueda': nro_propuesta
 }, 'post');
 
