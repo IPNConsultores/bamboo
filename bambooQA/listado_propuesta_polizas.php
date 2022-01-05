@@ -201,7 +201,7 @@ $(document).ready(function() {
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
-                        case 'Aceptado':
+                        case 'Aprobado':
                             estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
                         case 'Rechazado':
