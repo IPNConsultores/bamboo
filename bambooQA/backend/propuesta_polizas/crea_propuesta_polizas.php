@@ -26,6 +26,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $cuotas=estandariza_info($_POST["nro_cuotas"]);
   $moneda_cuota=estandariza_info($_POST["moneda_valor_cuota"]);
   $fechaprimer=estandariza_info($_POST["fecha_primera_cuota"]);
+  $contador_items=estandariza_info($_POST["contador_items"]);
 
 
   /*item
@@ -64,12 +65,11 @@ switch ($_POST["accion"]) {
       
   case 'actualiza_propuesta': 
       //pendiente update
-      $mensaje='Propuesta Póliza actualizada correctamente';
+      //delete from items where numero_propuesta='P000700' and numero_item>=4
+      $mensaje='Propuesta Póliza actualizada correctamente';      
       $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
-
-
       foreach ($_POST["rutaseg"] as $key => $valor) 
       {
         $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"][$key]));
@@ -88,12 +88,15 @@ switch ($_POST["accion"]) {
         $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
         $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
         $numero_item=estandariza_info($_POST["numero_item"][$key]);
-        $query="INSERT INTO items(numero_propuesta,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."',  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."') 
+        $query="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', 'TBD' ,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."') 
         ON DUPLICATE KEY UPDATE rut_asegurado='".$rut_aseg."',dv_asegurado='".$dv_aseg."',materia_asegurada='".$materia."',patente_ubicacion='".$detalle_materia."',cobertura='".$cobertura."',deducible='".$deducible."', tasa_afecta='".$tasa_afecta."', tasa_exenta='".$tasa_exenta."', prima_afecta='".$prima_afecta."', prima_exenta='".$prima_exenta."', prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."', monto_asegurado='".$monto_aseg."', venc_gtia='".$venc_gtia."' , fecha_ultima_modificacion=CURRENT_TIMESTAMP;";
         //$query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' , fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
         mysqli_query($link, $query);
-        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
       }
+      $query="delete from items where numero_propuesta='".$nro_propuesta."' and numero_item>".$contador_items.";";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
 
   case 'crear_propuesta':
@@ -138,7 +141,7 @@ switch ($_POST["accion"]) {
         $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"][$key]));
         $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
         $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
-        $query_items="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."',null,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."') 
+        $query_items="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."','TBD',  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."') 
         ON DUPLICATE KEY UPDATE rut_asegurado='".$rut_aseg."',dv_asegurado='".$dv_aseg."',materia_asegurada='".$materia."',patente_ubicacion='".$detalle_materia."',cobertura='".$cobertura."',deducible='".$deducible."', tasa_afecta='".$tasa_afecta."', tasa_exenta='".$tasa_exenta."', prima_afecta='".$prima_afecta."', prima_exenta='".$prima_exenta."', prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."', monto_asegurado='".$monto_aseg."', venc_gtia='".$venc_gtia."' , fecha_ultima_modificacion=CURRENT_TIMESTAMP;";
         //$query_items="INSERT INTO items(numero_propuesta, numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."')";
         mysqli_query($link, $query_items);
@@ -150,16 +153,15 @@ switch ($_POST["accion"]) {
         $mensaje='Póliza registrada correctamente';
         $listado='/bambooQA/listado_polizas.php';
 
-              $nro_poliza= estandariza_info($_POST["nro_poliza"]);
-              $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
-              $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
-              $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
-              $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
-              $fechadeposito= estandariza_info($_POST["fechadeposito"]);
-              $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
-              $boletaneg= estandariza_info($_POST["boletaneg"]);
-              $boleta= estandariza_info($_POST["boleta"]);
-
+            $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+            $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
+            $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
+            $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
+            $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
+            $fechadeposito= estandariza_info($_POST["fechadeposito"]);
+            $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
+            $boletaneg= estandariza_info($_POST["boletaneg"]);
+            $boleta= estandariza_info($_POST["boleta"]);
         // creación poliza
           // Actualiza ítems y asigna nro propuesta
             foreach ($_POST["rutaseg"] as $key => $valor) 
@@ -185,7 +187,7 @@ switch ($_POST["accion"]) {
         
               //$query='UPDATE items SET numero_poliza=\'' . $nro_poliza . '\', rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\', fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
               mysqli_query($link, $query);
-              mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+              mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
             }
 
 
@@ -207,7 +209,11 @@ switch ($_POST["accion"]) {
             $nro_propuesta = $fila->numero_poliza;
         }
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación póliza', '".str_replace("'","**",$query)."','poliza', '".$id_poliza."' , '".$_SERVER['PHP_SELF']."')");
-    // Incorporar ítems
+    // corrige ítems
+    $query="delete from items where numero_propuesta='".$nro_propuesta."' and numero_item>".$contador_items.";";
+    mysqli_query($link, $query);
+    mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+
     break;
 //echo $query;
 }

@@ -232,7 +232,7 @@ $(document).ready(function() {
         ],
         "order": [
             [1, "asc"],
-            [3, "desc"]
+            [2, "desc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",

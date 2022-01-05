@@ -1686,7 +1686,7 @@ function vencimientogarantia(){
           'nro_cuotas': document.getElementById("cuotas").value,
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
-
+          'contador_items':contador,
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,
@@ -1726,7 +1726,7 @@ function vencimientogarantia(){
           'nro_cuotas': document.getElementById("cuotas").value,
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
-
+          'contador_items':contador,
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,
@@ -1766,7 +1766,7 @@ function vencimientogarantia(){
           'nro_cuotas': document.getElementById("cuotas").value,
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
-
+          'contador_items':contador,
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,
