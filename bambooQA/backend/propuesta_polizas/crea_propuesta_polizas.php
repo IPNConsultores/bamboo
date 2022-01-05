@@ -192,7 +192,7 @@ switch ($_POST["accion"]) {
 
 
           //Aprueba propuesta póliza
-          $query= "update propuesta_polizas_2 set estado='Aprobada', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
+          $query= "update propuesta_polizas_2 set estado='Aprobado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
           mysqli_query($link, $query);
           mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Aprueba propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
   
