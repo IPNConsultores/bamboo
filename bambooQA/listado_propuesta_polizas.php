@@ -320,6 +320,21 @@ function format(d) {
     var ext_cancelado='';
     var items='';
     var listado_items='';
+    var botones='';
+    if (d.estado=='Pendiente'){
+        botones='<td>Acciones</td>' +
+        '<td>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
+        '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
+    }
     if (d.estado=='Cancelado'){
         ext_cancelado='<tr>' +
         '<td>Fecha CANCELACIÓN:</td>' +
@@ -402,27 +417,15 @@ function format(d) {
         '<tr>' +
         items +
         '<tr>' +
-        '<td>Acciones</td>' +
-        '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
-        '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
-        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
-        '</td>' +
-        '</tr>' +
-        '</table>';
+        botones;
 }
-
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "rechazar_propuesta": {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_poliza.php', {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
                     'accion':accion
                 }, 'post');
