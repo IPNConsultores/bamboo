@@ -291,7 +291,7 @@ $(document).ready(function() {
     var dd = new Date();
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
-
+        
     var buttons = new $.fn.dataTable.Buttons(table, {
         buttons: [{
                 sheetName: 'Propuestas de Pólizas',
