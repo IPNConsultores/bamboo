@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 mysqli_query($link, "SET @rownum=0;");
-$query= "select @rownum := @rownum + 1 AS fila, a.estado, a.numero_propuesta, b.numero_item, a.tipo_propuesta, a.fecha_propuesta, a.fecha_envio_propuesta, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, a.compania, a.vigencia_inicial, a.vigencia_final, a.ramo, a.moneda_poliza, a.vendedor, a.forma_pago, a.moneda_valor_cuota, a.valor_cuota, a.fecha_primera_cuota, a.nro_cuotas, a.comentarios_int, a.comentarios_ext, CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) as rut_asegurado, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.deducible, b.tasa_afecta, b.tasa_exenta, 
+$query= "select @rownum := @rownum + 1 AS fila, a.estado, a.numero_propuesta, b.numero_item, a.tipo_propuesta, a.fecha_propuesta, a.fecha_envio_propuesta, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, a.compania, a.vigencia_inicial, a.vigencia_final, a.ramo, a.moneda_poliza, a.vendedor, a.forma_pago, a.moneda_valor_cuota, a.valor_cuota, a.fecha_primera_cuota, a.nro_cuotas, a.comentarios_int, a.comentarios_ext, CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) as rut_asegurado, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.deducible, CONCAT(FORMAT(b.tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta, CONCAT(FORMAT(b.tasa_exenta, 2, 'de_DE'),'%') as tasa_exenta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_afecta, 2, 'de_DE')) as prima_afecta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_exenta, 2, 'de_DE')) as prima_exenta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_neta, 2, 'de_DE')) as prima_neta, 
@@ -22,7 +22,7 @@ $hojaActiva->setTitle("Listado Propuestas de póliza");
 $hojaActiva->setCellValue('A2', 'Fila');
 $hojaActiva->setCellValue('B2', 'Estado');
 $hojaActiva->setCellValue('C2', 'Número propuesta');
-$hojaActiva->setCellValue('D2', 'Ítem');
+$hojaActiva->setCellValue('D2', 'Número ítem');
 $hojaActiva->setCellValue('E2', 'Tipo propuesta');
 $hojaActiva->setCellValue('F2', 'Fecha propuesta');
 $hojaActiva->setCellValue('G2', 'Fecha envío propuesta');
@@ -53,6 +53,52 @@ $hojaActiva->setCellValue('AE2', 'Prima bruta anual');
 $hojaActiva->setCellValue('AF2', 'Monto asegurado');
 $hojaActiva->setCellValue('AG2', 'Vencimiento garantía');
 
+$styleArray = [
+    'font' => [
+        'bold' => true,
+    ],
+    'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+        'wrapText' => true,
+    ],
+];
+$hojaActiva->freezePane('A3');
+
+$hojaActiva->getStyle('A2:AG2')->applyFromArray($styleArray);
+$hojaActiva->getColumnDimension('A')->setWidth(5);
+$hojaActiva->getColumnDimension('D')->setWidth(8);
+$hojaActiva->getColumnDimension('E')->setWidth(8);
+$hojaActiva->getColumnDimension('M')->setWidth(8);
+$hojaActiva->getColumnDimension('N')->setWidth(8);
+$hojaActiva->getColumnDimension('O')->setWidth(8);
+$hojaActiva->getColumnDimension('P')->setWidth(8);
+$hojaActiva->getColumnDimension('R')->setWidth(8);
+$hojaActiva->getColumnDimension('Z')->setWidth(8);
+$hojaActiva->getColumnDimension('AA')->setWidth(8);
+$hojaActiva->getColumnDimension('AB')->setWidth(8);
+$hojaActiva->getColumnDimension('AC')->setWidth(8);
+$hojaActiva->getColumnDimension('AD')->setWidth(8);
+$hojaActiva->getColumnDimension('AE')->setWidth(8);
+$hojaActiva->getColumnDimension('B')->setWidth(10);
+$hojaActiva->getColumnDimension('C')->setWidth(10);
+$hojaActiva->getColumnDimension('F')->setWidth(10);
+$hojaActiva->getColumnDimension('G')->setWidth(10);
+$hojaActiva->getColumnDimension('K')->setWidth(10);
+$hojaActiva->getColumnDimension('L')->setWidth(10);
+$hojaActiva->getColumnDimension('Q')->setWidth(10);
+$hojaActiva->getColumnDimension('X')->setWidth(10);
+$hojaActiva->getColumnDimension('AG')->setWidth(10);
+$hojaActiva->getColumnDimension('H')->setWidth(15);
+$hojaActiva->getColumnDimension('U')->setWidth(15);
+$hojaActiva->getColumnDimension('Y')->setWidth(15);
+$hojaActiva->getColumnDimension('AF')->setWidth(15);
+$hojaActiva->getColumnDimension('S')->setWidth(20);
+$hojaActiva->getColumnDimension('T')->setWidth(20);
+$hojaActiva->getColumnDimension('W')->setWidth(20);
+$hojaActiva->getColumnDimension('I')->setWidth(30);
+$hojaActiva->getColumnDimension('J')->setWidth(30);
+$hojaActiva->getColumnDimension('V')->setWidth(30);
 /*
 listado original
 $hojaActiva->setCellValue('A2', 'fila');
@@ -134,8 +180,11 @@ while ($rows = mysqli_fetch_object($resultado))
 
     $fila++;
 }
+$fecha = new DateTime(date("Y-m-d H:i:sP"), new DateTimeZone('America/Santiago') );
+date_timezone_set($fecha, timezone_open('America/Santiago'));
+$hojaActiva->setAutoFilter('A2:AG'.($fila-1));
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Listado_propuestas.xlsx"');
+header('Content-Disposition: attachment;filename="Listado_propuestas '.date_format($fecha, 'd-m-Y H:i:s').'.xlsx"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($excel, 'Xlsx');
