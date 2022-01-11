@@ -80,7 +80,10 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     </tr>
 
             </table>
-            <div id="botones_poliza"></div>
+            <div id="botones_poliza">
+            <button title="Descargar_excel_propuestas" type="button"  onclick="window.location.href='/bambooQA/backend/propuesta_polizas/genera_excel_propuestas.php'">Descargar Excel <i class="fas fa-file-excel"></i></button>
+            </div>
+            
         </div>
 
         <div id="auxiliar" style="display: none;">
@@ -292,26 +295,7 @@ $(document).ready(function() {
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
         
-    var buttons = new $.fn.dataTable.Buttons(table, {
-        buttons: [{
-                sheetName: 'Propuestas de Pólizas',
-                orientation: 'landscape',
-                extend: 'excelHtml5',
-                filename: 'Listado Propuestas de Pólizas al: ' + fecha,
-                exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
-                }
-            },
-            {
-                orientation: 'landscape',
-                extend: 'pdfHtml5',
-                filename: 'Listado Propuestas de Pólizas al: ' + fecha,
-                exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
-                }
-            }
-        ]
-    }).container().appendTo($('#botones_poliza'));
+    
 
 });
 
