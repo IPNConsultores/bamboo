@@ -111,7 +111,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table = ''
 $(document).ready(function() {
     table = $('#listado_polizas').DataTable({
-        "ajax": "/bambooQA/test_felipe2.php",
+        "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2],
@@ -393,10 +393,8 @@ function format(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_poliza + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
-        '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Propuesta"  type="button" id=' + d.numero_poliza + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="WIP Editar Propuesta"  type="button" id=' + d.numero_poliza + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
         '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_poliza + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
