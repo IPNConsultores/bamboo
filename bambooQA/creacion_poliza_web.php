@@ -6,22 +6,10 @@ if ( !isset( $_SESSION ) ) {
 $camino = $nro_poliza = $selcompania = '';
 if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) == true ) {
   require_once "/home/gestio10/public_html/backend/config.php";
-  if ( isset( $_POST[ "renovar" ] ) == true ) {
-    $camino = 'renovar';
-    mysqli_set_charset( $link, 'utf8' );
-    mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-    $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
-    $resultado = mysqli_query( $link, $query );
-  } else {
-    $camino = 'modificar';
-  }
-  
- $id_poliza = estandariza_info( $_POST[ "id_poliza" ] );
 
- 
   require_once "/home/gestio10/public_html/backend/config.php";
   mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
   $query = "select  rut_proponente,  dv_proponente,  rut_asegurado,  dv_asegurado,  compania,  ramo, datediff(vigencia_final,vigencia_inicial) as dif_dias, vigencia_inicial,  vigencia_final, date_add(vigencia_final, interval 1 year) as vigencia_final_renovada, numero_poliza,  cobertura,  materia_asegurada,  patente_ubicacion, moneda_poliza,  deducible,  FORMAT(prima_afecta, 4, 'es_CL') as prima_afecta,  FORMAT(prima_exenta, 4, 'es_CL') as prima_exenta,  FORMAT(prima_neta, 4, 'es_CL') as prima_neta,  FORMAT(prima_bruta_anual, 4, 'es_CL') as prima_bruta_anual,  monto_asegurado,  numero_propuesta,  fecha_envio_propuesta,  moneda_comision,  FORMAT(comision, 4, 'es_CL') as comision,  FORMAT(porcentaje_comision, 4, 'es_CL') as porcentaje_comision,  FORMAT(comision_bruta, 4, 'es_CL') as comision_bruta,  FORMAT(comision_neta, 4, 'es_CL') as comision_neta, moneda_valor_cuota,  forma_pago, nro_cuotas,  FORMAT(valor_cuota, 4, 'es_CL') as valor_cuota,  fecha_primera_cuota, date_add(fecha_primera_cuota, interval 1 year) as fecha_primera_cuota_ren,   vendedor, nombre_vendedor, poliza_renovada, FORMAT(comision_negativa, 4, 'es_CL') as comision_negativa, boleta_negativa, depositado_fecha, numero_boleta, endoso, informacion_adicional, estado, venc_gtia, fech_cancela, motivo_cancela,item from polizas where id=" . $id_poliza;
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -97,9 +85,10 @@ function estandariza_info( $data ) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo/images/bamboo.png">
+<link rel="icon" href="/bambooQA/images/bamboo.png">
 <!-- Bootstrap --> 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> 
@@ -120,7 +109,7 @@ function estandariza_info( $data ) {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <div class="container">
 <div id=titulo1 style="display:flex">
-  <p>Póliza / Creación<br>
+  <p>Póliza WEB / Creación<br>
   </p>
 </div>
 <div id=titulo2 style="display:none">
@@ -131,64 +120,13 @@ function estandariza_info( $data ) {
     <br>
   </p>
 </div>
-<br>
+
 <div class="form-check form-check-inline">
-<div class="col align-self-end" id="botones_edicion" style="display:none ;align-items: center;">
-  <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
-                    style="background-color: #536656; margin-right: 5px ;color: white; display: flex">Editar</button>
-  <button ctype="button" lass="btn btn-second" id="cancelar1" onclick="cancela()"
-                    style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Cancelar</button>
-  <button type="button" class="btn btn-second" id="anular1" onclick="anular()" style="background-color: #721c24; margin-right: 5px; color: white; display: flex">Anular</button>
-</div>
-<div class="form" id="pregunta_renovar" style="display:flex ;align-items: center;">
-  <label class="form-check-label">¿Desea renovar una póliza existente?:&nbsp;&nbsp;</label>
-  <input class="form-check-input" type="radio" name="nueva" id="radio_no" value="nueva"
-                    onclick="checkRadio(this.name)" checked="checked">
-  <label class="form-check-label" for="inlineRadio1">No&nbsp;</label>
-  <input class="form-check-input" type="radio" name="renovacion" id="radio_si" value="renovacion"
-                    onclick="checkRadio(this.name)">
-  <label class="form-check-label" for="inlineRadio2">Si&nbsp;&nbsp;</label>
-  <button type="button" class="btn" id="busca_poliza" data-toggle="modal" data-target="#modal_poliza"
-                    style="background-color: #536656; color: white;display: none">Buscar Póliza</button>
-  <div class="modal fade" id="modal_poliza" tabindex="-1" role="dialog" aria-labelledby="modal_text"
-                    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div id="test1" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal_text">Buscar Póliza a Renovar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <table class="display" style="width:100%" id="listado_polizas">
-              <tr>
-                <th></th>
-                <th>Estado</th>
-                <th>Póliza</th>
-                <th>Compañia</th>
-                <th>Ramo</th>
-                <th>Inicio Vigencia</th>
-                <th>Fin Vigencia</th>
-                <th>Materia Asegurada</th>
-                <th>Observaciones</th>
-                <th>nom_clienteP</th>
-                <th>nom_clienteA</th>
-              </tr>
-            </table>
-            <div id="botones_poliza"></div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 <div class="col">
 <!-- "/bamboo/backend/polizas/crea_poliza.php" -->
-<form action="/bamboo/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
+<form action="/bambooQA/backend/polizas/crea_poliza.php" class="needs-validation" method="POST"
 
                     id="formulario" novalidate>
   <div id="auxiliar" style="display: none;">
@@ -199,61 +137,10 @@ function estandariza_info( $data ) {
   </div>
   </div>
 <!-- --------------------------------------------                -->
-  <div class ="col" id="datos_cancelacion"  style = "display:none"><br>
-    <div class ="row" >
-      <div class="col"style="display:flex ;align-items: center;">
-        <p><b>Complete información de</p>
-        &nbsp;
-        <p style="color:red">CANCELACIÓN</b></p>
-      </div>
-    </div>
-    <div class ="row" >
-      <div class="col-4" style="display:flex ;align-items: center;">
-        <label for="datofecha_cancelacion">Fecha Cancelación &nbsp;&nbsp;</label>
-        <div class="md-form">
-          <input placeholder="Selected date" type="date" id="datofecha_cancelacion" name="datofecha_cancelacion"
-                                        class="form-control"  max= "9999-12-31">
-        </div>
-      </div>
-      <div class="col" style="display:flex ;align-items: center;">
-        <label for="datomotivo_cancela">Motivo &nbsp;&nbsp;</label>
-        <div class = "col-9">
-          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_cancela" class="form-control" name="datomotivo_cancela">
-        </div>
-        <button type="button" class="btn btn-second" id="cancelar" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Cancelación</button>
-      </div>
-    </div>
-  </div>
 <!-- --------------------------------------------                -->
+
 <!-- --------------------------------------------                -->
-  <div class ="col" id="datos_anulacion"  style = "display:none"><br>
-    <div class ="row" >
-      <div class="col"style="display:flex ;align-items: center;">
-        <p><b>Complete información de</p>
-        &nbsp;
-        <p style="color:red">ANULACIÓN</b></p>
-      </div>
-    </div>
-    <div class ="row" >
-      <div class="col-4" style="display:flex ;align-items: center;">
-        <label for="datofecha_anulacion">Fecha Anulación &nbsp;&nbsp;</label>
-        <div class="md-form">
-          <input placeholder="Selected date" type="date" id="datofecha_anulacion" name="datofecha_anulacion"
-                                        class="form-control"  max= "9999-12-31">
-        </div>
-      </div>
-      <div class="col" style="display:flex ;align-items: center;">
-        <label for="datomotivo_anulacion">Motivo &nbsp;&nbsp;</label>
-        <div class = "col-9">
-          <input placeholder="Ingresa un Motivo" type="text" id="datomotivo_anulacion" class="form-control" name="datomotivo_anulacion">
-        </div>
-        <button type="button" class="btn btn-second" id="anular" onclick="modifica_estado(this.id)" style="background-color: #721c24; margin-right: 5px ;color: white; display: flex">Confirmar Anulación</button>
-      </div>
-    </div>
-  </div>
-<!-- --------------------------------------------                -->
-  <br>
-  <br>
+ 
   <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne" style="background-color:whitesmoke">
@@ -414,6 +301,9 @@ function estandariza_info( $data ) {
                             style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
         </h5>
       </div>
+      
+      <!-- DATOS DE LA COMPAÑíA --> 
+      
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body" id="card-body-two">
           <label for="compania"><b>Compañía</b></label>
@@ -740,6 +630,9 @@ function estandariza_info( $data ) {
       </div>
     </div>
   </div>
+  
+  <!--PROPUESTA, COMISIONES -->
+  
   <div class="card">
     <div class="card-header" id="headingThree" style="background-color:whitesmoke">
       <h5 class="mb-0">
@@ -755,13 +648,13 @@ function estandariza_info( $data ) {
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label for="nro_propuesta">Número de Propuesta</label>
-            <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta">
+            <input type="text" class="form-control" id="nro_propuesta" name="nro_propuesta" value="WEB" readonly>
           </div>
           <div class="col-md-4 mb-3">
             <label for="fechaprop">Fecha Envío Propuesta</label>
             <div class="md-form">
-              <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop"
-                                        class="form-control" max= "9999-12-31">
+              <input placeholder="Selected date" type="text" name="fechaprop" id="fechaprop" value="No Aplica"
+                                        class="form-control" max= "9999-12-31" readonly>
             </div>
           </div>
         </div>
@@ -952,7 +845,7 @@ function estandariza_info( $data ) {
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                            style="color:#536656">Comentarios y Endosos</button>
+                            style="color:#536656">Comentarios</button>
       </h5>
     </div>
     <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
@@ -962,12 +855,7 @@ function estandariza_info( $data ) {
         <textarea class="form-control" rows="2" style="height:100px" id='comentario' name='comentario'
                             style="text-indent:0px" ;>
         </textarea>
-        <br>
-        <label for="endoso"><b>Endosos</b></label>
-        <br>
-        <textarea class="form-control" rows="2" style="height:100px" id='endoso' name='endoso'
-                            style="text-indent:0px" ;>
-        </textarea>
+        
       </div>
     </div>
   </div>
@@ -1007,9 +895,7 @@ function estandariza_info( $data ) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
+
 <script src="/assets/js/jquery.redirect.js"></script>
 <script src="/assets/js/validarRUT.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -1023,7 +909,7 @@ function valida_rut_duplicado_prop() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1043,7 +929,7 @@ function valida_rut_duplicado_aseg() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1212,7 +1098,7 @@ $('#test1').on('shown.bs.modal', function() {
     //$('#modal_text').trigger('focus')
 })
 var table = $('#listado_polizas').DataTable({
-    "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
+    "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
     "scrollX": true,
     "searchPanes": {
         "columns": [2, 3, 8, 9],
@@ -1335,7 +1221,7 @@ var table = $('#listado_polizas').DataTable({
 });
 var tabla_clientes = $('#listado_clientes').DataTable({
 
-    "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+    "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
     "scrollX": true,
     "columns": [{
             "className": 'details-control',
@@ -1436,7 +1322,7 @@ function renovar_poliza(poliza, tipo_poliza) {
 
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/polizas/busqueda_poliza_renovada.php",
+                    url: "/bambooQA/backend/polizas/busqueda_poliza_renovada.php",
                     data: {
                         id_a_renovar: poliza
                     },
@@ -1451,7 +1337,7 @@ function renovar_poliza(poliza, tipo_poliza) {
                 $('#modal_poliza').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
-                $.redirect('/bamboo/creacion_poliza.php', {
+                $.redirect('/bambooQA/creacion_poliza.php', {
                     'id_poliza': poliza,
                     'renovar': true
                 }, 'post');
@@ -1461,14 +1347,14 @@ function renovar_poliza(poliza, tipo_poliza) {
             $('#modal_poliza').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            $.redirect('/bamboo/creacion_poliza.php');
+            $.redirect('/bambooQA/creacion_poliza.php');
         }
     } else {
         console.log('continúa normal');
         $('#modal_poliza').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-        $.redirect('/bamboo/creacion_poliza.php', {
+        $.redirect('/bambooQA/creacion_poliza.php', {
             'id_poliza': poliza,
             'renovar': true
         }, 'post');
@@ -1586,7 +1472,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("formulario").action = "/bamboo/backend/polizas/modifica_poliza.php";
+            document.getElementById("formulario").action = "/bambooQA/backend/polizas/modifica_poliza.php";
             
             document.getElementById("id_poliza").value = '<?php echo $id_poliza; ?>';
             document.getElementById("endoso").value = '<?php echo $endoso; ?>';
@@ -1799,7 +1685,7 @@ function modifica_estado(estado) {
     var r2 = confirm("Estás a punto de " + estado + " está póliza ¿Deseas continuar?");
     if (r2 == true) {
       // acá se debe cerrar todas las tareas asociadas a una tarea cancelada
-       $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
+       $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
             'id_poliza': document.getElementById("id_poliza").value,
             'accion': estado,
             'datofecha_cancelacion': document.getElementById("datofecha_cancelacion").value,
