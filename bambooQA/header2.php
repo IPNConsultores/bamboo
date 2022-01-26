@@ -130,6 +130,7 @@ function retrocede()
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/bambooQA/creacion_propuesta_poliza.php">Creación Propuesta </a>
                             <a class="dropdown-item" href="/bambooQA/listado_propuesta_polizas.php">Listado Propuesta </a>
+                            <a class="dropdown-item" href="/bambooQA/creacion_poliza_web.php">Creación Póliza Web </a>
                             <a class="dropdown-item" href="/bambooQA/listado_polizas.php">Listado de pólizas</a>
                         </div>
                     </li>
