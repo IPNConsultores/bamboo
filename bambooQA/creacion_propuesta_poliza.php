@@ -5,8 +5,9 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["numero_propuesta"]='P000704';
+//$_POST["numero_poliza"]='852849';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza'))
     {
       $camino = $_POST["accion"];
@@ -64,14 +65,14 @@ $camino='crear_propuesta';
             }
         }
     }
-    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_poliza')
+    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'modifica_poliza')
     {
       $camino = $_POST["accion"];
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $query = "select numero_poliza,numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta, fecha_emision_poliza from polizas_2 where numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
     
@@ -83,6 +84,7 @@ $camino='crear_propuesta';
         $fechainicio = $row->vigencia_inicial;
         $fechavenc = $row->vigencia_final;
         $moneda_poliza = $row->moneda_poliza;
+        $numero_poliza = $row->numero_poliza;
         $nro_propuesta = $row->numero_propuesta;
         $fechaprop = $row->fecha_propuesta;    
         $modo_pago = $row->forma_pago;
@@ -91,12 +93,21 @@ $camino='crear_propuesta';
         $valorcuota = $row->valor_cuota;
         $fechaprimer = $row->fecha_primera_cuota;
         $nombre_vendedor = $row->vendedor;
+        $fecha_emision_poliza = $row->fecha_emision_poliza;
         $porcentaje_comision = $row->porcentaje_comision;
+        $comision = $row->comision;
+        $comision_bruta = $row->comision_bruta;
+        $comision_neta = $row->comision_neta;
+        $depositado_fecha = $row->depositado_fecha;
+        $comision_negativa = $row->comision_negativa;
+        $boleta_negativa = $row->boleta_negativa;
+        $numero_boleta = $row->numero_boleta;
+        
         $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_poliza='".$_POST["numero_poliza"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -167,7 +178,12 @@ function estandariza_info( $data ) {
     <br>
   </p>
 </div>
-
+<div id=titulo3 style="display:none">
+  <p>Póliza / Modificación / N° Póliza :
+    <?php  echo $numero_poliza; ?>
+    <br>
+  </p>
+</div>
 <div class="form-row">
 <div class="col" id="botones_edicion" style="display:none ;align-items: center;">
   <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
@@ -1506,6 +1522,83 @@ console.log(orgn);
             }
             break;
           }
+          case 'modifica_poliza':{
+            console.log('Cargando información');
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            {
+                document.getElementById("radio2_si").checked = true;
+                document.getElementById("radio2_no").checked = false;
+            }
+            document.getElementById("contenedor_nro_propuesta").style.display = "inline";
+            document.getElementById("titulo1").style.display = "none";
+            document.getElementById("titulo3").style.display = "flex";
+            document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("nro_poliza").required = true;
+            
+            document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
+            document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            valida_rut_duplicado_prop();
+            document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+            document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
+            document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
+            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+            document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
+            document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
+            document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comision; ?>';
+            document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
+            document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
+            
+            
+            document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
+            document.getElementById("fecha_emision_poliza").value = '<?php echo $fecha_emision_poliza; ?>';
+            document.getElementById("comision").value = '<?php echo $comision; ?>';
+            document.getElementById("comisionbruta").value = '<?php echo $comision_bruta; ?>';
+            document.getElementById("comisionneta").value = '<?php echo $comision_neta; ?>';
+            document.getElementById("fechadeposito").value = '<?php echo $depositado_fecha; ?>';
+            document.getElementById("comisionneg").value = '<?php echo $comision_negativa; ?>';
+            document.getElementById("boletaneg").value = '<?php echo $boleta_negativa; ?>';
+            document.getElementById("boleta").value = '<?php echo $numero_boleta; ?>';
+
+            
+            
+            //agregar ítems
+            var contador=1;
+            var item= <?php echo json_encode($item); ?>;
+            var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var cobertura=<?php echo json_encode($cobertura); ?>;
+            var materia=<?php echo json_encode($materia); ?>;
+            var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
+            var deducible=<?php echo json_encode($deducible); ?>;
+            var tasa_afecta=<?php echo json_encode($tasa_afecta); ?>;
+            var tasa_exenta=<?php echo json_encode($tasa_exenta); ?>;
+            var prima_afecta=<?php echo json_encode($prima_afecta); ?>;
+            var prima_exenta=<?php echo json_encode($prima_exenta); ?>;
+            var prima_neta=<?php echo json_encode($prima_neta); ?>;
+            var prima_bruta=<?php echo json_encode($prima_bruta); ?>;
+            var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
+            var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
+
+            console.log(contador + 'total items: ' +'<?php echo $nro_items; ?>' )
+            while (contador<='<?php echo $nro_items; ?>'){
+                document.getElementById("btAdd").click();
+                document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
+                document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
+                document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
+                document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
+                document.getElementById("tasa_afecta["+contador.toString()+"]").value = tasa_afecta[(contador-1).toString()];
+                document.getElementById("tasa_exenta["+contador.toString()+"]").value = tasa_exenta[(contador-1).toString()];
+                document.getElementById("prima_afecta["+contador.toString()+"]").value = prima_afecta[(contador-1).toString()];
+                document.getElementById("prima_exenta["+contador.toString()+"]").value = prima_exenta[(contador-1).toString()];
+                document.getElementById("monto_aseg["+contador.toString()+"]").value = monto_aseg[(contador-1).toString()];
+                document.getElementById("prima_bruta["+contador.toString()+"]").value = prima_bruta[(contador-1).toString()];
+                document.getElementById("prima_neta["+contador.toString()+"]").value = prima_neta[(contador-1).toString()];
+                document.getElementById("venc_gtia["+contador.toString()+"]").value = venc_gtia[(contador-1).toString()];
+                document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
+                contador+=1;
+            }
+            break;
+          }
           default:{
             break;
           }
@@ -1759,6 +1852,67 @@ function vencimientogarantia(){
           
           //Póliza
           'nro_poliza': document.getElementById("nro_poliza").value,
+          'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
+          'comision': document.getElementById("comision").value,
+          'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
+          'comisionbruta': document.getElementById("comisionbruta").value,
+          'comisionneta': document.getElementById("comisionneta").value,
+          'fechadeposito': document.getElementById("fechadeposito").value,
+          'comisionneg': document.getElementById("comisionneg").value,
+          'boletaneg': document.getElementById("boletaneg").value,
+          'boleta': document.getElementById("boleta").value
+          }, 'post');
+          break;
+      }
+        case 'modifica_poliza': {
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe2.php', { 
+            'accion': 'crear_poliza',
+          //Propuesta
+          'rutprop': document.getElementById("rutprop").value,
+          'fechaprop': document.getElementById("fechaprop").value,
+          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'fechainicio': document.getElementById("fechainicio").value,
+          'fechavenc': document.getElementById("fechavenc").value,
+          'moneda_poliza': document.getElementById("moneda_poliza").value,
+          'selcompania': document.getElementById("selcompania").value, 
+          'ramo': document.getElementById("ramo").value, 
+          'comentarios_int': document.getElementById("comentarios_int").value,
+          'comentarios_ext': document.getElementById("comentarios_ext").value,  
+          'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+          'forma_pago': document.getElementById("modo_pago").value,
+          'valor_cuota': document.getElementById("valorcuota").value,
+          'nro_cuotas': document.getElementById("cuotas").value,
+          'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
+          'fecha_primera_cuota': document.getElementById("fechaprimer").value,
+            'numero_poliza': document.getElementById("nro_poliza").value,
+            'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
+            'comision':document.getElementById("comision").value,
+            'comisionbruta': document.getElementById("comisionbruta").value,
+            'comisionneta': document.getElementById("comisionneta").value,
+            'fechadeposito': document.getElementById("fechadeposito").value,
+            'comisionneg': document.getElementById("comisionneg").value ,
+            'boletaneg': document.getElementById("boletaneg").value,
+            'boleta':document.getElementById("boleta").value,
+          'contador_items':contador,
+          //Ítem
+          'rutaseg':  rutaseg,
+          'materia': materia,
+          'detalle_materia': detalle_materia,
+          'cobertura': cobertura,
+          'deducible': deducible,
+          'tasa_afecta': tasa_afecta,
+          'tasa_exenta': tasa_exenta,
+          'prima_afecta': prima_afecta,
+          'prima_exenta': prima_exenta,
+          'prima_neta': prima_neta,
+          'prima_bruta': prima_bruta,
+          'monto_aseg': monto_aseg,
+          'venc_gtia': venc_gtia,
+          'numero_item':numero_item,
+          //Póliza
+          'nro_poliza': document.getElementById("nro_poliza").value,
+          'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           'comision': document.getElementById("comision").value,
           'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
           'comisionbruta': document.getElementById("comisionbruta").value,
