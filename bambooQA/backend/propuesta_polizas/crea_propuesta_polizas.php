@@ -222,6 +222,52 @@ switch ($_POST["accion"]) {
 
     break;
 
+  case 'modifica_poliza':
+      //pendiente update
+      //delete from items where numero_propuesta='P000700' and numero_item>=4
+      //fecha_envio_propuesta, comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta
+      $mensaje='Póliza actualizada correctamente';      
+      $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+      $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
+      $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
+      $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
+      $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
+      $fechadeposito= estandariza_info($_POST["fechadeposito"]);
+      $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
+      $boletaneg= estandariza_info($_POST["boletaneg"]);
+      $boleta= estandariza_info($_POST["boleta"]);
+
+      $query='UPDATE polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\',porcentaje_comision=\'' . $porcentaje_comision . '\' , fecha_envio_propuesta=\'' . $fecha_envio_propuesta . '\' , comision=\'' . $comision . '\' , comision_bruta=\'' . $comisionbruta . '\' , comision_neta=\'' . $comisionneta . '\' , depositado_fecha=\'' . $fechadeposito . '\' , comision_negativa=\'' . $comisionneg . '\', boleta_negativa=\'' . $boletaneg . '\' , numero_boleta=\'' . $boleta . '\' WHERE numero_poliza=\'' . $nro_poliza . '\'';
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza Póliza', '".str_replace("'","**",$query)."','poliza','".$nro_poliza."', '".$_SERVER['PHP_SELF']."')");
+      foreach ($_POST["rutaseg"] as $key => $valor) 
+      {
+        $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"][$key]));
+        $rut_aseg=estandariza_info(substr($rut_completo_aseg, 0, strlen($rut_completo_aseg)-1));
+        $dv_aseg=estandariza_info(substr($rut_completo_aseg, -1,1));
+        $materia=estandariza_info($_POST["materia"][$key]);
+        $detalle_materia=estandariza_info($_POST["detalle_materia"][$key]);
+        $cobertura=estandariza_info($_POST["cobertura"][$key]);
+        $deducible=cambia_puntos_por_coma(estandariza_info($_POST["deducible"][$key]));
+        $tasa_afecta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_afecta"][$key]));
+        $tasa_exenta=cambia_puntos_por_coma(estandariza_info($_POST["tasa_exenta"][$key]));
+        $prima_afecta=cambia_puntos_por_coma(estandariza_info($_POST["prima_afecta"][$key]));
+        $prima_exenta=cambia_puntos_por_coma(estandariza_info($_POST["prima_exenta"][$key]));
+        $prima_neta=cambia_puntos_por_coma(estandariza_info($_POST["prima_neta"][$key]));
+        $prima_bruta=cambia_puntos_por_coma(estandariza_info($_POST["prima_bruta"][$key]));
+        $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
+        $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
+        $numero_item=estandariza_info($_POST["numero_item"][$key]);
+        $query="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".$nro_poliza."' ,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."' ) 
+        ON DUPLICATE KEY UPDATE rut_asegurado='".$rut_aseg."',dv_asegurado='".$dv_aseg."',materia_asegurada='".$materia."',patente_ubicacion='".$detalle_materia."',cobertura='".$cobertura."',deducible='".$deducible."', tasa_afecta='".$tasa_afecta."', tasa_exenta='".$tasa_exenta."', prima_afecta='".$prima_afecta."', prima_exenta='".$prima_exenta."', prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."', monto_asegurado='".$monto_aseg."', venc_gtia='".$venc_gtia."' , fecha_ultima_modificacion=CURRENT_TIMESTAMP;";
+        //$query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' , fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
+        mysqli_query($link, $query);
+        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_poliza."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
+      }
+      $query="delete from items where numero_poliza='".$nro_poliza."' and numero_item>".$contador_items.";";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_poliza."', '".$_SERVER['PHP_SELF']."')");
+      break;
     //echo $query;
 }
 function estandariza_info($data) {

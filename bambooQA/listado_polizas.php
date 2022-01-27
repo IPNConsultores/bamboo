@@ -281,26 +281,6 @@ $(document).ready(function() {
     var fecha = '' + dd.getFullYear() + '-' + (("0" + (dd.getMonth() + 1)).slice(-2)) + '-' + (("0" + (dd
         .getDate() + 1)).slice(-2)) + ' (' + dd.getHours() + dd.getMinutes() + dd.getSeconds() + ')';
 
-    var buttons = new $.fn.dataTable.Buttons(table, {
-        buttons: [{
-                sheetName: 'Propuestas de Pólizas',
-                orientation: 'landscape',
-                extend: 'excelHtml5',
-                filename: 'Listado Propuestas de Pólizas al: ' + fecha,
-                exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
-                }
-            },
-            {
-                orientation: 'landscape',
-                extend: 'pdfHtml5',
-                filename: 'Listado Propuestas de Pólizas al: ' + fecha,
-                exportOptions: {
-                    columns: [1,18,19,20,21,22,3,5,6,14,8,4,2,7,9,17,16,10,11,12,13,24,25,26,27,28,29,30,31,33,32,23]
-                }
-            }
-        ]
-    }).container().appendTo($('#botones_poliza'));
 
 });
 
@@ -393,8 +373,8 @@ function format(d) {
         '<tr>' +
         '<td>Acciones</td>' +
         '<td>' +
-        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="WIP Editar Propuesta"  type="button" id=' + d.numero_poliza + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="WIP Editar Propuesta"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
         '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_poliza + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
@@ -415,7 +395,7 @@ function botones(id, accion, base) {
                 }
             break;
         }
-        case "actualiza_propuesta": {
+        case "modifica_poliza": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
                 'numero_poliza': id,
                 'accion': accion
