@@ -71,7 +71,7 @@ $camino='crear_propuesta';
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
     
@@ -91,6 +91,7 @@ $camino='crear_propuesta';
         $valorcuota = $row->valor_cuota;
         $fechaprimer = $row->fecha_primera_cuota;
         $nombre_vendedor = $row->vendedor;
+        $porcentaje_comision = $row->porcentaje_comision;
         $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
@@ -1381,7 +1382,7 @@ console.log(orgn);
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("porcentaje_comision").value = '<?php echo $porcentaje_comision; ?>';
+            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
             //agregar ítems
@@ -1465,7 +1466,7 @@ console.log(orgn);
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
-            document.getElementById("porcentaje_comision").value = '<?php echo $porcentaje_comision; ?>';
+            document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
             //agregar ítems
