@@ -14,6 +14,63 @@ $camino='crear_propuesta';
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $resultado = mysqli_query( $link, $query );
+      While( $row = mysqli_fetch_object( $resultado ) ) {
+    
+        $rut_prop = $row->rut_proponente;
+        $dv_prop = $row->dv_proponente;
+        $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $selcompania = $row->compania;
+        $ramo = $row->ramo;
+        $fechainicio = $row->vigencia_inicial;
+        $fechavenc = $row->vigencia_final;
+        $moneda_poliza = $row->moneda_poliza;
+        $nro_propuesta = $row->numero_propuesta;
+        $fechaprop = $row->fecha_propuesta;    
+        $modo_pago = $row->forma_pago;
+        $cuotas = $row->nro_cuotas;
+        $moneda_cuota = $row->moneda_valor_cuota;
+        $valorcuota = $row->valor_cuota;
+        $fechaprimer = $row->fecha_primera_cuota;
+        $nombre_vendedor = $row->vendedor;
+        $porcentaje_comision = $row->porcentaje_comision;
+        $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
+        $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
+        $nro_items=0;
+        
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $resultado_item = mysqli_query( $link, $query_item );
+            While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
+                $nro_items+=1;
+                $item[]=$row_item->numero_item;
+                $rut_aseg = $row_item->rut_asegurado;
+                $dv_aseg = $row_item->dv_asegurado;
+                $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $cobertura[] = $row_item->cobertura;
+                $materia_i = $row_item->materia_asegurada;
+                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+                $detalle_materia_i = $row_item->patente_ubicacion;
+                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                $deducible[] = $row_item->deducible;
+                $tasa_afecta[] = $row_item->tasa_afecta;
+                $tasa_exenta[] = $row_item->tasa_exenta;
+                $prima_afecta[] = $row_item->prima_afecta;
+                $prima_exenta[] = $row_item->prima_exenta;
+                $prima_neta[] = $row_item->prima_neta;
+                $prima_bruta[] = $row_item->prima_bruta_anual;
+                $monto_aseg[] = $row_item->monto_asegurado;
+                $venc_gtia[] = $row_item->venc_gtia;
+            }
+        }
+    }
+    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_poliza')
+    {
+      $camino = $_POST["accion"];
+    
+      require_once "/home/gestio10/public_html/backend/config.php";
+      mysqli_set_charset( $link, 'utf8' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
       $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -63,7 +120,6 @@ $camino='crear_propuesta';
             }
         }
     }
-
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );
@@ -530,18 +586,27 @@ function estandariza_info( $data ) {
           
           <br>
           <br>
-             <label for="pago"><b>Vendedor</b></label>
+             <label for="pago"><b>Vendedor y Corredor</b></label>
               <br>
-               <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <div class="form-row">
-                    <div class="col" style="width:72%;" >
-                      <input type="text" class="form-control" id="nombre_vendedor"
-                                              name="nombre_vendedor" placeholder="Nombre Vendedor" style="width:72%;" >
-                    </div>
-                   </div>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                 <label>Nombre del Vendedor</label>
+                <div class="form-row">
+                  <div class="col" style="width:72%;" >
+                    <input type="text" class="form-control" id="nombre_vendedor" name="nombre_vendedor" placeholder="Nombre Vendedor" style="width:72%;" >
+                  </div>
                 </div>
-                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+              <label>Porcentaje Comisión del Corredor</label>
+              <div class="form-inline">
+                <input type="text" class="form-control" id="porcentaje_comsion"
+                                          name="porcentaje_comsion" onChange="calculacomision()">
+                <div class="input-group-prepend"><span class="input-group-text"
+                                              id="porcentaje_comi">%</span></div>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -661,15 +726,6 @@ function estandariza_info( $data ) {
           <label for = "datos_poliza"><b>Comisión</b></label>
           <br>
         <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <label>Porcentaje Comisión del Corredor</label>
-              <div class="form-inline">
-                <input type="text" class="form-control" id="porcentaje_comsion"
-                                          name="porcentaje_comsion" onChange="calculacomision()">
-                <div class="input-group-prepend"><span class="input-group-text"
-                                              id="porcentaje_comi">%</span></div>
-              </div>
-            </div>
             <div class="col-md-4 mb-3">
               <label for="comision">Comisión Correspondiente</label>
               <div class="form-inline">
@@ -1325,6 +1381,7 @@ console.log(orgn);
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("porcentaje_comision").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
             //agregar ítems
@@ -1408,6 +1465,7 @@ console.log(orgn);
             document.getElementById("valorcuota").value = '<?php echo $valorcuota; ?>';
             document.getElementById("fechaprimer").value = '<?php echo $fechaprimer; ?>';
             document.getElementById("nombre_vendedor").value = '<?php echo $nombre_vendedor; ?>';
+            document.getElementById("porcentaje_comision").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
             //agregar ítems
@@ -1598,6 +1656,7 @@ function vencimientogarantia(){
           'nro_cuotas': document.getElementById("cuotas").value,
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
+          'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
           'contador_items':contador,
           //Ítem
           'rutaseg':  rutaseg,
@@ -1638,6 +1697,7 @@ function vencimientogarantia(){
           'nro_cuotas': document.getElementById("cuotas").value,
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
+          'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
           'contador_items':contador,
           //Ítem
           'rutaseg':  rutaseg,

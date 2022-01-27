@@ -21,13 +21,14 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $comentarios_ext=estandariza_info($_POST["comentarios_ext"]);
   $comentarios_int=estandariza_info($_POST["comentarios_int"]);
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
+  $porcentaje_comision= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
   $forma_pago=estandariza_info($_POST["forma_pago"]);
   $valor_cuota=estandariza_info($_POST["valor_cuota"]);
   $cuotas=estandariza_info($_POST["nro_cuotas"]);
   $moneda_cuota=estandariza_info($_POST["moneda_valor_cuota"]);
   $fechaprimer=estandariza_info($_POST["fecha_primera_cuota"]);
   $contador_items=estandariza_info($_POST["contador_items"]);
-
+  
 
   /*item
   $rut_completo_aseg = $_POST["rutaseg"];
@@ -67,7 +68,7 @@ switch ($_POST["accion"]) {
       //pendiente update
       //delete from items where numero_propuesta='P000700' and numero_item>=4
       $mensaje='Propuesta Póliza actualizada correctamente';      
-      $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
+      $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\',porcentaje_comision=\'' . $porcentaje_comision . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       foreach ($_POST["rutaseg"] as $key => $valor) 
@@ -88,7 +89,7 @@ switch ($_POST["accion"]) {
         $monto_aseg=cambia_puntos_por_coma(estandariza_info($_POST["monto_aseg"][$key]));
         $venc_gtia=estandariza_info($_POST["venc_gtia"][$key]);
         $numero_item=estandariza_info($_POST["numero_item"][$key]);
-        $query="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', 'TBD' ,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."') 
+        $query="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', 'TBD' ,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."' ) 
         ON DUPLICATE KEY UPDATE rut_asegurado='".$rut_aseg."',dv_asegurado='".$dv_aseg."',materia_asegurada='".$materia."',patente_ubicacion='".$detalle_materia."',cobertura='".$cobertura."',deducible='".$deducible."', tasa_afecta='".$tasa_afecta."', tasa_exenta='".$tasa_exenta."', prima_afecta='".$prima_afecta."', prima_exenta='".$prima_exenta."', prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."', monto_asegurado='".$monto_aseg."', venc_gtia='".$venc_gtia."' , fecha_ultima_modificacion=CURRENT_TIMESTAMP;";
         //$query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' , fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
         mysqli_query($link, $query);
@@ -107,7 +108,7 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."')";
+        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."', '".$porcentaje_comision."' )";
         mysqli_query($link, $query);
         mysqli_query($link, 'update propuesta_polizas_2 set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
         $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
@@ -155,7 +156,6 @@ switch ($_POST["accion"]) {
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
             $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
-            $porcentaje_comsion= cambia_puntos_por_coma(estandariza_info($_POST["porcentaje_comsion"]));
             $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
             $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
             $fechadeposito= estandariza_info($_POST["fechadeposito"]);
@@ -205,7 +205,7 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO polizas_2(estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, numero_propuesta, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta) VALUES ('Activo', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."' , '".$nro_propuesta."', '".$nro_poliza."', '".$comision."', '".$porcentaje_comsion."', '".$comisionbruta."', '".$comisionneta."', '".$fechadeposito."', '".$comisionneg."', '".$boletaneg."', '".$boleta."');";
+        $query= "INSERT INTO polizas_2(estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, numero_propuesta, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta) VALUES ('Activo', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."' , '".$nro_propuesta."', '".$nro_poliza."', '".$comision."', '".$porcentaje_comision."', '".$comisionbruta."', '".$comisionneta."', '".$fechadeposito."', '".$comisionneg."', '".$boletaneg."', '".$boleta."');";
         mysqli_query($link, $query);
         $resultado = mysqli_query($link, 'select id, numero_poliza from polizas_2 where token=\'' . $token . '\';');
         while ($fila = mysqli_fetch_object($resultado))
