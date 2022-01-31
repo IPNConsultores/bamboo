@@ -7,6 +7,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     $listado='/bambooQA/listado_propuesta_polizas.php';
     $mensaje='';
+    $busqueda='';
 //Ingresar
   //Propuesta
   $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
@@ -58,6 +59,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 switch ($_POST["accion"]) {
 
   case 'rechazar_propuesta':
+    $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza rechazada correctamente';
       $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
@@ -65,6 +67,7 @@ switch ($_POST["accion"]) {
       break;
       
   case 'actualiza_propuesta': 
+    $busqueda=$nro_propuesta;
       //pendiente update
       //delete from items where numero_propuesta='P000700' and numero_item>=4
       $mensaje='Propuesta Póliza actualizada correctamente';      
@@ -101,6 +104,7 @@ switch ($_POST["accion"]) {
       break;
 
   case 'crear_propuesta':
+    $busqueda=$nro_propuesta;
     // creación propuesta
     $mensaje='Propuesta Póliza registrada correctamente';
         $id_propuesta='';
@@ -150,8 +154,9 @@ switch ($_POST["accion"]) {
       }
         break;
   case 'crear_poliza':
+    $busqueda=estandariza_info($_POST["nro_poliza"]);
         //poliza
-        $mensaje='Póliza registrada correctamente';
+        $mensaje='Póliza actualizada correctamente';
         $listado='/bambooQA/listado_polizas.php';
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
@@ -223,6 +228,7 @@ switch ($_POST["accion"]) {
     break;
 
   case 'modifica_poliza':
+    $busqueda=estandariza_info($_POST["nro_poliza"]);
       //pendiente update
       //delete from items where numero_propuesta='P000700' and numero_item>=4
       //fecha_envio_propuesta, comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta
@@ -260,7 +266,7 @@ switch ($_POST["accion"]) {
         $numero_item=estandariza_info($_POST["numero_item"][$key]);
         $query="INSERT INTO items(numero_propuesta, numero_poliza,  numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia) VALUES ('".$nro_propuesta."', '".$nro_poliza."' ,  '".(intval($key)+1)."','".$rut_aseg."','".$dv_aseg."','".$materia."','".$detalle_materia."','".$cobertura."','".$deducible."','".$tasa_afecta."','".$tasa_exenta."','".$prima_afecta."','".$prima_exenta."','".$prima_neta."','".$prima_bruta."','".$monto_aseg."','".$venc_gtia."' ) 
         ON DUPLICATE KEY UPDATE rut_asegurado='".$rut_aseg."',dv_asegurado='".$dv_aseg."',materia_asegurada='".$materia."',patente_ubicacion='".$detalle_materia."',cobertura='".$cobertura."',deducible='".$deducible."', tasa_afecta='".$tasa_afecta."', tasa_exenta='".$tasa_exenta."', prima_afecta='".$prima_afecta."', prima_exenta='".$prima_exenta."', prima_neta='".$prima_neta."', prima_bruta_anual='".$prima_bruta."', monto_asegurado='".$monto_aseg."', venc_gtia='".$venc_gtia."' , fecha_ultima_modificacion=CURRENT_TIMESTAMP;";
-        //$query='UPDATE items SET rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\' , fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
+
         mysqli_query($link, $query);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_poliza."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
       }
@@ -296,10 +302,10 @@ return $data;
 
 var mensaje= '<?php echo $mensaje; ?>';
 alert(mensaje);
-var nro_propuesta= '<?php echo $nro_propuesta; ?>';
+var busqueda= '<?php echo $busqueda; ?>';
 var listado= '<?php echo $listado; ?>';
   $.redirect(listado, {
- 'busqueda': nro_propuesta
+ 'busqueda': busqueda
 }, 'post');
 
 </script>

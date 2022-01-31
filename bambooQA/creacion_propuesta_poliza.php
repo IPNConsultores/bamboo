@@ -1867,7 +1867,7 @@ function vencimientogarantia(){
         case 'modifica_poliza': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
           //$.redirect('/bambooQA/test_felipe2.php', { 
-            'accion': 'crear_poliza',
+            'accion': 'modifica_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
