@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
             //poliza
-            $resultado_poliza=mysqli_query($link, 'SELECT id, compania, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura, rut_proponente, rut_asegurado FROM polizas where id='.$busqueda.' order by compania, numero_poliza;');
+            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, a.numero_poliza, rut_proponente, b.rut_asegurado FROM polizas_2 as a left join items as b on a.numero_poliza=b.numero_poliza where a.id='.$busqueda.' order by compania, a.numero_poliza;');
 
             While($row=mysqli_fetch_object($resultado_poliza))
                 {
@@ -67,13 +67,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $compania = $row->compania;
                     $vigencia_final= $row->vigencia_final;
                     $poliza= $row->numero_poliza;
-                    $materia_asegurada= $row->materia_asegurada;
-                    $patente_ubicacion = $row->patente_ubicacion;
-                    $cobertura = $row->cobertura;
                     $rut_proponente = $row->rut_proponente;
                     $rut_asegurado = $row->rut_asegurado;
                     $num_poliza=$num_poliza+1;
-                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza" checked disabled></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td><td>'.$materia_asegurada.'</td><td>'.$patente_ubicacion.'</td></tr>'."<br>";        
+                    $tabla_poliza=$tabla_poliza.'<tr><td>'.$num_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_poliza" checked disabled></td><td>'.$poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td></tr>'."<br>";        
                 }     
         //cliente
         $resultado=mysqli_query($link, 'SELECT id, concat_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \',nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -261,8 +258,6 @@ echo '<style>.info_clientes { display:none;}</style>';
                         <th>Compañia</th>
                         <th>Cobertura</th>
                         <th>Vigencia Final</th>
-                        <th>Materia Asegurada</th>
-                        <th>Observaciones materia asegurada</th>
                     </thead>
                 </tr>
                 <tbody>
