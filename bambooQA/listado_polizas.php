@@ -375,7 +375,7 @@ function format(d) {
         '<td>' +
         '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
         '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_poliza + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
         '</td>' +
@@ -403,6 +403,11 @@ function botones(id, accion, base) {
             break;
         }
         case "tarea": {
+            if (base == 'poliza') {
+                $.redirect('/bambooQA/creacion_actividades.php', {
+                    'id_poliza': id
+                }, 'post');
+            }
             if (base == 'cliente') {
                 $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_cliente': id
@@ -439,7 +444,7 @@ function botones(id, accion, base) {
         case "correo": {
             if (base == 'propuesta'){
                 $.redirect('/bambooQA/template_poliza.php', {
-                    'id_propuesta': id
+                    'id_poliza': id
                 }, 'post');
             }
             break;
