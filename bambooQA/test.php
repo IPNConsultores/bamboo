@@ -799,3 +799,4 @@ var table = $('#listado_polizas').DataTable({
 		
 
 </script>
+UPDATE polizas_2 SET fecha_propuesta='2022-01-24', rut_proponente='16366433', dv_proponente='K', compania='Axa Assistance',vigencia_inicial='2022-10-25',vigencia_final='2022-12-07',ramo='ASISTENCIA EN VIAJE',moneda_poliza='UF',vendedor='Felipe',forma_pago='Contado',moneda_valor_cuota='USD',valor_cuota='153.0000',fecha_primera_cuota='2022-10-10',nro_cuotas='2 Cuotas',comentarios_int='Comentarios Internos',comentarios_ext='Comentarios Externos',porcentaje_comision='30.0000' , fecha_envio_propuesta='' , comision='1.3100' , comision_bruta='31448.0000' , comision_neta='28303.0000' , depositado_fecha='2022-12-10' , comision_negativa='0.0000', boleta_negativa='' , numero_boleta='14' WHERE numero_poliza='852849'
