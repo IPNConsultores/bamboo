@@ -2,15 +2,16 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-$camino='crear_propuesta';
+$camino='crear_poliza_web';
 
-//$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'modifica_poliza';
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'crear_poliza_web';
 //$_POST["numero_propuesta"]='P000704';
-//$_POST["numero_poliza"]='852849';
-    if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza'))
+
+  if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
     {
       $camino = $_POST["accion"];
+     
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
@@ -184,6 +185,10 @@ function estandariza_info( $data ) {
     <br>
   </p>
 </div>
+<div id=titulo4 style="display:none">
+  <p>Póliza Web / Creación
+  </p>
+</div>
 <div class="form-row">
 <div class="col" id="botones_edicion" style="display:none ;align-items: center;">
   <button type="button" class="btn btn-second" id="edicion1" onclick="habilitaedicion1()"
@@ -318,8 +323,10 @@ function estandariza_info( $data ) {
                 <label for="seguimiento">Fecha Ingreso Propuesta:&nbsp;</label>
                 <label style="color: darkred">*</label>
                 <div class="md-form">
-                  <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
+                   <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
                       class="form-control"  oninput="valida_vencimiento()" max= "9999-12-31" required>
+                       <input placeholder="Selected date" type="text" name="fechaprop2" id="fechaprop2" value="No Aplica"
+                                        class="form-control" max= "9999-12-31" readonly>
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -1599,6 +1606,22 @@ console.log(orgn);
             }
             break;
           }
+          case 'crear_poliza_web':{
+            console.log('Crear Póliza Web');
+
+            document.getElementById("contenedor_nro_propuesta").style.display = "inline";
+            document.getElementById("titulo1").style.display = "none";
+            document.getElementById("titulo4").style.display = "flex";
+            document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("nro_poliza").required = true;
+            document.getElementById("nro_propuesta").value = "WEB";
+            document.getElementById("fechaprop").style.display = "none";
+            document.getElementById("fechaprop2").style.display = "flex";
+            
+            
+            break;
+          }
+          
           default:{
             break;
           }
@@ -1811,7 +1834,7 @@ function vencimientogarantia(){
           }, 'post');
         break;
       }
-      case 'crear_poliza': {
+        case 'crear_poliza': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
           //$.redirect('/bambooQA/test_felipe2.php', { 
             'accion': 'crear_poliza',
@@ -1924,12 +1947,68 @@ function vencimientogarantia(){
           }, 'post');
           break;
       }
+    
+      case 'crear_poliza_web': {
+        console.log("poliza_web");
+        
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe2.php', { 
+            'accion': 'crear_poliza_web',
+          //Propuesta
+          'rutprop': document.getElementById("rutprop").value,
+          'fechaprop': document.getElementById("fechaprop").value,
+          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
+          'fechainicio': document.getElementById("fechainicio").value,
+          'fechavenc': document.getElementById("fechavenc").value,
+          'moneda_poliza': document.getElementById("moneda_poliza").value,
+          'selcompania': document.getElementById("selcompania").value, 
+          'ramo': document.getElementById("ramo").value, 
+          'comentarios_int': document.getElementById("comentarios_int").value,
+          'comentarios_ext': document.getElementById("comentarios_ext").value,  
+          'nombre_vendedor': document.getElementById("nombre_vendedor").value,
+          'forma_pago': document.getElementById("modo_pago").value,
+          'valor_cuota': document.getElementById("valorcuota").value,
+          'nro_cuotas': document.getElementById("cuotas").value,
+          'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
+          'fecha_primera_cuota': document.getElementById("fechaprimer").value,
+          'contador_items':contador,
+          //Ítem
+          'rutaseg':  rutaseg,
+          'materia': materia,
+          'detalle_materia': detalle_materia,
+          'cobertura': cobertura,
+          'deducible': deducible,
+          'tasa_afecta': tasa_afecta,
+          'tasa_exenta': tasa_exenta,
+          'prima_afecta': prima_afecta,
+          'prima_exenta': prima_exenta,
+          'prima_neta': prima_neta,
+          'prima_bruta': prima_bruta,
+          'monto_aseg': monto_aseg,
+          'venc_gtia': venc_gtia,
+          'numero_item':numero_item,
+
+          
+          //Póliza
+          'nro_poliza': document.getElementById("nro_poliza").value,
+          'comision': document.getElementById("comision").value,
+          'porcentaje_comsion': document.getElementById("porcentaje_comsion").value,
+          'comisionbruta': document.getElementById("comisionbruta").value,
+          'comisionneta': document.getElementById("comisionneta").value,
+          'fechadeposito': document.getElementById("fechadeposito").value,
+          'comisionneg': document.getElementById("comisionneg").value,
+          'boletaneg': document.getElementById("boletaneg").value,
+          'boleta': document.getElementById("boleta").value
+          }, 'post');
+          break;
 
       }
    
     }
-  }
     
+   }
+  }
+  
  function valida_vencimiento(){
      
      
