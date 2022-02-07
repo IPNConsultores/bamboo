@@ -2,10 +2,10 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-$camino='crear_poliza_web';
+$camino='crear_propuesta';
 
-$_SERVER[ "REQUEST_METHOD" ] = "POST";
-$_POST["accion"] = 'crear_poliza_web';
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'crear_poliza_web';
 //$_POST["numero_propuesta"]='P000704';
 
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
