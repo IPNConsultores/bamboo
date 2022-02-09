@@ -326,7 +326,7 @@ function estandariza_info( $data ) {
                    <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
                       class="form-control"  oninput="valida_vencimiento()" max= "9999-12-31" required>
                        <input placeholder="Selected date" type="text" name="fechaprop2" id="fechaprop2" value="No Aplica"
-                                        class="form-control" max= "9999-12-31" readonly>
+                                        class="form-control" max= "9999-12-31" style="display:none;" readonly>
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -1536,6 +1536,7 @@ console.log(orgn);
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo3").style.display = "flex";
@@ -1958,6 +1959,7 @@ function vencimientogarantia(){
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
           'fechainicio': document.getElementById("fechainicio").value,
+          'numero_propuesta': 'WEB', //automàtica
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
           'selcompania': document.getElementById("selcompania").value, 
