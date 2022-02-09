@@ -12,7 +12,7 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
-$num_cliente=$num_poliza=0;
+$num_cliente=$num_poliza=$num_prop_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
  $tarea=$fecha_vencimiento=$recurrente=$tarea_con_fecha_fin=$fecha_fin='';
  $rut=$nombre=$telefono=$correo=$tabla_clientes=$tabla_poliza=$dia_recordatorio=$prioridad=$tipo_tarea='';
@@ -152,8 +152,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }
         
-}
-}
+
+        }
+
+    }
+// Viene desde propuesta
+    if(!empty(trim($_POST["id_propuesta"]))){
+        $busqueda=$_POST["id_propuesta"];
+        mysqli_set_charset( $link, 'utf8');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+            //poliza
+            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
+
+            While($row=mysqli_fetch_object($resultado_poliza))
+                {
+                    $id= $row ->id;
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $propuesta_poliza= $row->numero_propuesta;
+                    $rut_proponente = $row->rut_proponente;
+                    $rut_asegurado = $row->rut_asegurado;
+                    $num_prop_poliza=$num_prop_poliza+1;
+                    $tabla_propuesta_poliza=$tabla_propuesta_poliza.'<tr><td>'.$num_prop_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_propuesta" checked disabled></td><td>'.$propuesta_poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td></tr>'."<br>";        
+                }     
+        //cliente
+        $resultado=mysqli_query($link, 'SELECT id, concat_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \',nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
+        While($row=mysqli_fetch_object($resultado))
+            {
+                $rut=$row->rut;
+                $id=$row->id;
+                $nombre=$row->nombre;
+                $telefono=$row->telefono;
+                $correo=$row->correo;
+                $num_cliente=$num_cliente+1;
+                $rutsindv=estandariza_info(substr(str_replace("-", "", $rut), 0, strlen(str_replace("-", "", $rut))-1));
+                $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente"></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
+            }       
+        mysqli_close($link);
+    }
 else {    
 echo '<style>.info_clientes { display:none;}</style>';
 }
@@ -262,6 +298,29 @@ echo '<style>.info_clientes { display:none;}</style>';
                 </tr>
                 <tbody>
                     <?php echo $tabla_poliza; ?>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        </div>
+    <div id="cuadro_propuesta_poliza">
+        <label id = "titulo_propuesta" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>"> Datos propuesta póliza
+            Asociada <em>(Opcional)</em></label>
+        <br style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
+            <div class="form-row" style="<?php if ($_SERVER["REQUEST_METHOD"] <> "POST") { echo 'display:none;'; } ?>">
+            <table name="tabla_propuesta_polizas" id="tabla_propuesta_polizas" class="table table-striped">
+                <tr>
+                    <thead>
+                        <th>#</th>
+                        <th>Seleccionar propuesta</th>
+                        <th>Número Propuesta</th>
+                        <th>Compañia</th>
+                        <th>Cobertura</th>
+                        <th>Vigencia Final</th>
+                    </thead>
+                </tr>
+                <tbody>
+                    <?php echo $tabla_propuesta_poliza; ?>
                 </tbody>
             </table>
         </div>
@@ -485,6 +544,14 @@ function post() {
             coma = ',';
         }
     }
+    var propuestas = document.getElementsByName('check_propuesta');
+    for (var j = 0; j < propuestas.length; j++) {
+        if (propuestas[j].type == 'checkbox' && propuestas[j].checked == true)
+        {
+            arreglo += coma + ' {"id":"' + propuestas[j].getAttribute('id') + '","base":"propuestas"}';
+            coma = ',';
+        }
+    }
 
     arreglo += ']';
     ///bambooQA/backend/actividades/crea_tarea.php
@@ -606,6 +673,7 @@ $(document).ready(function() {
     
     var num_cliente ='<?php echo $num_cliente; ?>';
     var num_poliza ='<?php echo $num_poliza; ?>';
+    var num_prop_poliza ='<?php echo $num_prop_poliza; ?>';
     
     if(num_cliente == "0"){
         
@@ -618,8 +686,12 @@ $(document).ready(function() {
        document.getElementById('cuadro_poliza').style.display = "none";
        document.getElementById('titulo_poliza').style.display = "none";
     }
-    
-        if(num_poliza == "0" && num_cliente == "0" ){
+     if(num_prop_poliza == "0"){
+        
+       document.getElementById('cuadro_propuesta_poliza').style.display = "none";
+       document.getElementById('titulo_propuesta').style.display = "none";
+    }    
+    if(num_poliza == "0" && num_cliente == "0" ){
         
        document.getElementById('titulo_actividad').style.display = "none";
      

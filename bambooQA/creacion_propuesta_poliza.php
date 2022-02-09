@@ -537,7 +537,7 @@ function estandariza_info( $data ) {
                 </select>
                 <select class="form-control" name="cuotas" id="cuotas" style="width:42%;" required>
                   <option value="">Nro Cuotas</option>
-                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Contado") echo "selected" ?>>Sin Cuotas</option>
+                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Sin cuotas") echo "selected" ?>>Sin Cuotas</option>
                   <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
                   <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
                   <option value="4 Cuotas"

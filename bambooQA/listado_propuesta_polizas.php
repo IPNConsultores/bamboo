@@ -424,16 +424,9 @@ function botones(id, accion, base) {
             break;
         }
         case "tarea": {
-            if (base == 'cliente') {
-                $.redirect('/bambooQA/creacion_actividades.php', {
-                    'id_cliente': id
-                }, 'post');
-            }
-            if (base == 'propuesta'){
                 $.redirect('/bambooQA/creacion_actividades.php', {
                     'id_propuesta': id
                 }, 'post');
-            }
             break;
         }
         case "info": {
