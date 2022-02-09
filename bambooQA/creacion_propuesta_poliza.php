@@ -1957,7 +1957,6 @@ function vencimientogarantia(){
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
-          'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
           'fechainicio': document.getElementById("fechainicio").value,
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
