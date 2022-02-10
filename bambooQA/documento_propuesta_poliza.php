@@ -1,8 +1,4 @@
-<?php
-    $_POST["accion"]='generar_documento';
-    $_SERVER[ "REQUEST_METHOD" ] = "POST";
-    $_POST["numero_propuesta"]="P000708";
-    
+<?php    
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -307,7 +303,7 @@
                         <label  class = "text-right" >Comuna:</label> 
                     </div>
                     <div class="col" contenteditable="true" >       
-                        <input type="tel" placeholder="Ingresar Comuna">
+                        <input type="tel" placeholder="ingresar comuna">
                         <br>
                     </div>
                     <div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">       
@@ -315,7 +311,7 @@
                         <br>
                     </div>
                     <div class="col" contenteditable="true">       
-                        <input type="tel" placeholder="Ingresar Ciudad">
+                        <input type="tel" placeholder="ingresar ciudad">
                         <br>
                     </div>
                     <div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">       
@@ -323,7 +319,7 @@
                         <br>
                     </div>
                         <div class="col" contenteditable="true">       
-                        <input type="tel" placeholder="Ingresar Region">
+                        <input type="tel" placeholder="ingresar región">
                         <br>
                     </div>
                 </div>
@@ -517,7 +513,7 @@
                         <label>Día de Pago:</label> 
                     </div>
                     <div class="col-3" style="text-align:left"contenteditable="true">       
-                        <input type="tel" placeholder="Dia de pago:">
+                        <input type="tel" placeholder="día de pago:">
                         <br>
                     </div>
                     
@@ -679,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<label>Comuna:</label>'+ 
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="Ingresar Comuna">'+
+                            '<input type="tel" placeholder="ingresar comuna">'+
                             '<br>'+
                         '</div>'+
                         '<div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+       
@@ -687,7 +683,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<br>'+
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="Ingresar Ciudad">'+
+                            '<input type="tel" placeholder="ingresar ciudad">'+
                             '<br>'+
                         '</div>'+
                         '<div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+       
@@ -695,7 +691,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<br>'+
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="Ingresar Region">'+
+                            '<input type="tel" placeholder="ingresar región">'+
                             '<br>'+
                         '</div>'+
                     '</div>'+

@@ -309,7 +309,7 @@ function format(d) {
         botones='<td>Acciones</td>' +
         '<td>' +
         '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
-        '<button title="WIP Generar Propuesta" type="button" id=' + d.id_poliza + ' name="generar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="WIP Buscar información asociada" type="button" id=' + d.id_poliza + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="WIP Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
@@ -443,10 +443,9 @@ function botones(id, accion, base) {
             }, 'post');
             break;
         }
-        case "generar": {
-            $.redirect('/bambooQA/resumen2.php', {
-                'id': id,
-                'base': base
+        case "generar_documento": {
+            $.redirect('/bambooQA/documento_propuesta_poliza.php', {
+                'numero_propuesta': id
             }, 'post');
             break;
         }
