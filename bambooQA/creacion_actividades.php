@@ -99,16 +99,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             case 'individual':
                 $resultado_tarea=mysqli_query($link, 'SELECT a.id, a.tarea, a.estado, a.prioridad, a.fecha_vencimiento FROM tareas as a where a.id='.$busqueda);
                 $query_poliza="SELECT b.id, b.compania, b.vigencia_final, b.numero_poliza, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.rut_proponente, b.rut_asegurado FROM tareas_relaciones as a left join polizas as b on a.id_relacion=b.id where a.base='polizas' and a.id_tarea=".$busqueda;    
+                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta"; 
                 $query_cliente="SELECT b.id, concat_ws('-',b.rut_sin_dv, b.dv) as rut, concat_ws(' ', b.nombre_cliente,  b.apellido_paterno,  b.apellido_materno) as nombre , b.telefono, b.correo  FROM tareas_relaciones as a left join clientes as b on a.id_relacion=b.id where a.base='clientes' and a.id_tarea=".$busqueda;
                 break;
             case 'recurrente':
                 $resultado_tarea=mysqli_query($link, 'SELECT id, tarea, estado, prioridad, recurrente, tarea_con_fecha_fin, fecha_fin, dia_recordatorio FROM tareas_recurrentes where id='.$busqueda);
                 $query_poliza="SELECT b.id, b.compania, b.vigencia_final, b.numero_poliza, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.rut_proponente, b.rut_asegurado FROM tareas_relaciones as a left join polizas as b on a.id_relacion=b.id where a.base='polizas' and a.id_tarea_recurrente=".$busqueda;    
+                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea_recurrente='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta";
                 $query_cliente="SELECT b.id, concat_ws('-',b.rut_sin_dv, b.dv) as rut, concat_ws(' ', b.nombre_cliente,  b.apellido_paterno,  b.apellido_materno) as nombre , b.telefono, b.correo  FROM tareas_relaciones as a left join clientes as b on a.id_relacion=b.id where a.base='clientes' and a.id_tarea_recurrente=".$busqueda;
                 break;
         }
-            
-            While($row=mysqli_fetch_object($resultado_tarea))
+
+        While($row=mysqli_fetch_object($resultado_tarea))
                 {
                     $id_tarea= $row->id;
                     $tarea= $row->tarea;
@@ -124,7 +126,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          //poliza
             $resultado_poliza=mysqli_query($link, $query_poliza);
 
-            While($row=mysqli_fetch_object($resultado_poliza))
+        While($row=mysqli_fetch_object($resultado_poliza))
                 {
                     $id= $row ->id;
                     $compania = $row->compania;
@@ -152,8 +154,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $tabla_clientes=$tabla_clientes.'<tr><td>'.$num_cliente.'</td><td><input type="checkbox" id="'.$id.'" name="check_cliente" checked disabled></td><td>'.$rut.'</td><td>'.$nombre.'</td><td>'.$telefono.'</td><td>'.$correo.'</td></tr>'."<br>";        
             }
         
-
-        }
+        //propuesta
+        $resultado_prop=mysqli_query($link, $query_propuesta_poliza);
+            While($row=mysqli_fetch_object($resultado_prop))
+                {
+                    $id= $row ->id;
+                    $compania = $row->compania;
+                    $vigencia_final= $row->vigencia_final;
+                    $propuesta_poliza= $row->numero_propuesta;
+                    $rut_proponente = $row->rut_proponente;
+                    $rut_asegurado = $row->rut_asegurado;
+                    $ramo=$row->ramo;
+                    $num_prop_poliza=$num_prop_poliza+1;
+                    $tabla_propuesta_poliza=$tabla_propuesta_poliza.'<tr><td>'.$num_prop_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_propuesta" checked disabled></td><td>'.$propuesta_poliza.'</td><td>'.$compania.'</td><td>'.$ramo.'</td><td>'.$vigencia_final.'</td></tr>'."<br>";        
+                } 
 
     }
 // Viene desde propuesta
@@ -162,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
             //poliza
-            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
+            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, ramo, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
 
             While($row=mysqli_fetch_object($resultado_poliza))
                 {
@@ -172,8 +186,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $propuesta_poliza= $row->numero_propuesta;
                     $rut_proponente = $row->rut_proponente;
                     $rut_asegurado = $row->rut_asegurado;
+                    $ramo = $row->ramo;
                     $num_prop_poliza=$num_prop_poliza+1;
-                    $tabla_propuesta_poliza=$tabla_propuesta_poliza.'<tr><td>'.$num_prop_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_propuesta" checked disabled></td><td>'.$propuesta_poliza.'</td><td>'.$compania.'</td><td>'.$cobertura.'</td><td>'.$vigencia_final.'</td></tr>'."<br>";        
+                    $tabla_propuesta_poliza=$tabla_propuesta_poliza.'<tr><td>'.$num_prop_poliza.'</td><td><input type="checkbox" id="'.$id.'" name="check_propuesta" checked disabled></td><td>'.$propuesta_poliza.'</td><td>'.$compania.'</td><td>'.$ramo.'</td><td>'.$vigencia_final.'</td></tr>'."<br>";        
                 }     
         //cliente
         $resultado=mysqli_query($link, 'SELECT id, concat_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \',nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  rut_sin_dv in ('.$rut_proponente.' , '.$rut_asegurado.') ORDER BY apellido_paterno ASC, apellido_materno ASC;');
@@ -190,6 +205,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }       
         mysqli_close($link);
     }
+}
 else {    
 echo '<style>.info_clientes { display:none;}</style>';
 }
@@ -315,7 +331,7 @@ echo '<style>.info_clientes { display:none;}</style>';
                         <th>Seleccionar propuesta</th>
                         <th>Número Propuesta</th>
                         <th>Compañia</th>
-                        <th>Cobertura</th>
+                        <th>Ramo</th>
                         <th>Vigencia Final</th>
                     </thead>
                 </tr>
