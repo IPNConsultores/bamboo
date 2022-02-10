@@ -445,7 +445,8 @@ function botones(id, accion, base) {
         }
         case "generar_documento": {
             $.redirect('/bambooQA/documento_propuesta_poliza.php', {
-                'numero_propuesta': id
+                'numero_propuesta': id,
+                'accion': accion
             }, 'post');
             break;
         }

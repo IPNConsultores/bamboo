@@ -184,15 +184,20 @@
     <div class="row" style="float:center; align:middle">
         <div class="col-1"></div>
                 <div class="col" style="float: center;vertical-align: middle; border-style :solid; border-color: grey; border-width: 2px; border-right-width: 0px; border-bottom-width:1px">
-                     <div class="col" style="text-align: center ">
+                <div class="row">
+        <div class="col">
                         <p><img src="/bambooQA/images/logo_bamboo _verde.png" width="150" class="img-fluid" style="float: center;vertical-align: middle "></p>
+            </div>
+            <div class="col" style="vertical-align:middle;">
+    
                        <figure class="text-center">
                         <blockquote class="blockquote">
                              <p><b>Propuesta de Póliza</b></p>
                         </blockquote>
   
                         </figure>
-                     </div>
+         </div>
+    </div>
                     
                 </div>
                  <div class="col-4" style="border-style :solid; border-color: grey; border-width: 2px; border-bottom-width:1px;border-left-width:1px;  ">
@@ -513,7 +518,7 @@
                         <label>Día de Pago:</label> 
                     </div>
                     <div class="col-3" style="text-align:left"contenteditable="true">       
-                        <input type="tel" placeholder="día de pago:">
+                        <input type="tel" placeholder="día de pago">
                         <br>
                     </div>
                     
