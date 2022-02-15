@@ -37,6 +37,7 @@ foreach (array_keys($_POST['nombrecontact']) as $key) {
   $vacio = "";
   $borrar2=  "DELETE from clientes_contactos  WHERE id_cliente=".$id." and nombre='".$vacio."';";
 mysqli_query($link,$borrar2);
+mysqli_close($link);
 /*
 ECHO "<br>".$borrar;
 ECHO "<br>".$borrar2;

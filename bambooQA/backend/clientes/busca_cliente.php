@@ -29,7 +29,7 @@ While($row=mysqli_fetch_object($resultado))
    $nombre=$row["nombre"];
    echo $rut." - ".$nombre."<br>";
 }
-
+mysqli_close($link);
 function estandariza_info($data) {
     $data = trim($data);
     $data = stripslashes($data);

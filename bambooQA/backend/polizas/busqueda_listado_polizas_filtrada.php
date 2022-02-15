@@ -135,6 +135,7 @@ $resultado=mysqli_query($link, $sql);
     ));}
   }
   $codigo.=']}';
+  mysqli_close($link);
   echo $codigo;
   /*
 [4][1]-> "ramo" =>& $row->ramo, 

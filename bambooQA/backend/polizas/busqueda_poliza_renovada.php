@@ -25,5 +25,6 @@ $id_renovada=$_GET[ "id_a_renovar" ];
   }
 
   $codigo.=']}';
+  mysqli_close($link);
   echo $codigo;
 ?>

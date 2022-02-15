@@ -40,6 +40,7 @@ While($row2=mysqli_fetch_object($resultado2))
       array_push($ramo,$row2->ramo );
       array_push($cantidad,$row2->cantidad );
   }
+  mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="es">

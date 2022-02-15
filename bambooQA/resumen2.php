@@ -86,7 +86,7 @@ switch ($base) {
                 } 
         break;
 }
-
+mysqli_close($link);
 }
 ?>
 <!DOCTYPE html>

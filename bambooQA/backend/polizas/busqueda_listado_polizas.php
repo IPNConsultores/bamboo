@@ -118,6 +118,7 @@ $resultado=mysqli_query($link, $sql);
         }
     }
   $codigo.=']}';
+  mysqli_close($link);
   echo $codigo;
 
 ?>

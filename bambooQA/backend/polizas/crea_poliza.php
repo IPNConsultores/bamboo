@@ -81,6 +81,7 @@ function estandariza_info($data) {
 function cambia_puntos_por_coma($data){
   //$data=str_replace('.','',$data);
 $data=str_replace(',','.',$data);
+mysqli_close($link);
 return $data;
 }
 ?>

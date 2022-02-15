@@ -12,6 +12,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
     mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
     $query = "update polizas set tipo_poliza='Renovada' where id=" . $id_poliza;
     $resultado = mysqli_query( $link, $query );
+    mysqli_close($link);
   } else {
     $camino = 'modificar';
   }
@@ -79,7 +80,7 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_poliza" ]) ==
     $motivo_cancela = $row->motivo_cancela;
     $item = $row->item;
   }
-
+  mysqli_close($link);
 }
 
 

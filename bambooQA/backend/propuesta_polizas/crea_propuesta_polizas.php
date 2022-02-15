@@ -383,6 +383,7 @@ return $data;
 <script >
 
 var mensaje= '<?php echo $mensaje; ?>';
+mysqli_close($link);
 alert(mensaje);
 var busqueda= '<?php echo $busqueda; ?>';
 var listado= '<?php echo $listado; ?>';

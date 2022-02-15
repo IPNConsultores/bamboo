@@ -22,6 +22,7 @@ While($row=mysqli_fetch_object($resultado))
         $direccionl=$row->direccion_laboral;
         $correo=$row->correo;
    }
+   mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="es">

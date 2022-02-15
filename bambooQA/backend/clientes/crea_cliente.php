@@ -34,7 +34,7 @@ mysqli_query($link, $query);
    
     //echo "INSERT INTO clientes_contactos (id_cliente,indice, nombre, telefono, correo) select id , '".$nombrecontact."', '".$key."',, '".$telefonocontact."', '".$emailcontact."' from clientes where rut_sin_dv='".$rut."';";
   }
-
+  mysqli_close($link);
 
 //echo '<script type="text/javascript">
 //redirige('.$rut.');

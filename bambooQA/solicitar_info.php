@@ -66,6 +66,7 @@ $template = str_replace( '_[SU_ini]_', '', $template );
 $template = str_replace( '_[SU_fin]_', '', $template );
 $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destinatario&su=$subject&body=$body" );
 }
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>

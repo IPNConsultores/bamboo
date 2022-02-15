@@ -81,6 +81,7 @@ switch ($_POST["accion"]) {
        mysqli_query($link, $query);
        mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza póliza', '".str_replace("'","**",$query)."','poliza',".$_POST["id_poliza"].", '".$_SERVER['PHP_SELF']."')");
          break;
+ mysqli_close($link);
  echo $query;
 }
 

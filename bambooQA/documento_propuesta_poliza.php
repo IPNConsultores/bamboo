@@ -69,7 +69,7 @@
             }
         }
     }
-
+    mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="es">

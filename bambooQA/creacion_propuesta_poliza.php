@@ -66,6 +66,7 @@ $camino='crear_propuesta';
             }
         }
     }
+      mysqli_close($link);
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'modifica_poliza')
     {
       $camino = $_POST["accion"];
@@ -133,6 +134,7 @@ $camino='crear_propuesta';
             }
         }
     }
+    mysqli_close($link);
 function estandariza_info( $data ) {
   $data = trim( $data );
   $data = stripslashes( $data );

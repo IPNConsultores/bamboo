@@ -56,7 +56,7 @@ switch ($_POST["accion"]) {
         break;
  echo $query;
 }
-
+mysqli_close($link);
 
 function estandariza_info($data) {
   $data = trim($data);

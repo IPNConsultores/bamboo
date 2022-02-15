@@ -66,5 +66,6 @@ $sql = "SELECT CONCAT_WS('-',rut_sin_dv, dv) as rut, apellido_paterno, concat_ws
     );}
   }
   $codigo.=']}';
+  mysqli_close($link);
   echo $codigo;
 ?>

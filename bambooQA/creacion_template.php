@@ -51,7 +51,7 @@ $camino =  $_POST[ "tipo" ];
       }
       break;
   }
-
+  mysqli_close($link);
 
   $template_ejemplo = $template;
   $template_ejemplo = str_replace( '_[NOMBRE_CLIENTE]_', 'Juan Pérez', $template_ejemplo );
