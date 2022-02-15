@@ -62,7 +62,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
                    <tr>
                     <th></th>
                     <th>Estado</th>
-                    <th>N° Propuesta</th>
                     <th>Tipo propuesta</th>
                     <th>Fecha Envío Propuesta</th>
                     <th>Inicio Vigencia</th>
@@ -138,10 +137,6 @@ $(document).ready(function() {
                 title: "Nro Propuesta",
             }, //2
             {
-                "data": "tipo_propuesta",
-                title: "Tipo propuesta"
-            }, //3
-            {
                 "data": "fecha_envio_propuesta",
                 title: "Fecha Envío Propuesta"
             }, //3
@@ -155,7 +150,7 @@ $(document).ready(function() {
             }, //5
                         {
                 "data": "compania",
-                title: "Tipo Propuesta"
+                title: "Compañia"
             }, //6
             {
                 "data": "ramo",
@@ -220,7 +215,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [4,5,6],
+        targets: [4,5,3],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")
@@ -488,7 +483,7 @@ function botones(id, accion, base) {
      }
   
      return data;
- }
+ } 
   
  var searchType = jQuery.fn.DataTable.ext.type.search;
   
