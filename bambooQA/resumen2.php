@@ -137,6 +137,12 @@ mysqli_close($link);
                 <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab"
                     aria-controls="nav-tarea_rec" aria-selected="false" style="color: grey;border-color:#dee2e6"
                     onclick="cambiacolor(this.id)">Tarea Recurrente</a>
+                <a class="nav-item nav-link" id="listado_prop" data-toggle="tab" href="#nav-listado" role="tab"
+                    aria-controls="nav-listado" aria-selected="false" style="color: grey;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Listado Propuestas</a>
+                <a class="nav-item nav-link" id="listado_endo" data-toggle="tab" href="#nav-listado_endo" role="tab"
+                    aria-controls="nav-listado_endo" aria-selected="false" style="color: grey;border-color:#dee2e6"
+                    onclick="cambiacolor(this.id)">Listado endozos</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -263,6 +269,60 @@ mysqli_close($link);
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table class="table" id="listado_propuestas" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>Estado</th>
+                                <th>Nro_Propuesta</th>
+                                <th>Tipo_propuesta</th>
+                                <th>Fecha_envio_propuesta</th>
+                                <th>Vigencia_inicio</th>
+                                <th>Vigencia_termino</th>
+                                <th>Tipo_propuesta</th>
+                                <th>Moneda_poliza</th>
+                                <th>proponente</th>
+                                <th>Rut_proponente</th>
+                                <th>Grupo</th>
+                                <th>Referido</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <div id="botones_tareas_recurrentes"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-listado_endo" role="tabpanel" aria-labelledby="nav-listado_endo-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <table class="table" id="listado_propuestas_endo" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th>Estado</th>
+                                <th>nro_de_poliza</th>
+                                <th>vigencia_inicio</th>
+                                <th>vigencia_termino</th>
+                                <th>compañia</th>
+                                <th>ramo</th>
+                                <th>proponente</th>
+                                <th>rut_proponente</th>
+                                <th>grupo</th>
+                                <th>referido</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <div id="botones_tareas_recurrentes"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
             <br>
@@ -312,6 +372,13 @@ function cambiacolor(id) {
     document.getElementById("tarea_rec").style.backgroundColor = "white"
     document.getElementById("tarea_rec").style.color = "grey"
     document.getElementById("tarea_rec").style.borderColor = "#dee2e6"
+    document.getElementById("listado_prop").style.backgroundColor = "white"
+    document.getElementById("listado_prop").style.color = "grey"
+    document.getElementById("listado_prop").style.borderColor = "#dee2e6"
+    document.getElementById("listado_endo").style.backgroundColor = "white"
+    document.getElementById("listado_endo").style.color = "grey"
+    document.getElementById("listado_endo").style.borderColor = "#dee2e6"
+    
     document.getElementById(id).style.backgroundColor = "#536656"
     document.getElementById(id).style.color = "white"
 }
