@@ -61,11 +61,17 @@ switch ($_POST["accion"]) {
   case 'rechazar_propuesta':
     $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza rechazada correctamente';
-      $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
+      $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP, motivo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
-      
+  case 'eliminar_propuesta':
+    $busqueda=$nro_propuesta;
+    $mensaje='Propuesta Póliza eliminada correctamente';
+      $query= "delete from propuesta_polizas_2 where numero_propuesta='".$nro_propuesta."';";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+      break;      
   case 'actualiza_propuesta': 
     $busqueda=$nro_propuesta;
       //pendiente update

@@ -308,13 +308,14 @@ function format(d) {
     if (d.estado=='Pendiente'){
         botones='<td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-check"></i></button><a> </a>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-thumbs-down"></i></button>' +
         '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="WIP Buscar información asociada" type="button" id=' + d.id_propuesta + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="Asignar tarea"  type="button" id=' + d.id_propuesta +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_propuesta + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '<button style="background-color: #FF0000" title="Eliminar propuesta"  type="button" id=' + d.numero_propuesta + ' name="eliminar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -407,7 +408,21 @@ function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
         case "rechazar_propuesta": {
+                var motivo = window.prompt('Ingresa el motivo del rechazo', '');
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
+                
+                if (r2 == true) {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_propuesta': id,
+                    'accion':accion,
+                    'motivo':motivo
+                }, 'post');
+                }
+            break;
+        }
+        case "eliminar_propuesta": {
+                var r2 = confirm("Estás a punto de eliminar esta propuesta de póliza ¿Deseas continuar?");
+                //eliminar
                 if (r2 == true) {
                 $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
