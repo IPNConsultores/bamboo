@@ -377,7 +377,9 @@ function format(d) {
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Rechazar propuesta"  type="button" id=' + d.numero_poliza + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>C</i></button>' +
+        '<button style="background-color: #FF0000" title="Anular póliza"  type="button" id=' + d.id_poliza + ' name="anular_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>A</i></button>' +
+        '<button style="background-color: #FF0000" title="Rechazar póliza"  type="button" id=' + d.id_poliza + ' name="rechazar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>R</i></button>' +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -385,12 +387,36 @@ function format(d) {
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
-        case "rechazar_propuesta": {
+        case "rechazar_poliza": {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 if (r2 == true) {
                 $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_poliza.php', {
                     'numero_poliza': id,
                     'accion':accion
+                }, 'post');
+                }
+            break;
+        }
+        case "cancelar_poliza": {
+                var motivo = window.prompt('Ingresa el motivo de cancelación de póliza', '');
+                var r2 = confirm("Estás a punto de cancelar esta póliza ¿Deseas continuar?");
+                if (r2 == true) {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_poliza': id,
+                    'accion':accion,
+                    'motivo':motivo
+                }, 'post');
+                }
+            break;
+        }
+        case "anular_poliza": {
+                var motivo = window.prompt('Ingresa el motivo de anulación de póliza', '');
+                var r2 = confirm("Estás a punto de anular esta póliza ¿Deseas continuar?");
+                if (r2 == true) {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_poliza': id,
+                    'accion':accion,
+                    'motivo':motivo
                 }, 'post');
                 }
             break;
