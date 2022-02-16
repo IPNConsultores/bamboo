@@ -57,10 +57,10 @@ mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 //echo "Acción: ->".$_POST["accion"]."<-<br>";
 switch ($_POST["accion"]) {
-  case 'rechazar_poliza':
+  case 'eliminar_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
     $mensaje='Póliza rechazada correctamente';
-      $query= "update polizas_2 set estado='Rechazado', fech_cancela=CURRENT_TIMESTAMP  where id='".$busqueda."';";
+      $query= "delete from polizas_2 where id='".$busqueda."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
