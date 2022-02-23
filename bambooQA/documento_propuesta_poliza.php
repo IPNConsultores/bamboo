@@ -78,94 +78,7 @@
 
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-<script type="text/javascript">
-    
-    var nro_items=<?php echo json_encode($nro_items); ?>;
-    var idarr = [];
-    
-    for (var i = 1; i < nro_items+1 ; i++) {
-        idarr.push(`comuna_asegurado[${i}] required=`);
-        idarr.push(`ciudad_asegurado[${i}] required=`);
-        idarr.push(`region_asegurado[${i}] required=`);
-    };
-
-    window.hmtl2canvas = html2canvas;
-    window.jsPDF = window.jspdf.jsPDF;
-    
-    var id=[ "comuna" ,
-    "ciudad" ,
-    "region" , "dia_pago"];
-    
-
-    var resultado = id.concat(idarr);
-    
-
-      
-   // function chaobordes(){
-       // for (var i = 0; i < resultado.length ; i++) {
-
-          //  document.getElementById(resultado[i]).style.border="none";
-    //    }
-        
-        
-  //  }
-    
-  //  function olabordes(){
-        
-    //    for (var i = 0; i < resultado.length ; i++)
-
-           // document.getElementById(resultado[i]).style.border= "1px solid black";
-   //     }
-  //  }
-    
-    
-    
-    
-   
-    
-   
-    
-    
-    
-    function makePDF() {
-        
-       //  const captura =document.getElementById("capture");
-        // var bottom = Math.round(captura.getBoundingClientRect().bottom);
-      //   console.log(bottom)
-       // chaobordes();
-        
-
-    
-        html2canvas(document.querySelector("#capture"),{
-            
-            allowTaint:true,
-            useCORS: true,
-            scale: 1
-        }).then(canvas => {document.body.appendChild(canvas)
-            
-            var img = canvas.toDataURL("image/png");
-            var doc = new jsPDF();
-        //    pageHeight= doc.internal.pageSize.height;
-
-            
-            doc.setFont('Arial');
-            doc.getFontSize(11);
-            doc.addImage(img, 'IMG', -15,0,240,280);
-            //paginaporitem();
-            doc.save("Propuesta póliza P000XXXX");
-            
-        //olabordes();
-    });
-        
-        
-    }
-    
-
-
-
-  
-    
-</script>
+<script type="text/javascript"></script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -177,7 +90,7 @@
 <body>
     
 <div class="container" id="capture">
-    <button onclick="makePDF()" >Generar PDF</button>
+    <button id="BotonPDF" onclick="makePDF();">Generar PDF</button>
     <br>
     <br>
     <section id="section1">
@@ -308,7 +221,7 @@
                         <label  class = "text-right" >Comuna:</label> 
                     </div>
                     <div class="col" contenteditable="true" >       
-                        <input type="tel" placeholder="ingresar comuna">
+                        <input type="text" placeholder="Ingresar Comuna" class="form-inline" name="comuna" id="comuna">
                         <br>
                     </div>
                     <div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">       
@@ -316,7 +229,7 @@
                         <br>
                     </div>
                     <div class="col" contenteditable="true">       
-                        <input type="tel" placeholder="ingresar ciudad">
+                        <input type="text" placeholder="Ingresar Ciudad" class="form-inline" name="ciudad" id="ciudad">
                         <br>
                     </div>
                     <div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">       
@@ -324,7 +237,7 @@
                         <br>
                     </div>
                         <div class="col" contenteditable="true">       
-                        <input type="tel" placeholder="ingresar región">
+                        <input type="text" placeholder="Ingresar Región" class="form-inline" name="region" id="region">
                         <br>
                     </div>
                 </div>
@@ -518,7 +431,7 @@
                         <label>Día de Pago:</label> 
                     </div>
                     <div class="col-3" style="text-align:left"contenteditable="true">       
-                        <input type="tel" placeholder="día de pago">
+                        <input type="text" placeholder="Día de pago" class="form-inline" name="dia_pago" id="dia_pago">
                         <br>
                     </div>
                     
@@ -622,13 +535,38 @@
 
 </hmtl>
 
-<script type="module">
+<script>
+ function makePDF() {
+        
+      //  chaobordes();
+          NoButton();
+          NoBorder();
+        
+        html2canvas(document.querySelector("#capture"),{
+            allowTaint:true,
+            useCORS: true,
+            scale: 1
+        }).then(canvas => {document.body.appendChild(canvas)
+          var imgData = canvas.toDataURL('image/png');
+          var imgWidth = 210; 
+          var pageHeight = 295;  
+          var imgHeight = canvas.height * imgWidth / canvas.width;
+          var heightLeft = imgHeight;
+          var doc = new jsPDF('p', 'mm', 'a4');
+          var position = 0;
+          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
 
-
-    
-
-    
-
+          while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            doc.addPage();
+            doc.addImage(imgData, 'IMG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+          }
+          doc.save('<?php echo $nro_propuesta; ?>.pdf');
+          NoContainer();
+    });
+    }
 document.addEventListener("DOMContentLoaded", function(event) {
 
     document.getElementById("numero_items").innerHTML = '<?php echo $nro_items; ?>';
@@ -680,7 +618,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<label>Comuna:</label>'+ 
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="ingresar comuna">'+
+                            '<input type="text" placeholder="Ingresar Comuna" class="form-inline" name="comuna_asegurado" id="comuna_asegurado[' + i + ']">'+
                             '<br>'+
                         '</div>'+
                         '<div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+       
@@ -688,7 +626,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<br>'+
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="ingresar ciudad">'+
+                            '<input type="text" placeholder="Ingresar Ciudad" class="form-inline" name="ciudad_asegurado" id="ciudad_asegurado[' + i + ']">'+
                             '<br>'+
                         '</div>'+
                         '<div class="col-1" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+       
@@ -696,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             '<br>'+
                         '</div>'+
                         '<div class="col" contenteditable="true">'+      
-                            '<input type="tel" placeholder="ingresar región">'+
+                            '<input type="text" placeholder="Ingresar Región" class="form-inline" name="region_asegurado" id="region_asegurado[' + i + ']">'+
                             '<br>'+
                         '</div>'+
                     '</div>'+
@@ -919,10 +857,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("total_iva").innerHTML = <?php echo array_sum($prima_afecta)*0.19; ?>;
     document.getElementById("total_prima_periodo").innerHTML = <?php echo array_sum($prima_afecta)*1.19+array_sum($prima_exenta); ?>;
     
-    //document.getElementById("rut[1]").innerHTML = '< ?php echo $rut_completo_aseg[0]; ?>';
-
-    
-// console.log('rut desde el arreglo: -> '+ '<?php echo json_encode($rut_completo_aseg); ?>')
 
     
     //agregar ítems 
@@ -948,7 +882,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var porcentaje_comision=<?php echo json_encode($porcentaje_comision); ?>;
     
     
-   // console.log(contador + 'total items: ' +'<?php echo $nro_items; ?>' )
+   
     
     //validación inicial de cantidad de ítems 
     if('<?php echo $nro_items; ?>'=='1'){ 
@@ -990,11 +924,65 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
        // document.getElementById("Prima_con_IVA_vigencia["+contador.toString()+"]").innerHTML = wtf[contador.toString()-1];
      
-       
-
         contador+=1;
     }
+});
+
+   
+    var nro_items = <?php echo json_encode($nro_items); ?>;
+    //console.log(nro_items);
+    
+    window.hmtl2canvas = html2canvas;
+    window.jsPDF = window.jspdf.jsPDF;
+    
+    
+    var idarr = [];
+    for (var i = 1; i < nro_items+1 ; i++) {
+      //  idarr.push(`comuna_asegurado[${i}] required=`);
+    //    idarr.push(`ciudad_asegurado[${i}] required=`);
+      //  idarr.push(`region_asegurado[${i}] required=`);
+        idarr.push(`comuna_asegurado[${i}]`);
+        idarr.push(`ciudad_asegurado[${i}]`);
+        idarr.push(`region_asegurado[${i}]`);
+    };
 
     
-});
+    var id=[ "comuna" ,
+    "ciudad" ,
+    "region" , "dia_pago"];
+
+    var resultado = id.concat(idarr);
+    
+    //console.log(resultado);
+    
+    function NoBorderScript(){
+        document.getElementById("region_asegurado").style.border="none"
+    }
+
+    function NoBorder(){
+        
+        for(var i = 0; i < resultado.length ; i++){
+            try{
+             //console.log(resultado[i])
+             document.getElementById(resultado[i]).style.border="none"
+             if (document.getElementById(resultado[i]).innerHTML=='')
+             {
+                 document.getElementById(resultado[i]).placeholder=''
+             }
+            
+        }
+        catch{console.log("ocurrio un error")}    
+        }
+    }
+    
+    function NoContainer(){
+        document.getElementById("capture").style.display="none";
+        
+    }
+    
+    function NoButton(){
+        
+        document.getElementById("BotonPDF").style.display="none";
+    }
+
 </script>
