@@ -1,4 +1,4 @@
-<?php    
+<?php
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -79,6 +79,8 @@
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/jquery.redirect.js"></script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -566,6 +568,10 @@
           doc.save('<?php echo $nro_propuesta; ?>.pdf');
           NoContainer();
     });
+             $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                'numero_propuesta': '<?php echo $nro_propuesta; ?>'',
+                'accion':'envio_propuesta'
+            }, 'post');
     }
 document.addEventListener("DOMContentLoaded", function(event) {
 

@@ -85,6 +85,13 @@ switch ($_POST["accion"]) {
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
+  case 'envio_propuesta':
+    $busqueda=$nro_propuesta;
+    $mensaje='Propuesta Póliza generada correctamente';
+      $query= "update propuesta_polizas_2 set fecha_envio_propuesta=CURRENT_TIMESTAMP where numero_propuesta='".$nro_propuesta."';";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+      break;
   case 'eliminar_propuesta':
     $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza eliminada correctamente';
@@ -389,6 +396,7 @@ function cambia_puntos_por_coma($data){
 $data=str_replace(',','.',$data);
 return $data;
 }
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -403,7 +411,6 @@ return $data;
 <script >
 
 var mensaje= '<?php echo $mensaje; ?>';
-mysqli_close($link);
 alert(mensaje);
 var busqueda= '<?php echo $busqueda; ?>';
 var listado= '<?php echo $listado; ?>';
