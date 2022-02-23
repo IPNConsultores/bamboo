@@ -90,7 +90,6 @@ switch ($_POST["accion"]) {
     $mensaje='Propuesta Póliza generada correctamente';
       $query= "update propuesta_polizas_2 set fecha_envio_propuesta=CURRENT_TIMESTAMP where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'eliminar_propuesta':
     $busqueda=$nro_propuesta;

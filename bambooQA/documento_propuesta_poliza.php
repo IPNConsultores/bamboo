@@ -567,11 +567,11 @@
           }
           doc.save('<?php echo $nro_propuesta; ?>.pdf');
           NoContainer();
-    });
-             $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-                'numero_propuesta': '<?php echo $nro_propuesta; ?>'',
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                'numero_propuesta': '<?php echo $nro_propuesta; ?>',
                 'accion':'envio_propuesta'
             }, 'post');
+    });
     }
 document.addEventListener("DOMContentLoaded", function(event) {
 
