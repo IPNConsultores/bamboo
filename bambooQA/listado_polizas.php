@@ -73,7 +73,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Rut Proponente</th>
                     <th>grupo</th>
                     <th>referido</th>
-
                     </tr>
 
             </table>
@@ -272,7 +271,7 @@ $(document).ready(function() {
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format(row.data())).show();
+            row.child(format_poliza(row.data())).show();
             tr.addClass('shown');
         }
     });
@@ -284,7 +283,7 @@ $(document).ready(function() {
 
 });
 
-function format(d) {
+function format_poliza(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
     var items='';

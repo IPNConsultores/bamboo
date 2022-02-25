@@ -281,7 +281,7 @@ $(document).ready(function() {
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format(row.data())).show();
+            row.child(format_propuesta(row.data())).show();
             tr.addClass('shown');
         }
     });
@@ -294,7 +294,7 @@ $(document).ready(function() {
 
 });
 
-function format(d) {
+function format_propuesta(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
     var items='';
@@ -311,6 +311,15 @@ function format(d) {
         '<button title="Asignar tarea"  type="button" id=' + d.id_propuesta +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_propuesta + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
         '<button style="background-color: #FF0000" title="Eliminar propuesta"  type="button" id=' + d.numero_propuesta + ' name="eliminar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
+    }
+    else{
+        botones='<td>Acciones</td>' +
+        '<td>' +
+        '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_propuesta + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
         '</tr>' +
         '</table>';
