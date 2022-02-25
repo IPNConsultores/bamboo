@@ -3,8 +3,6 @@
     { 
         session_start(); 
     } 
-$_POST["busqueda"]="Felipe Abarca";
-$_SERVER["REQUEST_METHOD"] = "POST";
 $buscar=$base=$id=$nombre_base='';
 $id_clientes=$id_polizas='busqueda dummy';
 require_once "/home/gestio10/public_html/backend/config.php";
