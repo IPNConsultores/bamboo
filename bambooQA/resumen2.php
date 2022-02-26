@@ -81,6 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             {
                 $nombre_base = $row->nombre_cliente;
             }
+            $propuestas=$nombre_base;
+            $id_polizas=$nombre_base;
         break;
         case 'tarea':
             $nombre_base = $id;
@@ -348,8 +350,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="/assets/js/jquery.redirect.js"></script>
         <script src="/assets/js/bootstrap-notify.js"></script>
         <script src="/assets/js/bootstrap-notify.min.js"></script>
@@ -480,8 +481,7 @@ $(document).ready(function() {
         .on('keyup change', function(e) {
             if (e.keyCode !== 13 || this.value == "") {
                 var texto1 = this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                table.search(texto1)
-                    .draw();
+                table.search(texto1).draw();
             }
         });
     $('#listado_clientes tbody').on('click', 'td.details-control', function() {
@@ -1167,24 +1167,14 @@ $(document).ready(function() {
     
 switch (document.getElementById("aux_base").value) {
         case 'cliente': {
-            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat(
-                "<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
             document.getElementById("clientes").click();
-            //cliente
-            table.column(9).search(document.getElementById("aux_id").value, true).draw();
-            //poliza
-            //console.log(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'))
-            //table_polizas.column(50).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
-            table_polizas.column(13).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
-            table_propuesta_poliza.column(2).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
-  
-            //table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
-            //tarea
-            //table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
-            table_tareas.column(14).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
 
-            //tarea recurrente
-            table_tareas_recurrentes.column(10).search(document.getElementById("aux_id").value, true).draw();
+            table.column(9).search(document.getElementById("aux_id").value, true).draw();
+            table_polizas.search(document.getElementById("var3_poliza").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
+            table_propuesta_poliza.search(document.getElementById("var5_propuesta").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
+            table_tareas.search(document.getElementById("var3_poliza").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
+            table_tareas_recurrentes.search(document.getElementById("var3_poliza").value, true).draw();
             break;
         }
         case 'poliza': {
@@ -1194,6 +1184,7 @@ switch (document.getElementById("aux_base").value) {
             //cliente
             table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
             //poliza
+
             table_polizas.column(2).search(document.getElementById("var4_titulo").value, true).draw();
             table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
             //tarea
