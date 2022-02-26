@@ -1,94 +1,139 @@
 <?php
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-$buscar=$base=$id=$nombre_base='';
-$id_clientes=$id_polizas='busqueda dummy';
+if (!isset($_SESSION))
+{
+    session_start();
+}
+
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
-mysqli_set_charset( $link, 'utf8');
-$num=0;
- $busqueda=$busqueda_err=$data='';
- $rut=$nombre=$telefono=$correo=$lista='';
- $query = "SELECT a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
-$resultado_poliza=mysqli_query($link, $query);
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+$buscar = $base = $id = $nombre_base = '';
+$id_clientes = $id_polizas = $endosos = $propuestas = 'busqueda dummy';
+$num = 0;
+$busqueda = $busqueda_err = $data = $query= $resultado_poliza= '';
+$rut = $nombre = $telefono = $correo = $lista = '';
+//$query = "SELECT a.id as id_poliza, b.id as idP, c.id as idA FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
+//$resultado_poliza=mysqli_query($link, $query);
+if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) == true and isset($_POST["id"]) !== true)
+{
+    $buscar = eliminar_acentos(estandariza_info($_POST["busqueda"]));
+    $base = "header";
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true and isset($_POST["id"]) == true)
+{
+    $id = estandariza_info($_POST["id"]);
+    $base = estandariza_info($_POST["base"]);
 
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])==true and isset($_POST["id"])!==true){
-$buscar= eliminar_acentos(estandariza_info($_POST["busqueda"]));
-$base="header";
+    switch ($base)
+    {
+        case 'poliza':
+            $query = "select distinct a.numero_poliza, a.id as id_poliza, b.id as idP, d.id as idA from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza left join clientes as d on c.rut_asegurado= d.rut_sin_dv where a.id=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                if ($row->idA == $row->idP)
+                {
+                    $id_clientes = "^" . $row->idA . "$";
+                }
+                else
+                {
+                    $id_clientes = "^" . $row->idA . "$" . "|" . "^" . $row->idP . "$";
+                }
+                $nombre_base = $row->numero_poliza;
+            }
+
+            $query = "select distinct b.numero_propuesta from polizas_2 as a left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.id=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                $propuestas = $row->numero_propuesta;
+            }
+        break;
+        case 'propuesta':
+            $query = "select distinct a.numero_propuesta, b.id as idP, d.id as idA from propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_propuesta=c.numero_propuesta left join clientes as d on c.rut_asegurado= d.rut_sin_dv where a.numero_propuesta='" . $id . "';";
+
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                if ($row->idA == $row->idP)
+                {
+                    $id_clientes = "^" . $row->idA . "$";
+                }
+                else
+                {
+                    $id_clientes = "^" . $row->idA . "$" . "|" . "^" . $row->idP . "$";
+                }
+                $nombre_base = $row->numero_propuesta;
+            }
+
+            $query = "select distinct b.id as id_poliza from propuesta_polizas_2 as a left join polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='" . $id . "';";
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                $id_polizas = $row->id_poliza;
+            }
+        break;
+        case 'cliente':
+            $query = "SELECT nombre_cliente FROM clientes where id=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                $nombre_base = $row->nombre_cliente;
+            }
+        break;
+        case 'tarea':
+            $nombre_base = $id;
+            $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                if ($id_clientes == 'busqueda dummy')
+                {
+                    $id_clientes = '';
+                }
+                $id_clientes = $id_clientes . "^" . $row->id_relacion . "$ | ";
+            }
+            $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea=" . $id;
+            $resultado_poliza2 = mysqli_query($link, $query2);
+            while ($row = mysqli_fetch_object($resultado_poliza2))
+            {
+                if ($id_polizas == 'busqueda dummy')
+                {
+                    $id_polizas = '';
+                }
+                $id_polizas = $id_polizas . "^" . $row->id_relacion . "$ | ";
+            }
+        break;
+        case 'tarea recurrente':
+            $nombre_base = $id;
+            $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea_recurrente=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {
+                if ($id_clientes == 'busqueda dummy')
+                {
+                    $id_clientes = '';
+                }
+                $id_clientes = $id_clientes . "^" . $row->id_relacion . "$ | ";
+            }
+            $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea_recurrente=" . $id;
+            $resultado_poliza2 = mysqli_query($link, $query2);
+            while ($row = mysqli_fetch_object($resultado_poliza2))
+            {
+                if ($id_polizas == 'busqueda dummy')
+                {
+                    $id_polizas = '';
+                }
+                $id_polizas = $id_polizas . "^" . $row->id_relacion . "$ | ";
+            }
+        break;
+    }
+
 }
-if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"])!==true and isset($_POST["id"])==true){
-$id= estandariza_info($_POST["id"]);
-$base= estandariza_info($_POST["base"]);
-switch ($base) {
-    case 'poliza':
-            $query = "SELECT numero_poliza, a.id as id_poliza, b.id as idP, c.id as idA  FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where a.id=".$id;
-            $resultado_poliza=mysqli_query($link, $query);
-            While($row=mysqli_fetch_object($resultado_poliza))
-                {
-                    if($row->idA==$row->idP){
-                        $id_clientes="^".$row->idA."$";   
-                    }else{
-                        $id_clientes= "^".$row->idA."$"."|"."^".$row->idP."$";
-                    }
-                        $nombre_base= $row->numero_poliza;
-                } 
-        break;
-    case 'cliente':
-            $query = "SELECT nombre_cliente FROM clientes where id=".$id;
-            $resultado_poliza=mysqli_query($link, $query);
-            While($row=mysqli_fetch_object($resultado_poliza))
-                {
-                        $nombre_base= $row->nombre_cliente;
-                } 
-        break;
-    case 'tarea':
-        $nombre_base=$id;
-         $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea=".$id;
-         $resultado_poliza=mysqli_query($link, $query);
-            While($row=mysqli_fetch_object($resultado_poliza))
-                {
-                    if($id_clientes=='busqueda dummy'){
-                        $id_clientes='';
-                    }
-                        $id_clientes=$id_clientes."^".$row->id_relacion."$ | ";   
-                } 
-         $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea=".$id;
-         $resultado_poliza2=mysqli_query($link, $query2);
-            While($row=mysqli_fetch_object($resultado_poliza2))
-                {
-                    if($id_polizas=='busqueda dummy'){
-                        $id_polizas='';
-                    }
-                        $id_polizas=$id_polizas."^".$row->id_relacion."$ | ";   
-                } 
-        break;
-    case 'tarea recurrente':
-        $nombre_base=$id;
-         $query = "SELECT id_relacion FROM tareas_relaciones  where base='clientes' and id_tarea_recurrente=".$id;
-         $resultado_poliza=mysqli_query($link, $query);
-            While($row=mysqli_fetch_object($resultado_poliza))
-                {
-                   if($id_clientes=='busqueda dummy'){
-                        $id_clientes='';
-                    }
-                        $id_clientes=$id_clientes."^".$row->id_relacion."$ | ";   
-                } 
-         $query2 = "SELECT id_relacion FROM tareas_relaciones  where base='polizas' and id_tarea_recurrente=".$id;
-         $resultado_poliza2=mysqli_query($link, $query2);
-            While($row=mysqli_fetch_object($resultado_poliza2))
-                {
-                    if($id_polizas=='busqueda dummy'){
-                        $id_polizas='';
-                    }
-                        $id_polizas=$id_polizas."^".$row->id_relacion."$ | ";   
-                } 
-        break;
-}
-mysqli_close($link);
-}
+    mysqli_close($link);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -179,6 +224,7 @@ mysqli_close($link);
                                     <th>Rut Proponente</th>
                                     <th>grupo</th>
                                     <th>referido</th>
+                                    <th>id</th>
                                 </tr>
 
                             </table>
@@ -251,6 +297,7 @@ mysqli_close($link);
                                     <th>Rut Proponente</th>
                                     <th>grupo</th>
                                     <th>referido</th>
+                                    <th>id</th>
 
                                 </tr>
 
@@ -297,6 +344,7 @@ mysqli_close($link);
                 <input id="var2_cliente" value="<?php echo htmlspecialchars($id_clientes);?>">
                 <input id="var3_poliza" value="<?php echo htmlspecialchars($id_polizas);?>">
                 <input id="var4_titulo" value="<?php echo $nombre_base;?>">
+                <input id="var5_propuesta" value="<?php echo htmlspecialchars($propuestas);?>">
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -508,25 +556,29 @@ $(document).ready(function() {
             {
                 "data": "nom_clienteP",
                 title: "Proponente"
-            }, //10
+            }, //9
             {
                 "data": "rut_clienteP",
                 title: "Rut Proponente"
-            }, //11
+            }, //10
             {
                 "data": "grupo",
                 title: "Grupo"
-            }, //12
+            }, //11
             {
                 "data": "referido",
                 title: "Referido"
-            } // 13
+            }, // 12
+            {
+                "data":"id_poliza",
+                tittle:"ID"
+            }//13
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [7, 8],
+                "targets": [7, 8,13],
                 "visible": false,
             },
             {
@@ -931,76 +983,6 @@ $(document).ready(function() {
         }
     });
     $('#listado_tareas_recurrentes').dataTable().fnFilter(document.getElementById("var1").value);
-    switch (document.getElementById("aux_base").value) {
-        case 'cliente': {
-            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat(
-                "<b>" + document.getElementById("var4_titulo").value + "</b>");
-            document.getElementById("clientes").click();
-            //cliente
-            table.column(9).search(document.getElementById("aux_id").value, true).draw();
-            //poliza
-            //console.log(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'))
-            //table_polizas.column(50).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
-            table_polizas.column(51).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
-            //table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
-            //tarea
-            //table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
-            table_tareas.column(14).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
-
-            //tarea recurrente
-            table_tareas_recurrentes.column(10).search(document.getElementById("aux_id").value, true).draw();
-            break;
-        }
-        case 'poliza': {
-            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a póliza número: "
-                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
-            document.getElementById("poliza").click();
-            //cliente
-            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
-            //poliza
-            table_polizas.column(46).search(document.getElementById("aux_id").value, true).draw();
-            //tarea
-            table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
-            //tarea recurrente
-            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
-            break;
-        }
-        case 'tarea': {
-            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a tarea número: "
-                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
-            document.getElementById("tarea").click();
-            //cliente
-            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
-            //poliza
-            table_polizas.column(46).search(document.getElementById("var3_poliza").value, true).draw();
-            //tarea
-            table_tareas.column(1).search(document.getElementById("aux_id").value, true).draw();
-            //tarea recurrente
-            table_tareas_recurrentes.column(9).search("busqueda dummy").draw();
-            break;
-        }
-        case 'tarea recurrente': {
-            document.getElementById("titulo").innerHTML =
-                " Resumen / Búsqueda asociada a tarea recurrente número: ".concat("<b>" + document
-                    .getElementById("var4_titulo").value + "</b>");
-            document.getElementById("tarea_rec").click();
-            //cliente
-            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
-            //poliza
-            table_polizas.column(46).search(document.getElementById("var3_poliza").value, true).draw();
-            //tarea
-            table_tareas.column(1).search("busqueda dummy").draw();
-            //tarea recurrente
-            table_tareas_recurrentes.column(1).search(document.getElementById("aux_id").value, true).draw();
-            break;
-        }
-        case 'header': {
-            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a: ".concat("<b>" +
-                document.getElementById("var1").value + "</b>");
-
-            break;
-        }
-    }
     //fin tareas recurrents
     //inicio propuestas
     table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
@@ -1075,13 +1057,17 @@ $(document).ready(function() {
             {
                 "data": "referido",
                 title: "Referido"
-            } // 14
+            }, // 14
+            {
+                "data": "id_propuesta",
+                title: "id propuesta"
+            } //15
         ],
         //          "search": {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [8, 9, 10],
+                "targets": [8, 9, 10,15],
                 "visible": false,
             },
             {
@@ -1178,6 +1164,98 @@ $(document).ready(function() {
     //inicio endosos
 
     //fin endosos
+    
+switch (document.getElementById("aux_base").value) {
+        case 'cliente': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat(
+                "<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("clientes").click();
+            //cliente
+            table.column(9).search(document.getElementById("aux_id").value, true).draw();
+            //poliza
+            //console.log(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'))
+            //table_polizas.column(50).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
+            table_polizas.column(13).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
+            table_propuesta_poliza.column(2).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw()
+  
+            //table_polizas.columns([44, 45]).search(document.getElementById("aux_id").value, true).draw();
+            //tarea
+            //table_tareas.columns([11, 12]).search(document.getElementById("aux_id").value, true).draw();
+            table_tareas.column(14).search(document.getElementById("aux_id").value.replaceAll('$', '_').replaceAll('^', '_'), true).draw();
+
+            //tarea recurrente
+            table_tareas_recurrentes.column(10).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'poliza': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a póliza número: "
+                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("poliza").click();
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(2).search(document.getElementById("var4_titulo").value, true).draw();
+            table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
+            //tarea
+            table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'propuesta': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a propuesta póliza número: "
+                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("propuestas").click();
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(13).search(document.getElementById("var3_poliza").value, true).draw();
+            console.log(document.getElementById("var3_poliza").value)
+            table_propuesta_poliza.column(2).search(document.getElementById("var4_titulo").value, true).draw();
+            //tarea
+            table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'tarea': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a tarea número: "
+                .concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("tarea").click();
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(13).search(document.getElementById("var3_poliza").value, true).draw();
+            table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
+            //tarea
+            table_tareas.column(1).search(document.getElementById("aux_id").value, true).draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(9).search("busqueda dummy").draw();
+            break;
+        }
+        case 'tarea recurrente': {
+            document.getElementById("titulo").innerHTML =
+                " Resumen / Búsqueda asociada a tarea recurrente número: ".concat("<b>" + document
+                    .getElementById("var4_titulo").value + "</b>");
+            document.getElementById("tarea_rec").click();
+            //cliente
+            table.column(9).search(document.getElementById("var2_cliente").value, true).draw();
+            //poliza
+            table_polizas.column(13).search(document.getElementById("var3_poliza").value, true).draw();
+            table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
+            //tarea
+            table_tareas.column(1).search("busqueda dummy").draw();
+            //tarea recurrente
+            table_tareas_recurrentes.column(1).search(document.getElementById("aux_id").value, true).draw();
+            break;
+        }
+        case 'header': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a: ".concat("<b>" +
+                document.getElementById("var1").value + "</b>");
+
+            break;
+        }
+    }
 });
 function format_propuesta(d) {
     // `d` is the original data object for the row
@@ -1754,6 +1832,51 @@ function botones(id, accion, base) {
                     'id_poliza': id
                 }, 'post');
             }
+            break;
+        }
+        case "crear_poliza": {
+            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                'numero_propuesta': id,
+                'accion': accion
+            }, 'post');
+            break;
+        }
+        case "rechazar_propuesta": {
+                var motivo = window.prompt('Ingresa el motivo del rechazo', '');
+                var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
+                
+                if (r2 == true) {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_propuesta': id,
+                    'accion':accion,
+                    'motivo':motivo
+                }, 'post');
+                }
+            break;
+        }
+        case "eliminar_propuesta": {
+                var r2 = confirm("Estás a punto de eliminar esta propuesta de póliza ¿Deseas continuar?");
+                //eliminar
+                if (r2 == true) {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_propuesta': id,
+                    'accion':accion
+                }, 'post');
+                }
+            break;
+        }
+        case "actualiza_propuesta": {
+            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                'numero_propuesta': id,
+                'accion': accion
+            }, 'post');
+            break;
+        }
+        case "generar_documento": {
+            $.redirect('/bambooQA/documento_propuesta_poliza.php', {
+                'numero_propuesta': id,
+                'accion': accion
+            }, 'post');
             break;
         }
         case "cerrar_tarea": {
