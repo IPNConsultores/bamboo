@@ -210,16 +210,17 @@ $(document).ready(function() {
                 "data":"nombre[]",
                 title: "Clientes asociados"
             },
-                        {
+            {
                 "data":"numero_poliza[]",
-                title: "Pólizas asociados"
+                title: "Pólizas asociadas"
+            },
+            {
+                "data":"numero_propuesta[]",
+                title: "Propuestas asociadas"
             }
-
         ],
-
-
         "columnDefs": [{
-                "targets": [7,9],
+                "targets": [7, 10, 11,12],
                 "visible": false,
             },
         {
@@ -369,11 +370,12 @@ $(document).ready(function() {
     }
 });
 function detalle_tareas(d) {
-    $sin_rel=$tabla_clientes=$tabla_polizas='';
+    $sin_rel=$tabla_clientes=$tabla_polizas=$tabla_propuestas='';
     if (d.relaciones == 0) {
         $sin_rel= 'Tarea sin asociar a clientes  o pólizas';
         $tabla_clientes = 'Sin clientes asociados';
         $tabla_polizas = 'Sin pólizas asociadas';
+        $tabla_propuestas = 'Sin propuestas de póliza asociadas';
     } else {
         if (d.clientes == 0) {
             $tabla_clientes = 'Sin clientes asociados';
@@ -384,10 +386,8 @@ function detalle_tareas(d) {
                 $cont_i=0;
             for (i = 0; i < d.clientes; i++) {
                 $cont_i=$cont_i+1;
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
-                    .telefono[i] + '</td><td>' + d.correo[i] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_cliente[i] +
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d.telefono[i] + '</td><td>' + d.correo[i] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_cliente[i] +
                     ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_clientes = $tabla_clientes + '</table>';
@@ -397,21 +397,35 @@ function detalle_tareas(d) {
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
-                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
+                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
                 $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
                 $cont_j=$cont_j+1;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="'+d.estado_poliza_alerta[j]+'">'+d.estado_poliza[j]+'</span></td><td>' + d
-                    .numero_poliza[j] + '</td><td>' + d.compania[j] +
-                    '</td><td>' + d.ramo[j] +
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + 
+                    '</td><td><span class="'+d.estado_poliza_alerta[j]+'">'+d.estado_poliza[j]+
+                    '</span></td><td>' + d.numero_poliza[j] + 
                     '</td><td>' + d.vigencia_inicial[j] +
                     '</td><td>' + d.vigencia_final[j] +
-                    '</td><td>' + d.materia_asegurada[j] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_poliza[j] +
-                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button></td></tr>';
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_poliza[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
+        }
+        if (d.propuestas == 0) {
+            $tabla_propuestas = 'Sin propuestas de pólizas asociadas';
+        } else {
+            $tabla_propuestas =
+                '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+                '<tr><th># Propuestas</th><th>Estado</th><th>Nro propuesta</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
+                $cont_j=0;
+            for (j = 0; j < d.propuestas; j++) {
+                $cont_j=$cont_j+1;
+                $tabla_propuestas = $tabla_propuestas + '<tr><td>' + $cont_j + '</td><td><span class="'+d.estado_propuesta_alerta[j]+'">'+d.estado_propuesta[j]+'</span></td><td>' + d.numero_propuesta[j] + '</td><td>' + d.vigencia_inicial[j] +
+                    '</td><td>' + d.vigencia_final[j] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.numero_propuesta[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-search"></i></button></td></tr>';
+            }
+            $tabla_propuestas = $tabla_propuestas + '</table>';
         }
     }
 
@@ -431,6 +445,8 @@ function detalle_tareas(d) {
         '<td>'+ $tabla_clientes+'</td></tr>'+
         '<tr><td>Pólizas:</td>'+
         '<td>'+$tabla_polizas+'</td></tr>'+
+        '<tr><td>Propuestas de Pólizas:</td>'+
+        '<td>'+$tabla_propuestas+'</td></tr>'+
         '</table>';
 }
 
