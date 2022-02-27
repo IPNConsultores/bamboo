@@ -489,108 +489,76 @@ echo '<style>.info_clientes { display:none;}</style>';
 </html>
 
 <script>
-/*
-$tarea= $row->tarea;
-                    $estado = $row->estado;
-                    $prioridad= $row->prioridad;
-                    $fecha_vencimiento= $row->fecha_vencimiento;
-                    $recurrente= $row->recurrente;
-                    $tarea_con_fecha_fin= $row->tarea_con_fecha_fin;
-                    $fecha_fin= $row->fecha_fin;
-                    $dia_recordatorio= $row->dia_recordatorio;
-*/
 
 function post() {
-    /*
-    console.log('tarea_unica:'+document.getElementById('tarea_unica').checked);
-    console.log('tarea_recurrente:'+document.getElementById('tarea_recurrente').checked);
-    console.log('dia_mes:'+document.getElementById('dia_mes').value);
-    console.log('sin_fecha:'+document.getElementById('sin_fecha').checked);
-    console.log('con_fecha:'+document.getElementById('con_fecha').checked);
-    console.log('fechavencimiento_recurrente:'+document.getElementById('fechavencimiento_recurrente').value);
-    */
     var tarea_recurrente = 0;
     var tarea_con_fin = 0;
     var dia = 0;
     var fecha;
-    
-      if (document.getElementById("fechavencimiento").value == "") {
+    if (document.getElementById("fechavencimiento").value == "") {
         document.getElementById("validador1").style.visibility = "visible";
-    
-          
-      } 
-      
-      if (document.getElementById("tarea").value == "") {
+    }
+    if (document.getElementById("tarea").value == "") {
         document.getElementById("validador2").style.visibility = "visible";
-    
-          
-      } 
-    
-    
-    else if( document.getElementById("fechavencimiento").value != "" && document.getElementById("tarea").value != "" )
-        {
-    
-    if (document.getElementById('tarea_recurrente').checked) {
-        tarea_recurrente = 1;
-        dia = document.getElementById('dia_mes').value;
-        if (document.getElementById('con_fecha').checked) {
-            tarea_con_fin = 1;
-            fecha = document.getElementById('fechavencimiento_recurrente').value;
+    } else if (document.getElementById("fechavencimiento").value != "" && document.getElementById("tarea").value != "") {
+        if (document.getElementById('tarea_recurrente').checked) {
+            tarea_recurrente = 1;
+            dia = document.getElementById('dia_mes').value;
+            if (document.getElementById('con_fecha').checked) {
+                tarea_con_fin = 1;
+                fecha = document.getElementById('fechavencimiento_recurrente').value;
+            }
         }
-    }
 
-    //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
-    //console.log("tarea : "+document.getElementById('tarea').value);
-    var arreglo = '[';
-    var num = 0;
-    var coma = '';
-    var clientes = document.getElementsByName('check_cliente');
-    for (var i = 0; i < clientes.length; i++) {
-        if (clientes[i].type == 'checkbox' && clientes[i].checked == true)
-        {
-            arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
-            coma = ',';
+        //console.log("fechavencimiento : "+document.getElementById('fechavencimiento').value);
+        //console.log("tarea : "+document.getElementById('tarea').value);
+        var arreglo = '[';
+        var num = 0;
+        var coma = '';
+        var clientes = document.getElementsByName('check_cliente');
+        for (var i = 0; i < clientes.length; i++) {
+            if (clientes[i].type == 'checkbox' && clientes[i].checked == true) {
+                arreglo += coma + ' {"id":"' + clientes[i].getAttribute('id') + '","base":"clientes"}';
+                coma = ',';
+            }
         }
-    }
-    var polizas = document.getElementsByName('check_poliza');
-    for (var j = 0; j < polizas.length; j++) {
-        if (polizas[j].type == 'checkbox' && polizas[j].checked == true)
-        {
-            arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
-            coma = ',';
+        var polizas = document.getElementsByName('check_poliza');
+        for (var j = 0; j < polizas.length; j++) {
+            if (polizas[j].type == 'checkbox' && polizas[j].checked == true) {
+                arreglo += coma + ' {"id":"' + polizas[j].getAttribute('id') + '","base":"polizas"}';
+                coma = ',';
+            }
         }
-    }
-    var propuestas = document.getElementsByName('check_propuesta');
-    for (var j = 0; j < propuestas.length; j++) {
-        if (propuestas[j].type == 'checkbox' && propuestas[j].checked == true)
-        {
-            arreglo += coma + ' {"id":"' + propuestas[j].getAttribute('id') + '","base":"propuestas"}';
-            coma = ',';
+        var propuestas = document.getElementsByName('check_propuesta');
+        for (var j = 0; j < propuestas.length; j++) {
+            if (propuestas[j].type == 'checkbox' && propuestas[j].checked == true) {
+                arreglo += coma + ' {"id":"' + propuestas[j].getAttribute('id') + '","base":"propuestas"}';
+                coma = ',';
+            }
         }
-    }
 
-    arreglo += ']';
-    ///bambooQA/backend/actividades/crea_tarea.php
-    $.redirect('/bambooQA/backend/actividades/crea_tarea.php', {
-        'prioridad': document.getElementById('prioridad').value,
-        'fechavencimiento': document.getElementById('fechavencimiento').value,
-        'tarea': document.getElementById('tarea').value,
-        'relaciones': arreglo,
-        //tarea recurrente
-        'tarea_recurrente': tarea_recurrente,
-        'dia': dia,
-        'tarea_con_fin': tarea_con_fin,
-        'fecha': fecha,
-        //fin tarea recurrente
-        //inicio aux modificar
-        'modificar': '<?php echo $aux_modificar; ?>',
-        'id_tarea': '<?php echo $id_tarea; ?>'
-        //fin aux modificar
-    }, 'post');
+        arreglo += ']';
+        ///bambooQA/backend/actividades/crea_tarea.php
+        $.redirect('/bambooQA/backend/actividades/crea_tarea.php', {
+            'prioridad': document.getElementById('prioridad').value,
+            'fechavencimiento': document.getElementById('fechavencimiento').value,
+            'tarea': document.getElementById('tarea').value,
+            'relaciones': arreglo,
+            //tarea recurrente
+            'tarea_recurrente': tarea_recurrente,
+            'dia': dia,
+            'tarea_con_fin': tarea_con_fin,
+            'fecha': fecha,
+            //fin tarea recurrente
+            //inicio aux modificar
+            'modificar': '<?php echo $aux_modificar; ?>',
+            'id_tarea': '<?php echo $id_tarea; ?>'
+            //fin aux modificar
+        }, 'post');
+    }
 }
-}
- 
-function check_fecha(){
+
+function check_fecha() {
 
     if (document.getElementById("fechavencimiento").value != "") {
         document.getElementById("validador1").style.visibility = "hidden";
@@ -598,19 +566,19 @@ function check_fecha(){
 
 }
 
-function check_tarea(){
+function check_tarea() {
 
     if (document.getElementById("tarea").value != "") {
         document.getElementById("validador2").style.visibility = "hidden";
     }
 
 }
-   
+
 document.getElementById("formulario").addEventListener('submit', function(event) {
     if (document.getElementById("fechavencimiento").value == "") {
         document.getElementById("validador1").style.visibility = "visible";
-        event.preventDefault();} else {
-    }
+        event.preventDefault();
+    } else {}
 });
 
 function checkTipoTarea(tipoTarea) {
@@ -630,6 +598,7 @@ function checkTipoTarea(tipoTarea) {
             document.getElementById("panel_fecha").style.display = "none";
             document.getElementById("panel_dias").style.display = "block";
             document.getElementById("pregunta_fecha").style.display = "block";
+            document.getElementById("fechavencimiento").value='2000-01-01'
             break;
         }
         case 'sin_fecha': {
@@ -646,94 +615,93 @@ function checkTipoTarea(tipoTarea) {
         }
     }
 }
-function fecha_cliente(){
+
+function fecha_cliente() {
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
-    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
     document.getElementById("fechavencimiento").min = today;
     document.getElementById("fechavencimiento_recurrente").min = today;
 }
 $(document).ready(function() {
     fecha_cliente();
-    var consulta='<?php if ($_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
-    if (consulta=='True'){
-    var tipo_tarea = '<?php echo $tipo_tarea; ?>';
-    console.log(tipo_tarea);
-    document.getElementById('tarea').value = '<?php echo $tarea; ?>';
-    document.getElementById('fechavencimiento').value = '<?php echo $fecha_vencimiento; ?>';
+    var consulta = '<?php if ($_SERVER["REQUEST_METHOD"] == "POST") echo "True"; ?>'
+    if (consulta == 'True') {
+        var tipo_tarea = '<?php echo $tipo_tarea; ?>';
+        console.log(tipo_tarea);
+        document.getElementById('tarea').value = '<?php echo $tarea; ?>';
+        document.getElementById('fechavencimiento').value = '<?php echo $fecha_vencimiento; ?>';
 
-    switch (tipo_tarea) {
-        case 'individual': {
-            document.getElementById("formulario_tareas_recurrentes").style.display = "none"
-            break
-        }
-        case 'recurrente': {
-            var recurrente = '<?php echo $recurrente; ?>';
-            var tarea_infinita = '<?php echo $tarea_con_fecha_fin; ?>';
-             if (recurrente == 1) {
-                checkTipoTarea('recurrente');
-                if (tarea_infinita == 1) {
-                    checkTipoTarea('con_fecha');
-                    document.getElementById('fechavencimiento_recurrente').value = '<?php echo $fecha_fin; ?>';
-                } else {
-                    checkTipoTarea('sin_fecha');
-                }
+        switch (tipo_tarea) {
+            case 'individual': {
+                document.getElementById("formulario_tareas_recurrentes").style.display = "none"
+                break
             }
-            break
+            case 'recurrente': {
+                var recurrente = '<?php echo $recurrente; ?>';
+                var tarea_infinita = '<?php echo $tarea_con_fecha_fin; ?>';
+                if (recurrente == 1) {
+                    checkTipoTarea('recurrente');
+                    if (tarea_infinita == 1) {
+                        checkTipoTarea('con_fecha');
+                        document.getElementById('fechavencimiento_recurrente').value = '<?php echo $fecha_fin; ?>';
+                    } else {
+                        checkTipoTarea('sin_fecha');
+                    }
+                }
+                break
+            }
+            default: {
+
+            }
         }
-        default: {
+
+        var num_cliente = '<?php echo $num_cliente; ?>';
+        var num_poliza = '<?php echo $num_poliza; ?>';
+        var num_prop_poliza = '<?php echo $num_prop_poliza; ?>';
+
+        if (num_cliente == "0") {
+
+            document.getElementById('cuadro_cliente').style.display = "none";
+            document.getElementById('titulo_cliente').style.display = "none";
+        }
+
+        if (num_poliza == "0") {
+
+            document.getElementById('cuadro_poliza').style.display = "none";
+            document.getElementById('titulo_poliza').style.display = "none";
+        }
+        if (num_prop_poliza == "0") {
+
+            document.getElementById('cuadro_propuesta_poliza').style.display = "none";
+            document.getElementById('titulo_propuesta').style.display = "none";
+        }
+        if (num_poliza == "0" && num_cliente == "0") {
+
+            document.getElementById('titulo_actividad').style.display = "none";
 
         }
+
     }
-    
-    var num_cliente ='<?php echo $num_cliente; ?>';
-    var num_poliza ='<?php echo $num_poliza; ?>';
-    var num_prop_poliza ='<?php echo $num_prop_poliza; ?>';
-    
-    if(num_cliente == "0"){
-        
-       document.getElementById('cuadro_cliente').style.display = "none";
-       document.getElementById('titulo_cliente').style.display = "none";
-    }
-    
-     if(num_poliza == "0"){
-        
-       document.getElementById('cuadro_poliza').style.display = "none";
-       document.getElementById('titulo_poliza').style.display = "none";
-    }
-     if(num_prop_poliza == "0"){
-        
-       document.getElementById('cuadro_propuesta_poliza').style.display = "none";
-       document.getElementById('titulo_propuesta').style.display = "none";
-    }    
-    if(num_poliza == "0" && num_cliente == "0" ){
-        
-       document.getElementById('titulo_actividad').style.display = "none";
-     
-    }
-    
-}    
 })
-	var bPreguntar = true;
- 
-	window.onbeforeunload = preguntarAntesDeSalir;
- 
-	function preguntarAntesDeSalir () {
-		var respuesta;
- 
-		if ( bPreguntar ) {
-			respuesta = confirm ( '¿Seguro que quieres salir?' );
- 
-			if ( respuesta ) {
-				window.onunload = function () {
-					return true;
-				}
-			} else {
-				return false;
-			}
-		}
-	}
+var bPreguntar = true;
 
+window.onbeforeunload = preguntarAntesDeSalir;
 
+function preguntarAntesDeSalir() {
+    var respuesta;
+
+    if (bPreguntar) {
+        respuesta = confirm('¿Seguro que quieres salir?');
+
+        if (respuesta) {
+            window.onunload = function() {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+}
 </script>
