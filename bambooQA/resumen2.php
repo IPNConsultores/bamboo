@@ -263,15 +263,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                             <br>
                             <br>
                             <table class="table" id="listado_tareas_recurrentes" style="width:100%">
-                                <tr>
-                                    <th></th>
-                                    <th>id</th>
-                                    <th>Prioridad</th>
-                                    <th>Estado</th>
-                                    <th>Tarea</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                                <th></th>
+                                <th>id</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                                <th>Tarea</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
                             </table>
                             <div id="botones_tareas_recurrentes"></div>
                         </div>
@@ -858,60 +859,47 @@ $(document).ready(function() {
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
-
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
-            },
+            }, //1
             {
                 "data": "id_tarea",
                 title: "Tarea"
-            },
+            }, //2
             {
                 "data": "prioridad",
                 title: "Prioridad"
-            },
+            }, //3
             {
                 "data": "estado",
                 title: "Estado"
-            },
+            }, //4
             {
                 "data": "tarea",
                 title: "Tarea o Actividad"
-            },
-            {
-                "data": "dia_recordatorio",
-                title: "Día activación"
-            },
-            {
-                "data": "fecha_fin",
-                title: "Fecha fin"
-            },
+            }, //5
             {
                 "data": "fecingreso",
                 title: "Fecha creación tarea"
-            },
+            }, //6
             {
-                "data": "nombre[]",
+                "data":"dia_recordatorio",
+                title: "Día recordatorio"
+            }, //7
+            {
+                "data":"nombre[]",
                 title: "Clientes asociados"
-            },
+            }, //8
             {
-                "data": "numero_poliza[]",
-                title: "Pólizas asociados"
-            },
+                "data":"numero_poliza[]",
+                title: "Pólizas asociadas"
+            }, //9
             {
-                "data": "id_cliente[]",
-                title: "id cliente"
-            },
-            {
-                "data": "id_poliza[]",
-                title: "id poliza"
-            }
+                "data":"numero_propuesta[]",
+                title: "Propuestas asociadas"
+            } //10
         ],
-        //          "search": {
-        //          "search": "abarca"
-        //          },
-
         "columnDefs": [{
-                "targets": [10, 11],
+                "targets": [7,8,9],
                 "visible": false,
             },
             {
@@ -1257,14 +1245,14 @@ function format_propuesta(d) {
     if (d.estado=='Pendiente'){
         botones='<td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
-        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-thumbs-down"></i></button>' +
-        '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_propuesta + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="Asignar tarea"  type="button" id=' + d.id_propuesta +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
-        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_propuesta + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Eliminar propuesta"  type="button" id=' + d.numero_propuesta + ' name="eliminar_propuesta" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash-alt"></i></button>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta + ' name="crear_poliza" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fa fa-thumbs-down"></i></button>' +
+        '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Buscar información asociada" type="button" id=' + d.numero_propuesta + ' name="info" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_propuesta +' name="tarea" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_propuesta + ' name="correo" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Eliminar propuesta"  type="button" id=' + d.numero_propuesta + ' name="eliminar_propuesta" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-trash-alt"></i></button>' +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -1272,8 +1260,8 @@ function format_propuesta(d) {
     else{
         botones='<td>Acciones</td>' +
         '<td>' +
-        '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'poliza\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="WIP Buscar información asociada" type="button" id=' + d.id_propuesta + ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Generar Propuesta" type="button" id=' + d.numero_propuesta + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="WIP Buscar información asociada" type="button" id=' + d.numero_propuesta + ' name="info" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -1363,11 +1351,12 @@ function format_propuesta(d) {
         botones;
 }
 function detalle_tareas_recurrentes(d) {
-    $sin_rel = $tabla_clientes = $tabla_polizas = '';
+    $sin_rel=$tabla_clientes=$tabla_polizas=$tabla_propuestas='';
     if (d.relaciones == 0) {
-        $sin_rel = 'Tarea sin asociar a clientes  o pólizas';
+        $sin_rel= 'Tarea sin asociar a clientes  o pólizas';
         $tabla_clientes = 'Sin clientes asociados';
         $tabla_polizas = 'Sin pólizas asociadas';
+        $tabla_propuestas = 'Sin propuestas de póliza asociadas';
     } else {
         if (d.clientes == 0) {
             $tabla_clientes = 'Sin clientes asociados';
@@ -1375,13 +1364,11 @@ function detalle_tareas_recurrentes(d) {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
-            $cont_i = 0;
+                $cont_i=0;
             for (i = 0; i < d.clientes; i++) {
-                $cont_i = $cont_i + 1;
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
-                    .telefono[i] + '</td><td>' + d.correo[i] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_cliente[i] +
+                $cont_i=$cont_i+1;
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d.telefono[i] + '</td><td>' + d.correo[i] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_cliente[i] +
                     ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_clientes = $tabla_clientes + '</table>';
@@ -1391,22 +1378,35 @@ function detalle_tareas_recurrentes(d) {
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
-                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
-            $cont_j = 0;
+                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
+                $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
-                $cont_j = $cont_j + 1;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="' + d
-                    .estado_poliza_alerta[j] + '">' + d.estado_poliza[j] + '</span></td><td>' + d
-                    .numero_poliza[j] + '</td><td>' + d.compania[j] +
-                    '</td><td>' + d.ramo[j] +
+                $cont_j=$cont_j+1;
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + 
+                    '</td><td><span class="'+d.estado_poliza_alerta[j]+'">'+d.estado_poliza[j]+
+                    '</span></td><td>' + d.numero_poliza[j] + 
                     '</td><td>' + d.vigencia_inicial[j] +
                     '</td><td>' + d.vigencia_final[j] +
-                    '</td><td>' + d.materia_asegurada[j] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_poliza[j] +
-                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button></td></tr>';
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_poliza[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
+        }
+        if (d.propuestas == 0) {
+            $tabla_propuestas = 'Sin propuestas de pólizas asociadas';
+        } else {
+            $tabla_propuestas =
+                '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+                '<tr><th># Propuestas</th><th>Estado</th><th>Nro propuesta</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
+                $cont_j=0;
+            for (j = 0; j < d.propuestas; j++) {
+                $cont_j=$cont_j+1;
+                $tabla_propuestas = $tabla_propuestas + '<tr><td>' + $cont_j + '</td><td><span class="'+d.estado_propuesta_alerta[j]+'">'+d.estado_propuesta[j]+'</span></td><td>' + d.numero_propuesta[j] + '</td><td>' + d.vigencia_inicial[j] +
+                    '</td><td>' + d.vigencia_final[j] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.numero_propuesta[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-search"></i></button></td></tr>';
+            }
+            $tabla_propuestas = $tabla_propuestas + '</table>';
         }
     }
 
@@ -1415,26 +1415,25 @@ function detalle_tareas_recurrentes(d) {
         '<tr>' +
         '<td>Acciones:</td>' +
         '<td><button title="Buscar información asociada" type="button" id=' + d.id_tarea +
-        ' name="info" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
-        d.id_tarea +
-        ' name="modifica" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +
-        d.id_tarea +
-        ' name="cerrar_tarea" id=' + d.id_tarea +
-        ' onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-check-circle"></i></i></button></td>' +
+        ' name="info" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' + d.id_tarea +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +d.id_tarea +
+        ' name="cerrar_tarea_recurrente" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
-        '<tr><td>Clientes:</td>' +
-        '<td>' + $tabla_clientes + '</td></tr>' +
-        '<tr><td>Pólizas:</td>' +
-        '<td>' + $tabla_polizas + '</td></tr>' +
+        '<tr><td>Clientes:</td>'+
+        '<td>'+ $tabla_clientes+'</td></tr>'+
+        '<tr><td>Pólizas:</td>'+
+        '<td>'+$tabla_polizas+'</td></tr>'+
+        '<tr><td>Propuestas de Pólizas:</td>'+
+        '<td>'+$tabla_propuestas+'</td></tr>'+
         '</table>';
 }
-
 function detalle_tareas(d) {
-    $sin_rel = $tabla_clientes = $tabla_polizas = '';
+    $sin_rel=$tabla_clientes=$tabla_polizas=$tabla_propuestas='';
     if (d.relaciones == 0) {
-        $sin_rel = 'Tarea sin asociar a clientes  o pólizas';
+        $sin_rel= 'Tarea sin asociar a clientes  o pólizas';
         $tabla_clientes = 'Sin clientes asociados';
         $tabla_polizas = 'Sin pólizas asociadas';
+        $tabla_propuestas = 'Sin propuestas de póliza asociadas';
     } else {
         if (d.clientes == 0) {
             $tabla_clientes = 'Sin clientes asociados';
@@ -1442,13 +1441,11 @@ function detalle_tareas(d) {
             $tabla_clientes =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
                 '<tr><th># Clientes</th><th>Nombre</th><th>Telefono</th><th>Correo Electrónico</th><th>Acciones</th></tr>';
-            $cont_i = 0;
+                $cont_i=0;
             for (i = 0; i < d.clientes; i++) {
-                $cont_i = $cont_i + 1;
-                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d
-                    .telefono[i] + '</td><td>' + d.correo[i] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_cliente[i] +
+                $cont_i=$cont_i+1;
+                $tabla_clientes = $tabla_clientes + '<tr><td>' + $cont_i + '</td><td>' + d.nombre[i] + '</td><td>' + d.telefono[i] + '</td><td>' + d.correo[i] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_cliente[i] +
                     ' name="info" onclick="botones(this.id, this.name, \'cliente\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_clientes = $tabla_clientes + '</table>';
@@ -1458,22 +1455,35 @@ function detalle_tareas(d) {
         } else {
             $tabla_polizas =
                 '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
-                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Compañia</th><th>Ramo</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Materia asegurada</th><th>Acciones</th></tr>';
-            $cont_j = 0;
+                '<tr><th># Pólizas</th><th>Estado</th><th>Nro Póliza</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
+                $cont_j=0;
             for (j = 0; j < d.polizas; j++) {
-                $cont_j = $cont_j + 1;
-                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + '</td><td><span class="' + d
-                    .estado_poliza_alerta[j] + '">' + d.estado_poliza[j] + '</span></td><td>' + d
-                    .numero_poliza[j] + '</td><td>' + d.compania[j] +
-                    '</td><td>' + d.ramo[j] +
+                $cont_j=$cont_j+1;
+                $tabla_polizas = $tabla_polizas + '<tr><td>' + $cont_j + 
+                    '</td><td><span class="'+d.estado_poliza_alerta[j]+'">'+d.estado_poliza[j]+
+                    '</span></td><td>' + d.numero_poliza[j] + 
                     '</td><td>' + d.vigencia_inicial[j] +
                     '</td><td>' + d.vigencia_final[j] +
-                    '</td><td>' + d.materia_asegurada[j] +
-                    '</td><td><button title="Buscar información asociada" type="button" id=' + d
-                    .id_poliza[j] +
-                    ' name="modifica" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button></td></tr>';
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.id_poliza[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button></td></tr>';
             }
             $tabla_polizas = $tabla_polizas + '</table>';
+        }
+        if (d.propuestas == 0) {
+            $tabla_propuestas = 'Sin propuestas de pólizas asociadas';
+        } else {
+            $tabla_propuestas =
+                '<table  background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">' +
+                '<tr><th># Propuestas</th><th>Estado</th><th>Nro propuesta</th><th>Inicio Vigencia</th><th>Vigencia Final</th><th>Acciones</th></tr>';
+                $cont_j=0;
+            for (j = 0; j < d.propuestas; j++) {
+                $cont_j=$cont_j+1;
+                $tabla_propuestas = $tabla_propuestas + '<tr><td>' + $cont_j + '</td><td><span class="'+d.estado_propuesta_alerta[j]+'">'+d.estado_propuesta[j]+'</span></td><td>' + d.numero_propuesta[j] + '</td><td>' + d.vigencia_inicial[j] +
+                    '</td><td>' + d.vigencia_final[j] +
+                    '</td><td><button title="Buscar información asociada" type="button" id=' + d.numero_propuesta[j] +
+                    ' name="info" onclick="botones(this.id, this.name, \'propuesta\')"><i class="fas fa-search"></i></button></td></tr>';
+            }
+            $tabla_propuestas = $tabla_propuestas + '</table>';
         }
     }
 
@@ -1489,13 +1499,14 @@ function detalle_tareas(d) {
         ' name="cerrar_tarea" id=' + d.id_tarea +
         ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
-        '<tr><td>Clientes:</td>' +
-        '<td>' + $tabla_clientes + '</td></tr>' +
-        '<tr><td>Pólizas:</td>' +
-        '<td>' + $tabla_polizas + '</td></tr>' +
+        '<tr><td>Clientes:</td>'+
+        '<td>'+ $tabla_clientes+'</td></tr>'+
+        '<tr><td>Pólizas:</td>'+
+        '<td>'+$tabla_polizas+'</td></tr>'+
+        '<tr><td>Propuestas de Pólizas:</td>'+
+        '<td>'+$tabla_propuestas+'</td></tr>'+
         '</table>';
 }
-
 function format(d) {
     // `d` is the original data object for the row
     $conf_tabla =
