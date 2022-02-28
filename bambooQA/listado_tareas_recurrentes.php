@@ -155,7 +155,7 @@ $(document).ready(function() {
     });
     table_tareas = $('#tareas_completas').DataTable({
 
-        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_recurrentes.php",
+        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_recurrentes.php",
         "scrollX": true,
 
 //        "columns": [{
