@@ -155,7 +155,7 @@ $(document).ready(function() {
     });
     table_tareas = $('#tareas_completas').DataTable({
 
-        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_completas.php",
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_recurrentes.php",
         "scrollX": true,
 
 //        "columns": [{
@@ -199,8 +199,8 @@ $(document).ready(function() {
                 title: "Fecha creación tarea"
             },
             {
-                "data":"procedimiento",
-                title: "Procedimiento"
+                "data":"dia_recordatorio",
+                title: "Día recordatorio"
             },
             {
                 "data":"feccierre",
@@ -434,12 +434,9 @@ function detalle_tareas(d) {
         '<tr>' +
         '<td>Acciones:</td>' +
         '<td><button title="Buscar información asociada" type="button" id=' + d.id_tarea +
-        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' +
-        d.id_tarea +
-        ' name="modifica" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +
-        d.id_tarea +
-        ' name="cerrar_tarea" id=' + d.id_tarea +
-        ' onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
+        ' name="info" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-search"></i></button><a> </a><button title="Editar"  type="button" id=' + d.id_tarea +
+        ' name="modifica" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-edit"></i></button><a> </a><button title="Completar tarea"  type="button" id=' +d.id_tarea +
+        ' name="cerrar_tarea_recurrente" onclick="botones(this.id, this.name, \'tarea recurrente\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
         '<tr><td>Clientes:</td>'+
         '<td>'+ $tabla_clientes+'</td></tr>'+
@@ -483,6 +480,12 @@ function botones(id, accion, base) {
                 'tipo_tarea':'individual'
                 }, 'post');
             }
+            if (base == 'tarea recurrente') {
+                $.redirect('/bambooQA/creacion_actividades.php', {
+                'id_tarea': id,
+                'tipo_tarea':'recurrente'
+                }, 'post');
+            }
             break;
         }
         case "tarea": {
@@ -513,11 +516,11 @@ function botones(id, accion, base) {
             }
             break;
         }
-        case "cerrar_tarea": {
-            if (base == 'tarea') {
+        case "cerrar_tarea_recurrente": {
+            if (base == 'tarea recurrente') {
                 $.ajax({
                     type: "POST",
-                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
+                    url: "/bamboo/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:accion,
@@ -528,9 +531,9 @@ function botones(id, accion, base) {
                 //table_tareas.draw();
                 //$('#tareas_completas').DataTable().ajax.reload(null, false );
                 alert('Tarea cerrada correctamente');
-                table_tareas.clear();
-                table_tareas.ajax.reload(null, false );
-                table_tareas.draw();
+                $('#tareas_completas').DataTable().clear();
+                $('#tareas_completas').DataTable().ajax.reload(null, false );
+                $('#tareas_completas').DataTable().draw();
             }
             break;
         }

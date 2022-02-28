@@ -4,6 +4,7 @@
         session_start(); 
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
+
 $resultado = '';
 if (isset($_POST['rut']) && !empty($_POST['rut']))
 {

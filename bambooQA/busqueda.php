@@ -7,6 +7,8 @@ $buscar='';
 
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
