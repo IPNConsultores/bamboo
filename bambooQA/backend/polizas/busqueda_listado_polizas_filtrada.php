@@ -9,271 +9,116 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-    //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
-//    $sql = "SELECT informacion_adicional, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_poliza,poliza_renovada, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 2, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 2, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 2, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 2, 'de_DE')) AS prima_neta, compania, ramo, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial,DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, CONCAT_WS(' ',moneda_comision,FORMAT(comision, 2, 'de_DE')) AS comision, CONCAT(FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision, CONCAT_WS(' ',moneda_comision,FORMAT(comision_bruta, 2, 'de_DE')) AS comision_bruta , CONCAT_WS(' ',moneda_comision,FORMAT(comision_neta, 2, 'de_DE')) AS comision_neta, numero_boleta, boleta_negativa, CONCAT_WS(' ',moneda_comision_negativa,FORMAT(comision_negativa, 2, 'de_DE')) AS comision_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, nombre_vendedor, forma_pago, nro_cuotas, CONCAT_WS(' ',moneda_valor_cuota,FORMAT(valor_cuota, 2, 'de_DE')) AS valor_cuota , DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota , if(a.rut_proponente=a.rut_asegurado, c.grupo, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo))) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido, a.nombre_vendedor FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null";
-    $sql = "SELECT item, venc_gtia, fech_cancela, motivo_cancela, informacion_adicional, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, tipo_poliza,poliza_renovada, moneda_poliza, deducible, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_afecta, 2, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_exenta, 2, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_bruta_anual, 2, 'de_DE')) AS prima_bruta_anual, CONCAT_WS(' ',moneda_poliza,FORMAT(prima_neta, 2, 'de_DE')) AS prima_neta, compania, ramo,  vigencia_inicial, vigencia_final, numero_poliza, materia_asegurada, patente_ubicacion,cobertura , CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA, a.id as id_poliza, b.id as idP, c.id as idA,  monto_asegurado, numero_propuesta, fecha_envio_propuesta, CONCAT_WS(' ',moneda_poliza,FORMAT(comision, 2, 'de_DE')) AS comision, CONCAT(FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision, CONCAT_WS(' ',moneda_poliza,FORMAT(comision_bruta, 2, 'de_DE')) AS comision_bruta , CONCAT_WS(' ',moneda_poliza,FORMAT(comision_neta, 2, 'de_DE')) AS comision_neta, numero_boleta, boleta_negativa, CONCAT_WS(' ',moneda_poliza,FORMAT(comision_negativa, 2, 'de_DE')) AS comision_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, nombre_vendedor, forma_pago, nro_cuotas, CONCAT_WS(' ',moneda_valor_cuota,FORMAT(valor_cuota, 2, 'de_DE')) AS valor_cuota , DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota , if(a.rut_proponente=a.rut_asegurado, c.grupo, if(c.grupo=b.grupo, c.grupo, CONCAT_WS(' ',c.grupo, b.grupo))) as grupo, if(a.rut_proponente=a.rut_asegurado, c.referido, if(c.referido=b.referido, c.referido, CONCAT_WS(' ',c.referido, b.referido))) as referido, a.nombre_vendedor FROM polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join clientes as c on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null where estado not in ('Anulado', 'Cancelado') ";
-
+    $sql = "SELECT a.numero_poliza, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final,  CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, a.id as id_poliza, b.id as idP, fecha_envio_propuesta, b.grupo, b.referido, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_afecta), 2, 'de_DE')) as total_prima_afecta,  CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_exenta), 2, 'de_DE')) as total_prima_exenta, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_neta), 2, 'de_DE')) as total_prima_neta, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE')) as total_prima_bruta  FROM polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join items as c on a.numero_poliza=c.numero_poliza where a.estado not in ('Rechazado', 'Anulado', 'Cancelado')
+group by a.numero_poliza, estado, DATE_FORMAT(vigencia_final,'%m-%Y') , DATE_FORMAT(vigencia_inicial,'%m-%Y') , moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final,   CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) , CONCAT_WS('-',b.rut_sin_dv, b.dv) ,b.telefono , b.correo , a.id , b.id , fecha_envio_propuesta, b.grupo, b.referido  ";
+  
 $resultado=mysqli_query($link, $sql);
     $codigo='{
       "data": [';
     $conta=0;
   While($row=mysqli_fetch_object($resultado))
-  {$conta=$conta+1;
+    {   
+        $conta=$conta+1;
+    //$resultado contiene propuestas, a cada una de estas líneas hay que asignar un array con los ítem asociados
+        //echo "primera query -> nro_propuesta: ".$row->numero_poliza."<br>";
+        $resultado_contador_contactos=mysqli_query($link, "SELECT count(numero_item) as contador FROM items where numero_poliza='".$row->numero_poliza."';");
+        while ($fila=mysqli_fetch_object($resultado_contador_contactos))
+        {
+        //echo "segunda query -> contador: ".$fila->contador."<br>";
+        $contador_contactos=0;
+        $items=[];
+        $cant_items=$fila->contador;
+        $resultado_items=mysqli_query($link, "select a.numero_poliza, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') AS tasa_afecta, CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%') AS tasa_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 2, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 2, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 2, 'de_DE')) AS prima_bruta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 2, 'de_DE')) AS prima_neta, a.monto_asegurado, if(a.venc_gtia='0000-00-00','',a.venc_gtia) as venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join polizas_2 as b on a.numero_poliza=b.numero_poliza where a.numero_poliza='".$row->numero_poliza."';");
+            $items_array=array("total_items"=>& $fila->contador);
+            if (!$cant_items=="0"){
+        while($indice=mysqli_fetch_object($resultado_items)){
+            //echo "tercera query -> nropropuesta: ".$row->numero_poliza."- ítem nro: ".$indice->id_item."<br>";
+            
+            $contador_contactos=$contador_contactos+1;
+            array_push($items, array(
+                "numero_item" =>& $indice->numero_item,
+                "materia_asegurada" =>& $indice->materia_asegurada,
+                "patente_ubicacion" =>& $indice->patente_ubicacion,
+                "cobertura" =>& $indice->cobertura,
+                "deducible" =>& $indice->deducible,
+                "tasa_afecta" =>& $indice->tasa_afecta,
+                "tasa_exenta" =>& $indice->tasa_exenta,
+                "prima_afecta" =>& $indice->prima_afecta,
+                "prima_exenta" =>& $indice->prima_exenta,
+                "prima_neta" =>& $indice->prima_neta,
+                "prima_bruta" =>& $indice->prima_bruta,
+                "nom_clienteA" =>& $indice->nom_clienteA,
+                "rut_clienteA" =>& $indice->rut_clienteA,
+                "telefonoA" =>& $indice->telefonoA,
+                "correoA" =>& $indice->correoA,
+                "venc_gtia" =>& $indice->venc_gtia,
+                "monto_asegurado" =>& $indice->monto_asegurado
+                ));
+            
+        }
+
+            }
+        
+        }
     if ($conta==1){
-      $codigo.= json_encode(array(
-        "ramo" =>& $row->ramo,
-        "estado" =>& $row->estado,
-        "anomes_final" =>& $row->anomes_final,
-        "anomes_inicial" =>& $row->anomes_inicial,
-        "tipo_poliza" =>& $row->tipo_poliza,
-        "moneda_poliza" =>& $row->moneda_poliza,
-        "vigencia_inicial" =>& $row->vigencia_inicial,
-        "deducible" =>& $row->deducible,
-        "prima_afecta" =>& $row->prima_afecta,
-        "prima_exenta" =>& $row->prima_exenta,
-        "prima_neta" =>& $row->prima_neta,
-        "prima_bruta_anual" =>& $row->prima_bruta_anual,
-        "vigencia_final"=>& $row->vigencia_final,
-        "compania" =>& $row->compania,
-        "numero_poliza"=>& $row->numero_poliza,
-        "item"=>& $row->item,
-        "materia_asegurada"=>& $row->materia_asegurada,
-        "patente_ubicacion" =>& $row->patente_ubicacion,
-        "cobertura" =>& $row->cobertura,
-        "nom_clienteP" =>& $row->nom_clienteP,
-        "rut_clienteP" =>& $row->rut_clienteP,
-        "telefonoP" =>& $row->telefonoP,
-        "correoP" =>& $row->correoP,
-        "nom_clienteA" =>& $row->nom_clienteA,
-        "rut_clienteA" =>& $row->rut_clienteA,
-        "telefonoA" =>& $row->telefonoA,
-        "correoA" =>& $row->correoA,
-        "idP" =>& $row->idP,
-        "idA" =>& $row->idA,
-        "grupo" =>& $row->grupo,
-        "referido" =>& $row->referido,
-        "id_poliza"=>& $row->id_poliza,
-        "monto_asegurado" =>& $row->monto_asegurado,
-        "numero_propuesta" =>& $row->numero_propuesta,
-        "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,
-        "comision" =>& $row->comision,
-        "porcentaje_comision" =>& $row->porcentaje_comision,
-        "comision_bruta" =>& $row->comision_bruta,
-        "comision_neta" =>& $row->comision_neta,
-        "numero_boleta" =>& $row->numero_boleta,
-        "boleta_negativa" =>& $row->boleta_negativa,
-        "comision_negativa" =>& $row->comision_negativa,
-        "depositado_fecha" =>& $row->depositado_fecha,
-        "vendedor" =>& $row->vendedor,
-        "nombre_vendedor" =>& $row->nombre_vendedor,
-        "forma_pago" =>& $row->forma_pago,
-        "nro_cuotas" =>& $row->nro_cuotas,
-        "valor_cuota" =>& $row->valor_cuota,
-        "fecha_primera_cuota" =>& $row->fecha_primera_cuota,
-        "poliza_renovada" =>& $row->poliza_renovada,
-        "informacion_adicional" =>& $row->informacion_adicional,
-        "venc_gtia" =>& $row->venc_gtia,
-        "fech_cancela" =>& $row->fech_cancela,
-        "motivo_cancela" =>& $row->motivo_cancela
-      ));
+      $codigo.= json_encode(array_merge(array(
+        "numero_poliza" =>& $row->numero_poliza,          //1
+        "estado" =>& $row->estado,                              //2
+        "tipo_propuesta" =>& $row->tipo_propuesta,              //3
+        "moneda_poliza" =>& $row->moneda_poliza,                //4
+        "vigencia_inicial" =>& $row->vigencia_inicial,          //6
+        "vigencia_final"=>& $row->vigencia_final,               //7
+        "compania" =>& $row->compania,                          //8
+        "ramo" =>& $row->ramo,                                  //9
+        "total_prima_afecta" =>& $row->total_prima_afecta,      //10
+        "total_prima_exenta" =>& $row->total_prima_exenta,      //11
+        "total_prima_neta" =>& $row->total_prima_neta,          //12
+        "total_prima_bruta" =>& $row->total_prima_bruta,        //13       
+        "nom_clienteP" =>& $row->nom_clienteP,                  //14
+        "rut_clienteP" =>& $row->rut_clienteP,                  //15
+        "telefonoP" =>& $row->telefonoP,                        //16
+        "correoP" =>& $row->correoP,                            //17
+        "idP" =>& $row->idP,                                    //18
+        "grupo" =>& $row->grupo,                                //19
+        "referido" =>& $row->referido,                          //20
+        "id_poliza"=>& $row->id_poliza,                   //21
+        "anomes_final" =>& $row->anomes_final,                  //22
+        "anomes_inicial" =>& $row->anomes_inicial,              //23
+        "items" =>&$items                                       //24
+        ),
+        $items_array));
     } else {
-    $codigo.= ', '.json_encode(array(
-      "ramo" =>& $row->ramo, 
-      "estado" =>& $row->estado,
-      "anomes_final" =>& $row->anomes_final,
-      "anomes_inicial" =>& $row->anomes_inicial,
-      "tipo_poliza" =>& $row->tipo_poliza,
-      "moneda_poliza" =>& $row->moneda_poliza,
-      "vigencia_inicial" =>& $row->vigencia_inicial,
-      "deducible" =>& $row->deducible,
-      "prima_afecta" =>& $row->prima_afecta,
-      "prima_exenta" =>& $row->prima_exenta,
-      "prima_neta" =>& $row->prima_neta,
-      "prima_bruta_anual" =>& $row->prima_bruta_anual,
-      "vigencia_final"=>& $row->vigencia_final,
-      "compania" =>& $row->compania,
-      "numero_poliza"=>& $row->numero_poliza,
-      "item"=>& $row->item,
-      "materia_asegurada"=>& $row->materia_asegurada,
-      "patente_ubicacion" =>& $row->patente_ubicacion,
-      "cobertura" =>& $row->cobertura,
-      "nom_clienteP" =>& $row->nom_clienteP,
-      "rut_clienteP" =>& $row->rut_clienteP,
-      "telefonoP" =>& $row->telefonoP,
-      "correoP" =>& $row->correoP,
-      "nom_clienteA" =>& $row->nom_clienteA,
-      "rut_clienteA" =>& $row->rut_clienteA,
-      "telefonoA" =>& $row->telefonoA,
-      "correoA" =>& $row->correoA,
-      "idP" =>& $row->idP,
-      "idA" =>& $row->idA,
-      "grupo" =>& $row->grupo,
-      "referido" =>& $row->referido,
-      "id_poliza"=>& $row->id_poliza,
-      "monto_asegurado" =>& $row->monto_asegurado,
-      "numero_propuesta" =>& $row->numero_propuesta,
-      "fecha_envio_propuesta" =>& $row->fecha_envio_propuesta,
-      "comision" =>& $row->comision,
-      "porcentaje_comision" =>& $row->porcentaje_comision,
-      "comision_bruta" =>& $row->comision_bruta,
-      "comision_neta" =>& $row->comision_neta,
-      "numero_boleta" =>& $row->numero_boleta,
-      "boleta_negativa" =>& $row->boleta_negativa,
-      "comision_negativa" =>& $row->comision_negativa,
-      "depositado_fecha" =>& $row->depositado_fecha,
-      "vendedor" =>& $row->vendedor,
-      "nombre_vendedor" =>& $row->nombre_vendedor,
-      "forma_pago" =>& $row->forma_pago,
-      "nro_cuotas" =>& $row->nro_cuotas,
-      "valor_cuota" =>& $row->valor_cuota,
-      "fecha_primera_cuota" =>& $row->fecha_primera_cuota,
-      "poliza_renovada" =>& $row->poliza_renovada,
-      "informacion_adicional" =>& $row->informacion_adicional,
-      "venc_gtia" =>& $row->venc_gtia,
-      "fech_cancela" =>& $row->fech_cancela,
-      "motivo_cancela" =>& $row->motivo_cancela
-    ));}
-  }
+        $codigo.= ', '.json_encode(array_merge(array(
+        "numero_poliza" =>& $row->numero_poliza,          //1
+        "estado" =>& $row->estado,                              //2
+        "tipo_propuesta" =>& $row->tipo_propuesta,              //3
+        "moneda_poliza" =>& $row->moneda_poliza,                //4
+        "vigencia_inicial" =>& $row->vigencia_inicial,          //6
+        "vigencia_final"=>& $row->vigencia_final,               //7
+        "compania" =>& $row->compania,                          //8
+        "ramo" =>& $row->ramo,                                  //9
+        "total_prima_afecta" =>& $row->total_prima_afecta,      //10
+        "total_prima_exenta" =>& $row->total_prima_exenta,      //11
+        "total_prima_neta" =>& $row->total_prima_neta,          //12
+        "total_prima_bruta" =>& $row->total_prima_bruta,        //13       
+        "nom_clienteP" =>& $row->nom_clienteP,                  //14
+        "rut_clienteP" =>& $row->rut_clienteP,                  //15
+        "telefonoP" =>& $row->telefonoP,                        //16
+        "correoP" =>& $row->correoP,                            //17
+        "idP" =>& $row->idP,                                    //18
+        "grupo" =>& $row->grupo,                                //19
+        "referido" =>& $row->referido,                          //20
+        "id_poliza"=>& $row->id_poliza,                   //21
+        "anomes_final" =>& $row->anomes_final,                  //22
+        "anomes_inicial" =>& $row->anomes_inicial,               //23
+        "items" =>&$items//23
+        ),
+        $items_array))
+        ;
+        }
+    }
   $codigo.=']}';
   mysqli_close($link);
   echo $codigo;
-  /*
-[4][1]-> "ramo" =>& $row->ramo, 
-[1][2]-> "estado" =>& $row->estado,
-[14][3]-> "anomes_final" =>& $row->anomes_final,
-[15][4]-> "anomes_inicial" =>& $row->anomes_inicial,
-[8][5]-> "tipo_poliza" =>& $row->tipo_poliza,
-[16][6]-> "moneda_poliza" =>& $row->moneda_poliza,
-[5][7]-> "vigencia_inicial" =>& $row->vigencia_inicial,
-[10][8]-> "deducible" =>& $row->deducible,
-[11][9]-> "prima_afecta" =>& $row->prima_afecta,
-[12][10]-> "prima_exenta" =>& $row->prima_exenta,
-[13][11]-> "prima_bruta_anual" =>& $row->prima_bruta_anual,
-[6][12]-> "vigencia_final"=>& $row->vigencia_final,
-[3][13]-> "compania" =>& $row->compania,
-[][14]-> "vigencia_final"=>& $row->vigencia_final,
-[2][15]-> "numero_poliza"=>& $row->numero_poliza,
-[7][16]-> "materia_asegurada"=>& $row->materia_asegurada,
-[9][17]-> "patente_ubicacion" =>& $row->patente_ubicacion,
-[17][18]-> "cobertura" =>& $row->cobertura,
-[18][19]-> "nom_clienteP" =>& $row->nom_clienteP,
-[19][20]-> "rut_clienteP" =>& $row->rut_clienteP,
-[][21]-> "telefonoP" =>& $row->telefonoP,
-[][22]-> "correoP" =>& $row->correoP,
-[20][23]-> "nom_clienteA" =>& $row->nom_clienteA,
-[21][24]-> "rut_clienteA" =>& $row->rut_clienteA,
-[][25]-> "telefonoA" =>& $row->telefonoA,
-[][26]-> "correoA" =>& $row->correoA,
-[][27]-> "idP" =>& $row->idP,
-[][28]-> "idA" =>& $row->idA,
-[][29]-> "grupo" =>& $row->grupo
-[][30]-> "id_poliza"=>& $row->id_poliza
 
-
-
-
-[1][2]-> "estado" =>& $row->estado,
-[2][15]-> "numero_poliza"=>& $row->numero_poliza,
-[3][13]-> "compania" =>& $row->compania,
-[4][1]-> "ramo" =>& $row->ramo, 
-[5][7]-> "vigencia_inicial" =>& $row->vigencia_inicial,
-[6][12]-> "vigencia_final"=>& $row->vigencia_final,
-[7][16]-> "materia_asegurada"=>& $row->materia_asegurada,
-[8][5]-> "tipo_poliza" =>& $row->tipo_poliza,
-[9][17]-> "patente_ubicacion" =>& $row->patente_ubicacion,
-[10][8]-> "deducible" =>& $row->deducible,
-[11][9]-> "prima_afecta" =>& $row->prima_afecta,
-[12][10]-> "prima_exenta" =>& $row->prima_exenta,
-[13][11]-> "prima_bruta_anual" =>& $row->prima_bruta_anual,
-[14][3]-> "anomes_final" =>& $row->anomes_final,
-[15][4]-> "anomes_inicial" =>& $row->anomes_inicial,
-[16][6]-> "moneda_poliza" =>& $row->moneda_poliza,
-[17][18]-> "cobertura" =>& $row->cobertura,
-[18][19]-> "nom_clienteP" =>& $row->nom_clienteP,
-[19][20]-> "rut_clienteP" =>& $row->rut_clienteP,
-[20][23]-> "nom_clienteA" =>& $row->nom_clienteA,
-[21][24]-> "rut_clienteA" =>& $row->rut_clienteA,
-->[][14]-> "vigencia_final"=>& $row->vigencia_final,
-[][21]-> "telefonoP" =>& $row->telefonoP,
-[][22]-> "correoP" =>& $row->correoP,
-[][25]-> "telefonoA" =>& $row->telefonoA,
-[][26]-> "correoA" =>& $row->correoA,
-[][27]-> "idP" =>& $row->idP,
-[][28]-> "idA" =>& $row->idA,
-[][29]-> "grupo" =>& $row->grupo
-[][30]-> "id_poliza"=>& $row->id_poliza
-
-agregar:
-grupo,
-poliza_renovada,
-
-            {
-                "data": "referido",
-                title: "Referido"
-            },
-            {
-                "data": "monto_asegurado",
-                title: "Monto Asegurado"
-            },
-                        {
-                "data": "numero_propuesta",
-                title: "Propuesta"
-            },
-                        {
-                "data": "fecha_envio_propuesta",
-                title: "Fecha envío propuesto"
-            },
-                        {
-                "data": "comision",
-                title: "Comisión"
-            },
-                        {
-                "data": "porcentaje_comision",
-                title: "% Comisión"
-            },
-                        {
-                "data": "comision_bruta",
-                title: "Comisión Bruta"
-            },
-                        {
-                "data": "comision_neta",
-                title: "Comisión Neta"
-            },
-                        {
-                "data": "numero_boleta",
-                title: "Número boleta"
-            },
-                        {
-                "data": "boleta_negativa",
-                title: "Boleta negativa"
-            },
-                        {
-                "data": "comision_negativa",
-                title: "Comisión negativa"
-            },
-            {
-                "data": "depositado_fecha",
-                title: "Fecha depósito"
-            },
-            {
-                "data": "vendedor",
-                title: "Nombre vendedor"
-            },
-            {
-                "data": "forma_pago",
-                title: "Forma de pago"
-            },
-            {
-                "data": "nro_cuotas",
-                title: "Número de cuotas"
-            },
-            {
-                "data": "valor_cuota",
-                title: "Valor cuota"
-            },
-            {
-                "data": "fecha_primera_cuota",
-                title: "Fecha primera cuota"
-            }
-*/
 ?>

@@ -172,16 +172,12 @@ $(document).ready(function() {
                 title: "Referido"
             } // 13
         ],
-        //          "search": {
-        //          "search": "abarca"
-        //          },
-        "columnDefs": 
-        [
+        "columnDefs": [
             {
                 "targets": [7,8],
                 "visible": false,
             },
-         {
+        {
         targets: 1,
         render: function (data, type, row, meta) {
              var estado='';

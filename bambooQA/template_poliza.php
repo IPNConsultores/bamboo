@@ -31,7 +31,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   {
   $busqueda = $_POST[ "id_poliza" ];
   }
-  $query_ramo = "SELECT ramo from polizas where id=". $busqueda ." ;";
+  $query_ramo = "SELECT ramo from polizas_2 where id=". $busqueda ." ;";
   $resultado_ramo_poliza = mysqli_query($link,$query_ramo);
   
    While( $row = mysqli_fetch_object( $resultado_ramo_poliza ) ) {

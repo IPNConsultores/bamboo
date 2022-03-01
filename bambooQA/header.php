@@ -1,4 +1,5 @@
 <?php
+//obsoleto?
 // Initialize the session
 if(!isset($_SESSION)) 
 { 
