@@ -262,10 +262,12 @@ switch ($_POST["accion"]) {
     case 'crear_poliza_web':
       $busqueda=estandariza_info($_POST["nro_poliza"]);
           //poliza
-          $mensaje='Póliza actualizada correctamente';
+          $mensaje='Póliza creada correctamente';
           $listado='/bambooQA/listado_polizas.php';
   
               $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+              $accion_secundaria= estandariza_info($_POST["accion_secundaria"]);
+              $poliza_renovada= estandariza_info($_POST["poliza_renovada"]);
               $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
               
               $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
@@ -304,15 +306,8 @@ switch ($_POST["accion"]) {
           
                 //$query='UPDATE items SET numero_poliza=\'' . $nro_poliza . '\', rut_asegurado=\'' . $rut_aseg . '\',dv_asegurado=\'' . $dv_aseg . '\',materia_asegurada=\'' . $materia . '\',patente_ubicacion=\'' . $detalle_materia . '\',cobertura=\'' . $cobertura . '\',deducible=\'' . $deducible . '\', tasa_afecta=\'' . $tasa_afecta . '\', tasa_exenta=\'' . $tasa_exenta . '\', prima_afecta=\'' . $prima_afecta . '\', prima_exenta=\'' . $prima_exenta . '\', prima_neta=\'' . $prima_neta . '\', prima_bruta_anual=\'' . $prima_bruta . '\', monto_asegurado=\'' . $monto_aseg . '\', venc_gtia=\'' . $venc_gtia . '\', fecha_ultima_modificacion=CURRENT_TIMESTAMP WHERE numero_propuesta=\'' . $nro_propuesta . '\' and numero_item=\'' . $numero_item . '\';';
                 mysqli_query($link, $query);
-                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
+                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Crea ítem', '".str_replace("'","**",$query)."','Ítems',CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']'), '".$_SERVER['PHP_SELF']."')");
               }
-  
-  
-            //Aprueba propuesta póliza
-            $query= "update propuesta_polizas_2 set estado='Aprobado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
-            mysqli_query($link, $query);
-            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Aprueba propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
-    
           //crea token
           $largo = 6;
           $token = bin2hex(random_bytes($largo));
@@ -326,15 +321,20 @@ switch ($_POST["accion"]) {
               $nro_propuesta = $fila->numero_poliza;
           }
           mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación póliza', '".str_replace("'","**",$query)."','poliza', '".$id_poliza."' , '".$_SERVER['PHP_SELF']."')");
-      // corrige ítems
-      $query="delete from items where numero_propuesta='".$nro_propuesta."' and numero_item>".$contador_items.";";
-      mysqli_query($link, $query);
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
-        
+     
         //inicio acciones de renovación
+        if ($accion_secundaria=='renovar'){
+         //Póliza renovada registra renovación
+        $query= "update polizas_2 set estado_renovacion='Renovado' where numero_poliza='".$poliza_renovada."';";
+            mysqli_query($link, $query);
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
+        $query= "update polizas_2 set poliza_renovada='".$poliza_renovada."' where id='".$id_poliza."';";
+            mysqli_query($link, $query);
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','poliza','".$id_poliza."', '".$_SERVER['PHP_SELF']."')");
+ 
         
         //fin acciones de renovación
-        
+        }
         
       break;
   

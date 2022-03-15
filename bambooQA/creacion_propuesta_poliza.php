@@ -4,11 +4,11 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino='crear_propuesta';
 
-$_SERVER[ "REQUEST_METHOD" ] = "POST";
-$_POST["accion"] = 'modifica_poliza';
-$_POST["accion_secundaria"] = 'renovar';
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'modifica_poliza';
+//$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000704';
-$_POST["numero_poliza"]='852849';
+//$_POST["numero_poliza"]='852849';
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
     {
@@ -1633,9 +1633,9 @@ console.log(orgn);
                     document.getElementById("fechaprop2").style.display = "flex";
                     document.getElementById("nro_poliza").value = '';
                     document.getElementById("fecha_emision_poliza").value = '';
-                    document.getElementById("comision").value = '';
-                    document.getElementById("comisionbruta").value = '';
-                    document.getElementById("comisionneta").value = '';
+                    document.getElementById("comision").value = '<?php echo $comision; ?>';
+                    document.getElementById("comisionbruta").value = '<?php echo $comision_bruta; ?>';
+                    document.getElementById("comisionneta").value = '<?php echo $comision_neta; ?>';
                     document.getElementById("fechadeposito").value = '';
                     document.getElementById("comisionneg").value = '';
                     document.getElementById("boletaneg").value = '';
@@ -1997,7 +1997,7 @@ function vencimientogarantia(){
         console.log("poliza_web");
         
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe2.php', { 
+          //$.redirect('/bambooQA/test_felipe3.php', { 
             'accion': 'crear_poliza_web',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
