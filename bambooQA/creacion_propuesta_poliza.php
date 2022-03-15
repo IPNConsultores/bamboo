@@ -4,10 +4,12 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino='crear_propuesta';
 
-//$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza_web';
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'modifica_poliza';
+$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000704';
-
+$_POST["numero_poliza"]='852849';
+$poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
     {
       $camino = $_POST["accion"];
@@ -70,7 +72,10 @@ $camino='crear_propuesta';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'modifica_poliza')
     {
       $camino = $_POST["accion"];
-    
+        $accion_secundaria=$_POST["accion_secundaria"];
+        if ($accion_secundaria=='renovar'){
+            $poliza_renovada=$_POST["numero_poliza"];
+        }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
@@ -189,6 +194,11 @@ function estandariza_info( $data ) {
 </div>
 <div id=titulo4 style="display:none">
   <p>Póliza Web / Creación
+  </p>
+</div>
+<div id=titulo5 style="display:none">
+  <p>Póliza Web / Renovación Póliza N° :
+    <?php  echo $numero_poliza; ?>
   </p>
 </div>
 <div class="form-row">
@@ -1607,6 +1617,38 @@ console.log(orgn);
                 document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 contador+=1;
             }
+            
+            //inicio renovación póliza
+            
+                var origen_2='<?php echo $accion_secundaria; ?>';
+                if (origen_2=='renovar'){
+                    console.log(origen_2);
+                    document.getElementById("contenedor_nro_propuesta").style.display = "inline";
+                    document.getElementById("titulo3").style.display = "none";
+                    document.getElementById("titulo5").style.display = "flex";
+                    document.getElementById("informacion_poliza").style.display = "flex";
+                    document.getElementById("nro_poliza").required = true;
+                    document.getElementById("nro_propuesta").value = "WEB";
+                    document.getElementById("fechaprop").style.display = "none";
+                    document.getElementById("fechaprop2").style.display = "flex";
+                    document.getElementById("nro_poliza").value = '';
+                    document.getElementById("fecha_emision_poliza").value = '';
+                    document.getElementById("comision").value = '';
+                    document.getElementById("comisionbruta").value = '';
+                    document.getElementById("comisionneta").value = '';
+                    document.getElementById("fechadeposito").value = '';
+                    document.getElementById("comisionneg").value = '';
+                    document.getElementById("boletaneg").value = '';
+                    document.getElementById("boleta").value = '';
+                    document.getElementById("fechaprimer").value = '';
+                    document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
+                    document.getElementById("fechavenc").value = '';
+                    '<?php $camino='crear_poliza_web'; ?>'
+                    
+                }
+            //fin renovación póliza
+            
+            
             break;
           }
           case 'crear_poliza_web':{
@@ -2001,7 +2043,12 @@ function vencimientogarantia(){
           'fechadeposito': document.getElementById("fechadeposito").value,
           'comisionneg': document.getElementById("comisionneg").value,
           'boletaneg': document.getElementById("boletaneg").value,
-          'boleta': document.getElementById("boleta").value
+          'boleta': document.getElementById("boleta").value,
+          
+          //renovación
+          'accion_secundaria':'<?php echo $accion_secundaria; ?>',
+          'poliza_renovada':'<?php echo $poliza_renovada; ?>'
+          
           }, 'post');
           break;
 

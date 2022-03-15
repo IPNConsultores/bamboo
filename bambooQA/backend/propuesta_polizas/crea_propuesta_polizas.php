@@ -330,7 +330,12 @@ switch ($_POST["accion"]) {
       $query="delete from items where numero_propuesta='".$nro_propuesta."' and numero_item>".$contador_items.";";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
-  
+        
+        //inicio acciones de renovación
+        
+        //fin acciones de renovación
+        
+        
       break;
   
   
