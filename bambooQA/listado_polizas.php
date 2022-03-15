@@ -370,7 +370,7 @@ function format_poliza(d) {
         '<td>' +
         '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="WIP Renovar póliza" type="button" id="' + d.id_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
+        '<button title="WIP Renovar póliza" type="button" id="' + d.numero_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
         '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
         '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> - </a>' +
         '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>C</i></button><a> </a>' +
@@ -442,25 +442,6 @@ function botones(id, accion, base) {
             }
             break;
         }
-        case "renovar":{
-            var motivo = window.prompt('Ingresa la vía por donde quieres renovar esta póliza:\r\n 1) Vía Propuesta WEB\r\n 2) Vía Propuesta tradicional', 'digita 1 o 2');
-            switch (motivo){
-                case "1":
-                    alert('Renovación vía propuesta WEB');
-                    $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
-                        'numero_poliza': id,
-                        'accion': 'modifica_poliza',
-                        'accion_secundaria': 'renovar'
-                    }, 'post');
-                    break;
-                case "2":
-                    alert('Renovación vía propuesta tradicional');
-                    break;
-                default:
-                    alert('Número ingresado no válido. Debes ingresar 1 o 2');
-                    break;
-            }
-        }
         case "info": {
             $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
@@ -487,6 +468,26 @@ function botones(id, accion, base) {
                 $.redirect('/bambooQA/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
+            }
+            break;
+        }
+        case "renovar":{
+            var motivo = window.prompt('Ingresa la vía por donde quieres renovar esta póliza:\r\n 1) Vía Propuesta WEB\r\n 2) Vía Propuesta tradicional', 'digita 1 o 2');
+            switch (motivo){
+                case "1":
+                    //alert('Renovación vía propuesta WEB');
+                    $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                        'numero_poliza': id,
+                        'accion': 'modifica_poliza',
+                        'accion_secundaria': 'renovar'
+                    }, 'post');
+                    break;
+                case "2":
+                    alert('Renovación vía propuesta tradicional');
+                    break;
+                default:
+                    alert('Número ingresado no válido. Debes ingresar 1 o 2');
+                    break;
             }
             break;
         }
