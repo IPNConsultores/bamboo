@@ -139,6 +139,8 @@ switch ($_POST["accion"]) {
     $busqueda=$nro_propuesta;
     // creación propuesta
     $mensaje='Propuesta Póliza registrada correctamente';
+    $accion_secundaria= estandariza_info($_POST["accion_secundaria"]);
+    $poliza_renovada= estandariza_info($_POST["poliza_renovada"]);
         $id_propuesta='';
         $nro_propuesta='';
         //crea token
@@ -184,6 +186,20 @@ switch ($_POST["accion"]) {
         mysqli_query($link, $query_items);
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega ítems', '".str_replace("'","**",$query_items)."','Ítems', CONCAT('".$nro_propuesta."','[','".(intval($key)+1)."', ']') , '".$_SERVER['PHP_SELF']."')");
       }
+              //inicio acciones de renovación
+        if ($accion_secundaria=='renovar'){
+         //Póliza renovada registra renovación
+        $query= "update polizas_2 set estado_renovacion='Renovado' where numero_poliza='".$poliza_renovada."';";
+            mysqli_query($link, $query);
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
+        $query= "update propuesta_polizas_2 set poliza_renovada='".$poliza_renovada."' where id='".$id_propuesta."';";
+            mysqli_query($link, $query);
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','propuesta poliza','".$id_propuesta."', '".$_SERVER['PHP_SELF']."')");
+        }
+        
+        //fin acciones de renovación
+      
+      
         break;
   case 'crear_poliza':
   

@@ -4,21 +4,30 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino='crear_propuesta';
 
-//$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'modifica_poliza';
-//$_POST["accion_secundaria"] = 'renovar';
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'actualiza_propuesta';
+$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000704';
-//$_POST["numero_poliza"]='852849';
+$_POST["numero_poliza"]='renovación post pap 1';
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
     {
       $camino = $_POST["accion"];
-     
-    
+      $accion_secundaria=$_POST["accion_secundaria"];
+      if ($accion_secundaria=='renovar'){
+          $poliza_renovada=$_POST["numero_poliza"];
+        $query = "select '' as numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from polizas_2 where numero_poliza='".$poliza_renovada."'";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_poliza='".$poliza_renovada."' order by numero_item asc";
+
+      }    
+      else{
+        $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+
+      }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
     
@@ -43,7 +52,6 @@ $poliza_renovada='';
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -181,13 +189,13 @@ function estandariza_info( $data ) {
   </p>
 </div>
 <div id=titulo2 style="display:none">
-  <p>Propuesta de Póliza / Modificación / N° Propuesta :
+  <p>Propuesta de Póliza / Modificación / N° Propuesta:
     <?php  echo $nro_propuesta; ?>
     <br>
   </p>
 </div>
 <div id=titulo3 style="display:none">
-  <p>Póliza / Modificación / N° Póliza :
+  <p>Póliza / Modificación / N° Póliza:
     <?php  echo $numero_poliza; ?>
     <br>
   </p>
@@ -197,9 +205,12 @@ function estandariza_info( $data ) {
   </p>
 </div>
 <div id=titulo5 style="display:none">
-  <p>Póliza Web / Renovación Póliza N° :
+  <p>Póliza Web / Renovación Póliza N°:
     <?php  echo $numero_poliza; ?>
   </p>
+</div>
+<div id=titulo6 style="display:none">
+  <p>Propuesta de Póliza / Renovación Póliza N°: <?php  echo $poliza_renovada; ?> </p>
 </div>
 <div class="form-row">
 <div class="col" id="botones_edicion" style="display:none ;align-items: center;">
@@ -337,8 +348,8 @@ function estandariza_info( $data ) {
                 <div class="md-form">
                    <input placeholder="Selected date" type="date" name="fechaprop" id="fechaprop" value="<?php echo date("Y-m-d");?>"
                       class="form-control"  oninput="valida_vencimiento()" max= "9999-12-31" required>
-                       <input placeholder="Selected date" type="text" name="fechaprop2" id="fechaprop2" value="No Aplica"
-                                        class="form-control" max= "9999-12-31" style="display:none;" readonly>
+                   <input placeholder="Selected date" type="text" name="fechaprop2" id="fechaprop2" value="No Aplica"
+                                    class="form-control" max= "9999-12-31" style="display:none;" readonly>
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -836,32 +847,6 @@ function estandariza_info( $data ) {
 </div>/
 <script>
 
-//function validadatos() {
-            //// Fetch all the forms we want to apply custom Bootstrap validation styles to
-//            var forms = document.getElementsByClassName('needs-validation');
-            ////var form =document.getElementById('formulario');
-            
-            //var button = document.getElementById('boton_submit');
-            // Loop over them and prevent submission
-            //var validation = 
-        //Array.prototype.slice.call(forms).forEach(function(form) {
-          //      form.addEventListener('click', function(event) {
-                   // if (form.checkValidity() === false) {
-            //       console.log(form.checkValidity())
-              //       if (!form.checkValidity() ) {
-                         
-                         
-                //        event.preventDefault();
-                  //      event.stopPropagation();
-                      
-                        
-                //    }
-                 //   form.classList.add('was-validated');
-                //}, false);
-            //});
-        //};
-
-
 $("#boton_submit").click(function(e){
 
     blnFormValidity= $('#formulario')[0].checkValidity()
@@ -875,30 +860,7 @@ $("#boton_submit").click(function(e){
     
     genera_propuesta();
 })
- 
- 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-  //  (function() {
-     //   'use strict';
-    //    window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-     //       var forms = document.getElementsByClassName('needs-validation');
-            //var form =document.getElementById('formulario');
-            
-        //    var button = document.getElementById('boton_submit');
-            // Loop over them and prevent submission
-      //      var validation = Array.prototype.filter.call(forms, function(form) {
-        //        form.addEventListener('submit', function(event) {
-          //          if (form.checkValidity() === false) {
-            //            event.preventDefault();
-              //          event.stopPropagation();
-                        
-            //        }
-              //      form.classList.add('was-validated');
-        //        }, false);
-         //   });
-        //}, false);
-    //})();
+
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -1455,25 +1417,41 @@ console.log(orgn);
                 document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 contador+=1;
             }
-             var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
-            for (var i = 0; i < fields1.length; i++) {
-                fields1[i].disabled = true;
-            }
-            var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
-            for (var i = 0; i < fields2.length; i++) {
-                fields2[i].disabled = true;
-            }
-            var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
-            for (var i = 0; i < fields3.length; i++) {
-                fields3[i].disabled = true;
-            }
-            var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
-            for (var i = 0; i < fields4.length; i++) {
-                fields4[i].disabled = true;
-            }
+
             
             
-            ////////////////
+            //inicio renovación póliza
+            
+            var origen_2='<?php echo $accion_secundaria; ?>';
+                if (origen_2=='renovar'){
+                    console.log(origen_2 + '<?php echo $camino; ?>');
+                    document.getElementById("contenedor_nro_propuesta").style.display = "none";
+                    document.getElementById("titulo2").style.display = "none";
+                    document.getElementById("titulo6").style.display = "flex";
+                    document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
+                    document.getElementById("fechavenc").value = '';
+                    document.getElementById("edicion1").style.display = "none";
+                    '<?php $camino='crear_propuesta'; ?>'
+                    
+                } else {
+                  var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+                  for (var i = 0; i < fields1.length; i++) {
+                      fields1[i].disabled = true;
+                  }
+                  var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+                  for (var i = 0; i < fields2.length; i++) {
+                      fields2[i].disabled = true;
+                  }
+                  var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+                  for (var i = 0; i < fields3.length; i++) {
+                      fields3[i].disabled = true;
+                  }
+                  var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+                  for (var i = 0; i < fields4.length; i++) {
+                      fields4[i].disabled = true;
+                  }
+                }
+            //fin renovación póliza
             
             
             break;
@@ -1666,7 +1644,6 @@ console.log(orgn);
             
             break;
           }
-          
           default:{
             break;
           }
@@ -1792,14 +1769,13 @@ function vencimientogarantia(){
         venc_gtia.push(document.getElementById("venc_gtia["+i+"]").value);
         numero_item.push(document.getElementById("numero_item["+i+"]").value);
       }
-    //console.log(rutaseg);
-   //envía información a
-    //if (document.getElementById("headingfour").style.display =="none"){ Pendiente ocular datos póliza
+
     var camino='<?php echo $camino; ?>';
+    console.log(camino)
     switch (camino) {
         case 'crear_propuesta': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe.php', { 
+          //$.redirect('/bambooQA/test_felipe3.php', { 
             'accion': 'crear_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -1992,8 +1968,7 @@ function vencimientogarantia(){
           }, 'post');
           break;
       }
-    
-      case 'crear_poliza_web': {
+        case 'crear_poliza_web': {
         console.log("poliza_web");
         
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {

@@ -483,7 +483,11 @@ function botones(id, accion, base) {
                     }, 'post');
                     break;
                 case "2":
-                    alert('Renovación vía propuesta tradicional');
+                    $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                        'numero_poliza': id,
+                        'accion': 'actualiza_propuesta',
+                        'accion_secundaria': 'renovar'
+                    }, 'post');
                     break;
                 default:
                     alert('Número ingresado no válido. Debes ingresar 1 o 2');
