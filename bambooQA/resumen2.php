@@ -1593,84 +1593,85 @@ function format(d) {
 
 function format_poliza(d) {
     // `d` is the original data object for the row
-    var ext_cancelado = '';
-    var items = '';
-    var listado_items = '';
-    if (d.estado == 'Cancelado') {
-        ext_cancelado = '<tr>' +
-            '<td>Fecha CANCELACIÓN:</td>' +
-            '<td>' + d.fech_cancela + '</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>motivo CANCELACIÓN:</td>' +
-            '<td>' + d.motivo_cancela + '</td>' +
-            '</tr>';
+    var ext_cancelado='';
+    var items='';
+    var listado_items='';
+    if (d.estado=='Cancelado'){
+        ext_cancelado='<tr>' +
+        '<td>Fecha CANCELACIÓN:</td>' +
+        '<td>' + d.fech_cancela + '</td>' +
+        '</tr>'+
+        '<tr>' +
+        '<td>motivo CANCELACIÓN:</td>' +
+        '<td>' + d.motivo_cancela + '</td>' +
+        '</tr>';
     }
     console.log(d.total_items);
-    if (d.total_items == "0") {
-        items =
+    if(d.total_items=="0"){
+            items=
             '<tr>' +
             '<td>Sin ítems registrados</td>' +
-            '</tr>';
-    } else {
-
-        for (var i = 0; i < d.total_items; i++) {
-            listado_items += '<tr>' +
-                '<td>' + (i + 1) + '</td>' +
-                '<td>' + d.items[i].rut_clienteA + '</td>' +
-                '<td>' + d.items[i].nom_clienteA + '</td>' +
-                '<td>' + d.items[i].materia_asegurada + '</td>' +
-                '<td>' + d.items[i].patente_ubicacion + '</td>' +
-                '<td>' + d.items[i].cobertura + '</td>' +
-                '<td>' + d.items[i].deducible + '</td>' +
-                '<td>' + d.items[i].monto_asegurado + '</td>' +
-                '<td>' + d.items[i].prima_afecta + '</td>' +
-                '<td>' + d.items[i].prima_exenta + '</td>' +
-                '<td>' + d.items[i].prima_neta + '</td>' +
-                '<td>' + d.items[i].prima_bruta + '</td>' +
-                '<td>' + d.items[i].venc_gtia + '</td>'
-            '</tr>';
-
+            '</tr>';   
         }
-        items = '<table class="table table-striped" style="width:100%" id="listado_polizas">' +
-            '<tr>' +
-            '<th></th>' +
-            '<th>Rut Asegurado</th>' +
-            '<th>Nombre Asegurado</th>' +
-            '<th>Materia Asegurada</th>' +
-            '<th>Patente o Ubicación</th>' +
-            '<th>Cobertura</th>' +
-            '<th>Deducible</th>' +
-            '<th>Monto asegurado</th>' +
-            '<th>Prima Afecta</th>' +
-            '<th>Prima Exenta</th>' +
-            '<th>Prima Neta</th>' +
-            '<th>Prima Bruta</th>' +
+        else {
+            
+            for (var i=0; i<d.total_items; i++){
+            listado_items+= '<tr>'+
+            '<td>' + (i+1) + '</td>'+
+            '<td>' + d.items[i].rut_clienteA + '</td>'+
+            '<td>' + d.items[i].nom_clienteA + '</td>'+
+            '<td>' + d.items[i].materia_asegurada + '</td>'+
+            '<td>' + d.items[i].patente_ubicacion + '</td>'+
+            '<td>' + d.items[i].cobertura + '</td>'+
+            '<td>' + d.items[i].deducible + '</td>'+
+            '<td>' + d.items[i].monto_asegurado + '</td>'+
+            '<td>' + d.items[i].prima_afecta + '</td>'+
+            '<td>' + d.items[i].prima_exenta + '</td>'+
+            '<td>' + d.items[i].prima_neta + '</td>'+
+            '<td>' + d.items[i].prima_bruta + '</td>'+
+            '<td>' + d.items[i].venc_gtia + '</td>'
+            '</tr>';
+  
+            }
+            items='<table class="table table-striped" style="width:100%" id="listado_polizas">'+
+            '<tr>'+
+            '<th></th>'+
+            '<th>Rut Asegurado</th>'+
+            '<th>Nombre Asegurado</th>'+
+            '<th>Materia Asegurada</th>'+
+            '<th>Patente o Ubicación</th>'+
+            '<th>Cobertura</th>'+
+            '<th>Deducible</th>'+
+            '<th>Monto asegurado</th>'+
+            '<th>Prima Afecta</th>'+
+            '<th>Prima Exenta</th>'+
+            '<th>Prima Neta</th>'+
+            '<th>Prima Bruta</th>'+
 
-            '<th>Vencimiento Garantía</th>' +
-
-            '</tr>' +
-            listado_items +
-            '</table>';
+            '<th>Vencimiento Garantía</th>'+
+            
+            '</tr>'+
+            listado_items+
+            '</table>' ;
 
     }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        ext_cancelado +
-        '<td>Total Prima afecta:</td>' +
-        '<td>' + d.total_prima_afecta + '</td>' +
+            ext_cancelado + 
+            '<td>Total Prima afecta:</td>' +
+            '<td>' + d.total_prima_afecta + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Total Prima exenta:</td>' +
-        '<td>' + d.total_prima_exenta + '</td>' +
+            '<td>Total Prima exenta:</td>' +
+            '<td>' + d.total_prima_exenta + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Total Prima neta anual:</td>' +
-        '<td>' + d.total_prima_neta + '</td>' +
+            '<td>Total Prima neta anual:</td>' +
+            '<td>' + d.total_prima_neta + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Total Prima bruta anual:</td>' +
-        '<td>' + d.total_prima_bruta + '</td>' +
+            '<td>Total Prima bruta anual:</td>' +
+            '<td>' + d.total_prima_bruta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td></td>' +
@@ -1681,10 +1682,11 @@ function format_poliza(d) {
         '<td>' +
         '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza + ' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
-        '<button title="WIP Generar correo"  type="button"' + 'id=' + d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>C</i></button>' +
-        '<button style="background-color: #FF0000" title="Anular póliza"  type="button" id=' + d.id_poliza + ' name="anular_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>A</i></button>' +
+        '<button title="Renovar póliza" type="button" id="' + d.numero_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> - </a>' +
+        '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>C</i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Anular póliza"  type="button" id=' + d.id_poliza + ' name="anular_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>A</i></button><a> </a>' +
         '<button style="background-color: #FF0000" title="Eliminar póliza"  type="button" id=' + d.id_poliza + ' name="eliminar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i>E</i></button>' +
         '</td>' +
         '</tr>' +
@@ -1899,6 +1901,30 @@ function botones(id, accion, base) {
                 $('#listado_tareas_recurrentes').DataTable().clear();
                 $('#listado_tareas_recurrentes').DataTable().ajax.reload(null, false);
                 $('#listado_tareas_recurrentes').DataTable().draw();
+            }
+            break;
+        }
+        case "renovar":{
+            var motivo = window.prompt('Ingresa la vía por donde quieres renovar esta póliza:\r\n 1) Vía Propuesta WEB\r\n 2) Vía Propuesta tradicional', 'digita 1 o 2');
+            switch (motivo){
+                case "1":
+                    //alert('Renovación vía propuesta WEB');
+                    $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                        'numero_poliza': id,
+                        'accion': 'modifica_poliza',
+                        'accion_secundaria': 'renovar'
+                    }, 'post');
+                    break;
+                case "2":
+                    $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+                        'numero_poliza': id,
+                        'accion': 'actualiza_propuesta',
+                        'accion_secundaria': 'renovar'
+                    }, 'post');
+                    break;
+                default:
+                    alert('Número ingresado no válido. Debes ingresar 1 o 2');
+                    break;
             }
             break;
         }
