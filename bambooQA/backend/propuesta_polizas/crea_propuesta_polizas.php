@@ -190,10 +190,10 @@ switch ($_POST["accion"]) {
               //inicio acciones de renovación
         if ($accion_secundaria=='renovar'){
          //Póliza renovada registra renovación
-        $query= "update polizas_2 set estado_renovacion='Renovado' where numero_poliza='".$poliza_renovada."';";
+        $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
-        $query= "update propuesta_polizas_2 set poliza_renovada='".$poliza_renovada."' where id='".$id_propuesta."';";
+        $query= "update propuesta_polizas_2 set poliza_renovada='".$poliza_renovada."' , comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_propuesta."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','propuesta poliza','".$id_propuesta."', '".$_SERVER['PHP_SELF']."')");
         }
@@ -342,10 +342,10 @@ switch ($_POST["accion"]) {
         //inicio acciones de renovación
         if ($accion_secundaria=='renovar'){
          //Póliza renovada registra renovación
-        $query= "update polizas_2 set estado_renovacion='Renovado' where numero_poliza='".$poliza_renovada."';";
+        $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
-        $query= "update polizas_2 set poliza_renovada='".$poliza_renovada."' where id='".$id_poliza."';";
+        $query= "update polizas_2 set poliza_renovada='".$poliza_renovada."', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_poliza."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','poliza','".$id_poliza."', '".$_SERVER['PHP_SELF']."')");
  
