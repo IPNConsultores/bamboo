@@ -1,16 +1,23 @@
 <?php
+if ( !isset( $_SESSION ) ) {
+  session_start();
+}
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'generar_documento';
+//$_POST["numero_propuesta"]='P000716';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
     
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
+        $poliza_renovada = $row->poliza_renovada;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
         $nombre_proponente = $row->nombre_cliente;
         $telefono = $row->telefono;
@@ -183,9 +190,15 @@
     </div>
     
   <!--DATOS PROPONENTE -->
-    <div class="row" >
+    <div class="row" id='renovacion' style="display:none" >
+        <div class="col-1"></div>
+        <div id='titulo_renovacion' class="col" style="background-color:yellow;border-style :solid; border-color: grey; border-width: 1px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px"></div>
+    <div class="col-1"></div>
+    </div>
+        <div class="row" >
         <div class="col-1"></div>
         <div class="col" style="background-color:lightgrey;border-style :solid; border-color: grey; border-width: 1px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px; "> <b>PROPONENTE / CONTRATANTE </b></div>
+
         <div class="col-1"></div>
     </div>
     <div class="row" >
@@ -574,7 +587,11 @@
     });
     }
 document.addEventListener("DOMContentLoaded", function(event) {
-
+if ('<?php echo $poliza_renovada; ?>'!==''){
+    document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
+    document.getElementById("renovacion").style.display="flex";
+}
+    
     document.getElementById("numero_items").innerHTML = '<?php echo $nro_items; ?>';
     var contador= parseInt(document.getElementById("numero_items").innerHTML);
        //console.log(contador);
