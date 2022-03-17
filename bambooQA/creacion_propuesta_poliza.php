@@ -4,11 +4,12 @@ if ( !isset( $_SESSION ) ) {
 }
 $camino='crear_propuesta';
 
-$_SERVER[ "REQUEST_METHOD" ] = "POST";
-$_POST["accion"] = 'actualiza_propuesta';
-$_POST["accion_secundaria"] = 'renovar';
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000704';
-$_POST["numero_poliza"]='renovación post pap 1';
+//$_POST["numero_poliza"]='16032022';
+
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
     {
@@ -874,6 +875,7 @@ $("#boton_submit").click(function(e){
 
 </body>
 </html><script>
+var orgn='';
 function valida_rut_duplicado_prop() {
     var dato = $('#rutprop').val();
     console.log(dato);
@@ -1345,7 +1347,7 @@ function habilitaedicion1() {
 document.addEventListener("DOMContentLoaded", function(event) {
     var bPreguntar = true;
     
-var orgn = '<?php echo $camino; ?>';
+orgn = '<?php echo $camino; ?>';
 console.log('Cargando información');
 console.log(orgn);
         switch (orgn) 
@@ -1424,14 +1426,13 @@ console.log(orgn);
             
             var origen_2='<?php echo $accion_secundaria; ?>';
                 if (origen_2=='renovar'){
-                    console.log(origen_2 + '<?php echo $camino; ?>');
                     document.getElementById("contenedor_nro_propuesta").style.display = "none";
                     document.getElementById("titulo2").style.display = "none";
                     document.getElementById("titulo6").style.display = "flex";
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
                     document.getElementById("edicion1").style.display = "none";
-                    '<?php $camino='crear_propuesta'; ?>'
+                    orgn='crear_propuesta';
                     
                 } else {
                   var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
@@ -1452,7 +1453,6 @@ console.log(orgn);
                   }
                 }
             //fin renovación póliza
-            
             
             break;
           }
@@ -1621,7 +1621,7 @@ console.log(orgn);
                     document.getElementById("fechaprimer").value = '';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
-                    '<?php $camino='crear_poliza_web'; ?>'
+                    orgn='crear_poliza_web';
                     
                 }
             //fin renovación póliza
@@ -1640,15 +1640,14 @@ console.log(orgn);
             document.getElementById("nro_propuesta").value = "WEB";
             document.getElementById("fechaprop").style.display = "none";
             document.getElementById("fechaprop2").style.display = "flex";
-            
-            
+
             break;
           }
           default:{
+
             break;
           }
         }
-
 	//window.onbeforeunload = preguntarAntesDeSalir;
  
 	function preguntarAntesDeSalir () {
@@ -1770,12 +1769,12 @@ function vencimientogarantia(){
         numero_item.push(document.getElementById("numero_item["+i+"]").value);
       }
 
-    var camino='<?php echo $camino; ?>';
-    console.log(camino)
+    var camino=orgn;
+
     switch (camino) {
         case 'crear_propuesta': {
           $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe3.php', { 
+          //$.redirect('/bambooQA/test_felipe3.php', {
             'accion': 'crear_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -1809,7 +1808,11 @@ function vencimientogarantia(){
           'prima_neta': prima_neta,
           'prima_bruta': prima_bruta,
           'monto_aseg': monto_aseg,
-          'venc_gtia': venc_gtia
+          'venc_gtia': venc_gtia,
+          
+        //renovación
+          'accion_secundaria':'<?php echo $accion_secundaria; ?>',
+          'poliza_renovada':'<?php echo $poliza_renovada; ?>'
 
           }, 'post');
         break;

@@ -136,7 +136,7 @@ switch ($_POST["accion"]) {
       break;
 
   case 'crear_propuesta':
-    $busqueda=$nro_propuesta;
+    
     // creación propuesta
     $mensaje='Propuesta Póliza registrada correctamente';
     $accion_secundaria= estandariza_info($_POST["accion_secundaria"]);
@@ -156,6 +156,7 @@ switch ($_POST["accion"]) {
             // printf ("%s (%s)\n", $fila->id);
             $id_propuesta = $fila->id;
             $nro_propuesta = $fila->numero_propuesta;
+            $busqueda=$nro_propuesta;
         }
         mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza', '".$nro_propuesta."' , '".$_SERVER['PHP_SELF']."')");
     // Incorporar ítems
