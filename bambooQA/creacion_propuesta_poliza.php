@@ -302,7 +302,7 @@ function estandariza_info( $data ) {
         <label style="color: darkred">&nbsp; *</label>
         <input type="text" id="nombre_prop" class="form-control" name="nombre"
                               oninput="checkRut(this);copiadatos()"
-                              onchange="valida_rut_duplicado_prop();copiadatos();"  disabled required>
+                              onchange="valida_rut_duplicado_prop();copiadatos();quitavalidador()"  disabled required>
                               
         <div   style="color:red; font-size: 12px ; visibility: hidden" id="validador10">No puedes dejar este campo
           en blanco</div>
@@ -612,7 +612,7 @@ function estandariza_info( $data ) {
             <div class="col-md-4 mb-3">
               <label for="valorcuota">Valor Cuota</label>
               <div class="form-inline">
-                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:20%;">
+                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:30%;">
                   <option value="UF"
                                               <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
                   <option value="USD"
@@ -620,8 +620,8 @@ function estandariza_info( $data ) {
                   <option value="CLP"
                                               <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
                 </select>
-                <input type="text" class="form-control" name="valorcuota" id="valorcuota"
-                                           style="width:52%;">
+                <input type="number" step="0.01" placeholder="0,00" class="form-control" name="valorcuota" id="valorcuota"
+                                           style="width:42%;">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -648,7 +648,7 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
               <label>Porcentaje Comisión del Corredor</label>
               <div class="form-inline">
-                <input type="text" class="form-control" id="porcentaje_comsion"
+                <input type="number" step="0.01" placeholder="0,00" class="form-control" id="porcentaje_comsion"
                                           name="porcentaje_comsion" onChange="calculacomision()">
                 <div class="input-group-prepend"><span class="input-group-text"
                                               id="porcentaje_comi">%</span></div>
@@ -779,21 +779,21 @@ function estandariza_info( $data ) {
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text"
                                               id="moneda5">UF</span></div>
-                <input type="text" class="form-control" id="comision" name="comision">
+                <input input type="number" step="0.01" placeholder="0,00"class="form-control" id="comision" name="comision">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Bruta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input type="text" class="form-control" id="comisionbruta" name="comisionbruta">
+                <input input type="number" step="0.01" placeholder="0,00" class="form-control" id="comisionbruta" name="comisionbruta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Neta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input type="text" class="form-control" id="comisionneta" name="comisionneta">
+                <input input type="number" step="0.01" placeholder="0,00" class="form-control" id="comisionneta" name="comisionneta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -818,7 +818,7 @@ function estandariza_info( $data ) {
               <label for="comision">Monto</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input type="text" class="form-control" name="comisionneg" id="comisionneg">
+                <input input type="number" step="0.01" placeholder="0,00" class="form-control" name="comisionneg" id="comisionneg">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -838,10 +838,12 @@ function estandariza_info( $data ) {
     <div id="auxiliar2" style="display: none;"></div>
     <input id="auxiliar3" placeholder="false" style="display: none;" />
     
-    <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_submit' >Registrar</button>
+    
+    <button class="btn" type="button" style="background-color: #536656; color: white; display:none"
+              id='boton_submit' onclick=" validarutitem()"></button>
 </form>
-
+<button class="btn" type="button" style="background-color: #536656; color: white"
+              id='boton_prueba' onclick=" validarutitem()">Registrar</button>
 
 <br>
 <br>
@@ -1052,8 +1054,8 @@ function calculaprimabruta() {
     var primaneta;
     primabruta = parseFloat(primaafecta.replace(",", "."), 10) * (1.19) + parseFloat(primaexenta.replace(",", "."))
     primaneta = parseFloat(primaafecta.replace(",", "."), 10) + parseFloat(primaexenta.replace(",", "."))
-    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2).replace(".", ",")
-    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2).replace(".", ",")
+    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2).replace(".", ".")
+    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2).replace(".", ".")
     
      }
 }
@@ -1248,6 +1250,7 @@ function seleccion_rut(rut) {
         case 'busca_rut_prop': {
             document.getElementById("rutprop").value = rut;
             document.getElementById("rutprop").onchange();
+            document.getElementById("validador10").style.visibility = "hidden";
              var contador =  document.getElementById("contador").value;
                  for (var i = 1; i <= contador; i++){
                      
@@ -1680,9 +1683,39 @@ document.getElementById("formulario").addEventListener('submit', function(event)
 
     if (document.getElementById("nombre_prop").value == "") {
         document.getElementById("validador10").style.visibility = "visible";
+ 
         event.preventDefault();
+        window.history.back();
+    }
+     if (document.getElementById("contador").value == "0") {
+        alert("No has ingresado Items");
+        
+        event.preventDefault();
+        window.history.back();
+    }
+     else {
     }
 });
+
+function validarutitem(){
+    
+    
+    if (document.getElementById("nombre_prop").value == "") {
+        document.getElementById("validador10").style.visibility = "visible";
+ 
+      event.preventDefault();
+       
+    }
+     else if (document.getElementById("contador").value == "0") {
+        alert("No has ingresado Items");
+ 
+       event.preventDefault();
+        
+    }
+     else {
+         document.getElementById("boton_submit").click();
+    }
+}
 
 function validadorfecha(id){
     
@@ -2190,17 +2223,17 @@ function vencimientogarantia(){
                      'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
                 '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
-                      '<input type="text" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
-                      '<input type="text" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
-                '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2235,17 +2268,17 @@ function vencimientogarantia(){
                      'id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()"></div></td>'+
                 '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
-                      '<input type="text" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
-                      '<input type="text" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="text" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
-                '<input type="text" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2282,7 +2315,7 @@ function vencimientogarantia(){
 
   $('#btRemove').click(function() { // Elimina un elemento por click
 
-        if (iCnt != 1) {
+        if (iCnt != 0) {
            
             $('#btAdd').removeAttr('disabled');
             $('#item' + iCnt).remove();
@@ -2295,7 +2328,7 @@ function vencimientogarantia(){
             
         }
         }
-        if (iCnt == 1) {
+        if (iCnt == 0) {
             
             
             //$('#mytable').remove();
@@ -2303,7 +2336,7 @@ function vencimientogarantia(){
             //                $('#btSubmit').remove(); 
             $('#btAdd').removeAttr('disabled');
             $('#btAdd').attr('class', 'btn')
-            iCnt = 1;
+            iCnt = 0;
             //var newElement2 =
               //  '<table class="table" id="mytable"><tr><th>Nombre Contacto</th><th>Telefono</th><th>E-mail</th></tr></table>';
            // $("#main").append($(newElement2));
@@ -2311,5 +2344,27 @@ function vencimientogarantia(){
         }
     });
  });
+
+
+document.getElementById("formulario").addEventListener('submit', function(event) {
+    if (document.getElementById("rutprop").value == "") {
+        document.getElementById("validador10").style.visibility = "visible";
+        event.preventDefault();
+    }
+     else {
+    }
+    
+    
+});
+
+function quitavalidador(){
+    
+    if (document.getElementById("nombre_prop").value != ""){
+        
+        alert("asda");
+        document.getElementById("validador10").style.visibility = "hidden";
+    } 
+    
+}
 
 </script>
