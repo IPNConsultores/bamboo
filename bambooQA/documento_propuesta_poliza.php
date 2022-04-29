@@ -4,7 +4,7 @@ if ( !isset( $_SESSION ) ) {
 }
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P000716';
+//$_POST["numero_propuesta"]='P000708';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -913,7 +913,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("monto_asegurado").innerHTML = '<?php echo $monto_aseg[0]; ?>';
     } 
     else {
-        document.getElementById("monto_asegurado").innerHTML ='Monto asegurado por ítem'
+        document.getElementById("monto_asegurado").innerHTML ='<?php echo array_sum($monto_aseg); ?>';
     }
     
     document.getElementById("comision_corredor").innerHTML = '<?php echo $porcentaje_comision; ?>';
