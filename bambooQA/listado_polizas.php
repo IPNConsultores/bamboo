@@ -76,8 +76,9 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     </tr>
 
             </table>
-            <div id="botones_poliza"></div>
-        </div>
+            <div id="botones_poliza">
+            <button title="Descargar_excel_propuestas" type="button"  onclick="window.location.href='/bambooQA/backend/polizas/genera_excel_polizas.php'">Descargar Excel <i class="fas fa-file-excel"></i></button>
+            </div>
 
         <div id="auxiliar" style="display: none;">
             <input id="var1" value="<?php 
