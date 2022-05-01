@@ -45,7 +45,7 @@ if ( !isset( $_SESSION ) ) {
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_exenta, 2, 'de_DE')) as prima_exenta, prima_neta, CONCAT_WS(' ',FORMAT(prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_exenta, 2, 'de_DE')) as prima_exenta, prima_neta, CONCAT_WS(' ',FORMAT(prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, monto_asegurado,venc_gtia, CONCAT_WS(' ',FORMAT(prima_afecta*0.19, 2, 'de_DE')) as prima_afecta_iva FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -72,7 +72,7 @@ if ( !isset( $_SESSION ) ) {
                 $prima_bruta[] = $row_item->prima_bruta_anual;
                 $monto_aseg[] = $row_item->monto_asegurado;
                 $venc_gtia[] = $row_item->venc_gtia;
-                $prima_afecta_iva[] = $row_item->prima_afecta * 0.19;
+                $prima_afecta_iva[] = $row_item->prima_afecta_iva;
             }
         }
     }
@@ -731,6 +731,21 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
             '<div class="col-1"></div>'+
                 '<div class="col" style="border-style :solid; border-color: grey; border-width: 2px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px" >'+
                     '<div class= "row align-items-center">'+
+                        '<div class="col" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+
+                            '<label>Deducible:</label> '+
+                        '</div>'+
+                        '<div class="col" contenteditable="true">'+       
+                            '<label id="deducible[' + i + ']">deducible</label>'+
+                            '<br>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '<div class="col-1"></div>'+
+        '</div>'+
+        '<div class="row" >'+
+            '<div class="col-1"></div>'+
+                '<div class="col" style="border-style :solid; border-color: grey; border-width: 2px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px" >'+
+                    '<div class= "row align-items-center">'+
                         '<div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+
                             '<label>Monto Asegurado:</label> '+
                         '</div>'+
@@ -894,6 +909,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     var materia=<?php echo json_encode($materia); ?>;
     var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
     var cobertura=<?php echo json_encode($cobertura); ?>;
+    var deducible=<?php echo json_encode($deducible); ?>;
     var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
     var tasa_afecta=<?php echo json_encode($tasa_afecta); ?>;
     var tasa_exenta=<?php echo json_encode($tasa_exenta); ?>;
@@ -931,6 +947,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("detalle_materia["+contador.toString()+"]").innerHTML = materia[contador.toString()-1];
         document.getElementById("ubicacion_riesgo["+contador.toString()+"]").innerHTML = detalle_materia[contador.toString()-1];
         document.getElementById("cobertura["+contador.toString()+"]").innerHTML = cobertura[contador.toString()-1];
+        document.getElementById("deducible["+contador.toString()+"]").innerHTML = deducible[contador.toString()-1];
         //document.getElementById("moneda_monto["+contador.toString()+"]").innerHTML  ='< ?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_iva["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_prima_neta["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
