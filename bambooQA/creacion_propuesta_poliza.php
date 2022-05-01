@@ -22,7 +22,7 @@ $poliza_renovada='';
 
       }    
       else{
-        $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query = "select numero_propuesta, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
         $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }
@@ -49,6 +49,7 @@ $poliza_renovada='';
         $fechaprimer = $row->fecha_primera_cuota;
         $nombre_vendedor = $row->vendedor;
         $porcentaje_comision = $row->porcentaje_comision;
+        $fecha_envio_propuesta= $row->fecha_envio_propuesta;
         $comentarios_int = str_replace( "\r\n", "\\n", $row->comentarios_int );
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
@@ -1900,6 +1901,7 @@ function vencimientogarantia(){
           'fechaprop': document.getElementById("fechaprop").value,
           'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
           'fechainicio': document.getElementById("fechainicio").value,
+          'fecha_envio_propuesta': '<?php echo $fecha_envio_propuesta; ?>',
           'fechavenc': document.getElementById("fechavenc").value,
           'moneda_poliza': document.getElementById("moneda_poliza").value,
           'selcompania': document.getElementById("selcompania").value, 

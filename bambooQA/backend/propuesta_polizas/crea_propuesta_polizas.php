@@ -212,7 +212,7 @@ switch ($_POST["accion"]) {
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
             $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
-            
+            $fecha_envio_propuesta=estandariza_info($_POST["fecha_envio_propuesta"]);
             $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
             $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
             $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
@@ -287,7 +287,7 @@ switch ($_POST["accion"]) {
               $accion_secundaria= estandariza_info($_POST["accion_secundaria"]);
               $poliza_renovada= estandariza_info($_POST["poliza_renovada"]);
               $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
-              
+              $fecha_envio_propuesta='';
               $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
               $comisionbruta= cambia_puntos_por_coma(estandariza_info($_POST["comisionbruta"]));
               $comisionneta= cambia_puntos_por_coma(estandariza_info($_POST["comisionneta"]));
