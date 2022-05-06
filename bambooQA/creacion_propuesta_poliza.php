@@ -7,7 +7,7 @@ $camino='crear_propuesta';
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'actualiza_propuesta';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000704';
+//$_POST["numero_propuesta"]='P000760';
 //$_POST["numero_poliza"]='16032022';
 
 $poliza_renovada='';
@@ -66,7 +66,14 @@ $poliza_renovada='';
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
                 $detalle_materia_i = $row_item->patente_ubicacion;
                 $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
-                $deducible[] = $row_item->deducible;
+                if ($ramo == "RC" or $ramo == "D&O" or $ramo == "D&O Condominio" or $ramo == "RC General"){
+                    //echo str_replace("% Pérdida con mínimo de%", "", $row_item->deducible);
+                    $deducible_porcentaje[] = substr($row_item->deducible, 0,strrpos($row_item->deducible, "% de la Pérdida con mínimo de"));
+                    $deducible_valor[] = substr($row_item->deducible, strrpos ( $row_item->deducible , " ") + 1, strlen($row_item->deducible) - 1);
+                    
+                }else{
+                    $deducible[] = $row_item->deducible;  
+                }
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
                 $prima_afecta[] = $row_item->prima_afecta;
@@ -730,9 +737,7 @@ function estandariza_info( $data ) {
         <div class="card-body" id="card-body-three">
           <label for="comentario_interno"><b>Comentarios Internos</b></label>
           <br>
-          <textarea class="form-control" rows="2" style="height:100px" id='comentarios_int' name='comentario'
-                              style="text-indent:0px" ;>
-          </textarea>
+          <textarea class="form-control" rows="2" style="height:100px" id='comentarios_int' name='comentario' style="text-indent:0px" ;></textarea>
           <br>
            <label for="comentario_externo"><b>Comentarios Externos</b></label>
           <br>
@@ -1024,21 +1029,15 @@ function cambio_moneda() {
     document.getElementById("moneda4["+i+"]").innerHTML = moneda;
     document.getElementById("moneda5["+i+"]").innerHTML = moneda;
     document.getElementById("moneda7["+i+"]").innerHTML = moneda;
-
      }
-     
      }
-     
      else{
-         
          for (var i = 1; i <= contador; i++)
             {
-                
                 document.getElementById("moneda2["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda3["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda4["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda5["+i+"]").innerHTML = moneda;
-
             }          
          }
 }
@@ -1066,15 +1065,11 @@ function cambia_deducible() {
     
     var ramo = document.getElementById("ramo").value;
     var contador = document.getElementById("contador").value;
-      
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
         ramo == "VEH - Vehículos Pesados") {
         console.log("si");
-        
         for (var i = contador; i <= contador; i++){
-            
                console.log("si2");
-               
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']" style="display:flex ;align-items: center;">'+
                '<select class="form-control" id="deducible_defecto[' +i+ ']" name="deducible_defecto[' +i+ ']">'+
                '<option value="null" ?>Selecciona el deducible </option>'+
@@ -1085,68 +1080,35 @@ function cambia_deducible() {
                '<option value="UF 20" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 20") echo "selected" ?>>UF 20</option>'+
                '<option value="UF 50" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $deducible == "UF 50") echo "selected" ?>>UF 50</option>'+
                 '</select></div>';
-                          
                       }
-        
-        
-        
     } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" || ramo ==
         "INC - Hogar" || ramo == "INC - Misceláneos" || ramo == "INC - Perjuicio por Paralización" || ramo ==
         "INC - Pyme" || ramo == "INC - TRBF (Todo Riesgo Bienes Físicos)") {
-      
-      
-     
         for (var i = 1; i <= contador; i++){
-            
-            
-               
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="Varios" onChange="pobladeducible()"></div>';
-                          
                       }
-        
-      
-      
-            
-
     } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo == "Garantía" || ramo ==
         "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" || ramo == "ASISTENCIA EN VIAJE" || ramo ==
         "APV" || ramo == "VIDA") {
-        
          for (var i = 1; i <= contador; i++){
-            
-            
-               
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-inline" id="deducible_defecto_div[' +i+ ']">'+
               '<input type="text" class="form-control" name="deducible_defecto[' +i+ ']" id="deducible_defecto[' +i+ ']" value="No Aplica" onChange="pobladeducible()"></div>';
-                          
          }
-        
-
     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
-
-
-
          for (var i = 1; i <= contador; i++){
-            
             id="deducible_defecto[' +i+ ']"
-               
                document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-row" id="deducible_rc['+i+']"  align-items: center;">'+
                '<div class="col-2">'+
-                '<input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px" onChange="pobladeducible()>'+
+                '<input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px" onChange="pobladeducible()">'+
               '</div>'+
               '<label style="font-size:75%;">% Pérdida con mínimo de</label><br>'+
               '<div class="col" style="display: flex; align-items: center;">'+
               ' <div class="input-group-prepend"><span class="input-group-text" id="moneda7['+i+']">UF</span></div>'+
                ' <input type="text" class="form-control" name="deducible_valor" id="deducible_valor['+i+']" placeholder="Valor" onChange="pobladeducible()"></div></div>'+
                '<div class="form-inline" style="display:none" ><input type="text" class="form-control" name="deducible" id="deducible_defecto[' +i+ ']"></div>'
-                          
          }
-        
-        
-            
     } else {
-        
     }
 }
 
@@ -1158,15 +1120,11 @@ function pobladeducible(){
      for (var i = 1; i <= contador; i++){
          
           document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value +
-            "% de la Pérdida con mínimo de " + document.getElementById('moneda7['+i+']').innerHTML + " " + document
-            .getElementById('deducible_valor['+i+']').value;
+            "% de la Pérdida con mínimo de " + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
          
          
+          }
      }
-     
-     }
-     
-  
 }
 
 $('#test1').on('shown.bs.modal', function() {
@@ -1396,6 +1354,9 @@ console.log(orgn);
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
             var deducible=<?php echo json_encode($deducible); ?>;
+            var deducible_porcentaje_v=<?php echo json_encode($deducible_porcentaje); ?>;
+            var deducible_valor_v=<?php echo json_encode($deducible_valor); ?>;
+            //console.log('deducible valor: '+deducible_valor_v)
             var tasa_afecta=<?php echo json_encode($tasa_afecta); ?>;
             var tasa_exenta=<?php echo json_encode($tasa_exenta); ?>;
             var prima_afecta=<?php echo json_encode($prima_afecta); ?>;
@@ -1404,7 +1365,7 @@ console.log(orgn);
             var prima_bruta=<?php echo json_encode($prima_bruta); ?>;
             var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
             var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
-
+            var ramo='<?php echo $ramo; ?>';
             console.log(contador + 'total items: ' +'<?php echo $nro_items; ?>' )
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
@@ -1420,7 +1381,16 @@ console.log(orgn);
                 document.getElementById("prima_bruta["+contador.toString()+"]").value = prima_bruta[(contador-1).toString()];
                 document.getElementById("prima_neta["+contador.toString()+"]").value = prima_neta[(contador-1).toString()];
                 document.getElementById("venc_gtia["+contador.toString()+"]").value = venc_gtia[(contador-1).toString()];
-                document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
+
+                if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
+                    document.getElementById("deducible_porcentaje["+contador.toString()+"]").value =deducible_porcentaje_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                }
+                else
+                {
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
+                }
+
                 contador+=1;
             }
 
