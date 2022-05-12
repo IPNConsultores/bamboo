@@ -1098,11 +1098,11 @@ function cambia_deducible() {
     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
          for (var i = 1; i <= contador; i++){
             id="deducible_defecto[' +i+ ']"
-               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-row" id="deducible_rc['+i+']"  align-items: center;">'+
-               '<div class="col-2">'+
-                '<input type="text" class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px" onChange="pobladeducible()">'+
+               document.getElementById("div_deducible["+i+"]").innerHTML = '<div class="form-row" id="deducible_rc['+i+']"  style="align-items: center;">'+
+               '<div class="col" style="display: flex; align-items: center;">'+
+                '<input class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+i+']" placeholder="%" style="width:44px" onChange="pobladeducible();alert(this.value)">'+
+                '<label style="font-size:75%;">% Pérdida con mínimo de</label><br>'+
               '</div>'+
-              '<label style="font-size:75%;">% Pérdida con mínimo de</label><br>'+
               '<div class="col" style="display: flex; align-items: center;">'+
               ' <div class="input-group-prepend"><span class="input-group-text" id="moneda7['+i+']">UF</span></div>'+
                ' <input type="text" class="form-control" name="deducible_valor" id="deducible_valor['+i+']" placeholder="Valor" onChange="pobladeducible()"></div></div>'+
