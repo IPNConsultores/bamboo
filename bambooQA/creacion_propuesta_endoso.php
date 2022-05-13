@@ -338,10 +338,43 @@
   
   
         </div>
+        <div class="card">
+            <div class="card-header" id="headingthree" style="background-color:whitesmoke">
+             <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                              data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree"
+                              style="color:#536656">Confirmación de Endoso </button>
+             </h5>
+            </div>
+        <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+         <div class="card-body" id="card-body-three">
+            <div class="form-row">
+                <div class="col-3">
+                    <label for="monto"><b>Número de Endoso</b></label>
+                    <label style="color: darkred">&nbsp; *</label>
+                    <div class="md-form">
+                    <input type="text" class="form-control" id="nro_endoso" name="nro_endoso">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <label for="comentario_externo"><b>Comentarios </b></label>
+            <br>
+                    <textarea class="form-control" rows="2" style="height:100px" id='comentarios' name='comentario'
+                              style="text-indent:0px" ;>
+                    </textarea>
+            
+            </div>
+           
+        
+         </div>
+        </div>
+        </div>
    
-    </div>
+</div>
     
- </form>
+</form>
 <br>
 <button class="btn" type="button" style="background-color: #536656; color: white"
               id='boton_prueba' onclick=" validarutitem()">Registrar</button>
