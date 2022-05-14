@@ -5,10 +5,9 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
-//$_POST["numero_propuesta"]='P000760';
-
+//$_POST["accion"] = 'crear_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
+//$_POST["numero_propuesta"]='P000760';
 //$_POST["numero_poliza"]='16032022';
 
 $poliza_renovada='';
@@ -1042,7 +1041,6 @@ function calculaprimabruta() {
 
 
 function cambia_deducible() {
-console.log('ingreso a cambia')
     var ramo = document.getElementById("ramo").value;
     var contador = document.getElementById("contador").value;
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
@@ -1434,6 +1432,7 @@ orgn = '<?php echo $camino; ?>';
             var prima_bruta=<?php echo json_encode($prima_bruta); ?>;
             var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
             var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
+            var ramo='<?php echo $ramo; ?>';
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
@@ -1451,7 +1450,11 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                    
                 }
+                else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
+                      document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                } 
                 else
                 {
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
@@ -1518,6 +1521,7 @@ orgn = '<?php echo $camino; ?>';
             var prima_bruta=<?php echo json_encode($prima_bruta); ?>;
             var monto_aseg=<?php echo json_encode($monto_aseg); ?>;
             var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
+            var ramo='<?php echo $ramo; ?>';
 
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
@@ -1537,6 +1541,9 @@ orgn = '<?php echo $camino; ?>';
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
                 }
+                else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
+                      document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                } 
                 else
                 {
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
@@ -2120,7 +2127,6 @@ function vencimientogarantia(){
      function click_agrega_item(){
 
         if (iCnt <= 100) {
-            console.log('creación ítem :'+iCnt)
             iCnt = iCnt + 1;
 
             // Añadir caja de texto.
@@ -2133,7 +2139,6 @@ function vencimientogarantia(){
             }
             
             else if (document.getElementById("radio2_si").checked) {
-                
                 var newElement = '<tr id =item' + iCnt+ ' style="width:80%;">'+
                 '<td><input class="form-control" type="text" value="' + iCnt + '" id="numero_item[' + iCnt + ']" name="numero_item[]" disabled required/></td>'+
                 '<td><div class="input-group-prepend"><button type="button" id="busca_rut_aseg[' + iCnt + ']" data-toggle="modal" onclick="origen_busqueda(this.id,' + iCnt + ')" data-target="#modal_cliente"><i class="fas fa-search"></i></button><input type="text" class="form-control" '+
@@ -2206,7 +2211,6 @@ function vencimientogarantia(){
 
             $('#main').after(container, divSubmit);
              document.getElementById("contador").value = iCnt;
-                
                 
             }
             
