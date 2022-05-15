@@ -4,7 +4,7 @@ if ( !isset( $_SESSION ) ) {
 }
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P000708';
+//$_POST["numero_propuesta"]='P000760';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -310,7 +310,7 @@ if ( !isset( $_SESSION ) ) {
                         <label>Monto Total Asegurado:</label> 
                     </div>
                     <div class="col-1" style="text-align:right">       
-                        <label></label>
+                        <label id="moneda_poliza_MTA"></label>
                         <br>
                     </div>
                     <div class="col-3" contenteditable="true">       
@@ -873,6 +873,8 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("moneda_poliza").innerHTML = '<?php echo $moneda_poliza; ?>';
     document.getElementById("moneda_poliza_PT").innerHTML = '<?php echo $moneda_poliza; ?>';
     document.getElementById("moneda_poliza_PN").innerHTML = '<?php echo $moneda_poliza; ?>';
+    document.getElementById("moneda_poliza_MTA").innerHTML = '<?php echo $moneda_poliza; ?>';    
+    
     document.getElementById("moneda_poliza_PE").innerHTML = '<?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_poliza_iva").innerHTML = '<?php echo $moneda_poliza; ?>';
     
@@ -890,10 +892,10 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("valorcuota").innerHTML = '<?php echo $valorcuota; ?>';
     document.getElementById("fechaprimer").innerHTML = '<?php echo $fechaprimer; ?>';
     //document.getElementById("dia_pago").innerHTML = '< ?php echo $dia_pago; ?>';
-    document.getElementById("total_prima_neta").innerHTML = <?php echo array_sum($prima_afecta); ?>;
-    document.getElementById("total_prima_exenta").innerHTML = <?php echo array_sum($prima_exenta); ?>;
-    document.getElementById("total_iva").innerHTML = <?php echo array_sum($prima_afecta)*0.19; ?>;
-    document.getElementById("total_prima_periodo").innerHTML = <?php echo array_sum($prima_afecta)*1.19+array_sum($prima_exenta); ?>;
+    document.getElementById("total_prima_neta").innerHTML = "<?php echo number_format(array_sum($prima_afecta), 2, ",", "."); ?>";
+    document.getElementById("total_prima_exenta").innerHTML = "<?php echo number_format(array_sum($prima_exenta), 2, ",", "."); ?>";
+    document.getElementById("total_iva").innerHTML = "<?php echo number_format(array_sum($prima_afecta)*0.19, 2, ",", "."); ?>"
+    document.getElementById("total_prima_periodo").innerHTML = "<?php echo number_format(array_sum($prima_afecta)*1.19+array_sum($prima_exenta), 2, ",", "."); ?>";
     
 
     
@@ -948,7 +950,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("ubicacion_riesgo["+contador.toString()+"]").innerHTML = detalle_materia[contador.toString()-1];
         document.getElementById("cobertura["+contador.toString()+"]").innerHTML = cobertura[contador.toString()-1];
         document.getElementById("deducible["+contador.toString()+"]").innerHTML = deducible[contador.toString()-1];
-        //document.getElementById("moneda_monto["+contador.toString()+"]").innerHTML  ='< ?php echo $moneda_poliza; ?>';
+        document.getElementById("moneda_monto["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_iva["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_prima_neta["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("prima_neta_exenta["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
