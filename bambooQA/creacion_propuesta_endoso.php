@@ -1,3 +1,22 @@
+<?php
+if ( !isset( $_SESSION ) ) {
+  session_start();
+}
+require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+
+$camino=$_POST["accion"];
+if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_endoso')
+{
+  $query = "";
+  $resultado = mysqli_query( $link, $query );
+  While( $row = mysqli_fetch_object( $resultado ) ) {
+
+    $rut_prop = $row->rut_proponente;
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -314,13 +333,13 @@
                 </select>
             </div>
             <div class="col-2">
-            <label for="moneda_poliza"><b>Tasa Afecta %</b></label>
+            <label for="tasa_afecta"><b>Tasa Afecta %</b></label>
                 <div class="md-form">
                     <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta" name="monto">
                 </div>
             </div>
             <div class="col-2">
-            <label for="moneda_poliza"><b>Tasa Exenta %</b></label>
+            <label for="tasa_exenta"><b>Tasa Exenta %</b></label>
                 <div class="md-form">
                     <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta" name="monto">
                 </div>
@@ -467,6 +486,35 @@ orgn = '<?php echo $camino; ?>';
            
         }
 }
+function genera_propuesta(){
 
+    var camino='<?php echo $camino; ?>';;
+
+    switch (camino) {
+        case 'crea_propuesta_endoso': {
+          $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
+          'tipo_endoso':tipo_endoso,
+          'ramo': ramo,
+          'nro_poliza': nro_poliza,
+          'fecha_ingreso':fecha_ingreso,
+          'fecha_vigencia_inicial': fecha_vigencia_inicial,
+          'fecha_vigencia_final': fecha_vigencia_final,
+          'rutprop':rutprop,
+          'nombre': nombre,
+          'descripcion_endoso': descripcion_endoso,
+          'dice':dice,
+          'debe_decir': debe_decir,
+          'monto': monto,
+          'moneda_poliza':moneda_poliza,
+          'prima_neta_exenta': prima_neta_exenta,
+          'iva': iva,
+          'prima_neta_afecta':prima_neta_afecta,
+          'prima_total': prima_total
+          }, 'post');
+        break;
+        }
+    }
+   }
+  
 </script>
 
