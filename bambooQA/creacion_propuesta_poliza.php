@@ -5,10 +5,10 @@ if ( !isset( $_SESSION ) ) {
 //$camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000760';
-//$_POST["numero_poliza"]='16032022';
+//$_POST["numero_poliza"]='test 16 mayo 2105';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -144,6 +144,14 @@ $poliza_renovada='';
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
                 $detalle_materia_i = $row_item->patente_ubicacion;
                 $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                if ($ramo == "RC" or $ramo == "D&O" or $ramo == "D&O Condominio" or $ramo == "RC General"){
+                    
+                    $deducible_porcentaje[] = substr($row_item->deducible, 0,strrpos($row_item->deducible, "% de la Pérdida con mínimo de"));
+                    $deducible_valor[] = substr($row_item->deducible, strrpos ( $row_item->deducible , " ") + 1, strlen($row_item->deducible) - 1);
+                    
+                }else{
+                    $deducible[] = $row_item->deducible;  
+                }
                 $deducible[] = $row_item->deducible;
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
