@@ -30,7 +30,14 @@
   <p>Propuesta de Endoso / Creación</p>
   <br>
 </div>
-
+<div id=titulo2 style="display:none">
+  <p>Propuesta de Endoso / Confirmar</p>
+  <br>
+</div>
+<div id=titulo3 style="display:none">
+  <p>Endoso / Editar</p>
+  <br>
+</div>
 
   <form action="/bambooQA/backend/propuesta_endoso/crea_propuesta_endoso.php" class="needs-validation" method="POST" id="formulario"  novalidate>
   
@@ -155,16 +162,27 @@
                 </div>
                 
             </div>
+            <div class="col-2">
+                <label for="nro_poliza"><b>Compañía</b></label>
+                <label style="color: darkred">&nbsp; *</label>
+                <div class="md-form">
+                   <input type="text" class="form-control" id="compania"
+                                          name="compania">
+                </div>
+                <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
+            </div>
             
             <div class="col-2">
                 <label for="nro_poliza"><b>Número de Póliza</b></label>
                 <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
                    <input type="text" class="form-control" id="nro_poliza"
-                                          name="nro_poliza">
+                                          name="nro_poliza" readonly>
                 </div>
                 <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
             </div>
+        </div>
+        <div class="form-row">
             <div class="col">
                 <label for="corredor"><b>Corredor</b></label>
                     <input type="text" class="form-control" id="corredor"
@@ -177,7 +195,8 @@
              </div>
               
           </div>
-          
+        
+          <br>
           <div class="form-row">
             <div class="col-3">
               <label for="fechaprimer"><b>Fecha Ingreso</b></label>
@@ -212,7 +231,7 @@
           <br>
           <div class = "form-row">
             <div class="col-md-3 mb-3">
-                <label for="RUT"><b>RUT Contratante</b></label>
+                <label for="RUT"><b>RUT Proponente</b></label>
                 <label style="color: darkred">&nbsp; *</label>
                 <input type="text" class="form-control" id="rutprop" name="rutprop"
                               placeholder="1111111-1" required>
@@ -220,7 +239,7 @@
              </div>
              
             <div class="col-5">
-                <label for="Nombre"><b>Nombre Contratante</b></label>
+                <label for="Nombre"><b>Nombre Proponente</b></label>
                 <label style="color: darkred">&nbsp; *</label>
                 <input type="text" id="nombre_prop" class="form-control" name="nombre" required>
                               
@@ -295,9 +314,15 @@
                 </select>
             </div>
             <div class="col-2">
-            <label for="moneda_poliza"><b>Tasa %</b></label>
+            <label for="moneda_poliza"><b>Tasa Afecta %</b></label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="monto" name="monto">
+                    <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta" name="monto">
+                </div>
+            </div>
+            <div class="col-2">
+            <label for="moneda_poliza"><b>Tasa Exenta %</b></label>
+                <div class="md-form">
+                    <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta" name="monto">
                 </div>
             </div>
           </div>
@@ -338,7 +363,7 @@
   
   
         </div>
-        <div class="card">
+        <div class="card" id="card_confirma" style="display:none">
             <div class="card-header" id="headingthree" style="background-color:whitesmoke">
              <h5 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -403,5 +428,45 @@ function cambio_motivo(){
 }
     
     
+document.addEventListener("DOMContentLoaded", function(event) {
+    var bPreguntar = true;
+    
+orgn = '<?php echo $camino; ?>';
+
+        switch (orgn) 
+        {
+          case 'crear_propuesta': {
+              document.getElementById("titulo1").style.display = "flex";
+              document.getElementById("titulo2").style.display = "none";
+              document.getElementById("titulo3").style.display = "none";
+            
+            break;  
+          }
+           case 'actualiza_propuesta':{
+               
+                 document.getElementById("titulo1").style.display = "none";
+              document.getElementById("titulo2").style.display = "flex";
+              document.getElementById("titulo3").style.display = "none";
+              
+              
+               document.getElementById("card_confirma").style.display = "flex";
+                document.getElementById("nro_endoso").required = "true";
+               
+               break;
+               
+           }
+           case 'editar_endoso':{
+              document.getElementById("titulo1").style.display = "none";
+              document.getElementById("titulo2").style.display = "none";
+              document.getElementById("titulo3").style.display = "flex";
+               
+               break;
+               
+           }
+           
+           
+        }
+}
+
 </script>
 
