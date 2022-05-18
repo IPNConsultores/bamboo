@@ -6,14 +6,33 @@ require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 
+/*
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'crea_propuesta_endoso';
+$_POST["numero_poliza"]='685';
+*/
+
 $camino=$_POST["accion"];
-if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_endoso')
+if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
 {
-  $query = "";
+  $query = "select distinct a.numero_poliza, a.compania, a.id as id_poliza,a.ramo, a.vigencia_inicial, a.vigencia_final, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, CONCAT_WS(' ',b.nombre_cliente, b.apellido_paterno, ' ', b.apellido_materno) as nombre_proponente, FORMAT(sum(c.prima_afecta), 2, 'de_DE') as total_prima_afecta, FORMAT(sum(c.prima_exenta), 2, 'de_DE') as total_prima_exenta, FORMAT(sum(c.prima_neta), 2, 'de_DE') as total_prima_neta, FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE') as total_prima_bruta, FORMAT(sum(c.monto_asegurado), 2, 'de_DE') as total_monto_asegurado, a.moneda_poliza from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.id='".$_POST["numero_poliza"]."'";
   $resultado = mysqli_query( $link, $query );
   While( $row = mysqli_fetch_object( $resultado ) ) {
-
-    $rut_prop = $row->rut_proponente;
+    $numero_poliza = $row->numero_poliza;
+    $numero_poliza = $row->numero_poliza;
+    $ramo=$row->ramo;
+    $id_poliza = $row->id_poliza;
+    $compania = $row->compania;
+    $vigencia_inicial = $row->vigencia_inicial;
+    $vigencia_final = $row->vigencia_final;
+    $rut_proponente = $row->rut_proponente;
+    $nombre_proponente = $row->nombre_proponente;
+    $total_prima_afecta = $row->total_prima_afecta;
+    $total_prima_exenta = $row->total_prima_exenta;
+    $total_prima_neta = $row->total_prima_neta;
+    $total_prima_bruta = $row->total_prima_bruta;
+    $total_monto_asegurado = $row->total_monto_asegurado;
+    $moneda_poliza = $row->moneda_poliza;
   }
 }
 ?>
@@ -86,6 +105,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_endo
                 <label for="fecha_ingreso"><b>Fecha Prorroga:&nbsp;</b></label>
                 <label style="color: darkred">*</label>
                 <div class="md-form">
+
                    <input placeholder="Selected date" type="date" name="fecha_ingreso" id="fecha_ingreso" value="<?php echo date("Y-m-d");?>"
                       class="form-control" max= "9999-12-31" required>
                 </div>
@@ -421,7 +441,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_endo
 </form>
 <br>
 <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_prueba' onclick=" validarutitem()">Registrar</button>
+              id='boton_prueba' onclick=" genera_propuesta()">Registrar</button>
 <br>
 </body>
 <foot>
@@ -450,11 +470,24 @@ function cambio_motivo(){
 document.addEventListener("DOMContentLoaded", function(event) {
     var bPreguntar = true;
     
-orgn = '<?php echo $camino; ?>';
-
+    var orgn = '<?php echo $camino; ?>';
+    console.log(orgn)
         switch (orgn) 
         {
-          case 'crear_propuesta': {
+          case 'crea_propuesta_endoso': {
+            document.getElementById("ramo").value = '<?php echo $ramo; ?>';
+            document.getElementById("compania").value = '<?php echo $compania; ?>';
+            document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
+            document.getElementById("fecha_vigencia_inicial").value = '<?php echo $vigencia_inicial; ?>';
+            document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
+            document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
+            document.getElementById("monto").value = '<?php echo $total_monto_asegurado; ?>';
+            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+            document.getElementById("prima_neta_exenta").value = '<?php echo $total_prima_exenta; ?>';
+            document.getElementById("iva").value = '<?php echo number_format($total_prima_afecta*0.19, 2, ",", "."); ?>';
+            document.getElementById("prima_neta_afecta").value = '<?php echo $total_prima_afecta; ?>';
+            document.getElementById("prima_total").value = '<?php echo $total_prima_bruta; ?>';
               document.getElementById("titulo1").style.display = "flex";
               document.getElementById("titulo2").style.display = "none";
               document.getElementById("titulo3").style.display = "none";
@@ -485,31 +518,36 @@ orgn = '<?php echo $camino; ?>';
            
            
         }
-}
+})
 function genera_propuesta(){
 
-    var camino='<?php echo $camino; ?>';;
+
+    var camino='<?php echo $camino; ?>';
 
     switch (camino) {
         case 'crea_propuesta_endoso': {
-          $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
-          'tipo_endoso':tipo_endoso,
-          'ramo': ramo,
-          'nro_poliza': nro_poliza,
-          'fecha_ingreso':fecha_ingreso,
-          'fecha_vigencia_inicial': fecha_vigencia_inicial,
-          'fecha_vigencia_final': fecha_vigencia_final,
-          'rutprop':rutprop,
-          'nombre': nombre,
-          'descripcion_endoso': descripcion_endoso,
-          'dice':dice,
-          'debe_decir': debe_decir,
-          'monto': monto,
-          'moneda_poliza':moneda_poliza,
-          'prima_neta_exenta': prima_neta_exenta,
-          'iva': iva,
-          'prima_neta_afecta':prima_neta_afecta,
-          'prima_total': prima_total
+          $.redirect('/bambooQA/test_felipe.php', {
+        //$.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
+          'tipo_endoso':document.getElementById('motivo_endoso').value,
+          'ramo': document.getElementById('ramo').value,
+          'compania': document.getElementById('compania').value,
+          'nro_poliza': document.getElementById('nro_poliza').value,
+          'fecha_ingreso':document.getElementById('fecha_ingreso').value,
+          'fecha_vigencia_inicial': document.getElementById('fecha_vigencia_inicial').value,
+          'fecha_vigencia_final': document.getElementById('fecha_vigencia_final').value,
+          'rutprop':document.getElementById('rutprop').value,
+          'nombre': document.getElementById('nombre_prop').value,
+          'descripcion_endoso': document.getElementById('descripcion_endoso').value,
+          'dice':document.getElementById('dice').value,
+          'debe_decir': document.getElementById('debe_decir').value,
+          'monto': document.getElementById('monto').value,
+          'moneda_poliza':document.getElementById('moneda_poliza').value,
+          'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
+          'iva': document.getElementById('iva').value,
+          'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_total': document.getElementById('prima_total').value,
+          'id_poliza':'<?php echo $id_poliza; ?>',
+          'accion':camino
           }, 'post');
         break;
         }
