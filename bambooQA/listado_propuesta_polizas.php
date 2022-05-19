@@ -229,8 +229,8 @@ $(document).ready(function() {
          }}
         ],
         "order": [
-            [1, "asc"],
-            [2, "desc"]
+            [1, "desc"],
+            [2, "asc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
