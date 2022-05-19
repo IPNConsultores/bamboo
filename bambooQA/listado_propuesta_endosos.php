@@ -309,6 +309,7 @@ function format_propuesta(d) {
         '</tr>' +
         '<tr>' +
         '<td></td>' +
+        '<td> </td>' +
         '</tr>' +
         botones;
 }
