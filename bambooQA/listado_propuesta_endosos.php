@@ -108,7 +108,7 @@ var table = ''
 $(document).ready(function() {
     table = $('#listado_propuesta_endosos').DataTable({
         //"ajax": "/bambooQA/test_felipe2.php",
-        "ajax": "bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
+        "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
         "scrollX": true,
         "dom": 'Pfrtip',
         "columns": [{
