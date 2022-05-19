@@ -107,7 +107,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table = ''
 $(document).ready(function() {
     table = $('#listado_propuesta_endosos').DataTable({
-        //"ajax": "/bambooQA/test_felipe2.php",
         "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
         "scrollX": true,
         "dom": 'Pfrtip',
@@ -251,7 +250,7 @@ function format_propuesta(d) {
     if (d.estado=='Emitido'){
         botones='<tr><td>Acciones</td>' +
         '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_poliza" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
         '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
         '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
@@ -306,11 +305,12 @@ function format_propuesta(d) {
                     '<td>' + d.debe_decir + '</td>'+
                 '</table>'+
             '</td>' +
-        '</tr>' +
+        '</tr>' +    
         '<tr>' +
-        '<td></td>' +
-        '<td> </td>' +
+            '<td> </td>' +
+            '<td> </td>' +
         '</tr>' +
+
         botones;
 }
 function botones(id, accion, base) {
@@ -342,6 +342,7 @@ function botones(id, accion, base) {
         }
         case "actualiza_propuesta": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+            //$.redirect('/bambooQA/test_felipe2.php', {    
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
@@ -360,7 +361,7 @@ function botones(id, accion, base) {
             }, 'post');
             break;
         }
-        case "crear_poliza": {
+        case "crear_endoso": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
