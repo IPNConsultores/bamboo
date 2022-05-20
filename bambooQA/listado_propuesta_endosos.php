@@ -331,7 +331,7 @@ function botones(id, accion, base) {
         }
 
         case "actualiza_propuesta": {
-            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+            $.redirect('/bambooQA/creacion_propuesta_endoso.php', {
             //$.redirect('/bambooQA/test_felipe2.php', {    
                 'numero_propuesta': id,
                 'accion': accion
@@ -352,7 +352,7 @@ function botones(id, accion, base) {
             break;
         }
         case "crear_endoso": {
-            $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
+            $.redirect('/bambooQA/creacion_propuesta_endoso.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
@@ -363,14 +363,6 @@ function botones(id, accion, base) {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
-            break;
-        }
-        case "correo": {
-            if (base == 'propuesta'){
-                $.redirect('/bambooQA/template_poliza.php', {
-                    'id_propuesta': id
-                }, 'post');
-            }
             break;
         }
     }

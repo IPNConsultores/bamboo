@@ -8,7 +8,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'crea_propuesta_endoso';
 //$_POST["numero_poliza"]='685';
 //$_POST["numero_propuesta"]="E000005";
 $numero_propuesta='';
@@ -183,81 +183,44 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <select class="form-control" name="ramo" id="ramo" onChange="vencimientogarantia();cambia_deducible();" required> 
                                         
                   <option value="">Selecciona un ramo</option>
-                  <option value="AC - Accidentes Personales"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Accidentes Personales") echo "selected" ?>>ACCIDENTES PERSONALES - Accidentes Personales</option>
-                  <option value="AC - Protección Financiera"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Protección Financiera") echo "selected" ?>>ACCIDENTES PERSONALES - Protección Financiera</option>
-                  <option value="ASISTENCIA EN VIAJE"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ASISTENCIA EN VIAJE") echo "selected" ?>>ASISTENCIA EN VIAJE</option>
-                  <option value="INC - Condominio"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - Condominio") echo "selected" ?>>INCENDIO - Condominio</option>
-                  <option value="INC - Hogar"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - Hogar") echo "selected" ?>>INCENDIO - Hogar</option>
-                  <option value="INC - Misceláneos"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - Misceláneos") echo "selected" ?>>INCENDIO - Misceláneos</option>
-                  <option value="INC - Perjuicio por Paralización"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - Perjuicio por Paralización") echo "selected" ?>>INCENDIO - Perjuicio por Paralización</option>
-                  <option value="INC - Pyme"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - Pyme") echo "selected" ?>>INCENDIO - Pyme</option>
-                  <option value="INC - TRBF (Todo Riesgo Bienes Físicos)"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INC - TRBF (Todo Riesgo Bienes Físicos)") echo "selected" ?>>INCENDIO - TRBF (Todo Riesgo Bienes Físicos)</option>
-                  <option value="D&O Condominio"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="D&O Condominio") echo "selected" ?>>RESPONSABILIDAD CIVIL - D&O Condominio</option>
-                  <option value="RC General"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="RC General") echo "selected" ?>>RESPONSABILIDAD CIVIL - RC General</option>
-                  <option value="VEH - Vehículos Comerciales Livianos"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="VEH - Vehículos Comerciales Livianos") echo "selected" ?>>VEHÍCULOS - Vehículos Comerciales Livianos</option>
-                  <option value="VEH - Vehículos Particulares"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="VEH - Vehículos Particulares") echo "selected" ?>>VEHÍCULOS - Vehículos Particulares</option>
-                  <option value="VEH - Vehículos Pesados"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="VEH - Vehículos Pesados") echo "selected" ?>>VEHÍCULOS - Vehículos Pesados</option>
+                  <option value="AC - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="AC - Protección Financiera">ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="ASISTENCIA EN VIAJE">ASISTENCIA EN VIAJE</option>
+                  <option value="INC - Condominio">INCENDIO - Condominio</option>
+                  <option value="INC - Hogar">INCENDIO - Hogar</option>
+                  <option value="INC - Misceláneos">INCENDIO - Misceláneos</option>
+                  <option value="INC - Perjuicio por Paralización">INCENDIO - Perjuicio por Paralización</option>
+                  <option value="INC - Pyme">INCENDIO - Pyme</option>
+                  <option value="INC - TRBF (Todo Riesgo Bienes Físicos)">INCENDIO - TRBF (Todo Riesgo Bienes Físicos)</option>
+                  <option value="D&O Condominio">RESPONSABILIDAD CIVIL - D&O Condominio</option>
+                  <option value="RC General">RESPONSABILIDAD CIVIL - RC General</option>
+                  <option value="VEH - Vehículos Comerciales Livianos">VEHÍCULOS - Vehículos Comerciales Livianos</option>
+                  <option value="VEH - Vehículos Particulares">VEHÍCULOS - Vehículos Particulares</option>
+                  <option value="VEH - Vehículos Pesados">VEHÍCULOS - Vehículos Pesados</option>
                   <option value="null">--------------------------------------------------------------</option>
-                  <option value="AVERÍA DE MAQUINARIA"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AVERÍA DE MAQUINARIA") echo "selected" ?>>AVERÍA DE MAQUINARIA</option>
-                  <option value="CASCO - Aéreo"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="CASCO - Aéreo") echo "selected" ?>>CASCO - Aéreo</option>
-                  <option value="CASCO - Marítimo"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="CASCO - Marítimo") echo "selected" ?>>CASCO - Marítimo</option>
-                  <option value="Garantía"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="Garantía") echo "selected" ?>>GARANTÍA</option>
-                  <option value="ING - Equipo Contratistas"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ING - Equipo Contratistas") echo "selected" ?>>INGENIERÍA - Equipo Contratistas</option>
-                  <option value="ING - Equipo Móvil Agrícola"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ING - Equipo Móvil Agrícola") echo "selected" ?>>INGENIERÍA - Equipo Móvil Agrícola</option>
-                  <option value="ING - Equipos Electrónicos"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ING - Equipos Electrónicos") echo "selected" ?>>INGENIERÍA - Equipos Electrónicos</option>
-                  <option value="ING- TRC (Todo Riesgo Construcción)"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ING- TRC (Todo Riesgo Construcción)") echo "selected" ?>>INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
-                  <option value="REMESA DE VALORES"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="REMESA DE VALORES") echo "selected" ?>>REMESA DE VALORES</option>
-                  <option value="ROBO CON FUERZA"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ROBO CON FUERZA") echo "selected" ?>>ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
-                  <option value="ROTURA DE CRISTALES"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ROTURA DE CRISTALES") echo "selected" ?>>ROTURA DE CRISTALES</option>
-                  <option value="SEGURO ARRIENDO"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="SEGURO ARRIENDO") echo "selected" ?>>SEGURO ARRIENDO</option>
-                  <option value="SEGURO DE CRÉDITO"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="SEGURO DE CRÉDITO") echo "selected" ?>>SEGURO DE CRÉDITO</option>
-                  <option value="CABOTAJE"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="CABOTAJE") echo "selected" ?>>TRANSPORTE - CABOTAJE</option>
-                  <option value="INTERNACIONAL"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="INTERNACIONAL") echo "selected" ?>>TRANSPORTE - INTERNACIONAL</option>
-                  <option value="APV"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="APV") echo "selected" ?>>VIDA - APV</option>
-                  <option value="VIDA"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="VIDA") echo "selected" ?>>VIDA - VIDA</option>
-                  <option value="AP"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "AP") echo "selected" ?>>AP</option>
-                  <option value="D&O"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "D&O") echo "selected" ?>>D&O</option>
-                  <option value="INC"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "INC") echo "selected" ?>>INC</option>
-                  <option value="PyME"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "PyME") echo "selected" ?>>PyME</option>
-                  <option value="RC"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "RC") echo "selected" ?>>RC</option>
-                  <option value="VEH"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo == "VEH") echo "selected" ?>>VEH</option>
+                  <option value="AVERÍA DE MAQUINARIA">AVERÍA DE MAQUINARIA</option>
+                  <option value="CASCO - Aéreo">CASCO - Aéreo</option>
+                  <option value="CASCO - Marítimo">CASCO - Marítimo</option>
+                  <option value="Garantía">GARANTÍA</option>
+                  <option value="ING - Equipo Contratistas">INGENIERÍA - Equipo Contratistas</option>
+                  <option value="ING - Equipo Móvil Agrícola">INGENIERÍA - Equipo Móvil Agrícola</option>
+                  <option value="ING - Equipos Electrónicos">INGENIERÍA - Equipos Electrónicos</option>
+                  <option value="ING- TRC (Todo Riesgo Construcción)">INGENIERÍA - TRC (Todo Riesgo Construcción)</option>
+                  <option value="REMESA DE VALORES">REMESA DE VALORES</option>
+                  <option value="ROBO CON FUERZA">ROBO CON FUERZA EN LAS COSAS Y VIOLENCIA EN LAS PERSONAS</option>
+                  <option value="ROTURA DE CRISTALES">ROTURA DE CRISTALES</option>
+                  <option value="SEGURO ARRIENDO">SEGURO ARRIENDO</option>
+                  <option value="SEGURO DE CRÉDITO">SEGURO DE CRÉDITO</option>
+                  <option value="CABOTAJE">TRANSPORTE - CABOTAJE</option>
+                  <option value="INTERNACIONAL">TRANSPORTE - INTERNACIONAL</option>
+                  <option value="APV">VIDA - APV</option>
+                  <option value="VIDA">VIDA - VIDA</option>
+                  <option value="AP">AP</option>
+                  <option value="D&O">D&O</option>
+                  <option value="INC">INC</option>
+                  <option value="PyME">PyME</option>
+                  <option value="RC">RC</option>
+                  <option value="VEH">VEH</option>
                 </select>
                     <div class="invalid-feedback">Debes seleccionar un Ramo</div>
                 </div>
@@ -268,51 +231,28 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label style="color: darkred">&nbsp; *</label>
                 <select class="form-control" name="selcompania" id="selcompania" required>
                   <option value="">Selecciona una compañía</option>
-                  <option value="Axa Assistance"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Axa Assistance") echo "selected" ?>>Axa Assistance</option>
-                  <option value="BCI Seguros"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "BCI Seguros") echo "selected" ?>>BCI Seguros</option>
-                  <option value="Chilena Consolidada"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Chilena Consolidada") echo "selected" ?>>Chilena Consolidada</option>
-                  <option value="CHUBB"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "CHUBB") echo "selected" ?>>CHUBB</option>
-                  <option value="Confuturo"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Confuturo") echo "selected" ?>>Confuturo</option>
-                  <option value="Consorcio"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Consorcio") echo "selected" ?>>Consorcio</option>
-                  <option value="Continental"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Continental") echo "selected" ?>>Continental</option>
-                  <option value="Contempora"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Contempora") echo "selected" ?>>Contempora</option>
-                  <option value="Coris"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Coris") echo "selected" ?>>Coris</option>
-                  <option value="HDI Seguros"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "HDI Seguros") echo "selected" ?>>HDI Seguros</option>
-                  <option value="Liberty"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Liberty") echo "selected" ?>>Liberty</option>                       
-                                          
-                  <option value="Mapfre"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Mapfre") echo "selected" ?>>Mapfre</option>
-                  <option value="Ohio National Financial Group"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Ohio National Financial Group") echo "selected" ?>>Ohio National</option>
-                  <option value="Orsan"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Orsan") echo "selected" ?>>Orsan</option>
-                  <option value="Reale Seguros"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Reale Seguros") echo "selected" ?>>Reale Seguros</option>
-                  <option value="Renta Nacional"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Renta Nacional") echo "selected" ?>>Renta Nacional</option>
-                  <option value="Southbridge"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Southbridge") echo "selected" ?>>Southbridge</option>
-                  <option value="Sur Asistencia"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Sur Asistencia") echo "selected" ?>>Sur Asistencia</option>
-                  <option value="Suaval"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Suaval") echo "selected" ?>>Suaval</option>
-                  <option value="Sura"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Sura") echo "selected" ?>>Sura</option>
-                  <option value="STARR"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "STARR") echo "selected" ?>>STARR</option>
-                  <option value="Unnio"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Unnio") echo "selected" ?>>Unnio</option>
+                  <option value="Axa Assistance">Axa Assistance</option>
+                  <option value="BCI Seguros">BCI Seguros</option>
+                  <option value="Chilena Consolidada">Chilena Consolidada</option>
+                  <option value="CHUBB">CHUBB</option>
+                  <option value="Confuturo">Confuturo</option>
+                  <option value="Consorcio">Consorcio</option>
+                  <option value="Continental">Continental</option>
+                  <option value="Contempora">Contempora</option>
+                  <option value="Coris">Coris</option>
+                  <option value="HDI Seguros">HDI Seguros</option>
+                  <option value="Liberty">Liberty</option>                       
+                  <option value="Mapfre">Mapfre</option>
+                  <option value="Ohio National Financial Group">Ohio National</option>
+                  <option value="Orsan">Orsan</option>
+                  <option value="Reale Seguros">Reale Seguros</option>
+                  <option value="Renta Nacional">Renta Nacional</option>
+                  <option value="Southbridge">Southbridge</option>
+                  <option value="Sur Asistencia">Sur Asistencia</option>
+                  <option value="Suaval">Suaval</option>
+                  <option value="Sura">Sura</option>
+                  <option value="STARR">STARR</option>
+                  <option value="Unnio">Unnio</option>
                 </select>
                 <div class="invalid-feedback">Debes seleccionar una Compañía</div>
               
@@ -455,9 +395,9 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-2">
                 <label for="moneda_poliza"><b>Moneda Póliza</b></label>
                 <select class="form-control" id="moneda_poliza" name="moneda_poliza">
-                    <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
-                    <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
-                    <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
+                    <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?> >UF</option>
+                    <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?> >USD</option>
+                    <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?> >CLP</option>
                 </select>
             </div>
             <div class="col-2">
@@ -854,7 +794,7 @@ function genera_propuesta(){
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
           'id_poliza':'<?php echo $id_poliza; ?>',
-          'numero_propuesta_endoso':<?php echo $numero_propuesta ?>,
+          'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'accion':camino
           }, 'post');
         break;

@@ -38,7 +38,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             
     switch ($_POST["accion"]){
         case 'crea_propuesta_endoso':
-            $listado='listado_propuesta_endosos.php';
+            $listado='/bambooQA/listado_propuesta_endosos.php';
             $mensaje='Propuesta de endoso creada correctamente';
             $largo = 6;
             $token = bin2hex(random_bytes($largo));
@@ -56,7 +56,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             $busqueda=$numero_propuesta_endoso;
             break;
         case 'actualiza_propuesta':
-            $listado='listado_propuesta_endosos.php';
+            $listado='/bambooQA/listado_propuesta_endosos.php';
             $mensaje='Propuesta de endoso actualizada correctamente';
             $query="UPDATE propuesta_endosos SET fecha_ingreso_endoso='".$fecha_ingreso."',tipo_endoso='".$tipo_endoso."',ramo='".$ramo."',compania='".$compania."',rut_proponente='".$rut_prop."',dv_proponente='".$dv_prop."',nombre_proponente='".$nombre."',vigencia_inicial='".$fecha_vigencia_inicial."',vigencia_final='".$fecha_vigencia_final."',descripcion_endoso='".$descripcion_endoso."',dice='".$dice."',debe_decir='".$debe_decir."',monto_asegurado_endoso='".$monto."',moneda_poliza_endoso='".$moneda_poliza."',tasa_afecta_endoso='".$tasa_afecta."',tasa_exenta_endoso='".$tasa_exenta."',prima_neta_exenta='".$prima_neta_exenta."',IVA='".$iva."',prima_neta_afecta='".$prima_neta_afecta."',prima_total='".$prima_total."' WHERE numero_propuesta_endoso='".$_POST["numero_propuesta_endoso"]."'";
             mysqli_query($link, $query);
@@ -65,7 +65,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             break;
         case 'crear_endoso':
             $numero_propuesta_endoso=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta_endoso"]));
-            $listado='listado_endosos.php';
+            $listado='/bambooQA/listado_endosos.php';
             $mensaje='Endoso creado correctamente';
             $query="INSERT INTO endosos(numero_endoso, id_poliza, numero_propuesta_endoso, fecha_ingreso_endoso, tipo_endoso, ramo, compania, numero_poliza, rut_proponente, dv_proponente, nombre_proponente, vigencia_inicial, vigencia_final, descripcion_endoso, dice, debe_decir, monto_asegurado_endoso, moneda_poliza_endoso, tasa_afecta_endoso, tasa_exenta_endoso, prima_neta_exenta, IVA, prima_neta_afecta, prima_total) VALUES ('".$numero_endoso."','".$id_poliza."','".$numero_propuesta_endoso."','".$fecha_ingreso."','".$tipo_endoso."','".$ramo."','".$compania."','".$nro_poliza."','".$rut_prop."','".$dv_prop."','".$nombre."','".$fecha_vigencia_inicial."','".$fecha_vigencia_final."','".$descripcion_endoso."','".$dice."','".$debe_decir."','".$monto."','".$moneda_poliza."','".$tasa_afecta."','".$tasa_afecta."','".$prima_neta_exenta."','".$iva."','".$prima_neta_afecta."','".$prima_total."')";
             mysqli_query($link, $query);
@@ -74,6 +74,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             break;
         case 'rechazar_propuesta':
             $busqueda=$nro_propuesta;
+            $listado='/bambooQA/listado_propuesta_endosos.php';
             $mensaje='Propuesta Endoso rechazada correctamente';
                 $query= "update propuesta_endosos set estado='Rechazado', motivo_rechazo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta_endoso='".$nro_propuesta."';";
                 mysqli_query($link, $query);
