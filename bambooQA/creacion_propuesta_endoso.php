@@ -180,7 +180,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="ramo"><b>Ramo</b></label>
                 <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <select class="form-control" name="ramo" id="ramo" onChange="vencimientogarantia();cambia_deducible();" required> 
+                    <select class="form-control" name="ramo" id="ramo" onChange="cambia_deducible();" required> 
                                         
                   <option value="">Selecciona un ramo</option>
                   <option value="AC - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
