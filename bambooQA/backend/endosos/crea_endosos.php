@@ -3,7 +3,6 @@
     { 
         session_start(); 
     } 
-
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
@@ -59,20 +58,29 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
         case 'actualiza_propuesta':
             $listado='listado_propuesta_endosos.php';
             $mensaje='Propuesta de endoso actualizada correctamente';
-            $query="";
+            $query="UPDATE propuesta_endosos SET fecha_ingreso_endoso='".$fecha_ingreso."',tipo_endoso='".$tipo_endoso."',ramo='".$ramo."',compania='".$compania."',rut_proponente='".$rut_prop."',dv_proponente='".$dv_prop."',nombre_proponente='".$nombre."',vigencia_inicial='".$fecha_vigencia_inicial."',vigencia_final='".$fecha_vigencia_final."',descripcion_endoso='".$descripcion_endoso."',dice='".$dice."',debe_decir='".$debe_decir."',monto_asegurado_endoso='".$monto."',moneda_poliza_endoso='".$moneda_poliza."',tasa_afecta_endoso='".$tasa_afecta."',tasa_exenta_endoso='".$tasa_exenta."',prima_neta_exenta='".$prima_neta_exenta."',IVA='".$iva."',prima_neta_afecta='".$prima_neta_afecta."',prima_total='".$prima_total."' WHERE numero_propuesta_endoso='".$_POST["numero_propuesta_endoso"]."'";
             mysqli_query($link, $query);
-            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Modificación propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso', '".$numero_propuesta_endoso."' , '".$_SERVER['PHP_SELF']."')");
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Modificación propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso', '".$_POST["numero_endoso"]."' , '".$_SERVER['PHP_SELF']."')");
             $busqueda=$numero_propuesta_endoso;
             break;
         case 'crear_endoso':
+            $numero_propuesta_endoso=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta_endoso"]));
             $listado='listado_endosos.php';
             $mensaje='Endoso creado correctamente';
-            $query="";
+            $query="INSERT INTO endosos(numero_endoso, id_poliza, numero_propuesta_endoso, fecha_ingreso_endoso, tipo_endoso, ramo, compania, numero_poliza, rut_proponente, dv_proponente, nombre_proponente, vigencia_inicial, vigencia_final, descripcion_endoso, dice, debe_decir, monto_asegurado_endoso, moneda_poliza_endoso, tasa_afecta_endoso, tasa_exenta_endoso, prima_neta_exenta, IVA, prima_neta_afecta, prima_total) VALUES ('".$numero_endoso."','".$id_poliza."','".$numero_propuesta_endoso."','".$fecha_ingreso."','".$tipo_endoso."','".$ramo."','".$compania."','".$nro_poliza."','".$rut_prop."','".$dv_prop."','".$nombre."','".$fecha_vigencia_inicial."','".$fecha_vigencia_final."','".$descripcion_endoso."','".$dice."','".$debe_decir."','".$monto."','".$moneda_poliza."','".$tasa_afecta."','".$tasa_afecta."','".$prima_neta_exenta."','".$iva."','".$prima_neta_afecta."','".$prima_total."')";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación endoso', '".str_replace("'","**",$query)."','endoso', '".$numero_endoso."' , '".$_SERVER['PHP_SELF']."')");
             $busqueda=$numero_propuesta_endoso;
             break;
+        case 'rechazar_propuesta':
+            $busqueda=$nro_propuesta;
+            $mensaje='Propuesta Endoso rechazada correctamente';
+                $query= "update propuesta_endosos set estado='Rechazado', motivo_rechazo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta_endoso='".$nro_propuesta."';";
+                mysqli_query($link, $query);
+                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+                break;
     }
+    
 }
 
 
@@ -116,3 +124,4 @@ var listado= '<?php echo $listado; ?>';
 </script>
 </body>
 </html>
+

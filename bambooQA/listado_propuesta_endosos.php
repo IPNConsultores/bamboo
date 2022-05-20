@@ -318,10 +318,10 @@ function botones(id, accion, base) {
     switch (accion) {
         case "rechazar_propuesta": {
                 var motivo = window.prompt('Ingresa el motivo del rechazo', '');
-                var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
+                var r2 = confirm("Estás a punto de rechazar esta propuesta de endoso ¿Deseas continuar?");
                 
                 if (r2 == true) {
-                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
                     'numero_propuesta': id,
                     'accion':accion,
                     'motivo':motivo
@@ -329,17 +329,7 @@ function botones(id, accion, base) {
                 }
             break;
         }
-        case "eliminar_propuesta": {
-                var r2 = confirm("Estás a punto de eliminar esta propuesta de póliza ¿Deseas continuar?");
-                //eliminar
-                if (r2 == true) {
-                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-                    'numero_propuesta': id,
-                    'accion':accion
-                }, 'post');
-                }
-            break;
-        }
+
         case "actualiza_propuesta": {
             $.redirect('/bambooQA/creacion_propuesta_poliza.php', {
             //$.redirect('/bambooQA/test_felipe2.php', {    
@@ -369,7 +359,7 @@ function botones(id, accion, base) {
             break;
         }
         case "generar_documento": {
-            $.redirect('/bambooQA/documento_propuesta_poliza.php', {
+            $.redirect('/bambooQA/documento_propuesta_endoso.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
