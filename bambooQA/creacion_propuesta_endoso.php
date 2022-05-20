@@ -229,7 +229,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-4">
                 <label for="nro_poliza"><b>Compañía</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <select class="form-control" name="selcompania" id="selcompania" required>
+                <select class="form-control" name="selcompania" id="compania" required>
                   <option value="">Selecciona una compañía</option>
                   <option value="Axa Assistance">Axa Assistance</option>
                   <option value="BCI Seguros">BCI Seguros</option>
