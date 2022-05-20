@@ -150,28 +150,31 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
           <div class="card-body" id="card-body-one">
             
         <div class="form-row">
-            <div class="col-4">
+            <div class="col-5">
                 <label for = "motivo_endoso"><b>Motivo del Endoso</b></label>
+                <label style="color: darkred">*</label>
                 <br>
-                <select class="form-control" id="motivo_endoso" name="motivo_endoso" onchange=cambio_motivo()>
+                <select class="form-control" id="motivo_endoso" name="motivo_endoso" onchange=cambio_motivo() required>
+                    <option value="">Selecciona Motivo</option>
                     <option value="Endoso Aumento">Endoso Aumento</option>
                     <option value="Endoso de Disminución o Anulación">Endoso de Disminución o Anulación</option>
                     <option value="Endoso Prorroga">Endoso Prorroga</option>
                     <option value="Endoso Sin Movimiento">Endoso Sin Movimiento</option>
                 </select>
+                <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
           <div class="col-4" id="col_fecha_ingreso" style="display:none">
-                <label for="fecha_ingreso"><b>Fecha Prorroga:&nbsp;</b></label>
+                <label for="fecha_prorroga"><b>Fecha Prorroga:&nbsp;</b></label>
                 <label style="color: darkred">*</label>
                 <div class="md-form">
 
-                   <input placeholder="Selected date" type="date" name="fecha_ingreso" id="fecha_ingreso" value="<?php echo date("Y-m-d");?>"
+                   <input placeholder="Selected date" type="date" name="fecha_prorroga" id="fecha_prorroga" onchange="prorroga()" value=""
                       class="form-control" max= "9999-12-31" required>
+                      <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
         </div>
-        <br>
-        <br>
+         <br>
         <div class ="form-row">
             <div class="col-5">
                 <label for="ramo"><b>Ramo</b></label>
@@ -260,14 +263,59 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 </div>
                 
             </div>
-            <div class="col-2">
+            <div class="col-4">
                 <label for="nro_poliza"><b>Compañía</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <div class="md-form">
-                   <input type="text" class="form-control" id="compania"
-                                          name="compania">
-                </div>
-                <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
+                <select class="form-control" name="selcompania" id="selcompania" required>
+                  <option value="">Selecciona una compañía</option>
+                  <option value="Axa Assistance"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Axa Assistance") echo "selected" ?>>Axa Assistance</option>
+                  <option value="BCI Seguros"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "BCI Seguros") echo "selected" ?>>BCI Seguros</option>
+                  <option value="Chilena Consolidada"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Chilena Consolidada") echo "selected" ?>>Chilena Consolidada</option>
+                  <option value="CHUBB"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "CHUBB") echo "selected" ?>>CHUBB</option>
+                  <option value="Confuturo"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Confuturo") echo "selected" ?>>Confuturo</option>
+                  <option value="Consorcio"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Consorcio") echo "selected" ?>>Consorcio</option>
+                  <option value="Continental"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Continental") echo "selected" ?>>Continental</option>
+                  <option value="Contempora"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Contempora") echo "selected" ?>>Contempora</option>
+                  <option value="Coris"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Coris") echo "selected" ?>>Coris</option>
+                  <option value="HDI Seguros"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "HDI Seguros") echo "selected" ?>>HDI Seguros</option>
+                  <option value="Liberty"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Liberty") echo "selected" ?>>Liberty</option>                       
+                                          
+                  <option value="Mapfre"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Mapfre") echo "selected" ?>>Mapfre</option>
+                  <option value="Ohio National Financial Group"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Ohio National Financial Group") echo "selected" ?>>Ohio National</option>
+                  <option value="Orsan"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Orsan") echo "selected" ?>>Orsan</option>
+                  <option value="Reale Seguros"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Reale Seguros") echo "selected" ?>>Reale Seguros</option>
+                  <option value="Renta Nacional"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Renta Nacional") echo "selected" ?>>Renta Nacional</option>
+                  <option value="Southbridge"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Southbridge") echo "selected" ?>>Southbridge</option>
+                  <option value="Sur Asistencia"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Sur Asistencia") echo "selected" ?>>Sur Asistencia</option>
+                  <option value="Suaval"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Suaval") echo "selected" ?>>Suaval</option>
+                  <option value="Sura"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Sura") echo "selected" ?>>Sura</option>
+                  <option value="STARR"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "STARR") echo "selected" ?>>STARR</option>
+                  <option value="Unnio"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $selcompania == "Unnio") echo "selected" ?>>Unnio</option>
+                </select>
+                <div class="invalid-feedback">Debes seleccionar una Compañía</div>
+              
             </div>
             
             <div class="col-2">
@@ -281,12 +329,12 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             </div>
         </div>
         <div class="form-row">
-            <div class="col">
+            <div class="col-5">
                 <label for="corredor"><b>Corredor</b></label>
                     <input type="text" class="form-control" id="corredor"
                                           name="corredor" value="Adriana Sandoval Páez">
             </div>
-            <div class="col">
+            <div class="col-4">
             <label for="rut_corredor"><b>RUT Corredor</b></label>
              <input type="text" class="form-control" id="rut_corredor"
                                           name="rut_corredor" value="10.228.002-4">
@@ -295,26 +343,27 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
           </div>
         
           <br>
+           <br>
           <div class="form-row">
             <div class="col-3">
               <label for="fechaprimer"><b>Fecha Ingreso</b></label>
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
-                <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" max= "9999-12-31" style="width:72%;">
+                <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" max= "9999-12-31" style="width:72%;" >
               </div>
             </div>
             <div class="col-3">
               <label for="fecha_vigencia"><b>Fecha Vigencia Inicial</b></label>
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
-                <input type="date" class="form-control" id="fecha_vigencia_inicial" name="fecha_vigencia_inicial" max= "9999-12-31" style="width:72%;">
+                <input type="date" class="form-control" id="fecha_vigencia_inicial" name="fecha_vigencia_inicial" onchange="calculadias()"  max= "9999-12-31" style="width:72%;">
               </div>
             </div>
             <div class="col-3">
               <label for="fecha_vigencia"><b>Fecha Vigencia Final</b></label>
               <label style="color: darkred">&nbsp; *</label>
               <div class="md-form">
-                <input type="date" class="form-control" id="fecha_vigencia_final" name="fecha_vigencia_final" max= "9999-12-31" style="width:72%;">
+                <input type="date" class="form-control" id="fecha_vigencia_final" name="fecha_vigencia_final" max= "9999-12-31" onchange="calculadias()" style="width:72%;">
               </div>
             </div>
             <div class="col-3">
@@ -398,7 +447,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <label for="monto"><b>Monto</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="monto" name="monto">
+                    <input type="text" class="form-control" id="monto" name="monto" onchange="calculatasas()">
                 </div>
                 <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
                 </div>
@@ -414,13 +463,13 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-2">
             <label for="tasa_afecta"><b>Tasa Afecta %</b></label>
                 <div class="md-form">
-                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta" name="monto">
+                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta">
                 </div>
             </div>
             <div class="col-2">
             <label for="tasa_exenta"><b>Tasa Exenta %</b></label>
                 <div class="md-form">
-                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta" name="monto">
+                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta">
                 </div>
             </div>
           </div>
@@ -429,7 +478,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <label for="monto"><b>Prima Neta Exenta</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta">
+                    <input type="text" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal()">
                 </div>
                 </div>
 
@@ -437,13 +486,13 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="monto"><b>IVA</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="iva" name="iva">
+                    <input type="text" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
                 </div>
             </div>
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Neta Afecta</b></label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta">
+                    <input type="text" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
                 </div>
             </div>
             <div class="col-2">
@@ -507,8 +556,20 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
     <br>
 </foot>
 
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+<script src="/assets/js/jquery.redirect.js"></script>
+<script src="/assets/js/validarRUT.js"></script>
+<script src="/assets/js/bootstrap-notify.js"></script>
+<script src="/assets/js/bootstrap-notify.min.js"></script>
+
 <script>
-    
+
+
+
 function cambio_motivo(){
     
     var motivo_endoso = document.getElementById("motivo_endoso").value;
@@ -524,11 +585,21 @@ function cambio_motivo(){
     }
     
 }
+
+function prorroga(){
+    
+    var fecha = new Date();
+    fecha =document.getElementById('fecha_prorroga').value
+   document.getElementById('fecha_vigencia_final').value = fecha;
+    console.log(fecha);
+    
+}
     
     
 document.addEventListener("DOMContentLoaded", function(event) {
-    var bPreguntar = true;
-    
+   
+
+
     var orgn = '<?php echo $camino; ?>';
     console.log(orgn)
         switch (orgn) 
@@ -652,7 +723,79 @@ document.addEventListener("DOMContentLoaded", function(event) {
            
            
         }
+        
+//<<---PONER FECHA y CALCULAR DIAS--->>
+
+    var request = new XMLHttpRequest()
+    request.open('GET', 'https://mindicador.cl/api', true)
+    request.onload = function() {
+        // Begin accessing JSON data here
+        var data = JSON.parse(this.response)
+        if (request.status >= 200 && request.status < 400) {
+            let date = new Date(data.fecha)
+            let day = date.getDate()
+            let month = date.getMonth() + 1
+            let year = date.getFullYear()
+        if (month < 10) {
+            var fecha = `${year}-0${month}-${day}`
+        } else {
+            var fecha = `${year}-${month}-${day}`
+        }
+            console.log(fecha);
+            document.getElementById('fecha_ingreso').value = fecha;
+    } else {}
+}
+    request.send();
+
+    calculadias();
+    
+//CALCULAR TASAS
+
+    calculatasas();
+    calculaIVA();
+    calculaprimatotal();
+
 })
+
+function calculadias(){
+    
+ var inicio  = new Date(document.getElementById('fecha_vigencia_inicial').value); 
+ var final = new Date(document.getElementById('fecha_vigencia_final').value); 
+ var diferencia = final.getTime() - inicio.getTime() 
+ 
+ 
+ document.getElementById('dias').value= diferencia/86400000 ;
+ 
+    
+    
+}
+
+function calculatasas(){
+    
+    var monto =    document.getElementById('monto').value;
+    var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
+    var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
+    
+    document.getElementById('tasa_afecta').value = prima_neta_afecta/monto;
+    document.getElementById('tasa_exenta').value = prima_neta_exenta/monto;
+}
+
+function calculaIVA(){
+    
+    var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
+    document.getElementById('iva').value = prima_neta_afecta*0.19
+     
+    
+}
+function calculaprimatotal(){
+    var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
+    var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
+    var iva = document.getElementById('iva').value;
+    
+    document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+}
+
+
 function genera_propuesta(){
 
 
