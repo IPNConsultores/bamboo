@@ -152,7 +152,7 @@ $(document).ready(function() {
         render: function (data, type, row, meta) {
              var estado='';
             switch (data) {
-                        case 'Aprobado':
+                        case 'Emitido':
                             estado='<span class="badge badge-primary">'+data+'</span>';
                             break;
                         case 'Rechazado':
