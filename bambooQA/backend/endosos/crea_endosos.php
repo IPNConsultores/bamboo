@@ -80,7 +80,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
    
             break;
         case 'rechazar_propuesta':
-            $busqueda=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta"]));
+            $nro_propuesta=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta"]));
             $listado='/bambooQA/listado_propuesta_endosos.php';
             $mensaje='Propuesta Endoso rechazada correctamente';
                 $query= "update propuesta_endosos set estado='Rechazado', motivo_rechazo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta_endoso='".$nro_propuesta."';";
