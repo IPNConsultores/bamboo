@@ -823,6 +823,7 @@ function genera_propuesta(){
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
           'id_poliza':'<?php echo $id_poliza; ?>',
+          'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'numero_endoso':document.getElementById("nro_endoso").value,
           'comentario_endoso':document.getElementById("comentarios").value,
           'accion':camino
