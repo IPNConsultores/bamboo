@@ -247,7 +247,7 @@ function format_propuesta(d) {
     var ext_cancelado='';
 
     var botones='';
-    if (d.estado=='Emitido'){
+    if (d.estado=='Pendiente'){
         botones='<tr><td>Acciones</td>' +
         '<td>' +
         '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
