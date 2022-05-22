@@ -107,7 +107,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table = ''
 $(document).ready(function() {
     table = $('#listado_propuesta_endosos').DataTable({
-        "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
+        "ajax": "/bambooQA/backend/endosos/busqueda_listado_endosos.php",
         "scrollX": true,
         "dom": 'Pfrtip',
         "columns": [{
@@ -225,30 +225,6 @@ $(document).ready(function() {
 function format_propuesta(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
-
-    var botones='';
-    if (d.estado=='Pendiente'){
-        botones='<tr><td>Acciones</td>' +
-        '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
-        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
-        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '</td>' +
-        '</tr>' +
-        '</table>';
-    }
-    else{
-        botones='<tr><td>Acciones</td>' +
-        '<td>' +
-        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '</td>' +
-        '</tr>' +
-        '</table>';
-    }
-
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
             '<td>Total Prima afecta:</td>' +
@@ -290,8 +266,13 @@ function format_propuesta(d) {
             '<td> </td>' +
             '<td> </td>' +
         '</tr>' +
-
-        botones;
+        '<tr><td>Acciones</td>' +
+        '<td>' +
+        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id=' + d.numero_endoso + ' name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
 }
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
