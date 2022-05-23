@@ -691,9 +691,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 //CALCULAR TASAS
 
-    calculatasas();
-    calculaIVA();
-    calculaprimatotal();
+   
 
 })
 
