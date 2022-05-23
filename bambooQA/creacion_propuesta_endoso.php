@@ -387,7 +387,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <label for="monto"><b>Monto</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="monto" name="monto" onchange="calculatasas()">
+                    <input type="number" class="form-control" id="monto" name="monto" onchange="calculatasas()">
                 </div>
                 <div style="color:red; visibility: hidden" id="validador6">Debes seleccionar Fecha de Vencimiento</div>
                 </div>
@@ -403,13 +403,13 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-2">
             <label for="tasa_afecta"><b>Tasa Afecta %</b></label>
                 <div class="md-form">
-                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta">
+                    <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_afecta">
                 </div>
             </div>
             <div class="col-2">
             <label for="tasa_exenta"><b>Tasa Exenta %</b></label>
                 <div class="md-form">
-                    <input type="text" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta">
+                    <input type="number" step="0.01" placeholder="0,00"  class="form-control" id="tasa_exenta">
                 </div>
             </div>
           </div>
@@ -418,7 +418,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <label for="monto"><b>Prima Neta Exenta</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal()">
+                    <input type="number" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal()">
                 </div>
                 </div>
 
@@ -426,19 +426,19 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="monto"><b>IVA</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
+                    <input type="number" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
                 </div>
             </div>
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Neta Afecta</b></label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
+                    <input type="number" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
                 </div>
             </div>
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Total</b></label>
                 <div class="md-form">
-                    <input type="text" class="form-control" id="prima_total" name="prima_total">
+                    <input type="number" class="form-control" id="prima_total" name="prima_total">
                 </div>
             </div>
           </div>
@@ -714,8 +714,11 @@ function calculatasas(){
     var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
     var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
     
-    document.getElementById('tasa_afecta').value = prima_neta_afecta/monto;
-    document.getElementById('tasa_exenta').value = prima_neta_exenta/monto;
+    var tasa_afecta = prima_neta_afecta/monto*100;
+    var tasa_exenta = prima_neta_exenta/monto*100;
+    
+    document.getElementById('tasa_afecta').value = tasa_afecta;
+    document.getElementById('tasa_exenta').value = tasa_exenta;
 }
 
 function calculaIVA(){
