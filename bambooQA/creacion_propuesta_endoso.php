@@ -8,9 +8,9 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crea_propuesta_endoso';
+//$_POST["accion"] = 'editar_endoso';
 //$_POST["numero_poliza"]='685';
-//$_POST["numero_propuesta"]="E000005";
+//$_POST["numero_propuesta"]="E000004";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
@@ -691,6 +691,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
 //CALCULAR TASAS
 
+console.log(document.getElementById('monto').value);
+console.log(document.getElementById('prima_neta_exenta').value);
+console.log(document.getElementById('prima_neta_exenta').value);
+console.log(document.getElementById('tasa_afecta').value);
+
    
 
 })
@@ -712,6 +717,7 @@ function calculatasas(){
     
     var monto =    document.getElementById('monto').value;
     var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
+    
     var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
     
     var tasa_afecta = prima_neta_afecta/monto*100;
