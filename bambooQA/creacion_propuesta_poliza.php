@@ -756,7 +756,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
-      <div  id="informacion_poliza" class="card" style="display:none" disabled>
+      <div  id="informacion_poliza" class="card" style="display:flex" disabled>
       <div class="card-header" id="headingfour" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -764,7 +764,7 @@ function estandariza_info( $data ) {
                               style="color:#536656">Información de Póliza </button>
         </h5>
       </div>
-      <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+        <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
         <div class="card-body" id="card-body-four">
         
           <label for = "datos_poliza"><b>Datos Póliza</b></label>
@@ -844,9 +844,42 @@ function estandariza_info( $data ) {
 
          
           </div>
-        
         </div>
+        </div>
+        <div  id="info_endoso" class="card" style="display:flex" disabled>
+            <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
+                <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                              data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix"
+                              style="color:#536656">Endosos </button>
+                </h5>
+            </div>
+        <div id="collapsesix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionExample">
+        <div class="card-body" id="card-body-six">
+            <table class="table table-bordered table-responsive" id="info_endosos" style="width:100%; overflow-x: auto; white-space: nowrap;">
+                <thead>
+                    <tr class="d-flex">
+                        <th>Nro Endoso</th>
+                        <th>Tipo de Endoso</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Motivo Endoso</th>
+                        <th>Dice</th>
+                        <th>Debe Decir</th>
+                        <th>Fecha Prorroga</th>
+                        <th>Prima Afecta</th>
+                        <th>IVA</th>
+                        <th>Prima Exenta</th>
+                        <th>Prima Total</th>
+                        <th>Monto Asegurado</th>
+                            </tr>
+                </thead>
+                        </table>
+         
+        </div>
+        
       </div>
+      </div>
+      
     </div>
     <br>
     <div id="auxiliar2" style="display: none;"></div>
