@@ -756,7 +756,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
-      <div  id="informacion_poliza" class="card" style="display:none" disabled>
+    <div  id="informacion_poliza" class="card" style="display:none" disabled>
       <div class="card-header" id="headingfour" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -847,6 +847,40 @@ function estandariza_info( $data ) {
         
         </div>
       </div>
+      <div  id="info_endoso" class="card" style="display:none" disabled>
+      <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                              data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix"
+                              style="color:#536656">Endosos </button>
+        </h5>
+      </div>
+      <div id="collapsesix" class="collapse" aria-labelledby="headingsixr" data-parent="#accordionExample">
+        <div class="card-body" id="card-body-six">
+        
+             <table class="table table-bordered table-responsive" id="info_endosos" style="width:100%; overflow-x: auto; white-space: nowrap;">
+                <thead>
+                            <tr class="d-flex">
+                                <th>Nro Endoso</th>
+                                <th>Tipo de Endoso</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Motivo Endoso</th>
+                                <th>Dice</th>
+                                <th>Debe Decir</th>
+                                <th>Fecha Prorroga</th>
+                                <th>Prima Afecta</th>
+                                <th>IVA</th>
+                                <th>Prima Exenta</th>
+                                <th>Prima Total</th>
+                                <th>Monto Asegurado</th>
+                            </tr>
+                </thead>
+                        </table>
+         
+        </div>
+        
+      </div>
+      </div>
     </div>
     <br>
     <div id="auxiliar2" style="display: none;"></div>
@@ -863,21 +897,24 @@ function estandariza_info( $data ) {
 <br>
 </div>/
 <script>
-
-$("#boton_submit").click(function(e){
-
-    blnFormValidity= $('#formulario')[0].checkValidity()
-   document.getElementById('formulario').classList.add('was-validated');
-    if(blnFormValidity==false){
-        e.preventDefault();
-        return false
-    }
-    document.getElementById('auxiliar3').value = blnFormValidity;
-    
-    genera_propuesta();
-})
-
-</script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+    </script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
@@ -1373,6 +1410,8 @@ orgn = '<?php echo $camino; ?>';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
                     document.getElementById("edicion1").style.display = "none";
+                    
+                     document.getElementById("info_endoso").style.display = "flex";
                     orgn='crear_propuesta';
                     
                 } else {
@@ -1583,6 +1622,7 @@ orgn = '<?php echo $camino; ?>';
                     document.getElementById("fechaprimer").value = '';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
+                    document.getElementById("info_endoso").style.display = "flex";
                     orgn='crear_poliza_web';
                     
                 }
