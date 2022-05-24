@@ -3,13 +3,14 @@ if (!isset($_SESSION))
 {
     session_start();
 }
-
+//$_POST["busqueda"]='test poliza 14 may 1346';
+//$_SERVER["REQUEST_METHOD"]="POST";
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
 mysqli_set_charset($link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
 $buscar = $base = $id = $nombre_base = '';
-$id_clientes = $id_polizas = $endosos = $propuestas = 'busqueda dummy';
+$id_clientes = $id_polizas = $endosos = $propuestas =$propuestas_endosos= 'busqueda dummy';
 $num = 0;
 $busqueda = $busqueda_err = $data = $query= $resultado_poliza= '';
 $rut = $nombre = $telefono = $correo = $lista = '';
@@ -172,10 +173,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="clientes" data-toggle="tab" href="#nav-cliente" role="tab" aria-controls="nav-cliente" aria-selected="true" style="color: white;background-color:#536656;border-color:#dee2e6" onclick="cambiacolor(this.id)">Cliente</a>
                 <a class="nav-item nav-link" id="poliza" data-toggle="tab" href="#nav-poliza" role="tab" aria-controls="nav-poliza" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Póliza</a>
+                <a class="nav-item nav-link" id="endosos" data-toggle="tab" href="#nav-endosos" role="tab" aria-controls="nav-endosos" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Endosos</a>
                 <a class="nav-item nav-link" id="tarea" data-toggle="tab" href="#nav-tarea" role="tab" aria-controls="nav-tarea" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Tarea</a>
                 <a class="nav-item nav-link" id="tarea_rec" data-toggle="tab" href="#nav-tarea_rec" role="tab" aria-controls="nav-tarea_rec" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Tarea Recurrente</a>
-                <a class="nav-item nav-link" id="propuestas" data-toggle="tab" href="#nav-propuestas" role="tab" aria-controls="nav-propuestas" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Propuestas</a>
-                <a class="nav-item nav-link" id="endosos" data-toggle="tab" href="#nav-endodosos" role="tab" aria-controls="nav-endodosos" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Endosos</a>
+                <a class="nav-item nav-link" id="propuestas" data-toggle="tab" href="#nav-propuestas" role="tab" aria-controls="nav-propuestas" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Propuestas póliza</a>
+                <a class="nav-item nav-link" id="propuestas_endosos" data-toggle="tab" href="#nav-propuestas_endosos" role="tab" aria-controls="nav-propuestas_endosos" aria-selected="false" style="color: grey;border-color:#dee2e6" onclick="cambiacolor(this.id)">Propuestas endosos</a>
+
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -309,33 +312,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                         </div>
                     </div>
                 </div>
-            <div class="tab-pane fade" id="nav-endosos" role="tabpanel" aria-labelledby="nav-endosos-tab">
+                <div class="tab-pane fade" id="nav-endosos" role="tabpanel" aria-labelledby="nav-endosos-tab">
                     <div class="card">
                         <div class="card-body">
                             <br>
                             <br>
-                            <table class="table" id="listado_propuestas_endosos" style="width:100%">
+                            <table class="display" style="width:100%" id="listado_endosos">
                                 <tr>
                                     <th></th>
-                                    <th>Estado</th>
-                                    <th>nro_de_poliza</th>
-                                    <th>vigencia_inicio</th>
-                                    <th>vigencia_termino</th>
-                                    <th>compañia</th>
-                                    <th>ramo</th>
-                                    <th>proponente</th>
-                                    <th>rut_proponente</th>
-                                    <th>grupo</th>
-                                    <th>referido</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Número Endoso</th>
+                                    <th>Nro Propuesta Endoso</th>
+                                    <th>Tipo Endoso</th>
+                                    <th>Nro Póliza</th>
+                                    <th>Fecha ingreso</th>
+                                    <th>Inicio Vigencia</th>
+                                    <th>Fin Vigencia</th>
                                 </tr>
+                
                             </table>
-                            <div id="botones_tareas_recurrentes"></div>
                         </div>
                     </div>
                 </div>
-            
+                <div class="tab-pane fade" id="nav-propuestas_endosos" role="tabpanel" aria-labelledby="nav-propuestas_endosos-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <br>
+                            <br>
+                            <table class="display" style="width:100%" id="listado_propuesta_endosos">
+                                <tr>
+                                    <th></th>
+                                    <th>Número Endoso</th>
+                                    <th>Nro Propuesta Endoso</th>
+                                    <th>Tipo Endoso</th>
+                                    <th>Nro Póliza</th>
+                                    <th>Fecha ingreso</th>
+                                    <th>Inicio Vigencia</th>
+                                    <th>Fin Vigencia</th>
+                                </tr>
+                
+                            </table>
+                        </div>
+                    </div>
+                </div>
             <div>
                 <br>
             </div>
@@ -348,6 +366,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 <input id="var3_poliza" value="<?php echo htmlspecialchars($id_polizas);?>">
                 <input id="var4_titulo" value="<?php echo $nombre_base;?>">
                 <input id="var5_propuesta" value="<?php echo htmlspecialchars($propuestas);?>">
+                <input id="var6_endoso" value="<?php echo htmlspecialchars($endoso);?>">
+                <input id="var7_propuesta_endoso" value="<?php echo htmlspecialchars($propuestas_endosos);?>">
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -389,7 +409,10 @@ function cambiacolor(id) {
     document.getElementById("endosos").style.backgroundColor = "white"
     document.getElementById("endosos").style.color = "grey"
     document.getElementById("endosos").style.borderColor = "#dee2e6"
-
+    document.getElementById("propuestas_endosos").style.backgroundColor = "white"
+    document.getElementById("propuestas_endosos").style.color = "grey"
+    document.getElementById("propuestas_endosos").style.borderColor = "#dee2e6"
+    
     document.getElementById(id).style.backgroundColor = "#536656"
     document.getElementById(id).style.color = "white"
 }
@@ -973,11 +996,11 @@ $(document).ready(function() {
     $('#listado_tareas_recurrentes').dataTable().fnFilter(document.getElementById("var1").value);
     //fin tareas recurrents
     //inicio propuestas
-    table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
+    var table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
         "ajax": "/bambooQA/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
         "scrollX": true,
         "initComplete": function(settings, json) {
-            document.getElementById("propuestas").innerHTML = "Propuestas (" + $(
+            document.getElementById("propuestas").innerHTML = "Prop. Póliza (" + $(
                 '#listado_propuesta_polizas').DataTable().page.info().recordsDisplay + ")";
         },
         "searchPanes": {
@@ -1150,8 +1173,265 @@ $(document).ready(function() {
     $('#listado_propuesta_polizas').dataTable().fnFilter(document.getElementById("var1").value);
     //fin propuestas
     //inicio endosos
+            table_endosos = $('#listado_endosos').DataTable({
+        "ajax": "/bambooQA/backend/endosos/busqueda_listado_endosos.php",
+        "scrollX": true,
+        "initComplete": function(settings, json) {
+                document.getElementById("endosos").innerHTML = "Endosos (" + $(
+                    '#listado_endosos').DataTable().page.info().recordsDisplay + ")";
+            },
+        "dom": 'Pfrtip',
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            }, //0
+            {
+                "data": "numero_endoso",
+                title: "Número Endoso"
+            }, //1
+            { 
+                data: "numero_propuesta_endoso", 
+                title: "Nro Propuesta Endoso",
+            }, //2
+            {
+                "data": "tipo_endoso",
+                title: "Tipo Endoso"
+            }, //3
+            {
+                "data": "numero_poliza",
+                title: "Número Póliza"
+            }, //4
+            {
+                "data": "fecha_ingreso_endoso",
+                title: "Fecha ingreso"
+            }, //5
+            {
+                "data": "vigencia_inicial",
+                title: "Inicio Vigencia"
+            }, //6
+            {
+                "data": "vigencia_final",
+                title: "Fin Vigencia"
+            } //7
+        ],
+        "columnDefs": 
+        [
+        {
+        targets: [5,6,7],
+         render: function(data, type, full)
+         {
+            if (data==null || data=="0000-00-00")
+            {
+                return '';
+            }
+            else
+            {
+                return moment(data).format('YYYY/MM/DD');
+            }
+         }}
+        ],
+        "order": [
+            [1, "desc"],
+            [2, "desc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+                "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
+                }
+            }
+        }
+    });
+    $("#listado_endosos_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+        table_endosos.search(texto1)
+            .draw();
+    }
+        
+    });
+    $('#listado_endosos tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table_endosos.row(tr);
 
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format_endoso(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+    $('#listado_endosos').dataTable().fnFilter(document.getElementById("var1").value);
+ 
     //fin endosos
+    // inicio propuesta_endosos
+        var table_propuestas_endosos = $('#listado_propuesta_endosos').DataTable({
+        "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
+        "initComplete": function(settings, json) {
+                document.getElementById("propuestas_endosos").innerHTML = "Prop. Endosos (" + $(
+                    '#listado_propuesta_endosos').DataTable().page.info().recordsDisplay + ")";
+            },
+        "scrollX": true,
+        "dom": 'Pfrtip',
+        "columns": [{
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="fas fa-search-plus"></i>'
+            }, //0
+            {
+                "data": "estado",
+                title: "Estado"
+            }, //1
+            { 
+                data: "numero_propuesta_endoso", 
+                title: "Nro Propuesta Endoso",
+            }, //2
+            {
+                "data": "tipo_endoso",
+                title: "Tipo Endoso"
+            }, //3
+            {
+                "data": "numero_poliza",
+                title: "Número Póliza"
+            }, //4
+            {
+                "data": "fecha_ingreso_endoso",
+                title: "Fecha ingreso"
+            }, //5
+            {
+                "data": "vigencia_inicial",
+                title: "Inicio Vigencia"
+            }, //6
+            {
+                "data": "vigencia_final",
+                title: "Fin Vigencia"
+            } //7
+        ],
+        "columnDefs": 
+        [
+         {
+        targets: 1,
+        render: function (data, type, row, meta) {
+             var estado='';
+            switch (data) {
+                        case 'Emitido':
+                            estado='<span class="badge badge-primary">'+data+'</span>';
+                            break;
+                        case 'Rechazado':
+                            estado='<span class="badge badge-danger">'+data+'</span>';
+                            break;
+                        case 'Cancelado':
+                            estado='<span class="badge badge-dark">'+data+'</span>';
+                            break;
+                        default:
+                            estado='<span class="badge badge-light">'+data+'</span>';
+                            break;
+                    }
+          return estado;  //render link in cell
+        }},
+        {
+        targets: [5,6,7],
+         render: function(data, type, full)
+         {
+            if (data==null || data=="0000-00-00")
+            {
+                return '';
+            }
+            else
+            {
+                return moment(data).format('YYYY/MM/DD');
+            }
+         }}
+        ],
+        "order": [
+            [1, "desc"],
+            [2, "desc"]
+        ],
+        "oLanguage": {
+            "sSearch": "Búsqueda rápida",
+            "sLengthMenu": 'Mostrar <select>' +
+                '<option value="10">10</option>' +
+                '<option value="25">30</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">todos</option>' +
+                '</select> registros',
+                "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
+            "sLengthMenu": "Muestra _MENU_ registros por página",
+            "sZeroRecords": "No hay registros asociados",
+            "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+            "sInfoEmpty": "No hay registros disponibles",
+            "oPaginate": {
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior",
+                "sLast": "Última"
+            }
+        },
+        "language": {
+            "searchPanes": {
+                "title":{
+                    _: 'Filtros seleccionados - %d',
+                    0: 'Sin Filtros Seleccionados',
+                    1: '1 Filtro Seleccionado',
+                }
+            }
+        }
+    });
+    $("#listado_propuesta_endosos_filter input")
+    .off()
+    .on('keyup change', function (e) {
+    if (e.keyCode !== 13 || this.value == "") {
+        var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
+        table_propuestas_endosos.search(texto1)
+            .draw();
+    }
+        
+    });
+    $('#listado_propuesta_endosos tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+        var row = table_propuestas_endosos.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format_propuesta_endoso(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+    $('#listado_propuesta_endosos').dataTable().fnFilter(document.getElementById("var1").value);
+ 
+    // fin propuesta endosos
     
 switch (document.getElementById("aux_base").value) {
         case 'cliente': {
@@ -1235,6 +1515,8 @@ switch (document.getElementById("aux_base").value) {
             break;
         }
     }
+
+    
 });
 function format_propuesta(d) {
     // `d` is the original data object for the row
@@ -1590,12 +1872,13 @@ function format(d) {
         '</table><br>' +
         $contactos + '<br>';
 }
-
 function format_poliza(d) {
     // `d` is the original data object for the row
-    var ext_cancelado='';
+ var ext_cancelado='';
     var items='';
+    var endosos='';  
     var listado_items='';
+    var listado_endosos='';
     if (d.estado=='Cancelado'){
         ext_cancelado='<tr>' +
         '<td>Fecha CANCELACIÓN:</td>' +
@@ -1606,6 +1889,52 @@ function format_poliza(d) {
         '<td>' + d.motivo_cancela + '</td>' +
         '</tr>';
     }
+    //inicio endosos
+    console.log('nro de endosos: '+ d.nro_endosos);
+        if(d.nro_endosos=="0"){
+            endosos=
+            '<tr>' +
+                '<td></td>' +
+                '<td></td>' +
+            '</tr>';   
+            
+        }
+        else {
+            for (var i=0; i< d.nro_endosos; i++){
+                listado_endosos+= '<tr>'+
+                '<td>' + (i+1) + '</td>'+
+                '<td>' + d.endosos[i].numero_endoso + '</td>'+
+                '<td>' + d.endosos[i].tipo_endoso + '</td>'+
+                '<td>' + d.endosos[i].descripcion_endoso + '</td>'+
+                '<td>' + d.endosos[i].dice + '</td>'+
+                '<td>' + d.endosos[i].debe_decir + '</td>'+
+                '<td>' + d.endosos[i].vigencia_inicial + '</td>'+
+                '<td>' + d.endosos[i].vigencia_final + '</td>'+
+                '<td>' + d.endosos[i].fecha_ingreso_endoso + '</td>'+
+                '<td>' + d.endosos[i].fecha_prorroga + '</td>'+
+                '</tr>';
+            }
+            endosos='<tr>' +
+            '<td VALIGN=TOP>Endosos: </td>' +
+            '<td><table class="table table-striped" style="width:100%" id="listado_endosos_1">'+
+            '<tr>'+
+            '<th></th>'+
+            '<th>Número</th>'+
+            '<th>Tipo</th>'+
+            '<th>Descripción</th>'+
+            '<th>Dice</th>'+
+            '<th>Debe decir</th>'+
+            '<th>Vigencia Inicial</th>'+
+            '<th>Vigencia Final</th>'+
+            '<th>Fecha ingreso</th>'+
+            '<th>Fecha Prorroga</th>'+
+            '</tr>'+
+            listado_endosos+
+            '</table></td>' +
+            '</tr>' ;
+    }
+    
+    //fin endosos
     console.log(d.total_items);
     if(d.total_items=="0"){
             items=
@@ -1633,7 +1962,7 @@ function format_poliza(d) {
             '</tr>';
   
             }
-            items='<table class="table table-striped" style="width:100%" id="listado_polizas">'+
+            items='<table class="table table-striped" style="width:100%" id="listado_polizas_1">'+
             '<tr>'+
             '<th></th>'+
             '<th>Rut Asegurado</th>'+
@@ -1656,29 +1985,45 @@ function format_poliza(d) {
 
     }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+
         '<tr>' +
-            ext_cancelado + 
-            '<td>Total Prima afecta:</td>' +
-            '<td>' + d.total_prima_afecta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima exenta:</td>' +
-            '<td>' + d.total_prima_exenta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima neta anual:</td>' +
-            '<td>' + d.total_prima_neta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima bruta anual:</td>' +
-            '<td>' + d.total_prima_bruta + '</td>' +
+        ext_cancelado + 
+            '<td VALIGN=TOP>Primas: </td>' +
+            '<td>'+
+                '<table class="table table-striped" style="width:100%">'+
+                    '<tr>' +
+                        '<td>Total Prima afecta:</td>' +
+                        '<td>' + d.total_prima_afecta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima exenta:</td>' +
+                        '<td>' + d.total_prima_exenta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima neta anual:</td>' +
+                        '<td>' + d.total_prima_neta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima bruta anual:</td>' +
+                        '<td>' + d.total_prima_bruta + '</td>' +
+                    '</tr>' +
+                '</table>'+
+            '</td>' +
         '</tr>' +
         '<tr>' +
         '<td></td>' +
+        '<td></td>' +
         '<tr>' +
-        items +
         '<tr>' +
-        '<td>Acciones</td>' +
+            '<td VALIGN=TOP>Ítems: </td>' +
+            '<td>' + items + '</td>' +
+        '</tr>' +
+         '<tr>' +
+        '<td></td>' +
+        '<td></td>' +
+        '<tr>' + endosos +      
+        '<tr>' +
+        '<td VALIGN=TOP>Acciones: </td>' +
         '<td>' +
         '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
@@ -1693,7 +2038,129 @@ function format_poliza(d) {
         '</tr>' +
         '</table>';
 }
+function format_endoso(d) {
+    // `d` is the original data object for the row
+    var ext_cancelado='';
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+            '<td>Total Prima afecta:</td>' +
+            '<td>' + d.prima_neta_afecta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Total Prima exenta:</td>' +
+            '<td>' + d.prima_neta_exenta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Total IVA:</td>' +
+            '<td>' + d.iva + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Prima total:</td>' +
+            '<td>' + d.prima_total + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td> </td>' +
+            '<td> </td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td> </td>' +
+            '<td>'+
+                '<table class="table table-striped" style="padding-left:50px;" cellpadding="5" cellspacing="0" border="0" id="listado_polizas">'+
+                    '<tr>'+
+                        '<th>Descripción</th>'+
+                        '<th>Dice</th>'+
+                        '<th>Debe Decir</th>'+
+                    '</tr>'+
+                    '<tr>'+
+                    '<td>' + d.descripcion_endoso + '</td>'+
+                    '<td>' + d.dice + '</td>'+
+                    '<td>' + d.debe_decir + '</td>'+
+                '</table>'+
+            '</td>' +
+        '</tr>' +    
+        '<tr>' +
+            '<td> </td>' +
+            '<td> </td>' +
+        '</tr>' +
+        '<tr><td>Acciones</td>' +
+        '<td>' +
+        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id=' + d.numero_endoso + ' name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
+}
+function format_propuesta_endoso(d) {
+    // `d` is the original data object for the row
+    var ext_cancelado='';
 
+    var botones='';
+    if (d.estado=='Pendiente'){
+        botones='<tr><td>Acciones</td>' +
+        '<td>' +
+        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
+        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
+    }
+    else{
+        botones='<tr><td>Acciones</td>' +
+        '<td>' +
+        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '</td>' +
+        '</tr>' +
+        '</table>';
+    }
+
+    return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+            '<td>Total Prima afecta:</td>' +
+            '<td>' + d.prima_neta_afecta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Total Prima exenta:</td>' +
+            '<td>' + d.prima_neta_exenta + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Total IVA:</td>' +
+            '<td>' + d.iva + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td>Prima total:</td>' +
+            '<td>' + d.prima_total + '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td> </td>' +
+            '<td> </td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td> </td>' +
+            '<td>'+
+                '<table class="table table-striped" style="padding-left:50px;" cellpadding="5" cellspacing="0" border="0" id="listado_polizas">'+
+                    '<tr>'+
+                        '<th>Descripción</th>'+
+                        '<th>Dice</th>'+
+                        '<th>Debe Decir</th>'+
+                    '</tr>'+
+                    '<tr>'+
+                    '<td>' + d.descripcion_endoso + '</td>'+
+                    '<td>' + d.dice + '</td>'+
+                    '<td>' + d.debe_decir + '</td>'+
+                '</table>'+
+            '</td>' +
+        '</tr>' +    
+        '<tr>' +
+            '<td> </td>' +
+            '<td> </td>' +
+        '</tr>' +
+
+        botones;
+}
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {

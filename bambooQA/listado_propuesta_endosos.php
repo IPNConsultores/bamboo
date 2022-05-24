@@ -104,9 +104,9 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
 </html>
 <script>
-var table = ''
+var table_propuestas_endosos = ''
 $(document).ready(function() {
-    table = $('#listado_propuesta_endosos').DataTable({
+    table_propuestas_endosos = $('#listado_propuesta_endosos').DataTable({
         "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
         "scrollX": true,
         "dom": 'Pfrtip',
@@ -219,14 +219,14 @@ $(document).ready(function() {
     .on('keyup change', function (e) {
     if (e.keyCode !== 13 || this.value == "") {
         var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
-         table.search(texto1)
+        table_propuestas_endosos.search(texto1)
             .draw();
     }
         
     });
     $('#listado_propuesta_endosos tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
-        var row = table.row(tr);
+        var row = table_propuestas_endosos.row(tr);
 
         if (row.child.isShown()) {
             // This row is already open - close it
@@ -242,7 +242,7 @@ $(document).ready(function() {
  
 });
 
-function format_propuesta(d) {
+function format_propuesta_endoso(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
 
