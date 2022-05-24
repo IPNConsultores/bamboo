@@ -723,8 +723,8 @@ function calculatasas(){
     var tasa_afecta = prima_neta_afecta/monto*100;
     var tasa_exenta = prima_neta_exenta/monto*100;
     
-    document.getElementById('tasa_afecta').value = tasa_afecta;
-    document.getElementById('tasa_exenta').value = tasa_exenta;
+    document.getElementById('tasa_afecta').value = tasa_afecta.toFixed(2);
+    document.getElementById('tasa_exenta').value = tasa_exenta.toFixed(2);
 }
 
 function calculaIVA(){
@@ -738,6 +738,7 @@ function calculaprimatotal(){
     var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
     var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
     var iva = document.getElementById('iva').value;
+    
     
     document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
 }
