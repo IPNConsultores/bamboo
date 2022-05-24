@@ -234,7 +234,7 @@ $(document).ready(function() {
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format_propuesta(row.data())).show();
+            row.child(format_propuesta_endoso(row.data())).show();
             tr.addClass('shown');
         }
     });
