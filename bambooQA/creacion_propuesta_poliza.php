@@ -756,7 +756,7 @@ function estandariza_info( $data ) {
         </div>
       </div>
     </div>
-      <div  id="informacion_poliza" class="card" style="display:flex" disabled>
+      <div  id="informacion_poliza" class="card" style="display:none" disabled>
       <div class="card-header" id="headingfour" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -846,7 +846,7 @@ function estandariza_info( $data ) {
           </div>
         </div>
         </div>
-        <div  id="info_endoso" class="card" style="display:flex" disabled>
+        <div  id="info_endoso" class="card" style="display:none" disabled>
             <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
                 <h5 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -1406,6 +1406,7 @@ orgn = '<?php echo $camino; ?>';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
                     document.getElementById("edicion1").style.display = "none";
+                    document.getElementById("info_endoso").style.display = "flex";
                     orgn='crear_propuesta';
                     
                 } else {
@@ -1616,6 +1617,7 @@ orgn = '<?php echo $camino; ?>';
                     document.getElementById("fechaprimer").value = '';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
+                     document.getElementById("info_endoso").style.display = "flex";
                     orgn='crear_poliza_web';
                     
                 }
