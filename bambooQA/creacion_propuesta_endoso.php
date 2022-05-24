@@ -450,17 +450,17 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
   
   
         </div>
-        <div class="card" id="card_confirma" style="display:none">
+        <div class="card" id="card_confirma" style="display:flex">
             <div class="card-header" id="headingthree" style="background-color:whitesmoke">
              <h5 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                               data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree"
-                              style="color:#536656">Confirmación de Endoso </button>
+                              style="color:#536656"> Comentarios </button>
              </h5>
             </div>
         <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
          <div class="card-body" id="card-body-three">
-            <div class="form-row">
+            <div class="form-row" id="caja_numero_endoso" style="display:none">
                 <div class="col-3">
                     <label for="monto"><b>Número de Endoso</b></label>
                     <label style="color: darkred">&nbsp; *</label>
@@ -654,7 +654,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("titulo2").style.display = "flex";
                 document.getElementById("titulo3").style.display = "none";
                 document.getElementById("titulo4").style.display = "none";
-                document.getElementById("card_confirma").style.display = "flex";
+                document.getElementById("caja_numero_endoso").style.display = "flex";
                 document.getElementById("nro_endoso").required = "true";              
                
                break;
