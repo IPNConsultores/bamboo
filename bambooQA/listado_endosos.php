@@ -69,6 +69,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Fecha ingreso</th>
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
+                    <th>Fecha Prorroga</th>
                 </tr>
 
             </table>
@@ -143,6 +144,10 @@ $(document).ready(function() {
             {
                 "data": "vigencia_final",
                 title: "Fin Vigencia"
+            }, //7
+            {
+                "data": "fecha_prorroga",
+                title: "Fecha Prorroga"
             } //7
         ],
         "columnDefs": 
@@ -227,50 +232,55 @@ function format_endoso(d) {
     var ext_cancelado='';
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-            '<td>Total Prima afecta:</td>' +
-            '<td>' + d.prima_neta_afecta + '</td>' +
+            '<td VALIGN=TOP>Primas: </td>' +
+            '<td>'+
+                 '<table class="table table-striped" style="width:100%">'+
+                    '<tr>' +
+                        '<td>Total Prima afecta:</td>' +
+                        '<td>' + d.prima_neta_afecta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima exenta:</td>' +
+                        '<td>' + d.prima_neta_exenta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima neta anual:</td>' +
+                        '<td>' + d.iva + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima bruta anual:</td>' +
+                        '<td>' + d.prima_total + '</td>' +
+                    '</tr>' +
+                '</table>'+
+            '</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Total Prima exenta:</td>' +
-            '<td>' + d.prima_neta_exenta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total IVA:</td>' +
-            '<td>' + d.iva + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Prima total:</td>' +
-            '<td>' + d.prima_total + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td> </td>' +
-            '<td> </td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td> </td>' +
+        '<td VALIGN=TOP>Detalle: </td>' +
             '<td>'+
                 '<table class="table table-striped" style="padding-left:50px;" cellpadding="5" cellspacing="0" border="0" id="listado_polizas">'+
                     '<tr>'+
                         '<th>Descripción</th>'+
                         '<th>Dice</th>'+
                         '<th>Debe Decir</th>'+
+                        '<th>Comentario</th>'+
                     '</tr>'+
                     '<tr>'+
                     '<td>' + d.descripcion_endoso + '</td>'+
                     '<td>' + d.dice + '</td>'+
                     '<td>' + d.debe_decir + '</td>'+
+                    '<td>' + d.comentario_endoso + '</td>'+
                 '</table>'+
             '</td>' +
         '</tr>' +    
-        '<tr>' +
-            '<td> </td>' +
-            '<td> </td>' +
-        '</tr>' +
-        '<tr><td>Acciones</td>' +
+        '<tr><td VALIGN=TOP>Acciones</td>' +
         '<td>' +
         '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Buscar información asociada" type="button" id=' + d.numero_endoso + ' name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
+        '</tr>' +
+        '<tr>' +
+            '<td> </td>' +
+            '<td> </td>' +
         '</tr>' +
         '</table>';
 }
