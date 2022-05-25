@@ -208,7 +208,7 @@ $(document).ready(function() {
   var   table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas.php",
-        "scrollX": true,
+        "scrollX": false,
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
@@ -366,7 +366,7 @@ $(document).ready(function() {
 
      table = $('#listado_polizas').DataTable({
 "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
-        "scrollX": true,
+        "scrollX": false,
         "searchPanes":{
             "columns":[2],
         },
