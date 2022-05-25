@@ -61,7 +61,7 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
     $dice=$row->dice;
     $debe_decir=$row->debe_decir;
     $fecha_prorroga=$row->fecha_prorroga;
-    $comentario=$row->comentario_endoso;
+    $comentarios=$row->comentario_endoso;
   }
 }
 elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_endoso'){
