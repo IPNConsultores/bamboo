@@ -69,6 +69,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Fecha ingreso</th>
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
+                    <th>Fecha Prorroga</th>
                 </tr>
 
             </table>
@@ -143,6 +144,10 @@ $(document).ready(function() {
             {
                 "data": "vigencia_final",
                 title: "Fin Vigencia"
+            }, //7
+            {
+                "data": "fecha_prorroga",
+                title: "Fecha Prorroga"
             } //7
         ],
         "columnDefs": 
@@ -168,7 +173,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,7],
+        targets: [5,6,7,8],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")
@@ -312,12 +317,11 @@ function format_propuesta_endoso(d) {
                 '</table>'+
             '</td>' +
         '</tr>' +     
+        botones +
         '<tr>' +
             '<td> </td>' +
             '<td> </td>' +
-        '</tr>' +
-
-        botones;
+        '</tr>' +;
 }
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
