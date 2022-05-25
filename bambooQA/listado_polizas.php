@@ -284,7 +284,9 @@ function format_poliza(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
     var items='';
+    var endosos='';  
     var listado_items='';
+    var listado_endosos='';
     if (d.estado=='Cancelado'){
         ext_cancelado='<tr>' +
         '<td>Fecha CANCELACIÓN:</td>' +
@@ -295,6 +297,52 @@ function format_poliza(d) {
         '<td>' + d.motivo_cancela + '</td>' +
         '</tr>';
     }
+    //inicio endosos
+    console.log('nro de endosos: '+ d.nro_endosos);
+        if(d.nro_endosos=="0"){
+            endosos=
+            '<tr>' +
+                '<td></td>' +
+                '<td></td>' +
+            '</tr>';   
+            
+        }
+        else {
+            for (var i=0; i< d.nro_endosos; i++){
+                listado_endosos+= '<tr>'+
+                '<td>' + (i+1) + '</td>'+
+                '<td>' + d.endosos[i].numero_endoso + '</td>'+
+                '<td>' + d.endosos[i].tipo_endoso + '</td>'+
+                '<td>' + d.endosos[i].descripcion_endoso + '</td>'+
+                '<td>' + d.endosos[i].dice + '</td>'+
+                '<td>' + d.endosos[i].debe_decir + '</td>'+
+                '<td>' + d.endosos[i].vigencia_inicial + '</td>'+
+                '<td>' + d.endosos[i].vigencia_final + '</td>'+
+                '<td>' + d.endosos[i].fecha_ingreso_endoso + '</td>'+
+                '<td>' + d.endosos[i].fecha_prorroga + '</td>'+
+                '</tr>';
+            }
+            endosos='<tr>' +
+            '<td VALIGN=TOP>Endosos: </td>' +
+            '<td><table class="table table-striped" style="width:100%" id="listado_endosos_1">'+
+            '<tr>'+
+            '<th></th>'+
+            '<th>Número</th>'+
+            '<th>Tipo</th>'+
+            '<th>Descripción</th>'+
+            '<th>Dice</th>'+
+            '<th>Debe decir</th>'+
+            '<th>Vigencia Inicial</th>'+
+            '<th>Vigencia Final</th>'+
+            '<th>Fecha ingreso</th>'+
+            '<th>Fecha Prorroga</th>'+
+            '</tr>'+
+            listado_endosos+
+            '</table></td>' +
+            '</tr>' ;
+    }
+    
+    //fin endosos
     console.log(d.total_items);
     if(d.total_items=="0"){
             items=
@@ -322,7 +370,7 @@ function format_poliza(d) {
             '</tr>';
   
             }
-            items='<table class="table table-striped" style="width:100%" id="listado_polizas">'+
+            items='<table class="table table-striped" style="width:100%" id="listado_polizas_1">'+
             '<tr>'+
             '<th></th>'+
             '<th>Rut Asegurado</th>'+
@@ -345,29 +393,45 @@ function format_poliza(d) {
 
     }
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+
         '<tr>' +
-            ext_cancelado + 
-            '<td>Total Prima afecta:</td>' +
-            '<td>' + d.total_prima_afecta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima exenta:</td>' +
-            '<td>' + d.total_prima_exenta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima neta anual:</td>' +
-            '<td>' + d.total_prima_neta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total Prima bruta anual:</td>' +
-            '<td>' + d.total_prima_bruta + '</td>' +
+        ext_cancelado + 
+            '<td VALIGN=TOP>Primas: </td>' +
+            '<td>'+
+                '<table class="table table-striped" style="width:100%">'+
+                    '<tr>' +
+                        '<td>Total Prima afecta:</td>' +
+                        '<td>' + d.total_prima_afecta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima exenta:</td>' +
+                        '<td>' + d.total_prima_exenta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima neta anual:</td>' +
+                        '<td>' + d.total_prima_neta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima bruta anual:</td>' +
+                        '<td>' + d.total_prima_bruta + '</td>' +
+                    '</tr>' +
+                '</table>'+
+            '</td>' +
         '</tr>' +
         '<tr>' +
         '<td></td>' +
+        '<td></td>' +
         '<tr>' +
-        items +
         '<tr>' +
-        '<td>Acciones</td>' +
+            '<td VALIGN=TOP>Ítems: </td>' +
+            '<td>' + items + '</td>' +
+        '</tr>' +
+         '<tr>' +
+        '<td></td>' +
+        '<td></td>' +
+        '<tr>' + endosos +      
+        '<tr>' +
+        '<td VALIGN=TOP>Acciones: </td>' +
         '<td>' +
         '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
         '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +

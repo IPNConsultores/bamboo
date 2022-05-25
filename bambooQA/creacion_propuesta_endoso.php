@@ -60,6 +60,8 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
     $descripcion_endoso=$row->descripcion_endoso;
     $dice=$row->dice;
     $debe_decir=$row->debe_decir;
+    $fecha_prorroga=$row->fecha_prorroga;
+    $comentarios=$row->comentario_endoso;
   }
 }
 elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_endoso'){
@@ -474,8 +476,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="comentario_externo"><b>Comentarios </b></label>
             <br>
                     <textarea class="form-control" rows="2" style="height:100px" id='comentarios' name='comentario'
-                              style="text-indent:0px" ;>
-                    </textarea>
+                              style="text-indent:0px" ;></textarea>
             
             </div>
            
@@ -586,12 +587,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("debe_decir").value = '<?php echo $debe_decir; ?>';
             document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso; ?>';
             document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
-            
+            document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
+            document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";
             document.getElementById("titulo4").style.display = "flex";
-            
+
+            if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
+              document.getElementById("col_fecha_ingreso").style.display ="block";
+            }
                
                break;
                
@@ -619,11 +624,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
             document.getElementById("nro_endoso").value = '<?php echo $numero_endoso; ?>';
             document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
+            document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
               document.getElementById("titulo1").style.display = "none";
               document.getElementById("titulo2").style.display = "none";
               document.getElementById("titulo3").style.display = "flex";
               document.getElementById("titulo4").style.display = "none";
-               
+              if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
+              document.getElementById("col_fecha_ingreso").style.display ="block";
+            }            
                break;
                
            }
@@ -646,17 +654,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("descripcion_endoso").value = '<?php echo $descripcion_endoso; ?>';
             document.getElementById("dice").value = '<?php echo $dice; ?>';
             document.getElementById("debe_decir").value = '<?php echo $debe_decir; ?>';
-            
+            document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
             document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso; ?>';
             document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
-
+            document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
                 document.getElementById("titulo1").style.display = "none";
                 document.getElementById("titulo2").style.display = "flex";
                 document.getElementById("titulo3").style.display = "none";
                 document.getElementById("titulo4").style.display = "none";
                 document.getElementById("caja_numero_endoso").style.display = "flex";
                 document.getElementById("nro_endoso").required = "true";              
-               
+                if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
+              document.getElementById("col_fecha_ingreso").style.display ="block";
+            }
                break;
                
            }
@@ -773,6 +783,8 @@ function genera_propuesta(){
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
+          'comentario_endoso': document.getElementById('comentarios').value,
+          'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'id_poliza':'<?php echo $id_poliza; ?>',
           'accion':camino
           }, 'post');
@@ -801,6 +813,8 @@ function genera_propuesta(){
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
+          'comentario_endoso': document.getElementById('comentarios').value,
+          'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'accion':camino
@@ -833,6 +847,7 @@ function genera_propuesta(){
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'comentario_endoso':document.getElementById("comentarios").value,
           'accion':camino
           }, 'post');

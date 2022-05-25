@@ -9,7 +9,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
-    $sql = "SELECT comentario_endoso, fecha_prorroga, estado, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_neta_afecta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(iva, 2, 'de_DE')) as iva, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_neta_exenta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_total, 2, 'de_DE')) as prima_total, dice, debe_decir, descripcion_endoso FROM propuesta_endosos as a where a.estado <> 'Rechazado'";
+    $sql = "SELECT fecha_prorroga, numero_endoso,comentario_endoso, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_neta_afecta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(iva, 2, 'de_DE')) as iva, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_neta_exenta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_total, 2, 'de_DE')) as prima_total, dice, debe_decir, descripcion_endoso FROM endosos as a where id_poliza='".$_GET["id"]."'";
     $resultado=mysqli_query($link, $sql);
     $codigo='{
       "data": [';
@@ -19,7 +19,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         $conta=$conta+1;
         if ($conta==1){
             $codigo.= json_encode(array(
-            "estado" =>& $row->estado,
+            "numero_endoso" =>& $row->numero_endoso,
             "fecha_ingreso_endoso"=>& $row->fecha_ingreso_endoso,
             "tipo_endoso"=>& $row->tipo_endoso,
             "compania"=>& $row->compania,
@@ -34,12 +34,12 @@ require_once "/home/gestio10/public_html/backend/config.php";
             "prima_total" =>& $row->prima_total,
             "dice" =>& $row->dice,
             "debe_decir" =>& $row->debe_decir,
-            "fecha_prorroga" =>& $row->fecha_prorroga,
             "comentario_endoso" =>& $row->comentario_endoso,
+            "fecha_prorroga" =>& $row->fecha_prorroga,
             "descripcion_endoso" =>& $row->descripcion_endoso));
         } else {
             $codigo.= ', '.json_encode(array(
-            "estado" =>& $row->estado,
+            "numero_endoso" =>& $row->numero_endoso,
             "fecha_ingreso_endoso"=>& $row->fecha_ingreso_endoso,
             "tipo_endoso"=>& $row->tipo_endoso,
             "compania"=>& $row->compania,
@@ -54,8 +54,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
             "prima_total" =>& $row->prima_total,
             "dice" =>& $row->dice,
             "debe_decir" =>& $row->debe_decir,
-            "fecha_prorroga" =>& $row->fecha_prorroga,
             "comentario_endoso" =>& $row->comentario_endoso,
+            "fecha_prorroga" =>& $row->fecha_prorroga,
             "descripcion_endoso" =>& $row->descripcion_endoso));
         }
     }

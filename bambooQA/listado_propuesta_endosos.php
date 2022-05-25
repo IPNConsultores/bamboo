@@ -69,6 +69,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Fecha ingreso</th>
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
+                    <th>Fecha Prorroga</th>
                 </tr>
 
             </table>
@@ -104,9 +105,9 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
 </html>
 <script>
-var table = ''
+var table_propuestas_endosos = ''
 $(document).ready(function() {
-    table = $('#listado_propuesta_endosos').DataTable({
+    table_propuestas_endosos = $('#listado_propuesta_endosos').DataTable({
         "ajax": "/bambooQA/backend/endosos/busqueda_listado_propuesta_endoso.php",
         "scrollX": true,
         "dom": 'Pfrtip',
@@ -143,6 +144,10 @@ $(document).ready(function() {
             {
                 "data": "vigencia_final",
                 title: "Fin Vigencia"
+            }, //7
+            {
+                "data": "fecha_prorroga",
+                title: "Fecha Prorroga"
             } //7
         ],
         "columnDefs": 
@@ -168,7 +173,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,7],
+        targets: [5,6,7,8],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")
@@ -219,14 +224,14 @@ $(document).ready(function() {
     .on('keyup change', function (e) {
     if (e.keyCode !== 13 || this.value == "") {
         var texto1=this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");  
-         table.search(texto1)
+        table_propuestas_endosos.search(texto1)
             .draw();
     }
         
     });
     $('#listado_propuesta_endosos tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
-        var row = table.row(tr);
+        var row = table_propuestas_endosos.row(tr);
 
         if (row.child.isShown()) {
             // This row is already open - close it
@@ -234,7 +239,7 @@ $(document).ready(function() {
             tr.removeClass('shown');
         } else {
             // Open this row
-            row.child(format_propuesta(row.data())).show();
+            row.child(format_propuesta_endoso(row.data())).show();
             tr.addClass('shown');
         }
     });
@@ -242,25 +247,26 @@ $(document).ready(function() {
  
 });
 
-function format_propuesta(d) {
+function format_propuesta_endoso(d) {
     // `d` is the original data object for the row
     var ext_cancelado='';
 
     var botones='';
     if (d.estado=='Pendiente'){
-        botones='<tr><td>Acciones</td>' +
-        '<td>' +
-        '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
-        '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
-        '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '</td>' +
+        botones='<tr>'+
+            '<td VALIGN=TOP>Acciones:</td>' +
+            '<td>' +
+                '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+                '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
+                '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
+                '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+                '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
+            '</td>' +
         '</tr>' +
         '</table>';
     }
     else{
-        botones='<tr><td>Acciones</td>' +
+        botones='<tr><td VALIGN=TOP>Acciones:</td>' +
         '<td>' +
         '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
@@ -270,48 +276,52 @@ function format_propuesta(d) {
     }
 
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-        '<tr>' +
-            '<td>Total Prima afecta:</td>' +
-            '<td>' + d.prima_neta_afecta + '</td>' +
+    '<tr>' +
+            '<td VALIGN=TOP>Primas: </td>' +
+            '<td>'+
+                 '<table class="table table-striped" style="width:100%">'+
+                    '<tr>' +
+                        '<td>Total Prima afecta:</td>' +
+                        '<td>' + d.prima_neta_afecta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima exenta:</td>' +
+                        '<td>' + d.prima_neta_exenta + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima neta anual:</td>' +
+                        '<td>' + d.iva + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td>Total Prima bruta anual:</td>' +
+                        '<td>' + d.prima_total + '</td>' +
+                    '</tr>' +
+                '</table>'+
+            '</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Total Prima exenta:</td>' +
-            '<td>' + d.prima_neta_exenta + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Total IVA:</td>' +
-            '<td>' + d.iva + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Prima total:</td>' +
-            '<td>' + d.prima_total + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td> </td>' +
-            '<td> </td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td> </td>' +
+        '<td VALIGN=TOP>Detalle: </td>' +
             '<td>'+
                 '<table class="table table-striped" style="padding-left:50px;" cellpadding="5" cellspacing="0" border="0" id="listado_polizas">'+
                     '<tr>'+
                         '<th>Descripción</th>'+
                         '<th>Dice</th>'+
                         '<th>Debe Decir</th>'+
+                        '<th>Comentario</th>'+
                     '</tr>'+
                     '<tr>'+
                     '<td>' + d.descripcion_endoso + '</td>'+
                     '<td>' + d.dice + '</td>'+
                     '<td>' + d.debe_decir + '</td>'+
+                    '<td>' + d.comentario_endoso + '</td>'+
                 '</table>'+
             '</td>' +
-        '</tr>' +    
+        '</tr>' +     
+        botones +
         '<tr>' +
             '<td> </td>' +
             '<td> </td>' +
-        '</tr>' +
-
-        botones;
+        '</tr>' +;
 }
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
