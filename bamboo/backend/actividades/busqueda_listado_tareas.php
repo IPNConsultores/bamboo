@@ -119,7 +119,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
       case 'Atrasado':
           $estado_sw='badge badge-danger';
           break;
-      case 'Próximo a vencer':
+      case 'Pr贸ximo a vencer':
           $estado_sw='badge badge-warning';
           break;
       default:
