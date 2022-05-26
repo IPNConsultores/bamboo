@@ -4,7 +4,10 @@ if (!isset($_SESSION))
     session_start();
 }
 //$_POST["busqueda"]='test poliza 14 may 1346';
+//$_POST["id"]='E000008';
+//$_POST["base"]='propuesta_endoso';
 //$_SERVER["REQUEST_METHOD"]="POST";
+
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bambooQA/backend/funciones.php";
 mysqli_set_charset($link, 'utf8');
@@ -47,9 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             $query = "select distinct b.numero_propuesta from polizas_2 as a left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.id=" . $id;
             $resultado_poliza = mysqli_query($link, $query);
             while ($row = mysqli_fetch_object($resultado_poliza))
-            {
-                $propuestas = $row->numero_propuesta;
+            {   if($row->numero_propuesta!==null){
+                $propuestas = $row->numero_propuesta;}
             }
+            $query = "select numero_endoso from endosos where id_poliza=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {   if($row->numero_endoso!==null){
+                $endoso = $row->numero_endoso;}
+            }
+            
         break;
         case 'propuesta':
             $query = "select distinct a.numero_propuesta, b.id as idP, d.id as idA from propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_propuesta=c.numero_propuesta left join clientes as d on c.rut_asegurado= d.rut_sin_dv where a.numero_propuesta='" . $id . "';";
@@ -71,8 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             $query = "select distinct b.id as id_poliza from propuesta_polizas_2 as a left join polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='" . $id . "';";
             $resultado_poliza = mysqli_query($link, $query);
             while ($row = mysqli_fetch_object($resultado_poliza))
-            {
-                $id_polizas = $row->id_poliza;
+            {   if($row->id_poliza!==null){
+                    $id_polizas = $row->id_poliza;
+                }
             }
         break;
         case 'cliente':
@@ -84,6 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             }
             $propuestas=$nombre_base;
             $id_polizas=$nombre_base;
+            /* funciona para 0 y 1 póliza. cuando hay más de 1 se debe armar array
+            $query = "select distinct a.numero_poliza, a.id as id_poliza, b.id as idP, d.id as idA from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza left join clientes as d on c.rut_asegurado= d.rut_sin_dv where d.id=" . $id;
+            $resultado_poliza = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_poliza))
+            {   if($row->id_poliza!==null){
+                $endoso = $row->id_poliza;}
+            }
+            */
         break;
         case 'tarea':
             $nombre_base = $id;
@@ -130,7 +149,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 }
                 $id_polizas = $id_polizas . "^" . $row->id_relacion . "$ | ";
             }
-        break;
+            break;
+        case 'endoso':
+            $query = "select id_poliza, numero_endoso, numero_propuesta_endoso, numero_poliza, nombre_proponente from endosos where numero_endoso='" . $id."'";
+            $resultado_endoso = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_endoso))
+            {   
+                if($row->id_poliza!==null)
+                {
+                    $id_polizas = $row->numero_poliza;
+                    $nombre_base=$row->numero_endoso;
+                    $propuestas_endosos=$row->numero_propuesta_endoso;
+                    $id_clientes=$row->nombre_proponente;
+                }
+            }
+            break;
+        case 'propuesta_endoso':
+            $query = "select a.id_poliza, a.numero_propuesta_endoso, a.numero_poliza, a.nombre_proponente, b.numero_endoso from propuesta_endosos as a left join endosos as b on a.numero_propuesta_endoso=b.numero_propuesta_endoso where a.numero_propuesta_endoso='" . $id."'";
+            $resultado_endoso = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_object($resultado_endoso))
+            {   
+                if($row->id_poliza!==null)
+                {
+                    $id_polizas = $row->numero_poliza;
+                    $endosos=$row->numero_endoso;
+                    $nombre_base=$row->numero_propuesta_endoso;
+                    $id_clientes=$row->nombre_proponente;
+                }
+            }
+            break;
     }
 
 }
@@ -327,6 +374,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                                     <th>Fecha ingreso</th>
                                     <th>Inicio Vigencia</th>
                                     <th>Fin Vigencia</th>
+                                    
                                 </tr>
                 
                             </table>
@@ -366,7 +414,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 <input id="var3_poliza" value="<?php echo htmlspecialchars($id_polizas);?>">
                 <input id="var4_titulo" value="<?php echo $nombre_base;?>">
                 <input id="var5_propuesta" value="<?php echo htmlspecialchars($propuestas);?>">
-                <input id="var6_endoso" value="<?php echo htmlspecialchars($endoso);?>">
+                <input id="var6_endoso" value="<?php echo htmlspecialchars($endosos);?>">
                 <input id="var7_propuesta_endoso" value="<?php echo htmlspecialchars($propuestas_endosos);?>">
             </div>
         </div>
@@ -421,7 +469,7 @@ $(document).ready(function() {
     var table = $('#listado_clientes').DataTable({
 
         "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
-        "scrollX": true,
+        
         "initComplete": function(settings, json) {
             document.getElementById("clientes").innerHTML = "Clientes (" + $('#listado_clientes')
                 .DataTable().page.info().recordsDisplay + ")";
@@ -529,7 +577,6 @@ $(document).ready(function() {
 
     var table_polizas = $('#listado_polizas').DataTable({
         "ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
-        "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("poliza").innerHTML = "Pólizas (" + $('#listado_polizas')
                 .DataTable().page.info().recordsDisplay + ")";
@@ -708,7 +755,6 @@ $(document).ready(function() {
     var table_tareas = $('#listado_tareas').DataTable({
 
         "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_completas.php",
-        "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("tarea").innerHTML = "Tareas (" + $('#listado_tareas')
                 .DataTable().page.info().recordsDisplay + ")";
@@ -873,7 +919,7 @@ $(document).ready(function() {
     var table_tareas_recurrentes = $('#listado_tareas_recurrentes').DataTable({
 
         "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas_recurrentes.php",
-        "scrollX": true,
+        
         "initComplete": function(settings, json) {
             document.getElementById("tarea_rec").innerHTML = "Tareas recurrentes (" + $(
                 '#listado_tareas_recurrentes').DataTable().page.info().recordsDisplay + ")";
@@ -998,7 +1044,7 @@ $(document).ready(function() {
     //inicio propuestas
     var table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
         "ajax": "/bambooQA/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
-        "scrollX": true,
+        
         "initComplete": function(settings, json) {
             document.getElementById("propuestas").innerHTML = "Prop. Póliza (" + $(
                 '#listado_propuesta_polizas').DataTable().page.info().recordsDisplay + ")";
@@ -1173,9 +1219,9 @@ $(document).ready(function() {
     $('#listado_propuesta_polizas').dataTable().fnFilter(document.getElementById("var1").value);
     //fin propuestas
     //inicio endosos
-            table_endosos = $('#listado_endosos').DataTable({
+         var   table_endosos = $('#listado_endosos').DataTable({
         "ajax": "/bambooQA/backend/endosos/busqueda_listado_endosos.php",
-        "scrollX": true,
+        
         "initComplete": function(settings, json) {
                 document.getElementById("endosos").innerHTML = "Endosos (" + $(
                     '#listado_endosos').DataTable().page.info().recordsDisplay + ")";
@@ -1299,7 +1345,7 @@ $(document).ready(function() {
                 document.getElementById("propuestas_endosos").innerHTML = "Prop. Endosos (" + $(
                     '#listado_propuesta_endosos').DataTable().page.info().recordsDisplay + ")";
             },
-        "scrollX": true,
+        
         "dom": 'Pfrtip',
         "columns": [{
                 "className": 'details-control',
@@ -1434,6 +1480,44 @@ $(document).ready(function() {
     // fin propuesta endosos
     
 switch (document.getElementById("aux_base").value) {
+        case 'propuesta_endoso': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a Propuesta Endoso número: ".concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("propuestas_endosos").click();
+            
+                //cliente
+            table.column(2).search(document.getElementById("var2_cliente").value, true).draw();
+                //poliza
+    
+            table_polizas.column(2).search(document.getElementById("var3_poliza").value, true).draw();
+                table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
+                //tarea
+                table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
+                //tarea recurrente
+                table_tareas_recurrentes.column(9).search(document.getElementById("aux_id").value, true).draw();
+                //endosos
+                table_endosos.column(1).search(document.getElementById("var6_endoso").value, true).draw();
+                table_propuestas_endosos.column(2).search(document.getElementById("var4_titulo").value, true).draw();
+                break;
+        }
+        case 'endoso': {
+            document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a Endoso número: ".concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
+            document.getElementById("endosos").click();
+            
+                //cliente
+            table.column(2).search(document.getElementById("var2_cliente").value, true).draw();
+                //poliza
+    
+            table_polizas.column(2).search(document.getElementById("var3_poliza").value, true).draw();
+                table_propuesta_poliza.column(2).search(document.getElementById("var5_propuesta").value, true).draw();
+                //tarea
+                table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
+                //tarea recurrente
+                table_tareas_recurrentes.column(9).search(document.getElementById("aux_id").value, true).draw();
+                //endosos
+            table_endosos.column(1).search(document.getElementById("var4_titulo").value, true).draw();
+            table_propuestas_endosos.column(2).search(document.getElementById("var7_propuesta_endoso").value, true).draw();
+                break;
+        }
         case 'cliente': {
             document.getElementById("titulo").innerHTML = " Resumen / Búsqueda asociada a cliente: ".concat("<b>" + document.getElementById("var4_titulo").value + "</b>");
             document.getElementById("clientes").click();
@@ -1458,7 +1542,10 @@ switch (document.getElementById("aux_base").value) {
             //tarea
             table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
             //tarea recurrente
-            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
+            table_tareas_recurrentes.column(9).search(document.getElementById("aux_id").value, true).draw();
+            //endosos
+            table_endosos.column(4).search(document.getElementById("var4_titulo").value, true).draw();
+            table_propuestas_endosos.column(4).search(document.getElementById("var4_titulo").value, true).draw();
             break;
         }
         case 'propuesta': {
@@ -1474,7 +1561,10 @@ switch (document.getElementById("aux_base").value) {
             //tarea
             table_tareas.column(13).search(document.getElementById("aux_id").value, true).draw();
             //tarea recurrente
-            table_tareas_recurrentes.column(11).search(document.getElementById("aux_id").value, true).draw();
+            table_tareas_recurrentes.column(9).search(document.getElementById("aux_id").value, true).draw();
+                        //endosos
+            table_endosos.column(4).search("busqueda_propuesta_poliza", true).draw();
+            table_propuestas_endosos.column(4).search("busqueda_propuesta_poliza", true).draw();
             break;
         }
         case 'tarea': {
