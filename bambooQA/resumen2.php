@@ -1563,8 +1563,8 @@ switch (document.getElementById("aux_base").value) {
             //tarea recurrente
             table_tareas_recurrentes.column(9).search(document.getElementById("aux_id").value, true).draw();
                         //endosos
-            table_endosos.column(4).search("busqueda_propuesta_poliza", true).draw();
-            table_propuestas_endosos.column(4).search("busqueda_propuesta_poliza", true).draw();
+            table_endosos.column(4).search("busqueda", true).draw();
+            table_propuestas_endosos.column(4).search("busqueda", true).draw();
             break;
         }
         case 'tarea': {
@@ -1580,6 +1580,8 @@ switch (document.getElementById("aux_base").value) {
             table_tareas.column(1).search(document.getElementById("aux_id").value, true).draw();
             //tarea recurrente
             table_tareas_recurrentes.column(9).search("busqueda dummy").draw();
+            table_endosos.column(4).search("busqueda", true).draw();
+            table_propuestas_endosos.column(4).search("busqueda", true).draw();
             break;
         }
         case 'tarea recurrente': {
@@ -1596,6 +1598,8 @@ switch (document.getElementById("aux_base").value) {
             table_tareas.column(1).search("busqueda dummy").draw();
             //tarea recurrente
             table_tareas_recurrentes.column(1).search(document.getElementById("aux_id").value, true).draw();
+            table_endosos.column(4).search("busqueda", true).draw();
+            table_propuestas_endosos.column(4).search("busqueda", true).draw();
             break;
         }
         case 'header': {
