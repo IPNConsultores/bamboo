@@ -2376,15 +2376,13 @@ function vencimientogarantia(){
             // inicio deducible
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']">'+
                 //inicio deducible para RC
-                    '<div id="deducible_para_RC[' + iCnt + ']" style="display:none;">'+
+                   '<div id="deducible_para_RC[' + iCnt + ']" style="display:none;">'+
                     
                         '<div class="form-row" id="deducible_rc['+iCnt+']"  style="align-items: center;">'+
                             '<div class="row" style="align-items: center;">'+
-                                '<input class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+iCnt+']" placeholder="%" style="width:44px" onChange="pobladeducible()">'+
-                                '<label style="font-size:75%;">% Pérdida con mínimo de</label>'+
-                            '</div>'+
-                            '<br>'+
-                            '<div class="row" style="align-items: center;">'+
+                                '<input class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+iCnt+']" placeholder="%" style="width:44px" onChange="pobladeducible()">&nbsp'+
+                                '<label style="font-size:75%;display:block;">% Pérdida con mínimo de      </label>&nbsp'+
+                            
                                 '<div class="input-group-prepend"><span class="input-group-text" id="moneda7['+iCnt+']">UF</span></div>'+
                                 '<input type="text" class="form-control" name="deducible_valor" id="deducible_valor['+iCnt+']" placeholder="Valor" onChange="pobladeducible()">'+
                             '</div>'+
