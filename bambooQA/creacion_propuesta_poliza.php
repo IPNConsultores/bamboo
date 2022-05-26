@@ -2450,6 +2450,13 @@ function vencimientogarantia(){
         cambio_moneda();
     
     }
+    $(document).bind('keydown',function(e){
+      if ( e.which == 27 ) {
+                                                  
+      console.log("Has pulsado la tecla ESC");
+      $('.modal-backdrop').remove();
+                                             };
+                               });
  $(document).ready(function() {
 
      var listado_filtrado="/bambooQA/backend/endosos/busqueda_listado_endosos_filtrada.php?id="+'<?php echo $id; ?>'
