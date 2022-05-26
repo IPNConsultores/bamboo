@@ -847,15 +847,17 @@ function estandariza_info( $data ) {
           </div>
         </div>
         </div>
-        <div  id="info_endoso" class="card" style="display:none" disabled>
+
+      
+    </div>
+    <br>
+    
+            <div  id="info_endoso" class="card" style="display:flex" disabled>
             <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
-                <h5 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                              data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix"
-                              style="color:#536656">Endosos </button>
-                </h5>
+                <h6 class="mb-0" style="color:#536656"> Endosos
+               
+                </h6>
             </div>
-        <div id="collapsesix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionExample">
         <div class="card-body" id="card-body-six">
             <table class="display" id="listado_endosos" style="width:100%">
                 <thead>
@@ -875,10 +877,8 @@ function estandariza_info( $data ) {
         </div>
         
       </div>
-      </div>
-      
-    </div>
-    <br>
+      <br>
+   
     <div id="auxiliar2" style="display: none;"></div>
     <input id="auxiliar3" placeholder="false" style="display: none;" />
     
@@ -888,7 +888,7 @@ function estandariza_info( $data ) {
 </form>
 <button class="btn" type="button" style="background-color: #536656; color: white"
               id='boton_prueba' onclick=" validarutitem()">Registrar</button>
-
+ </div>
 <br>
 <br>
 </div>/
