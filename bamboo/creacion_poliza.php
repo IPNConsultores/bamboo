@@ -1987,7 +1987,13 @@ function vencimiento_garantía(){
          document.getElementById("venc_gtia").value = '';
     }
 }
-
+$(document).bind('keydown',function(e){
+      if ( e.which == 27 ) {
+                                                  
+      console.log("Has pulsado la tecla ESC");
+      $('.modal-backdrop').remove();
+                                             };
+                               });
  function valida_vencimiento(){
      
      
