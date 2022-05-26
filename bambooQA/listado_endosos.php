@@ -285,7 +285,7 @@ function format_endoso(d) {
         '</table>';
 }
 function botones(id, accion, base) {
-    alert("ID:" + id + " => acción:" + accion + " => base:"+ base);
+    //alert("ID:" + id + " => acción:" + accion + " => base:"+ base);
     switch (accion) {
         case "rechazar_propuesta": {
                 var motivo = window.prompt('Ingresa el motivo del rechazo', '');
