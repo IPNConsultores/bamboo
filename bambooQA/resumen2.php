@@ -4,8 +4,8 @@ if (!isset($_SESSION))
     session_start();
 }
 //$_POST["busqueda"]='test poliza 14 may 1346';
-//$_POST["id"]='E000008';
-//$_POST["base"]='propuesta_endoso';
+//$_POST["id"]='Endoso 6';
+//$_POST["base"]='endoso';
 //$_SERVER["REQUEST_METHOD"]="POST";
 
 require_once "/home/gestio10/public_html/backend/config.php";
@@ -172,7 +172,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 if($row->id_poliza!==null)
                 {
                     $id_polizas = $row->numero_poliza;
-                    $endosos=$row->numero_endoso;
+                    if($row->numero_endoso!==null)
+                    {
+                        $endosos=$row->numero_endoso;
+                    }
                     $nombre_base=$row->numero_propuesta_endoso;
                     $id_clientes=$row->nombre_proponente;
                 }

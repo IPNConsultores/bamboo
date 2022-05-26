@@ -265,17 +265,17 @@ function format_endoso(d) {
                         '<th>Comentario</th>'+
                     '</tr>'+
                     '<tr>'+
-                    '<td>' + d.descripcion_endoso + '</td>'+
-                    '<td>' + d.dice + '</td>'+
-                    '<td>' + d.debe_decir + '</td>'+
-                    '<td>' + d.comentario_endoso + '</td>'+
+                    '<td>"' + d.descripcion_endoso + '"</td>'+
+                    '<td>"' + d.dice + '"</td>'+
+                    '<td>"' + d.debe_decir + '"</td>'+
+                    '<td>"' + d.comentario_endoso + '"</td>'+
                 '</table>'+
             '</td>' +
         '</tr>' +    
         '<tr><td VALIGN=TOP>Acciones</td>' +
         '<td>' +
         '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
-        '<button title="Buscar información asociada" type="button" id=' + d.numero_endoso + ' name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Buscar información asociada" type="button" id="' + d.numero_endoso + '" name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
         '</tr>' +
         '<tr>' +
@@ -285,7 +285,7 @@ function format_endoso(d) {
         '</table>';
 }
 function botones(id, accion, base) {
-    console.log("ID:" + id + " => acción:" + accion);
+    alert("ID:" + id + " => acción:" + accion + " => base:"+ base);
     switch (accion) {
         case "rechazar_propuesta": {
                 var motivo = window.prompt('Ingresa el motivo del rechazo', '');
@@ -316,6 +316,7 @@ function botones(id, accion, base) {
             break;
         }
         case "info": {
+           
             $.redirect('/bambooQA/resumen2.php', {
                 'id': id,
                 'base': base
