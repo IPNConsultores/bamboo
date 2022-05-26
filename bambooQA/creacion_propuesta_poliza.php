@@ -694,25 +694,24 @@ function estandariza_info( $data ) {
           <div class="container" id="main" >
             
             
-            <div class="container" style="overflow-x:auto;width:100%;height: auto">
-              <table class="table"  id="mytable"  style="width:4000px">
+            <div class="container" style="overflow-x:auto;width:100%;height: auto;  white-space: nowrap;">
+              <table class="table"  id="mytable"  style="width:450%;white-space: nowrap;">
                 <tr>
-                  <th style="width:20px">N° Ítem</th>
-                  <th style="width:200px" >RUT Asegurado</th>
-                  <th style="width:300px">Nombre Asegurado</th>
-                  <th style="width:300px">Materia Asegurada <label style="color: darkred">*</label></th>
-                  <th style="width:300px">Patente o Ubicación</th>
-                  <th style="width:200px">Cobertura</th>
-                  <th style="width:100px">Deducible</th>
-                  <th style="width:150px">Monto Asegurado <label style="color: darkred">*</label></th>
-                   <th style="width:50px">Tasa Afecta</th>
-                    <th style="width:50px">Tasa Exenta</th>
-                  <th style="width:50px">Prima Afecta</th>
-                  <th style="width:50px">Prima Exenta</th>
-                  <th style="width:50px">Prima Neta</th>
-                  <th style="width:50px">Prima Bruta</th>
-                  
-                  <th style="width:100px" id="titulo_venc_gtia">Vencimiento Garantía</th>
+             	  <th style="width:20px">N° Ítem</th>
+                  <th>RUT Asegurado</th>
+                  <th>Nombre Asegurado</th>
+                  <th>Materia Asegurada <label style="color: darkred">*</label></th>
+                  <th>Patente o Ubicación</th>
+                  <th>Cobertura</th>
+                  <th>Deducible</th>
+                  <th>Monto Asegurado <label style="color: darkred">*</label></th>
+                  <th>Tasa Afecta</th>
+                  <th>Tasa Exenta</th>
+                  <th>Prima Afecta</th>
+                  <th>Prima Exenta</th>
+                  <th>Prima Neta</th>
+                  <th>Prima Bruta</th>
+                  <th id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
               </table>
@@ -1122,9 +1121,10 @@ function cambia_deducible() {
 function pobladeducible(){
      var contador = document.getElementById("contador").value;
      var ramo = document.getElementById("ramo").value;
+     var espacio = document.createTextNode('&nbsp')
      if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
         for (var i = 1; i <= contador; i++){
-              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de " + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
+              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de" + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
         }
      }
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
@@ -2304,11 +2304,9 @@ function vencimientogarantia(){
                     
                         '<div class="form-row" id="deducible_rc['+iCnt+']"  style="align-items: center;">'+
                             '<div class="row" style="align-items: center;">'+
-                                '<input class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+iCnt+']" placeholder="%" style="width:44px" onChange="pobladeducible()">'+
-                                '<label style="font-size:75%;">% Pérdida con mínimo de</label>'+
-                            '</div>'+
-                            '<br>'+
-                            '<div class="row" style="align-items: center;">'+
+                                '<input class="form-control" name="deducible_porcentaje" id="deducible_porcentaje['+iCnt+']" placeholder="%" style="width:44px" onChange="pobladeducible()">&nbsp'+
+                                '<label style="font-size:75%;display:block;">% Pérdida con mínimo de      </label>&nbsp'+
+                            
                                 '<div class="input-group-prepend"><span class="input-group-text" id="moneda7['+iCnt+']">UF</span></div>'+
                                 '<input type="text" class="form-control" name="deducible_valor" id="deducible_valor['+iCnt+']" placeholder="Valor" onChange="pobladeducible()">'+
                             '</div>'+
