@@ -321,7 +321,7 @@ function format_propuesta_endoso(d) {
         '<tr>' +
             '<td> </td>' +
             '<td> </td>' +
-        '</tr>' +;
+        '</tr>' ;
 }
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
