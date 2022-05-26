@@ -852,7 +852,7 @@ function estandariza_info( $data ) {
     </div>
     <br>
     
-            <div  id="info_endoso" class="card" style="display:flex" disabled>
+            <div  id="info_endoso" class="card" style="display:none" disabled>
             <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
                 <h6 class="mb-0" style="color:#536656"> Endosos
                
