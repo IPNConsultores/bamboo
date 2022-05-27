@@ -711,16 +711,13 @@ console.log(document.getElementById('tasa_afecta').value);
 })
 
 function calculadias(){
-    
- var inicio  = new Date(document.getElementById('fecha_vigencia_inicial').value); 
- var final = new Date(document.getElementById('fecha_vigencia_final').value); 
- var diferencia = final.getTime() - inicio.getTime() 
- 
- 
- document.getElementById('dias').value= diferencia/86400000 ;
- 
-    
-    
+
+    if (document.getElementById('fecha_vigencia_inicial').value!==""){
+         var inicio  = new Date(document.getElementById('fecha_vigencia_inicial').value); 
+         var final = new Date(document.getElementById('fecha_vigencia_final').value); 
+         var diferencia = final.getTime() - inicio.getTime() 
+         document.getElementById('dias').value= diferencia/86400000 ;
+    }
 }
 
 function calculatasas(){
