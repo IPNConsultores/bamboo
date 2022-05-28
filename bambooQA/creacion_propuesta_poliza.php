@@ -5,10 +5,10 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'modifica_poliza';
+//$_POST["accion"] = 'actualiza_propuesta';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000760';
-//$_POST["numero_poliza"]='test poliza 14 may 1346';
+//$_POST["numero_propuesta"]='P000764';
+//$_POST["numero_poliza"]='TBD';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -800,14 +800,14 @@ function estandariza_info( $data ) {
               <label>Comisión Bruta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="comisionbruta" name="comisionbruta">
+                <input input type="number" step="0" placeholder="0" class="form-control" id="comisionbruta" name="comisionbruta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Neta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="comisionneta" name="comisionneta">
+                <input input type="number"  step="0" placeholder="0"  class="form-control" id="comisionneta" name="comisionneta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -1748,12 +1748,12 @@ orgn = '<?php echo $camino; ?>';
 
             break;
           }
+          
+         
         }
 	//window.onbeforeunload = preguntarAntesDeSalir;
 
-  $("#number").change(function(){
-  this.value = parseFloat(this.value).toFixed(2);
-});
+ 
 
 	function preguntarAntesDeSalir () {
 	    
@@ -1773,7 +1773,27 @@ orgn = '<?php echo $camino; ?>';
 		}
 	}
 
-
+          dosdecimales("valorcuota");
+          dosdecimales("porcentaje_comsion");
+          dosdecimales("comsion");
+           
+          contador2="1";
+          var items ='<?php echo $nro_items; ?>'
+          console.log('<?php echo $nro_items; ?>');
+          
+           while (contador2<=items){
+               
+         
+               dosdecimales("tasa_afecta["+contador2+"]");
+               dosdecimales("tasa_exenta["+contador2+"]");
+               dosdecimales("prima_afecta["+contador2+"]");
+               dosdecimales("prima_exenta["+contador2+"]");
+               dosdecimales("prima_neta["+contador2+"]");
+               dosdecimales("prima_bruta["+contador2+"]");
+             contador2++
+              
+           }
+          
 });
 
 
