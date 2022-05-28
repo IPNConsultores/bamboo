@@ -2333,7 +2333,7 @@ function vencimientogarantia(){
                     '</div>'+
                 '</div></td>'+
             // fin deducible
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
@@ -2411,7 +2411,7 @@ function vencimientogarantia(){
             // fin deducible
                 
                 
-                '<td><input type="text" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
