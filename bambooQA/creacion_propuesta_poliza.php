@@ -22,7 +22,7 @@ $poliza_renovada='';
 
       }    
       else{
-        $query = "select numero_propuesta, id, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas_2 where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query = "select numero_propuesta, id, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas where numero_propuesta='".$_POST["numero_propuesta"]."'";
         $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }

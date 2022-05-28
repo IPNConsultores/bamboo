@@ -12,7 +12,7 @@ CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_afecta, 2, 'de_DE')) as prima_afect
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_exenta, 2, 'de_DE')) as prima_exenta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_neta, 2, 'de_DE')) as prima_neta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, 
-b.monto_asegurado, b.venc_gtia from propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta
+b.monto_asegurado, b.venc_gtia from propuesta_polizas as a left join items as b on a.numero_propuesta=b.numero_propuesta
 where b.id is not null
 order by a.numero_propuesta, b.numero_item";
 $resultado=mysqli_query($link, $query);

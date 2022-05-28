@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 $nombre_base = $row->numero_poliza;
             }
 
-            $query = "select distinct b.numero_propuesta from polizas_2 as a left join propuesta_polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.id=" . $id;
+            $query = "select distinct b.numero_propuesta from polizas_2 as a left join propuesta_polizas as b on a.numero_propuesta=b.numero_propuesta where a.id=" . $id;
             $resultado_poliza = mysqli_query($link, $query);
             while ($row = mysqli_fetch_object($resultado_poliza))
             {   if($row->numero_propuesta!==null){
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
             
         break;
         case 'propuesta':
-            $query = "select distinct a.numero_propuesta, b.id as idP, d.id as idA from propuesta_polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_propuesta=c.numero_propuesta left join clientes as d on c.rut_asegurado= d.rut_sin_dv where a.numero_propuesta='" . $id . "';";
+            $query = "select distinct a.numero_propuesta, b.id as idP, d.id as idA from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_propuesta=c.numero_propuesta left join clientes as d on c.rut_asegurado= d.rut_sin_dv where a.numero_propuesta='" . $id . "';";
 
             $resultado_poliza = mysqli_query($link, $query);
             while ($row = mysqli_fetch_object($resultado_poliza))
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                 $nombre_base = $row->numero_propuesta;
             }
 
-            $query = "select distinct b.id as id_poliza from propuesta_polizas_2 as a left join polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='" . $id . "';";
+            $query = "select distinct b.id as id_poliza from propuesta_polizas as a left join polizas_2 as b on a.numero_propuesta=b.numero_propuesta where a.numero_propuesta='" . $id . "';";
             $resultado_poliza = mysqli_query($link, $query);
             while ($row = mysqli_fetch_object($resultado_poliza))
             {   if($row->id_poliza!==null){

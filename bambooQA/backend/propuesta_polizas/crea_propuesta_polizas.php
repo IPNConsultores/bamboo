@@ -81,21 +81,21 @@ switch ($_POST["accion"]) {
   case 'rechazar_propuesta':
     $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza rechazada correctamente';
-      $query= "update propuesta_polizas_2 set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP, motivo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta='".$nro_propuesta."';";
+      $query= "update propuesta_polizas set estado='Rechazado', fecha_cambio_estado=CURRENT_TIMESTAMP, motivo='".estandariza_info($_POST["motivo"])."'  where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'envio_propuesta':
     $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza generada correctamente';
-      $query= "update propuesta_polizas_2 set fecha_envio_propuesta=CURRENT_TIMESTAMP where numero_propuesta='".$nro_propuesta."';";
+      $query= "update propuesta_polizas set fecha_envio_propuesta=CURRENT_TIMESTAMP where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Envía propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'eliminar_propuesta':
     $busqueda=$nro_propuesta;
     $mensaje='Propuesta Póliza eliminada correctamente';
-      $query= "delete from propuesta_polizas_2 where numero_propuesta='".$nro_propuesta."';";
+      $query= "delete from propuesta_polizas where numero_propuesta='".$nro_propuesta."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       break;      
@@ -104,7 +104,7 @@ switch ($_POST["accion"]) {
       //pendiente update
       //delete from items where numero_propuesta='P000700' and numero_item>=4
       $mensaje='Propuesta Póliza actualizada correctamente';      
-      $query='UPDATE propuesta_polizas_2 SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\',porcentaje_comision=\'' . $porcentaje_comision . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
+      $query='UPDATE propuesta_polizas SET fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\',porcentaje_comision=\'' . $porcentaje_comision . '\' WHERE numero_propuesta=\'' . $nro_propuesta . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
       foreach ($_POST["rutaseg"] as $key => $valor) 
@@ -147,10 +147,10 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO propuesta_polizas_2 (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."', '".$porcentaje_comision."' )";
+        $query= "INSERT INTO propuesta_polizas (estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision) VALUES ('Pendiente', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."', '".$porcentaje_comision."' )";
         mysqli_query($link, $query);
-        mysqli_query($link, 'update propuesta_polizas_2 set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
-        $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas_2 where token=\'' . $token . '\';');
+        mysqli_query($link, 'update propuesta_polizas set numero_propuesta=CONCAT(\'P\', LPAD(id,6,0)) where token=\'' . $token . '\';');
+        $resultado = mysqli_query($link, 'select id, numero_propuesta from propuesta_polizas where token=\'' . $token . '\';');
         
         while ($fila = mysqli_fetch_object($resultado))
         {
@@ -194,7 +194,7 @@ switch ($_POST["accion"]) {
         $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
-        $query= "update propuesta_polizas_2 set poliza_renovada='".$poliza_renovada."' , comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_propuesta."';";
+        $query= "update propuesta_polizas set poliza_renovada='".$poliza_renovada."' , comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_propuesta."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','propuesta poliza','".$id_propuesta."', '".$_SERVER['PHP_SELF']."')");
         }
@@ -254,7 +254,7 @@ switch ($_POST["accion"]) {
 
 
           //Aprueba propuesta póliza
-          $query= "update propuesta_polizas_2 set estado='Aprobado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
+          $query= "update propuesta_polizas set estado='Aprobado', fecha_cambio_estado=CURRENT_TIMESTAMP  where numero_propuesta='".$nro_propuesta."';";
           mysqli_query($link, $query);
           mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Aprueba propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
   

@@ -76,7 +76,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
                     break;
                 }
                 case "propuestas":{
-                    $resul_rel=mysqli_query($link, "SELECT estado , DATE_FORMAT(vigencia_inicial, '%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final, '%d-%m-%Y') as vigencia_final, numero_propuesta FROM propuesta_polizas_2 as a  where a.id='".$rel_tareas->id_relacion."' order by estado, vigencia_final asc");
+                    $resul_rel=mysqli_query($link, "SELECT estado , DATE_FORMAT(vigencia_inicial, '%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final, '%d-%m-%Y') as vigencia_final, numero_propuesta FROM propuesta_polizas as a  where a.id='".$rel_tareas->id_relacion."' order by estado, vigencia_final asc");
 
                     while($list_polizas=mysqli_fetch_object($resul_rel))
                     {

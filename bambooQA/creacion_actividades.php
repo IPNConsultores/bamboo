@@ -99,13 +99,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             case 'individual':
                 $resultado_tarea=mysqli_query($link, 'SELECT a.id, a.tarea, a.estado, a.prioridad, a.fecha_vencimiento FROM tareas as a where a.id='.$busqueda);
                 $query_poliza="SELECT b.id, b.compania, b.vigencia_final, b.numero_poliza, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.rut_proponente, b.rut_asegurado FROM tareas_relaciones as a left join polizas as b on a.id_relacion=b.id where a.base='polizas' and a.id_tarea=".$busqueda;    
-                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta"; 
+                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta"; 
                 $query_cliente="SELECT b.id, concat_ws('-',b.rut_sin_dv, b.dv) as rut, concat_ws(' ', b.nombre_cliente,  b.apellido_paterno,  b.apellido_materno) as nombre , b.telefono, b.correo  FROM tareas_relaciones as a left join clientes as b on a.id_relacion=b.id where a.base='clientes' and a.id_tarea=".$busqueda;
                 break;
             case 'recurrente':
                 $resultado_tarea=mysqli_query($link, 'SELECT id, tarea, estado, prioridad, recurrente, tarea_con_fecha_fin, fecha_fin, dia_recordatorio FROM tareas_recurrentes where id='.$busqueda);
                 $query_poliza="SELECT b.id, b.compania, b.vigencia_final, b.numero_poliza, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.rut_proponente, b.rut_asegurado FROM tareas_relaciones as a left join polizas as b on a.id_relacion=b.id where a.base='polizas' and a.id_tarea_recurrente=".$busqueda;    
-                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea_recurrente='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta";
+                $query_propuesta_poliza="SELECT distinct a.id, compania, ramo, vigencia_final, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id=(select id_relacion from tareas_relaciones where id_tarea_recurrente='".$busqueda."' and base='propuestas') order by compania, a.numero_propuesta";
                 $query_cliente="SELECT b.id, concat_ws('-',b.rut_sin_dv, b.dv) as rut, concat_ws(' ', b.nombre_cliente,  b.apellido_paterno,  b.apellido_materno) as nombre , b.telefono, b.correo  FROM tareas_relaciones as a left join clientes as b on a.id_relacion=b.id where a.base='clientes' and a.id_tarea_recurrente=".$busqueda;
                 break;
         }
@@ -176,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_set_charset( $link, 'utf8');
         mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
             //poliza
-            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, ramo, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas_2 as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
+            $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, ramo, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
 
             While($row=mysqli_fetch_object($resultado_poliza))
                 {
