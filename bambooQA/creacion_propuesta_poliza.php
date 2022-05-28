@@ -1751,6 +1751,10 @@ orgn = '<?php echo $camino; ?>';
         }
 	//window.onbeforeunload = preguntarAntesDeSalir;
 
+  $(".number").change(function(){
+  this.value = parseFloat(this.value).toFixed(2);
+});
+
 	function preguntarAntesDeSalir () {
 	    
 	
