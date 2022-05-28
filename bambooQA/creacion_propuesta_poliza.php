@@ -5,7 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza_web';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000760';
 //$_POST["numero_poliza"]='test poliza 14 may 1346';
@@ -637,7 +637,7 @@ function estandariza_info( $data ) {
                   <option value="CLP"
                                               <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
                 </select>
-                <input type="number" step="0.01" placeholder="0,00" class="form-control" name="valorcuota" id="valorcuota"
+                <input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="valorcuota" id="valorcuota"
                                            style="width:42%;">
               </div>
             </div>
@@ -665,7 +665,7 @@ function estandariza_info( $data ) {
               <div class="col-md-4 mb-3">
               <label>Porcentaje Comisión del Corredor</label>
               <div class="form-inline">
-                <input type="number" step="0.01" placeholder="0,00" class="form-control" id="porcentaje_comsion"
+                <input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="porcentaje_comsion"
                                           name="porcentaje_comsion" onChange="calculacomision()">
                 <div class="input-group-prepend"><span class="input-group-text"
                                               id="porcentaje_comi">%</span></div>
@@ -793,21 +793,21 @@ function estandariza_info( $data ) {
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text"
                                               id="moneda5">UF</span></div>
-                <input input type="number" step="0.01" placeholder="0,00"class="form-control" id="comision" name="comision">
+                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="comision" name="comision">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Bruta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" step="0.01" placeholder="0,00" class="form-control" id="comisionbruta" name="comisionbruta">
+                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="comisionbruta" name="comisionbruta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Neta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" step="0.01" placeholder="0,00" class="form-control" id="comisionneta" name="comisionneta">
+                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="comisionneta" name="comisionneta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -832,7 +832,7 @@ function estandariza_info( $data ) {
               <label for="comision">Monto</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" step="0.01" placeholder="0,00" class="form-control" name="comisionneg" id="comisionneg">
+                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="comisionneg" id="comisionneg">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -1751,7 +1751,7 @@ orgn = '<?php echo $camino; ?>';
         }
 	//window.onbeforeunload = preguntarAntesDeSalir;
 
-  $(".number").change(function(){
+  $("#number").change(function(){
   this.value = parseFloat(this.value).toFixed(2);
 });
 
@@ -1798,6 +1798,14 @@ document.getElementById("formulario").addEventListener('submit', function(event)
      else {
     }
 });
+
+function dosdecimales(id){
+    
+    valor= document.getElementById(id).value;
+    
+    valor = parseFloat(this.valor).toFixed(2);
+    document.getElementById(id).value = valor;
+}
 
 function validarutitem(){
     
@@ -2337,19 +2345,19 @@ function vencimientogarantia(){
                     '</div>'+
                 '</div></td>'+
             // fin deducible
-                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange= "dosdecimales(this.id);"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
-                '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2415,19 +2423,19 @@ function vencimientogarantia(){
             // fin deducible
                 
                 
-                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><input type="number" onchange= "dosdecimales(this.id);" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
-                '<input type="number" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
