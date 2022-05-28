@@ -2,10 +2,11 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
+
 /*
 $_SERVER[ "REQUEST_METHOD" ] = "POST";
 $_POST["accion"] = 'generar_documento';
-$_POST["numero_propuesta"]='E000011';
+$_POST["numero_propuesta"]='E000012';
 */
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
@@ -18,9 +19,9 @@ $_POST["numero_propuesta"]='E000011';
             from propuesta_endosos as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.numero_propuesta_endoso='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
-        $comentario_endoso = $row->comentario_endoso;
-        $debe_decir = $row->debe_decir;
-        $dice = $row->dice;
+        $comentario_endoso = str_replace( "\r\n", "<br/>", $row->comentario_endoso );
+        $debe_decir = str_replace( "\r\n", "<br/>", $row->debe_decir);
+        $dice = str_replace( "\r\n", "<br/>", $row->dice);
         $tipo_endoso = $row->tipo_endoso;
         $numero_poliza = $row->numero_poliza;
         $tasa_afecta = $row->tasa_afecta;
@@ -31,7 +32,8 @@ $_POST["numero_propuesta"]='E000011';
         $prima_afecta_iva = $row->prima_afecta_iva;
         $prima_bruta = $row->prima_bruta_anual;
         $monto_aseg = $row->monto_asegurado_endoso;
-        $descripcion_endoso=$row->descripcion_endoso;
+        
+        $descripcion_endoso=str_replace( "\r\n", "<br/>", $row->descripcion_endoso);
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
@@ -48,6 +50,8 @@ $_POST["numero_propuesta"]='E000011';
         $moneda_poliza = $row->moneda_poliza_endoso;
         $nro_propuesta = $row->numero_propuesta;
         $fechaprop = $row->fecha_propuesta;    
+
+
 
         $nro_items=$row->numero_items;
         
@@ -431,20 +435,20 @@ $_POST["numero_propuesta"]='E000011';
         <div class="col-1"></div>
             <div class="col" style="border-style :solid; border-color: grey; border-width: 2px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px" >
                 <div class= "row align-items-center">
-                    <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
+                    <div class="col-3 align-self-stretch" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
                         <label>Tipo de Endoso: </label> 
                     </div>
-                    <div class="col-5" style="text-align:left;" contenteditable="true">       
+                    <div class="col-5 align-self-stretch" style="text-align:left;" contenteditable="true">       
                         <label id="tipo_endoso"></label>
                         <br>
                     </div>
                     
                 </div>
-                <div class= "row align-items-center">
-                    <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;padding-top: 6px;padding-bottom: 5px">
+                <div class= "row align-items-center align-self-stretch">
+                    <div class="col-3 align-self-stretch" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;padding-top: 6px;padding-bottom: 5px;">
                         <label>Descripcion del Endoso:</label> 
                     </div>
-                    <div id="descripcion_endoso" class="col-5" style="text-align:left;"contenteditable="true">       
+                    <div id="descripcion_endoso" class="col-5" style="text-align:left;" contenteditable="true">       
                         
                         <br>
                     </div>
@@ -456,7 +460,7 @@ $_POST["numero_propuesta"]='E000011';
                 </div>
                 
                 <div class= "row align-items-center">
-                    <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
+                    <div class="col-3 align-self-stretch" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;height: auto;">
                         <label>Dice:</label>
                     </div>
                 
@@ -465,7 +469,7 @@ $_POST["numero_propuesta"]='E000011';
                     
                     
                     
-                    <div class="col-2"   style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">       
+                    <div class="col-2 align-self-stretch"   style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;height: auto;">       
                         <label>Debe decir:</label>
                         
                         <br>
@@ -478,17 +482,17 @@ $_POST["numero_propuesta"]='E000011';
 <!--FORMA DE PAGO -->
  <div class="row" >
         <div class="col-1"></div>
-        <div class="col" style="background-color:lightgrey;border-style :solid; border-color: grey; border-width: 1px; border-top-width:0px; border-right-width: 2px;border-left-width: 2px; "> <b>COMENTARIOS</b></div>
+        <div class="col" style="background-color:lightgrey;border-style :solid; border-color: grey; border-width: 1px; border-top-width:0px; border-right-width: 2px;border-left-width: 2px; height: auto;"> <b>COMENTARIOS</b></div>
         <div class="col-1"></div>
  </div>
  <div class="row" >
         <div class="col-1"></div>
             <div class="col" style="border-style :solid; border-color: grey; border-width: 2px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px" >
                 <div class= "row align-items-center">
-                    <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
+                    <div class="col-3 align-self-stretch" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;height: auto;">
                         <label>Comentario endoso: </label> 
                     </div>
-                    <div class="col-5" style="text-align:left;" contenteditable="true">       
+                    <div class="col-5 align-self-stretch" style="text-align:left;" contenteditable="true">       
                         <label id="comentario_endoso"></label>
                         <br>
                     </div>
@@ -582,11 +586,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("tipo_endoso").innerHTML = "<?php echo $tipo_endoso; ?>";
     document.getElementById("dice").innerHTML = "<?php echo $dice; ?>";
     document.getElementById("debe_decir").innerHTML = "<?php echo $debe_decir; ?>";
-    document.getElementById("descripcion_endoso").innerHTML = "<?php echo $descripcion_endoso; ?>";
+    document.getElementById("descripcion_endoso").innerHTML = '<?php echo $descripcion_endoso; ?>';
 
     document.getElementById("tasa_afecta").innerHTML = "<?php echo $tasa_afecta; ?>";
     document.getElementById("tasa_exenta").innerHTML = "<?php echo $tasa_exenta; ?>";
-    document.getElementById("comentario_endoso").innerHTML = "<?php echo $comentario_endoso; ?>";
+    document.getElementById("comentario_endoso").innerHTML = '<?php echo $comentario_endoso; ?>';
 
 
     
