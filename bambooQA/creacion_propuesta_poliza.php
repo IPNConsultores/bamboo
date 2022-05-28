@@ -5,10 +5,10 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000764';
-//$_POST["numero_poliza"]='TBD';
+//$_POST["numero_poliza"]='test poliza 14 may 1346';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -800,14 +800,14 @@ function estandariza_info( $data ) {
               <label>Comisión Bruta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" step="0" placeholder="0" class="form-control" id="comisionbruta" name="comisionbruta">
+                <input input type="number" step="0" onchange= "sindecimales(this.id);"placeholder="0" class="form-control" id="comisionbruta" name="comisionbruta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label>Comisión Neta a Pago</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number"  step="0" placeholder="0"  class="form-control" id="comisionneta" name="comisionneta">
+                <input input type="number"  step="0" placeholder="0" onchange= "sindecimales(this.id);"  class="form-control" id="comisionneta" name="comisionneta">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -832,7 +832,7 @@ function estandariza_info( $data ) {
               <label for="comision">Monto</label>
               <div class="form-inline">
                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="comisionneg" id="comisionneg">
+                <input input type="number" onchange= "sindecimales(this.id);"  step="0.01" placeholder="0,00" class="form-control" name="comisionneg" id="comisionneg">
               </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -1748,6 +1748,8 @@ orgn = '<?php echo $camino; ?>';
 
             break;
           }
+          //AQUIIII
+          
           
          
         }
@@ -1775,11 +1777,16 @@ orgn = '<?php echo $camino; ?>';
 
           dosdecimales("valorcuota");
           dosdecimales("porcentaje_comsion");
-          dosdecimales("comsion");
-           
+          dosdecimales("comision");
+          sindecimales("comisionbruta");
+          sindecimales("comisionneta");
+          sindecimales("comisionneg");
+          
+         
           contador2="1";
+          
           var items ='<?php echo $nro_items; ?>'
-          console.log('<?php echo $nro_items; ?>');
+          console.log("contador 2 total:"+'<?php echo $nro_items; ?>');
           
            while (contador2<=items){
                
@@ -1821,11 +1828,35 @@ document.getElementById("formulario").addEventListener('submit', function(event)
 
 function dosdecimales(id){
     
+   
+    
     valor= document.getElementById(id).value;
+    console.log(id);
+    console.log(valor);
+    
+    
     
     valor = parseFloat(this.valor).toFixed(2);
     document.getElementById(id).value = valor;
+  
+   
 }
+function sindecimales(id){
+    
+   
+    
+    valor= document.getElementById(id).value;
+    console.log(id);
+    console.log(valor);
+    
+    
+    
+    valor = parseFloat(this.valor).toFixed(0);
+    document.getElementById(id).value = valor;
+  
+   
+}
+
 
 function validarutitem(){
     
@@ -2197,6 +2228,8 @@ function vencimientogarantia(){
       }
    
     }
+    
+    
     
    }
   }
