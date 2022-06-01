@@ -8,7 +8,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
     $prioridad = $_POST["prioridad"];
     $fechavencimiento = $_POST["fechavencimiento"];
     $tarea = $_POST["tarea"];

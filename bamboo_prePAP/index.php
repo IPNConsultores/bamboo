@@ -15,7 +15,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 $num=0;
 
 mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
 $sql = "SELECT *, concat_ws('-',mes,SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
     $resultado=mysqli_query($link, $sql);

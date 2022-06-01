@@ -8,7 +8,7 @@ $resultado=$resultado1 =$busqueda= '';
     $busqueda=$_POST["rut"];
 
     mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
     $sql = "SELECT id, nombre_cliente, apellido_paterno, apellido_materno FROM clientes WHERE rut_sin_dv = ?";
     if ($stmt = mysqli_prepare($link, $sql))

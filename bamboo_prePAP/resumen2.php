@@ -11,7 +11,7 @@ if (!isset($_SESSION))
 require_once "/home/gestio10/public_html/backend/config.php";
 require_once "/home/gestio10/public_html/bamboo_prePAP/backend/funciones.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $buscar = $base = $id = $nombre_base = '';
 $id_clientes = $id_polizas = $endosos = $propuestas =$propuestas_endosos= 'busqueda dummy';
 $num = 0;

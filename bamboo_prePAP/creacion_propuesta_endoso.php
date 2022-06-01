@@ -4,7 +4,7 @@ if ( !isset( $_SESSION ) ) {
 }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";

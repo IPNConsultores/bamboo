@@ -14,7 +14,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 //if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
   mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
   //poliza
   
   $instancia = "envio_poliza";
@@ -234,7 +234,7 @@ $body = urlencode( $body );
 
 
 mysqli_set_charset( $link, 'utf8' );
-mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
 //correo_Cliente
 $resultado_correo_cliente = mysqli_query( $link, 'SELECT a.correo, a.rut_sin_dv, a.id , count(b.correo) cuenta_contacto FROM clientes a LEFT JOIN clientes_contactos b on a.id = b.id_cliente where a.rut_sin_dv =' . $rut_proponente . ' or a.rut_sin_dv =' . $rut_asegurado . ' group by a.correo, a.rut_sin_dv, a.id order by cuenta_contacto desc;' );
 
