@@ -1194,7 +1194,7 @@ var tabla_clientes = $('#listado_clientes').DataTable({
             '</select> registros',
         "sInfoFiltered": "(filtrado de _MAX_ registros totales)",
         "sLengthMenu": "Muestra _MENU_ registros por página",
-        "sZeroRecords": "No hay registros asociados",
+        "sZeroRecords": "Se están cargando los registros. Espera unos segundos más.",
         "sInfo": "Mostrando página _PAGE_ de _PAGES_",
         "sInfoEmpty": "No hay registros disponibles",
         "oPaginate": {
@@ -2593,7 +2593,7 @@ function vencimientogarantia(){
                 '</select> registros',
                 "sInfoFiltered": "(Resultado búsqueda: _TOTAL_ de _MAX_ registros totales)",
             "sLengthMenu": "Muestra _MENU_ registros por página",
-            "sZeroRecords": "No hay registros asociados",
+            "sZeroRecords": "Se están cargando los registros. Espera unos segundos más.",
             "sInfo": "Mostrando página _PAGE_ de _PAGES_",
             "sInfoEmpty": "No hay registros disponibles",
             "oPaginate": {
