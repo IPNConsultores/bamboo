@@ -259,7 +259,7 @@ function estandariza_info( $data ) {
       <div class="card-header" id="headingOne" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne" style="color:#536656">Asegurado y
+                            aria-expanded="true" aria-controls="collapseOne" style="color:#536656" onclick="window.scrollTo(0,0)">Asegurado y
           Proponente</button>
         </h5>
       </div>
@@ -411,7 +411,7 @@ function estandariza_info( $data ) {
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                            style="color:#536656">Compañía, Vigencia, Materia y Deducible</button>
+                            style="color:#536656" onclick="window.scrollTo(0,0)">Compañía, Vigencia, Materia y Deducible</button>
         </h5>
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -745,7 +745,7 @@ function estandariza_info( $data ) {
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
-                            style="color:#536656">Propuesta, Comisiones y Método de Pagos</button>
+                            style="color:#536656" onclick="window.scrollTo(0,0)">Propuesta, Comisiones y Método de Pagos</button>
       </h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
@@ -952,7 +952,7 @@ function estandariza_info( $data ) {
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                            style="color:#536656">Comentarios y Endosos</button>
+                            style="color:#536656" onclick="window.scrollTo(0,0)">Comentarios y Endosos</button>
       </h5>
     </div>
     <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
