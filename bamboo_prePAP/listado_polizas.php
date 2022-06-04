@@ -539,11 +539,9 @@ function botones(id, accion, base) {
             break;
         }
         case "correo": {
-            if (base == 'propuesta'){
                 $.redirect('/bamboo_prePAP/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
-            }
             break;
         }
         case "renovar":{
