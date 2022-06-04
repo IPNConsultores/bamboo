@@ -1531,6 +1531,7 @@ orgn = '<?php echo $camino; ?>';
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo3").style.display = "flex";
             document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("botones_edicion").style.display = "flex";
             
             document.getElementById("nro_poliza").required = true;
             
@@ -1636,6 +1637,39 @@ orgn = '<?php echo $camino; ?>';
                      
                     orgn='crear_poliza_web';
                     
+                }
+                            var origen_2='<?php echo $accion_secundaria; ?>';
+                if (origen_2=='renovar'){
+                    document.getElementById("contenedor_nro_propuesta").style.display = "none";
+                    document.getElementById("titulo2").style.display = "none";
+                    document.getElementById("titulo6").style.display = "flex";
+                    document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
+                    document.getElementById("fechavenc").value = '';
+                    document.getElementById("edicion1").style.display = "none";
+                    if ('<?php echo $numero_endosos; ?>'!=='0'){
+                        document.getElementById("info_endoso").style.display = "flex";
+                    }
+
+                    orgn='crear_propuesta';
+                    
+                } 
+                else {
+                  var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+                  for (var i = 0; i < fields1.length; i++) {
+                      fields1[i].disabled = true;
+                  }
+                  var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+                  for (var i = 0; i < fields2.length; i++) {
+                      fields2[i].disabled = true;
+                  }
+                  var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+                  for (var i = 0; i < fields3.length; i++) {
+                      fields3[i].disabled = true;
+                  }
+                  var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+                  for (var i = 0; i < fields4.length; i++) {
+                      fields4[i].disabled = true;
+                  }
                 }
             //fin renovación póliza
             
