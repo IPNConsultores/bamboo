@@ -207,7 +207,7 @@ switch ($_POST["accion"]) {
   
     $busqueda=estandariza_info($_POST["nro_poliza"]);
         //poliza
-        $mensaje='Póliza actualizada correctamente';
+        $mensaje='Póliza creada correctamente';
         $listado='/bamboo_prePAP/listado_polizas.php';
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
