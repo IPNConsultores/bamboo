@@ -4,6 +4,8 @@
         session_start(); 
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $rut_completo = preg_replace('/[^k0-9]/i', '', $_POST["rut2"]);
 
 $id=estandariza_info($_POST["id"]);

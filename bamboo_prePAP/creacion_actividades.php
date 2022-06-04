@@ -12,6 +12,8 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num_cliente=$num_poliza=$num_prop_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
  $tarea=$fecha_vencimiento=$recurrente=$tarea_con_fecha_fin=$fecha_fin='';
