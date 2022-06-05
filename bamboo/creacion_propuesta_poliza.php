@@ -5,9 +5,9 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'modifica_poliza';
+//$_POST["accion"] = 'actualiza_propuesta';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000005';
+//$_POST["numero_propuesta"]='P000024';
 //$_POST["numero_poliza"]='test final';
 
 $poliza_renovada='';
@@ -23,7 +23,7 @@ $poliza_renovada='';
       }    
       else{
         $query = "select numero_propuesta, id, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas where numero_propuesta='".$_POST["numero_propuesta"]."'";
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado, b.nombre_cliente , materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }
       require_once "/home/gestio10/public_html/backend/config.php";
@@ -62,6 +62,7 @@ $poliza_renovada='';
                 $rut_aseg = $row_item->rut_asegurado;
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $nombre_asegurado[]=$row_item->nombre_cliente;
                 $cobertura[] = $row_item->cobertura;
                 $materia_i = $row_item->materia_asegurada;
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
@@ -1336,7 +1337,7 @@ console.log(orgn)
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
-            if (validador=true) 
+            if (validador==true) 
             {
                 console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
@@ -1358,7 +1359,7 @@ console.log(orgn)
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
-            if (validador=true) 
+            if (validador==true) 
             {
                 console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
@@ -1391,6 +1392,7 @@ console.log(orgn)
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1411,8 +1413,7 @@ console.log(orgn)
                 console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                valida_rut_duplicado_aseg(contador.toString());
-                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1488,7 +1489,7 @@ console.log(orgn)
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
-            if (validador=true) 
+            if (validador==true) 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
@@ -1521,6 +1522,7 @@ console.log(orgn)
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1539,8 +1541,8 @@ console.log(orgn)
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                valida_rut_duplicado_aseg(contador.toString());
-                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
+
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1576,7 +1578,7 @@ console.log(orgn)
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
-            if (validador=true) 
+            if (validador==true) 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
@@ -1631,6 +1633,7 @@ console.log(orgn)
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1650,8 +1653,7 @@ console.log(orgn)
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                valida_rut_duplicado_aseg(contador.toString());
-                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1793,6 +1795,7 @@ console.log(orgn)
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1812,8 +1815,7 @@ console.log(orgn)
             while (contador<='<?php echo $nro_items; ?>'){
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                valida_rut_duplicado_aseg(contador.toString());
-                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
