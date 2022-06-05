@@ -778,8 +778,7 @@ function estandariza_info( $data ) {
            <label for="comentario_externo"><b>Comentarios Externos</b></label>
           <br>
           <textarea class="form-control" rows="2" style="height:100px" id='comentarios_ext' name='comentario'
-                              style="text-indent:0px" ;>
-          </textarea>
+                              style="text-indent:0px" ;></textarea>
         
         </div>
       </div>
