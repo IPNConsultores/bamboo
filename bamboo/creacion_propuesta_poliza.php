@@ -1550,9 +1550,10 @@ console.log(orgn)
             break;
           }
           case 'modifica_poliza':{
+            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
+            console.log(validador);
 
-            
-            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            if (validador=true) 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
