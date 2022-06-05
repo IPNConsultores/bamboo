@@ -1091,6 +1091,9 @@ function calculaprimabruta() {
 function cambia_deducible() {
     var ramo = document.getElementById("ramo").value;
     var contador = document.getElementById("contador").value;
+    var orgn = '<?php echo $camino; ?>';
+
+    
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
         ramo == "VEH - Vehículos Pesados") {
         for (var i = 1; i <= contador; i++){
@@ -1102,11 +1105,15 @@ function cambia_deducible() {
         "INC - Hogar" || ramo == "INC - Misceláneos" || ramo == "INC - Perjuicio por Paralización" || ramo ==
         "INC - Pyme" || ramo == "INC - TRBF (Todo Riesgo Bienes Físicos)") {
         for (var i = 1; i <= contador; i++){
+          
             document.getElementById('deducible_para_otros[' +i+ ']').style.display="flex";
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
             document.getElementById('moneda[' + i + ']').style.display="none";
+            if (orgn ="crar_propuesta"){
+
             document.getElementById("deducible_defecto["+i+"]").value="Varios"; 
+            }
         }
     } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo == "Garantía" || ramo ==
         "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" || ramo == "ASISTENCIA EN VIAJE" || ramo ==
@@ -1116,7 +1123,9 @@ function cambia_deducible() {
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
              document.getElementById('moneda[' + i + ']').style.display="none";
+             if (orgn ="crar_propuesta"){
              document.getElementById("deducible_defecto["+i+"]").value="No Aplica";
+             }
          }
     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
          for (var i = 1; i <= contador; i++){
