@@ -1333,12 +1333,13 @@ console.log(orgn)
           case 'actualiza_propuesta':{
             if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
             {
+                console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
             else{
-
-              document.getElementById("radio2_si").checked = false;
+              console.log("diferentes");
+                document.getElementById("radio2_si").checked = false;
                 document.getElementById("radio2_no").checked = true;
             }
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
@@ -1382,6 +1383,7 @@ console.log(orgn)
             while (contador<='<?php echo $nro_items; ?>'){
                 console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
+                document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
