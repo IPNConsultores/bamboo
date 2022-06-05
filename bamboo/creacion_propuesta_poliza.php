@@ -1134,7 +1134,7 @@ function pobladeducible(){
      var espacio = document.createTextNode('&nbsp')
      if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
         for (var i = 1; i <= contador; i++){
-              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de" + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
+              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de " + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
         }
      }
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
@@ -1394,6 +1394,7 @@ console.log(orgn)
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    pobladeducible();
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
