@@ -328,7 +328,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Neta Afecta:</label> 
+                        <label>Prima Total Neta Afecta:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PN"></label>
@@ -344,7 +344,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Neta Exenta:</label> 
+                        <label>Prima Total Neta Exenta:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PE"></label>
@@ -390,7 +390,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Vigencia con IVA:</label> 
+                        <label>Prima Bruta Total del periodo Vigencia:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PT">$</label>
@@ -835,7 +835,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
                     '</div>'+
                     '<div class= "row align-items-center">'+
                         '<div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+
-                            '<label>Prima bruta del periodo vigencia:</label> '+
+                            '<label>Prima Bruta del Periodo Vigencia:</label> '+
                         '</div>'+
                         '<div class="col-1" style="text-align:right" contenteditable="true">'+       
                             '<label id="moneda_prima_iva[' + i + ']"></label>'+
