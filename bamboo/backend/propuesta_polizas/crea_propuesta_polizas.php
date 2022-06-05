@@ -5,7 +5,7 @@
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
 
-    $listado='/bamboo_prePAP/listado_propuesta_polizas.php';
+    $listado='/bamboo/listado_propuesta_polizas.php';
     $mensaje='';
     $busqueda='';
 //Ingresar
@@ -54,7 +54,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //echo "Acción: ->".$_POST["accion"]."<-<br>";
 switch ($_POST["accion"]) {
   case 'eliminar_poliza':
@@ -208,7 +208,7 @@ switch ($_POST["accion"]) {
     $busqueda=estandariza_info($_POST["nro_poliza"]);
         //poliza
         $mensaje='Póliza creada correctamente';
-        $listado='/bamboo_prePAP/listado_polizas.php';
+        $listado='/bamboo/listado_polizas.php';
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
             $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
@@ -281,7 +281,7 @@ switch ($_POST["accion"]) {
       $busqueda=estandariza_info($_POST["nro_poliza"]);
           //poliza
           $mensaje='Póliza creada correctamente';
-          $listado='/bamboo_prePAP/listado_polizas.php';
+          $listado='/bamboo/listado_polizas.php';
   
               $nro_poliza= estandariza_info($_POST["nro_poliza"]);
               $accion_secundaria= estandariza_info($_POST["accion_secundaria"]);
@@ -363,7 +363,7 @@ switch ($_POST["accion"]) {
       //delete from items where numero_propuesta='P000700' and numero_item>=4
       //fecha_envio_propuesta, comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta
       $mensaje='Póliza actualizada correctamente';   
-      $listado='/bamboo_prePAP/listado_polizas.php';   
+      $listado='/bamboo/listado_polizas.php';   
       $nro_poliza= estandariza_info($_POST["nro_poliza"]);
       $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
       $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));

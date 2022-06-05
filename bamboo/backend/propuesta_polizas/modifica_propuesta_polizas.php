@@ -31,7 +31,7 @@ $fechaprop=estandariza_info($_POST["fechaprop"]);
 $item  = estandariza_info($_POST["item"]);
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
     case 'elimina':
         $query="delete from propuesta_polizas where id=".$_POST["id_propuesta"];
@@ -82,7 +82,7 @@ function cambia_puntos_por_coma($data){
 <script >
 alert("Póliza Modificada Correctamente");
 var nro_propuesta= '<?php echo $nro_propuesta; ?>';
- $.redirect('/bamboo_prePAP/listado_propuesta_polizas.php', {
+ $.redirect('/bamboo/listado_propuesta_polizas.php', {
  'busqueda': nro_propuesta
 }, 'post');
 

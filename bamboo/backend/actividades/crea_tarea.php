@@ -8,7 +8,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     $prioridad = $_POST["prioridad"];
     $fechavencimiento = $_POST["fechavencimiento"];
     $tarea = $_POST["tarea"];
@@ -163,13 +163,13 @@ alert("Tarea Creada Correctamente");
 		}
 	
 if (tarea_recurrente==true){
-    $.redirect('/bamboo_prePAP/listado_tareas_recurrentes.php', {
+    $.redirect('/bamboo/listado_tareas_recurrentes.php', {
   'tarea': id_tarea
 }, 'GET');
 }
 else
 {
-    $.redirect('/bamboo_prePAP/listado_tareas.php', {
+    $.redirect('/bamboo/listado_tareas.php', {
   'tarea': id_tarea
 }, 'GET');
 }

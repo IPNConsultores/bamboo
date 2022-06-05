@@ -6,7 +6,7 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $id=estandariza_info($_POST["id_tarea"]);
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 if ($_POST["accion"]=='cerrar_tarea'){
   $query='update tareas set estado="Cerrado", fecha_completada=current_date WHERE id='.$id.';';
@@ -29,7 +29,7 @@ function estandariza_info($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
-//  header("location: /bamboo_prePAP/index.php");
+//  header("location: /bamboo/index.php");
 //$message = "Tarea Finalizada";
 //echo "<script type='text/javascript'>alert('$message');</script>";
 

@@ -54,7 +54,7 @@ $item=estandariza_info($_POST["item"]);
 
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 if ($id_poliza_renovada!=='')
 {
   mysqli_query($link, "update polizas_2 set tipo_poliza='Renovada' where id=".$id_poliza_renovada);
@@ -99,7 +99,7 @@ return $data;
 <script >
 alert("Póliza Registrada Correctamente");
 var nro_poliza= '<?php echo $nro_poliza; ?>';
-  $.redirect('/bamboo_prePAP/listado_polizas.php', {
+  $.redirect('/bamboo/listado_polizas.php', {
  'busqueda': nro_poliza
 }, 'post');
 

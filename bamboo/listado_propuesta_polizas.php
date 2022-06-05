@@ -12,7 +12,7 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -32,7 +32,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -82,7 +82,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
             </table>
             <div id="botones_poliza">
-            <button title="Descargar_excel_propuestas" type="button"  onclick="window.location.href='/bamboo_prePAP/backend/propuesta_polizas/genera_excel_propuestas.php'">Descargar Excel <i class="fas fa-file-excel"></i></button>
+            <button title="Descargar_excel_propuestas" type="button"  onclick="window.location.href='/bamboo/backend/propuesta_polizas/genera_excel_propuestas.php'">Descargar Excel <i class="fas fa-file-excel"></i></button>
             </div>
             
         </div>
@@ -118,7 +118,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table = ''
 $(document).ready(function() {
     table = $('#listado_propuesta_polizas').DataTable({
-        "ajax": "/bamboo_prePAP/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
+        "ajax": "/bamboo/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
         "scrollX": true,
         "searchPanes":{
             "columns":[2,3,13,14],
@@ -417,7 +417,7 @@ function botones(id, accion, base) {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 
                 if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
                     'accion':accion,
                     'motivo':motivo
@@ -429,7 +429,7 @@ function botones(id, accion, base) {
                 var r2 = confirm("Estás a punto de eliminar esta propuesta de póliza ¿Deseas continuar?");
                 //eliminar
                 if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
                     'accion':accion
                 }, 'post');
@@ -437,34 +437,34 @@ function botones(id, accion, base) {
             break;
         }
         case "actualiza_propuesta": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+            $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "tarea": {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_propuesta': id
                 }, 'post');
             break;
         }
         case "info": {
-            $.redirect('/bamboo_prePAP/resumen2.php', {
+            $.redirect('/bamboo/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
             break;
         }
         case "crear_poliza": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+            $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "generar_documento": {
-            $.redirect('/bamboo_prePAP/documento_propuesta_poliza.php', {
+            $.redirect('/bamboo/documento_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
@@ -472,7 +472,7 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'propuesta'){
-                $.redirect('/bamboo_prePAP/template_poliza.php', {
+                $.redirect('/bamboo/template_poliza.php', {
                     'id_propuesta': id
                 }, 'post');
             }

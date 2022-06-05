@@ -18,7 +18,7 @@ $rut_completo = str_replace("-", "", estandariza_info($_POST["rut"]));
 
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $query='insert into clientes(nombre_cliente, apellido_paterno, apellido_materno, rut_sin_dv, dv, direccion_personal, correo,direccion_laboral, telefono, referido, grupo) values (\''.$nombre.'\', \''.$apellidop.'\', \''.$apellidom.'\', \''.$rut.'\', \''.$dv.'\', \''.$direccionp.'\', \''.$correo_electronico.'\', \''.$direccionl.'\', \''.$telefono.'\', \''.$referido.'\', \''.$grupo.'\');';
 mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Agrega clientes', '".str_replace("'","**",$query)."','cliente',null, '".$_SERVER['PHP_SELF']."')");
 
@@ -40,7 +40,7 @@ mysqli_query($link, $query);
 //echo '<script type="text/javascript">
 //redirige('.$rut.');
 //</script>';
-//header("Location:http://gestionipn.cl/bamboo_prePAP/index.php");
+//header("Location:http://gestionipn.cl/bamboo/index.php");
 
 function estandariza_info($data) {
   $data = trim($data);
@@ -62,7 +62,7 @@ function estandariza_info($data) {
 <script >
 alert("Cliente Creado correctamente")
 var rut='<?php echo $rut; ?>'
-  $.redirect('/bamboo_prePAP/listado_clientes.php', {
+  $.redirect('/bamboo/listado_clientes.php', {
   'busqueda': rut
 }, 'post');
 

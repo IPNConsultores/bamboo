@@ -12,7 +12,7 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -32,7 +32,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -106,7 +106,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     $(document).ready(function () {
         table = $('#listado_clientes').DataTable({
 
-            "ajax": "/bamboo_prePAP/backend/clientes/busqueda_listado_clientes.php",
+            "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
             "scrollX": true,
             "columns": [{
                 "className": 'details-control',
@@ -315,7 +315,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                 if (r == true) {
                     $.ajax({
                         type: "POST",
-                        url: "/bamboo_prePAP/backend/clientes/elimina_cliente.php",
+                        url: "/bamboo/backend/clientes/elimina_cliente.php",
                         data: {
                             cliente: id
                         },
@@ -343,19 +343,19 @@ $buscar= estandariza_info($_POST["busqueda"]);
                 }
             }
             case "modifica": {
-                $.redirect('/bamboo_prePAP/creacion_cliente.php', {
+                $.redirect('/bamboo/creacion_cliente.php', {
                     'id_cliente': id
                 }, 'post');
                 break;
             }
             case "tarea": {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
                 break;
             }
             case "info": {
-            $.redirect('/bamboo_prePAP/resumen2.php', {
+            $.redirect('/bamboo/resumen2.php', {
                 'id': id,
                 'base': 'cliente'
             }, 'post');

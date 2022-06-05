@@ -10,7 +10,7 @@ if ( !isset( $_SESSION ) ) {
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
       $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -92,7 +92,7 @@ if ( !isset( $_SESSION ) ) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+<link rel="icon" href="/bamboo/images/bamboo.png">
 <!-- Bootstrap --> 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -108,7 +108,7 @@ if ( !isset( $_SESSION ) ) {
                 <div class="col" style="float: center;vertical-align: middle; border-style :solid; border-color: grey; border-width: 2px; border-right-width: 0px; border-bottom-width:1px">
                 <div class="row">
         <div class="col">
-                        <p><img src="/bamboo_prePAP/images/logo_bamboo _verde.png" width="150" class="img-fluid" style="float: center;vertical-align: middle "></p>
+                        <p><img src="/bamboo/images/logo_bamboo _verde.png" width="150" class="img-fluid" style="float: center;vertical-align: middle "></p>
             </div>
             <div class="col" style="vertical-align:middle;">
     
@@ -580,7 +580,7 @@ if ( !isset( $_SESSION ) ) {
           }
           doc.save('<?php echo $nro_propuesta; ?>.pdf');
           NoContainer();
-          $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                 'numero_propuesta': '<?php echo $nro_propuesta; ?>',
                 'accion':'envio_propuesta'
             }, 'post');

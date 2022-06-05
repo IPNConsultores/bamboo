@@ -14,7 +14,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 //if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
   mysqli_set_charset( $link, 'utf8' );
-  mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+  mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
   //poliza
   
   $instancia = "envio_poliza";
@@ -234,7 +234,7 @@ $body = urlencode( $body );
 
 
 mysqli_set_charset( $link, 'utf8' );
-mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
 //correo_Cliente
 $resultado_correo_cliente = mysqli_query( $link, 'SELECT a.correo, a.rut_sin_dv, a.id , count(b.correo) cuenta_contacto FROM clientes a LEFT JOIN clientes_contactos b on a.id = b.id_cliente where a.rut_sin_dv =' . $rut_proponente . ' or a.rut_sin_dv =' . $rut_asegurado . ' group by a.correo, a.rut_sin_dv, a.id order by cuenta_contacto desc;' );
 
@@ -283,7 +283,7 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+<link rel="icon" href="/bamboo/images/bamboo.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>

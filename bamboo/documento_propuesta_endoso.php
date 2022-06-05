@@ -13,7 +13,7 @@ $_POST["numero_propuesta"]='E000012';
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
       $query = "select a.descripcion_endoso, numero_propuesta_endoso as numero_propuesta,moneda_poliza_endoso, a.compania, a.ramo, a.rut_proponente, a.dv_proponente, b.nombre_cliente, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral,DATE_FORMAT(fecha_ingreso_endoso,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia,DATE_FORMAT(fecha_prorroga,'%d-%m-%Y') as fecha_prorroga,  CONCAT_WS(' ',FORMAT(tasa_afecta_endoso, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta_endoso, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_exenta, CONCAT_WS(' ',FORMAT(IVA, 2, 'de_DE')) as prima_afecta_iva, CONCAT_WS(' ',FORMAT(prima_total, 2, 'de_DE')) as prima_bruta_anual, 
             a.comentario_endoso, a.debe_decir, a.dice, a.monto_asegurado_endoso, a.tipo_endoso, a.numero_poliza, count(c.id) as numero_items
             from propuesta_endosos as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.numero_propuesta_endoso='".$_POST["numero_propuesta"]."'";
@@ -73,7 +73,7 @@ $_POST["numero_propuesta"]='E000012';
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+<link rel="icon" href="/bamboo/images/bamboo.png">
 <!-- Bootstrap --> 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -89,7 +89,7 @@ $_POST["numero_propuesta"]='E000012';
                 <div class="col" style="float: center;vertical-align: middle; border-style :solid; border-color: grey; border-width: 2px; border-right-width: 0px; border-bottom-width:1px">
                 <div class="row">
         <div class="col">
-                        <p><img src="/bamboo_prePAP/images/logo_bamboo _verde.png" width="150" class="img-fluid" style="float: center;vertical-align: middle "></p>
+                        <p><img src="/bamboo/images/logo_bamboo _verde.png" width="150" class="img-fluid" style="float: center;vertical-align: middle "></p>
             </div>
             <div class="col" style="vertical-align:middle;">
     
@@ -546,7 +546,7 @@ $_POST["numero_propuesta"]='E000012';
           }
           doc.save('Propuesta endoso <?php echo $nro_propuesta; ?>.pdf');
           NoContainer();
-          $.redirect('/bamboo_prePAP/listado_propuesta_endosos.php', {
+          $.redirect('/bamboo/listado_propuesta_endosos.php', {
                 'busqueda': '<?php echo $nro_propuesta; ?>',
             }, 'post');
     });

@@ -4,7 +4,7 @@ if ( !isset( $_SESSION ) ) {
 }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
@@ -100,7 +100,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+<link rel="icon" href="/bamboo/images/bamboo.png">
 <!-- Bootstrap --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
@@ -138,7 +138,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
   <p>Propuesta de Endoso / Editar propuesta: <?php  echo $numero_propuesta; ?></p>
   <br>
 </div>
-  <form action="/bamboo_prePAP/backend/propuesta_endoso/crea_propuesta_endoso.php" class="needs-validation" method="POST" id="formulario"  novalidate>
+  <form action="/bamboo/backend/propuesta_endoso/crea_propuesta_endoso.php" class="needs-validation" method="POST" id="formulario"  novalidate>
   
 <div class="accordion" id="accordionExample">
       <div class="card">
@@ -767,8 +767,8 @@ function genera_propuesta(){
 
     switch (camino) {
         case 'crea_propuesta_endoso': {
-          //$.redirect('/bamboo_prePAP/test_felipe.php', {
-        $.redirect('/bamboo_prePAP/backend/endosos/crea_endosos.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
+        $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,
@@ -797,8 +797,8 @@ function genera_propuesta(){
         break;
         }
         case 'actualiza_propuesta': {
-          //$.redirect('/bamboo_prePAP/test_felipe.php', {
-        $.redirect('/bamboo_prePAP/backend/endosos/crea_endosos.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
+        $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,
@@ -828,8 +828,8 @@ function genera_propuesta(){
         break;
         }
         case 'crear_endoso': {
-          //$.redirect('/bamboo_prePAP/test_felipe.php', {
-        $.redirect('/bamboo_prePAP/backend/endosos/crea_endosos.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
+        $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,

@@ -12,7 +12,7 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -32,7 +32,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -110,7 +110,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
 var table_endosos = ''
 $(document).ready(function() {
     table_endosos = $('#listado_endosos').DataTable({
-        "ajax": "/bamboo_prePAP/backend/endosos/busqueda_listado_endosos.php",
+        "ajax": "/bamboo/backend/endosos/busqueda_listado_endosos.php",
         "scrollX": true,
         "dom": 'Pfrtip',
         "columns": [{
@@ -294,7 +294,7 @@ function botones(id, accion, base) {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de endoso ¿Deseas continuar?");
                 
                 if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/endosos/crea_endosos.php', {
+                $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
                     'numero_propuesta': id,
                     'accion':accion,
                     'motivo':motivo
@@ -304,36 +304,36 @@ function botones(id, accion, base) {
         }
 
         case "actualiza_propuesta": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_endoso.php', {
-            //$.redirect('/bamboo_prePAP/test_felipe2.php', {    
+            $.redirect('/bamboo/creacion_propuesta_endoso.php', {
+            //$.redirect('/bamboo/test_felipe2.php', {    
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "tarea": {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_propuesta': id
                 }, 'post');
             break;
         }
         case "info": {
            
-            $.redirect('/bamboo_prePAP/resumen2.php', {
+            $.redirect('/bamboo/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
             break;
         }
         case "crear_endoso": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_endoso.php', {
+            $.redirect('/bamboo/creacion_propuesta_endoso.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "generar_documento": {
-            $.redirect('/bamboo_prePAP/documento_propuesta_endoso.php', {
+            $.redirect('/bamboo/documento_propuesta_endoso.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');

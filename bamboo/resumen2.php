@@ -9,9 +9,9 @@ if (!isset($_SESSION))
 //$_SERVER["REQUEST_METHOD"]="POST";
 
 require_once "/home/gestio10/public_html/backend/config.php";
-require_once "/home/gestio10/public_html/bamboo_prePAP/backend/funciones.php";
+require_once "/home/gestio10/public_html/bamboo/backend/funciones.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $buscar = $base = $id = $nombre_base = '';
 $id_clientes = $id_polizas = $endosos = $propuestas =$propuestas_endosos= 'busqueda dummy';
 $num = 0;
@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bamboo_prePAP/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -471,7 +471,7 @@ function cambiacolor(id) {
 $(document).ready(function() {
     var table = $('#listado_clientes').DataTable({
 
-        "ajax": "/bamboo_prePAP/backend/clientes/busqueda_listado_clientes.php",
+        "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
         
         "initComplete": function(settings, json) {
             document.getElementById("clientes").innerHTML = "Clientes (" + $('#listado_clientes')
@@ -579,7 +579,7 @@ $(document).ready(function() {
     //inicio pólizas
 
     var table_polizas = $('#listado_polizas').DataTable({
-        "ajax": "/bamboo_prePAP/backend/polizas/busqueda_listado_polizas.php",
+        "ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "initComplete": function(settings, json) {
             document.getElementById("poliza").innerHTML = "Pólizas (" + $('#listado_polizas')
                 .DataTable().page.info().recordsDisplay + ")";
@@ -757,7 +757,7 @@ $(document).ready(function() {
     // inicio tareas
     var table_tareas = $('#listado_tareas').DataTable({
 
-        "ajax": "/bamboo_prePAP/backend/actividades/busqueda_listado_tareas_completas.php",
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_completas.php",
         "initComplete": function(settings, json) {
             document.getElementById("tarea").innerHTML = "Tareas (" + $('#listado_tareas')
                 .DataTable().page.info().recordsDisplay + ")";
@@ -921,7 +921,7 @@ $(document).ready(function() {
     // inicio tareas_recurrentes
     var table_tareas_recurrentes = $('#listado_tareas_recurrentes').DataTable({
 
-        "ajax": "/bamboo_prePAP/backend/actividades/busqueda_listado_tareas_recurrentes.php",
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas_recurrentes.php",
         
         "initComplete": function(settings, json) {
             document.getElementById("tarea_rec").innerHTML = "Tareas recurrentes (" + $(
@@ -1046,7 +1046,7 @@ $(document).ready(function() {
     //fin tareas recurrents
     //inicio propuestas
     var table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
-        "ajax": "/bamboo_prePAP/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
+        "ajax": "/bamboo/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
         
         "initComplete": function(settings, json) {
             document.getElementById("propuestas").innerHTML = "Prop. Póliza (" + $(
@@ -1223,7 +1223,7 @@ $(document).ready(function() {
     //fin propuestas
     //inicio endosos
          var   table_endosos = $('#listado_endosos').DataTable({
-        "ajax": "/bamboo_prePAP/backend/endosos/busqueda_listado_endosos.php",
+        "ajax": "/bamboo/backend/endosos/busqueda_listado_endosos.php",
         
         "initComplete": function(settings, json) {
                 document.getElementById("endosos").innerHTML = "Endosos (" + $(
@@ -1343,7 +1343,7 @@ $(document).ready(function() {
     //fin endosos
     // inicio propuesta_endosos
         var table_propuestas_endosos = $('#listado_propuesta_endosos').DataTable({
-        "ajax": "/bamboo_prePAP/backend/endosos/busqueda_listado_propuesta_endoso.php",
+        "ajax": "/bamboo/backend/endosos/busqueda_listado_propuesta_endoso.php",
         "initComplete": function(settings, json) {
                 document.getElementById("propuestas_endosos").innerHTML = "Prop. Endosos (" + $(
                     '#listado_propuesta_endosos').DataTable().page.info().recordsDisplay + ")";
@@ -2265,7 +2265,7 @@ function botones(id, accion, base) {
             var motivo = window.prompt('Ingresa el motivo de cancelación de póliza', '');
             var r2 = confirm("Estás a punto de cancelar esta póliza ¿Deseas continuar?");
             if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_poliza': id,
                     'accion': accion,
                     'motivo': motivo
@@ -2277,7 +2277,7 @@ function botones(id, accion, base) {
             var motivo = window.prompt('Ingresa el motivo de anulación de póliza', '');
             var r2 = confirm("Estás a punto de anular esta póliza ¿Deseas continuar?");
             if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_poliza': id,
                     'accion': accion,
                     'motivo': motivo
@@ -2288,7 +2288,7 @@ function botones(id, accion, base) {
         case "eliminar_poliza": {
             var r2 = confirm("Estás a punto de eliminar esta póliza ¿Deseas continuar?");
             if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_poliza.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_poliza.php', {
                     'numero_poliza': id,
                     'accion': accion
                 }, 'post');
@@ -2297,7 +2297,7 @@ function botones(id, accion, base) {
         }
         case "elimina": {
             if (base == 'tarea' || base == 'tarea recurrente') {
-                $.redirect('/bamboo_prePAP/backend/actividades/cierra_tarea.php', {
+                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
                     'accion': accion,
                 }, 'post');
@@ -2310,7 +2310,7 @@ function botones(id, accion, base) {
                 if (r == true) {
                     $.ajax({
                         type: "POST",
-                        url: "/bamboo_prePAP/backend/clientes/elimina_cliente.php",
+                        url: "/bamboo/backend/clientes/elimina_cliente.php",
                         data: {
                             cliente: id
                         },
@@ -2340,7 +2340,7 @@ function botones(id, accion, base) {
             break;
         }
         case "modifica_poliza": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+            $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                 'numero_poliza': id,
                 'accion': accion
             }, 'post');
@@ -2348,19 +2348,19 @@ function botones(id, accion, base) {
         }
         case "modifica": {
             if (base == 'tarea recurrente') {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_tarea': id,
                     'tipo_tarea': 'recurrente'
                 }, 'post');
             }
             if (base == 'tarea') {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_tarea': id,
                     'tipo_tarea': 'individual'
                 }, 'post');
             }
             if (base == 'cliente') {
-                $.redirect('/bamboo_prePAP/creacion_cliente.php', {
+                $.redirect('/bamboo/creacion_cliente.php', {
                     'id_cliente': id
                 }, 'post');
             }
@@ -2377,19 +2377,19 @@ function botones(id, accion, base) {
         }
         case "tarea": {
             if (base == 'cliente') {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza') {
-                $.redirect('/bamboo_prePAP/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "info": {
-            $.redirect('/bamboo_prePAP/resumen2.php', {
+            $.redirect('/bamboo/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
@@ -2397,14 +2397,14 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'poliza') {
-                $.redirect('/bamboo_prePAP/template_poliza.php', {
+                $.redirect('/bamboo/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "crear_poliza": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+            $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
@@ -2415,7 +2415,7 @@ function botones(id, accion, base) {
                 var r2 = confirm("Estás a punto de rechazar esta propuesta de póliza ¿Deseas continuar?");
                 
                 if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
                     'accion':accion,
                     'motivo':motivo
@@ -2427,7 +2427,7 @@ function botones(id, accion, base) {
                 var r2 = confirm("Estás a punto de eliminar esta propuesta de póliza ¿Deseas continuar?");
                 //eliminar
                 if (r2 == true) {
-                $.redirect('/bamboo_prePAP/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_propuesta': id,
                     'accion':accion
                 }, 'post');
@@ -2435,21 +2435,21 @@ function botones(id, accion, base) {
             break;
         }
         case "actualiza_propuesta": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+            $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "crea_propuesta_endoso": {
-            $.redirect('/bamboo_prePAP/creacion_propuesta_endoso.php', {
+            $.redirect('/bamboo/creacion_propuesta_endoso.php', {
                 'numero_poliza': id,
                 'accion': accion
             }, 'post');
             break;
         }
         case "generar_documento": {
-            $.redirect('/bamboo_prePAP/documento_propuesta_poliza.php', {
+            $.redirect('/bamboo/documento_propuesta_poliza.php', {
                 'numero_propuesta': id,
                 'accion': accion
             }, 'post');
@@ -2459,7 +2459,7 @@ function botones(id, accion, base) {
             if (base == 'tarea' || base == 'tarea recurrente') {
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo_prePAP/backend/actividades/cierra_tarea.php",
+                    url: "/bamboo/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion: accion,
@@ -2481,14 +2481,14 @@ function botones(id, accion, base) {
             switch (motivo){
                 case "1":
                     //alert('Renovación vía propuesta WEB');
-                    $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+                    $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                         'numero_poliza': id,
                         'accion': 'modifica_poliza',
                         'accion_secundaria': 'renovar'
                     }, 'post');
                     break;
                 case "2":
-                    $.redirect('/bamboo_prePAP/creacion_propuesta_poliza.php', {
+                    $.redirect('/bamboo/creacion_propuesta_poliza.php', {
                         'numero_poliza': id,
                         'accion': 'actualiza_propuesta',
                         'accion_secundaria': 'renovar'
