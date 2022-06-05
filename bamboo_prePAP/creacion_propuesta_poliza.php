@@ -5,9 +5,9 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000004';
+//$_POST["numero_propuesta"]='P000764';
 //$_POST["numero_poliza"]='test poliza 14 may 1346';
 
 $poliza_renovada='';
@@ -339,6 +339,33 @@ function estandariza_info( $data ) {
       </div>
     </div>
   
+              <div  id="info_endoso" class="card" style="display:none" disabled>
+            <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
+                <h6 class="mb-0" style="color:#536656" onclick="window.scrollTo(0,0)"> Endosos
+               
+                </h6>
+            </div>
+        <div class="card-body" id="card-body-six">
+            <table class="display" id="listado_endosos" style="width:100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Número Endoso</th>
+                    <th>Nro Propuesta Endoso</th>
+                    <th>Tipo Endoso</th>
+                    <th>Fecha ingreso</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Fecha Prorroga</th>
+                </tr>
+                </thead>
+                        </table>
+         
+        </div>
+        
+      </div>
+      
+      <br>
 
     <div class="accordion" id="accordionExample">
       <div class="card">
@@ -406,6 +433,7 @@ function estandariza_info( $data ) {
                 <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
                 <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
                 <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
+                <option value="EUR" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "EUR") echo "selected" ?>>EUR</option>
               </select>
             
           </div>
@@ -851,31 +879,6 @@ function estandariza_info( $data ) {
     </div>
     <br>
     
-            <div  id="info_endoso" class="card" style="display:none" disabled>
-            <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
-                <h6 class="mb-0" style="color:#536656" onclick="window.scrollTo(0,0)"> Endosos
-               
-                </h6>
-            </div>
-        <div class="card-body" id="card-body-six">
-            <table class="display" id="listado_endosos" style="width:100%">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Número Endoso</th>
-                    <th>Nro Propuesta Endoso</th>
-                    <th>Tipo Endoso</th>
-                    <th>Fecha ingreso</th>
-                    <th>Inicio Vigencia</th>
-                    <th>Fin Vigencia</th>
-                    <th>Fecha Prorroga</th>
-                </tr>
-                </thead>
-                        </table>
-         
-        </div>
-        
-      </div>
       <br>
    
     <div id="auxiliar2" style="display: none;"></div>
@@ -1055,24 +1058,31 @@ function cambio_moneda() {
                 document.getElementById("moneda3["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda4["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda5["+i+"]").innerHTML = moneda;
+                document.getElementById("moneda8["+i+"]").innerHTML = moneda;
             }          
          }
 }
 
 function calculaprimabruta() {
     
+    console.log("entró a cálculo de prima");
     var contador = document.getElementById("contador").value;
+    
+    console.log("entró a cálculo de prima");
+    
      for (var i = 1; i <= contador; i++)
      {
          
     var primaafecta = document.getElementById("prima_afecta["+i+"]").value;
+    console.log("prima afecta item" +i+": " + primaafecta);
     var primaexenta = document.getElementById("prima_exenta["+i+"]").value;
+    console.log("prima exenta item" +i+": " + primaexenta);
     var primabruta;
     var primaneta;
-    primabruta = parseFloat(primaafecta.replace(",", "."), 10) * (1.19) + parseFloat(primaexenta.replace(",", "."))
-    primaneta = parseFloat(primaafecta.replace(",", "."), 10) + parseFloat(primaexenta.replace(",", "."))
-    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2).replace(".", ".")
-    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2).replace(".", ".")
+    primabruta = parseFloat(primaafecta, 10) * (1.19) + parseFloat(primaexenta);
+    primaneta = parseFloat(primaafecta, 10) + parseFloat(primaexenta);
+    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2);
+    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2);
     
      }
 }
@@ -1493,11 +1503,10 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
-                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
-                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
@@ -1522,6 +1531,7 @@ orgn = '<?php echo $camino; ?>';
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo3").style.display = "flex";
             document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("botones_edicion").style.display = "flex";
             
             document.getElementById("nro_poliza").required = true;
             
@@ -1589,11 +1599,9 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
-                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
-                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
@@ -1629,6 +1637,39 @@ orgn = '<?php echo $camino; ?>';
                      
                     orgn='crear_poliza_web';
                     
+                }
+                            var origen_2='<?php echo $accion_secundaria; ?>';
+                if (origen_2=='renovar'){
+                    document.getElementById("contenedor_nro_propuesta").style.display = "none";
+                    document.getElementById("titulo2").style.display = "none";
+                    document.getElementById("titulo6").style.display = "flex";
+                    document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
+                    document.getElementById("fechavenc").value = '';
+                    document.getElementById("edicion1").style.display = "none";
+                    if ('<?php echo $numero_endosos; ?>'!=='0'){
+                        document.getElementById("info_endoso").style.display = "flex";
+                    }
+
+                    orgn='crear_propuesta';
+                    
+                } 
+                else {
+                  var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+                  for (var i = 0; i < fields1.length; i++) {
+                      fields1[i].disabled = true;
+                  }
+                  var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+                  for (var i = 0; i < fields2.length; i++) {
+                      fields2[i].disabled = true;
+                  }
+                  var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+                  for (var i = 0; i < fields3.length; i++) {
+                      fields3[i].disabled = true;
+                  }
+                  var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+                  for (var i = 0; i < fields4.length; i++) {
+                      fields4[i].disabled = true;
+                  }
                 }
             //fin renovación póliza
             
@@ -2401,15 +2442,16 @@ function vencimientogarantia(){
                     '</div>'+
                 '</div></td>'+
             // fin deducible
-                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange= "dosdecimales(this.id);"  required>' +  
+                '<td><div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda8[' + iCnt + ']">UF</span></div>'+
+                    '<input type="number" onchange= "dosdecimales(this.id);"step="0.01" placeholder="0,00"  class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required></div></td>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id); calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number" onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
@@ -2479,15 +2521,16 @@ function vencimientogarantia(){
             // fin deducible
                 
                 
-                '<td><input type="number" onchange= "dosdecimales(this.id);" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda8[' + iCnt + ']">UF</span></div>'+
+                    '<input type="number" onchange= "dosdecimales(this.id);"step="0.01" placeholder="0,00"  class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required></div></td>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" ></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
