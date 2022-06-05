@@ -8,8 +8,8 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'editar_endoso';
-//$_POST["numero_poliza"]='685';
+//$_POST["accion"] = 'crea_propuesta_endoso';
+//$_POST["numero_poliza"]='872';
 //$_POST["numero_propuesta"]="E000004";
 $numero_propuesta='';
 $camino=$_POST["accion"];
@@ -553,12 +553,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado; ?>';
+            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $total_prima_exenta; ?>';
+            document.getElementById("prima_neta_exenta").value = '<?php echo $total_prima_exenta*1; ?>';
             document.getElementById("iva").value = '<?php echo $total_prima_afecta*0.19; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $total_prima_afecta; ?>';
-            document.getElementById("prima_total").value = '<?php echo $total_prima_bruta; ?>';
+            document.getElementById("prima_neta_afecta").value = '<?php echo $total_prima_afecta*1; ?>';
+            document.getElementById("prima_total").value = '<?php echo $total_prima_bruta*1; ?>';
             document.getElementById("titulo1").style.display = "flex";
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";
@@ -574,19 +574,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado; ?>';
+            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza_endoso; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta; ?>';
-            document.getElementById("iva").value = '<?php echo $iva; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta; ?>';
-            document.getElementById("prima_total").value = '<?php echo $prima_total; ?>';
+            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
+            document.getElementById("iva").value = '<?php echo $iva*1; ?>';
+            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
+            document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
             document.getElementById("motivo_endoso").value = '<?php echo $tipo_endoso; ?>';
             document.getElementById("fecha_ingreso").value = '<?php echo $fecha_ingreso; ?>';
             document.getElementById("descripcion_endoso").value = '<?php echo $descripcion_endoso; ?>';
             document.getElementById("dice").value = '<?php echo $dice; ?>';
             document.getElementById("debe_decir").value = '<?php echo $debe_decir; ?>';
-            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso; ?>';
-            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
+            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso*1; ?>';
+            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso*1; ?>';
             document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
             document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
             document.getElementById("titulo1").style.display = "none";
@@ -609,19 +609,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado; ?>';
+            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza_endoso; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta; ?>';
-            document.getElementById("iva").value = '<?php echo $iva; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta; ?>';
-            document.getElementById("prima_total").value = '<?php echo $prima_total; ?>';
+            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
+            document.getElementById("iva").value = '<?php echo $iva*1; ?>';
+            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
+            document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
             document.getElementById("motivo_endoso").value = '<?php echo $tipo_endoso; ?>';
             document.getElementById("fecha_ingreso").value = '<?php echo $fecha_ingreso; ?>';
             document.getElementById("descripcion_endoso").value = '<?php echo $descripcion_endoso; ?>';
             document.getElementById("dice").value = '<?php echo $dice; ?>';
             document.getElementById("debe_decir").value = '<?php echo $debe_decir; ?>';
-            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso; ?>';
-            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
+            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso*1; ?>';
+            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso*1; ?>';
             document.getElementById("nro_endoso").value = '<?php echo $numero_endoso; ?>';
             document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
             document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
@@ -643,20 +643,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado; ?>';
+            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza_endoso; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta; ?>';
-            document.getElementById("iva").value = '<?php echo $iva; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta; ?>';
-            document.getElementById("prima_total").value = '<?php echo $prima_total; ?>';
+            document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
+            document.getElementById("iva").value = '<?php echo $iva*1; ?>';
+            document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
+            document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
             document.getElementById("motivo_endoso").value = '<?php echo $tipo_endoso; ?>';
             document.getElementById("fecha_ingreso").value = '<?php echo $fecha_ingreso; ?>';
             document.getElementById("descripcion_endoso").value = '<?php echo $descripcion_endoso; ?>';
             document.getElementById("dice").value = '<?php echo $dice; ?>';
             document.getElementById("debe_decir").value = '<?php echo $debe_decir; ?>';
             document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
-            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso; ?>';
-            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso; ?>';
+            document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso*1; ?>';
+            document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso*1; ?>';
             document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
                 document.getElementById("titulo1").style.display = "none";
                 document.getElementById("titulo2").style.display = "flex";
@@ -686,10 +686,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
             let day = date.getDate()
             let month = date.getMonth() + 1
             let year = date.getFullYear()
+            
         if (month < 10) {
-            var fecha = `${year}-0${month}-${day}`
+            if (day < 10) {
+                var fecha = `${year}-0${month}-0${day}`}
+            else {
+                var fecha = `${year}-0${month}-${day}`
+            }
         } else {
-            var fecha = `${year}-${month}-${day}`
+            if (day < 10) {
+                var fecha = `${year}-${month}-0${day}`}
+            else {
+                var fecha = `${year}-${month}-${day}`
+            }
         }
             console.log(fecha);
             document.getElementById('fecha_ingreso').value = fecha;
