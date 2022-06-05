@@ -1340,10 +1340,8 @@ console.log(orgn)
             break;  
           }
           case 'actualiza_propuesta':{
-            const rut_aseg = <?php echo $rut_completo_aseg; ?>;
-            var validador = (rut_aseg).includes('<?php echo $rut_completo_prop; ?>');
-
-            if (validador == true) {
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            {
                 console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
@@ -1468,10 +1466,8 @@ console.log(orgn)
             break;
           }
           case 'crear_poliza':{
-            const rut_aseg = <?php echo $rut_completo_aseg; ?>;
-            var validador = (rut_aseg).includes('<?php echo $rut_completo_prop; ?>');
-            
-            if (validador == true) {
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
@@ -1554,10 +1550,9 @@ console.log(orgn)
             break;
           }
           case 'modifica_poliza':{
-            const rut_aseg = <?php echo $rut_completo_aseg; ?>;
-            var validador = (rut_aseg).includes('<?php echo $rut_completo_prop; ?>');
 
-            if (validador == true) 
+            
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
