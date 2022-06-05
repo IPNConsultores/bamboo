@@ -5,10 +5,10 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000005';
-//$_POST["numero_poliza"]='test poliza 14 may 1346';
+//$_POST["numero_poliza"]='test final';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -1065,18 +1065,18 @@ function cambio_moneda() {
 
 function calculaprimabruta() {
     
-    console.log("entró a cálculo de prima");
+    //console.log("entró a cálculo de prima");
     var contador = document.getElementById("contador").value;
     
-    console.log("entró a cálculo de prima");
+    //console.log("entró a cálculo de prima");
     
      for (var i = 1; i <= contador; i++)
      {
          
     var primaafecta = document.getElementById("prima_afecta["+i+"]").value;
-    console.log("prima afecta item" +i+": " + primaafecta);
+    //console.log("prima afecta item" +i+": " + primaafecta);
     var primaexenta = document.getElementById("prima_exenta["+i+"]").value;
-    console.log("prima exenta item" +i+": " + primaexenta);
+    //console.log("prima exenta item" +i+": " + primaexenta);
     var primabruta;
     var primaneta;
     primabruta = parseFloat(primaafecta, 10) * (1.19) + parseFloat(primaexenta);
@@ -1319,6 +1319,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var bPreguntar = true;
     
 orgn = '<?php echo $camino; ?>';
+console.log(orgn)
 
         switch (orgn) 
         {
@@ -1409,6 +1410,7 @@ orgn = '<?php echo $camino; ?>';
             //inicio renovación póliza
 
             var origen_2='<?php echo $accion_secundaria; ?>';
+            console.log(origen_2)
                 if (origen_2=='renovar'){
                     document.getElementById("contenedor_nro_propuesta").style.display = "none";
                     document.getElementById("titulo2").style.display = "none";
@@ -1603,11 +1605,11 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
-                    ocument.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
-                      ocument.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
+                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
@@ -1619,9 +1621,11 @@ orgn = '<?php echo $camino; ?>';
             //inicio renovación póliza
             
                 var origen_2='<?php echo $accion_secundaria; ?>';
+                console.log(origen_2)
                 if (origen_2=='renovar'){
                     document.getElementById("contenedor_nro_propuesta").style.display = "inline";
                     document.getElementById("titulo3").style.display = "none";
+                    document.getElementById("titulo6").style.display = "none";
                     document.getElementById("titulo5").style.display = "flex";
                     document.getElementById("informacion_poliza").style.display = "flex";
                     document.getElementById("nro_poliza").required = true;
@@ -1644,21 +1648,7 @@ orgn = '<?php echo $camino; ?>';
                     orgn='crear_poliza_web';
                     
                 }
-                            var origen_2='<?php echo $accion_secundaria; ?>';
-                if (origen_2=='renovar'){
-                    document.getElementById("contenedor_nro_propuesta").style.display = "none";
-                    document.getElementById("titulo2").style.display = "none";
-                    document.getElementById("titulo6").style.display = "flex";
-                    document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
-                    document.getElementById("fechavenc").value = '';
-                    document.getElementById("edicion1").style.display = "none";
-                    if ('<?php echo $numero_endosos; ?>'!=='0'){
-                        document.getElementById("info_endoso").style.display = "flex";
-                    }
-
-                    orgn='crear_propuesta';
-                    
-                } 
+                
                 else {
                   var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
                   for (var i = 0; i < fields1.length; i++) {
@@ -1838,7 +1828,7 @@ orgn = '<?php echo $camino; ?>';
           contador2="1";
           
           var items ='<?php echo $nro_items; ?>'
-          console.log("contador 2 total:"+'<?php echo $nro_items; ?>');
+          //console.log("contador 2 total:"+'< ?php echo $nro_items; ?>');
           
            while (contador2<=items){
                
@@ -1883,8 +1873,8 @@ function dosdecimales(id){
    
     
     valor= document.getElementById(id).value;
-    console.log(id);
-    console.log(valor);
+    //console.log(id);
+    //console.log(valor);
     
     
     
@@ -1898,8 +1888,8 @@ function sindecimales(id){
    
     
     valor= document.getElementById(id).value;
-    console.log(id);
-    console.log(valor);
+    //console.log(id);
+    //console.log(valor);
     
     
     
