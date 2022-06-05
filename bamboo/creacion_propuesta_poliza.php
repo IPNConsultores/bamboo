@@ -1336,6 +1336,11 @@ console.log(orgn)
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            else{
+
+              document.getElementById("radio2_si").checked = false;
+                document.getElementById("radio2_no").checked = true;
+            }
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "flex";
@@ -1453,6 +1458,11 @@ console.log(orgn)
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
+            }
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "flex";
@@ -1529,6 +1539,12 @@ console.log(orgn)
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
+            }
+
             if ('<?php echo $numero_endosos; ?>'!=='0'){
                 document.getElementById("info_endoso").style.display = "flex";
             }
@@ -1690,6 +1706,11 @@ console.log(orgn)
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
+            }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
             }
             if ('<?php echo $numero_endosos; ?>'!=='0'){
                 document.getElementById("info_endoso").style.display = "flex";
