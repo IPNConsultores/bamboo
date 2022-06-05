@@ -1047,7 +1047,7 @@ $(document).ready(function() {
     //inicio propuestas
     var table_propuesta_poliza = $('#listado_propuesta_polizas').DataTable({
         "ajax": "/bambooQA/backend/propuesta_polizas/busqueda_listado_propuesta_polizas.php",
-        
+        "scrollX": true,
         "initComplete": function(settings, json) {
             document.getElementById("propuestas").innerHTML = "Prop. Póliza (" + $(
                 '#listado_propuesta_polizas').DataTable().page.info().recordsDisplay + ")";
