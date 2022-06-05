@@ -1333,20 +1333,6 @@ console.log(orgn)
         switch (orgn) 
         {
           case 'aceptar_poliza': {
-            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
-            console.log(validador);
-
-            if (validador=true) 
-            {
-                console.log("iguales");
-                document.getElementById("radio2_si").checked = true;
-                document.getElementById("radio2_no").checked = false;
-            }
-            else{
-              console.log("diferentes");
-                document.getElementById("radio2_si").checked = false;
-                document.getElementById("radio2_no").checked = true;
-            }
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("informacion_poliza").disabled = false;
             document.getElementById("nro_poliza").required = true;
@@ -1354,10 +1340,7 @@ console.log(orgn)
             break;  
           }
           case 'actualiza_propuesta':{
-            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
-            console.log(validador);
-
-            if (validador=true) 
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
             {
                 console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
@@ -1483,20 +1466,8 @@ console.log(orgn)
             break;
           }
           case 'crear_poliza':{
-            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
-            console.log(validador);
-
-            if (validador=true) 
+            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
             {
-                console.log("iguales");
-                document.getElementById("radio2_si").checked = true;
-                document.getElementById("radio2_no").checked = false;
-            }
-            else{
-              console.log("diferentes");
-                document.getElementById("radio2_si").checked = false;
-                document.getElementById("radio2_no").checked = true;
-            }
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
