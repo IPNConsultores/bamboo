@@ -18,7 +18,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $fechavenc=estandariza_info($_POST["fechavenc"]);
   $moneda_poliza=estandariza_info($_POST["moneda_poliza"]);
   $selcompania=estandariza_info($_POST["selcompania"]);
-  $ramo=estandariza_info($_POST["ramo"]);
+  $ramo=estandariza_info(html_entity_decode($_POST["ramo"]));
   $comentarios_ext=estandariza_info($_POST["comentarios_ext"]);
   $comentarios_int=estandariza_info($_POST["comentarios_int"]);
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
