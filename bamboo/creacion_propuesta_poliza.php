@@ -737,8 +737,8 @@ function estandariza_info( $data ) {
                   <th>Tasa Exenta</th>
                   <th>Prima Afecta</th>
                   <th>Prima Exenta</th>
-                  <th>Prima Neta</th>
                   <th>Prima Bruta</th>
+                  <th>Prima Neta</th>
                   <th id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
