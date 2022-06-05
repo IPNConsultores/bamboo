@@ -1394,6 +1394,7 @@ console.log(orgn)
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 valida_rut_duplicado_aseg(contador.toString());
+                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1517,6 +1518,7 @@ console.log(orgn)
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 valida_rut_duplicado_aseg(contador.toString());
+                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1623,6 +1625,7 @@ console.log(orgn)
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 valida_rut_duplicado_aseg(contador.toString());
+                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1784,6 +1787,7 @@ console.log(orgn)
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 valida_rut_duplicado_aseg(contador.toString());
+                console.log(document.getElementById("nombre_seg[" + contador.toString() + "]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
