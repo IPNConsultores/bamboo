@@ -12,7 +12,7 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num=0;
  $busqueda=$busqueda_err=$data=$id_tarea='';
  $rut=$nombre=$telefono=$correo=$lista='';

@@ -10,7 +10,7 @@ if ( !isset( $_SESSION ) ) {
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
       $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {

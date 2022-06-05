@@ -8,7 +8,7 @@ $resultado =$codigo=$conta='';
 require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
     $sql = "SELECT a.numero_poliza, estado, DATE_FORMAT(vigencia_final,'%m-%Y') as anomes_final, DATE_FORMAT(vigencia_inicial,'%m-%Y')  as anomes_inicial, moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final,  CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) as nom_clienteP, CONCAT_WS('-',b.rut_sin_dv, b.dv) as rut_clienteP,b.telefono as telefonoP, b.correo as correoP, a.id as id_poliza, b.id as idP, fecha_envio_propuesta, b.grupo, b.referido, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_afecta), 2, 'de_DE')) as total_prima_afecta,  CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_exenta), 2, 'de_DE')) as total_prima_exenta, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_neta), 2, 'de_DE')) as total_prima_neta, CONCAT_WS(' ',a.moneda_poliza,FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE')) as total_prima_bruta  FROM polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv and b.rut_sin_dv is not null left join items as c on a.numero_poliza=c.numero_poliza where a.estado not in ('Rechazado', 'Anulado', 'Cancelado')
 group by a.numero_poliza, estado, DATE_FORMAT(vigencia_final,'%m-%Y') , DATE_FORMAT(vigencia_inicial,'%m-%Y') , moneda_poliza, compania, ramo,  vigencia_inicial, vigencia_final,   CONCAT_WS(' ',b.nombre_cliente,  b.apellido_paterno, ' ', b.apellido_materno) , CONCAT_WS('-',b.rut_sin_dv, b.dv) ,b.telefono , b.correo , a.id , b.id , fecha_envio_propuesta, b.grupo, b.referido  ";
   

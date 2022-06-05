@@ -5,7 +5,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 mysqli_query($link, "SET @rownum=0;");
 $query= "select @rownum := @rownum + 1 AS fila, a.estado, a.numero_propuesta, b.numero_item, a.tipo_propuesta, a.fecha_propuesta, a.fecha_envio_propuesta, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, a.compania, a.vigencia_inicial, a.vigencia_final, a.ramo, a.moneda_poliza, a.vendedor, a.forma_pago, a.moneda_valor_cuota, a.valor_cuota, a.fecha_primera_cuota, a.nro_cuotas, a.comentarios_int, a.comentarios_ext, CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) as rut_asegurado, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.deducible, CONCAT(FORMAT(b.tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta, CONCAT(FORMAT(b.tasa_exenta, 2, 'de_DE'),'%') as tasa_exenta, 
 CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_afecta, 2, 'de_DE')) as prima_afecta, 
