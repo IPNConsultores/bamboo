@@ -1110,7 +1110,7 @@ function cambia_deducible() {
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
             document.getElementById('moneda[' + i + ']').style.display="none";
-            if (orgn ="crear_propuesta"){
+            if (orgn =="crear_propuesta"){
               console.log("entrar a Varios en cambia deducible");
             document.getElementById("deducible_defecto["+i+"]").value="Varios"; 
             }
@@ -1123,7 +1123,7 @@ function cambia_deducible() {
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
              document.getElementById('moneda[' + i + ']').style.display="none";
-             if (orgn ="crear_propuesta"){
+             if (orgn =="crear_propuesta"){
               console.log("entrar a No Aplica en cambia deducible");
              document.getElementById("deducible_defecto["+i+"]").value="No Aplica";
              }
