@@ -1661,7 +1661,7 @@ console.log(orgn)
                 console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                console.log(nombre_aseg[(contador).toString()]);
+                console.log(nombre_aseg[0]);
                 document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
