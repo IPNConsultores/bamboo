@@ -1596,7 +1596,9 @@ console.log(orgn)
               document.getElementById("radio2_no").checked = true;
             }
 
-            if ('<?php echo $numero_endosos; ?>'!=='0'){
+            var endosos = '<?php echo $numero_endosos; ?>';
+            console.log(endosos);
+            if (endosos!=='0'){
                 document.getElementById("info_endoso").style.display = "flex";
             }
             
