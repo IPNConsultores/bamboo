@@ -157,7 +157,7 @@ $poliza_renovada='';
                 }else{
                     $deducible[] = $row_item->deducible;  
                 }
-                $deducible[] = $row_item->deducible;
+                
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
                 $prima_afecta[] = $row_item->prima_afecta;
