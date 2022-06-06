@@ -5,7 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
 //$_POST["numero_poliza"]='test final';
@@ -99,13 +99,14 @@ $poliza_renovada='';
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
-      $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza where a.numero_poliza='".$_POST["numero_poliza"]."'";
+      $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $nombre_cliente = $row->nombre_cliente;
         $selcompania = $row->compania;
         $ramo = $row->ramo;
         $fechainicio = $row->vigencia_inicial;
@@ -134,7 +135,7 @@ $poliza_renovada='';
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_poliza='".$_POST["numero_poliza"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado,b.nombre_cliente, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_poliza='".$_POST["numero_poliza"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -142,6 +143,7 @@ $poliza_renovada='';
                 $rut_aseg = $row_item->rut_asegurado;
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $nombre_asegurado[]=$row_item->nombre_cliente;
                 $cobertura[] = $row_item->cobertura;
                 $materia_i = $row_item->materia_asegurada;
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
