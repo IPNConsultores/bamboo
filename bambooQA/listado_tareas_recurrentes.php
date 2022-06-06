@@ -11,6 +11,8 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num=0;
  $busqueda=$busqueda_err=$data=$id_tarea='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -520,7 +522,7 @@ function botones(id, accion, base) {
             if (base == 'tarea recurrente') {
                 $.ajax({
                     type: "POST",
-                    url: "/bamboo/backend/actividades/cierra_tarea.php",
+                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:accion,

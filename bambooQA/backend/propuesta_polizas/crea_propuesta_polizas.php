@@ -18,7 +18,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   $fechavenc=estandariza_info($_POST["fechavenc"]);
   $moneda_poliza=estandariza_info($_POST["moneda_poliza"]);
   $selcompania=estandariza_info($_POST["selcompania"]);
-  $ramo=estandariza_info($_POST["ramo"]);
+  $ramo=addslashes($_POST["ramo"]);
   $comentarios_ext=estandariza_info($_POST["comentarios_ext"]);
   $comentarios_int=estandariza_info($_POST["comentarios_int"]);
   $vendedor=estandariza_info($_POST["nombre_vendedor"]);
@@ -54,7 +54,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 //echo "Acción: ->".$_POST["accion"]."<-<br>";
 switch ($_POST["accion"]) {
   case 'eliminar_poliza':
@@ -207,7 +207,7 @@ switch ($_POST["accion"]) {
   
     $busqueda=estandariza_info($_POST["nro_poliza"]);
         //poliza
-        $mensaje='Póliza actualizada correctamente';
+        $mensaje='Póliza creada correctamente';
         $listado='/bambooQA/listado_polizas.php';
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);

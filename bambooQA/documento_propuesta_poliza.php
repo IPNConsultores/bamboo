@@ -4,13 +4,13 @@ if ( !isset( $_SESSION ) ) {
 }
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P000760';
+//$_POST["numero_propuesta"]='P000021';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
       $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -45,7 +45,7 @@ if ( !isset( $_SESSION ) ) {
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_exenta, 2, 'de_DE')) as prima_exenta, prima_neta, CONCAT_WS(' ',FORMAT(prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, monto_asegurado,venc_gtia, CONCAT_WS(' ',FORMAT(prima_afecta*0.19, 2, 'de_DE')) as prima_afecta_iva FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_exenta, 2, 'de_DE')) as prima_exenta, prima_neta, CONCAT_WS(' ',FORMAT(prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, CONCAT_WS(' ',FORMAT(monto_asegurado, 2, 'de_DE')) as monto_asegurado,venc_gtia, CONCAT_WS(' ',FORMAT(prima_afecta*0.19, 2, 'de_DE')) as prima_afecta_iva FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -53,11 +53,11 @@ if ( !isset( $_SESSION ) ) {
                 $rut_aseg = $row_item->rut_asegurado;
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
-                $nombre_proponente_asegurado[] = $row->nombre_cliente;
-                $telefono_asegurado[] = $row->telefono;
-                $correo_asegurado[] = $row->correo;
-                $direccion_personal_asegurado[] = $row->direccion_personal;
-                $direccion_laboral_asegurado[] = $row->direccion_laboral;
+                $nombre_proponente_asegurado[] = $row_item->nombre_cliente;
+                $telefono_asegurado[] = $row_item->telefono;
+                $correo_asegurado[] = $row_item->correo;
+                $direccion_personal_asegurado[] = $row_item->direccion_personal;
+                $direccion_laboral_asegurado[] = $row_item->direccion_laboral;
                 $cobertura[] = $row_item->cobertura;
                 $materia_i = $row_item->materia_asegurada;
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
@@ -328,7 +328,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Neta Afecta:</label> 
+                        <label>Prima Neta Total Afecta:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PN"></label>
@@ -344,7 +344,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Neta Exenta:</label> 
+                        <label>Prima Neta Total Exenta:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PE"></label>
@@ -390,7 +390,7 @@ if ( !isset( $_SESSION ) ) {
                 </div>
                 <div class= "row align-items-center">
                     <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Prima Vigencia con IVA:</label> 
+                        <label>Prima Bruta Total Periodo Vigencia:</label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
                         <label id="moneda_poliza_PT">$</label>
@@ -835,7 +835,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
                     '</div>'+
                     '<div class= "row align-items-center">'+
                         '<div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;" >'+
-                            '<label>Prima bruta del periodo vigencia:</label> '+
+                            '<label>Prima Bruta del Periodo Vigencia:</label> '+
                         '</div>'+
                         '<div class="col-1" style="text-align:right" contenteditable="true">'+       
                             '<label id="moneda_prima_iva[' + i + ']"></label>'+

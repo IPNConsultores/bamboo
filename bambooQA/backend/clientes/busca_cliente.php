@@ -8,7 +8,7 @@ $busqueda=estandariza_info($_POST["buscacliente"]);
 $numero=$trozos=0;
 mysqli_set_charset( $link, 'utf8');
 
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 if ($busqueda<>''){
   //CUENTA EL NUMERO DE PALABRAS
   $trozos=explode(" ",$busqueda);

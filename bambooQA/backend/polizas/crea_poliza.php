@@ -5,6 +5,7 @@
     } 
 
 require_once "/home/gestio10/public_html/backend/config.php";
+
 $rut_completo_prop = str_replace("-", "", estandariza_info($_POST["rutprop"]));
 $rut_completo_aseg = str_replace("-", "", estandariza_info($_POST["rutaseg"]));
  $rut_prop=estandariza_info(substr($rut_completo_prop, 0, strlen($rut_completo_prop)-1));
@@ -53,7 +54,7 @@ $item=estandariza_info($_POST["item"]);
 
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 if ($id_poliza_renovada!=='')
 {
   mysqli_query($link, "update polizas_2 set tipo_poliza='Renovada' where id=".$id_poliza_renovada);

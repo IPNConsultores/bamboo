@@ -7,8 +7,8 @@ $camino='crear_propuesta';
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000764';
-//$_POST["numero_poliza"]='test poliza 14 may 1346';
+//$_POST["numero_propuesta"]='P000025';
+//$_POST["numero_poliza"]='test final';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -22,19 +22,20 @@ $poliza_renovada='';
 
       }    
       else{
-        $query = "select numero_propuesta, id, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas where numero_propuesta='".$_POST["numero_propuesta"]."'";
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query = "select numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,b.nombre_cliente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado, b.nombre_cliente , materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $nombre_cliente = $row->nombre_cliente;
         $selcompania = $row->compania;
         $ramo = $row->ramo;
         $fechainicio = $row->vigencia_inicial;
@@ -62,6 +63,7 @@ $poliza_renovada='';
                 $rut_aseg = $row_item->rut_asegurado;
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $nombre_asegurado[]=$row_item->nombre_cliente;
                 $cobertura[] = $row_item->cobertura;
                 $materia_i = $row_item->materia_asegurada;
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
@@ -96,14 +98,15 @@ $poliza_renovada='';
         }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_QA' );
-      $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza where a.numero_poliza='".$_POST["numero_poliza"]."'";
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+      $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $nombre_cliente = $row->nombre_cliente;
         $selcompania = $row->compania;
         $ramo = $row->ramo;
         $fechainicio = $row->vigencia_inicial;
@@ -132,7 +135,7 @@ $poliza_renovada='';
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_poliza='".$_POST["numero_poliza"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado,b.nombre_cliente, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_poliza='".$_POST["numero_poliza"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -140,6 +143,7 @@ $poliza_renovada='';
                 $rut_aseg = $row_item->rut_asegurado;
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
+                $nombre_asegurado[]=$row_item->nombre_cliente;
                 $cobertura[] = $row_item->cobertura;
                 $materia_i = $row_item->materia_asegurada;
                 $materia[] = str_replace( "\r\n", "\\n", $materia_i );
@@ -153,7 +157,7 @@ $poliza_renovada='';
                 }else{
                     $deducible[] = $row_item->deducible;  
                 }
-                $deducible[] = $row_item->deducible;
+                
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
                 $prima_afecta[] = $row_item->prima_afecta;
@@ -339,6 +343,33 @@ function estandariza_info( $data ) {
       </div>
     </div>
   
+              <div  id="info_endoso" class="card" style="display:none" disabled>
+            <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
+                <h6 class="mb-0" style="color:#536656" onclick="window.scrollTo(0,0)"> Endosos
+               
+                </h6>
+            </div>
+        <div class="card-body" id="card-body-six">
+            <table class="display" id="listado_endosos" style="width:100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Número Endoso</th>
+                    <th>Nro Propuesta Endoso</th>
+                    <th>Tipo Endoso</th>
+                    <th>Fecha ingreso</th>
+                    <th>Inicio Vigencia</th>
+                    <th>Fin Vigencia</th>
+                    <th>Fecha Prorroga</th>
+                </tr>
+                </thead>
+                        </table>
+         
+        </div>
+        
+      </div>
+      
+      <br>
 
     <div class="accordion" id="accordionExample">
       <div class="card">
@@ -406,6 +437,7 @@ function estandariza_info( $data ) {
                 <option value="UF" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "UF") echo "selected" ?>>UF</option>
                 <option value="USD" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "USD") echo "selected" ?>>USD</option>
                 <option value="CLP" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "CLP") echo "selected" ?>>CLP</option>
+                <option value="EUR" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_poliza == "EUR") echo "selected" ?>>EUR</option>
               </select>
             
           </div>
@@ -709,8 +741,8 @@ function estandariza_info( $data ) {
                   <th>Tasa Exenta</th>
                   <th>Prima Afecta</th>
                   <th>Prima Exenta</th>
-                  <th>Prima Neta</th>
                   <th>Prima Bruta</th>
+                  <th>Prima Neta</th>
                   <th id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
@@ -750,8 +782,7 @@ function estandariza_info( $data ) {
            <label for="comentario_externo"><b>Comentarios Externos</b></label>
           <br>
           <textarea class="form-control" rows="2" style="height:100px" id='comentarios_ext' name='comentario'
-                              style="text-indent:0px" ;>
-          </textarea>
+                              style="text-indent:0px" ;></textarea>
         
         </div>
       </div>
@@ -851,31 +882,6 @@ function estandariza_info( $data ) {
     </div>
     <br>
     
-            <div  id="info_endoso" class="card" style="display:none" disabled>
-            <div class="card-header" id="headingsix" style="background-color:#A5CCAB">
-                <h6 class="mb-0" style="color:#536656" onclick="window.scrollTo(0,0)"> Endosos
-               
-                </h6>
-            </div>
-        <div class="card-body" id="card-body-six">
-            <table class="display" id="listado_endosos" style="width:100%">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Número Endoso</th>
-                    <th>Nro Propuesta Endoso</th>
-                    <th>Tipo Endoso</th>
-                    <th>Fecha ingreso</th>
-                    <th>Inicio Vigencia</th>
-                    <th>Fin Vigencia</th>
-                    <th>Fecha Prorroga</th>
-                </tr>
-                </thead>
-                        </table>
-         
-        </div>
-        
-      </div>
       <br>
    
     <div id="auxiliar2" style="display: none;"></div>
@@ -936,12 +942,14 @@ function valida_rut_duplicado_prop() {
             if (response.resultado == 'antiguo') {
                 document.getElementById("nombre_prop").value = response.nombre;
                 var contador =  document.getElementById("contador").value;
+ /*
                  for (var i = 1; i <= contador; i++){
                      
                     document.getElementById("nombre_seg[" + i + "]").value =response.nombre;
-                        
+                    //console.log(document.getElementById("nombre_seg[" + i + "]").value);
                      
                  }
+                */
             
                 
             }
@@ -963,10 +971,12 @@ function valida_rut_duplicado_aseg(item) {
         success: function(response) {
             if (response.resultado == 'antiguo') {
                 document.getElementById("nombre_seg[" + item + "]").value = response.nombre;
+                //console.log(document.getElementById("nombre_seg[" + item + "]").value);
 
             }
         }
     });
+    
 }
 function checkRadio(name) {
     if (name == "nueva") {
@@ -1055,24 +1065,31 @@ function cambio_moneda() {
                 document.getElementById("moneda3["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda4["+i+"]").innerHTML = moneda;
                 document.getElementById("moneda5["+i+"]").innerHTML = moneda;
+                document.getElementById("moneda8["+i+"]").innerHTML = moneda;
             }          
          }
 }
 
 function calculaprimabruta() {
     
+    //console.log("entró a cálculo de prima");
     var contador = document.getElementById("contador").value;
+    
+    //console.log("entró a cálculo de prima");
+    
      for (var i = 1; i <= contador; i++)
      {
          
     var primaafecta = document.getElementById("prima_afecta["+i+"]").value;
+    //console.log("prima afecta item" +i+": " + primaafecta);
     var primaexenta = document.getElementById("prima_exenta["+i+"]").value;
+    //console.log("prima exenta item" +i+": " + primaexenta);
     var primabruta;
     var primaneta;
-    primabruta = parseFloat(primaafecta.replace(",", "."), 10) * (1.19) + parseFloat(primaexenta.replace(",", "."))
-    primaneta = parseFloat(primaafecta.replace(",", "."), 10) + parseFloat(primaexenta.replace(",", "."))
-    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2).replace(".", ".")
-    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2).replace(".", ".")
+    primabruta = parseFloat(primaafecta, 10) * (1.19) + parseFloat(primaexenta);
+    primaneta = parseFloat(primaafecta, 10) + parseFloat(primaexenta);
+    document.getElementById("prima_bruta["+i+"]").value = primabruta.toFixed(2);
+    document.getElementById("prima_neta["+i+"]").value = primaneta.toFixed(2);
     
      }
 }
@@ -1081,6 +1098,9 @@ function calculaprimabruta() {
 function cambia_deducible() {
     var ramo = document.getElementById("ramo").value;
     var contador = document.getElementById("contador").value;
+    var orgn = '<?php echo $camino; ?>';
+
+    
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
         ramo == "VEH - Vehículos Pesados") {
         for (var i = 1; i <= contador; i++){
@@ -1092,11 +1112,15 @@ function cambia_deducible() {
         "INC - Hogar" || ramo == "INC - Misceláneos" || ramo == "INC - Perjuicio por Paralización" || ramo ==
         "INC - Pyme" || ramo == "INC - TRBF (Todo Riesgo Bienes Físicos)") {
         for (var i = 1; i <= contador; i++){
+          
             document.getElementById('deducible_para_otros[' +i+ ']').style.display="flex";
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
             document.getElementById('moneda[' + i + ']').style.display="none";
+            if (orgn =="crear_propuesta" || orgn =="crear_poliza_web" ){
+              console.log("entrar a Varios en cambia deducible");
             document.getElementById("deducible_defecto["+i+"]").value="Varios"; 
+            }
         }
     } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo == "Garantía" || ramo ==
         "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" || ramo == "ASISTENCIA EN VIAJE" || ramo ==
@@ -1106,7 +1130,10 @@ function cambia_deducible() {
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="none";
              document.getElementById('moneda[' + i + ']').style.display="none";
+             if (orgn =="crear_propuesta" || orgn =="crear_poliza_web" ){
+              console.log("entrar a No Aplica en cambia deducible");
              document.getElementById("deducible_defecto["+i+"]").value="No Aplica";
+             }
          }
     } else if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
          for (var i = 1; i <= contador; i++){
@@ -1124,7 +1151,7 @@ function pobladeducible(){
      var espacio = document.createTextNode('&nbsp')
      if (ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General") {
         for (var i = 1; i <= contador; i++){
-              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de" + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
+              document.getElementById('deducible_defecto[' +i+ ']').value = document.getElementById('deducible_porcentaje['+i+']').value + "% de la Pérdida con mínimo de " + document.getElementById('moneda7['+i+']').innerHTML + " " + document.getElementById('deducible_valor['+i+']').value;
         }
      }
     if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" ||
@@ -1309,10 +1336,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var bPreguntar = true;
     
 orgn = '<?php echo $camino; ?>';
+console.log(orgn)
 
         switch (orgn) 
         {
           case 'aceptar_poliza': {
+            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
+            console.log(validador);
+
+            if (validador==true) 
+            {
+                console.log("iguales");
+                document.getElementById("radio2_si").checked = true;
+                document.getElementById("radio2_no").checked = false;
+            }
+            else{
+              console.log("diferentes");
+                document.getElementById("radio2_si").checked = false;
+                document.getElementById("radio2_no").checked = true;
+            }
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("informacion_poliza").disabled = false;
             document.getElementById("nro_poliza").required = true;
@@ -1320,10 +1362,20 @@ orgn = '<?php echo $camino; ?>';
             break;  
           }
           case 'actualiza_propuesta':{
-            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+
+            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
+            console.log(validador);
+
+            if (validador==true) 
             {
+                console.log("iguales");
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
+            }
+            else{
+              console.log("diferentes");
+                document.getElementById("radio2_si").checked = false;
+                document.getElementById("radio2_no").checked = true;
             }
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
@@ -1332,7 +1384,8 @@ orgn = '<?php echo $camino; ?>';
            
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
+
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1347,6 +1400,7 @@ orgn = '<?php echo $camino; ?>';
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1366,6 +1420,9 @@ orgn = '<?php echo $camino; ?>';
             while (contador<='<?php echo $nro_items; ?>'){
                 console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
+                document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
+                console.log(nombre_aseg[(contador-1).toString()] + " valor en form:" + document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1382,14 +1439,18 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    pobladeducible();
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 }
+                //console.log(document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 contador+=1;
             }
  
@@ -1397,6 +1458,7 @@ orgn = '<?php echo $camino; ?>';
             //inicio renovación póliza
 
             var origen_2='<?php echo $accion_secundaria; ?>';
+            console.log(origen_2)
                 if (origen_2=='renovar'){
                     document.getElementById("contenedor_nro_propuesta").style.display = "none";
                     document.getElementById("titulo2").style.display = "none";
@@ -1428,15 +1490,25 @@ orgn = '<?php echo $camino; ?>';
                       fields4[i].disabled = true;
                   }
                 }
+                
             //fin renovación póliza
 
             break;
           }
           case 'crear_poliza':{
-            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+
+            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
+            console.log(validador);
+
+            if (validador==true) 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
+            }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
             }
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
@@ -1446,7 +1518,7 @@ orgn = '<?php echo $camino; ?>';
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1461,6 +1533,7 @@ orgn = '<?php echo $camino; ?>';
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1477,7 +1550,10 @@ orgn = '<?php echo $camino; ?>';
             var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
             var ramo='<?php echo $ramo; ?>';
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
+                document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1493,10 +1569,12 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
                     
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
@@ -1507,11 +1585,21 @@ orgn = '<?php echo $camino; ?>';
             break;
           }
           case 'modifica_poliza':{
-            if ('<?php echo $rut_completo_prop; ?>' == '<?php echo $rut_completo_aseg; ?>') 
+            
+            var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
+            console.log(validador);
+
+            if (validador==true) 
             {
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
+            }
+
             if ('<?php echo $numero_endosos; ?>'!=='0'){
                 document.getElementById("info_endoso").style.display = "flex";
             }
@@ -1521,12 +1609,13 @@ orgn = '<?php echo $camino; ?>';
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo3").style.display = "flex";
             document.getElementById("informacion_poliza").style.display = "flex";
+            document.getElementById("botones_edicion").style.display = "flex";
             
             document.getElementById("nro_poliza").required = true;
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1555,6 +1644,7 @@ orgn = '<?php echo $camino; ?>';
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1572,7 +1662,11 @@ orgn = '<?php echo $camino; ?>';
             var ramo='<?php echo $ramo; ?>';
 
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
+                document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
+                console.log(nombre_aseg);
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1588,12 +1682,17 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    pobladeducible();
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
+                  console.log(deducible);
+                  console.log(deducible[(contador-1).toString()])
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 }
                 contador+=1;
@@ -1602,9 +1701,11 @@ orgn = '<?php echo $camino; ?>';
             //inicio renovación póliza
             
                 var origen_2='<?php echo $accion_secundaria; ?>';
+                console.log(origen_2)
                 if (origen_2=='renovar'){
                     document.getElementById("contenedor_nro_propuesta").style.display = "inline";
                     document.getElementById("titulo3").style.display = "none";
+                    document.getElementById("titulo6").style.display = "none";
                     document.getElementById("titulo5").style.display = "flex";
                     document.getElementById("informacion_poliza").style.display = "flex";
                     document.getElementById("nro_poliza").required = true;
@@ -1626,6 +1727,25 @@ orgn = '<?php echo $camino; ?>';
                      
                     orgn='crear_poliza_web';
                     
+                }
+                
+                else {
+                  var fields1 = document.getElementById("card-body-one").getElementsByTagName('*');
+                  for (var i = 0; i < fields1.length; i++) {
+                      fields1[i].disabled = true;
+                  }
+                  var fields2 = document.getElementById("card-body-two").getElementsByTagName('*');
+                  for (var i = 0; i < fields2.length; i++) {
+                      fields2[i].disabled = true;
+                  }
+                  var fields3 = document.getElementById("card-body-three").getElementsByTagName('*');
+                  for (var i = 0; i < fields3.length; i++) {
+                      fields3[i].disabled = true;
+                  }
+                  var fields4 = document.getElementById("card-body-four").getElementsByTagName('*');
+                  for (var i = 0; i < fields4.length; i++) {
+                      fields4[i].disabled = true;
+                  }
                 }
             //fin renovación póliza
             
@@ -1650,6 +1770,11 @@ orgn = '<?php echo $camino; ?>';
                 document.getElementById("radio2_si").checked = true;
                 document.getElementById("radio2_no").checked = false;
             }
+            else
+            {
+              document.getElementById("radio2_si").checked = false;
+              document.getElementById("radio2_no").checked = true;
+            }
             if ('<?php echo $numero_endosos; ?>'!=='0'){
                 document.getElementById("info_endoso").style.display = "flex";
             }
@@ -1657,7 +1782,7 @@ orgn = '<?php echo $camino; ?>';
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1686,6 +1811,7 @@ orgn = '<?php echo $camino; ?>';
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
             var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
+            var nombre_aseg=<?php echo json_encode($nombre_asegurado); ?>;
             var cobertura=<?php echo json_encode($cobertura); ?>;
             var materia=<?php echo json_encode($materia); ?>;
             var detalle_materia=<?php echo json_encode($detalle_materia); ?>;
@@ -1703,7 +1829,10 @@ orgn = '<?php echo $camino; ?>';
             var ramo='<?php echo $ramo; ?>';
 
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
+                document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1719,9 +1848,11 @@ orgn = '<?php echo $camino; ?>';
                 if(ramo == "RC" || ramo == "D&O" || ramo == "D&O Condominio" || ramo == "RC General"){
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
+                    document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
+                      document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 } 
                 else
                 {
@@ -1786,7 +1917,7 @@ orgn = '<?php echo $camino; ?>';
           contador2="1";
           
           var items ='<?php echo $nro_items; ?>'
-          console.log("contador 2 total:"+'<?php echo $nro_items; ?>');
+          //console.log("contador 2 total:"+'< ?php echo $nro_items; ?>');
           
            while (contador2<=items){
                
@@ -1831,8 +1962,8 @@ function dosdecimales(id){
    
     
     valor= document.getElementById(id).value;
-    console.log(id);
-    console.log(valor);
+    //console.log(id);
+    //console.log(valor);
     
     
     
@@ -1846,8 +1977,8 @@ function sindecimales(id){
    
     
     valor= document.getElementById(id).value;
-    console.log(id);
-    console.log(valor);
+    //console.log(id);
+    //console.log(valor);
     
     
     
@@ -2398,15 +2529,16 @@ function vencimientogarantia(){
                     '</div>'+
                 '</div></td>'+
             // fin deducible
-                '<td><input type="number" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']" onchange= "dosdecimales(this.id);"  required>' +  
+                '<td><div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda8[' + iCnt + ']">UF</span></div>'+
+                    '<input type="number" onchange= "dosdecimales(this.id);"step="0.01" placeholder="0,00"  class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required></div></td>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id); calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number" onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
@@ -2476,15 +2608,16 @@ function vencimientogarantia(){
             // fin deducible
                 
                 
-                '<td><input type="number" onchange= "dosdecimales(this.id);" class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required>' +  
+                '<td><div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda8[' + iCnt + ']">UF</span></div>'+
+                    '<input type="number" onchange= "dosdecimales(this.id);"step="0.01" placeholder="0,00"  class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required></div></td>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" onChange="calculaprimabruta()"></div></td>'+
+                      '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" ></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" onChange="calculaprimabruta()" style="width=75%"></div></td>'+ 
+                      '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
@@ -2497,6 +2630,7 @@ function vencimientogarantia(){
             $('#main').after(container, divSubmit);
              document.getElementById("contador").value = iCnt;
          }
+         
         }
         
         

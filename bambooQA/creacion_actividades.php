@@ -12,6 +12,8 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num_cliente=$num_poliza=$num_prop_poliza=0;
  $busqueda=$busqueda_err=$data=$resultado_poliza='';
  $tarea=$fecha_vencimiento=$recurrente=$tarea_con_fecha_fin=$fecha_fin='';
@@ -22,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_cliente"]))){
         $busqueda=$_POST["id_cliente"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
         //cliente
         $resultado=mysqli_query($link, 'SELECT id, concat_ws(\'-\',rut_sin_dv, dv) as rut, concat_ws(\' \',nombre_cliente,  apellido_paterno, apellido_materno) as nombre , telefono, correo FROM clientes where  id='.$busqueda.' ORDER BY apellido_paterno ASC, apellido_materno ASC;');
         While($row=mysqli_fetch_object($resultado))
@@ -57,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_poliza"]))){
         $busqueda=$_POST["id_poliza"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
             //poliza
             $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, a.numero_poliza, rut_proponente, b.rut_asegurado FROM polizas_2 as a left join items as b on a.numero_poliza=b.numero_poliza where a.id='.$busqueda.' order by compania, a.numero_poliza;');
 
@@ -93,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $tipo_tarea=$_POST["tipo_tarea"];
         $aux_modificar='update';
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
             //poliza
         switch ($tipo_tarea){
             case 'individual':
@@ -174,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty(trim($_POST["id_propuesta"]))){
         $busqueda=$_POST["id_propuesta"];
         mysqli_set_charset( $link, 'utf8');
-        mysqli_select_db($link, 'gestio10_asesori1_bamboo_QA');
+        mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
             //poliza
             $resultado_poliza=mysqli_query($link, 'SELECT distinct a.id, compania, vigencia_final, ramo, a.numero_propuesta, rut_proponente, b.rut_asegurado FROM propuesta_polizas as a left join items as b on a.numero_propuesta=b.numero_propuesta where a.id='.$busqueda.' order by compania, a.numero_propuesta;');
 

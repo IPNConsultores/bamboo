@@ -11,6 +11,8 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -452,7 +454,7 @@ function botones(id, accion, base) {
         case "eliminar_poliza": {
                 var r2 = confirm("Estás a punto de eliminar esta póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_poliza.php', {
+                $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_poliza': id,
                     'accion':accion
                 }, 'post');
@@ -537,11 +539,9 @@ function botones(id, accion, base) {
             break;
         }
         case "correo": {
-            if (base == 'propuesta'){
                 $.redirect('/bambooQA/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
-            }
             break;
         }
         case "renovar":{

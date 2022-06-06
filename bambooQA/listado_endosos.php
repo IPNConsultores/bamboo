@@ -11,6 +11,8 @@ function estandariza_info($data) {
     return $data;
   }
 require_once "/home/gestio10/public_html/backend/config.php";
+mysqli_set_charset($link, 'utf8');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 $num=0;
  $busqueda=$busqueda_err=$data='';
  $rut=$nombre=$telefono=$correo=$lista='';
@@ -55,7 +57,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
     <!-- body code goes here -->
     <div id="header"><?php include 'header2.php' ?></div>
     <div class="container">
-        <p> Propuesta de Endosos / Listado de Propuestas de Endosos<br>
+        <p> Endosos / Listado de Endosos<br>
         </p>
         <br>
         <div class="container">
