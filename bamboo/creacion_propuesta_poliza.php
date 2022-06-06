@@ -1546,11 +1546,10 @@ console.log(orgn)
             var venc_gtia=<?php echo json_encode($venc_gtia); ?>;
             var ramo='<?php echo $ramo; ?>';
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                console.log(nombre_aseg[(contador-1).toString()] + " valor en form:" + document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
-
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1659,11 +1658,10 @@ console.log(orgn)
             var ramo='<?php echo $ramo; ?>';
 
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                console.log(nombre_aseg[(contador-1).toString()] + " valor en form:" + document.getElementById("nombre_seg["+contador.toString()+"]").value);
-                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
-                
+                document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];;
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1823,9 +1821,9 @@ console.log(orgn)
             var ramo='<?php echo $ramo; ?>';
 
             while (contador<='<?php echo $nro_items; ?>'){
+                console.log(contador + ' de total items: ' +'<?php echo $nro_items; ?>' )
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
-                console.log(nombre_aseg[(contador-1).toString()] + " valor en form:" + document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
