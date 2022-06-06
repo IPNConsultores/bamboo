@@ -7,7 +7,7 @@ $camino='crear_propuesta';
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'actualiza_propuesta';
 //$_POST["accion_secundaria"] = 'renovar';
-//$_POST["numero_propuesta"]='P000024';
+//$_POST["numero_propuesta"]='P000025';
 //$_POST["numero_poliza"]='test final';
 
 $poliza_renovada='';
@@ -22,7 +22,7 @@ $poliza_renovada='';
 
       }    
       else{
-        $query = "select numero_propuesta, id, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor,  forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query = "select numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,b.nombre_cliente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
         $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado, b.nombre_cliente , materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }
@@ -35,6 +35,7 @@ $poliza_renovada='';
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
+        $nombre_cliente = $row->nombre_cliente;
         $selcompania = $row->compania;
         $ramo = $row->ramo;
         $fechainicio = $row->vigencia_inicial;
@@ -942,7 +943,7 @@ function valida_rut_duplicado_prop() {
                  for (var i = 1; i <= contador; i++){
                      
                     document.getElementById("nombre_seg[" + i + "]").value =response.nombre;
-                        
+                    //console.log(document.getElementById("nombre_seg[" + i + "]").value);
                      
                  }
             
@@ -966,10 +967,12 @@ function valida_rut_duplicado_aseg(item) {
         success: function(response) {
             if (response.resultado == 'antiguo') {
                 document.getElementById("nombre_seg[" + item + "]").value = response.nombre;
+                //console.log(document.getElementById("nombre_seg[" + item + "]").value);
 
             }
         }
     });
+    
 }
 function checkRadio(name) {
     if (name == "nueva") {
@@ -1377,7 +1380,8 @@ console.log(orgn)
            
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
+
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1414,6 +1418,7 @@ console.log(orgn)
                 document.getElementById("btAdd").click();
                 document.getElementById("rutaseg["+contador.toString()+"]").value = rut_completo_aseg[(contador-1).toString()];
                 document.getElementById("nombre_seg["+contador.toString()+"]").value = nombre_aseg[(contador-1).toString()];
+                console.log(nombre_aseg[(contador-1).toString()] + " valor en form:" + document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 document.getElementById("materia["+contador.toString()+"]").value = materia[(contador-1).toString()];
                 document.getElementById("detalle_materia["+contador.toString()+"]").value = detalle_materia[(contador-1).toString()];
                 document.getElementById("cobertura["+contador.toString()+"]").value = cobertura[(contador-1).toString()];
@@ -1441,6 +1446,7 @@ console.log(orgn)
                 {
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 }
+                //console.log(document.getElementById("nombre_seg["+contador.toString()+"]").value);
                 contador+=1;
             }
  
@@ -1480,6 +1486,7 @@ console.log(orgn)
                       fields4[i].disabled = true;
                   }
                 }
+                
             //fin renovación póliza
 
             break;
@@ -1507,7 +1514,7 @@ console.log(orgn)
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1604,7 +1611,7 @@ console.log(orgn)
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -1766,7 +1773,7 @@ console.log(orgn)
             
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
-            valida_rut_duplicado_prop();
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
@@ -2613,6 +2620,7 @@ function vencimientogarantia(){
             $('#main').after(container, divSubmit);
              document.getElementById("contador").value = iCnt;
          }
+         
         }
         
         
