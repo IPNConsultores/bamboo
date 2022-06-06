@@ -1690,6 +1690,8 @@ console.log(orgn)
                 } 
                 else
                 {
+                  console.log(deducible);
+                  console.log(deducible[(contador-1).toString()])
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible[(contador-1).toString()];
                 }
                 contador+=1;
