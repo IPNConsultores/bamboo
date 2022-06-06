@@ -454,7 +454,7 @@ function botones(id, accion, base) {
         case "eliminar_poliza": {
                 var r2 = confirm("Estás a punto de eliminar esta póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_poliza.php', {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
                     'numero_poliza': id,
                     'accion':accion
                 }, 'post');
