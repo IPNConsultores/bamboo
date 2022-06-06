@@ -1683,6 +1683,7 @@ console.log(orgn)
                     document.getElementById("deducible_porcentaje["+contador.toString()+"]").value = deducible_porcentaje_v[(contador-1).toString()];
                     document.getElementById("deducible_valor["+contador.toString()+"]").value =deducible_valor_v[(contador-1).toString()] ;
                     document.getElementById("deducible_defecto["+contador.toString()+"]").value = deducible_valor_v[(contador-1).toString()] ;
+                    pobladeducible();
                 }
                 else if (ramo == "VEH" || ramo == "VEH - Vehículos Comerciales Livianos" || ramo == "VEH - Vehículos Particulares" || ramo == "VEH - Vehículos Pesados"){
                       document.getElementById("deducible_vehiculo["+contador.toString()+"]").value=deducible[(contador-1).toString()];
