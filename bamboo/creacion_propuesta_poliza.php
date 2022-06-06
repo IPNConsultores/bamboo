@@ -942,12 +942,14 @@ function valida_rut_duplicado_prop() {
             if (response.resultado == 'antiguo') {
                 document.getElementById("nombre_prop").value = response.nombre;
                 var contador =  document.getElementById("contador").value;
+ /*
                  for (var i = 1; i <= contador; i++){
                      
                     document.getElementById("nombre_seg[" + i + "]").value =response.nombre;
                     //console.log(document.getElementById("nombre_seg[" + i + "]").value);
                      
                  }
+                */
             
                 
             }
