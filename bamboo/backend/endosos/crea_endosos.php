@@ -5,7 +5,7 @@
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $mensaje='';
 $busqueda='';
 $listado='';

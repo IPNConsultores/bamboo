@@ -53,7 +53,7 @@ $venc_gtia  = estandariza_info($_POST["venc_gtia"]);
 $item  = estandariza_info($_POST["item"]);
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
     case 'elimina':
         $query="delete from polizas where id=".$_POST["id_poliza"];

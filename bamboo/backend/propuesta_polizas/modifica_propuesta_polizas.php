@@ -31,7 +31,7 @@ $fechaprop=estandariza_info($_POST["fechaprop"]);
 $item  = estandariza_info($_POST["item"]);
 
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
     case 'elimina':
         $query="delete from propuesta_polizas where id=".$_POST["id_propuesta"];

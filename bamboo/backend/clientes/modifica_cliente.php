@@ -5,7 +5,7 @@
     } 
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $rut_completo = preg_replace('/[^k0-9]/i', '', $_POST["rut2"]);
 
 $id=estandariza_info($_POST["id"]);
@@ -20,7 +20,7 @@ $correo=estandariza_info($_POST["correo_electronico"]);
 $referido=estandariza_info($_POST["referido"]);
 $grupo=estandariza_info($_POST["grupo"]);
 mysqli_set_charset( $link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $query = 'UPDATE clientes SET referido=\''.$referido.'\' , grupo=\''.$grupo.'\' , nombre_cliente=\''.$nombre.'\' ,rut_sin_dv=\''.$rut.'\' ,dv=\''.$dv.'\' ,telefono=\''.$telefono.'\' ,direccion_personal=\''.$direccionp.'\' ,direccion_laboral=\''.$direccionl.'\' ,correo=\''.$correo.'\'  WHERE id='.$id.';';
 mysqli_query($link,$query);
 mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Modifica cliente', '".str_replace("'","**",$query)."','cliente',".$id.", '".$_SERVER['PHP_SELF']."')");

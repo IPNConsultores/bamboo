@@ -6,7 +6,7 @@
 require_once "/home/gestio10/public_html/backend/config.php";
 $id=estandariza_info($_POST["id_tarea"]);
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 if ($_POST["accion"]=='cerrar_tarea'){
   $query='update tareas set estado="Cerrado", fecha_completada=current_date WHERE id='.$id.';';
