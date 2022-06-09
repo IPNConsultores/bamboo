@@ -472,8 +472,7 @@ $(document).ready(function() {
          }}
         ],
         "order": [
-            [1, "asc"],
-            [3, "desc"]
+            [4, "desc"]
         ],
         "oLanguage": {
             "sSearch": "Búsqueda rápida",
