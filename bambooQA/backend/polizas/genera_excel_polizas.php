@@ -8,10 +8,10 @@ mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
 mysqli_query($link, "SET @rownum=0;");
 $query= "select @rownum := @rownum + 1 AS fila, a.estado, a.numero_poliza, b.numero_item, a.numero_propuesta, a.tipo_propuesta, a.fecha_propuesta, a.fecha_envio_propuesta, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, a.compania, a.vigencia_inicial, a.vigencia_final, a.ramo, a.moneda_poliza, a.vendedor, a.forma_pago, a.moneda_valor_cuota, a.valor_cuota, a.fecha_primera_cuota, a.nro_cuotas, a.comentarios_int, a.comentarios_ext, CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) as rut_asegurado, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.deducible, CONCAT(FORMAT(b.tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta, CONCAT(FORMAT(b.tasa_exenta, 2, 'de_DE'),'%') as tasa_exenta, 
-CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_afecta, 2, 'de_DE')) as prima_afecta, 
-CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_exenta, 2, 'de_DE')) as prima_exenta, 
-CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_neta, 2, 'de_DE')) as prima_neta, 
-CONCAT_WS(' ',a.moneda_poliza,FORMAT(b.prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, 
+FORMAT(b.prima_afecta, 2)+0.0 as prima_afecta, 
+FORMAT(b.prima_exenta, 2)+0.0 as prima_exenta, 
+FORMAT(b.prima_neta, 2)+0.0 as prima_neta, 
+FORMAT(b.prima_bruta_anual, 2)+0.0 as prima_bruta_anual, 
 b.monto_asegurado, b.venc_gtia, c.nombre_cliente as proponente, d.nombre_cliente as asegurado, c.grupo as grupo_proponente, d.grupo as grupo_asegurado, a.comision, a.porcentaje_comision, a.comision_bruta, a.comision_neta, a.comision_neta,a.numero_boleta, a.comision_negativa, a.boleta_negativa, a.depositado_fecha, a.vendedor, a.poliza_renovada, a.fech_cancela as fecha_cancelacion, a.motivo_cancela as motivo_cancelacion
 from polizas_2 as a 
 left join items as b 
@@ -42,21 +42,21 @@ $hojaActiva->setCellValue('O2', 'Compañía');
 $hojaActiva->setCellValue('P2', 'Vigencia inicial');
 $hojaActiva->setCellValue('Q2', 'Vigencia final');
 $hojaActiva->setCellValue('R2', 'Ramo');
-$hojaActiva->setCellValue('S2', 'Moneda póliza');
-$hojaActiva->setCellValue('T2', 'vendedor');
-$hojaActiva->setCellValue('U2', 'Forma pago');
-$hojaActiva->setCellValue('V2', 'Moneda valor cuota');
-$hojaActiva->setCellValue('W2', 'Valor cuota');
-$hojaActiva->setCellValue('X2', 'Fecha primera cuota');
-$hojaActiva->setCellValue('Y2', 'Nro cuotas');
-$hojaActiva->setCellValue('Z2', 'Comentarios internos');
-$hojaActiva->setCellValue('AA2', 'Comentarios externos');
-$hojaActiva->setCellValue('AB2', 'Materia asegurada');
-$hojaActiva->setCellValue('AC2', 'Patente ubicacion');
-$hojaActiva->setCellValue('AD2', 'Cobertura');
-$hojaActiva->setCellValue('AE2', 'Deducible');
-$hojaActiva->setCellValue('AF2', 'Tasa afecta');
-$hojaActiva->setCellValue('AG2', 'Tasa exenta');
+$hojaActiva->setCellValue('S2', 'vendedor');
+$hojaActiva->setCellValue('T2', 'Forma pago');
+$hojaActiva->setCellValue('U2', 'Moneda valor cuota');
+$hojaActiva->setCellValue('V2', 'Valor cuota');
+$hojaActiva->setCellValue('W2', 'Fecha primera cuota');
+$hojaActiva->setCellValue('X2', 'Nro cuotas');
+$hojaActiva->setCellValue('Y2', 'Comentarios internos');
+$hojaActiva->setCellValue('Z2', 'Comentarios externos');
+$hojaActiva->setCellValue('AA2', 'Materia asegurada');
+$hojaActiva->setCellValue('AB2', 'Patente ubicacion');
+$hojaActiva->setCellValue('AC2', 'Cobertura');
+$hojaActiva->setCellValue('AD2', 'Deducible');
+$hojaActiva->setCellValue('AE2', 'Tasa afecta');
+$hojaActiva->setCellValue('AF2', 'Tasa exenta');
+$hojaActiva->setCellValue('AG2', 'Moneda póliza');
 $hojaActiva->setCellValue('AH2', 'Prima afecta');
 $hojaActiva->setCellValue('AI2', 'Prima exenta');
 $hojaActiva->setCellValue('AJ2', 'Prima neta');
@@ -108,19 +108,19 @@ $hojaActiva->getColumnDimension('O')->setWidth(25);
 $hojaActiva->getColumnDimension('P')->setWidth(10);
 $hojaActiva->getColumnDimension('Q')->setWidth(10);
 $hojaActiva->getColumnDimension('R')->setWidth(25);
-$hojaActiva->getColumnDimension('S')->setWidth(10);
-$hojaActiva->getColumnDimension('T')->setWidth(15);
+$hojaActiva->getColumnDimension('S')->setWidth(15);
+$hojaActiva->getColumnDimension('T')->setWidth(10);
 $hojaActiva->getColumnDimension('U')->setWidth(10);
 $hojaActiva->getColumnDimension('V')->setWidth(10);
 $hojaActiva->getColumnDimension('W')->setWidth(10);
 $hojaActiva->getColumnDimension('X')->setWidth(10);
-$hojaActiva->getColumnDimension('Y')->setWidth(10);
+$hojaActiva->getColumnDimension('Y')->setWidth(30);
 $hojaActiva->getColumnDimension('Z')->setWidth(30);
-$hojaActiva->getColumnDimension('AA')->setWidth(30);
-$hojaActiva->getColumnDimension('AB')->setWidth(25);
-$hojaActiva->getColumnDimension('AC')->setWidth(20);
+$hojaActiva->getColumnDimension('AA')->setWidth(25);
+$hojaActiva->getColumnDimension('AB')->setWidth(20);
+$hojaActiva->getColumnDimension('AC')->setWidth(15);
 $hojaActiva->getColumnDimension('AD')->setWidth(15);
-$hojaActiva->getColumnDimension('AE')->setWidth(15);
+$hojaActiva->getColumnDimension('AE')->setWidth(10);
 $hojaActiva->getColumnDimension('AF')->setWidth(10);
 $hojaActiva->getColumnDimension('AG')->setWidth(10);
 $hojaActiva->getColumnDimension('AH')->setWidth(10);
@@ -163,21 +163,21 @@ while ($rows = mysqli_fetch_object($resultado))
     $hojaActiva->setCellValue('P'.$fila, $rows->vigencia_inicial);
     $hojaActiva->setCellValue('Q'.$fila, $rows->vigencia_final);
     $hojaActiva->setCellValue('R'.$fila, $rows->ramo);
-    $hojaActiva->setCellValue('S'.$fila, $rows->moneda_poliza);
-    $hojaActiva->setCellValue('T'.$fila, $rows->vendedor);
-    $hojaActiva->setCellValue('U'.$fila, $rows->forma_pago);
-    $hojaActiva->setCellValue('V'.$fila, $rows->moneda_valor_cuota);
-    $hojaActiva->setCellValue('W'.$fila, $rows->valor_cuota);
-    $hojaActiva->setCellValue('X'.$fila, $rows->fecha_primera_cuota);
-    $hojaActiva->setCellValue('Y'.$fila, $rows->nro_cuotas);
-    $hojaActiva->setCellValue('Z'.$fila, $rows->comentarios_int);
-    $hojaActiva->setCellValue('AA'.$fila, $rows->comentarios_ext);
-    $hojaActiva->setCellValue('AB'.$fila, $rows->materia_asegurada);
-    $hojaActiva->setCellValue('AC'.$fila, $rows->patente_ubicacion);
-    $hojaActiva->setCellValue('AD'.$fila, $rows->cobertura);
-    $hojaActiva->setCellValue('AE'.$fila, $rows->deducible);
-    $hojaActiva->setCellValue('AF'.$fila, $rows->tasa_afecta);
-    $hojaActiva->setCellValue('AG'.$fila, $rows->tasa_exenta);
+    $hojaActiva->setCellValue('S'.$fila, $rows->vendedor);
+    $hojaActiva->setCellValue('T'.$fila, $rows->forma_pago);
+    $hojaActiva->setCellValue('U'.$fila, $rows->moneda_valor_cuota);
+    $hojaActiva->setCellValue('V'.$fila, $rows->valor_cuota);
+    $hojaActiva->setCellValue('W'.$fila, $rows->fecha_primera_cuota);
+    $hojaActiva->setCellValue('X'.$fila, $rows->nro_cuotas);
+    $hojaActiva->setCellValue('Y'.$fila, $rows->comentarios_int);
+    $hojaActiva->setCellValue('Z'.$fila, $rows->comentarios_ext);
+    $hojaActiva->setCellValue('AA'.$fila, $rows->materia_asegurada);
+    $hojaActiva->setCellValue('AB'.$fila, $rows->patente_ubicacion);
+    $hojaActiva->setCellValue('AC'.$fila, $rows->cobertura);
+    $hojaActiva->setCellValue('AD'.$fila, $rows->deducible);
+    $hojaActiva->setCellValue('AE'.$fila, $rows->tasa_afecta);
+    $hojaActiva->setCellValue('AF'.$fila, $rows->tasa_exenta);
+    $hojaActiva->setCellValue('AG'.$fila, $rows->moneda_poliza);
     $hojaActiva->setCellValue('AH'.$fila, $rows->prima_afecta);
     $hojaActiva->setCellValue('AI'.$fila, $rows->prima_exenta);
     $hojaActiva->setCellValue('AJ'.$fila, $rows->prima_neta);
@@ -200,7 +200,7 @@ while ($rows = mysqli_fetch_object($resultado))
 }
 $fecha = new DateTime(date("Y-m-d H:i:sP"), new DateTimeZone('America/Santiago') );
 date_timezone_set($fecha, timezone_open('America/Santiago'));
-$hojaActiva->setAutoFilter('A2:AG'.($fila-1));
+$hojaActiva->setAutoFilter('A2:AX'.($fila-1));
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="Listado_pólizas '.date_format($fecha, 'd-m-Y H:i:s').'.xlsx"');
 header('Cache-Control: max-age=0');
