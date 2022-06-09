@@ -59,10 +59,10 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 switch ($_POST["accion"]) {
   case 'eliminar_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
-    $mensaje='Póliza rechazada correctamente';
+    $mensaje='Póliza eliminada correctamente';
       $query= "delete from polizas_2 where id='".$busqueda."';";
       mysqli_query($link, $query);
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Rechaza propuesta póliza', '".str_replace("'","**",$query)."','propuesta_poliza','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'cancelar_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
