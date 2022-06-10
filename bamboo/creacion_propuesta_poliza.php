@@ -64,11 +64,11 @@ $poliza_renovada='';
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
                 $nombre_asegurado[]=$row_item->nombre_cliente;
-                $cobertura[] = $row_item->cobertura;
+                $cobertura[] = str_replace( "\r\n", "\n",$row_item->cobertura);
                 $materia_i = $row_item->materia_asegurada;
-                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+                $materia[] = str_replace( "\r\n", "\n", $materia_i );
                 $detalle_materia_i = $row_item->patente_ubicacion;
-                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                $detalle_materia[] = str_replace( "\r\n", "\n", $detalle_materia_i );
                 if ($ramo == "RC" or $ramo == "D&O" or $ramo == "D&O Condominio" or $ramo == "RC General"){
                     
                     $deducible_porcentaje[] = substr($row_item->deducible, 0,strrpos($row_item->deducible, "% de la Pérdida con mínimo de"));
@@ -144,11 +144,11 @@ $poliza_renovada='';
                 $dv_aseg = $row_item->dv_asegurado;
                 $rut_completo_aseg[] = $rut_aseg . '-' . $dv_aseg;
                 $nombre_asegurado[]=$row_item->nombre_cliente;
-                $cobertura[] = $row_item->cobertura;
+                $cobertura[] = str_replace( "\r\n", "\n",$row_item->cobertura);
                 $materia_i = $row_item->materia_asegurada;
-                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+                $materia[] = str_replace( "\r\n", "\n", $materia_i );
                 $detalle_materia_i = $row_item->patente_ubicacion;
-                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                $detalle_materia[] = str_replace( "\r\n", "\n", $detalle_materia_i );
                 if ($ramo == "RC" or $ramo == "D&O" or $ramo == "D&O Condominio" or $ramo == "RC General"){
                     
                     $deducible_porcentaje[] = substr($row_item->deducible, 0,strrpos($row_item->deducible, "% de la Pérdida con mínimo de"));

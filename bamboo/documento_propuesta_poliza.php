@@ -58,11 +58,11 @@ if ( !isset( $_SESSION ) ) {
                 $correo_asegurado[] = $row_item->correo;
                 $direccion_personal_asegurado[] = $row_item->direccion_personal;
                 $direccion_laboral_asegurado[] = $row_item->direccion_laboral;
-                $cobertura[] = $row_item->cobertura;
+                $cobertura[] = str_replace( "\r\n", "\n",$row_item->cobertura);
                 $materia_i = $row_item->materia_asegurada;
-                $materia[] = str_replace( "\r\n", "\\n", $materia_i );
+                $materia[] = str_replace( "\r\n", "\n", $materia_i );
                 $detalle_materia_i = $row_item->patente_ubicacion;
-                $detalle_materia[] = str_replace( "\r\n", "\\n", $detalle_materia_i );
+                $detalle_materia[] = str_replace( "\r\n", "\n", $detalle_materia_i );
                 $deducible[] = $row_item->deducible;
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
