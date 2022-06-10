@@ -2520,8 +2520,8 @@ function vencimientogarantia(){
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
-                '<td><textarea type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]" rows="6" /textarea></td>'+
-                '<td><textarea type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]" rows="6"/textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]" rows="6">< /textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]" rows="6"></textarea></td>'+
             // inicio deducible
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']">'+
                 //inicio deducible para RC
@@ -2597,8 +2597,8 @@ function vencimientogarantia(){
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]"  required></td>'+
                 '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
-                '<td><textarea type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]" rows="6"/textarea></td>'+
-                '<td><textarea type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"  rows="6" /textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]" rows="6"></textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"  rows="6"> </textarea></td>'+
                 
             // inicio deducible
                 '<td><div class="form-inline" id="div_deducible[' + iCnt + ']">'+
