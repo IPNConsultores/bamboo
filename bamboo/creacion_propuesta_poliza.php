@@ -28,7 +28,7 @@ $poliza_renovada='';
       }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
@@ -98,7 +98,7 @@ $poliza_renovada='';
         }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
       $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -183,7 +183,7 @@ function estandariza_info( $data ) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bamboo/images/bamboo.png">
+<link rel="icon" href="/bambooQA/images/bamboo.png">
 <!-- Bootstrap --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
@@ -247,7 +247,7 @@ function estandariza_info( $data ) {
  
 <!-- --------------------------------------------                -->
 
-<form action="/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario"  novalidate>
+<form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario"  novalidate>
   <div class="form-check form-check-inline">
 
     <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
@@ -741,8 +741,8 @@ function estandariza_info( $data ) {
                   <th>Tasa Exenta</th>
                   <th>Prima Afecta</th>
                   <th>Prima Exenta</th>
+                  <th>Prima Neta Total</th>
                   <th>Prima Bruta</th>
-                  <th>Prima Neta</th>
                   <th id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
@@ -792,7 +792,7 @@ function estandariza_info( $data ) {
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                               data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                              style="color:#536656" onclick="window.scrollTo(0,0)">Información de Póliza </button>
+                              style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();">Información de Póliza </button>
         </h5>
       </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
@@ -933,7 +933,7 @@ function valida_rut_duplicado_prop() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -963,7 +963,7 @@ function valida_rut_duplicado_aseg(item) {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bamboo/backend/clientes/busqueda_nombre.php",
+        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1171,7 +1171,7 @@ $('#test1').on('shown.bs.modal', function() {
 })
 var tabla_clientes = $('#listado_clientes').DataTable({
 
-    "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
+    "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
     "scrollX": true,
     "columns": [{
             "className": 'details-control',
@@ -1988,6 +1988,35 @@ function sindecimales(id){
    
 }
 
+function calculacomision(){
+    
+var contador = "1";
+var prima_neta_total ="0";
+var comision_corredor ="0";
+var porcentaje_comision = document.getElementById("porcentaje_comsion").value;
+
+console.log("Entre a calculacomision");
+console.log("porcentaje comision = " + porcentaje_comision);
+console.log("Items: "+document.getElementById("contador").value);
+
+while (contador<=document.getElementById("contador").value){
+    
+    console.log("Item número: " + contador);
+    console.log("Prima neta item: " + document.getElementById("prima_neta["+contador+"]").value);
+    
+    prima_neta_total = parseFloat(prima_neta_total) + parseFloat(document.getElementById("prima_neta["+contador+"]").value)
+    console.log("Prima neta total: " + prima_neta_total);
+    
+    contador++;
+    
+}
+
+comision_corredor = porcentaje_comision/100 * prima_neta_total;
+
+document.getElementById("comision").value = comision_corredor;
+
+}
+
 
 function validarutitem(){
     
@@ -2099,8 +2128,8 @@ function vencimientogarantia(){
 
     switch (camino) {
         case 'crear_propuesta': {
-          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bamboo/test_felipe3.php', {
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe3.php', {
             'accion': 'crear_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2144,8 +2173,8 @@ function vencimientogarantia(){
         break;
         }
         case 'actualiza_propuesta': {
-          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bamboo/test_felipe2.php', { 
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe2.php', { 
             'accion': 'actualiza_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2185,8 +2214,8 @@ function vencimientogarantia(){
         break;
       }
         case 'crear_poliza': {
-          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bamboo/test_felipe2.php', { 
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe2.php', { 
             'accion': 'crear_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2239,8 +2268,8 @@ function vencimientogarantia(){
           break;
       }
         case 'modifica_poliza': {
-          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bamboo/test_felipe2.php', { 
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe2.php', { 
             'accion': 'modifica_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2300,8 +2329,8 @@ function vencimientogarantia(){
       }
         case 'crear_poliza_web': {
         
-          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bamboo/test_felipe3.php', { 
+          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bambooQA/test_felipe3.php', { 
             'accion': 'crear_poliza_web',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2490,7 +2519,7 @@ function vencimientogarantia(){
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" required></td>'+
-                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
             // inicio deducible
@@ -2539,10 +2568,11 @@ function vencimientogarantia(){
                       '<input type="number" onchange= "dosdecimales(this.id); calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
                 '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2566,7 +2596,7 @@ function vencimientogarantia(){
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]"  required></td>'+
-                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
                 
@@ -2618,10 +2648,11 @@ function vencimientogarantia(){
                       '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" ></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
                       '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
                 '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2658,7 +2689,7 @@ function vencimientogarantia(){
                                });
  $(document).ready(function() {
 
-     var listado_filtrado="/bamboo/backend/endosos/busqueda_listado_endosos_filtrada.php?id="+'<?php echo $id; ?>'
+     var listado_filtrado="/bambooQA/backend/endosos/busqueda_listado_endosos_filtrada.php?id="+'<?php echo $id; ?>'
      var table_endosos = $('#listado_endosos').DataTable({
         "ajax": listado_filtrado,
         "scrollX": true,
