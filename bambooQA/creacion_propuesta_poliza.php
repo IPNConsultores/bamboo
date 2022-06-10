@@ -741,8 +741,8 @@ function estandariza_info( $data ) {
                   <th>Tasa Exenta</th>
                   <th>Prima Afecta</th>
                   <th>Prima Exenta</th>
+                  <th>Prima Neta Total</th>
                   <th>Prima Bruta</th>
-                  <th>Prima Neta</th>
                   <th id="titulo_venc_gtia">Vencimiento Garantía</th>
                   
                 </tr>
@@ -792,7 +792,7 @@ function estandariza_info( $data ) {
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                               data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                              style="color:#536656" onclick="window.scrollTo(0,0)">Información de Póliza </button>
+                              style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();">Información de Póliza </button>
         </h5>
       </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
@@ -1988,6 +1988,35 @@ function sindecimales(id){
    
 }
 
+function calculacomision(){
+    
+var contador = "1";
+var prima_neta_total ="0";
+var comision_corredor ="0";
+var porcentaje_comision = document.getElementById("porcentaje_comsion").value;
+
+console.log("Entre a calculacomision");
+console.log("porcentaje comision = " + porcentaje_comision);
+console.log("Items: "+document.getElementById("contador").value);
+
+while (contador<=document.getElementById("contador").value){
+    
+    console.log("Item número: " + contador);
+    console.log("Prima neta item: " + document.getElementById("prima_neta["+contador+"]").value);
+    
+    prima_neta_total = parseFloat(prima_neta_total) + parseFloat(document.getElementById("prima_neta["+contador+"]").value)
+    console.log("Prima neta total: " + prima_neta_total);
+    
+    contador++;
+    
+}
+
+comision_corredor = porcentaje_comision/100 * prima_neta_total;
+
+document.getElementById("comision").value = comision_corredor;
+
+}
+
 
 function validarutitem(){
     
@@ -2490,7 +2519,7 @@ function vencimientogarantia(){
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]" required></td>'+
-                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
             // inicio deducible
@@ -2539,10 +2568,11 @@ function vencimientogarantia(){
                       '<input type="number" onchange= "dosdecimales(this.id); calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']" style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
                 '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
@@ -2566,7 +2596,7 @@ function vencimientogarantia(){
                     'id="rutaseg[' + iCnt + ']" name="rutaseg[]" placeholder="1111111-1" onchange="valida_rut_duplicado_aseg(' + iCnt + ')" oninput="checkRut(this);"'+
                     '  required/></div></td>' +
                 '<td><input type="text" id="nombre_seg[' + iCnt + ']" class="form-control" name="nombreaseg[]"  required></td>'+
-                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="1" required></textarea></td>'+
+                '<td><textarea type="text" class="form-control" id="materia[' + iCnt + ']" name="materia[]" rows="6" required></textarea></td>'+
                 '<td><input type="text" class="form-control" id="detalle_materia[' + iCnt + ']" name="detalle_materia[]"></td>'+
                 '<td><input type="text" class="form-control" id="cobertura[' + iCnt + ']" name="cobertura[]"></td>'+
                 
@@ -2618,10 +2648,11 @@ function vencimientogarantia(){
                       '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']" ></div></td>'+
                 '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
                       '<input type="number"  onchange= "dosdecimales(this.id);calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_exenta[]" id="prima_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
-                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda5[' + iCnt + ']">UF</span></div>'+
                 '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_neta[]" id="prima_neta[' + iCnt + ']"></div></td>'+
+                '<td> <div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda4[' + iCnt + ']">UF</span></div>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="prima_bruta[]" id="prima_bruta[' + iCnt + ']"></div></td>'+
+                
                   
                  '<td> <input placeholder="Seleccionar fecha si aplica" type="date" name="venc_gtia[]" id="venc_gtia[' + iCnt + ']" class="form-control"></td>'+
                '</tr>';
