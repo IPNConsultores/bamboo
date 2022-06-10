@@ -13,11 +13,11 @@ function estandariza_info($data) {
   }
 require_once "/home/gestio10/public_html/backend/config.php";
 mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 $num=0;
 
 mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'gestio10_asesori1_bamboo_prePAP');
+    mysqli_select_db($link, 'gestio10_asesori1_bamboo');
     //$sql = "SELECT id FROM clientes WHERE CONTACT(rut_sin_dv, \'-\',dv) = ?";
 $sql = "SELECT *, concat_ws('-',mes,SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
     $resultado=mysqli_query($link, $sql);
@@ -51,7 +51,7 @@ While($row2=mysqli_fetch_object($resultado2))
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/bambooQA/images/bamboo.png">
+    <link rel="icon" href="/bamboo/images/bamboo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -209,7 +209,7 @@ $(document).ready(function() {
     document.getElementById("fec_max").value=formateoFechas(fin);
   var   table_tareas = $('#listado_tareas').DataTable({
 
-        "ajax": "/bambooQA/backend/actividades/busqueda_listado_tareas.php",
+        "ajax": "/bamboo/backend/actividades/busqueda_listado_tareas.php",
         "scrollX": false,
         "columns": [{
                 "className": 'details-control',
@@ -367,7 +367,7 @@ $(document).ready(function() {
     }).container().appendTo($('#botones_tareas'));
 
      table = $('#listado_polizas').DataTable({
-"ajax": "/bambooQA/backend/polizas/busqueda_listado_polizas.php",
+"ajax": "/bamboo/backend/polizas/busqueda_listado_polizas.php",
         "scrollX": false,
         "searchPanes":{
             "columns":[2],
@@ -776,7 +776,7 @@ function botones(id, accion, base) {
     switch (accion) {
         case "elimina": {            
             if (base == 'tarea') {
-                $.redirect('/bambooQA/backend/actividades/cierra_tarea.php', {
+                $.redirect('/bamboo/backend/actividades/cierra_tarea.php', {
                     'id_tarea': id,
                     'accion':accion,
                 }, 'post');
@@ -784,7 +784,7 @@ function botones(id, accion, base) {
             if (base == 'poliza') {
                 var r2 = confirm("Estás a punto de eliminar está póliza ¿Deseas continuar?");
                 if (r2 == true) {
-                $.redirect('/bambooQA/backend/polizas/modifica_poliza.php', {
+                $.redirect('/bamboo/backend/polizas/modifica_poliza.php', {
                     'id_poliza': id,
                     'accion':accion,
                 }, 'post');
@@ -802,12 +802,12 @@ function botones(id, accion, base) {
                 type: 'success'
             });
             if (base == 'poliza') {
-                $.redirect('/bambooQA/creacion_poliza.php', {
+                $.redirect('/bamboo/creacion_poliza.php', {
                 'id_poliza': id
                 }, 'post');
             }
             if (base == 'tarea') {
-                $.redirect('/bambooQA/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                 'id_tarea': id,
                 'tipo_tarea':'individual'
                 }, 'post');
@@ -816,19 +816,19 @@ function botones(id, accion, base) {
         }
         case "tarea": {
             if (base == 'cliente') {
-                $.redirect('/bambooQA/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_cliente': id
                 }, 'post');
             }
             if (base == 'poliza') {
-                $.redirect('/bambooQA/creacion_actividades.php', {
+                $.redirect('/bamboo/creacion_actividades.php', {
                     'id_poliza': id
                 }, 'post');
             }
             break;
         }
         case "info": {
-            $.redirect('/bambooQA/resumen2.php', {
+            $.redirect('/bamboo/resumen2.php', {
                 'id': id,
                 'base': base
             }, 'post');
@@ -836,7 +836,7 @@ function botones(id, accion, base) {
         }
         case "correo": {
             if (base == 'poliza') {
-                $.redirect('/bambooQA/template_poliza.php', {
+                $.redirect('/bamboo/template_poliza.php', {
                     'id_poliza': id
                 }, 'post');
             }
@@ -846,7 +846,7 @@ function botones(id, accion, base) {
             if (base == 'tarea') {
                 $.ajax({
                     type: "POST",
-                    url: "/bambooQA/backend/actividades/cierra_tarea.php",
+                    url: "/bamboo/backend/actividades/cierra_tarea.php",
                     data: {
                         id_tarea: id,
                         accion:accion,

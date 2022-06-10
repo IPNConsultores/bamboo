@@ -28,7 +28,7 @@ $poliza_renovada='';
       }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
@@ -98,7 +98,7 @@ $poliza_renovada='';
         }
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
-      mysqli_select_db( $link, 'gestio10_asesori1_bamboo_prePAP' );
+      mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
       $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -183,7 +183,7 @@ function estandariza_info( $data ) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/bambooQA/images/bamboo.png">
+<link rel="icon" href="/bamboo/images/bamboo.png">
 <!-- Bootstrap --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
@@ -247,7 +247,7 @@ function estandariza_info( $data ) {
  
 <!-- --------------------------------------------                -->
 
-<form action="/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario"  novalidate>
+<form action="/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php" class="needs-validation" method="POST" id="formulario"  novalidate>
   <div class="form-check form-check-inline">
 
     <label class="form-check-label">¿Cliente Asegurado y Proponente son la misma
@@ -933,7 +933,7 @@ function valida_rut_duplicado_prop() {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
+        url: "/bamboo/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -963,7 +963,7 @@ function valida_rut_duplicado_aseg(item) {
     rut_sin_dv = rut_sin_dv.slice(0, -1);
     $.ajax({
         type: "POST",
-        url: "/bambooQA/backend/clientes/busqueda_nombre.php",
+        url: "/bamboo/backend/clientes/busqueda_nombre.php",
         data: {
             rut: rut_sin_dv
         },
@@ -1171,7 +1171,7 @@ $('#test1').on('shown.bs.modal', function() {
 })
 var tabla_clientes = $('#listado_clientes').DataTable({
 
-    "ajax": "/bambooQA/backend/clientes/busqueda_listado_clientes.php",
+    "ajax": "/bamboo/backend/clientes/busqueda_listado_clientes.php",
     "scrollX": true,
     "columns": [{
             "className": 'details-control',
@@ -2128,8 +2128,8 @@ function vencimientogarantia(){
 
     switch (camino) {
         case 'crear_propuesta': {
-          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe3.php', {
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bamboo/test_felipe3.php', {
             'accion': 'crear_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2173,8 +2173,8 @@ function vencimientogarantia(){
         break;
         }
         case 'actualiza_propuesta': {
-          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe2.php', { 
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bamboo/test_felipe2.php', { 
             'accion': 'actualiza_propuesta',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2214,8 +2214,8 @@ function vencimientogarantia(){
         break;
       }
         case 'crear_poliza': {
-          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe2.php', { 
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bamboo/test_felipe2.php', { 
             'accion': 'crear_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2268,8 +2268,8 @@ function vencimientogarantia(){
           break;
       }
         case 'modifica_poliza': {
-          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe2.php', { 
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bamboo/test_felipe2.php', { 
             'accion': 'modifica_poliza',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2329,8 +2329,8 @@ function vencimientogarantia(){
       }
         case 'crear_poliza_web': {
         
-          $.redirect('/bambooQA/backend/propuesta_polizas/crea_propuesta_polizas.php', {
-          //$.redirect('/bambooQA/test_felipe3.php', { 
+          $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+          //$.redirect('/bamboo/test_felipe3.php', { 
             'accion': 'crear_poliza_web',
           //Propuesta
           'rutprop': document.getElementById("rutprop").value,
@@ -2689,7 +2689,7 @@ function vencimientogarantia(){
                                });
  $(document).ready(function() {
 
-     var listado_filtrado="/bambooQA/backend/endosos/busqueda_listado_endosos_filtrada.php?id="+'<?php echo $id; ?>'
+     var listado_filtrado="/bamboo/backend/endosos/busqueda_listado_endosos_filtrada.php?id="+'<?php echo $id; ?>'
      var table_endosos = $('#listado_endosos').DataTable({
         "ajax": listado_filtrado,
         "scrollX": true,
