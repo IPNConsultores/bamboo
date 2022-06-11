@@ -10,7 +10,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'crea_propuesta_endoso';
 //$_POST["numero_poliza"]='872';
-//$_POST["numero_propuesta"]="E000004";
+////$_POST["numero_propuesta"]="E000004";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
@@ -518,11 +518,25 @@ function cambio_motivo(){
     if(motivo_endoso == "Endoso Prorroga") {
       
         document.getElementById("col_fecha_ingreso").style.display ="block";
-    }   
+    }  
+    
     
     else{
         
         document.getElementById("col_fecha_ingreso").style.display ="none";
+    }
+    
+    if (motivo_endoso =="Endoso Sin Movimiento"){
+        
+        document.getElementById("monto").value = "";
+        document.getElementById("tasa_afecta").value = "";
+        document.getElementById("tasa_exenta").value = "";
+        document.getElementById("prima_neta_exenta").value = "";
+        document.getElementById("iva").value = "";
+        document.getElementById("prima_neta_afecta").value = "";
+        document.getElementById("prima_total").value = "";
+        
+        
     }
     
 }
