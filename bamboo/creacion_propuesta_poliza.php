@@ -1726,6 +1726,8 @@ console.log(orgn)
                     document.getElementById("fechaprimer").value = '';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
+                    console.log("quitar required de fechaprop");
+                    $("#fechaprop").removeAttr("required");
                      
                     orgn='crear_poliza_web';
                     
