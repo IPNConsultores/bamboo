@@ -1784,6 +1784,7 @@ console.log(orgn)
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+            document.getElementById("fechaprop").removeAttr("required");
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
@@ -1793,6 +1794,7 @@ console.log(orgn)
             document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
+
             
             
             document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
