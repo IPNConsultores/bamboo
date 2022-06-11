@@ -8,7 +8,7 @@ $camino='crear_propuesta';
 //$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
-//$_POST["numero_poliza"]='test final';
+//$_POST["numero_poliza"]='300222345';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -792,7 +792,7 @@ function estandariza_info( $data ) {
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                               data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
-                              style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();">Información de Póliza </button>
+                              style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();dosdecimales(comision.id);">Información de Póliza </button>
         </h5>
       </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
@@ -1466,7 +1466,7 @@ console.log(orgn)
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
                     console.log("quitar required de fechaprop");
-                    $("#fechaprop").removeAttr("required");
+                     $("#fechaprop").removeAttr("required");
                     document.getElementById("edicion1").style.display = "none";
                     if ('<?php echo $numero_endosos; ?>'!=='0'){
                         document.getElementById("info_endoso").style.display = "flex";
@@ -1969,8 +1969,9 @@ function dosdecimales(id){
    
     
     valor= document.getElementById(id).value;
-    //console.log(id);
-    //console.log(valor);
+    
+    console.log(id);
+    console.log(valor);
     
     
     
