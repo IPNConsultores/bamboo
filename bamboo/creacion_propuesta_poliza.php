@@ -1465,6 +1465,8 @@ console.log(orgn)
                     document.getElementById("titulo6").style.display = "flex";
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
+                    console.log("quitar required de fechaprop");
+                    $("#fechaprop").removeAttr("required");
                     document.getElementById("edicion1").style.display = "none";
                     if ('<?php echo $numero_endosos; ?>'!=='0'){
                         document.getElementById("info_endoso").style.display = "flex";
