@@ -281,7 +281,7 @@ $_POST["numero_propuesta"]='E000012';
                         <label>Items:</label> 
                     </div>
                     <div class="col-2" style="text-align:right" contenteditable="true">       
-                        <span id="numero_items" >3</span>
+                        <span id="numero_items" ></span>
                         <br>
                     </div>
                     
@@ -576,6 +576,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("vigencia_inicial").innerHTML = '<?php echo $fechainicio; ?>';
     document.getElementById("vigencia_final").innerHTML = '<?php echo $fechavenc; ?>';
     document.getElementById("plazo_vigencia").innerHTML = '<?php echo $plazo_vigencia; ?>';
+
+    document.getElementById("numero_items").innerHTML = '<?php echo $nro_items; ?>';
 
     document.getElementById("total_prima_neta").innerHTML = "<?php echo $prima_afecta; ?>";
     document.getElementById("total_prima_exenta").innerHTML = '<?php echo $prima_exenta; ?>';
