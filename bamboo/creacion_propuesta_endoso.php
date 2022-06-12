@@ -10,7 +10,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'crea_propuesta_endoso';
 //$_POST["numero_poliza"]='872';
-////$_POST["numero_propuesta"]="E000004";
+//$_POST["numero_propuesta"]="E000004";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
@@ -116,6 +116,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
 </head>
 
 <body>
+
 <?php include 'header2.php' ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -171,7 +172,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <div class="md-form">
 
                    <input placeholder="Selected date" type="date" name="fecha_prorroga" id="fecha_prorroga" onchange="prorroga()" value=""
-                      class="form-control" max= "9999-12-31" required>
+                      class="form-control" max= "9999-12-31">
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -345,7 +346,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col">
                 <label for="descripción_endoso"><b>Descripción del Endoso</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='descripcion_endoso' name='descripcion_endoso' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='descripcion_endoso' name='descripcion_endoso' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
@@ -357,14 +358,14 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-6">
                 <label for="descripción_endoso"><b>Dice</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='dice' name='dice' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='dice' name='dice' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
             <div class="col-6">
                 <label for="descripción_endoso"><b>Debe Decir</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='debe_decir' name='debe_decir' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='debe_decir' name='debe_decir' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
@@ -428,7 +429,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="monto"><b>IVA</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
+                    <input type="number" step="0.01" placeholder="0,00" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
                 </div>
             </div>
             <div class="col-2">
@@ -489,13 +490,18 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
     
 </form>
 <br>
+ <button class="btn" type="button" style="background-color: #536656; color: white; display:none"
+              id='boton_submit' onclick=" genera_propuesta()"></button>
+              
 <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_prueba' onclick=" genera_propuesta()">Registrar</button>
+              id='boton_prueba' onclick=" validados()">Registrar</button>
 <br>
 </body>
 <foot>
     <br>
 </foot>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -507,9 +513,48 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
 <script src="/assets/js/bootstrap-notify.js"></script>
 <script src="/assets/js/bootstrap-notify.min.js"></script>
 
+
+
+
+
 <script>
 
 
+$("#boton_prueba").click(function(e){
+
+    blnFormValidity= $('#formulario')[0].checkValidity()
+   document.getElementById('formulario').classList.add('was-validated');
+    if(blnFormValidity==false){
+        
+         
+        e.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        return false
+    }
+
+})
+
+function validados(){
+    
+     var descripcion = document.getElementById('descripcion_endoso').value;
+     var dice = document.getElementById('dice').value;
+     var debe = document.getElementById('debe_decir').value;
+     var motivo = document.getElementById('motivo_endoso').value;
+     
+    if(descripcion =='' || dice ==''|| debe ==''|| motivo ==null){
+        
+        alert("Hay Campos Requeditos Sin Llenar")
+        
+    }
+    
+    else {
+        
+        genera_propuesta()
+    }
+
+    
+}
 
 function cambio_motivo(){
     
