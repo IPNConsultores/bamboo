@@ -258,11 +258,11 @@ function format_propuesta_endoso(d) {
         botones='<tr>'+
             '<td VALIGN=TOP>Acciones:</td>' +
             '<td>' +
-                '<button title="Aprobar Propuesta" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
-                '<button title="Rechazar propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
+                '<button title="Emitir Endoso" type="button" id=' + d.numero_propuesta_endoso + ' name="crear_endoso" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-up"></i></button><a> </a>' +
+                '<button title="Rechazar Endoso"  type="button" id=' + d.numero_propuesta_endoso + ' name="rechazar_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-thumbs-down"></i></button>' +
                 '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
                 '<button title="Buscar información asociada" type="button" id=' + d.numero_propuesta_endoso + ' name="info" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
-                '<button title="Editar Propuesta"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
+                '<button title="Editar Propuesta Endoso"  type="button" id=' + d.numero_propuesta_endoso + ' name="actualiza_propuesta" onclick="botones(this.id, this.name, \'propuesta_endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
             '</td>' +
         '</tr>' +
         '</table>';
