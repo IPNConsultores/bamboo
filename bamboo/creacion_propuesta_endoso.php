@@ -187,8 +187,8 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <select class="form-control" name="ramo" id="ramo" onChange="cambia_deducible();" required> 
                                         
                   <option value="">Selecciona un ramo</option>
-                  <option value="AC - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
-                  <option value="AC - Protección Financiera">ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="AP - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="AP - Protección Financiera">ACCIDENTES PERSONALES - Protección Financiera</option>
                   <option value="ASISTENCIA EN VIAJE">ASISTENCIA EN VIAJE</option>
                   <option value="INC - Condominio">INCENDIO - Condominio</option>
                   <option value="INC - Hogar">INCENDIO - Hogar</option>

@@ -507,10 +507,10 @@ function estandariza_info( $data ) {
                 <select class="form-control" name="ramo" id="ramo" onChange="vencimientogarantia();cambia_deducible();" required> 
                                         
                   <option value="">Selecciona un ramo</option>
-                  <option value="AC - Accidentes Personales"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Accidentes Personales") echo "selected" ?>>ACCIDENTES PERSONALES - Accidentes Personales</option>
-                  <option value="AC - Protección Financiera"
-                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AC - Protección Financiera") echo "selected" ?>>ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="AP - Accidentes Personales"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AP - Accidentes Personales") echo "selected" ?>>ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="AP - Protección Financiera"
+                                          <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="AP - Protección Financiera") echo "selected" ?>>ACCIDENTES PERSONALES - Protección Financiera</option>
                   <option value="ASISTENCIA EN VIAJE"
                                           <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $ramo =="ASISTENCIA EN VIAJE") echo "selected" ?>>ASISTENCIA EN VIAJE</option>
                   <option value="INC - Condominio"
@@ -1123,7 +1123,7 @@ function cambia_deducible() {
             }
         }
     } else if (ramo == "A. VIAJE" || ramo == "APV" || ramo == "AP" || ramo == "Vida" || ramo == "Garantía" || ramo ==
-        "AC - Accidentes Personales" || ramo == "AC - Protección Financiera" || ramo == "ASISTENCIA EN VIAJE" || ramo ==
+        "AP - Accidentes Personales" || ramo == "AP - Protección Financiera" || ramo == "ASISTENCIA EN VIAJE" || ramo ==
         "APV" || ramo == "VIDA") {
          for (var i = 1; i <= contador; i++){
             document.getElementById('deducible_para_otros[' +i+ ']').style.display="flex";
