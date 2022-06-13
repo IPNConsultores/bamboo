@@ -567,7 +567,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("nro_propuesta").innerHTML = '<?php echo $nro_propuesta; ?>';
     document.getElementById("rut_proponente").innerHTML = '<?php echo $rut_completo_prop; ?>';
     document.getElementById("nombre_proponente").innerHTML = '<?php echo $nombre_proponente; ?>';
+    var direccion_laboral ='<?php echo $direccion_laboral; ?>';
+    var direccion_personal = '<?php echo $direccion_personal; ?>';    
+    console.log(direccion_laboral);
+    console.log(direccion_personal);
+    if (direccion_laboral == 'NO' && direccion_personal == 'NO'){
+    
+        document.getElementById("direccion_particular").innerHTML = "<span style='color: red;'>INGRESAR DIRECCIÓN</span>";
+    }
+    
+    else if (direccion_laboral === 'NO'){
+        
+        console.log("dirección personal")
+        document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_personal; ?>';
+    }
+    
+    else{
+        console.log("dirección Laboral")
     document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_laboral; ?>';
+        }  
     document.getElementById("telefono").innerHTML = '<?php echo $telefono; ?>';
     document.getElementById("correo").innerHTML = '<?php echo $correo; ?>';
     
