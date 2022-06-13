@@ -4,7 +4,7 @@ if ( !isset( $_SESSION ) ) {
 }
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P000021';
+//$_POST["numero_propuesta"]='P000001';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -863,7 +863,26 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("nro_propuesta").innerHTML = '<?php echo $nro_propuesta; ?>';
     document.getElementById("rut_proponente").innerHTML = '<?php echo $rut_completo_prop; ?>';
     document.getElementById("nombre_proponente").innerHTML = '<?php echo $nombre_proponente; ?>';
+    var direccion_laboral ='<?php echo $direccion_laboral; ?>';
+    var direccion_personal = '<?php echo $direccion_personal; ?>';    
+    console.log(direccion_laboral);
+    console.log(direccion_personal);
+    if (direccion_laboral == 'NO' && direccion_personal == 'NO'){
+    
+        document.getElementById("direccion_particular").innerHTML = "<span style='color: red;'>INGRESAR DIRECCIÓN</span>";
+    }
+    
+    else if (direccion_laboral === 'NO'){
+        
+        console.log("dirección personal")
+        document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_personal; ?>';
+    }
+    
+    else{
+        console.log("dirección Laboral")
+        
     document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_laboral; ?>';
+        }  
     document.getElementById("telefono").innerHTML = '<?php echo $telefono; ?>';
     document.getElementById("correo").innerHTML = '<?php echo $correo; ?>';
     
@@ -903,7 +922,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     var contador=1;
     var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
     var nombre_asegurado=<?php echo json_encode($nombre_proponente_asegurado); ?>;
-    var direccion_personal_asegurado=<?php echo json_encode($direccion_laboral_asegurado); ?>;
+    var direccion_personal_asegurado=<?php echo json_encode($direccion_personal_asegurado); ?>;
     //var comuna
     //var region
     var telefono_asegurado=<?php echo json_encode($telefono_asegurado); ?>;
@@ -940,7 +959,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("rut["+contador.toString()+"]").innerHTML = rut_completo_aseg[contador.toString()-1];  
         document.getElementById("nom_asegurado["+contador.toString()+"]").innerHTML = nombre_asegurado[contador.toString()-1];
         
-        document.getElementById("direccion_asegurado["+contador.toString()+"]").innerHTML = direccion_laboral_asegurado[contador.toString()-1]
+        document.getElementById("direccion_asegurado["+contador.toString()+"]").innerHTML = direccion_personal_asegurado[contador.toString()-1]
 
 
        
