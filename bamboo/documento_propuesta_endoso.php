@@ -567,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("nro_propuesta").innerHTML = '<?php echo $nro_propuesta; ?>';
     document.getElementById("rut_proponente").innerHTML = '<?php echo $rut_completo_prop; ?>';
     document.getElementById("nombre_proponente").innerHTML = '<?php echo $nombre_proponente; ?>';
-    document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_personal; ?>';
+    document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_laboral; ?>';
     document.getElementById("telefono").innerHTML = '<?php echo $telefono; ?>';
     document.getElementById("correo").innerHTML = '<?php echo $correo; ?>';
     

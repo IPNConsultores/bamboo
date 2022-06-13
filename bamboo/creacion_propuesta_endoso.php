@@ -615,10 +615,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
             document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $total_prima_exenta*1; ?>';
-            document.getElementById("iva").value = '<?php echo $total_prima_afecta*0.19; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $total_prima_afecta*1; ?>';
-            document.getElementById("prima_total").value = '<?php echo $total_prima_bruta*1; ?>';
+            //document.getElementById("prima_neta_exenta").value = '< ?php echo $total_prima_exenta*1; ?>';
+            //document.getElementById("iva").value = '< ?php echo $total_prima_afecta*0.19; ?>';
+            //document.getElementById("prima_neta_afecta").value = '< ?php echo $total_prima_afecta*1; ?>';
+            //document.getElementById("prima_total").value = '< ?php echo $total_prima_bruta*1; ?>';
             document.getElementById("titulo1").style.display = "flex";
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";

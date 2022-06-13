@@ -863,7 +863,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("nro_propuesta").innerHTML = '<?php echo $nro_propuesta; ?>';
     document.getElementById("rut_proponente").innerHTML = '<?php echo $rut_completo_prop; ?>';
     document.getElementById("nombre_proponente").innerHTML = '<?php echo $nombre_proponente; ?>';
-    document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_personal; ?>';
+    document.getElementById("direccion_particular").innerHTML = '<?php echo $direccion_laboral; ?>';
     document.getElementById("telefono").innerHTML = '<?php echo $telefono; ?>';
     document.getElementById("correo").innerHTML = '<?php echo $correo; ?>';
     
@@ -903,7 +903,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     var contador=1;
     var rut_completo_aseg=<?php echo json_encode($rut_completo_aseg); ?>;
     var nombre_asegurado=<?php echo json_encode($nombre_proponente_asegurado); ?>;
-    var direccion_personal_asegurado=<?php echo json_encode($direccion_personal_asegurado); ?>;
+    var direccion_personal_asegurado=<?php echo json_encode($direccion_laboral_asegurado); ?>;
     //var comuna
     //var region
     var telefono_asegurado=<?php echo json_encode($telefono_asegurado); ?>;
@@ -940,7 +940,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("rut["+contador.toString()+"]").innerHTML = rut_completo_aseg[contador.toString()-1];  
         document.getElementById("nom_asegurado["+contador.toString()+"]").innerHTML = nombre_asegurado[contador.toString()-1];
         
-        document.getElementById("direccion_asegurado["+contador.toString()+"]").innerHTML = direccion_personal_asegurado[contador.toString()-1]
+        document.getElementById("direccion_asegurado["+contador.toString()+"]").innerHTML = direccion_laboral_asegurado[contador.toString()-1]
 
 
        
