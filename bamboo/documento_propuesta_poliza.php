@@ -2,16 +2,16 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-//$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P000001';
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'generar_documento';
+$_POST["numero_propuesta"]='P100006';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-      $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
+      $query = "select poliza_renovada, numero_propuesta, a.rut_proponente,a.dv_proponente, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral , DATE_FORMAT(fecha_propuesta,'%d-%m-%Y') as fecha_propuesta , DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, CONCAT(DATEDIFF(vigencia_final,vigencia_inicial),' días') as plazo_vigencia, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota+0.0 as valor_cuota, nro_cuotas, moneda_valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota,DATE_FORMAT(fecha_propuesta,'%d') as dia_pago, CONCAT_WS(' ',FORMAT(porcentaje_comision, 2, 'de_DE'),'%') as porcentaje_comision from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
     
@@ -35,7 +35,7 @@ if ( !isset( $_SESSION ) ) {
         $modo_pago = $row->forma_pago;
         $cuotas = $row->nro_cuotas;
         $moneda_cuota = $row->moneda_valor_cuota;
-        $valorcuota = $row->valor_cuota;
+        $valorcuota = $row->valor_cuota+0.0;
         $fechaprimer = $row->fecha_primera_cuota;
         $dia_pago = $row->dia_pago;
         $porcentaje_comision = $row->porcentaje_comision;
@@ -45,7 +45,7 @@ if ( !isset( $_SESSION ) ) {
         $comentarios_ext = str_replace( "\r\n", "\\n", $row->comentarios_ext );
         $nro_items=0;
         
-        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, CONCAT_WS(' ',FORMAT(prima_afecta, 2, 'de_DE')) as prima_afecta,CONCAT_WS(' ',FORMAT(prima_exenta, 2, 'de_DE')) as prima_exenta, prima_neta, CONCAT_WS(' ',FORMAT(prima_bruta_anual, 2, 'de_DE')) as prima_bruta_anual, CONCAT_WS(' ',FORMAT(monto_asegurado, 2, 'de_DE')) as monto_asegurado,venc_gtia, CONCAT_WS(' ',FORMAT(prima_afecta*0.19, 2, 'de_DE')) as prima_afecta_iva FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
+        $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, b.nombre_cliente, b.telefono, b.telefono, b.correo, b.direccion_personal, b.direccion_laboral, materia_asegurada, patente_ubicacion, cobertura, deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta ,CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%')as tasa_exenta, prima_afecta+0.0 as prima_afecta, prima_exenta+0.0 as prima_exenta, prima_neta+0.0 as prima_neta, prima_bruta_anual+0.0 as prima_bruta_anual, monto_asegurado+0.0 as monto_asegurado,venc_gtia, prima_afecta*0.19 as prima_afecta_iva FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
         $resultado_item = mysqli_query( $link, $query_item );
             While( $row_item = mysqli_fetch_object( $resultado_item ) ) {
                 $nro_items+=1;
@@ -66,13 +66,20 @@ if ( !isset( $_SESSION ) ) {
                 $deducible[] = $row_item->deducible;
                 $tasa_afecta[] = $row_item->tasa_afecta;
                 $tasa_exenta[] = $row_item->tasa_exenta;
-                $prima_afecta[] = $row_item->prima_afecta;
-                $prima_exenta[] = $row_item->prima_exenta;
-                $prima_neta[] = $row_item->prima_neta;
-                $prima_bruta[] = $row_item->prima_bruta_anual;
-                $monto_aseg[] = $row_item->monto_asegurado;
+                $prima_afecta[] = $row_item->prima_afecta+0.0;
+                $prima_exenta[] = $row_item->prima_exenta+0.0;
+                $prima_neta[] = $row_item->prima_neta+0.0;
+                $prima_bruta[] = $row_item->prima_bruta_anual+0.0;
+                $monto_aseg[] = $row_item->monto_asegurado+0.0;
                 $venc_gtia[] = $row_item->venc_gtia;
-                $prima_afecta_iva[] = $row_item->prima_afecta_iva;
+                $prima_afecta_iva[] = $row_item->prima_afecta_iva+0.0;
+                
+                $total_prima_afecta =+$row_item->prima_afecta;
+                $total_prima_exenta =+ $row_item->prima_exenta;
+                $total_prima_neta =+ $row_item->prima_neta;
+                $total_prima_bruta =+ $row_item->prima_bruta_anual;
+                $total_monto_aseg =+ $row_item->monto_asegurado;
+                $total_prima_afecta_iva =+ $row_item->prima_afecta_iva;
             }
         }
     }
@@ -425,11 +432,11 @@ if ( !isset( $_SESSION ) ) {
         <div class="col-1"></div>
             <div class="col" style="border-style :solid; border-color: grey; border-width: 2px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px" >
                 <div class= "row align-items-center">
-                    <div class="col-3" style="background-color:#f5f5f5;border-style :solid; border-color: grey; border-width: 0px; border-top-width:0px; border-right-width: 0px;border-left-width: 0px;">
-                        <label>Medio de Pago: </label> 
+                    <div class="col-3" style="background-color:#f5f5f5;">
+                        <label style="height: auto;">Medio de Pago: </label> 
                     </div>
                     <div class="col-1" style="text-align:right" contenteditable="true">       
-                        <label id="modo_pago"></label>
+                        <label id="modo_pago" style="width:100px;"></label>
                         <br>
                     </div>
                     <div class="col-3"></div>
@@ -908,13 +915,13 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
     } else{
     document.getElementById("cuotas").innerHTML = '<?php echo $cuotas; ?>';}
     document.getElementById("moneda_cuota").innerHTML = '<?php echo $moneda_cuota; ?>';
-    document.getElementById("valorcuota").innerHTML = '<?php echo $valorcuota; ?>';
+    document.getElementById("valorcuota").innerHTML = (<?php echo json_encode($valorcuota); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
     document.getElementById("fechaprimer").innerHTML = '<?php echo $fechaprimer; ?>';
     //document.getElementById("dia_pago").innerHTML = '< ?php echo $dia_pago; ?>';
-    document.getElementById("total_prima_neta").innerHTML = "<?php echo number_format(array_sum($prima_afecta), 2, ",", "."); ?>";
-    document.getElementById("total_prima_exenta").innerHTML = "<?php echo number_format(array_sum($prima_exenta), 2, ",", "."); ?>";
-    document.getElementById("total_iva").innerHTML = "<?php echo number_format(array_sum($prima_afecta)*0.19, 2, ",", "."); ?>"
-    document.getElementById("total_prima_periodo").innerHTML = "<?php echo number_format(array_sum($prima_afecta)*1.19+array_sum($prima_exenta), 2, ",", "."); ?>";
+    document.getElementById("total_prima_neta").innerHTML = (<?php echo json_encode($total_prima_afecta); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("total_prima_exenta").innerHTML = (<?php echo json_encode($total_prima_exenta); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("total_iva").innerHTML = (<?php echo json_encode($total_prima_afecta_iva); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("total_prima_periodo").innerHTML = (<?php echo json_encode($total_prima_bruta); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
     
 
     
@@ -945,14 +952,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
    
     
     //validación inicial de cantidad de ítems 
-    if('<?php echo $nro_items; ?>'=='1'){ 
-        
-        document.getElementById("monto_asegurado").innerHTML = '<?php echo $monto_aseg[0]; ?>';
-    } 
-    else {
-        document.getElementById("monto_asegurado").innerHTML ='<?php echo array_sum($monto_aseg); ?>';
-    }
-    
+    document.getElementById("monto_asegurado").innerHTML=(<?php echo json_encode($total_monto_aseg); ?>).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
     document.getElementById("comision_corredor").innerHTML = '<?php echo $porcentaje_comision; ?>';
     
     while (contador<='<?php echo $nro_items; ?>'){
@@ -974,14 +974,14 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         document.getElementById("moneda_prima_neta["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("prima_neta_exenta["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
         document.getElementById("moneda_prima_iva["+contador.toString()+"]").innerHTML  ='<?php echo $moneda_poliza; ?>';
-        document.getElementById("monto_asegurado["+contador.toString()+"]").innerHTML = monto_aseg[contador.toString()-1];
+        document.getElementById("monto_asegurado["+contador.toString()+"]").innerHTML = (monto_aseg[contador.toString()-1]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
         document.getElementById("tasa_afecta["+contador.toString()+"]").innerHTML = tasa_afecta[contador.toString()-1];
         document.getElementById("tasa_exenta["+contador.toString()+"]").innerHTML = tasa_exenta[contador.toString()-1];
-        document.getElementById("prima_neta_afecta["+contador.toString()+"]").innerHTML = prima_afecta[contador.toString()-1];
-        document.getElementById("prima_exenta["+contador.toString()+"]").innerHTML = prima_exenta[contador.toString()-1];
-        document.getElementById("prima_bruta["+contador.toString()+"]").innerHTML = prima_bruta[contador.toString()-1];
+        document.getElementById("prima_neta_afecta["+contador.toString()+"]").innerHTML = (prima_afecta[contador.toString()-1]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById("prima_exenta["+contador.toString()+"]").innerHTML = (prima_exenta[contador.toString()-1]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById("prima_bruta["+contador.toString()+"]").innerHTML = (prima_bruta[contador.toString()-1]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
         document.getElementById("comentarios_ext").innerHTML = '<?php echo $comentarios_ext; ?>';
-        document.getElementById("prima_afecta_iva["+contador.toString()+"]").innerHTML = prima_afecta_iva[contador.toString()-1];
+        document.getElementById("prima_afecta_iva["+contador.toString()+"]").innerHTML = (prima_afecta_iva[contador.toString()-1]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2 });
         
        // document.getElementById("Prima_con_IVA_vigencia["+contador.toString()+"]").innerHTML = wtf[contador.toString()-1];
      
@@ -1045,5 +1045,7 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
         
         document.getElementById("BotonPDF").style.display="none";
     }
-
+function sumar_arreglo(a) {
+  return (a.length && parseFloat(a[0]) + sumar_arreglo(a.slice(1))) || 0;
+}
 </script>
