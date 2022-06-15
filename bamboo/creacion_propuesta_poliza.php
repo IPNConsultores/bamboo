@@ -2322,6 +2322,7 @@ function vencimientogarantia(){
           'venc_gtia': venc_gtia,
           'numero_item':numero_item,
           //Póliza
+          'id_poliza': <?php echo $id; ?>
           'nro_poliza': document.getElementById("nro_poliza").value,
           'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           'comision': document.getElementById("comision").value,
