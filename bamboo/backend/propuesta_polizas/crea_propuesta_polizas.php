@@ -373,7 +373,8 @@ switch ($_POST["accion"]) {
       $comisionneg= cambia_puntos_por_coma(estandariza_info($_POST["comisionneg"]));
       $boletaneg= estandariza_info($_POST["boletaneg"]);
       $boleta= estandariza_info($_POST["boleta"]);
-      
+      $id_poliza= estandariza_info($_POST["id_poliza"]);
+
       $query='UPDATE polizas_2 SET numero_poliza=\'' . $nro_poliza . '\', fecha_propuesta=\'' . $fechaprop . '\', rut_proponente=\'' . $rut_prop . '\', dv_proponente=\'' . $dv_prop . '\', compania=\'' . $selcompania . '\',vigencia_inicial=\'' . $fechainicio . '\',vigencia_final=\'' . $fechavenc . '\',ramo=\'' . $ramo . '\',moneda_poliza=\'' . $moneda_poliza . '\',vendedor=\'' . $vendedor . '\',forma_pago=\'' . $forma_pago . '\',moneda_valor_cuota=\'' . $moneda_cuota . '\',valor_cuota=\'' . $valor_cuota . '\',fecha_primera_cuota=\'' . $fechaprimer . '\',nro_cuotas=\'' . $cuotas . '\',comentarios_int=\'' . $comentarios_int . '\',comentarios_ext=\'' . $comentarios_ext . '\',porcentaje_comision=\'' . $porcentaje_comision . '\' , fecha_envio_propuesta=\'' . $fecha_envio_propuesta . '\' , comision=\'' . $comision . '\' , comision_bruta=\'' . $comisionbruta . '\' , comision_neta=\'' . $comisionneta . '\' , depositado_fecha=\'' . $fechadeposito . '\' , comision_negativa=\'' . $comisionneg . '\', boleta_negativa=\'' . $boletaneg . '\' , numero_boleta=\'' . $boleta . '\', fecha_emision_poliza=\'' . $fecha_emision_poliza . '\' WHERE id=\'' . $id_poliza . '\'';
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza Póliza', '".str_replace("'","**",$query)."','poliza','".$nro_poliza."', '".$_SERVER['PHP_SELF']."')");
