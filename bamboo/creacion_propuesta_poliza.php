@@ -2492,7 +2492,7 @@ function vencimientogarantia(){
  function modopago() {
     if (document.getElementById("modo_pago").value == "Contado") {
         document.getElementById("cuotas").disabled = true;
-        document.getElementById("cuotas").value = "Contado";
+        document.getElementById("cuotas").value = "Sin cuotas";
         
     } else {
         document.getElementById("cuotas").disabled = false;
