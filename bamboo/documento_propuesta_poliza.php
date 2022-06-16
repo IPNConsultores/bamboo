@@ -2,9 +2,9 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-$_SERVER[ "REQUEST_METHOD" ] = "POST";
-$_POST["accion"] = 'generar_documento';
-$_POST["numero_propuesta"]='P100006';
+//$_SERVER[ "REQUEST_METHOD" ] = "POST";
+//$_POST["accion"] = 'generar_documento';
+//$_POST["numero_propuesta"]='P100006';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
