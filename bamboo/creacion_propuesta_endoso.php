@@ -613,7 +613,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
+            //document.getElementById("monto").value = '< ?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
             //document.getElementById("prima_neta_exenta").value = '< ?php echo $total_prima_exenta*1; ?>';
             //document.getElementById("iva").value = '< ?php echo $total_prima_afecta*0.19; ?>';
