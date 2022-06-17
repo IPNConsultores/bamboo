@@ -791,7 +791,7 @@ function estandariza_info( $data ) {
       <div class="card-header" id="headingfour" style="background-color:whitesmoke">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                              data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour"
+                              data-target="#collapsefour" aria-expanded="false" id=pestana_poliza aria-controls="collapsefour"
                               style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();dosdecimales(comision.id);">Información de Póliza </button>
         </h5>
       </div>
@@ -1499,6 +1499,7 @@ console.log(orgn)
           }
           case 'crear_poliza':{
 
+            document.getElementById("pestana_poliza").click();
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
