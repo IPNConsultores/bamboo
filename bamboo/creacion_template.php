@@ -145,8 +145,10 @@ $camino =  $_POST[ "tipo" ];
             <option value="null">Selecciona una instancia</option>
           <option value="info_cotizar" <?php if ($instancia == "info_cotizar") echo "selected" ?>>Información para Cotizar</option>
           <option value="envio_cotizacion" <?php if ($instancia == "envio_cotizacion") echo "selected" ?>>Envío de Cotización</option>
-          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza</option>
-          <option value="reenvio_poliza" <?php if ($instancia == "reenvio_poliza") echo "selected" ?>>Reenviar póliza</option>
+          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza - Un Item</option>
+          <option value="reenvio_poliza" <?php if ($instancia == "reenvio_poliza") echo "selected" ?>>Reenviar póliza - Un Item</option>
+          <option value="varios_items_envio_poliza" <?php if ($instancia == "varios_items_envio_poliza") echo "selected" ?>>Enviar póliza - Varios Items</option>
+          <option value="varios_items_reenvio_poliza" <?php if ($instancia == "varios_items_reenvio_poliza") echo "selected" ?>>Reenviar póliza - Varios Items</option>
         </select>
       </div>
       <div class="col-6">
