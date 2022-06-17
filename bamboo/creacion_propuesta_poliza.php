@@ -593,96 +593,7 @@ function estandariza_info( $data ) {
   
                 <br>
                 <br>
-                    <label for="infopago"><b>Información de Pago</b></label>
-          <br>
-          <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <label for="formapago">Forma de Pago</label>
-              <label style="color: darkred">&nbsp; *</label>
-              <div class="form" style="display: flex; align-items: center;">
-                <select class="form-control" name="modo_pago" id="modo_pago"
-                                          onChange="modopago();" style="width:30%;" required>
-                  <option value="">-</option>
-                  <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
-                  <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
-                  <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
-                  <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
-                </select>
-                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;" required>
-                  <option value="">Nro Cuotas</option>
-                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Sin cuotas") echo "selected" ?>>Sin Cuotas</option>
-                  <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
-                  <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
-                  <option value="4 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
-                  <option value="5 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
-                  <option value="6 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
-                  <option value="7 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
-                  <option value="8 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
-                  <option value="9 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
-                  <option value="10 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
-                  <option value="11 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
-                  <option value="12 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
-                  <option value="13 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
-                  <option value="14 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
-                  <option value="15 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
-                  <option value="16 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
-                  <option value="17 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
-                  <option value="18 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
-                  <option value="19 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
-                  <option value="20 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                  <option value="21 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
-                  <option value="22 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
-                  <option value="23 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
-                  <option value="24 Cuotas"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="valorcuota">Valor Cuota</label>
-              <div class="form-inline">
-                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:30%;">
-                  <option value="UF"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
-                  <option value="USD"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
-                  <option value="CLP"
-                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
-                </select>
-                <input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="valorcuota" id="valorcuota"
-                                           style="width:42%;">
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="fechaprimer">Fecha Primera Cuota</label>
-              <div class="md-form">
-                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
-              </div>
-            </div>
-          </div>
-          
-          <br>
-          <br>
+                    
              <label for="pago"><b>Vendedor y Corredor</b></label>
               <br>
             <div class="form-row">
@@ -814,7 +725,96 @@ function estandariza_info( $data ) {
                                           class="form-control"  max= "9999-12-31" style="width:72%;">
           </div>
         </div>
-      </div>
+      </div>´
+      <label for="infopago"><b>Información de Pago</b></label>
+          <br>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="formapago">Forma de Pago</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <div class="form" style="display: flex; align-items: center;">
+                <select class="form-control" name="modo_pago" id="modo_pago"
+                                          onChange="modopago();" style="width:30%;" required>
+                  <option value="">-</option>
+                  <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
+                  <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
+                  <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
+                  <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
+                </select>
+                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;" required>
+                  <option value="">Nro Cuotas</option>
+                  <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Sin cuotas") echo "selected" ?>>Sin Cuotas</option>
+                  <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
+                  <option value="3 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "3 Cuotas") echo "selected" ?>>3 Cuotas</option>
+                  <option value="4 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "4 Cuotas") echo "selected" ?>>4 Cuotas</option>
+                  <option value="5 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "5 Cuotas") echo "selected" ?>>5 Cuotas</option>
+                  <option value="6 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "6 Cuotas") echo "selected" ?>>6 Cuotas</option>
+                  <option value="7 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "7 Cuotas") echo "selected" ?>>7 Cuotas</option>
+                  <option value="8 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "8 Cuotas") echo "selected" ?>>8 Cuotas</option>
+                  <option value="9 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "9 Cuotas") echo "selected" ?>>9 Cuotas</option>
+                  <option value="10 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "10 Cuotas") echo "selected" ?>>10 Cuotas</option>
+                  <option value="11 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "11 Cuotas") echo "selected" ?>>11 Cuotas</option>
+                  <option value="12 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "12 Cuotas") echo "selected" ?>>12 Cuotas</option>
+                  <option value="13 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "13 Cuotas") echo "selected" ?>>13 Cuotas</option>
+                  <option value="14 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "14 Cuotas") echo "selected" ?>>14 Cuotas</option>
+                  <option value="15 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "15 Cuotas") echo "selected" ?>>15 Cuotas</option>
+                  <option value="16 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "16 Cuotas") echo "selected" ?>>16 Cuotas</option>
+                  <option value="17 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "17 Cuotas") echo "selected" ?>>17 Cuotas</option>
+                  <option value="18 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "18 Cuotas") echo "selected" ?>>18 Cuotas</option>
+                  <option value="19 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "19 Cuotas") echo "selected" ?>>19 Cuotas</option>
+                  <option value="20 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "20 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                  <option value="21 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "21 Cuotas") echo "selected" ?>>21 Cuotas</option>
+                  <option value="22 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "22 Cuotas") echo "selected" ?>>22 Cuotas</option>
+                  <option value="23 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "23 Cuotas") echo "selected" ?>>23 Cuotas</option>
+                  <option value="24 Cuotas"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "24 Cuotas") echo "selected" ?>>24 Cuotas</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="valorcuota">Valor Cuota</label>
+              <div class="form-inline">
+                <select class="form-control" name="moneda_cuota" id="moneda_cuota" style="width:30%;">
+                  <option value="UF"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "UF") echo "selected" ?>>UF</option>
+                  <option value="USD"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "USD") echo "selected" ?>>USD</option>
+                  <option value="CLP"
+                                              <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $moneda_cuota == "CLP") echo "selected" ?>>CLP</option>
+                </select>
+                <input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="valorcuota" id="valorcuota"
+                                           style="width:42%;">
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="fechaprimer">Fecha Primera Cuota</label>
+              <div class="md-form">
+                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
+              </div>
+            </div>
+          </div>
+          
+          <br>
           <br> 
           <label for = "datos_poliza"><b>Comisión</b></label>
           <br>
@@ -1588,7 +1588,8 @@ console.log(orgn)
             break;
           }
           case 'modifica_poliza':{
-            
+            console.log("quitar required de fechaprop");
+            $("#fechaprop").removeAttr("required");
             var validador = ('<?php echo json_encode($rut_completo_aseg); ?>').includes('<?php echo $rut_completo_prop; ?>');
             console.log(validador);
 
@@ -1758,7 +1759,7 @@ console.log(orgn)
             break;
           }
           case 'crear_poliza_web':{
-
+            $("#fechaprop").removeAttr("required");
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo4").style.display = "flex";
@@ -1790,7 +1791,7 @@ console.log(orgn)
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             console.log("quitar required de fechaprop");
-            $("#fechaprop").removeAttr("required");
+            
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
@@ -2281,6 +2282,7 @@ function vencimientogarantia(){
           //$.redirect('/bamboo/test_felipe2.php', { 
             'accion': 'modifica_poliza',
           //Propuesta
+          
           'rutprop': document.getElementById("rutprop").value,
           'fechaprop': document.getElementById("fechaprop").value,
           'numero_propuesta': document.getElementById("nro_propuesta").value, //automàtica
@@ -2323,7 +2325,7 @@ function vencimientogarantia(){
           'venc_gtia': venc_gtia,
           'numero_item':numero_item,
           //Póliza
-          'id_poliza': <?php echo $id; ?>,
+          'id_poliza': '<?php echo $id; ?>',
           'nro_poliza': document.getElementById("nro_poliza").value,
           'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           'comision': document.getElementById("comision").value,
