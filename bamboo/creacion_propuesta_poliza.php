@@ -605,15 +605,7 @@ function estandariza_info( $data ) {
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 mb-3">
-              <label>Porcentaje Comisión del Corredor</label>
-              <div class="form-inline">
-                <input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" id="porcentaje_comsion"
-                                          name="porcentaje_comsion" onChange="calculacomision()">
-                <div class="input-group-prepend"><span class="input-group-text"
-                                              id="porcentaje_comi">%</span></div>
-              </div>
-            </div>
+
             </div>
           </div>
         </div>
@@ -703,7 +695,7 @@ function estandariza_info( $data ) {
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                               data-target="#collapsefour" aria-expanded="false" id=pestana_poliza aria-controls="collapsefour"
-                              style="color:#536656" onclick="window.scrollTo(0,0); calculacomision();dosdecimales(comision.id);">Información de Póliza </button>
+                              style="color:#536656" onclick="window.scrollTo(0,0);">Información de Póliza </button>
         </h5>
       </div>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
@@ -818,7 +810,17 @@ function estandariza_info( $data ) {
           <br> 
           <label for = "datos_poliza"><b>Comisión</b></label>
           <br>
-        <div class="form-row">
+          <div class="form-row">
+         <div class="col-md-4 mb-3">
+              <label>Porcentaje Comisión del Corredor</label>
+              <div class="form-inline">
+                <input type="number"  step="0.01" placeholder="0,00" class="form-control" id="porcentaje_comsion"
+                                          name="porcentaje_comsion" onChange="calculacomision();dosdecimales(comision.id);dosdecimales(this.id);">
+                <div class="input-group-prepend"><span class="input-group-text"
+                                              id="porcentaje_comi">%</span></div>
+              </div>
+            </div>
+        
             <div class="col-md-4 mb-3">
               <label for="comision">Comisión Correspondiente</label>
               <div class="form-inline">
