@@ -10,7 +10,7 @@ function estandariza_info( $data ) {
   return $data;
 }
 require_once "/home/gestio10/public_html/backend/config.php";
-
+//$_POST[ "id_poliza" ]=881;
 //if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
   mysqli_set_charset( $link, 'utf8' );
@@ -73,64 +73,61 @@ $ramo_poliza = str_replace('inc -','INC -',$ramo_poliza);
   // Viene desde póliza
   //if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
 
-    $query =  "SELECT   a.id, estado, tipo_poliza, rut_proponente, dv_proponente, rut_asegurado, dv_asegurado, a.grupo, compania, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, mes_vencimiento, ano_vencimiento, poliza_renovada, ramo, numero_poliza, materia_asegurada, patente_ubicacion, cobertura, deducible, moneda_poliza, FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual, FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta, moneda_comision, FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta, FORMAT(prima_neta, 2, 'de_DE') as prima_neta, FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual, monto_asegurado, numero_propuesta, DATE_FORMAT(fecha_envio_propuesta,'%d-%m-%Y') as fecha_envio_propuesta, endoso, FORMAT(comision, 2, 'de_DE') as comision, FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision, FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta, FORMAT(comision_neta, 2, 'de_DE') as comision_neta, numero_boleta, moneda_comision_negativa, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, nombre_vendedor, forma_pago, moneda_valor_cuota, FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota, nro_cuotas, informacion_adicional, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_asegurado FROM polizas as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;"; 
+    $query =  "SELECT   a.id, a.estado, a.rut_proponente, a.dv_proponente, b.grupo, a.compania, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, a.ramo, a.numero_poliza,moneda_poliza,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision, FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision, FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta, FORMAT(comision_neta, 2, 'de_DE') as comision_neta, numero_boleta, moneda_comision_negativa, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, forma_pago, moneda_valor_cuota, FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota, nro_cuotas, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_proponente FROM polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;"; 
     $resultado_poliza = mysqli_query( $link,$query);
 
 
     While( $row = mysqli_fetch_object( $resultado_poliza ) ) {
-     $estado= $row->estado;
-      $tipo_poliza= $row->tipo_poliza;
-      $rut_proponente= $row->rut_proponente;
-      $dv_proponente= $row->dv_proponente;
-      $rut_asegurado= $row->rut_asegurado;
-      $dv_asegurado= $row->dv_asegurado;
-      $grupo= $row->grupo;
-      $compania= $row->compania;
-      $vigencia_inicial= $row->vigencia_inicial;
-      $vigencia_final= $row->vigencia_final;
-      $mes_vencimiento= $row->mes_vencimiento;
-      $ano_vencimiento= $row->ano_vencimiento;
-      $poliza_renovada= $row->poliza_renovada;
-      $ramo= $row->ramo;
-      $numero_poliza= $row->numero_poliza;
-      $materia_asegurada= $row->materia_asegurada;
-      $patente_ubicacion= $row->patente_ubicacion;
-      $cobertura= $row->cobertura;
-      $deducible= $row->deducible;
-      $moneda_poliza= $row->moneda_poliza;
-      $prima_afecta= $row->prima_afecta;
-      $moneda_comision= $row->moneda_comision;
-      $prima_exenta= $row->prima_exenta;
-      $prima_neta= $row->prima_neta;
-      $prima_bruta_anual= $row->prima_bruta_anual;
-      $monto_asegurado= $row->monto_asegurado;
-      $numero_propuesta= $row->numero_propuesta;
-      $fecha_envio_propuesta= $row->fecha_envio_propuesta;
-      $endoso= $row->endoso;
-      $comision= $row->comision;
-      $porcentaje_comision= $row->porcentaje_comision;
-      $comision_bruta= $row->comision_bruta;
-      $comision_neta= $row->comision_neta;
-      $numero_boleta= $row->numero_boleta;
-      $moneda_comision_negativa= $row->moneda_comision_negativa;
-      $comision_negativa= $row->comision_negativa;
-      $boleta_negativa= $row->boleta_negativa;
-      $depositado_fecha= $row->depositado_fecha;
-      $vendedor= $row->vendedor;
-      $nombre_vendedor= $row->nombre_vendedor;
-      $forma_pago= $row->forma_pago;
-      $moneda_valor_cuota= $row->moneda_valor_cuota;
-      $valor_cuota= $row->valor_cuota;
-      $fecha_primera_cuota= $row->fecha_primera_cuota;
-      $nro_cuotas= $row->nro_cuotas;
-      $informacion_adicional= $row->informacion_adicional;
-      $id = $row->id;
-      $nombre_asegurado = $row->nombre_asegurado;
-    
-    
-      
+        $id = $row->id;
+        $estado= $row->estado;
+        $rut_proponente= $row->rut_proponente;
+        $dv_proponente= $row->dv_proponente;
+        $grupo= $row->grupo;
+        $compania= $row->compania;
+        $vigencia_inicial= $row->vigencia_inicial;
+        $vigencia_final= $row->vigencia_final;
+        $ramo= $row->ramo;
+        $numero_poliza= $row->numero_poliza;
+        $moneda_poliza= $row->moneda_poliza;
+        $moneda_comision= $row->moneda_comision;
+        $comision= $row->comision;
+        $porcentaje_comision= $row->porcentaje_comision;
+        $comision_bruta= $row->comision_bruta;
+        $comision_neta= $row->comision_neta;
+        $numero_boleta= $row->numero_boleta;
+        $moneda_comision_negativa= $row->moneda_comision_negativa;
+        $comision_negativa= $row->comision_negativa;
+        $boleta_negativa= $row->boleta_negativa;
+        $depositado_fecha= $row->depositado_fecha;
+        $vendedor= $row->vendedor;
+        $forma_pago= $row->forma_pago;
+        $moneda_valor_cuota= $row->moneda_valor_cuota;
+        $valor_cuota= $row->valor_cuota;
+        $fecha_primera_cuota= $row->fecha_primera_cuota;
+        $nro_cuotas= $row->nro_cuotas;
+        $nombre_proponente=$row->nombre_proponente;
       
     }
+    $query_items="SSELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_asegurado FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_poliza='" . $numero_poliza . "'";
+    $resultado_items = mysqli_query( $link,$query);
+    
+    While( $row_items = mysqli_fetch_object( $resultado_items ) ) {
+            $rut_asegurado= $row_items->rut_asegurado;
+            $dv_asegurado= $row_items->dv_asegurado;
+            $nombre_asegurado = $row_items->nombre_asegurado;
+            $materia_asegurada= $row_items->materia_asegurada;
+            $patente_ubicacion= $row_items->patente_ubicacion;
+            $cobertura= $row_items->cobertura;
+            $deducible= $row_items->deducible;
+            $prima_afecta= $row_items->prima_afecta;
+            $prima_exenta= $row_items->prima_exenta;
+            $prima_neta= $row_items->prima_neta;
+            $prima_bruta_anual= $row_items->prima_bruta_anual;
+            $monto_asegurado= $row_items->monto_asegurado;
+            $numero_propuesta= $row_items->numero_propuesta;
+            $fecha_envio_propuesta= $row_items->fecha_envio_propuesta;
+    }
+    
     
     $template = str_replace( '_[NRO_POLIZA]_', $numero_poliza, $template );
     $template = str_replace( '_[NOMBRE_CLIENTE]_', $nombre_asegurado, $template );
@@ -308,10 +305,10 @@ $url = htmlspecialchars( "https://mail.google.com/mail/?view=cm&fs=1&to=$destina
     <label><b>Instancia</b></label>
     <select class="form-control" name="instancia" id="instancia">
       
-          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza - Un Item</option>
-          <option value="reenvio_poliza" <?php if ($instancia == "reenvio_poliza") echo "selected" ?>>Reenviar póliza - Un Item</option>
-          <option value="varios_items_envio_poliza" <?php if ($instancia == "varios_items_envio_poliza") echo "selected" ?>>Enviar póliza - Varios Items</option>
-          <option value="varios_items_reenvio_poliza" <?php if ($instancia == "varios_items_reenvio_poliza") echo "selected" ?>>Reenviar póliza - Varios Items</option>
+          <option value="envio_poliza" <?php if ($instancia == "envio_poliza") echo "selected" ?>>Enviar póliza - Un Ítem</option>
+          <option value="reenvio_poliza" <?php if ($instancia == "reenvio_poliza") echo "selected" ?>>Reenviar póliza - Un Ítem</option>
+          <option value="varios_items_envio_poliza" <?php if ($instancia == "varios_items_envio_poliza") echo "selected" ?>>Enviar póliza - Varios Ítems</option>
+          <option value="varios_items_reenvio_poliza" <?php if ($instancia == "varios_items_reenvio_poliza") echo "selected" ?>>Reenviar póliza - Varios Ítems</option>
     </select>
   </div>
   <div class="col" style="align-self:flex-end">
