@@ -8,7 +8,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crea_propuesta_endoso';
+//$_POST["accion"] = 'crear_endoso';
 //$_POST["numero_poliza"]='872';
 //$_POST["numero_propuesta"]="E000004";
 $numero_propuesta='';
@@ -541,8 +541,12 @@ function validados(){
      var dice = document.getElementById('dice').value;
      var debe = document.getElementById('debe_decir').value;
      var motivo = document.getElementById('motivo_endoso').value;
+     var orgn = '<?php echo $camino; ?>';
+     var nro_endoso = document.getElementById('nro_endoso').value;
      
-    if(descripcion =='' || dice ==''|| debe ==''|| motivo ==null){
+    if(orgn =="crear_endoso"){
+        
+        if (descripcion =='' || dice ==''|| debe ==''|| motivo ==null || nro_endoso ==""){
         
         alert("Hay Campos Requeditos Sin Llenar")
         
@@ -551,6 +555,25 @@ function validados(){
     else {
         
         genera_propuesta()
+    }
+        
+        
+    }
+     
+    else
+    {
+        
+    if (descripcion =='' || dice ==''|| debe ==''|| motivo ==null){
+        
+        alert("Hay Campos Requeditos Sin Llenar")
+        
+    }
+    
+    else {
+        
+        genera_propuesta()
+    }
+    
     }
 
     
