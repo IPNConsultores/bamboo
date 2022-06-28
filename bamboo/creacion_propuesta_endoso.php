@@ -153,6 +153,14 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
           <div class="card-body" id="card-body-one">
             
         <div class="form-row">
+            <div class="col-5" id="caja_numero_endoso" style="display:none">
+                    <label for="monto"><b>Número de Endoso</b></label>
+                    <label style="color: darkred">&nbsp; *</label>
+                    <div class="md-form">
+                    <input type="text" class="form-control" id="nro_endoso" name="nro_endoso">
+                    </div>
+                
+            </div>
             <div class="col-5">
                 <label for = "motivo_endoso"><b>Motivo del Endoso</b></label>
                 <label style="color: darkred">*</label>
@@ -464,16 +472,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             </div>
         <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
          <div class="card-body" id="card-body-three">
-            <div class="form-row" id="caja_numero_endoso" style="display:none">
-                <div class="col-3">
-                    <label for="monto"><b>Número de Endoso</b></label>
-                    <label style="color: darkred">&nbsp; *</label>
-                    <div class="md-form">
-                    <input type="text" class="form-control" id="nro_endoso" name="nro_endoso">
-                    </div>
-                </div>
-            </div>
-            <br>
+
             <div class="form-row">
                 <label for="comentario_externo"><b>Comentarios </b></label>
             <br>
@@ -722,7 +721,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("titulo2").style.display = "flex";
                 document.getElementById("titulo3").style.display = "none";
                 document.getElementById("titulo4").style.display = "none";
-                document.getElementById("caja_numero_endoso").style.display = "flex";
+                document.getElementById("caja_numero_endoso").style.display = "block";
                 document.getElementById("nro_endoso").required = "true";              
                 if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";

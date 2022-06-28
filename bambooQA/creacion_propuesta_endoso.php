@@ -116,6 +116,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
 </head>
 
 <body>
+
 <?php include 'header2.php' ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -152,6 +153,14 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
           <div class="card-body" id="card-body-one">
             
         <div class="form-row">
+            <div class="col-5" id="caja_numero_endoso" style="display:none">
+                    <label for="monto"><b>Número de Endoso</b></label>
+                    <label style="color: darkred">&nbsp; *</label>
+                    <div class="md-form">
+                    <input type="text" class="form-control" id="nro_endoso" name="nro_endoso">
+                    </div>
+                
+            </div>
             <div class="col-5">
                 <label for = "motivo_endoso"><b>Motivo del Endoso</b></label>
                 <label style="color: darkred">*</label>
@@ -162,6 +171,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <option value="Endoso de Disminución o Anulación">Endoso de Disminución o Anulación</option>
                     <option value="Endoso Prorroga">Endoso Prorroga</option>
                     <option value="Endoso Sin Movimiento">Endoso Sin Movimiento</option>
+                    <option value="Endoso de Cancelación">Endoso de Cancelación</option>
                 </select>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
@@ -171,7 +181,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <div class="md-form">
 
                    <input placeholder="Selected date" type="date" name="fecha_prorroga" id="fecha_prorroga" onchange="prorroga()" value=""
-                      class="form-control" max= "9999-12-31" required>
+                      class="form-control" max= "9999-12-31">
                       <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
                 </div>
           </div>
@@ -185,8 +195,8 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                     <select class="form-control" name="ramo" id="ramo" onChange="cambia_deducible();" required> 
                                         
                   <option value="">Selecciona un ramo</option>
-                  <option value="AC - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
-                  <option value="AC - Protección Financiera">ACCIDENTES PERSONALES - Protección Financiera</option>
+                  <option value="AP - Accidentes Personales">ACCIDENTES PERSONALES - Accidentes Personales</option>
+                  <option value="AP - Protección Financiera">ACCIDENTES PERSONALES - Protección Financiera</option>
                   <option value="ASISTENCIA EN VIAJE">ASISTENCIA EN VIAJE</option>
                   <option value="INC - Condominio">INCENDIO - Condominio</option>
                   <option value="INC - Hogar">INCENDIO - Hogar</option>
@@ -345,7 +355,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col">
                 <label for="descripción_endoso"><b>Descripción del Endoso</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='descripcion_endoso' name='descripcion_endoso' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='descripcion_endoso' name='descripcion_endoso' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
@@ -357,14 +367,14 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             <div class="col-6">
                 <label for="descripción_endoso"><b>Dice</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='dice' name='dice' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='dice' name='dice' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
             <div class="col-6">
                 <label for="descripción_endoso"><b>Debe Decir</b></label>
                 <label style="color: darkred">&nbsp; *</label>
-                <textarea class="form-control" rows="2" style="height:100px" id='debe_decir' name='debe_decir' style="text-indent:0px" ;></textarea>
+                <textarea class="form-control" rows="2" style="height:100px" id='debe_decir' name='debe_decir' style="text-indent:0px" ; required></textarea>
                 
              <br>
             </div>
@@ -428,7 +438,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
                 <label for="monto"><b>IVA</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
+                    <input type="number" step="0.01" placeholder="0,00" class="form-control" id="iva" name="iva" onchange="calculaprimatotal();">
                 </div>
             </div>
             <div class="col-2">
@@ -462,16 +472,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
             </div>
         <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
          <div class="card-body" id="card-body-three">
-            <div class="form-row" id="caja_numero_endoso" style="display:none">
-                <div class="col-3">
-                    <label for="monto"><b>Número de Endoso</b></label>
-                    <label style="color: darkred">&nbsp; *</label>
-                    <div class="md-form">
-                    <input type="text" class="form-control" id="nro_endoso" name="nro_endoso">
-                    </div>
-                </div>
-            </div>
-            <br>
+
             <div class="form-row">
                 <label for="comentario_externo"><b>Comentarios </b></label>
             <br>
@@ -489,13 +490,18 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
     
 </form>
 <br>
+ <button class="btn" type="button" style="background-color: #536656; color: white; display:none"
+              id='boton_submit' onclick=" genera_propuesta()"></button>
+              
 <button class="btn" type="button" style="background-color: #536656; color: white"
-              id='boton_prueba' onclick=" genera_propuesta()">Registrar</button>
+              id='boton_prueba' onclick=" validados()">Registrar</button>
 <br>
 </body>
 <foot>
     <br>
 </foot>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -507,9 +513,48 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_end
 <script src="/assets/js/bootstrap-notify.js"></script>
 <script src="/assets/js/bootstrap-notify.min.js"></script>
 
+
+
+
+
 <script>
 
 
+$("#boton_prueba").click(function(e){
+
+    blnFormValidity= $('#formulario')[0].checkValidity()
+   document.getElementById('formulario').classList.add('was-validated');
+    if(blnFormValidity==false){
+        
+         
+        e.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        return false
+    }
+
+})
+
+function validados(){
+    
+     var descripcion = document.getElementById('descripcion_endoso').value;
+     var dice = document.getElementById('dice').value;
+     var debe = document.getElementById('debe_decir').value;
+     var motivo = document.getElementById('motivo_endoso').value;
+     
+    if(descripcion =='' || dice ==''|| debe ==''|| motivo ==null){
+        
+        alert("Hay Campos Requeditos Sin Llenar")
+        
+    }
+    
+    else {
+        
+        genera_propuesta()
+    }
+
+    
+}
 
 function cambio_motivo(){
     
@@ -518,11 +563,25 @@ function cambio_motivo(){
     if(motivo_endoso == "Endoso Prorroga") {
       
         document.getElementById("col_fecha_ingreso").style.display ="block";
-    }   
+    }  
+    
     
     else{
         
         document.getElementById("col_fecha_ingreso").style.display ="none";
+    }
+    
+    if (motivo_endoso =="Endoso Sin Movimiento"){
+        
+        document.getElementById("monto").value = "";
+        document.getElementById("tasa_afecta").value = "";
+        document.getElementById("tasa_exenta").value = "";
+        document.getElementById("prima_neta_exenta").value = "";
+        document.getElementById("iva").value = "";
+        document.getElementById("prima_neta_afecta").value = "";
+        document.getElementById("prima_total").value = "";
+        
+        
     }
     
 }
@@ -553,12 +612,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
-            document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
+            //document.getElementById("monto").value = '< ?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
-            document.getElementById("prima_neta_exenta").value = '<?php echo $total_prima_exenta*1; ?>';
-            document.getElementById("iva").value = '<?php echo $total_prima_afecta*0.19; ?>';
-            document.getElementById("prima_neta_afecta").value = '<?php echo $total_prima_afecta*1; ?>';
-            document.getElementById("prima_total").value = '<?php echo $total_prima_bruta*1; ?>';
+            //document.getElementById("prima_neta_exenta").value = '< ?php echo $total_prima_exenta*1; ?>';
+            //document.getElementById("iva").value = '< ?php echo $total_prima_afecta*0.19; ?>';
+            //document.getElementById("prima_neta_afecta").value = '< ?php echo $total_prima_afecta*1; ?>';
+            //document.getElementById("prima_total").value = '< ?php echo $total_prima_bruta*1; ?>';
             document.getElementById("titulo1").style.display = "flex";
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";
@@ -662,7 +721,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("titulo2").style.display = "flex";
                 document.getElementById("titulo3").style.display = "none";
                 document.getElementById("titulo4").style.display = "none";
-                document.getElementById("caja_numero_endoso").style.display = "flex";
+                document.getElementById("caja_numero_endoso").style.display = "block";
                 document.getElementById("nro_endoso").required = "true";              
                 if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";
@@ -767,7 +826,7 @@ function genera_propuesta(){
 
     switch (camino) {
         case 'crea_propuesta_endoso': {
-          //$.redirect('/bambooQA/test_felipe.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
@@ -797,7 +856,7 @@ function genera_propuesta(){
         break;
         }
         case 'actualiza_propuesta': {
-          //$.redirect('/bambooQA/test_felipe.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
@@ -828,7 +887,7 @@ function genera_propuesta(){
         break;
         }
         case 'crear_endoso': {
-          //$.redirect('/bambooQA/test_felipe.php', {
+          //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bambooQA/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
