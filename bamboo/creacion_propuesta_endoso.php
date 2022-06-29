@@ -72,6 +72,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
         $query = "select * from endosos where numero_endoso='".$_POST["numero_endoso"]."'";
         $resultado = mysqli_query( $link, $query );
         While( $row = mysqli_fetch_object( $resultado ) ) {
+            $numero_propuesta=$row->numero_propuesta_endoso;
             $numero_endoso = $_POST["numero_endoso"];
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
