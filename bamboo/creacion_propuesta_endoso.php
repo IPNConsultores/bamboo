@@ -11,6 +11,8 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //$_POST["accion"] = 'actualiza_endoso';
 //$_POST["numero_poliza"]='872';
 //$_POST["numero_endoso"]="test endoso";
+echo "'".$_POST["numero_propuesta"]."' '";
+echo $_POST["numero_endoso"]."'";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
