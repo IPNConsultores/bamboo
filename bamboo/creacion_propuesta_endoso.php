@@ -10,7 +10,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'actualiza_endoso';
 //$_POST["numero_poliza"]='872';
-//$_POST["numero_endoso"]="test endoso";
+//$_POST["numero_endoso"]="test";
 //echo "'".$_POST["numero_propuesta"]."' '";
 //echo $_POST["numero_endoso"]."'";
 $numero_propuesta='';
@@ -716,6 +716,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               document.getElementById("titulo2").style.display = "none";
               document.getElementById("titulo3").style.display = "flex";
               document.getElementById("titulo4").style.display = "none";
+              document.getElementById("caja_numero_endoso").style.display = "block";
               if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";
             }            
