@@ -276,6 +276,7 @@ function format_endoso(d) {
         '</tr>' +    
         '<tr><td VALIGN=TOP>Acciones</td>' +
         '<td>' +
+        '<button title="Editar Endoso" type="button" id=' + d.numero_endoso + ' name="actualizar_endoso" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Generar documento" type="button" id=' + d.numero_propuesta_endoso + ' name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Buscar información asociada" type="button" id="' + d.numero_endoso + '" name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
@@ -325,9 +326,9 @@ function botones(id, accion, base) {
             }, 'post');
             break;
         }
-        case "crear_endoso": {
+        case "actualizar_endoso": {
             $.redirect('/bamboo/creacion_propuesta_endoso.php', {
-                'numero_propuesta': id,
+                'numero_endoso': id,
                 'accion': accion
             }, 'post');
             break;

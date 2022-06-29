@@ -8,90 +8,91 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_endoso';
+//$_POST["accion"] = 'actualiza_endoso';
 //$_POST["numero_poliza"]='872';
-//$_POST["numero_propuesta"]="E000004";
+//$_POST["numero_propuesta"]="E000007";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
 {
-  $query = "select distinct a.numero_poliza, a.compania, a.id as id_poliza,a.ramo, a.vigencia_inicial, a.vigencia_final, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, CONCAT_WS(' ',b.nombre_cliente, b.apellido_paterno, ' ', b.apellido_materno) as nombre_proponente, FORMAT(sum(c.prima_afecta), 2, 'de_DE') as total_prima_afecta, FORMAT(sum(c.prima_exenta), 2, 'de_DE') as total_prima_exenta, FORMAT(sum(c.prima_neta), 2, 'de_DE') as total_prima_neta, FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE') as total_prima_bruta, FORMAT(sum(c.monto_asegurado), 2, 'de_DE') as total_monto_asegurado, a.moneda_poliza from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.id='".$_POST["numero_poliza"]."'";
-  $resultado = mysqli_query( $link, $query );
-  While( $row = mysqli_fetch_object( $resultado ) ) {
-    $numero_poliza = $row->numero_poliza;
-    $ramo=$row->ramo;
-    $id_poliza = $row->id_poliza;
-    $compania = $row->compania;
-    $vigencia_inicial = $row->vigencia_inicial;
-    $vigencia_final = $row->vigencia_final;
-    $rut_proponente = $row->rut_proponente;
-    $nombre_proponente = $row->nombre_proponente;
-    $total_prima_afecta = $row->total_prima_afecta;
-    $total_prima_exenta = $row->total_prima_exenta;
-    $total_prima_neta = $row->total_prima_neta;
-    $total_prima_bruta = $row->total_prima_bruta;
-    $total_monto_asegurado = $row->total_monto_asegurado;
-    $moneda_poliza = $row->moneda_poliza;
-  }
+        $query = "select distinct a.numero_poliza, a.compania, a.id as id_poliza,a.ramo, a.vigencia_inicial, a.vigencia_final, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, CONCAT_WS(' ',b.nombre_cliente, b.apellido_paterno, ' ', b.apellido_materno) as nombre_proponente, FORMAT(sum(c.prima_afecta), 2, 'de_DE') as total_prima_afecta, FORMAT(sum(c.prima_exenta), 2, 'de_DE') as total_prima_exenta, FORMAT(sum(c.prima_neta), 2, 'de_DE') as total_prima_neta, FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE') as total_prima_bruta, FORMAT(sum(c.monto_asegurado), 2, 'de_DE') as total_monto_asegurado, a.moneda_poliza from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.id='".$_POST["numero_poliza"]."'";
+        $resultado = mysqli_query( $link, $query );
+        While( $row = mysqli_fetch_object( $resultado ) ) {
+            $numero_poliza = $row->numero_poliza;
+            $ramo=$row->ramo;
+            $id_poliza = $row->id_poliza;
+            $compania = $row->compania;
+            $vigencia_inicial = $row->vigencia_inicial;
+            $vigencia_final = $row->vigencia_final;
+            $rut_proponente = $row->rut_proponente;
+            $nombre_proponente = $row->nombre_proponente;
+            $total_prima_afecta = $row->total_prima_afecta;
+            $total_prima_exenta = $row->total_prima_exenta;
+            $total_prima_neta = $row->total_prima_neta;
+            $total_prima_bruta = $row->total_prima_bruta;
+            $total_monto_asegurado = $row->total_monto_asegurado;
+            $moneda_poliza = $row->moneda_poliza;
+        }
 }
-elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] =='crear_endoso')){
-    $query = "select * from propuesta_endosos where numero_propuesta_endoso='".$_POST["numero_propuesta"]."'";
-  $resultado = mysqli_query( $link, $query );
-  While( $row = mysqli_fetch_object( $resultado ) ) {
-    $numero_propuesta = $_POST["numero_propuesta"];
-    $numero_poliza = $row->numero_poliza;
-    $ramo=$row->ramo;
-    $id_poliza = $row->id_poliza;
-    $compania = $row->compania;
-    $vigencia_inicial = $row->vigencia_inicial;
-    $vigencia_final = $row->vigencia_final;
-    $rut_proponente = $row->rut_proponente.'-'.$row->dv_proponente;
-    $nombre_proponente = $row->nombre_proponente;
-    $prima_neta_afecta = $row->prima_neta_afecta;
-    $prima_neta_exenta = $row->prima_neta_exenta;
-    $iva = $row->IVA;
-    $prima_total = $row->prima_total;
-    $total_monto_asegurado = $row->monto_asegurado_endoso;
-    $moneda_poliza_endoso = $row->moneda_poliza_endoso;
-    $tasa_afecta_endoso=$row->tasa_afecta_endoso;
-    $tasa_exenta_endoso=$row->tasa_exenta_endoso;
-    $tipo_endoso=$row->tipo_endoso;
-    $fecha_ingreso=$row->fecha_ingreso;
-    $descripcion_endoso=$row->descripcion_endoso;
-    $dice=$row->dice;
-    $debe_decir=$row->debe_decir;
-    $fecha_prorroga=$row->fecha_prorroga;
-    $comentarios=$row->comentario_endoso;
-  }
+elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_endoso')){
+        $query = "select * from propuesta_endosos where numero_propuesta_endoso='".$_POST["numero_propuesta"]."'";
+        $resultado = mysqli_query( $link, $query );
+        While( $row = mysqli_fetch_object( $resultado ) ) {
+            $numero_propuesta = $_POST["numero_propuesta"];
+            $numero_poliza = $row->numero_poliza;
+            $ramo=$row->ramo;
+            $id_poliza = $row->id_poliza;
+            $compania = $row->compania;
+            $vigencia_inicial = $row->vigencia_inicial;
+            $vigencia_final = $row->vigencia_final;
+            $rut_proponente = $row->rut_proponente.'-'.$row->dv_proponente;
+            $nombre_proponente = $row->nombre_proponente;
+            $prima_neta_afecta = $row->prima_neta_afecta;
+            $prima_neta_exenta = $row->prima_neta_exenta;
+            $iva = $row->IVA;
+            $prima_total = $row->prima_total;
+            $total_monto_asegurado = $row->monto_asegurado_endoso;
+            $moneda_poliza_endoso = $row->moneda_poliza_endoso;
+            $tasa_afecta_endoso=$row->tasa_afecta_endoso;
+            $tasa_exenta_endoso=$row->tasa_exenta_endoso;
+            $tipo_endoso=$row->tipo_endoso;
+            $fecha_ingreso=$row->fecha_ingreso;
+            $descripcion_endoso=str_replace("\r\n", "\\n",$row->descripcion_endoso);
+            $dice=str_replace("\r\n", "\\n",$row->dice);
+            $debe_decir=str_replace("\r\n", "\\n",$row->debe_decir);
+            $fecha_prorroga=$row->fecha_prorroga;
+            $comentarios=str_replace("\r\n", "\\n",$row->comentario_endoso);
+        }
+
 }
-elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crear_endoso'){
-    $query = "select * from endosos where numero_endoso='".$_POST["numero_endoso"]."'";
-  $resultado = mysqli_query( $link, $query );
-  While( $row = mysqli_fetch_object( $resultado ) ) {
-    $numero_endoso = $_POST["numero_endoso"];
-    $numero_poliza = $row->numero_poliza;
-    $ramo=$row->ramo;
-    $id_poliza = $row->id_poliza;
-    $compania = $row->compania;
-    $vigencia_inicial = $row->vigencia_inicial;
-    $vigencia_final = $row->vigencia_final;
-    $rut_proponente = $row->rut_proponente.'-'.$row->dv_proponente;
-    $nombre_proponente = $row->nombre_proponente;
-    $prima_neta_afecta = $row->prima_neta_afecta;
-    $prima_neta_exenta = $row->prima_neta_exenta;
-    $iva = $row->IVA;
-    $prima_total = $row->prima_total;
-    $total_monto_asegurado = $row->monto_asegurado_endoso;
-    $moneda_poliza_endoso = $row->moneda_poliza_endoso;
-    $tasa_afecta_endoso=$row->tasa_afecta_endoso;
-    $tasa_exenta_endoso=$row->tasa_exenta_endoso;
-    $tipo_endoso=$row->tipo_endoso;
-    $fecha_ingreso=$row->fecha_ingreso;
-    $descripcion_endoso=$row->descripcion_endoso;
-    $dice=$row->dice;
-    $debe_decir=$row->debe_decir;
-    $comentario=$row->comentario_endoso;
-  }   
+elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_endoso'){
+        $query = "select * from endosos where numero_endoso='".$_POST["numero_endoso"]."'";
+        $resultado = mysqli_query( $link, $query );
+        While( $row = mysqli_fetch_object( $resultado ) ) {
+            $numero_endoso = $_POST["numero_endoso"];
+            $numero_poliza = $row->numero_poliza;
+            $ramo=$row->ramo;
+            $id_poliza = $row->id_poliza;
+            $compania = $row->compania;
+            $vigencia_inicial = $row->vigencia_inicial;
+            $vigencia_final = $row->vigencia_final;
+            $rut_proponente = $row->rut_proponente.'-'.$row->dv_proponente;
+            $nombre_proponente = $row->nombre_proponente;
+            $prima_neta_afecta = $row->prima_neta_afecta;
+            $prima_neta_exenta = $row->prima_neta_exenta;
+            $iva = $row->IVA;
+            $prima_total = $row->prima_total;
+            $total_monto_asegurado = $row->monto_asegurado_endoso;
+            $moneda_poliza_endoso = $row->moneda_poliza_endoso;
+            $tasa_afecta_endoso=$row->tasa_afecta_endoso;
+            $tasa_exenta_endoso=$row->tasa_exenta_endoso;
+            $tipo_endoso=$row->tipo_endoso;
+            $fecha_ingreso=$row->fecha_ingreso;
+            $descripcion_endoso=str_replace("\r\n", "\\n",$row->descripcion_endoso);
+            $dice=str_replace("\r\n", "\\n",$row->dice);
+            $debe_decir=str_replace("\r\n", "\\n",$row->debe_decir);
+            $comentario=str_replace("\r\n", "\\n",$row->comentario_endoso);
+        } 
 }
 ?>
 <!DOCTYPE html>
@@ -683,7 +684,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                break;
                
            }
-           case 'editar_endoso':{
+           case 'actualiza_endoso':{
             document.getElementById("ramo").value = '<?php echo $ramo; ?>';
             document.getElementById("compania").value = '<?php echo $compania; ?>';
             document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
@@ -910,6 +911,38 @@ function genera_propuesta(){
         break;
         }
         case 'crear_endoso': {
+          //$.redirect('/bamboo/test_felipe.php', {
+        $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
+          'tipo_endoso':document.getElementById('motivo_endoso').value,
+          'ramo': document.getElementById('ramo').value,
+          'compania': document.getElementById('compania').value,
+          'nro_poliza': document.getElementById('nro_poliza').value,
+          'fecha_ingreso':document.getElementById('fecha_ingreso').value,
+          'fecha_vigencia_inicial': document.getElementById('fecha_vigencia_inicial').value,
+          'fecha_vigencia_final': document.getElementById('fecha_vigencia_final').value,
+          'rutprop':document.getElementById('rutprop').value,
+          'nombre': document.getElementById('nombre_prop').value,
+          'descripcion_endoso': document.getElementById('descripcion_endoso').value,
+          'dice':document.getElementById('dice').value,
+          'debe_decir': document.getElementById('debe_decir').value,
+          'monto': document.getElementById('monto').value,
+          'moneda_poliza':document.getElementById('moneda_poliza').value,
+          'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
+          'iva': document.getElementById('iva').value,
+          'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_total': document.getElementById('prima_total').value,
+          'tasa_afecta': document.getElementById('tasa_afecta').value,
+          'tasa_exenta': document.getElementById('tasa_exenta').value,
+          'id_poliza':'<?php echo $id_poliza; ?>',
+          'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
+          'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_prorroga': document.getElementById('fecha_prorroga').value,
+          'comentario_endoso':document.getElementById("comentarios").value,
+          'accion':camino
+          }, 'post');
+        break;
+        }
+        case 'actualiza_endoso': {
           //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
