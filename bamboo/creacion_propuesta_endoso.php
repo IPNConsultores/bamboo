@@ -10,7 +10,7 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
 //$_POST["accion"] = 'actualiza_endoso';
 //$_POST["numero_poliza"]='872';
-//$_POST["numero_propuesta"]="E000007";
+//$_POST["numero_endoso"]="test endoso";
 $numero_propuesta='';
 $camino=$_POST["accion"];
 if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
@@ -66,6 +66,7 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
 
 }
 elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_endoso'){
+        //no funcionando
         $query = "select * from endosos where numero_endoso='".$_POST["numero_endoso"]."'";
         $resultado = mysqli_query( $link, $query );
         While( $row = mysqli_fetch_object( $resultado ) ) {
@@ -549,7 +550,7 @@ function validados(){
         
         if (descripcion =='' || dice ==''|| debe ==''|| motivo ==null || nro_endoso ==""){
         
-        alert("Hay Campos Requeditos Sin Llenar")
+        alert("Existen campos obligatorios sin completar")
         
     }
     
