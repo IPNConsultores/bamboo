@@ -151,7 +151,9 @@ While($row2=mysqli_fetch_object($resultado2))
                     </tr>
 
             </table>
-                        <div id="botones_poliza"></div>
+            <div id="botones_poliza">
+            <button title="Descargar_excel_polizas" id="boton_descarga_excel" type="button"  onclick="descarga_excel();">Descargar Excel <i class="fas fa-file-excel"></i></button>
+            </div>
                     </div>
                 </div>
             </div>
@@ -1035,5 +1037,11 @@ function genera_data(data) {
     document.getElementById("fec_max").value=formateoFechas(fin);
     table.draw();
     });
-    
+
+    function descarga_excel(){
+    var dias=document.getElementById("busqueda_dias").value;
+     $.redirect('/bamboo/backend/polizas/genera_excel_polizas_filtradas.php', {
+    'filtro_dias': dias
+    }, 'get');
+}
 </script>
