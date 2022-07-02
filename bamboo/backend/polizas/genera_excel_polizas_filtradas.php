@@ -23,7 +23,7 @@ left join clientes as c
 on a.rut_proponente=c.rut_sin_dv
 left join clientes as d 
 on b.rut_asegurado=d.rut_sin_dv
-where b.id is not null DATEDIFF(a.vigencia_final, CURRENT_DATE) + 1  between 0 and ".$dias.";";
+where b.id is not null and DATEDIFF(a.vigencia_final, CURRENT_DATE) + 1  between 0 and ".$dias.";";
 $resultado=mysqli_query($link, $query);
 $excel= new Spreadsheet();
 $hojaActiva=$excel->getActiveSheet();
