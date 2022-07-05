@@ -36,6 +36,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
   
    While( $row = mysqli_fetch_object( $resultado_ramo_poliza ) ) {
     $ramo_poliza = $row->ramo;
+
   }
   
   
@@ -60,12 +61,7 @@ $ramo_poliza = str_replace('inc -','INC -',$ramo_poliza);
   
 
   $query_template =  "SELECT template FROM template_correos where producto='".$ramo_poliza."' and instancia='".$instancia."'";
-  
-  
-  
-  
   $resultado_template = mysqli_query( $link, $query_template);
-  
   While( $row = mysqli_fetch_object( $resultado_template ) ) {
     $template = $row->template;
   }
@@ -73,7 +69,7 @@ $ramo_poliza = str_replace('inc -','INC -',$ramo_poliza);
   // Viene desde póliza
   //if ( !empty( trim( $_POST[ "id_poliza" ] ) ) ) {
 
-    $query =  "SELECT   a.id, a.estado, a.rut_proponente, a.dv_proponente, b.grupo, a.compania, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, a.ramo, a.numero_poliza,moneda_poliza,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision, FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision, FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta, FORMAT(comision_neta, 2, 'de_DE') as comision_neta, numero_boleta, moneda_comision_negativa, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, forma_pago, moneda_valor_cuota, FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota, nro_cuotas, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_proponente FROM polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.id=" . $busqueda . " order by compania, numero_poliza;"; 
+    $query =  "SELECT   a.id, a.estado, a.rut_proponente, a.dv_proponente, b.grupo, a.compania, DATE_FORMAT(vigencia_inicial,'%d-%m-%Y') as vigencia_inicial, DATE_FORMAT(vigencia_final,'%d-%m-%Y') as vigencia_final, a.ramo, a.numero_poliza,moneda_poliza,  moneda_comision,  FORMAT(comision, 2, 'de_DE') as comision, FORMAT(porcentaje_comision, 2, 'de_DE') as porcentaje_comision, FORMAT(comision_bruta, 2, 'de_DE') as comision_bruta, FORMAT(comision_neta, 2, 'de_DE') as comision_neta, numero_boleta, moneda_comision_negativa, FORMAT(comision_negativa, 2, 'de_DE') as comision_negativa, boleta_negativa, DATE_FORMAT(depositado_fecha,'%d-%m-%Y') as depositado_fecha, vendedor, forma_pago, moneda_valor_cuota, FORMAT(valor_cuota, 2, 'de_DE') as valor_cuota, DATE_FORMAT(fecha_primera_cuota,'%d-%m-%Y') as fecha_primera_cuota, nro_cuotas, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_proponente FROM polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.id='" . $busqueda . "' order by compania, numero_poliza;"; 
     $resultado_poliza = mysqli_query( $link,$query);
 
 
@@ -108,8 +104,8 @@ $ramo_poliza = str_replace('inc -','INC -',$ramo_poliza);
         $nombre_proponente=$row->nombre_proponente;
       
     }
-    $query_items="SSELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado, venc_gtia, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_asegurado FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_poliza='" . $numero_poliza . "'";
-    $resultado_items = mysqli_query( $link,$query);
+    $query_items="SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, FORMAT(tasa_afecta, 2, 'de_DE') as tasa_afecta,FORMAT(tasa_exenta, 2, 'de_DE') as tasa_exenta,FORMAT(prima_afecta, 2, 'de_DE') as prima_afecta, FORMAT(prima_exenta, 2, 'de_DE') as prima_exenta, prima_neta, FORMAT(prima_bruta_anual, 2, 'de_DE') as prima_bruta_anual, FORMAT(monto_asegurado, 2, 'de_DE') as monto_asegurado, venc_gtia, concat_ws(' ',b.nombre_cliente, b.apellido_paterno) as nombre_asegurado FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_poliza='" . $numero_poliza . "'";
+    $resultado_items = mysqli_query( $link,$query_items);
     
     While( $row_items = mysqli_fetch_object( $resultado_items ) ) {
             $rut_asegurado= $row_items->rut_asegurado;
