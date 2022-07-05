@@ -292,11 +292,11 @@ function format_poliza(d) {
     if (d.estado=='Cancelado'){
         ext_cancelado='<tr>' +
         '<td>Fecha CANCELACIÓN:</td>' +
-        '<td>' + d.fech_cancela + '</td>' +
+        '<td>' + d.fecha_cancelacion + '</td>' +
         '</tr>'+
         '<tr>' +
         '<td>motivo CANCELACIÓN:</td>' +
-        '<td>' + d.motivo_cancela + '</td>' +
+        '<td>' + d.motivo_cancelacion + '</td>' +
         '</tr>';
     }
     //inicio endosos
