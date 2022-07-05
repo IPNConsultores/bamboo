@@ -5,10 +5,10 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'modifica_poliza';
+//$_POST["accion"] = 'actualiza_propuesta';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
-//$_POST["numero_poliza"]='300222345';
+//$_POST["numero_poliza"]='300255006';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -99,7 +99,7 @@ $poliza_renovada='';
       require_once "/home/gestio10/public_html/backend/config.php";
       mysqli_set_charset( $link, 'utf8' );
       mysqli_select_db( $link, 'gestio10_asesori1_bamboo' );
-      $query = "select a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
+      $query = "select DATE_ADD(fecha_primera_cuota, INTERVAL 1 YEAR) as fecha_primera_cuota_renovada, a.id, a.numero_poliza,a.numero_propuesta, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, a.comision, a.comision_bruta, a.comision_neta, a.depositado_fecha, a.comision_negativa, a.boleta_negativa, a.numero_boleta, a.fecha_emision_poliza, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$_POST["numero_poliza"]."'";
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
@@ -120,6 +120,7 @@ $poliza_renovada='';
         $moneda_cuota = $row->moneda_valor_cuota;
         $valorcuota = $row->valor_cuota;
         $fechaprimer = $row->fecha_primera_cuota;
+        $fecha_primera_cuota_renovada=  $row->fecha_primera_cuota_renovada;
         $nombre_vendedor = $row->vendedor;
         $fecha_emision_poliza = $row->fecha_emision_poliza;
         $porcentaje_comision = $row->porcentaje_comision;
@@ -1727,7 +1728,7 @@ console.log(orgn)
                     document.getElementById("comisionneg").value = '';
                     document.getElementById("boletaneg").value = '';
                     document.getElementById("boleta").value = '';
-                    document.getElementById("fechaprimer").value = '';
+                    document.getElementById("fechaprimer").value = '<?php echo $fecha_primera_cuota_renovada; ?>';
                     document.getElementById("fechainicio").value = document.getElementById("fechavenc").value;
                     document.getElementById("fechavenc").value = '';
                     console.log("quitar required de fechaprop");
