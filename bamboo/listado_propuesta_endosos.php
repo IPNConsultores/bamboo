@@ -292,7 +292,7 @@ function format_propuesta_endoso(d) {
                     '</tr>' +
                     '<tr>' +
                         '<td>Total Prima neta anual:</td>' +
-                        '<td>' + d.iva + '</td>' +
+                        '<td>' + d.prima_neta + '</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>Total Prima bruta anual:</td>' +
