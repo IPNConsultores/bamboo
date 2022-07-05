@@ -450,7 +450,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Neta Total</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_total" name="prima_total">
+                    <input type="number" class="form-control" id="prima_neta" name="prima_neta">
                     
              </div>
             </div>
@@ -464,7 +464,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             <div class="col-2">
             <label for="prima_bruta"><b>Prima Bruta</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_bruta" name="prima_bruta">
+                    <input type="number" class="form-control" id="prima_total" name="prima_total">
                     
              </div>
             </div>
@@ -856,9 +856,9 @@ function calculaprimatotal(){
     var iva = document.getElementById('iva').value;
     
     
-    document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value);
+    document.getElementById('prima_neta').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value);
     
-        document.getElementById('prima_bruta').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+        document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
     
 }
 
