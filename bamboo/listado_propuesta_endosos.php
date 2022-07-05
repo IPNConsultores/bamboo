@@ -68,6 +68,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Nro Propuesta Endoso</th>
                     <th>Tipo Endoso</th>
                     <th>Nro Póliza</th>
+                    <th>Rut proponente</th>
+                    <th>Nombre proponente</th>
                     <th>Fecha ingreso</th>
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
@@ -132,6 +134,14 @@ $(document).ready(function() {
                 title: "Tipo Endoso"
             }, //3
             {
+                "data": "rut_proponente",
+                title: "Rut proponente"
+            }, //3
+            {
+                "data": "nombre_proponente",
+                title: "Nombre proponente"
+            }, //3
+            {
                 "data": "numero_poliza",
                 title: "Número Póliza"
             }, //4
@@ -175,7 +185,7 @@ $(document).ready(function() {
           return estado;  //render link in cell
         }},
         {
-        targets: [5,6,7,8],
+        targets: [7,8,9,10],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")
