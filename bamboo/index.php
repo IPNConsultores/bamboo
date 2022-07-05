@@ -597,8 +597,9 @@ function detalle_tareas(d) {
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
         '<td>Acciones:</td>' +
-        '<td><button title="Buscar información asociada" type="button" id=' + d.id_tarea +
-        ' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button></td>' +
+        '<td>'+
+        '<button title="Buscar información asociada" type="button" id=' + d.id_tarea +' name="info" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-search"></i></button><a> </a>'+
+        '<button title="Completar tarea"  type="button" id=' + d.id_tarea +' name="cerrar_tarea" onclick="botones(this.id, this.name, \'tarea\')"><i class="fas fa-check-circle"></i></i></button></td>' +
         '</tr>' +
         '<tr><td>Clientes:</td>'+
         '<td>'+ $tabla_clientes+'</td></tr>'+
