@@ -431,6 +431,12 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             </div>
           </div>
           <div class="form-row">
+            <div class="col-2">
+            <label for="moneda_poliza"><b>Prima Neta Afecta</b></label>
+                <div class="md-form">
+                    <input type="number" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
+                </div>
+            </div>
                 <div class="col-2">
                     <label for="monto"><b>Prima Neta Exenta</b></label>
                     <label style="color: darkred">&nbsp; *</label>
@@ -439,6 +445,15 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
                 </div>
                 </div>
 
+
+            
+            <div class="col-2">
+            <label for="moneda_poliza"><b>Prima Neta Total</b></label>
+                <div class="md-form">
+                    <input type="number" class="form-control" id="prima_total" name="prima_total">
+                    
+             </div>
+            </div>
             <div class="col-2">
                 <label for="monto"><b>IVA</b></label>
                     <label style="color: darkred">&nbsp; *</label>
@@ -447,16 +462,11 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
                 </div>
             </div>
             <div class="col-2">
-            <label for="moneda_poliza"><b>Prima Neta Afecta</b></label>
+            <label for="prima_bruta"><b>Prima Bruta</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
-                </div>
-            </div>
-            <div class="col-2">
-            <label for="moneda_poliza"><b>Prima Total</b></label>
-                <div class="md-form">
-                    <input type="number" class="form-control" id="prima_total" name="prima_total">
-                </div>
+                    <input type="number" class="form-control" id="prima_bruta" name="prima_bruta">
+                    
+             </div>
             </div>
           </div>
          </div>
@@ -583,6 +593,8 @@ function validados(){
 
     
 }
+
+
 
 function cambio_motivo(){
     
@@ -844,7 +856,10 @@ function calculaprimatotal(){
     var iva = document.getElementById('iva').value;
     
     
-    document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+    document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value);
+    
+        document.getElementById('prima_bruta').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+    
 }
 
 
