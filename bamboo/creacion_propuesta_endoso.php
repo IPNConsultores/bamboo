@@ -8,14 +8,14 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_endoso';
-//$_POST["numero_poliza"]='872';
+//$_POST["accion"] = 'crea_propuesta_endoso_web';
+//$_POST["numero_poliza"]='885';
 //$_POST["numero_endoso"]="test";
 //echo "'".$_POST["numero_propuesta"]."' '";
 //echo $_POST["numero_endoso"]."'";
 $numero_propuesta='';
 $camino=$_POST["accion"];
-if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'crea_propuesta_endoso')
+if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'crea_propuesta_endoso_web' or $_POST["accion"] == 'crea_propuesta_endoso_manual'))
 {
         $query = "select distinct a.numero_poliza, a.compania, a.id as id_poliza,a.ramo, a.vigencia_inicial, a.vigencia_final, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, CONCAT_WS(' ',b.nombre_cliente, b.apellido_paterno, ' ', b.apellido_materno) as nombre_proponente, FORMAT(sum(c.prima_afecta), 2, 'de_DE') as total_prima_afecta, FORMAT(sum(c.prima_exenta), 2, 'de_DE') as total_prima_exenta, FORMAT(sum(c.prima_neta), 2, 'de_DE') as total_prima_neta, FORMAT(sum(c.prima_bruta_anual), 2, 'de_DE') as total_prima_bruta, FORMAT(sum(c.monto_asegurado), 2, 'de_DE') as total_monto_asegurado, a.moneda_poliza from polizas_2 as a left join clientes as b on a.rut_proponente=b.rut_sin_dv left join items as c on a.numero_poliza=c.numero_poliza where a.id='".$_POST["numero_poliza"]."'";
         $resultado = mysqli_query( $link, $query );
@@ -129,7 +129,11 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
         
 <div class="container">
 <div id=titulo1 style="display:flex">
-  <p>Propuesta de Endoso / Creación</p>
+  <p>Propuesta de Endoso / Creación manual</p>
+  <br>
+</div>
+<div id=titulo5 style="display:none">
+  <p>Propuesta de Endoso / Creación WEB</p>
   <br>
 </div>
 <div id=titulo2 style="display:none">
@@ -644,7 +648,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     console.log(orgn)
         switch (orgn) 
         {
-          case 'crea_propuesta_endoso': {
+          case 'crea_propuesta_endoso_manual': {
             document.getElementById("ramo").value = '<?php echo $ramo; ?>';
             document.getElementById("compania").value = '<?php echo $compania; ?>';
             document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
@@ -662,6 +666,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";
             document.getElementById("titulo4").style.display = "none";
+            document.getElementById("titulo5").style.display = "none";
+            
+            break;  
+          }
+          case 'crea_propuesta_endoso_web': {
+            document.getElementById("ramo").value = '<?php echo $ramo; ?>';
+            document.getElementById("compania").value = '<?php echo $compania; ?>';
+            document.getElementById("nro_poliza").value = '<?php echo $numero_poliza; ?>';
+            document.getElementById("fecha_vigencia_inicial").value = '<?php echo $vigencia_inicial; ?>';
+            document.getElementById("fecha_vigencia_final").value = '<?php echo $vigencia_final; ?>';
+            document.getElementById("rutprop").value = '<?php echo $rut_proponente; ?>';
+            document.getElementById("nombre_prop").value = '<?php echo $nombre_proponente; ?>';
+            //document.getElementById("monto").value = '< ?php echo $total_monto_asegurado*1; ?>';
+            document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
+            //document.getElementById("prima_neta_exenta").value = '< ?php echo $total_prima_exenta*1; ?>';
+            //document.getElementById("iva").value = '< ?php echo $total_prima_afecta*0.19; ?>';
+            //document.getElementById("prima_neta_afecta").value = '< ?php echo $total_prima_afecta*1; ?>';
+            //document.getElementById("prima_total").value = '< ?php echo $total_prima_bruta*1; ?>';
+            document.getElementById("titulo1").style.display = "none";
+            document.getElementById("titulo2").style.display = "none";
+            document.getElementById("titulo3").style.display = "none";
+            document.getElementById("titulo4").style.display = "none";
+            document.getElementById("titulo5").style.display = "flex";
+            document.getElementById("caja_numero_endoso").style.display = "block";
+            document.getElementById("nro_endoso").required = "true";              
+            if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
+                document.getElementById("col_fecha_ingreso").style.display ="block";
+            }
             
             break;  
           }
@@ -692,6 +724,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("titulo2").style.display = "none";
             document.getElementById("titulo3").style.display = "none";
             document.getElementById("titulo4").style.display = "flex";
+            document.getElementById("titulo5").style.display = "none";
 
             if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";
@@ -728,6 +761,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               document.getElementById("titulo2").style.display = "none";
               document.getElementById("titulo3").style.display = "flex";
               document.getElementById("titulo4").style.display = "none";
+              document.getElementById("titulo5").style.display = "none";
               document.getElementById("caja_numero_endoso").style.display = "block";
               if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";
@@ -762,6 +796,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("titulo2").style.display = "flex";
                 document.getElementById("titulo3").style.display = "none";
                 document.getElementById("titulo4").style.display = "none";
+                document.getElementById("titulo5").style.display = "none";
                 document.getElementById("caja_numero_endoso").style.display = "block";
                 document.getElementById("nro_endoso").required = "true";              
                 if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
@@ -869,7 +904,7 @@ function genera_propuesta(){
     var camino='<?php echo $camino; ?>';
 
     switch (camino) {
-        case 'crea_propuesta_endoso': {
+        case 'crea_propuesta_endoso_manual': {
           //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
           'tipo_endoso':document.getElementById('motivo_endoso').value,
@@ -955,6 +990,37 @@ function genera_propuesta(){
           'tasa_exenta': document.getElementById('tasa_exenta').value,
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
+          'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_prorroga': document.getElementById('fecha_prorroga').value,
+          'comentario_endoso':document.getElementById("comentarios").value,
+          'accion':camino
+          }, 'post');
+        break;
+        }
+        case 'crea_propuesta_endoso_web': {
+        $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
+          'tipo_endoso':document.getElementById('motivo_endoso').value,
+          'ramo': document.getElementById('ramo').value,
+          'compania': document.getElementById('compania').value,
+          'nro_poliza': document.getElementById('nro_poliza').value,
+          'fecha_ingreso':document.getElementById('fecha_ingreso').value,
+          'fecha_vigencia_inicial': document.getElementById('fecha_vigencia_inicial').value,
+          'fecha_vigencia_final': document.getElementById('fecha_vigencia_final').value,
+          'rutprop':document.getElementById('rutprop').value,
+          'nombre': document.getElementById('nombre_prop').value,
+          'descripcion_endoso': document.getElementById('descripcion_endoso').value,
+          'dice':document.getElementById('dice').value,
+          'debe_decir': document.getElementById('debe_decir').value,
+          'monto': document.getElementById('monto').value,
+          'moneda_poliza':document.getElementById('moneda_poliza').value,
+          'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
+          'iva': document.getElementById('iva').value,
+          'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_total': document.getElementById('prima_total').value,
+          'tasa_afecta': document.getElementById('tasa_afecta').value,
+          'tasa_exenta': document.getElementById('tasa_exenta').value,
+          'id_poliza':'<?php echo $id_poliza; ?>',
+          'numero_propuesta_endoso':'web',
           'numero_endoso':document.getElementById("nro_endoso").value,
           'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'comentario_endoso':document.getElementById("comentarios").value,

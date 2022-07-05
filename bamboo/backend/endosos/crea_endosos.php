@@ -40,7 +40,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
 
             
     switch ($_POST["accion"]){
-        case 'crea_propuesta_endoso':
+        case 'crea_propuesta_endoso_manual':
             $listado='/bamboo/listado_propuesta_endosos.php';
             $mensaje='Propuesta de endoso creada correctamente';
             $largo = 6;
@@ -91,6 +91,17 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Aprueba propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso','".$_POST["numero_propuesta_endoso"]."', '".$_SERVER['PHP_SELF']."')");
    
             break;
+            case 'crea_propuesta_endoso_web':
+                $numero_propuesta_endoso=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta_endoso"]));
+                $numero_endoso=cambia_puntos_por_coma(estandariza_info($_POST["numero_endoso"]));
+                $listado='/bamboo/listado_endosos.php';
+                $mensaje='Endoso creado correctamente';
+                $query="INSERT INTO endosos(fecha_prorroga, numero_endoso,comentario_endoso,  id_poliza, numero_propuesta_endoso, fecha_ingreso_endoso, tipo_endoso, ramo, compania, numero_poliza, rut_proponente, dv_proponente, nombre_proponente, vigencia_inicial, vigencia_final, descripcion_endoso, dice, debe_decir, monto_asegurado_endoso, moneda_poliza_endoso, tasa_afecta_endoso, tasa_exenta_endoso, prima_neta_exenta, IVA, prima_neta_afecta, prima_total) VALUES ('".$fecha_prorroga."','".$numero_endoso."','".$comentario_endoso."','".$id_poliza."','".$numero_propuesta_endoso."','".$fecha_ingreso."','".$tipo_endoso."','".$ramo."','".$compania."','".$nro_poliza."','".$rut_prop."','".$dv_prop."','".$nombre."','".$fecha_vigencia_inicial."','".$fecha_vigencia_final."','".$descripcion_endoso."','".$dice."','".$debe_decir."','".$monto."','".$moneda_poliza."','".$tasa_afecta."','".$tasa_afecta."','".$prima_neta_exenta."','".$iva."','".$prima_neta_afecta."','".$prima_total."')";
+                mysqli_query($link, $query);
+                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación endoso', '".str_replace("'","**",$query)."','endoso', '".$numero_endoso."' , '".$_SERVER['PHP_SELF']."')");
+                $busqueda=$numero_propuesta_endoso;
+                      
+                break;
         case 'rechazar_propuesta':
             $nro_propuesta=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta"]));
             $listado='/bamboo/listado_propuesta_endosos.php';

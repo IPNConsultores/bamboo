@@ -493,10 +493,25 @@ function botones(id, accion, base) {
             break;
         }
         case "crea_propuesta_endoso": {
-            $.redirect('/bamboo/creacion_propuesta_endoso.php', {
-                'numero_poliza': id,
-                'accion': accion
-            }, 'post');
+            var motivo = window.prompt('Ingresa la vía por donde quieres crear el endoso:\r\n 1) Vía Propuesta WEB\r\n 2) Vía Propuesta manual', 'digita 1 o 2');
+            switch (motivo){
+                case "1":
+                    //alert('Renovación vía propuesta WEB');
+                    $.redirect('/bamboo/creacion_propuesta_endoso.php', {
+                        'numero_poliza': id,
+                        'accion': 'crea_propuesta_endoso_web'
+                    }, 'post');
+                    break;
+                case "2":
+                    $.redirect('/bamboo/creacion_propuesta_endoso.php', {
+                        'numero_poliza': id,
+                        'accion': 'crea_propuesta_endoso_manual'
+                    }, 'post');
+                    break;
+                default:
+                    alert('Número ingresado no válido. Debes ingresar 1 o 2');
+                    break;
+            }
             break;
         }
         case "tarea": {
