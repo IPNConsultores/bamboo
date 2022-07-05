@@ -9,7 +9,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $sql = "SELECT comentario_endoso, fecha_prorroga, estado, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_neta_afecta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(iva, 2, 'de_DE')) as iva, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_neta_exenta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_total, 2, 'de_DE')) as prima_total, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta, 2, 'de_DE')) as prima_neta, dice, debe_decir, descripcion_endoso FROM propuesta_endosos as a where a.estado <> 'Rechazado'";
+    $sql = "SELECT comentario_endoso, fecha_prorroga, estado, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_neta_afecta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(iva, 2, 'de_DE')) as iva, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_neta_exenta, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_total, 2, 'de_DE')) as prima_total, CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta, 2, 'de_DE')) as prima_neta, dice, debe_decir, descripcion_endoso, CONCAT_WS('-',rut_proponente,dv_proponente) AS rut_proponente, nombre_proponente FROM propuesta_endosos as a where a.estado <> 'Rechazado'";
     $resultado=mysqli_query($link, $sql);
     $codigo='{
       "data": [';
@@ -20,6 +20,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
         if ($conta==1){
             $codigo.= json_encode(array(
             "estado" =>& $row->estado,
+            "rut_proponente" =>& $row->rut_proponente,
+            "nombre_proponente" =>& $row->nombre_proponente,
             "fecha_ingreso_endoso"=>& $row->fecha_ingreso_endoso,
             "tipo_endoso"=>& $row->tipo_endoso,
             "compania"=>& $row->compania,
@@ -41,6 +43,8 @@ require_once "/home/gestio10/public_html/backend/config.php";
         } else {
             $codigo.= ', '.json_encode(array(
             "estado" =>& $row->estado,
+            "rut_proponente" =>& $row->rut_proponente,
+            "nombre_proponente" =>& $row->nombre_proponente,
             "fecha_ingreso_endoso"=>& $row->fecha_ingreso_endoso,
             "tipo_endoso"=>& $row->tipo_endoso,
             "compania"=>& $row->compania,
