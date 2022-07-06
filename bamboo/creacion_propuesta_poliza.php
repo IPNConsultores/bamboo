@@ -5,7 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'crear_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
 //$_POST["numero_poliza"]='300255006';
@@ -802,7 +802,7 @@ function estandariza_info( $data ) {
             <div class="col-md-4 mb-3">
               <label for="fechaprimer">Fecha Primera Cuota</label>
               <div class="md-form">
-                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;">
+                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;" required>
               </div>
             </div>
           </div>
@@ -1071,6 +1071,54 @@ function cambio_moneda() {
                 document.getElementById("moneda8["+i+"]").innerHTML = moneda;
             }          
          }
+}
+
+function calculaprimaafecta(){
+    //console.log("entró a cálculo de prima afecta");
+    var contador = document.getElementById("contador").value;
+    
+    //console.log("entró a cálculo de prima afecta");
+    
+     for (var i = 1; i <= contador; i++)
+     {
+         
+    var tasa_afecta = document.getElementById("tasa_afecta["+i+"]").value;
+    //console.log("prima afecta item" +i+": " + primaafecta);
+    var monto_asegurado = document.getElementById("monto_aseg["+i+"]").value;
+    //console.log("prima exenta item" +i+": " + primaexenta);
+    var primaafecta;
+  
+    primaafecta = parseFloat(tasa_afecta, 10) * parseFloat(monto_asegurado,10)/1000;
+    
+    document.getElementById("prima_afecta["+i+"]").value = primaafecta.toFixed(2);
+  
+    
+     }
+    
+}
+
+function calculaprimaexenta(){
+    //console.log("entró a cálculo de prima afecta");
+    var contador = document.getElementById("contador").value;
+    
+    //console.log("entró a cálculo de prima afecta");
+    
+     for (var i = 1; i <= contador; i++)
+     {
+         
+    var tasa_exenta = document.getElementById("tasa_exenta["+i+"]").value;
+    //console.log("prima afecta item" +i+": " + primaafecta);
+    var monto_asegurado = document.getElementById("monto_aseg["+i+"]").value;
+    //console.log("prima exenta item" +i+": " + primaexenta);
+    var primaexenta;
+  
+    primaexenta = parseFloat(tasa_exenta, 10) * parseFloat(monto_asegurado,10)/1000;
+    
+    document.getElementById("prima_exenta["+i+"]").value = primaexenta.toFixed(2);
+  
+    
+     }
+    
 }
 
 function calculaprimabruta() {
@@ -2576,9 +2624,9 @@ function vencimientogarantia(){
                 '<td><div class="form-inline" onchange= "dosdecimales(this.id);" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda8[' + iCnt + ']">UF</span></div>'+
                     '<input type="number" onchange= "dosdecimales(this.id);"step="0.01" placeholder="0,00"  class="form-control" name="monto_aseg[]" id="monto_aseg[' + iCnt + ']"  required></div></td>' +  
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
+                      '<input type="number" onchange= "dosdecimales(this.id);calculaprimaafecta()" step="0.01" placeholder="0,00" class="form-control" name="tasa_afecta[]" id="tasa_afecta[' + iCnt + ']" "></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="pormilla2[' + iCnt + ']">%</span></div>'+
-                      '<input type="number" onchange= "dosdecimales(this.id);" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
+                      '<input type="number" onchange= "dosdecimales(this.id);calculaprimaexenta();calculaprimabruta()" step="0.01" placeholder="0,00" class="form-control" name="tasa_exenta[]" id="tasa_exenta[' + iCnt + ']"  style="width=75%"></div></td>'+ 
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda2[' + iCnt + ']">UF</span></div>'+
                       '<input type="number" onchange= "dosdecimales(this.id); calculaprimabruta();" step="0.01" placeholder="0,00" class="form-control" name="prima_afecta[]" id="prima_afecta[' + iCnt + ']"></div></td>'+
                 '<td> <div class="form-inline" style="width:auto"><div class="input-group-prepend"><span class="input-group-text" id="moneda3[' + iCnt + ']">UF</span></div>'+
