@@ -51,6 +51,7 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
             $nombre_proponente = $row->nombre_proponente;
             $prima_neta_afecta = $row->prima_neta_afecta;
             $prima_neta_exenta = $row->prima_neta_exenta;
+            $prima_neta = $row->prima_neta;
             $iva = $row->IVA;
             $prima_total = $row->prima_total;
             $total_monto_asegurado = $row->monto_asegurado_endoso;
@@ -85,6 +86,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             $prima_neta_afecta = $row->prima_neta_afecta;
             $prima_neta_exenta = $row->prima_neta_exenta;
             $iva = $row->IVA;
+            $prima_neta = $row->prima_neta;
             $prima_total = $row->prima_total;
             $total_monto_asegurado = $row->monto_asegurado_endoso;
             $moneda_poliza_endoso = $row->moneda_poliza_endoso;
@@ -708,6 +710,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("monto").value = '<?php echo $total_monto_asegurado*1; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza_endoso; ?>';
             document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
+            document.getElementById("prima_neta").value = '<?php echo $prima_neta*1; ?>';
             document.getElementById("iva").value = '<?php echo $iva*1; ?>';
             document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
             document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
@@ -746,6 +749,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
             document.getElementById("iva").value = '<?php echo $iva*1; ?>';
             document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
+            document.getElementById("prima_neta").value = '<?php echo $prima_neta*1; ?>';
             document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
             document.getElementById("motivo_endoso").value = '<?php echo $tipo_endoso; ?>';
             document.getElementById("fecha_ingreso").value = '<?php echo $fecha_ingreso; ?>';
@@ -782,6 +786,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("prima_neta_exenta").value = '<?php echo $prima_neta_exenta*1; ?>';
             document.getElementById("iva").value = '<?php echo $iva*1; ?>';
             document.getElementById("prima_neta_afecta").value = '<?php echo $prima_neta_afecta*1; ?>';
+            document.getElementById("prima_neta").value = '<?php echo $prima_neta*1; ?>';
             document.getElementById("prima_total").value = '<?php echo $prima_total*1; ?>';
             document.getElementById("motivo_endoso").value = '<?php echo $tipo_endoso; ?>';
             document.getElementById("fecha_ingreso").value = '<?php echo $fecha_ingreso; ?>';
@@ -924,6 +929,7 @@ function genera_propuesta(){
           'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
           'iva': document.getElementById('iva').value,
           'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_neta': document.getElementById('prima_neta').value,
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
@@ -954,6 +960,7 @@ function genera_propuesta(){
           'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
           'iva': document.getElementById('iva').value,
           'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_neta': document.getElementById('prima_neta').value,
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
@@ -985,6 +992,7 @@ function genera_propuesta(){
           'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
           'iva': document.getElementById('iva').value,
           'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_neta': document.getElementById('prima_neta').value,
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
@@ -1016,6 +1024,7 @@ function genera_propuesta(){
           'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
           'iva': document.getElementById('iva').value,
           'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_neta': document.getElementById('prima_neta').value,
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
@@ -1048,6 +1057,7 @@ function genera_propuesta(){
           'prima_neta_exenta': document.getElementById('prima_neta_exenta').value,
           'iva': document.getElementById('iva').value,
           'prima_neta_afecta':document.getElementById('prima_neta_afecta').value,
+          'prima_neta': document.getElementById('prima_neta').value,
           'prima_total': document.getElementById('prima_total').value,
           'tasa_afecta': document.getElementById('tasa_afecta').value,
           'tasa_exenta': document.getElementById('tasa_exenta').value,
