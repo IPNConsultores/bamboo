@@ -436,13 +436,13 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
           </div>
           <div class="form-row">
             <div class="col-2">
-            <label for="moneda_poliza"><b>Prima Neta Afecta</b></label>
+            <label for="moneda_poliza"><b>Prima Afecta</b></label>
                 <div class="md-form">
                     <input type="number" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
                 </div>
             </div>
                 <div class="col-2">
-                    <label for="monto"><b>Prima Neta Exenta</b></label>
+                    <label for="monto"><b>Prima Exenta</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
                     <input type="number" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal()">
