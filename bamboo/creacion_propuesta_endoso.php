@@ -440,14 +440,14 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Afecta</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
+                    <input type="number" step="0.01" class="form-control" id="prima_neta_afecta" name="prima_neta_afecta" onchange="calculatasas(),calculaIVA(),calculaprimatotal()">
                 </div>
             </div>
                 <div class="col-2">
                     <label for="monto"><b>Prima Exenta</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal()">
+                    <input type="number" step="0.01" class="form-control" id="prima_neta_exenta" name="prima_neta_exenta" onchange="calculatasas(),calculaprimatotal(); dosdecimales(this.id)">
                 </div>
                 </div>
 
@@ -456,7 +456,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             <div class="col-2">
             <label for="moneda_poliza"><b>Prima Neta Total</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_neta" name="prima_neta">
+                    <input type="number" step="0.01" class="form-control" id="prima_neta" name="prima_neta">
                     
              </div>
             </div>
@@ -470,7 +470,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             <div class="col-2">
             <label for="prima_bruta"><b>Prima Bruta</b></label>
                 <div class="md-form">
-                    <input type="number" class="form-control" id="prima_total" name="prima_total">
+                    <input type="number" step="0.01" class="form-control" id="prima_total" name="prima_total">
                     
              </div>
             </div>
@@ -886,19 +886,43 @@ function calculatasas(){
 function calculaIVA(){
     
     var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
-    document.getElementById('iva').value = prima_neta_afecta*0.19
-     
+    document.getElementById('iva').value = prima_neta_afecta*0.19;
     
+     dosdecimales('iva');
+    
+}
+
+function dosdecimales(id){
+    
+   
+    
+    valor= document.getElementById(id).value;
+    
+    console.log(id);
+    console.log(valor);
+    
+    
+    
+    valor = parseFloat(this.valor).toFixed(2);
+    document.getElementById(id).value = valor;
+  
+   
 }
 function calculaprimatotal(){
     var prima_neta_exenta = document.getElementById('prima_neta_exenta').value;
     var prima_neta_afecta = document.getElementById('prima_neta_afecta').value;
     var iva = document.getElementById('iva').value;
     
+    var primaneta;
+    var primatotal;
     
-    document.getElementById('prima_neta').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value);
     
-        document.getElementById('prima_total').value = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+    primaneta = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value);
+    primatotal = parseFloat(document.getElementById('prima_neta_exenta').value)+parseFloat(document.getElementById('prima_neta_afecta').value)+parseFloat(document.getElementById('iva').value);
+    
+    document.getElementById('prima_neta').value = primaneta.toFixed(2);
+    
+    document.getElementById('prima_total').value = primatotal.toFixed(2);
     
 }
 
