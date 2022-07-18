@@ -264,6 +264,12 @@ function format_propuesta_endoso(d) {
     var ext_cancelado='';
 
     var botones='';
+    if (d.estado=='Rechazado'){
+        ext_cancelado='<tr>' +
+        '<td>Motivo rechazo:</td>' +
+        '<td>' + d.motivo_rechazo + '</td>' +
+        '</tr>';
+    }
     if (d.estado=='Pendiente'){
         botones='<tr>'+
             '<td VALIGN=TOP>Acciones:</td>' +
@@ -289,6 +295,7 @@ function format_propuesta_endoso(d) {
 
     return '<table background-color:#F6F6F6; color:#FFF; cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
     '<tr>' +
+            ext_cancelado +
             '<td VALIGN=TOP>Primas: </td>' +
             '<td>'+
                  '<table class="table table-striped" style="width:100%">'+
