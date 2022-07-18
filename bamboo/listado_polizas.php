@@ -356,7 +356,7 @@ function format_poliza(d) {
             
             for (var i=0; i<d.total_items; i++){
             listado_items+= '<tr>'+
-            '<td>' + (i+1) + '</td>'+
+            '<td>' + d.items[i].numero_item + '</td>'+
             '<td>' + d.items[i].rut_clienteA + '</td>'+
             '<td>' + d.items[i].nom_clienteA + '</td>'+
             '<td>' + d.items[i].materia_asegurada + '</td>'+
