@@ -727,14 +727,14 @@ function estandariza_info( $data ) {
               <label style="color: darkred">&nbsp; *</label>
               <div class="form" style="display: flex; align-items: center;">
                 <select class="form-control" name="modo_pago" id="modo_pago"
-                                          onChange="modopago();" style="width:30%;" required>
+                                          onChange="modopago();" style="width:30%;">
                   <option value="">-</option>
                   <option value="PAT" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAT") echo "selected" ?>>PAT</option>
                   <option value="PAC" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "PAC") echo "selected" ?>>PAC</option>
                   <option value="Plan de pago"<?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Plan de pago") echo "selected" ?>>Plan de pago</option>
                   <option value="Contado" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $modo_pago == "Contado") echo "selected" ?>>Contado</option>
                 </select>
-                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;" required>
+                <select class="form-control" name="cuotas" id="cuotas" style="width:42%;">
                   <option value="">Nro Cuotas</option>
                   <option value="Sin cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "Sin cuotas") echo "selected" ?>>Sin Cuotas</option>
                   <option value="2 Cuotas" <?php if ($_SERVER[ "REQUEST_METHOD" ] == "POST" && $cuotas == "2 Cuotas") echo "selected" ?>>2 Cuotas</option>
@@ -802,7 +802,7 @@ function estandariza_info( $data ) {
             <div class="col-md-4 mb-3">
               <label for="fechaprimer">Fecha Primera Cuota</label>
               <div class="md-form">
-                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;" required>
+                <input type="date" class="form-control" id="fechaprimer" name="fechaprimer" onchange="validadorfecha(this.id); valida_primerpago()" max= "9999-12-31" style="width:72%;" >
               </div>
             </div>
           </div>
@@ -1410,6 +1410,9 @@ console.log(orgn)
             document.getElementById("informacion_poliza").disabled = false;
             document.getElementById("nro_poliza").required = true;
             document.getElementById("modo_pago").required = true;
+            document.getElementById("fechaprimer").required = true;
+            document.getElementById("modo_pago").required = true;
+            document.getElementById("cuotas").required = true;
             break;  
           }
           case 'actualiza_propuesta':{
