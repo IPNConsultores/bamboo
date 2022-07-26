@@ -106,9 +106,15 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
                 $query="INSERT INTO endosos(fecha_prorroga, numero_endoso,comentario_endoso,  id_poliza, numero_propuesta_endoso, fecha_ingreso_endoso, tipo_endoso, ramo, compania, numero_poliza, rut_proponente, dv_proponente, nombre_proponente, vigencia_inicial, vigencia_final, descripcion_endoso, dice, debe_decir, monto_asegurado_endoso, moneda_poliza_endoso, tasa_afecta_endoso, tasa_exenta_endoso, prima_neta_exenta, IVA, prima_neta_afecta, prima_total, prima_neta, token) VALUES ('".$fecha_prorroga."','".$numero_endoso."','".$comentario_endoso."','".$id_poliza."','".$numero_propuesta_endoso."','".$fecha_ingreso."','".$tipo_endoso."','".$ramo."','".$compania."','".$nro_poliza."','".$rut_prop."','".$dv_prop."','".$nombre."','".$fecha_vigencia_inicial."','".$fecha_vigencia_final."','".$descripcion_endoso."','".$dice."','".$debe_decir."','".$monto."','".$moneda_poliza."','".$tasa_afecta."','".$tasa_afecta."','".$prima_neta_exenta."','".$iva."','".$prima_neta_afecta."','".$prima_total."','".$prima_neta."', '".$token."')";
                 mysqli_query($link, $query);
                 mysqli_query($link, 'update endosos set numero_propuesta_endoso=CONCAT(\'E2\', LPAD(id,5,0)) where token=\'' . $token . '\';');
-                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación endoso web', '".str_replace("'","**",$query)."','endoso', '".$numero_endoso."' , '".$_SERVER['PHP_SELF']."')");
+                $resultado = mysqli_query($link, 'select id, numero_propuesta_endoso from endosos where token=\'' . $token . '\';');
+                while ($fila = mysqli_fetch_object($resultado))
+                {
+                    // printf ("%s (%s)\n", $fila->id);
+                    $id= $fila->id;
+                    $numero_propuesta_endoso = $fila->numero_propuesta_endoso;
+                }
                 $busqueda=$numero_propuesta_endoso;
-                        
+                mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación endoso web', '".str_replace("'","**",$query)."','endoso', '".$id."' , '".$_SERVER['PHP_SELF']."')");
                 break;
         case 'rechazar_propuesta':
             $id_propuesta_endoso=cambia_puntos_por_coma(estandariza_info($_POST["id"]));
