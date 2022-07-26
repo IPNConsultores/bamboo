@@ -463,6 +463,7 @@ function botones(id, accion, base) {
         }
         case "cancelar_poliza": {
                 var motivo = window.prompt('Ingresa el motivo de cancelación de póliza', '');
+                //var fecha_motivo = window.prompt('Ingresa la fecha de la cancelación en el siguiente formato dd/mm/aaaa. Por ejemplo: 31/07/2022', '');
                 var r2 = confirm("Estás a punto de cancelar esta póliza ¿Deseas continuar?");
                 if (r2 == true) {
                 $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {

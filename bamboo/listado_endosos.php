@@ -286,7 +286,7 @@ function format_endoso(d) {
         '</tr>' +    
         '<tr><td VALIGN=TOP>Acciones</td>' +
         '<td>' +
-        '<button title="Editar Endoso" type="button" id="' + d.numero_endoso + '" name="actualiza_endoso" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Editar Endoso" type="button" id="' + d.id + '" name="actualiza_endoso" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-edit"></i></button><a> </a>' +
         '<button title="Generar documento" type="button" id="' + d.numero_propuesta_endoso + '" name="generar_documento" onclick="botones(this.id, this.name, \'endoso\')"><i class="fa fa-file-pdf-o"></i></button><a> </a>' +
         '<button title="Buscar información asociada" type="button" id="' + d.numero_endoso + '" name="info" onclick="botones(this.id, this.name, \'endoso\')"><i class="fas fa-search"></i></button><a> </a>' +
         '</td>' +
@@ -307,6 +307,7 @@ function botones(id, accion, base) {
                 if (r2 == true) {
                 $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
                     'numero_propuesta': id,
+                    'id': id,
                     'accion':accion,
                     'motivo':motivo
                 }, 'post');
@@ -318,6 +319,7 @@ function botones(id, accion, base) {
             $.redirect('/bamboo/creacion_propuesta_endoso.php', {
             //$.redirect('/bamboo/test_felipe2.php', {    
                 'numero_propuesta': id,
+                'id': id,
                 'accion': accion
             }, 'post');
             break;
@@ -339,6 +341,7 @@ function botones(id, accion, base) {
         case "actualiza_endoso": {
             $.redirect('/bamboo/creacion_propuesta_endoso.php', {
                 'numero_endoso': id,
+                'id': id,
                 'accion': accion
             }, 'post');
             break;
@@ -346,6 +349,7 @@ function botones(id, accion, base) {
         case "generar_documento": {
             $.redirect('/bamboo/documento_propuesta_endoso.php', {
                 'numero_propuesta': id,
+                'id': id,
                 'accion': accion
             }, 'post');
             break;
