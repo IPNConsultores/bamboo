@@ -37,10 +37,10 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'crea_propue
         }
 }
 elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_endoso')){
-        $query = "select * from propuesta_endosos where numero_propuesta_endoso='".$_POST["numero_propuesta"]."'";
+        $query = "select * from propuesta_endosos where id='".$_POST["id"]."'";
         $resultado = mysqli_query( $link, $query );
         While( $row = mysqli_fetch_object( $resultado ) ) {
-            $numero_propuesta = $_POST["numero_propuesta"];
+            $numero_propuesta = $row->numero_propuesta_endoso;
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
             $id_poliza = $row->id_poliza;
@@ -70,11 +70,11 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
 }
 elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza_endoso'){
         //no funcionando
-        $query = "select * from endosos where numero_endoso='".$_POST["numero_endoso"]."'";
+        $query = "select * from endosos where id='".$_POST["id"]."'";
         $resultado = mysqli_query( $link, $query );
         While( $row = mysqli_fetch_object( $resultado ) ) {
             $numero_propuesta=$row->numero_propuesta_endoso;
-            $numero_endoso = $_POST["numero_endoso"];
+            $numero_endoso = $row->numero_endoso;
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
             $id_poliza = $row->id_poliza;
