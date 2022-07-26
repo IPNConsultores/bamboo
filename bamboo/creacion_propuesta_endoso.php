@@ -43,6 +43,7 @@ elseif ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actuali
             $numero_propuesta = $row->numero_propuesta_endoso;
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
+            $id=$row->id;
             $id_poliza = $row->id_poliza;
             $compania = $row->compania;
             $vigencia_inicial = $row->vigencia_inicial;
@@ -77,6 +78,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
             $numero_endoso = $row->numero_endoso;
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
+            $id=$row->id;
             $id_poliza = $row->id_poliza;
             $compania = $row->compania;
             $vigencia_inicial = $row->vigencia_inicial;
@@ -967,6 +969,7 @@ function genera_propuesta(){
         case 'actualiza_propuesta': {
           //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
+          'id': '<?php echo $id; ?>',
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,
@@ -999,6 +1002,7 @@ function genera_propuesta(){
         case 'crear_endoso': {
           //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
+          'id': '<?php echo $id; ?>',
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,
@@ -1064,6 +1068,7 @@ function genera_propuesta(){
         case 'actualiza_endoso': {
           //$.redirect('/bamboo/test_felipe.php', {
         $.redirect('/bamboo/backend/endosos/crea_endosos.php', {
+          'id': '<?php echo $id; ?>',
           'tipo_endoso':document.getElementById('motivo_endoso').value,
           'ramo': document.getElementById('ramo').value,
           'compania': document.getElementById('compania').value,

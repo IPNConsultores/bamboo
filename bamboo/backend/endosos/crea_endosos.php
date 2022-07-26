@@ -56,7 +56,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
                 $id_poliza = $fila->id;
                 $numero_propuesta_endoso = $fila->numero_propuesta_endoso;
             }
-            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso', '".$numero_propuesta_endoso."' , '".$_SERVER['PHP_SELF']."')");
+            mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Creación propuesta endoso', '".str_replace("'","**",$query)."','propuesta_endoso', '".$id_poliza."' , '".$_SERVER['PHP_SELF']."')");
             $busqueda=$numero_propuesta_endoso;
             break;
         case 'actualiza_propuesta':
