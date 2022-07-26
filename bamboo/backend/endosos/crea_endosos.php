@@ -61,6 +61,7 @@ if ($_SERVER[ "REQUEST_METHOD" ] == "POST")
             break;
         case 'actualiza_propuesta':
             $id_endoso=cambia_puntos_por_coma(estandariza_info($_POST["id"]));
+            $numero_propuesta_endoso=cambia_puntos_por_coma(estandariza_info($_POST["numero_propuesta_endoso"]));
             $listado='/bamboo/listado_propuesta_endosos.php';
             $mensaje='Propuesta de endoso actualizada correctamente';
             $query="UPDATE propuesta_endosos SET comentario_endoso='".$comentario_endoso."',fecha_prorroga='".$fecha_prorroga."', fecha_ingreso_endoso='".$fecha_ingreso."',tipo_endoso='".$tipo_endoso."',ramo='".$ramo."',compania='".$compania."',rut_proponente='".$rut_prop."',dv_proponente='".$dv_prop."',nombre_proponente='".$nombre."',vigencia_inicial='".$fecha_vigencia_inicial."',vigencia_final='".$fecha_vigencia_final."',descripcion_endoso='".$descripcion_endoso."',dice='".$dice."',debe_decir='".$debe_decir."',monto_asegurado_endoso='".$monto."',moneda_poliza_endoso='".$moneda_poliza."',tasa_afecta_endoso='".$tasa_afecta."',tasa_exenta_endoso='".$tasa_exenta."',prima_neta_exenta='".$prima_neta_exenta."',IVA='".$iva."',prima_neta_afecta='".$prima_neta_afecta."',prima_total='".$prima_total."', prima_neta='".$prima_neta."' WHERE id='".$id_endoso."'";
