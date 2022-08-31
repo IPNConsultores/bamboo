@@ -448,6 +448,11 @@ function format_poliza(d) {
         '</tr>' +
         '</table>';
 }
+function estandariza_fecha(fecha){
+    let partes = (fecha || '').split('/'),
+        fechaGenerada = new Date(partes[2], --partes[1], partes[0]);
+        return fechaGenerada;
+}
 function botones(id, accion, base) {
     console.log("ID:" + id + " => acción:" + accion);
     switch (accion) {
@@ -471,7 +476,7 @@ function botones(id, accion, base) {
                     'numero_poliza': id,
                     'accion':accion,
                     'motivo':motivo,
-                    'fecha_motivo':fecha_motivo
+                    'fecha_motivo':estandariza_fecha(fecha_motivo)
                 }, 'post');
                 }
                 
@@ -486,7 +491,7 @@ function botones(id, accion, base) {
                     'numero_poliza': id,
                     'accion':accion,
                     'motivo':motivo,
-                    'fecha_motivo':fecha_motivo
+                    'fecha_motivo':estandariza_fecha(fecha_motivo)
                 }, 'post');
                 }
             break;
