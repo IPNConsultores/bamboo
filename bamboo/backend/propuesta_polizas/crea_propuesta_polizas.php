@@ -70,12 +70,13 @@ switch ($_POST["accion"]) {
     $busqueda=estandariza_info($_POST["numero_poliza"]);
       $query= "update polizas_2 set estado='Cancelado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
-      $resultado = mysqli_query($link, "select id, numero_poliza from polizas_2 where id='".$busqueda."';");
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
+      $query_2='select id, numero_poliza from polizas_2 where id='.$busqueda.';';
+      $resultado = mysqli_query($link, $query_2);
       while ($fila = mysqli_fetch_object($resultado))
       {
-          $busqueda=$fila->$numero_poliza;
+          $busqueda=$fila->numero_poliza;
       }
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'anular_poliza':
     $listado='/bamboo/listado_polizas.php';
@@ -83,12 +84,13 @@ switch ($_POST["accion"]) {
     $busqueda=estandariza_info($_POST["numero_poliza"]);
       $query= "update polizas_2 set estado='Anulado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
-      $resultado = mysqli_query($link, "select id, numero_poliza from polizas_2 where id='".$busqueda."';");
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Anula póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
+          $query_2='select id, numero_poliza from polizas_2 where id='.$busqueda.';';
+      $resultado = mysqli_query($link, $query_2);
       while ($fila = mysqli_fetch_object($resultado))
       {
-          $busqueda=$fila->$numero_poliza;
+          $busqueda=$fila->numero_poliza;
       }
-      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Anula póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'rechazar_propuesta':
     $busqueda=$nro_propuesta;
