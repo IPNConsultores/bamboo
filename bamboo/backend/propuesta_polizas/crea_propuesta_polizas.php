@@ -67,9 +67,10 @@ switch ($_POST["accion"]) {
   case 'cancelar_poliza':
     $listado='/bamboo/listado_polizas.php';
     $mensaje='Póliza cancelada correctamente';
+    $busqueda=estandariza_info($_POST["numero_poliza"]);
       $query= "update polizas_2 set estado='Cancelado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
-      $resultado = mysqli_query($link, "select id, numero_poliza from polizas where id='".$busqueda."';");
+      $resultado = mysqli_query($link, "select id, numero_poliza from polizas_2 where id='".$busqueda."';");
       while ($fila = mysqli_fetch_object($resultado))
       {
           $busqueda=$fila->$numero_poliza;
@@ -79,9 +80,10 @@ switch ($_POST["accion"]) {
   case 'anular_poliza':
     $listado='/bamboo/listado_polizas.php';
     $mensaje='Póliza anulada correctamente';
+    $busqueda=estandariza_info($_POST["numero_poliza"]);
       $query= "update polizas_2 set estado='Anulado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
-      $resultado = mysqli_query($link, "select id, numero_poliza from polizas where id='".$busqueda."';");
+      $resultado = mysqli_query($link, "select id, numero_poliza from polizas_2 where id='".$busqueda."';");
       while ($fila = mysqli_fetch_object($resultado))
       {
           $busqueda=$fila->$numero_poliza;
