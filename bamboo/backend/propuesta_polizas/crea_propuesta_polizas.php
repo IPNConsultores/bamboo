@@ -78,6 +78,20 @@ switch ($_POST["accion"]) {
           $busqueda=$fila->numero_poliza;
       }
       break;
+  case 'reactivar_poliza':
+    $listado='/bamboo/listado_polizas.php';
+    $mensaje='Póliza reactivada correctamente';
+    $busqueda=estandariza_info($_POST["numero_poliza"]);
+      $query= "update polizas_2 set estado='Activo', fecha_reactivacion='".estandariza_info($_POST["fecha_motivo"])."'  where id='".$busqueda."';";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Reactiva póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
+      $query_2='select id, numero_poliza from polizas_2 where id='.$busqueda.';';
+      $resultado = mysqli_query($link, $query_2);
+      while ($fila = mysqli_fetch_object($resultado))
+      {
+          $busqueda=$fila->numero_poliza;
+      }
+      break;
   case 'anular_poliza':
     $listado='/bamboo/listado_polizas.php';
     $mensaje='Póliza anulada correctamente';

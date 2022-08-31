@@ -288,6 +288,7 @@ function format_poliza(d) {
     var items='';
     var endosos='';  
     var listado_items='';
+    var botones='';
     var listado_endosos='';
     if (d.estado=='Cancelado'){
         ext_cancelado='<tr>' +
@@ -298,8 +299,28 @@ function format_poliza(d) {
         '<td>motivo CANCELACIÓN:</td>' +
         '<td>' + d.motivo_cancelacion + '</td>' +
         '</tr>';
+        
+        botones='<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Renovar póliza" type="button" id="' + d.numero_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> - </a>' +
+        '<button title="Generar propuesta de endoso"  type="button"' + 'id='+ d.id_poliza + ' name="crea_propuesta_endoso" onclick="botones(this.id, this.name, \'poliza\')"><i>E</i></button><a> - </a>' +
+        '<button style="background-color: #FF0000" title="Reactivar póliza"  type="button" id=' + d.id_poliza + ' name="reactivar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-sync"></i></button>';
+    } else {
+         botones='<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
+        '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
+        '<button title="Renovar póliza" type="button" id="' + d.numero_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
+        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
+        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> - </a>' +
+        '<button title="Generar propuesta de endoso"  type="button"' + 'id='+ d.id_poliza + ' name="crea_propuesta_endoso" onclick="botones(this.id, this.name, \'poliza\')"><i>E</i></button><a> - </a>' +
+        '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-backspace"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Anular póliza"  type="button" id=' + d.id_poliza + ' name="anular_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-ban"></i></button><a> </a>' +
+        '<button style="background-color: #FF0000" title="Eliminar póliza"  type="button" id=' + d.id_poliza + ' name="eliminar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash"></i></button>';
+
     }
     //inicio endosos
+    
     console.log('nro de endosos: '+ d.nro_endosos);
         if(d.nro_endosos=="0"){
             endosos=
@@ -435,15 +456,7 @@ function format_poliza(d) {
         '<tr>' +
         '<td VALIGN=TOP>Acciones: </td>' +
         '<td>' +
-        '<button title="Buscar información asociada" type="button" id="' + d.id_poliza + '" name="info" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-search"></i></button><a> </a>' +
-        '<button title="Editar Póliza"  type="button" id="' + d.numero_poliza + '" name="modifica_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-edit"></i></button><a> </a>' +
-        '<button title="Renovar póliza" type="button" id="' + d.numero_poliza + '" name="renovar" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-redo"></i></button><a> - </a>' +
-        '<button title="Asignar tarea"  type="button" id=' + d.id_poliza +' name="tarea" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-clipboard-list"></i></button><a> </a>' +
-        '<button title="WIP Generar correo"  type="button"' + 'id='+ d.id_poliza + ' name="correo" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-envelope-open-text"></i></button><a> - </a>' +
-        '<button title="Generar propuesta de endoso"  type="button"' + 'id='+ d.id_poliza + ' name="crea_propuesta_endoso" onclick="botones(this.id, this.name, \'poliza\')"><i>E</i></button><a> - </a>' +
-        '<button style="background-color: #FF0000" title="Cancelar póliza"  type="button" id=' + d.id_poliza + ' name="cancelar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-backspace"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Anular póliza"  type="button" id=' + d.id_poliza + ' name="anular_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-ban"></i></button><a> </a>' +
-        '<button style="background-color: #FF0000" title="Eliminar póliza"  type="button" id=' + d.id_poliza + ' name="eliminar_poliza" onclick="botones(this.id, this.name, \'poliza\')"><i class="fas fa-trash"></i></button>' +
+        botones +
         '</td>' +
         '</tr>' +
         '</table>';
@@ -475,6 +488,20 @@ function botones(id, accion, base) {
                     'numero_poliza': id,
                     'accion':accion,
                     'motivo':motivo,
+                    'fecha_motivo':estandariza_fecha(fecha_motivo)
+                }, 'post');
+                }
+                
+            break;
+        }
+        case "reactivar_poliza": {
+                var fecha_motivo = window.prompt('Ingresa la fecha de reactivación en el siguiente formato dd/mm/aaaa. Por ejemplo: 31/07/2022', '');
+                var r2 = confirm("Estás a punto de reactivar esta póliza ¿Deseas continuar?");
+                
+                if (r2 == true) {
+                $.redirect('/bamboo/backend/propuesta_polizas/crea_propuesta_polizas.php', {
+                    'numero_poliza': id,
+                    'accion':accion,
                     'fecha_motivo':estandariza_fecha(fecha_motivo)
                 }, 'post');
                 }
