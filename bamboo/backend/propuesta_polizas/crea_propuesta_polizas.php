@@ -65,6 +65,7 @@ switch ($_POST["accion"]) {
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Elimina póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'cancelar_poliza':
+    $listado='/bamboo/listado_polizas.php';
     $busqueda=estandariza_info($_POST["numero_poliza"]);
     $mensaje='Póliza cancelada correctamente';
       $query= "update polizas_2 set estado='Cancelado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
@@ -73,6 +74,7 @@ switch ($_POST["accion"]) {
       break;
   case 'anular_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
+    $listado='/bamboo/listado_polizas.php';
     $mensaje='Póliza anulada correctamente';
       $query= "update polizas_2 set estado='Anulado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);

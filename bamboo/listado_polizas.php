@@ -449,8 +449,7 @@ function format_poliza(d) {
         '</table>';
 }
 function estandariza_fecha(fecha){
-    let partes = (fecha || '').split('/'),
-        fechaGenerada = new Date(partes[2], --partes[1], partes[0]);
+    let partes = (fecha || '').split('/'), fechaGenerada = (partes[2] + '-' + partes[1] + '-' + partes[0]);
         return fechaGenerada;
 }
 function botones(id, accion, base) {
