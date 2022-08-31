@@ -67,14 +67,14 @@ switch ($_POST["accion"]) {
   case 'cancelar_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
     $mensaje='Póliza cancelada correctamente';
-      $query= "update polizas_2 set estado='Cancelado', fech_cancela=CURRENT_TIMESTAMP, motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
+      $query= "update polizas_2 set estado='Cancelado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Cancela póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
   case 'anular_poliza':
     $busqueda=estandariza_info($_POST["numero_poliza"]);
     $mensaje='Póliza anulada correctamente';
-      $query= "update polizas_2 set estado='Anulado', fech_cancela=CURRENT_TIMESTAMP, motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
+      $query= "update polizas_2 set estado='Anulado', fech_cancela='".estandariza_info($_POST["fecha_motivo"])."', motivo_cancela='".estandariza_info($_POST["motivo"])."'  where id='".$busqueda."';";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Anula póliza', '".str_replace("'","**",$query)."','poliza','".$busqueda."', '".$_SERVER['PHP_SELF']."')");
       break;
