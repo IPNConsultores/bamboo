@@ -2,9 +2,9 @@
 if ( !isset( $_SESSION ) ) {
   session_start();
 }
-//$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'generar_documento';
-//$_POST["numero_propuesta"]='P100006';
+$_SERVER[ "REQUEST_METHOD" ] = "POST";
+$_POST["accion"] = 'generar_documento';
+$_POST["numero_propuesta"]='P100006';
     if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'generar_documento')
     {
     
@@ -107,6 +107,7 @@ if ( !isset( $_SESSION ) ) {
     
 <div class="container" id="capture">
     <button id="BotonPDF" onclick="makePDF();">Generar PDF</button>
+    <button id="boton_renovacion" onclick="ocultarenovacion();" display="none">Oculta Renovación</button>
     <br>
     <br>
     <section id="section1">
@@ -199,7 +200,7 @@ if ( !isset( $_SESSION ) ) {
   <!--DATOS PROPONENTE -->
     <div class="row" id='renovacion' style="display:none" >
         <div class="col-1"></div>
-        <div id='titulo_renovacion' class="col" style="background-color:yellow;border-style :solid; border-color: grey; border-width: 1px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px"></div>
+        <div id='titulo_renovacion' contenteditable="true" class="col" style="background-color:yellow;border-style :solid; border-color: grey; border-width: 1px; border-top:0px; border-right-width: 2px;border-left-width: 2px;border-bottom-width:1px"></div>
     <div class="col-1"></div>
     </div>
         <div class="row" >
@@ -595,8 +596,10 @@ if ( !isset( $_SESSION ) ) {
     }
 document.addEventListener("DOMContentLoaded", function(event) {
 if ('<?php echo $poliza_renovada; ?>'!==''){
-    document.getElementById("titulo_renovacion").innerHTML = "<label><b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b></label>";
+    document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
     document.getElementById("renovacion").style.display="flex";
+    document.getElementById("boton_renovacion").style.display="flex";
+    
 }
     
     document.getElementById("numero_items").innerHTML = '<?php echo $nro_items; ?>';
@@ -1048,4 +1051,29 @@ if ('<?php echo $poliza_renovada; ?>'!==''){
 function sumar_arreglo(a) {
   return (a.length && parseFloat(a[0]) + sumar_arreglo(a.slice(1))) || 0;
 }
+
+
+function ocultarenovacion(){
+ 
+ var a = document.getElementById("renovacion").style.display
+ 
+  
+ if (a=="flex" ){
+    document.getElementById("renovacion").style.display="none";
+    console.log("oculto rneovacion");
+    
+ }
+ 
+ else {
+     
+     document.getElementById("renovacion").style.display="flex";
+     console.log("muestro rneovacion");
+     
+ }
+
+
+}
+
+
+
 </script>
