@@ -107,7 +107,9 @@ if ( !isset( $_SESSION ) ) {
     
 <div class="container" id="capture">
     <button id="BotonPDF" onclick="makePDF();">Generar PDF</button>
-    <button id="boton_renovacion" onclick="ocultarenovacion();" display="none">Oculta Renovación</button>
+   
+    <button id="boton_renovacion2" onclick="ocultarenovacion();" style="display:none">Oculta Renovación</button>
+    
     <br>
     <br>
     <section id="section1">
