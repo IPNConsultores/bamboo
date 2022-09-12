@@ -181,9 +181,10 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
                 <select class="form-control" id="motivo_endoso" name="motivo_endoso" onchange=cambio_motivo() required>
                     <option value="">Selecciona Motivo</option>
                     <option value="Endoso Aumento">Endoso Aumento</option>
-                    <option value="Endoso de Disminución o Anulación">Endoso de Disminución o Anulación</option>
+                    <option value="Endoso de Disminución">Endoso de Disminución</option>
                     <option value="Endoso Prorroga">Endoso Prorroga</option>
                     <option value="Endoso Sin Movimiento">Endoso Sin Movimiento</option>
+                     <option value="Endoso de Anulación">Endoso de Anulación</option>
                     <option value="Endoso de Cancelación">Endoso de Cancelación</option>
                 </select>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
