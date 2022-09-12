@@ -595,7 +595,7 @@ if ( !isset( $_SESSION ) ) {
     }
 document.addEventListener("DOMContentLoaded", function(event) {
 if ('<?php echo $poliza_renovada; ?>'!==''){
-    document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
+    document.getElementById("titulo_renovacion").innerHTML = "<label><b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b></label>";
     document.getElementById("renovacion").style.display="flex";
 }
     
