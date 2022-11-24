@@ -78,6 +78,8 @@ $buscar= estandariza_info($_POST["busqueda"]);
 
             </table>
             <div id="botones_poliza">
+                <button title="Descargar_excel_endosos" type="button"  onclick="window.location.href='/bamboo/backend/endosos/genera_excel_endosos.php'">Descargar Excel <i class="fas fa-file-excel"></i></button>
+            </div>
             
         </div>
 
