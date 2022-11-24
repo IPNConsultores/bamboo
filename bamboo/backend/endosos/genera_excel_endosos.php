@@ -49,7 +49,7 @@ $hojaActiva->setCellValue('L2', 'Total Prima Afecta');
 $hojaActiva->setCellValue('M2', 'Total Prima Exenta');
 $hojaActiva->setCellValue('N2', 'Total Prima Neta Anual');
 $hojaActiva->setCellValue('O2', 'Total Prima Bruta Anual');
-$hojaActiva->setCellValue('P2', 'Descripción Endoso');
+$hojaActiva->setCellValue('P2', 'Descripcion Endoso');
 $hojaActiva->setCellValue('Q2', 'Dice');
 $hojaActiva->setCellValue('R2', 'Debe Decir');
 $hojaActiva->setCellValue('S2', 'Comentario');
