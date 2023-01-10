@@ -5,7 +5,7 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza';
+//$_POST["accion"] = 'crear_poliza_web';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
 //$_POST["numero_poliza"]='300255006';
@@ -712,7 +712,8 @@ function estandariza_info( $data ) {
                                        style="width:72%;">
                 </div>
           <div class="col-md-4 mb-3">
-          <label for="fecha_emision_poliza">Fecha Emisión Póliza &nbsp;&nbsp;</label>
+          <label for="fecha_emision_poliza">Fecha Emisión Póliza</label>
+          <label style="color: darkred">&nbsp; *</label>
           <div class="md-form">
             <input placeholder="Selected date" type="date" id="fecha_emision_poliza" name="fecha_emision_poliza"
                                           class="form-control"  max= "9999-12-31" style="width:72%;">
@@ -1819,6 +1820,7 @@ console.log(orgn)
             document.getElementById("titulo4").style.display = "flex";
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("nro_poliza").required = true;
+            document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("nro_propuesta").value = "WEB";
             document.getElementById("fechaprop").style.display = "none";
             document.getElementById("fechaprop2").style.display = "flex";
