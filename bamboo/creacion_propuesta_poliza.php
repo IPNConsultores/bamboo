@@ -1410,6 +1410,7 @@ console.log(orgn)
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("informacion_poliza").disabled = false;
             document.getElementById("nro_poliza").required = true;
+            document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("modo_pago").required = true;
             document.getElementById("fechaprimer").required = true;
             document.getElementById("modo_pago").required = true;
@@ -1573,7 +1574,7 @@ console.log(orgn)
             document.getElementById("titulo2").style.display = "flex";
             document.getElementById("informacion_poliza").style.display = "flex";
             document.getElementById("nro_poliza").required = true;
-            
+            document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
@@ -1671,7 +1672,7 @@ console.log(orgn)
             document.getElementById("botones_edicion").style.display = "flex";
             
             document.getElementById("nro_poliza").required = true;
-            
+            document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
@@ -1768,6 +1769,7 @@ console.log(orgn)
                     document.getElementById("titulo5").style.display = "flex";
                     document.getElementById("informacion_poliza").style.display = "flex";
                     document.getElementById("nro_poliza").required = true;
+                    document.getElementById("fecha_emision_poliza").required = true;
                     document.getElementById("nro_propuesta").value = "WEB";
                     document.getElementById("fechaprop").style.display = "none";
                     document.getElementById("fechaprop2").style.display = "flex";
@@ -1841,7 +1843,7 @@ console.log(orgn)
                 document.getElementById("info_endoso").style.display = "flex";
             }
             document.getElementById("nro_poliza").required = true;
-            
+            document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
