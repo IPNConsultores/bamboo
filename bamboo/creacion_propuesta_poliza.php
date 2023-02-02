@@ -2420,6 +2420,7 @@ function vencimientogarantia(){
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
           'contador_items':contador,
+          'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,
@@ -2447,7 +2448,7 @@ function vencimientogarantia(){
           'comisionneg': document.getElementById("comisionneg").value,
           'boletaneg': document.getElementById("boletaneg").value,
           'boleta': document.getElementById("boleta").value,
-          
+          'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           //renovación
           'accion_secundaria':'<?php echo $accion_secundaria; ?>',
           'poliza_renovada':'<?php echo $poliza_renovada; ?>'
