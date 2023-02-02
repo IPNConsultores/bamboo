@@ -2420,7 +2420,7 @@ function vencimientogarantia(){
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
           'contador_items':contador,
-          
+          'fecha_emision_poliza': document.getElementById("fecha_emision_poliza").value,
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,
