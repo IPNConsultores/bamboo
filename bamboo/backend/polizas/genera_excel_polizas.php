@@ -14,8 +14,7 @@ FORMAT(b.prima_neta, 2)+0.0 as prima_neta,
 FORMAT(b.prima_bruta_anual, 2)+0.0 as prima_bruta_anual, 
 b.monto_asegurado, b.venc_gtia, c.nombre_cliente as proponente, d.nombre_cliente as asegurado, c.grupo as grupo_proponente, d.grupo as grupo_asegurado, a.comision, a.porcentaje_comision, a.comision_bruta, a.comision_neta, a.comision_neta,a.numero_boleta, a.comision_negativa, a.boleta_negativa, a.depositado_fecha, a.vendedor, a.poliza_renovada, a.fech_cancela as fecha_cancelacion, a.motivo_cancela as motivo_cancelacion,
 concat_ws('-',SUBSTRING(a.vigencia_inicial, 6,2),SUBSTRING(a.vigencia_inicial, 1,4)) as mesano_vigencia_inicial,
-concat_ws('-',SUBSTRING(a.vigencia_final, 6,2),SUBSTRING(a.vigencia_final, 1,4)) as mesano_vigencia_final
-
+concat_ws('-',SUBSTRING(a.vigencia_final, 6,2),SUBSTRING(a.vigencia_final, 1,4)) as mesano_vigencia_final, fecha_emision_poliza
 from polizas_2 as a 
 left join items as b 
 on a.numero_poliza=b.numero_poliza
@@ -79,7 +78,7 @@ $hojaActiva->setCellValue('AW2', 'Fecha cancelacion');
 $hojaActiva->setCellValue('AX2', 'Motivo cancelacion');
 $hojaActiva->setCellValue('AY2', 'Vigencia inicial (mes-año)');
 $hojaActiva->setCellValue('AZ2', 'Vigencia final (mes-año)');
-
+$hojaActiva->setCellValue('BA2', 'Fecha Emisión Póliza');
 
 $styleArray = [
     'font' => [
@@ -93,7 +92,7 @@ $styleArray = [
 ];
 $hojaActiva->freezePane('A3');
 
-$hojaActiva->getStyle('A2:AZ2')->applyFromArray($styleArray);
+$hojaActiva->getStyle('A2:BA2')->applyFromArray($styleArray);
 $hojaActiva->getColumnDimension('A')->setWidth(10);
 $hojaActiva->getColumnDimension('B')->setWidth(10);
 $hojaActiva->getColumnDimension('C')->setWidth(20);
@@ -146,6 +145,7 @@ $hojaActiva->getColumnDimension('AW')->setWidth(10);
 $hojaActiva->getColumnDimension('AX')->setWidth(10);
 $hojaActiva->getColumnDimension('AY')->setWidth(10);
 $hojaActiva->getColumnDimension('AZ')->setWidth(10);
+$hojaActiva->getColumnDimension('BA')->setWidth(10);
 $fila=3;
 
 while ($rows = mysqli_fetch_object($resultado))
@@ -202,11 +202,12 @@ while ($rows = mysqli_fetch_object($resultado))
     $hojaActiva->setCellValue('AX'.$fila, $rows->motivo_cancelacion);
     $hojaActiva->setCellValue('AY'.$fila, $rows->mesano_vigencia_inicial);
     $hojaActiva->setCellValue('AZ'.$fila, $rows->mesano_vigencia_final);
+    $hojaActiva->setCellValue('BA'.$fila, $rows->fecha_emision_poliza);
     $fila++;
 }
 $fecha = new DateTime(date("Y-m-d H:i:sP"), new DateTimeZone('America/Santiago') );
 date_timezone_set($fecha, timezone_open('America/Santiago'));
-$hojaActiva->setAutoFilter('A2:AZ'.($fila-1));
+$hojaActiva->setAutoFilter('A2:BA'.($fila-1));
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="Listado_pólizas '.date_format($fecha, 'd-m-Y H:i:s').'.xlsx"');
 header('Cache-Control: max-age=0');
