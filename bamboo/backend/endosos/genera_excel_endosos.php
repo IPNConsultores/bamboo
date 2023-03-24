@@ -29,7 +29,8 @@ $query= "select @rownum := @rownum + 1 AS fila,
     debe_decir, 
     descripcion_endoso,
     CONCAT_WS('-',rut_proponente,dv_proponente) AS rut_proponente,
-    nombre_proponente
+    nombre_proponente,
+    fecha_emision
     FROM endosos as a";
 $resultado=mysqli_query($link, $query);
 $excel= new Spreadsheet();
@@ -54,6 +55,7 @@ $hojaActiva->setCellValue('Q2', 'Dice');
 $hojaActiva->setCellValue('R2', 'Debe Decir');
 $hojaActiva->setCellValue('S2', 'Comentario');
 $hojaActiva->setCellValue('T2', 'Compañia');
+$hojaActiva->setCellValue('U2', 'Fecha Emisión');
 
 $styleArray = [
     'font' => [
@@ -88,6 +90,7 @@ $hojaActiva->getColumnDimension('Q')->setWidth(40);
 $hojaActiva->getColumnDimension('R')->setWidth(40);
 $hojaActiva->getColumnDimension('S')->setWidth(30);
 $hojaActiva->getColumnDimension('T')->setWidth(15);
+$hojaActiva->getColumnDimension('U')->setWidth(10);
 $fila=3;
 
 while ($rows = mysqli_fetch_object($resultado))
@@ -112,11 +115,12 @@ while ($rows = mysqli_fetch_object($resultado))
     $hojaActiva->setCellValue('R'.$fila, $rows->debe_decir);
     $hojaActiva->setCellValue('S'.$fila, $rows->comentario_endoso);
     $hojaActiva->setCellValue('T'.$fila, $rows->compania);
+    $hojaActiva->setCellValue('U'.$fila, $rows->fecha_emision);
     $fila++;
 }
 $fecha = new DateTime(date("Y-m-d H:i:sP"), new DateTimeZone('America/Santiago') );
 date_timezone_set($fecha, timezone_open('America/Santiago'));
-$hojaActiva->setAutoFilter('A2:T'.($fila-1));
+$hojaActiva->setAutoFilter('A2:U'.($fila-1));
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="Listado_endosos '.date_format($fecha, 'd-m-Y H:i:s').'.xlsx"');
 header('Cache-Control: max-age=0');
