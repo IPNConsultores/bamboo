@@ -8,7 +8,8 @@ mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crea_propuesta_endoso_web';
+//$_POST["accion"] = 'crear_endoso';
+//$_POST["id"]='72';
 //$_POST["numero_poliza"]='885';
 //$_POST["numero_endoso"]="test";
 //echo "'".$_POST["numero_propuesta"]."' '";
@@ -76,6 +77,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
         While( $row = mysqli_fetch_object( $resultado ) ) {
             $numero_propuesta=$row->numero_propuesta_endoso;
             $numero_endoso = $row->numero_endoso;
+            $fecha_emision = $row->fecha_emision;
             $numero_poliza = $row->numero_poliza;
             $ramo=$row->ramo;
             $id=$row->id;
@@ -166,7 +168,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
           <div class="card-body" id="card-body-one">
             
         <div class="form-row">
-            <div class="col-5" id="caja_numero_endoso" style="display:none">
+            <div class="col-3" id="caja_numero_endoso" style="display:none">
                     <label for="monto"><b>Número de Endoso</b></label>
                     <label style="color: darkred">&nbsp; *</label>
                     <div class="md-form">
@@ -174,7 +176,7 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
                     </div>
                 
             </div>
-            <div class="col-5">
+            <div class="col-3">
                 <label for = "motivo_endoso"><b>Motivo del Endoso</b></label>
                 <label style="color: darkred">*</label>
                 <br>
@@ -189,6 +191,16 @@ elseif($_SERVER[ "REQUEST_METHOD" ] == "POST" and $_POST["accion"] == 'actualiza
                 </select>
                 <div class="invalid-feedback">No puedes dejar este campo en blanco</div>
             </div>
+            
+            <div class="col-3">
+              <label for="fecha_emision">Fecha Emisión Endoso</label>
+              <label style="color: darkred">&nbsp; *</label>
+              <div class="md-form">
+                <input placeholder="Selected date" type="date" id="fecha_emision" name="fecha_emision"
+                                              class="form-control"  max= "9999-12-31" style="width:72%;">
+              </div>
+            </div>
+            
           <div class="col-4" id="col_fecha_ingreso" style="display:none">
                 <label for="fecha_prorroga"><b>Fecha Prorroga:&nbsp;</b></label>
                 <label style="color: darkred">*</label>
@@ -567,10 +579,10 @@ function validados(){
      var motivo = document.getElementById('motivo_endoso').value;
      var orgn = '<?php echo $camino; ?>';
      var nro_endoso = document.getElementById('nro_endoso').value;
-     
+     var fecha_emision = document.getElementById('fecha_emision').value;
     if(orgn =="crear_endoso"){
         
-        if (descripcion =='' || dice ==''|| debe ==''|| motivo ==null || nro_endoso ==""){
+        if (descripcion =='' || dice ==''|| debe ==''|| motivo ==null || nro_endoso ==""|| fecha_emision ==""){
         
         alert("Existen campos obligatorios sin completar")
         
@@ -695,7 +707,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("titulo4").style.display = "none";
             document.getElementById("titulo5").style.display = "flex";
             document.getElementById("caja_numero_endoso").style.display = "block";
-            document.getElementById("nro_endoso").required = "true";              
+            document.getElementById("nro_endoso").required = "true"; 
+            document.getElementById("fecha_emision").required = "true";
             if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
                 document.getElementById("col_fecha_ingreso").style.display ="block";
             }
@@ -762,6 +775,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("tasa_afecta").value = '<?php echo $tasa_afecta_endoso*1; ?>';
             document.getElementById("tasa_exenta").value = '<?php echo $tasa_exenta_endoso*1; ?>';
             document.getElementById("nro_endoso").value = '<?php echo $numero_endoso; ?>';
+            document.getElementById("fecha_emision").value = '<?php echo $fecha_emision; ?>';
             document.getElementById("comentarios").value = '<?php echo $comentarios; ?>';
             document.getElementById("fecha_prorroga").value='<?php echo $fecha_prorroga; ?>';
               document.getElementById("titulo1").style.display = "none";
@@ -806,7 +820,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("titulo4").style.display = "none";
                 document.getElementById("titulo5").style.display = "none";
                 document.getElementById("caja_numero_endoso").style.display = "block";
-                document.getElementById("nro_endoso").required = "true";              
+                document.getElementById("nro_endoso").required = "true"; 
+                document.getElementById("fecha_emision").required = "true";  
                 if('<?php echo $tipo_endoso; ?>' == "Endoso Prorroga") {
               document.getElementById("col_fecha_ingreso").style.display ="block";
             }
@@ -1028,6 +1043,7 @@ function genera_propuesta(){
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_emision':document.getElementById("fecha_emision").value,
           'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'comentario_endoso':document.getElementById("comentarios").value,
           'accion':camino
@@ -1060,6 +1076,7 @@ function genera_propuesta(){
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'web',
           'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_emision':document.getElementById("fecha_emision").value,
           'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'comentario_endoso':document.getElementById("comentarios").value,
           'accion':camino
@@ -1094,6 +1111,7 @@ function genera_propuesta(){
           'id_poliza':'<?php echo $id_poliza; ?>',
           'numero_propuesta_endoso':'<?php echo $numero_propuesta ?>',
           'numero_endoso':document.getElementById("nro_endoso").value,
+          'fecha_emision':document.getElementById("fecha_emision").value,
           'fecha_prorroga': document.getElementById('fecha_prorroga').value,
           'comentario_endoso':document.getElementById("comentarios").value,
           'accion':camino
