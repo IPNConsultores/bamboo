@@ -64,7 +64,6 @@ $buscar= estandariza_info($_POST["busqueda"]);
             <table class="display" style="width:100%" id="listado_endosos">
                 <tr>
                     <th></th>
-                    <th>Número Endoso</th>
                     <th>Nro Propuesta Endoso</th>
                     <th>Tipo Endoso</th>
                     <th>Nro Póliza</th>
@@ -124,10 +123,7 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": '<i class="fas fa-search-plus"></i>'
             }, //0
-            {
-                "data": "numero_endoso",
-                title: "Número Endoso"
-            }, //1
+           
             { 
                 data: "numero_propuesta_endoso", 
                 title: "Nro Propuesta Endoso",
@@ -172,7 +168,7 @@ $(document).ready(function() {
         "columnDefs": 
         [
         {
-        targets: [7,8,9,10,11],
+        targets: [6,7,8,9,10],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")
