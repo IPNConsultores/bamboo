@@ -74,6 +74,7 @@ $buscar= estandariza_info($_POST["busqueda"]);
                     <th>Inicio Vigencia</th>
                     <th>Fin Vigencia</th>
                     <th>Fecha Prorroga</th>
+                    <th>Fecha Emisión</th>
                 </tr>
 
             </table>
@@ -138,36 +139,40 @@ $(document).ready(function() {
             {
                 "data": "rut_proponente",
                 title: "Rut proponente"
-            }, //3
+            }, //4
             {
                 "data": "nombre_proponente",
                 title: "Nombre proponente"
-            }, //3
+            }, //5
             {
                 "data": "numero_poliza",
                 title: "Número Póliza"
-            }, //4
+            }, //6
             {
                 "data": "fecha_ingreso_endoso",
                 title: "Fecha ingreso"
-            }, //5
+            }, //7
             {
                 "data": "vigencia_inicial",
                 title: "Inicio Vigencia"
-            }, //6
+            }, //8
             {
                 "data": "vigencia_final",
                 title: "Fin Vigencia"
-            }, //7
+            }, //9
             {
                 "data": "fecha_prorroga",
                 title: "Fecha Prorroga"
-            } //7
+            }, //10
+            {
+                "data": "fecha_emision",
+                title: "Fecha Emisión"
+            } //11
         ],
         "columnDefs": 
         [
         {
-        targets: [7,8,9],
+        targets: [7,8,9,10,11],
          render: function(data, type, full)
          {
             if (data==null || data=="0000-00-00")

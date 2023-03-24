@@ -9,7 +9,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
 
     mysqli_set_charset($link, 'utf8');
     mysqli_select_db($link, 'gestio10_asesori1_bamboo');
-    $sql = "sELECT a.id, fecha_prorroga, numero_endoso,comentario_endoso, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, 
+    $sql = "sELECT a.id, fecha_emision, fecha_prorroga, numero_endoso,comentario_endoso, tipo_endoso, compania,fecha_ingreso_endoso, ramo, vigencia_inicial, vigencia_final, numero_poliza, numero_propuesta_endoso, 
     CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(iva, 2, 'de_DE')) as iva, 
     CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_exenta, 2, 'de_DE')) as prima_neta_exenta, 
     CONCAT_WS(' ',moneda_poliza_endoso,FORMAT(prima_neta_afecta, 2, 'de_DE')) as prima_neta_afecta,
@@ -29,6 +29,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         if ($conta==1){
             $codigo.= json_encode(array(
             "numero_endoso" =>& $row->numero_endoso,
+            "fecha_emision" =>& $row->fecha_emision,
             "id" =>& $row->id,
             "rut_proponente" =>& $row->rut_proponente,
             "nombre_proponente" =>& $row->nombre_proponente,
@@ -53,6 +54,7 @@ require_once "/home/gestio10/public_html/backend/config.php";
         } else {
             $codigo.= ', '.json_encode(array(
             "numero_endoso" =>& $row->numero_endoso,
+            "fecha_emision" =>& $row->fecha_emision,
             "id" =>& $row->id,
             "rut_proponente" =>& $row->rut_proponente,
             "nombre_proponente" =>& $row->nombre_proponente,
