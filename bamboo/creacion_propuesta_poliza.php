@@ -2617,8 +2617,14 @@ function vencimientogarantia(){
                             '<option value="UF 3">UF 3</option>'+
                             '<option value="UF 5">UF 5</option>'+
                             '<option value="UF 10">UF 10</option>'+
+                            '<option value="UF 15">UF 15</option>'+
+                            '<option value="UF 18">UF 18</option>'+
                             '<option value="UF 20">UF 20</option>'+
+                            '<option value="UF 25">UF 25</option>'+
+                            '<option value="UF 30">UF 30</option>'+
+                            '<option value="UF 40">UF 40</option>'+
                             '<option value="UF 50">UF 50</option>'+
+                            '<option value="UF 75">UF 75</option>'+
                         '</select>'+
                     '</div>'+
                 //inicio deducible normal
@@ -2695,8 +2701,14 @@ function vencimientogarantia(){
                             '<option value="UF 3">UF 3</option>'+
                             '<option value="UF 5">UF 5</option>'+
                             '<option value="UF 10">UF 10</option>'+
+                            '<option value="UF 15">UF 15</option>'+
+                            '<option value="UF 18">UF 18</option>'+
                             '<option value="UF 20">UF 20</option>'+
+                            '<option value="UF 25">UF 25</option>'+
+                            '<option value="UF 30">UF 30</option>'+
+                            '<option value="UF 40">UF 40</option>'+
                             '<option value="UF 50">UF 50</option>'+
+                            '<option value="UF 75">UF 75</option>'+
                         '</select>'+
                     '</div>'+
                 //inicio deducible normal
