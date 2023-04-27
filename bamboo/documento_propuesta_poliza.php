@@ -598,8 +598,7 @@ if ( !isset( $_SESSION ) ) {
     });
     }
 document.addEventListener("DOMContentLoaded", function(event) {
-    console.log($prima_afecta);
-    console.log($prima_neta);
+    
 if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
     document.getElementById("renovacion").style.display="flex";
