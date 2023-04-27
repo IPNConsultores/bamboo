@@ -598,6 +598,7 @@ if ( !isset( $_SESSION ) ) {
     });
     }
 document.addEventListener("DOMContentLoaded", function(event) {
+    <?php echo $monto_aseg[];?>
     
 if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
