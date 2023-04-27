@@ -74,12 +74,12 @@ if ( !isset( $_SESSION ) ) {
                 $venc_gtia[] = $row_item->venc_gtia;
                 $prima_afecta_iva[] = $row_item->prima_afecta_iva+0.0;
                 
-                $total_prima_afecta =+$row_item->prima_afecta;
-                $total_prima_exenta =+ $row_item->prima_exenta;
-                $total_prima_neta =+ $row_item->prima_neta;
-                $total_prima_bruta =+ $row_item->prima_bruta_anual;
-                $total_monto_aseg =+ $row_item->monto_asegurado;
-                $total_prima_afecta_iva =+ $row_item->prima_afecta_iva;
+                $total_prima_afecta += $row_item->prima_afecta;
+                $total_prima_exenta += $row_item->prima_exenta;
+                $total_prima_neta += $row_item->prima_neta;
+                $total_prima_bruta += $row_item->prima_bruta_anual;
+                $total_monto_aseg += $row_item->monto_asegurado;
+                $total_prima_afecta_iva += $row_item->prima_afecta_iva;
             }
         }
     }
