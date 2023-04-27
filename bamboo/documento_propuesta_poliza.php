@@ -106,8 +106,7 @@ if ( !isset( $_SESSION ) ) {
 <body>
     
 <div class="container" id="capture">
-<?php echo $monto_aseg[];?>
-    
+
     <button id="BotonPDF" onclick="makePDF();">Generar PDF</button>
    
     <button id="boton_renovacion" onclick="ocultarenovacion();" style="display:none">Oculta Renovación</button>
