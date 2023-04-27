@@ -106,6 +106,7 @@ if ( !isset( $_SESSION ) ) {
 <body>
     
 <div class="container" id="capture">
+<?php echo $monto_aseg[];?>
     
     <button id="BotonPDF" onclick="makePDF();">Generar PDF</button>
    
@@ -598,8 +599,7 @@ if ( !isset( $_SESSION ) ) {
     });
     }
 document.addEventListener("DOMContentLoaded", function(event) {
-    <?php echo $monto_aseg[];?>
-    
+   
 if ('<?php echo $poliza_renovada; ?>'!==''){
     document.getElementById("titulo_renovacion").innerHTML = "<b>Renueva póliza nro: <?php echo $poliza_renovada; ?></b>";
     document.getElementById("renovacion").style.display="flex";
