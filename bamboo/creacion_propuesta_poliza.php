@@ -1164,6 +1164,7 @@ function cambia_deducible() {
             document.getElementById('deducible_para_otros[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_RC[' +i+ ']').style.display="none";
             document.getElementById('deducible_para_vehiculos[' +i+ ']').style.display="flex";
+            document.getElementById('cobertura[' +i+ ']').value="Cobertura: Plan L + Taller de marca + Responsabilidad Civil (Daños a terceros) UF 1.500 + Asistencia B + Auto de reemplazo 30 días con copago diario $5.000";
                       }
     } else if (ramo == "INC" || ramo == "Hogar" || ramo == "PyME" || ramo == "INC - Condominio" || ramo ==
         "INC - Hogar" || ramo == "INC - Misceláneos" || ramo == "INC - Perjuicio por Paralización" || ramo ==
