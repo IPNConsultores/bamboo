@@ -5,10 +5,11 @@ if ( !isset( $_SESSION ) ) {
 $camino='crear_propuesta';
 
 //$_SERVER[ "REQUEST_METHOD" ] = "POST";
-//$_POST["accion"] = 'crear_poliza_web';
+//$_POST["accion"] = 'actualiza_propuesta';
+//$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
-//$_POST["numero_poliza"]='300255006';
+//$_POST["numero_poliza"]='88480-00';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -17,7 +18,7 @@ $poliza_renovada='';
       $accion_secundaria=$_POST["accion_secundaria"];
       if ($accion_secundaria=='renovar'){
           $poliza_renovada=$_POST["numero_poliza"];
-        $query = "select '' as numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza where a.numero_poliza='".$poliza_renovada."'";
+        $query = "select '' as numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,b.nombre_cliente,a.fecha_propuesta, a.vigencia_inicial, a.vigencia_final, a.moneda_poliza, a.compania, a.ramo, a.comentarios_int, a.comentarios_ext, a.vendedor, a.forma_pago, a.valor_cuota, a.nro_cuotas, a.moneda_valor_cuota, a.fecha_primera_cuota, a.porcentaje_comision, count(e.numero_endoso) as numero_endosos from polizas_2 as a left join endosos as e on a.id=e.id_poliza left join clientes as b on a.rut_proponente=b.rut_sin_dv where a.numero_poliza='".$poliza_renovada."'";
         $query_item = "SELECT numero_item, rut_asegurado, dv_asegurado, materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` where numero_poliza='".$poliza_renovada."' order by numero_item asc";
 
       }    
@@ -1286,7 +1287,7 @@ var tabla_clientes = $('#listado_clientes').DataTable({
 var origen = '';
 var item='';
 function origen_busqueda(origen_boton, indice_item) {
-    //console.log('origen: <' +origen_boton +'> - nro_item: <'+ indice_item +'>')
+   // console.log('origen: <' +origen_boton +'> - nro_item: <'+ indice_item +'>')
     origen = origen_boton;
     item=indice_item
 }
@@ -1433,6 +1434,8 @@ console.log(orgn)
                 document.getElementById("radio2_si").checked = false;
                 document.getElementById("radio2_no").checked = true;
             }
+            
+            
             document.getElementById("contenedor_nro_propuesta").style.display = "inline";
             document.getElementById("titulo1").style.display = "none";
             document.getElementById("titulo2").style.display = "flex";
@@ -1440,6 +1443,7 @@ console.log(orgn)
            
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            console.log("copio nombre proponente" +  '<?php echo $nombre_cliente; ?>' +  '<?php echo $rut_completo_prop; ?>');
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
 
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
@@ -1452,6 +1456,8 @@ console.log(orgn)
             document.getElementById("porcentaje_comsion").value = '<?php echo $porcentaje_comision; ?>';
             document.getElementById("comentarios_int").value = '<?php echo $comentarios_int; ?>';
             document.getElementById("comentarios_ext").value = '<?php echo $comentarios_ext; ?>';
+           
+
             //agregar ítems
             var contador=1;
             var item= <?php echo json_encode($item); ?>;
@@ -1523,6 +1529,8 @@ console.log(orgn)
                     document.getElementById("fechavenc").value = '';
                     console.log("quitar required de fechaprop");
                      $("#fechaprop").removeAttr("required");
+                    console.log("copio nombre proponente");
+                    document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
                     document.getElementById("edicion1").style.display = "none";
                     if ('<?php echo $numero_endosos; ?>'!=='0'){
                         document.getElementById("info_endoso").style.display = "flex";
@@ -1675,6 +1683,7 @@ console.log(orgn)
             document.getElementById("fecha_emision_poliza").required = true;
             document.getElementById("nro_propuesta").value = '<?php echo $nro_propuesta; ?>';
             document.getElementById("rutprop").value = '<?php echo $rut_completo_prop; ?>';
+            console.log("copio nombre proponente")
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
