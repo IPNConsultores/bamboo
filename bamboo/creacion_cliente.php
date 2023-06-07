@@ -171,12 +171,12 @@ if ( $_SERVER[ "REQUEST_METHOD" ] == "POST" and isset( $_POST[ "id_cliente" ] ) 
         </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="Dirección">Dirección Principal</label>
+        <label for="Dirección">Dirección Particular</label>
                 <input type="text" class="form-control" name="direccionp" id="direccionp">
         
       </div>
       <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Dirección Secundaria</label>
+        <label for="validationCustomUsername">Dirección Comercial</label>
         <div class="input-group">
           <input type="text" class="form-control" name="direccionl" id="direccionl">
           
