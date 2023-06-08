@@ -22,7 +22,7 @@ mysqli_set_charset($link, 'utf8');
 $sql = "SELECT *, concat_ws('-',mes,SUBSTRING(anomes, 3,2)) as anomes_nombre FROM `stock_polizas` WHERE ANOMES BETWEEN ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH)) AND ANOMES(DATE_ADD(CURRENT_DATE, INTERVAL + 6 MONTH))";
     $resultado=mysqli_query($link, $sql);
 
-    $leyendas = $stock=$salidas=$entradas=$ramo=$cantidad=array();
+    $leyendas = $stock=$salidas=$entradas=$ramo=$porcentaje=$cantidad=array();
 While($row=mysqli_fetch_object($resultado))
   {
       if($row->anomes==date("Ym")){
@@ -36,11 +36,12 @@ While($row=mysqli_fetch_object($resultado))
       array_push($salidas,$row->salidas );
   }
   
-$resultado2=mysqli_query($link, "SELECT b.ramo_agrupado as ramo, count(a.ramo) as cantidad FROM polizas_2 as a left join ramos_agrupados as b on a.ramo=b.ramo where estado not in ('Cancelado','Anulado') group by b.ramo_agrupado order by count(a.ramo) desc");
+$resultado2=mysqli_query($link, "SELECT b.ramo_agrupado AS ramo, COUNT(a.ramo) AS cantidad, CONCAT(FORMAT((COUNT(a.ramo) / (SELECT COUNT(*) FROM polizas_2 WHERE estado NOT IN ('Cancelado', 'Anulado'))) * 100, 1), '%') AS porcentaje_total FROM polizas_2 AS a LEFT JOIN ramos_agrupados AS b ON a.ramo = b.ramo WHERE estado NOT IN ('Cancelado', 'Anulado') GROUP BY b.ramo_agrupado ORDER BY COUNT(a.ramo) DESC");
 While($row2=mysqli_fetch_object($resultado2))
   {
       array_push($ramo,$row2->ramo );
       array_push($cantidad,$row2->cantidad );
+      array_push($porcentaje,$row2->porcentaje_total );
   }
   mysqli_close($link);
 ?>
@@ -902,11 +903,16 @@ var randomScalingFactor = function() {
     return Math.round(Math.random() * 100);
 };
 var ctx2 = document.getElementById('torta').getContext('2d');
+
+var data = <?php echo json_encode($cantidad);?>;
+var labels = <?php echo json_encode($ramo);?>;
+var percentages = <?php echo json_encode($porcentaje_total);?>;
+
 var myDoughnutChart = new Chart(ctx2, {
     type: 'pie',
     data: {
         datasets: [{
-            data: <?php echo json_encode($cantidad);?> ,
+            data: data,
             backgroundColor : ["rgb(54, 162, 235)",
                 "rgb(255, 99, 132)",
                 "rgb(255, 205, 86)",
@@ -921,7 +927,7 @@ var myDoughnutChart = new Chart(ctx2, {
 
             label: 'Ramo'
         }],
-        labels: <?php echo json_encode($ramo);?>
+        labels: labels
     },
     options: {
         responsive: true,
@@ -939,18 +945,15 @@ var myDoughnutChart = new Chart(ctx2, {
         tooltips: {
             callbacks: {
                 label: function(tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-                        return previousValue + currentValue;
-                    });
-                    var currentValue = dataset.data[tooltipItem.index];
-                    var percentage = Math.floor(((currentValue/total) * 100)+0.5);         
-                    return percentage + "%";
+                    var currentValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    var percentage = percentages[tooltipItem.index];
+                    return labels[tooltipItem.index] + ': ' + currentValue + ' (' + percentage + '%)';
                 }
             }
         }
     }
 });
+
 
 function genera_data(data) {
     switch (data) {
