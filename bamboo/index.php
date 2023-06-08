@@ -36,7 +36,7 @@ While($row=mysqli_fetch_object($resultado))
       array_push($salidas,$row->salidas );
   }
   
-$resultado2=mysqli_query($link, "SELECT ramo, count(*) as cantidad FROM polizas_2 where estado not in ('Cancelado','Anulado') group by ramo order by count(*) desc");
+$resultado2=mysqli_query($link, "SELECT b.ramo_agrupado as ramo, count(a.ramo) as cantidad FROM polizas_2 as a left join ramos_agrupados as b on a.ramo=b.ramo where estado not in ('Cancelado','Anulado') group by b.ramo_agrupado order by count(a.ramo) desc");
 While($row2=mysqli_fetch_object($resultado2))
   {
       array_push($ramo,$row2->ramo );
@@ -935,6 +935,19 @@ var myDoughnutChart = new Chart(ctx2, {
         animation: {
             animateScale: true,
             animateRotate: true
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                        return previousValue + currentValue;
+                    });
+                    var currentValue = dataset.data[tooltipItem.index];
+                    var percentage = Math.floor(((currentValue/total) * 100)+0.5);         
+                    return percentage + "%";
+                }
+            }
         }
     }
 });
