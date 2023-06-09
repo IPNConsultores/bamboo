@@ -903,16 +903,11 @@ var randomScalingFactor = function() {
     return Math.round(Math.random() * 100);
 };
 var ctx2 = document.getElementById('torta').getContext('2d');
-
-var data = <?php echo json_encode($cantidad);?>;
-var labels = <?php echo json_encode($ramo);?>;
-var percentages = <?php echo json_encode($porcentaje_total);?>;
-
 var myDoughnutChart = new Chart(ctx2, {
     type: 'pie',
     data: {
         datasets: [{
-            data: data,
+            data: <?php echo json_encode($cantidad);?> ,
             backgroundColor : ["rgb(54, 162, 235)",
                 "rgb(255, 99, 132)",
                 "rgb(255, 205, 86)",
@@ -927,7 +922,7 @@ var myDoughnutChart = new Chart(ctx2, {
 
             label: 'Ramo'
         }],
-        labels: labels
+        labels: <?php echo json_encode($ramo);?>
     },
     options: {
         responsive: true,
@@ -941,15 +936,6 @@ var myDoughnutChart = new Chart(ctx2, {
         animation: {
             animateScale: true,
             animateRotate: true
-        },
-        tooltips: {
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    var currentValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    var percentage = percentages[tooltipItem.index];
-                    return labels[tooltipItem.index] + ': ' + currentValue + ' (' + percentage + '%)';
-                }
-            }
         }
     }
 });
