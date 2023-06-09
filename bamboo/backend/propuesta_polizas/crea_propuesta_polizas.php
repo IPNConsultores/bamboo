@@ -219,7 +219,7 @@ switch ($_POST["accion"]) {
               //inicio acciones de renovación
         if ($accion_secundaria=='renovar'){
          //Póliza renovada registra renovación
-        $query= "update polizas_2 set estado_renovacion='Renovado', estado='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
+        $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
         $query= "update propuesta_polizas set poliza_renovada='".$poliza_renovada."' , comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_propuesta."';";
@@ -304,6 +304,12 @@ switch ($_POST["accion"]) {
     $query="delete from items where numero_propuesta='".$nro_propuesta."' and numero_item>".$contador_items.";";
     mysqli_query($link, $query);
     mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
+    if ($poliza_renovada_desde_propuesta) {
+      // Si existe, actualiza la tabla polizas_2
+      $query = "UPDATE polizas_2 SET estado='renovado' WHERE numero_poliza='".$poliza_renovada_desde_propuesta."'";
+      mysqli_query($link, $query);
+      mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza estado de la póliza renovada', '".str_replace("'","**",$query)."','poliza', '".$poliza_renovada_desde_propuesta."', '".$_SERVER['PHP_SELF']."')");
+  }
 
     break;
     case 'crear_poliza_web':
