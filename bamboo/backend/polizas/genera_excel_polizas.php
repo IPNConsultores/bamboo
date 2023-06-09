@@ -199,7 +199,7 @@ $styleArray = [
 ];
 $hojaActiva->freezePane('A3');
 
-$hojaActiva->getStyle('A2:BA2')->applyFromArray($styleArray);
+$hojaActiva->getStyle('A2:BB2')->applyFromArray($styleArray);
 $hojaActiva->getColumnDimension('A')->setWidth(10);
 $hojaActiva->getColumnDimension('B')->setWidth(10);
 $hojaActiva->getColumnDimension('C')->setWidth(20);
