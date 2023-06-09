@@ -23,7 +23,7 @@ $poliza_renovada='';
 
       }    
       else{
-        $query = "select numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,b.nombre_cliente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
+        $query = "select poliza_renovada, numero_propuesta, a.id, a.rut_proponente,a.dv_proponente,b.nombre_cliente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, porcentaje_comision, fecha_envio_propuesta from propuesta_polizas as a left join clientes as b on a.rut_proponente=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'";
         $query_item = "SELECT numero_item, a.rut_asegurado, a.dv_asegurado, b.nombre_cliente , materia_asegurada, patente_ubicacion, cobertura, deducible, tasa_afecta, tasa_exenta, prima_afecta, prima_exenta, prima_neta, prima_bruta_anual, monto_asegurado,venc_gtia FROM `items` as a left join clientes as b on a.rut_asegurado=b.rut_sin_dv where numero_propuesta='".$_POST["numero_propuesta"]."'order by numero_item asc";
 
       }
@@ -33,6 +33,7 @@ $poliza_renovada='';
       $resultado = mysqli_query( $link, $query );
       While( $row = mysqli_fetch_object( $resultado ) ) {
         $id = $row->id;
+        $poliza_renovada_desde_propuesta = $row->poliza_renovada;
         $rut_prop = $row->rut_proponente;
         $dv_prop = $row->dv_proponente;
         $rut_completo_prop = $rut_prop . '-' . $dv_prop;
@@ -2318,6 +2319,7 @@ function vencimientogarantia(){
           'moneda_valor_cuota': document.getElementById("moneda_cuota").value,
           'fecha_primera_cuota': document.getElementById("fechaprimer").value,
           'contador_items':contador,
+          'poliza_renovada':'<?php echo $poliza_renovada_desde_propuesta; ?>',
           //Ítem
           'rutaseg':  rutaseg,
           'materia': materia,

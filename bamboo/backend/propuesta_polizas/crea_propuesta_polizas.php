@@ -219,7 +219,7 @@ switch ($_POST["accion"]) {
               //inicio acciones de renovación
         if ($accion_secundaria=='renovar'){
          //Póliza renovada registra renovación
-        $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
+        $query= "update polizas_2 set estado_renovacion='Renovado', estado='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por propuesta póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
         $query= "update propuesta_polizas set poliza_renovada='".$poliza_renovada."' , comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_propuesta."';";
@@ -239,6 +239,7 @@ switch ($_POST["accion"]) {
         $listado='/bamboo/listado_polizas.php';
 
             $nro_poliza= estandariza_info($_POST["nro_poliza"]);
+            $poliza_renovada_desde_propuesta= estandariza_info($_POST["poliza_renovada"]);
             $fecha_emision_poliza= estandariza_info($_POST["fecha_emision_poliza"]);
             $fecha_envio_propuesta=estandariza_info($_POST["fecha_envio_propuesta"]);
             $comision= cambia_puntos_por_coma(estandariza_info($_POST["comision"]));
@@ -289,7 +290,7 @@ switch ($_POST["accion"]) {
         //crea token
         $largo = 6;
         $token = bin2hex(random_bytes($largo));
-        $query= "INSERT INTO polizas_2(estado, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, numero_propuesta, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta, fecha_envio_propuesta, fecha_emision_poliza) VALUES ('Activo', '".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."' , '".$nro_propuesta."', '".$nro_poliza."', '".$comision."', '".$porcentaje_comision."', '".$comisionbruta."', '".$comisionneta."', '".$fechadeposito."', '".$comisionneg."', '".$boletaneg."', '".$boleta."','".$fecha_envio_propuesta."','".$fecha_emision_poliza."');";
+        $query= "INSERT INTO polizas_2(estado, poliza_renovada, token, rut_proponente,dv_proponente,fecha_propuesta, vigencia_inicial, vigencia_final, moneda_poliza, compania, ramo, comentarios_int, comentarios_ext, vendedor, tipo_propuesta, forma_pago, valor_cuota, nro_cuotas, moneda_valor_cuota, fecha_primera_cuota, numero_propuesta, numero_poliza, comision, porcentaje_comision, comision_bruta, comision_neta, depositado_fecha, comision_negativa, boleta_negativa, numero_boleta, fecha_envio_propuesta, fecha_emision_poliza) VALUES ('Activo', '".$poliza_renovada_desde_propuesta."','".$token."', '".$rut_prop."', '".$dv_prop."', '".$fechaprop."', '".$fechainicio."', '".$fechavenc."',  '".$moneda_poliza."', '".$selcompania."', '".$ramo."', '".$comentarios_int."','".$comentarios_ext."', '".$vendedor."' , 'Estándar', '".$forma_pago."', '".$valor_cuota."', '".$cuotas."', '".$moneda_cuota."', '".$fechaprimer."' , '".$nro_propuesta."', '".$nro_poliza."', '".$comision."', '".$porcentaje_comision."', '".$comisionbruta."', '".$comisionneta."', '".$fechadeposito."', '".$comisionneg."', '".$boletaneg."', '".$boleta."','".$fecha_envio_propuesta."','".$fecha_emision_poliza."');";
         mysqli_query($link, $query);
         $resultado = mysqli_query($link, 'select id, numero_poliza from polizas_2 where token=\'' . $token . '\';');
         while ($fila = mysqli_fetch_object($resultado))
@@ -371,10 +372,10 @@ switch ($_POST["accion"]) {
         //inicio acciones de renovación
         if ($accion_secundaria=='renovar'){
          //Póliza renovada registra renovación
-        $query= "update polizas_2 set estado_renovacion='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
+        $query= "update polizas_2 set estado_renovacion='Renovado', estado='Renovado', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' es renovada por póliza ".$nro_propuesta."') where numero_poliza='".$poliza_renovada."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - antigua', '".str_replace("'","**",$query)."','poliza','".$poliza_renovada."', '".$_SERVER['PHP_SELF']."')");
-        $query= "update polizas_2 set poliza_renovada='".$poliza_renovada."', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_poliza."';";
+            $query= "update polizas_2 set poliza_renovada='".$poliza_renovada."', comentarios_int=concat(comentarios_int,'; ', DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y'), ' renueva póliza ".$poliza_renovada."') where id='".$id_poliza."';";
             mysqli_query($link, $query);
             mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Renovación póliza - nueva', '".str_replace("'","**",$query)."','poliza','".$id_poliza."', '".$_SERVER['PHP_SELF']."')");
  
