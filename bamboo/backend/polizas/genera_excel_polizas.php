@@ -7,22 +7,129 @@ use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
 mysqli_set_charset( $link, 'utf8');
 mysqli_select_db($link, 'gestio10_asesori1_bamboo');
 mysqli_query($link, "SET @rownum=0;");
-$query= "select @rownum := @rownum + 1 AS fila, a.estado, a.numero_poliza, b.numero_item, a.numero_propuesta, a.tipo_propuesta, a.fecha_propuesta, a.fecha_envio_propuesta, CONCAT_WS('-',a.rut_proponente, a.dv_proponente) as rut_proponente, a.compania, a.vigencia_inicial, a.vigencia_final, a.ramo, a.moneda_poliza, a.vendedor, a.forma_pago, a.moneda_valor_cuota, a.valor_cuota, a.fecha_primera_cuota, a.nro_cuotas, a.comentarios_int, a.comentarios_ext, CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) as rut_asegurado, b.materia_asegurada, b.patente_ubicacion, b.cobertura, b.deducible, CONCAT(FORMAT(b.tasa_afecta, 2, 'de_DE'),'%') as tasa_afecta, CONCAT(FORMAT(b.tasa_exenta, 2, 'de_DE'),'%') as tasa_exenta, 
-FORMAT(b.prima_afecta, 2)+0.0 as prima_afecta, 
-FORMAT(b.prima_exenta, 2)+0.0 as prima_exenta, 
-FORMAT(b.prima_neta, 2)+0.0 as prima_neta, 
-FORMAT(b.prima_bruta_anual, 2)+0.0 as prima_bruta_anual, 
-b.monto_asegurado, b.venc_gtia, c.nombre_cliente as proponente, d.nombre_cliente as asegurado, c.grupo as grupo_proponente, d.grupo as grupo_asegurado, a.comision, a.porcentaje_comision, a.comision_bruta, a.comision_neta, a.comision_neta,a.numero_boleta, a.comision_negativa, a.boleta_negativa, a.depositado_fecha, a.vendedor, a.poliza_renovada, a.fech_cancela as fecha_cancelacion, a.motivo_cancela as motivo_cancelacion,
-concat_ws('-',SUBSTRING(a.vigencia_inicial, 6,2),SUBSTRING(a.vigencia_inicial, 1,4)) as mesano_vigencia_inicial,
-concat_ws('-',SUBSTRING(a.vigencia_final, 6,2),SUBSTRING(a.vigencia_final, 1,4)) as mesano_vigencia_final, fecha_emision_poliza
-from polizas_2 as a 
-left join items as b 
-on a.numero_poliza=b.numero_poliza
-left join clientes as c
-on a.rut_proponente=c.rut_sin_dv
-left join clientes as d 
-on b.rut_asegurado=d.rut_sin_dv
-where b.id is not null";
+$query= "SELECT 
+@rownum := @rownum + 1 AS fila,
+a.estado,
+a.numero_poliza,
+b.numero_item,
+a.numero_propuesta,
+a.tipo_propuesta,
+a.fecha_propuesta,
+a.fecha_envio_propuesta,
+CONCAT_WS('-',a.rut_proponente, a.dv_proponente) AS rut_proponente,
+a.compania,
+a.vigencia_inicial,
+a.vigencia_final,
+a.ramo,
+a.moneda_poliza,
+a.vendedor,
+a.forma_pago,
+a.moneda_valor_cuota,
+a.valor_cuota,
+a.fecha_primera_cuota,
+a.nro_cuotas,
+a.comentarios_int,
+a.comentarios_ext,
+CONCAT_WS('-',b.rut_asegurado, b.dv_asegurado) AS rut_asegurado,
+b.materia_asegurada,
+b.patente_ubicacion,
+b.cobertura,
+b.deducible,
+CONCAT(FORMAT(b.tasa_afecta, 2, 'de_DE'),'%') AS tasa_afecta,
+CONCAT(FORMAT(b.tasa_exenta, 2, 'de_DE'),'%') AS tasa_exenta,
+FORMAT(b.prima_afecta, 2)+0.0 AS prima_afecta,
+FORMAT(b.prima_exenta, 2)+0.0 AS prima_exenta,
+FORMAT(b.prima_neta, 2)+0.0 AS prima_neta,
+FORMAT(b.prima_bruta_anual, 2)+0.0 AS prima_bruta_anual,
+b.monto_asegurado,
+b.venc_gtia,
+c.nombre_cliente AS proponente,
+d.nombre_cliente AS asegurado,
+c.grupo AS grupo_proponente,
+d.grupo AS grupo_asegurado,
+a.comision,
+a.porcentaje_comision,
+a.comision_bruta,
+a.comision_neta,
+a.comision_neta,
+a.numero_boleta,
+a.comision_negativa,
+a.boleta_negativa,
+a.depositado_fecha,
+a.vendedor,
+a.poliza_renovada,
+a.fech_cancela AS fecha_cancelacion,
+a.motivo_cancela AS motivo_cancelacion,
+CONCAT_WS('-',SUBSTRING(a.vigencia_inicial, 6,2),SUBSTRING(a.vigencia_inicial, 1,4)) AS mesano_vigencia_inicial,
+CONCAT_WS('-',SUBSTRING(a.vigencia_final, 6,2),SUBSTRING(a.vigencia_final, 1,4)) AS mesano_vigencia_final,
+fecha_emision_poliza,
+COUNT(e.numero_endoso) AS endosos
+FROM 
+polizas_2 AS a
+LEFT JOIN items AS b ON a.numero_poliza = b.numero_poliza
+LEFT JOIN clientes AS c ON a.rut_proponente = c.rut_sin_dv
+LEFT JOIN clientes AS d ON b.rut_asegurado = d.rut_sin_dv
+LEFT JOIN endosos AS e ON a.numero_poliza = e.numero_poliza
+WHERE 
+b.id IS NOT NULL
+GROUP BY 
+a.estado,
+a.numero_poliza,
+b.numero_item,
+a.numero_propuesta,
+a.tipo_propuesta,
+a.fecha_propuesta,
+a.fecha_envio_propuesta,
+rut_proponente,
+a.compania,
+a.vigencia_inicial,
+a.vigencia_final,
+a.ramo,
+a.moneda_poliza,
+a.vendedor,
+a.forma_pago,
+a.moneda_valor_cuota,
+a.valor_cuota,
+a.fecha_primera_cuota,
+a.nro_cuotas,
+a.comentarios_int,
+a.comentarios_ext,
+rut_asegurado,
+b.materia_asegurada,
+b.patente_ubicacion,
+b.cobertura,
+b.deducible,
+tasa_afecta,
+tasa_exenta,
+prima_afecta,
+prima_exenta,
+prima_neta,
+prima_bruta_anual,
+b.monto_asegurado,
+b.venc_gtia,
+proponente,
+asegurado,
+grupo_proponente,
+grupo_asegurado,
+a.comision,
+a.porcentaje_comision,
+a.comision_bruta,
+a.comision_neta,
+a.comision_neta,
+a.numero_boleta,
+a.comision_negativa,
+a.boleta_negativa,
+a.depositado_fecha,
+a.vendedor,
+a.poliza_renovada,
+a.fech_cancela,
+a.motivo_cancela,
+mesano_vigencia_inicial,
+mesano_vigencia_final,
+fecha_emision_poliza
+ORDER BY 
+fila;
+";
 $resultado=mysqli_query($link, $query);
 $excel= new Spreadsheet();
 $hojaActiva=$excel->getActiveSheet();
@@ -79,7 +186,7 @@ $hojaActiva->setCellValue('AX2', 'Motivo cancelacion');
 $hojaActiva->setCellValue('AY2', 'Vigencia inicial (mes-año)');
 $hojaActiva->setCellValue('AZ2', 'Vigencia final (mes-año)');
 $hojaActiva->setCellValue('BA2', 'Fecha Emisión Póliza');
-
+$hojaActiva->setCellValue('BB2', 'Cantidad de Endosos');
 $styleArray = [
     'font' => [
         'bold' => true,
@@ -146,6 +253,7 @@ $hojaActiva->getColumnDimension('AX')->setWidth(10);
 $hojaActiva->getColumnDimension('AY')->setWidth(10);
 $hojaActiva->getColumnDimension('AZ')->setWidth(10);
 $hojaActiva->getColumnDimension('BA')->setWidth(10);
+$hojaActiva->getColumnDimension('BB')->setWidth(10);
 $fila=3;
 
 while ($rows = mysqli_fetch_object($resultado))
@@ -203,11 +311,12 @@ while ($rows = mysqli_fetch_object($resultado))
     $hojaActiva->setCellValue('AY'.$fila, $rows->mesano_vigencia_inicial);
     $hojaActiva->setCellValue('AZ'.$fila, $rows->mesano_vigencia_final);
     $hojaActiva->setCellValue('BA'.$fila, $rows->fecha_emision_poliza);
+    $hojaActiva->setCellValue('BB'.$fila, $rows->endosos);
     $fila++;
 }
 $fecha = new DateTime(date("Y-m-d H:i:sP"), new DateTimeZone('America/Santiago') );
 date_timezone_set($fecha, timezone_open('America/Santiago'));
-$hojaActiva->setAutoFilter('A2:BA'.($fila-1));
+$hojaActiva->setAutoFilter('A2:BB'.($fila-1));
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="Listado_pólizas '.date_format($fecha, 'd-m-Y H:i:s').'.xlsx"');
 header('Cache-Control: max-age=0');
