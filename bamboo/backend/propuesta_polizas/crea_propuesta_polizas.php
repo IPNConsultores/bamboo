@@ -306,7 +306,7 @@ switch ($_POST["accion"]) {
     mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Corrige cantidad de ítems', '".str_replace("'","**",$query)."','Ìtems','".$nro_propuesta."', '".$_SERVER['PHP_SELF']."')");
     if ($poliza_renovada_desde_propuesta) {
       // Si existe, actualiza la tabla polizas_2
-      $query = "UPDATE polizas_2 SET estado='renovado' WHERE numero_poliza='".$poliza_renovada_desde_propuesta."'";
+      $query = "UPDATE polizas_2 SET estado='Renovado' WHERE numero_poliza='".$poliza_renovada_desde_propuesta."'";
       mysqli_query($link, $query);
       mysqli_query($link, "select trazabilidad('".$_SESSION["username"]."', 'Actualiza estado de la póliza renovada', '".str_replace("'","**",$query)."','poliza', '".$poliza_renovada_desde_propuesta."', '".$_SERVER['PHP_SELF']."')");
   }
