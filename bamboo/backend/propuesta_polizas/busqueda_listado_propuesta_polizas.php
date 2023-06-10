@@ -32,6 +32,7 @@ $resultado=mysqli_query($link, $sql);
         where a.numero_propuesta='".$row->numero_propuesta."' order by a.numero_item asc;");
             $items_array=array("total_items"=>& $fila->contador);
             if (!$cant_items=="0"){
+                $consolidado_patentes='';
         while($indice=mysqli_fetch_object($resultado_items)){
             //echo "tercera query -> nropropuesta: ".$row->numero_propuesta."- ítem nro: ".$indice->id_item."<br>";
             $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;

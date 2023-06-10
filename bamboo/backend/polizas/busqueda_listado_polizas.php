@@ -31,7 +31,9 @@ $resultado=mysqli_query($link, $sql);
         $cant_items=$fila->contador;
         $resultado_items=mysqli_query($link, "select a.numero_poliza, a.numero_item, a.id as id_item, a.materia_asegurada, a.patente_ubicacion, a.cobertura , a.deducible, CONCAT_WS(' ',FORMAT(tasa_afecta, 2, 'de_DE'),'%') AS tasa_afecta, CONCAT_WS(' ',FORMAT(tasa_exenta, 2, 'de_DE'),'%') AS tasa_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_afecta, 2, 'de_DE')) AS prima_afecta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_exenta, 2, 'de_DE')) AS prima_exenta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_bruta_anual, 2, 'de_DE')) AS prima_bruta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(prima_neta, 2, 'de_DE')) AS prima_neta, CONCAT_WS(' ',b.moneda_poliza,FORMAT(a.monto_asegurado, 2, 'de_DE')) AS monto_asegurado , if(a.venc_gtia='0000-00-00','',a.venc_gtia) as venc_gtia, CONCAT_WS(' ',c.nombre_cliente,  c.apellido_paterno,  c.apellido_materno) as nom_clienteA, CONCAT_WS('-',c.rut_sin_dv, c.dv) as rut_clienteA,c.telefono as telefonoA, c.correo as correoA from items as a left join clientes as c  on a.rut_asegurado=c.rut_sin_dv and c.rut_sin_dv is not null left join polizas_2 as b on a.numero_poliza=b.numero_poliza where a.numero_poliza='".$row->numero_poliza."' order by a.numero_item asc ;");
             $items_array=array("total_items"=>& $fila->contador);
+
             if (!$cant_items=="0"){
+                $consolidado_patentes='';
                 while($indice=mysqli_fetch_object($resultado_items)){
                     //echo "tercera query -> nropropuesta: ".$row->numero_poliza."- ítem nro: ".$indice->id_item."<br>";
                     $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;
