@@ -280,6 +280,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                                     <th>grupo</th>
                                     <th>referido</th>
                                     <th>id</th>
+                                    <th>Patente o Ubicación</th>
                                 </tr>
 
                             </table>
@@ -354,7 +355,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["busqueda"]) !== true 
                                     <th>grupo</th>
                                     <th>referido</th>
                                     <th>id</th>
-
+                                    <th>Patente o Ubicación</th> 
                                 </tr>
 
                             </table>
@@ -646,7 +647,11 @@ $(document).ready(function() {
             {
                 "data":"id_poliza",
                 tittle:"ID"
-            }//13
+            },//13
+            {
+                "data":"patente_ubicacion",
+                tittle:"Patente o Ubicación"
+            }//14
         ],
         //          "search": {
         //          "search": "abarca"
@@ -1121,7 +1126,11 @@ $(document).ready(function() {
             {
                 "data": "id_propuesta",
                 title: "id propuesta"
-            } //15
+            }, //15
+            {
+                "data": "patente_ubicacion",
+                title: "Patente o Ubicación"
+            } //16
         ],
         //          "search": {
         //          "search": "abarca"
