@@ -25,7 +25,7 @@ $resultado=mysqli_query($link, $sql);
         while ($fila=mysqli_fetch_object($resultado_contador_contactos))
         {
         //echo "segunda query -> contador: ".$fila->contador."<br>";
-        $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;
+        
         $contador_contactos=0;
         $items=[];
         $cant_items=$fila->contador;
@@ -34,7 +34,7 @@ $resultado=mysqli_query($link, $sql);
             if (!$cant_items=="0"){
                 while($indice=mysqli_fetch_object($resultado_items)){
                     //echo "tercera query -> nropropuesta: ".$row->numero_poliza."- ítem nro: ".$indice->id_item."<br>";
-                    
+                    $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;
                     $contador_contactos=$contador_contactos+1;
                     array_push($items, array(
                         "numero_item" =>& $indice->numero_item,
