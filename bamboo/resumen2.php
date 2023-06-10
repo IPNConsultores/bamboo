@@ -649,7 +649,7 @@ $(document).ready(function() {
                 tittle:"ID"
             },//13
             {
-                "data":"patente_ubicacion",
+                "data":"consolidado_patentes",
                 tittle:"Patente o Ubicación"
             }//14
         ],
@@ -657,7 +657,7 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [7, 8,13],
+                "targets": [7, 8,13,14],
                 "visible": false,
             },
             {
@@ -1128,7 +1128,7 @@ $(document).ready(function() {
                 title: "id propuesta"
             }, //15
             {
-                "data": "patente_ubicacion",
+                "data": "consolidado_patentes",
                 title: "Patente o Ubicación"
             } //16
         ],
@@ -1136,7 +1136,7 @@ $(document).ready(function() {
         //          "search": "abarca"
         //          },
         "columnDefs": [{
-                "targets": [8, 9, 10,15],
+                "targets": [8, 9, 10,15,16],
                 "visible": false,
             },
             {

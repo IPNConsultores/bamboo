@@ -3,7 +3,7 @@
     { 
         session_start(); 
     } 
-$resultado =$codigo=$conta=$nro_endosos='';
+$resultado=$consolidado_patentes =$codigo=$conta=$nro_endosos='';
 
 require_once "/home/gestio10/public_html/backend/config.php";
 
@@ -25,6 +25,7 @@ $resultado=mysqli_query($link, $sql);
         while ($fila=mysqli_fetch_object($resultado_contador_contactos))
         {
         //echo "segunda query -> contador: ".$fila->contador."<br>";
+        $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;
         $contador_contactos=0;
         $items=[];
         $cant_items=$fila->contador;
@@ -104,7 +105,8 @@ $resultado=mysqli_query($link, $sql);
         "nro_endosos"=>&$nro_endosos,
         "endosos"=>&$arreglo_endosos,
         "fecha_cancelacion"=>&$row->fech_cancela, 
-        "motivo_cancelacion"=>&$row->motivo_cancela
+        "motivo_cancelacion"=>&$row->motivo_cancela,
+        "consolidado_patentes" =>&$consolidado_patentes 
         ),
         $items_array));
     } else {
@@ -135,7 +137,8 @@ $resultado=mysqli_query($link, $sql);
         "nro_endosos"=>&$nro_endosos,
         "endosos"=>&$arreglo_endosos,
         "fecha_cancelacion"=>&$row->fech_cancela, 
-        "motivo_cancelacion"=>&$row->motivo_cancela
+        "motivo_cancelacion"=>&$row->motivo_cancela,
+        "consolidado_patentes" =>&$consolidado_patentes 
         ),
         $items_array))
         ;

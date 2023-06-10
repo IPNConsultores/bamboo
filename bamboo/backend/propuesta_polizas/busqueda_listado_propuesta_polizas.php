@@ -3,7 +3,7 @@
     { 
         session_start(); 
     } 
-$resultado =$codigo=$conta='';
+$resultado =$codigo=$conta=$consolidado_patentes='';
 
 require_once "/home/gestio10/public_html/backend/config.php";
 
@@ -34,7 +34,7 @@ $resultado=mysqli_query($link, $sql);
             if (!$cant_items=="0"){
         while($indice=mysqli_fetch_object($resultado_items)){
             //echo "tercera query -> nropropuesta: ".$row->numero_propuesta."- ítem nro: ".$indice->id_item."<br>";
-            
+            $consolidado_patentes=$consolidado_patentes.' - '.$indice->patente_ubicacion;
             $contador_contactos=$contador_contactos+1;
             array_push($items, array(
                 "numero_item" =>& $indice->numero_item,
@@ -86,7 +86,8 @@ $resultado=mysqli_query($link, $sql);
         "id_propuesta"=>& $row->id_propuesta,                   //21
         "anomes_final" =>& $row->anomes_final,                  //22
         "anomes_inicial" =>& $row->anomes_inicial,              //23
-        "items" =>&$items                                       //24
+        "items" =>&$items,                                      //24
+        "consolidado_patentes" =>&$consolidado_patentes 
         ),
         $items_array));
     } else {
@@ -114,7 +115,8 @@ $resultado=mysqli_query($link, $sql);
         "id_propuesta"=>& $row->id_propuesta,                   //21
         "anomes_final" =>& $row->anomes_final,                  //22
         "anomes_inicial" =>& $row->anomes_inicial,               //23
-        "items" =>&$items//23
+        "items" =>&$items,                                      //23
+        "consolidado_patentes" =>&$consolidado_patentes 
         ),
         $items_array))
         ;
