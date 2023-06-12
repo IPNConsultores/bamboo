@@ -76,6 +76,8 @@ While($row2=mysqli_fetch_object($resultado2))
     <div class="container">
         <canvas id="myChart" width="400" height="100"></canvas><br>
         <hr>
+        <canvas id="myChart2" width="400" height="100"></canvas><br>
+        <hr>
         <canvas id="torta" width="400" height="100" class="chartjs-render-monitor"></canvas>
         <hr><br>
         <p> Resumen de tareas <br></p>
@@ -884,6 +886,39 @@ var chart = new Chart(ctx, {
             backgroundColor: 'rgba(255, 99, 132, 0.1)',
             borderColor: 'rgb(255, 99, 132)',
             data: genera_data('stock')
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0
+                }
+            }]
+        }
+    }
+});
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var chart2 = new Chart(ctx2, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: genera_data('leyendas'),
+        datasets: [{
+            label: 'Pólizas que inician su vigencia',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            borderColor: 'rgb(54, 162, 235)',
+            data: genera_data('entradas')
+        },
+        {
+            label: 'Pólizas que finalizan su vigencia',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: genera_data('salidas')
         }]
     },
 
