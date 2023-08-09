@@ -63,7 +63,7 @@ $resultado=mysqli_query($link, $sql);
     $nro_endosos=$row->contador_endosos;
     if (!$nro_endosos=="0"){
         $nro_endosos=0;
-        $resultado_contador_endosos=mysqli_query($link, "SELECT e.numero_endoso, e.fecha_ingreso_endoso, e.fecha_prorroga, e.vigencia_inicial, e.vigencia_final, e.tipo_endoso, e.descripcion_endoso, e.dice, e.debe_decir, e.comentario_endoso, e.monto_asegurado_endoso, e.tasa_afecta_endoso, e.tasa_exenta_endoso, e.prima_neta_exenta, e.prima_neta_afecta, e.IVA, e.prima_total FROM endosos as e where e.id_poliza='".$row->id_poliza."';");
+        $resultado_contador_endosos=mysqli_query($link, "SELECT e.numero_endoso, e.fecha_ingreso_endoso, e.fecha_prorroga, e.vigencia_inicial, e.vigencia_final, e.tipo_endoso, e.descripcion_endoso, e.dice, e.debe_decir, e.comentario_endoso, e.monto_asegurado_endoso, e.tasa_afecta_endoso, e.tasa_exenta_endoso, e.prima_neta_exenta, e.prima_neta_afecta, e.IVA, e.prima_total FROM endosos as e where e.id_poliza='".$row->id_poliza."' order by e.numero_endoso asc;");
         while($endosos=mysqli_fetch_object($resultado_contador_endosos)){
             array_push($arreglo_endosos, array(
                 "numero_endoso" =>& $endosos->numero_endoso,
