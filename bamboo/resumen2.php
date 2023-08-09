@@ -2008,7 +2008,6 @@ function format_poliza(d) {
         else {
             for (var i=0; i< d.nro_endosos; i++){
                 listado_endosos+= '<tr>'+
-                '<td>' + (i+1) + '</td>'+
                 '<td>' + d.endosos[i].numero_endoso + '</td>'+
                 '<td>' + d.endosos[i].tipo_endoso + '</td>'+
                 '<td>' + d.endosos[i].descripcion_endoso + '</td>'+
@@ -2024,7 +2023,6 @@ function format_poliza(d) {
             '<td VALIGN=TOP>Endosos: </td>' +
             '<td><table class="table table-striped" style="width:100%" id="listado_endosos_1">'+
             '<tr>'+
-            '<th></th>'+
             '<th>Número</th>'+
             '<th>Tipo</th>'+
             '<th>Descripción</th>'+
