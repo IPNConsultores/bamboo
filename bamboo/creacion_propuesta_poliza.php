@@ -9,7 +9,7 @@ $camino='crear_propuesta';
 //$_POST["accion"] = 'modifica_poliza';
 //$_POST["accion_secundaria"] = 'renovar';
 //$_POST["numero_propuesta"]='P000025';
-//$_POST["numero_poliza"]='88480-00';
+//$_POST["numero_poliza"]='7621783';
 
 $poliza_renovada='';
   if ($_SERVER[ "REQUEST_METHOD" ] == "POST" and ($_POST["accion"] == 'actualiza_propuesta' or $_POST["accion"] == 'crear_poliza' or $_POST["accion"] == 'crear_poliza_web'))
@@ -1453,6 +1453,8 @@ console.log(orgn)
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
 
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
+           
+            
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
             document.getElementById("moneda_poliza").value = '<?php echo $moneda_poliza; ?>';
@@ -1528,6 +1530,16 @@ console.log(orgn)
             var origen_2='<?php echo $accion_secundaria; ?>';
             console.log(origen_2)
                 if (origen_2=='renovar'){
+                    console.log("entro a renovar");
+                    var fechaHoy = new Date();
+                    var formatoFechaHoy = fechaHoy.toISOString().slice(0, 10);
+                    document.getElementById("fechaprop").value = formatoFechaHoy;
+                    
+                    var fechaprimer_renovada = new Date(document.getElementById("fechaprimer").value);
+                    fechaprimer_renovada.setFullYear(fechaprimer_renovada.getFullYear() + 1);
+                    var formatofechaprimer_renovada = fechaprimer_renovada.toISOString().slice(0, 10);
+                    document.getElementById("fechaprimer").value = formatofechaprimer_renovada;
+                    
                     document.getElementById("contenedor_nro_propuesta").style.display = "none";
                     document.getElementById("titulo2").style.display = "none";
                     document.getElementById("titulo6").style.display = "flex";
@@ -1778,6 +1790,7 @@ console.log(orgn)
                 var origen_2='<?php echo $accion_secundaria; ?>';
                 console.log(origen_2)
                 if (origen_2=='renovar'){
+                    console.log("entro a renovar");
                     document.getElementById("contenedor_nro_propuesta").style.display = "inline";
                     document.getElementById("titulo3").style.display = "none";
                     document.getElementById("titulo6").style.display = "none";
@@ -1802,6 +1815,7 @@ console.log(orgn)
                     document.getElementById("fechavenc").value = '';
                     console.log("quitar required de fechaprop");
                     $("#fechaprop").removeAttr("required");
+                   // document.getElementById("fechaprop").value = "<?php echo date("Y-m-d");?>";
                      
                     orgn='crear_poliza_web';
                     
@@ -1864,6 +1878,7 @@ console.log(orgn)
             document.getElementById("nombre_prop").value = '<?php echo $nombre_cliente; ?>';
             document.getElementById("fechaprop").value = '<?php echo $fechaprop; ?>';
             console.log("quitar required de fechaprop");
+            
             
             document.getElementById("fechainicio").value = '<?php echo $fechainicio; ?>';
             document.getElementById("fechavenc").value = '<?php echo $fechavenc; ?>';
