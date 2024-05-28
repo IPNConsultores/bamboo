@@ -2661,7 +2661,7 @@ function vencimientogarantia(){
                 //inicio deducible normal
                     '<div id="deducible_para_otros[' + iCnt + ']">'+
                         '<div class="input-group-prepend"><span class="input-group-text" id="moneda[' + iCnt + ']">UF</span></div> '+
-                        '<input type="text" class="form-control" name="deducible_defecto" id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()">'+
+                        '<input type="text" class="form-control" name="deducible_defecto" id="deducible_defecto[' + iCnt + ']" onChange="pobladeducible()" required>'+
         
                     '</div>'+
                 '</div></td>'+
